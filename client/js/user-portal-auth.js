@@ -30,7 +30,7 @@ function phoneAuth() {
   //get the number
   // let number = document.getElementById('phone').value;
   let number = inputPhone.getNumber();
-  // consoles.log(number)
+  consoles.log(number)
   //phone number authentication function of firebase
   //it takes two parameter first one is number,,,second one is recaptcha
   firebase.auth().signInWithPhoneNumber(number,window.recaptchaVerifier).then(function (confirmationResult) {
@@ -57,7 +57,7 @@ function phoneAuth() {
     document.getElementById("btnVerify").setAttribute("style", "background-color: #c1c1c1");
     document.getElementById("btnVerify").style.cursor='not-allowed';
     document.getElementById("btnVerify").disabled = true;
-    // console.log("Phone Verification Failed Error Code: "+ error);
+    console.log("Phone Verification Failed Error Code: "+ error);
     func.showNotification('top','center', 'danger', 'error_outline', "Phone Verification Failed. Please make sure you enter a valid phone number." );
 
     // alert("Phone Verification Failed. Please make sure you enter a valid phone number.")
