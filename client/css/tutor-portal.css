@@ -1,0 +1,494 @@
+/* Horizontal scroll */
+@media (min-width: 992px) {
+  .container-scroll {
+    overflow-x: auto;
+  }
+  .container-scroll > .row {
+    width: 105%; /* = 100% * 4/3 */
+  }
+}
+
+/* Course Specific */
+.card-course {
+  margin-top: 1rem;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  padding: 14px 80px 14px 24px;
+  cursor: pointer;
+}
+
+.card-course:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.card-course h3 {
+  font-weight: 600;
+}
+
+.card-course h4 {
+  font-weight: 400;
+}
+
+.card-course img {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  max-height: 120px;
+}
+.card-course-online-label {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-left: 0.5em;
+  color: white;
+  background-color: rgb(253, 114, 0);
+  border-radius: 10px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  box-shadow: 2px 2px 4px rgb(46, 46, 46);
+}
+
+.card-course-status-label {
+  /* font-size: 1rem; */
+  font-weight: 400;
+  margin-left: 0.5em;
+  color: white;
+  background-color: rgb(253, 114, 0);
+  border-radius: 5px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  box-shadow: 2px 2px 4px rgb(46, 46, 46);
+}
+
+.card-course-item-wrapper {
+  display: flex;
+}
+
+.card-course-item {
+  font-weight: 600;
+  color: #6d6d6d;
+}
+/* .card-course-item-icon{
+  color: #9DE1FF; 
+  margin-right: 0.5em;
+} */
+
+/* Class Specific */
+.card-class {
+  margin-top: 1rem;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  padding: 14px 24px 14px 24px;
+}
+
+.card-class-wrapper {
+  cursor: pointer !important;
+}
+
+.card-class:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.card-class h3 {
+  font-weight: 600;
+}
+
+.card-class h4 {
+  font-weight: 400;
+}
+
+.card-class-online-label {
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-left: 0.5em;
+  color: white;
+  background-color: rgb(253, 114, 0);
+  border-radius: 10px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  box-shadow: 2px 2px 4px rgb(46, 46, 46);
+}
+
+.card-class-status-label {
+  /* font-size: 1rem; */
+  font-weight: 400;
+  margin-left: 0.5em;
+  color: white;
+  background-color: rgb(253, 114, 0);
+  border-radius: 5px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  box-shadow: 2px 2px 4px rgb(46, 46, 46);
+}
+
+.card-class-pro-label {
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-left: 0.5em;
+  color: white;
+  background-color: #bf40bf;
+  border-radius: 4px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  box-shadow: 2px 2px 4px rgb(46, 46, 46);
+}
+
+.card-class-item-wrapper {
+  display: flex;
+}
+
+.card-class-item {
+  font-weight: 400;
+  color: #6d6d6d;
+}
+
+.card-class-item-wrapper .fas {
+  color: #9de1ff;
+  margin-right: 0.5em;
+  font-size: 18px;
+}
+
+/* Student Specific */
+.card-student {
+  margin-top: 1rem;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  padding: 14px 80px 14px 24px;
+  cursor: pointer;
+}
+
+.card-student:hover {
+  /* transform: scale(1.05); */
+  background: #fff;
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06); */
+}
+
+.card-student h3 {
+  font-weight: 600;
+}
+
+.card-student h4 {
+  font-weight: 400;
+}
+
+.card-student img {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  max-height: 120px;
+}
+.card-student-online-label {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-left: 0.5em;
+  color: white;
+  background-color: rgb(253, 114, 0);
+  border-radius: 10px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  box-shadow: 2px 2px 4px rgb(46, 46, 46);
+}
+
+.card-student-status-label {
+  font-size: 0.6rem;
+  font-weight: 400;
+  /* margin-left: 0.5em; */
+  color: white;
+  /* background-color: rgb(253, 114, 0); */
+  border-radius: 5px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  display: inline-block;
+  box-shadow: 2px 2px 4px rgb(46, 46, 46);
+}
+
+.card-student-status-label.pending {
+  background-color: rgb(253, 114, 0) !important;
+}
+
+.card-student-status-label.active {
+  background-color: #4bb543 !important;
+}
+
+.card-student-item-wrapper {
+  display: flex;
+}
+
+.card-student-item {
+  /* margin-top: 0.2rem; */
+  /* border-radius: 4px; */
+  /* background: #fff; */
+  /* box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05); */
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  padding: 14px 80px 14px 24px;
+  cursor: pointer;
+  border-bottom: solid #ababab;
+  border-width: thin;
+}
+
+.card-student-item:hover {
+  /* transform: scale(1.05); */
+  background: #cacaca;
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06); */
+}
+
+.card-student-item > p {
+  margin: 0;
+}
+
+/* Tutor Specific */
+.card-tutor {
+  margin-top: 1rem;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  padding: 14px 24px 14px 24px;
+  cursor: pointer;
+}
+
+.card-tutor:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Change this to card IB, National, Cambridge, UEC, Language, Computer Programming, English Exam */
+.card-1 {
+  background-image: url(https://ionicframework.com/img/getting-started/ionic-native-card.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
+.card-2 {
+  background-image: url(https://ionicframework.com/img/getting-started/components-card.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
+.card-3 {
+  background-image: url(https://ionicframework.com/img/getting-started/theming-card.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
+.card-cambridge {
+  background-image: url("../../assets/img/card-course-cambridge.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
+.card-kpm {
+  background-image: url("../../assets/img/card-course-kpm.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
+.card-uec {
+  background-image: url("../../assets/img/card-course-uec.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
+.card-pearson {
+  background-image: url("../../assets/img/card-course-pearson.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
+.card-ib {
+  background-image: url("../../assets/img/card-course-ib.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+.card-language-and-english-exam {
+  background-image: url("../../assets/img/card-course-language-and-english.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
+.card-music {
+  background-image: url("../../assets/img/card-course-music.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
+.card-computer-programming {
+  background-image: url("../../assets/img/card-course-programming.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
+/* Used in Class */
+.card-fixed {
+  margin-top: 1rem;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  padding: 14px 80px 18px 36px;
+  /* cursor: none; */
+}
+
+.card-fixed:hover {
+  /* transform: scale(1.05); */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.card-fixed h3 {
+  font-weight: 600;
+}
+
+.card-fixed img {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  max-height: 120px;
+}
+
+/* Used for multistep form */
+.invalid {
+  background-color: #ffdddd;
+}
+
+/* Lesson Specific  */
+.lesson-header {
+  padding: 0rem 0rem 0rem 0rem;
+  border-top: solid #2e74b6;
+  border-bottom: solid #2e74b6;
+  border-width: 2px;
+  margin-top: 1rem;
+}
+
+.lesson-header p {
+  padding: 0.3rem 0 0.3rem 0;
+  margin: 0;
+  font-size: smaller;
+  font-weight: 600;
+  color: gray;
+}
+
+.lesson-wrapper {
+  padding: 0rem 0rem 0rem 0rem;
+  border-bottom: solid #2e74b6;
+  border-width: thin;
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+}
+
+.lesson-wrapper:hover {
+  transform: scale(1.01);
+
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06); */
+}
+
+.lesson-active {
+  cursor: pointer;
+}
+
+.lesson-item {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  font-size: small;
+  font-weight: 300;
+}
+
+/* Student specific */
+
+.student-item {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  font-size: small;
+  font-weight: 300;
+}
+
+.student-wrapper {
+  padding: 0rem 0rem 0rem 0rem;
+  border-bottom: solid #2e74b6;
+  border-width: thin;
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+}
+
+.student-wrapper:hover {
+  transform: scale(1.01);
+
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06); */
+}
+
+/* Tutor specific - Used in Class-Select Tutor */
+.tutor-wrapper {
+  padding: 0.5rem 0rem 0rem 0rem;
+  border-bottom: solid #2e74b6;
+  border-width: thin;
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+}
+
+.tutor-wrapper:hover {
+  transform: scale(1.01);
+}
+
+.tutor-item {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  font-size: small;
+  font-weight: 300;
+}
+
+/* Date Picker specific */
+.addLessonModal {
+  z-index: 10 !important;
+}
+.mc-calendar {
+  z-index: 10000 !important;
+}

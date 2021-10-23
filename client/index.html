@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>GoLearn</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!-- Fonts and icons -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
+  <!-- Material Kit CSS -->
+  <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <!-- Tutor specific css -->
+  <link href="../assets/css/tutor.css" rel="stylesheet" />
+  <!-- Firebase Init -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+  <script src="../assets/js/firebase.js"></script>
+</head>
+
+<body>
+
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-3.jpg">
+
+      <div class="logo">
+        <a href="./" class="simple-text logo-mini">
+			    <img src="../assets/img/logo.png" style="width: 216px; height: auto;" alt=""></img>
+          
+        </a>
+        <a href="./" class="simple-text logo-normal">
+          Welcome!
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active  ">
+            <a class="nav-link" href="./">
+              <i class="material-icons">home</i>
+              <p>Home</p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="./class/">
+              <i class="material-icons">school</i>
+              <p>My Classes</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./dependant/">
+              <i class="material-icons">escalator_warning</i>
+              <p>My Dependant</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">Home</a>
+          </div>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <form class="navbar-form">
+              <!-- Put empty placeholder here -->
+            </form>
+
+            <ul class="navbar-nav">
+              <li class="nav-item" id="activationNavItem">
+                <a href="#" class="btn btn-danger btn-round" style="visibility: hidden;" id="btnActivateAccount" ></a>
+              </li>
+              <li class="nav-item">
+                <a class="navbar-brand" href="javascript:;">
+                   Hi <span id="user"></span> !
+                </a> 
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i> Notifications
+                </a>
+                <!-- <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i>
+                  <span class="notification">5</span>
+                  <p class="d-lg-none d-md-block">
+                    Some Actions
+                  </p>
+                </a> -->
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+									<p style="padding: 1em;" >No notification</p>
+                  <!-- <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                  <a class="dropdown-item" href="#">Another Notification</a>
+                  <a class="dropdown-item" href="#">Another One</a> -->
+                </div>
+              </li>
+              <!-- your navbar here -->
+			  
+			  			<li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">person</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                  <a class="dropdown-item" href="./edit-profile.html">Edit Profile</a>
+									<a class="display:block; dropdown-item" href="./about.html">About</a>
+									<div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
+									<!-- <div class="dropdown-divider"></div> -->
+									<!-- <a style="font-weight: 500 ;padding: 0.5em ;text-align: center; width: 200px; background-color: #428dd4 ;display: block; color: #fff;" href="https://golearn.com.my/pricing/" target="_blank" id="btnUpgradeToPro">Upgrade to Pro</a> -->
+
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+
+      <!-- Modal Start -->
+
+      <!-- Activation modal -->
+      <div class="row">
+        <div class="modal fade" id="activationModal" tabindex="-1" role="dialog" aria-labelledby="activationModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="activationModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnActivationModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="activationModalBody">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnActivationModalClose2">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnActivationModalUpdate">Join Us</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sign-out modal -->
+      <div class="row">
+        <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="signOutModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="signOutLabel">Logging Out</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnSignOutModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="signOutModalBody">
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSignOutModalClose2">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSignOutModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal End -->
+
+      <div class="content">
+        <div class="container-fluid">
+          <!-- your content here -->
+
+          <!-- <button id="btnTest" class="btn btn-round btn-twitter"><i class="fa fa-twitter"></i> &middot; 45</button> -->
+
+          <div class="row">
+
+
+          </div>
+ 
+
+		    </div>
+      </div>
+
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav class="float-left">
+          <ul>
+            <li>
+            <a href="https://golearn.com.my" target="_blank">
+              Visit GoLearn
+            </a>
+            </li>
+          </ul>
+          </nav>
+          <!-- <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script> 
+            , made with <i class="material-icons">favorite</i> by <a href="#" >GoLearn Team</a>
+          </div> -->
+          <!-- your footer here -->
+        </div>
+      </footer>
+    </div>
+	  
+  </div>
+  
+  <div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+      <a href="#" data-toggle="dropdown">
+				<i class="material-icons" style="font-size: 36px; padding: 0.2em; color: white;">apps</i>
+      </a>
+      <ul class="dropdown-menu">
+		    <br>
+        <li class="header-title">Get More Tuition Jobs?</li>
+        <li class="button-container">
+          <a href="https://golearn.com.my/job/" target="_blank" class="btn btn-primary btn-block">Apply Now</a>
+        </li>
+        
+        <li class="button-container">
+          <a href="https://golearn.com.my/" target="_blank" class="btn btn-default btn-block">
+            Visit our website
+          </a>
+        </li>
+       
+        <li class="header-title">Follow and Like Us!</li>
+        <li class="button-container text-center">
+			    <button id="facebook" class="btn btn-round btn-facebook" onclick="window.open('https://www.facebook.com/FindTutorInMalaysia/', '_blank');"><i class="fa fa-facebook-f"></i> &middot; facebook</button>
+          <button id="twitter"  class="btn btn-round btn-twitter" onclick="window.open('https://twitter.com/golearnmalaysia', '_blank');"><i class="fa fa-twitter"></i> &middot; twitter</button>
+          <button id="instagram"  class="btn btn-round btn-twitter" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); " onclick="window.open('https://www.instagram.com/golearn.education/', '_blank');"><i class="fa fa-instagram"></i> &middot; instagram</button>
+          <br>
+          <br>
+        </li>
+        <li class="header-title">Found a problem? </li>
+        <li class="button-container">
+          <a href="https://golearn.com.my/submit-anything-to-us/" target="_blank" class="btn btn-warning btn-block">
+            Let us know
+          </a>
+          <br>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src="../assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="../assets/js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+  <!-- <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script> -->
+  <!-- 	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <!-- <script src="assets/js/plugins/bootstrap-selectpicker.js"></script> -->
+  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+  <!-- <script src="assets/js/plugins/bootstrap-datetimepicker.min.js"></script> -->
+  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+  <!-- <script src="assets/js/plugins/jquery.dataTables.min.js"></script> -->
+  <!-- 	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+  <!-- <script src="assets/js/plugins/bootstrap-tagsinput.js"></script> -->
+  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+  <!-- <script src="assets/js/plugins/jasny-bootstrap.min.js"></script> -->
+  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+  <!-- <script src="assets/js/plugins/fullcalendar.min.js"></script> -->
+  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+  <!-- <script src="assets/js/plugins/jquery-jvectormap.js"></script> -->
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <!-- <script src="assets/js/plugins/nouislider.min.js"></script> -->
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> -->
+  <!-- Library for adding dinamically elements -->
+  <!-- <script src="assets/js/plugins/arrive.min.js"></script> -->
+  <!--  Google Maps Plugin    -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+  <!-- Chartist JS -->
+  <!-- <script src="assets/js/plugins/chartist.min.js"></script> -->
+  <!--  Notifications Plugin    -->
+  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+  
+  <!-- Common constants -->
+  <script src="../assets/js/common.js" type="text/javascript"></script>
+  <!-- Core Tutor Js -->
+  <script src="../assets/js/tutor-core.js" type="text/javascript"></script>
+
+  <script>
+    // Global Variables
+    var userId;
+    var current_name, current_email, current_phone, current_imgUri, current_nric,
+      current_address1, current_address2, current_addressPostCode, current_addressState, current_address;
+
+		var db = firebase.firestore();
+		db.settings({ timestampsInSnapshots: true });
+
+		firebase.auth().onAuthStateChanged(function(user){
+      
+			if(!user){
+        // Return to login if user does not exist.
+				window.location.href = "login.html"
+			}else{
+        // if the displayName is null, it means user register using Phone
+        if (firebase.auth().currentUser.displayName == null ){
+          userId = firebase.auth().currentUser.phoneNumber;
+        }else
+          userId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+
+        loadUserInfo(userId);
+        updateLastOnline(userId)
+
+      }
+		});
+
+    // Client Specific
+    function loadUserInfo(userId){
+      // Tutor Id must be a phone with +60, no spacing or other chars
+      var docRef = db.collection("Users").doc(userId);
+      
+      // docRef.get().then((doc) => {
+      docRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          // console.log("Document data:", doc.data());
+          current_name = (doc.data().name == null || doc.data().name == "")? "New User" : doc.data().name;
+          current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email;
+          current_phone = (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone; 
+          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/empty-photo.png" : doc.data().imgUrl;
+          current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
+          current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
+          current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
+          current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
+          current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
+
+          // Store data to sessionStorage
+          // var tutorDataObj = {
+          //   [NAME_KEY] : doc.data().name,
+          //   [EMAIL_KEY] : doc.data().email,
+          //   [PHONE_KEY] : doc.data().phone,
+          //   [ADDRESS_1_KEY] :doc.data().address1,
+          //   [ADDRESS_2_KEY] :doc.data().address2,
+          //   [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
+          //   [ADDRESS_STATE_KEY] :doc.data().addressState,
+          //   [IMAGE_KEY] : doc.data().imgUrl,
+          //   [PROFILE_STATUS_KEY] : doc.data().profileStatus,
+          // }
+
+          // Set tutorInfoObj as sessionStorage
+          // sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
+
+          // Set the nav user name 
+          document.getElementById("user").textContent = doc.data().name;
+        } 
+        else {
+          console.log("No user! Redirecting to login");
+          window.location = "login.html"
+          
+        }
+      });
+    };
+
+    // Update Last Online
+    function updateLastOnline(userId){
+      // Update last online
+      var docRefDate = db.collection("Users").doc(userId);
+
+      docRefDate.get().then((doc) => {
+        if (doc.exists) {
+          let docRef = db.collection("Users").doc(userId);
+          let docRefWithMerge = docRef.set({
+            [SYSTEM_LAST_ONLINE_KEY] : firebase.firestore.Timestamp.fromDate(new Date())
+            }, { merge: true });
+            
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+      }).catch((error) => {
+          console.log("Error getting document:", error);
+      });
+    }
+
+    // Sign out
+    function signOutFunction(){
+      $('#signOutModal').modal('show');
+      $("#signOutModal").appendTo("body");
+    }
+  </script>
+
+  <script>
+		$( document ).ready(function() {
+
+
+      $('#btnActivationModalUpdate').on('click', function (e) {
+        // Do something
+        $('#activationModal').modal('hide');
+      });
+
+      $('#btnActivationModalClose1').on('click', function (e) {
+        $('#activationModal').modal('hide');
+      });
+      $('#btnActivationModalClose2').on('click', function (e) {
+        $('#activationModal').modal('hide');
+      });
+
+      $('#btnSignOutModalUpdate').on('click', function (e) {
+      
+        firebase.auth().signOut().then(() => {
+            // Sign-out successful.
+          }).catch((error) => {
+            window.alert("Logging out failed");
+            func.showNotification('top','center', 'danger', 'error_outline', "Logging out failed." );
+          });
+        // Do something
+        $('#signOutModal').modal('hide');
+      });
+
+      $('#btnSignOutModalClose1').on('click', function (e) {
+        $('#signOutModal').modal('hide');
+      });
+      $('#btnSignOutModalClose2').on('click', function (e) {
+        $('#signOutModal').modal('hide');
+      });
+
+    });
+
+  </script>
+ 
+</body>
+
+</html>

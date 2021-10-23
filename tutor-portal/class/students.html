@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>GoLearn Tutor</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous"> -->
+  <!-- Material Kit CSS -->
+  <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <!-- <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
+  <link href="../css/tutor-portal.css" rel="stylesheet" />
+  <!-- Firebase Init -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+  <script src="../js/firebase.js"></script>
+</head>
+
+<body>
+
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/img/sidebar-3.jpg">
+      <!--
+      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+      Tip 2: you can also add an image using data-image tag
+  -->
+      <div class="logo">
+        <a href="#" class="simple-text logo-mini">
+			<img src="../source/logo.png" style="width: 216px; height: auto;" alt=""></img>
+          
+        </a>
+        <a href="#" class="simple-text logo-normal">
+         Welcome!
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="./class.html">
+              <i class="material-icons">home</i>
+              <p>Class</p>
+            </a>
+          </li>
+		  		<!-- <li class="nav-item">
+            <a class="nav-link" href="./job.html">
+              <i class="material-icons">work_outline</i>
+              <p>Tuition Jobs</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="./course.html">
+              <i class="material-icons">format_list_bulleted</i>
+              <p>My Courses</p>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="./update.html">
+              <i class="material-icons">note_alt</i>
+              <p>Update Information</p>
+            </a>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">Classes <span><i class="material-icons" style="color: gray;">chevron_right</i></span> Add Class<span><i class="material-icons" style="color: gray;">chevron_right</i></span> Students</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <form class="navbar-form">
+              <!-- Put empty placeholder here -->
+            </form>
+
+            <ul class="navbar-nav">
+              <li class="nav-item" id="activationNavItem">
+                <a href="#" class="btn btn-danger btn-round" style="visibility: hidden;" id="btnActivateAccount" ></a>
+              </li>
+              <li class="nav-item">
+                <a class="navbar-brand" href="javascript:;">
+                   Hi <span id="user"></span> !
+                </a> 
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i> Notifications
+                </a>
+                <!-- <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i>
+                  <span class="notification">5</span>
+                  <p class="d-lg-none d-md-block">
+                    Some Actions
+                  </p>
+                </a> -->
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+									<p style="padding: 1em;" >No notification</p>
+                  <!-- <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                  <a class="dropdown-item" href="#">Another Notification</a>
+                  <a class="dropdown-item" href="#">Another One</a> -->
+                </div>
+              </li>
+              <!-- your navbar here -->
+			  
+			  			<li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">person</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                  <a class="dropdown-item" href="./edit-profile.html">Edit Profile</a>
+                  <a id="navPublicProfile" class="dropdown-item" href="#">My Public Profile</a>
+									<a class="display:block; dropdown-item" href="./about.html">About</a>
+									<div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
+									<div class="dropdown-divider"></div>
+									<a style="font-weight: 500 ;padding: 0.5em ;text-align: center; width: 200px; background-color: #428dd4 ;display: block; color: #fff;" href="https://golearn.com.my/pricing/" target="_blank" id="btnUpgradeToPro">Upgrade to Pro</a>
+
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+
+			<!-- Modal Start -->
+
+      <!-- List Teacher modal -->
+      <div class="row">
+        <div class="modal fade" id="myTeacherModal" tabindex="-1" role="dialog" aria-labelledby="myTeacherModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="myTeacherModalLabel">My Teachers</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnMyTeacherModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="myTeacherModalBody">
+
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Gender</span> 
+                  <div class="form-check form-check-radio">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="addTeacherModalRadio-male" value="option1" >
+                        Alice Liew
+                      <span class="circle">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="form-check form-check-radio">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="addTeacherModalRadio-female" value="option2">
+                        Mariana
+                      <span class="circle">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"  data-dismiss="modal" id="btnMyTeacherModalClose2">Not Now</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#addTeacherModal" id="btnAddTeacherModal">Add New Teacher</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnMyTeacherModalUpdate">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Teacher Modal -->
+      <div class="row">
+        <div class="modal fade" id="addTeacherModal" tabindex="-1" role="dialog" aria-labelledby="addTeacherModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addTeacherModalLabel">Add Teacher</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Phone*</label>
+                  <input class="form-control" id="addTeacherModalEmail" placeholder="" type="tel"></input>
+                </div>
+
+                <div class="form-group">
+                  <label class="bmd-label-floating">Name*</label>
+                  <input class="form-control" id="addTeacherModalName" placeholder=""></input>
+                </div>
+
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Gender</span> 
+                  <div class="form-check form-check-radio form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="addTeacherModalRadio-male" value="option1" >
+                      Male
+                      <span class="circle">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="form-check form-check-radio form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="addTeacherModalRadio-female" value="option2">
+                      Female
+                      <span class="circle">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="bmd-label-floating">Email</label>
+                  <input class="form-control" id="addTeacherModalEmail" placeholder=""></input>
+                </div>
+
+                <div class="form-group">
+                  <label class="bmd-label-floating">Address</label>
+                  <textarea class="form-control" id="addTeacherModalAddress" rows="4"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddTeacherModalUpdate" >Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Activation modal -->
+      <div class="row">
+        <div class="modal fade" id="activationModal" tabindex="-1" role="dialog" aria-labelledby="activationModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="activationModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnActivationModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="activationModalBody">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnActivationModalClose2">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnActivationModalUpdate">Join Us</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+			
+      <!-- Sign-out modal -->
+      <div class="row">
+        <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="signOutModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="signOutLabel">Logging Out</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnSignOutModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="signOutModalBody">
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSignOutModalClose2">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSignOutModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="content">
+        <div class="container-fluid">
+          <!-- your content here -->
+
+          <!-- Back button -->
+          <div class="row" id="desciption-row" >
+            
+            <div class="col-lg-4 col-md-4 col-sm-4">
+              <a href="./class.html" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
+            </div>
+
+          </div>
+
+          <!-- Internal Navbar -->
+          <div class="row">
+            <div class="col-md-12">
+              <nav class="navbar navbar-expand-sm bg-primary ">
+                <div class="container">
+                  <!-- <a class="navbar-brand" href="#">Navbar</a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button> -->
+                  <div class="" id="navbarText">
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item ">
+                        <a class="nav-link" href="./add-class.html">General <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" href="./students.html">Students</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="./fee.html">Fee</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="./admin.html">Admin</a>
+                      </li>
+                    </ul>
+                    <!-- <span class="navbar-text">
+                      Navbar text with an inline element
+                    </span> -->
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+
+          <!-- Save Button -->
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              <a href="javascript:;" class="btn btn-primary btn-round" id="btnUpdate" style="background-color: grey; pointer-events: none;" >Save</a>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+
+          <!-- General Details -->
+          <div class="row" id="card-all-job-requests">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              
+              <div class="card-fixed">
+
+                <div class="form-group" style="margin-top: 2rem;">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Fee*</span> 
+                  <input type="text" class="form-control">
+                </div>
+                
+                <div class="form-group" style="margin-top: 1.0rem;">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Gender</span> 
+                  <div class="form-check form-check-radio form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="addTeacherModalRadio-male" value="option1" >
+                      Per Month
+                      <span class="circle">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="form-check form-check-radio form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="addTeacherModalRadio-female" value="option2">
+                      Per Hour
+                      <span class="circle">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+
+      </div>
+
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav class="float-left">
+          <ul>
+            <li>
+            <a href="https://golearn.com.my/join-us" target="_blank">
+              Visit GoLearn Tutor
+            </a>
+            </li>
+          </ul>
+          </nav>
+          <!-- <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script> 
+            , made with <i class="material-icons">favorite</i> by <a href="#" >GoLearn Team</a>
+          </div> -->
+          <!-- your footer here -->
+        </div>
+      </footer>
+    </div>
+	  
+  </div>
+
+
+  <div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+      <a href="#" data-toggle="dropdown">
+				<i class="material-icons" style="font-size: 36px; padding: 0.2em; color: white;">apps</i>
+      </a>
+      <ul class="dropdown-menu">
+		    <br>
+        <li class="header-title">Get More Tuition Jobs?</li>
+        <li class="button-container">
+          <a href="https://golearn.com.my/job/" target="_blank" class="btn btn-primary btn-block">Apply Now</a>
+        </li>
+        
+        <li class="button-container">
+          <a href="https://golearn.com.my/" target="_blank" class="btn btn-default btn-block">
+            Visit our website
+          </a>
+        </li>
+       
+        <li class="header-title">Follow and Like Us!</li>
+        <li class="button-container text-center">
+			    <button id="facebook" class="btn btn-round btn-facebook" onclick="window.open('https://www.facebook.com/FindTutorInMalaysia/', '_blank');"><i class="fa fa-facebook-f"></i> &middot; facebook</button>
+          <button id="twitter"  class="btn btn-round btn-twitter" onclick="window.open('https://twitter.com/golearnmalaysia', '_blank');"><i class="fa fa-twitter"></i> &middot; twitter</button>
+          <button id="instagram"  class="btn btn-round btn-twitter" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); " onclick="window.open('https://www.instagram.com/golearn.education/', '_blank');"><i class="fa fa-instagram"></i> &middot; instagram</button>
+          <br>
+          <br>
+        </li>
+        <li class="header-title">Found a problem? </li>
+        <li class="button-container">
+          <a href="https://golearn.com.my/submit-anything-to-us/" target="_blank" class="btn btn-warning btn-block">
+            Let us know
+          </a>
+          <br>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src="../assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="../assets/js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+  <!-- <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script> -->
+  <!-- 	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <!-- <script src="assets/js/plugins/bootstrap-selectpicker.js"></script> -->
+  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+  <!-- <script src="assets/js/plugins/bootstrap-datetimepicker.min.js"></script> -->
+  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+  <!-- <script src="assets/js/plugins/jquery.dataTables.min.js"></script> -->
+  <!-- 	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+  <!-- <script src="assets/js/plugins/bootstrap-tagsinput.js"></script> -->
+  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+  <!-- <script src="assets/js/plugins/jasny-bootstrap.min.js"></script> -->
+  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+  <!-- <script src="assets/js/plugins/fullcalendar.min.js"></script> -->
+  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+  <!-- <script src="assets/js/plugins/jquery-jvectormap.js"></script> -->
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <!-- <script src="assets/js/plugins/nouislider.min.js"></script> -->
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> -->
+  <!-- Library for adding dinamically elements -->
+  <!-- <script src="assets/js/plugins/arrive.min.js"></script> -->
+  <!--  Google Maps Plugin    -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+  <!-- Chartist JS -->
+  <!-- <script src="assets/js/plugins/chartist.min.js"></script> -->
+  <!--  Notifications Plugin    -->
+  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+  <!-- Common constants -->
+  <script src="../../assets/js/common.js" type="text/javascript"></script>
+  <!-- Core Tutor Js -->
+  <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
+  <script>
+    // Global Variables
+    var tutorId;
+    var current_name, current_email, current_phone, current_age, current_gender, current_imgUri, current_nric,
+      current_address1, current_address2, current_addressPostCode, current_addressState,
+      current_rating, current_ratingTimes, current_ratingFinal, current_profileStatus,
+      current_token, current_agent, current_accountStatus;
+    var currentYearsExperience, currentTutoringExperience, currentTutoringApproach, currentQualification, 
+      current_preferedAreaList, current_preferedSubjectList;
+    // Depreciated
+    // var current_chk_homeTutor, current_chk_privateTutor, current_chk_groupTutor, current_chk_onlineTutor;
+    var isModeHomeStudentToTutor, isModeHomeTutorToStudent, isModeGroup, isModeOnline, isModeOnlineGroup;
+    var isLanEng, isLanBm, isLanBc, isLanBt, isLanOther;
+    var current_chk_homeStudentToTutor, current_chk_homeTutorToStudent, current_chk_group, current_chk_online, current_chk_onlineGroup;
+    var current_mon_8am, current_mon_12pm, current_mon_3pm, current_mon_6pm, 
+      current_tue_8am, current_tue_12pm, current_tue_3pm, current_tue_6pm, 
+      current_wed_8am, current_wed_12pm, current_wed_3pm, current_wed_6pm, 
+      current_thu_8am, current_thu_12pm, current_thu_3pm, current_thu_6pm, 
+      current_fri_8am, current_fri_12pm, current_fri_3pm, current_fri_6pm,
+      current_sat_8am, current_sat_12pm, current_sat_3pm, current_sat_6pm, 
+      current_sun_8am, current_sun_12pm, current_sun_3pm, current_sun_6pm;
+    var current_aweburl, current_aPremiumSubjectLimit, current_aPremiumConnectLimit, current_aTotalSubjectLimit, 
+     current_aTotalConnectLimit, current_aPreferredSubjectLimit, current_aPreferredAreaLimit;
+     
+		var db = firebase.firestore();
+		db.settings({ timestampsInSnapshots: true });
+
+    // Set the nav name and global var, if user already login and have session Storage 
+    var tutorInfoObj = null;
+    if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
+      // Do nothing
+    }else{
+      // Set the nav user name
+      tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
+      document.getElementById("user").textContent = tutorInfoObj.name;
+
+      current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
+      // current_email, 
+      // current_phone, 
+      current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
+      current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
+      current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
+      current_accountStatus = tutorInfoObj.accountStatus; // bool
+      currentYearsExperience = tutorInfoObj.yearsExperience; // number
+      currentTutoringExperience = tutorInfoObj.tutoringExperience;
+      currentTutoringApproach = tutorInfoObj.tutoringApproach;
+      currentQualification= tutorInfoObj.qualification;
+      current_mon_8am = tutorInfoObj.tMon8am;
+      current_mon_12pm= tutorInfoObj.tMon12pm; 
+      current_mon_3pm = tutorInfoObj.tMon3pm;  
+      current_mon_6pm = tutorInfoObj.tMon6pm;  
+      current_tue_8am = tutorInfoObj.tTue8am;  
+      current_tue_12pm= tutorInfoObj.tTue12pm;  
+      current_tue_3pm = tutorInfoObj.tTue3pm;  
+      current_tue_6pm = tutorInfoObj.tTue6pm;  
+      current_wed_8am = tutorInfoObj.tWed8am;  
+      current_wed_12pm= tutorInfoObj.tWed12pm;  
+      current_wed_3pm = tutorInfoObj.tWed3pm;  
+      current_wed_6pm = tutorInfoObj.tWed6pm;  
+      current_thu_8am = tutorInfoObj.tThu8am;  
+      current_thu_12pm= tutorInfoObj.tThu12pm;  
+      current_thu_3pm = tutorInfoObj.tThu3pm;  
+      current_thu_6pm = tutorInfoObj.tThu6pm;  
+      current_fri_8am = tutorInfoObj.tFri8am;  
+      current_fri_12pm= tutorInfoObj.tFri12pm;  
+      current_fri_3pm = tutorInfoObj.tFri3pm;  
+      current_fri_6pm = tutorInfoObj.tFri6pm; 
+      current_sat_8am = tutorInfoObj.tSat8am;  
+      current_sat_12pm= tutorInfoObj.tSat12pm;  
+      current_sat_3pm = tutorInfoObj.tSat3pm;  
+      current_sat_6pm = tutorInfoObj.tSat6pm;  
+      current_sun_8am = tutorInfoObj.tSun8am;  
+      current_sun_12pm= tutorInfoObj.tSun12pm;  
+      current_sun_3pm = tutorInfoObj.tSun3pm;  
+      current_sun_6pm = tutorInfoObj.tSun6pm;
+      current_aweburl = tutorInfoObj.aWebUrl
+
+      // updatePageView(current_accountStatus);
+    }
+
+		firebase.auth().onAuthStateChanged(function(user){
+      
+			if(!user){
+        // Return to login if user does not exist.
+				window.location.href = "login.html"
+			}else{
+        // if the displayName is null, it means user register using Phone
+        if (firebase.auth().currentUser.displayName == null ){
+            tutorId = firebase.auth().currentUser.phoneNumber;
+        }else
+            tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+
+        loadUserInfo(tutorId);
+        
+			}
+		});
+
+    // Tutor Specific
+    function loadUserInfo(tutorId){
+      // Tutor Id must be a phone with +60, no spacing or other chars
+      var docRef = db.collection("Tutor").doc(tutorId);
+      
+
+      // docRef.get().then((doc) => {
+      docRef.onSnapshot((doc) => {
+
+        if (doc.exists) {
+          // console.log("Document data:", doc.data());
+
+          current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
+          // current_email, 
+          // current_phone, 
+          current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
+          current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
+          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
+          current_accountStatus = doc.data().accountStatus; 
+          currentYearsExperience = doc.data().yearsExperience; // number
+          currentTutoringExperience = doc.data().tutoringExperience;
+          currentTutoringApproach = doc.data().tutoringApproach;
+          currentQualification= doc.data().qualification;
+          current_mon_8am = doc.data().tMon8am;
+          current_mon_12pm= doc.data().tMon12pm; 
+          current_mon_3pm = doc.data().tMon3pm;  
+          current_mon_6pm = doc.data().tMon6pm;  
+          current_tue_8am = doc.data().tTue8am;  
+          current_tue_12pm= doc.data().tTue12pm;  
+          current_tue_3pm = doc.data().tTue3pm;  
+          current_tue_6pm = doc.data().tTue6pm;  
+          current_wed_8am = doc.data().tWed8am;  
+          current_wed_12pm= doc.data().tWed12pm;  
+          current_wed_3pm = doc.data().tWed3pm;  
+          current_wed_6pm = doc.data().tWed6pm;  
+          current_thu_8am = doc.data().tThu8am;  
+          current_thu_12pm= doc.data().tThu12pm;  
+          current_thu_3pm = doc.data().tThu3pm;  
+          current_thu_6pm = doc.data().tThu6pm;  
+          current_fri_8am = doc.data().tFri8am;  
+          current_fri_12pm= doc.data().tFri12pm;  
+          current_fri_3pm = doc.data().tFri3pm;  
+          current_fri_6pm = doc.data().tFri6pm; 
+          current_sat_8am = doc.data().tSat8am;  
+          current_sat_12pm= doc.data().tSat12pm;  
+          current_sat_3pm = doc.data().tSat3pm;  
+          current_sat_6pm = doc.data().tSat6pm;  
+          current_sun_8am = doc.data().tSun8am;  
+          current_sun_12pm= doc.data().tSun12pm;  
+          current_sun_3pm = doc.data().tSun3pm;  
+          current_sun_6pm = doc.data().tSun6pm; 
+
+          // Store data to sessionStorage
+          var tutorDataObj = {
+            [NAME_KEY] : doc.data().name,
+            [EMAIL_KEY] : doc.data().email,
+            [PHONE_KEY] : doc.data().phone,
+            [AGE_KEY] : doc.data().age,
+            [GENDER_KEY] : doc.data().gender,
+            [ADDRESS_1_KEY] :doc.data().address1,
+            [ADDRESS_2_KEY] :doc.data().address2,
+            [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
+            [ADDRESS_STATE_KEY] :doc.data().addressState,
+            [IMAGE_KEY] : doc.data().imgUrl,
+            // [NRIC_KEY] : doc.data().name,
+            [RATING_KEY] : doc.data().rating,
+            [RATING_TIMES_KEY] : doc.data().ratingTimes,
+            [RATING_FINAL_KEY] : doc.data().ratingFinal,
+            [PROFILE_STATUS_KEY] : doc.data().profileStatus,
+            // [CHECK_HOMETUTOR_KEY] : doc.data().name,
+            // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
+            // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
+            // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
+            [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
+            [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
+            [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
+            [QUALIFICATION_KEY] : doc.data().qualification,
+            [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
+            [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
+            [AGENT_KEY] : doc.data().agent,
+            [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
+            
+            [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
+            [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
+            [CHECK_GROUP_KEY] : doc.data().modeGroup,
+            [CHECK_ONLINE_KEY] : doc.data().modeOnline,
+            [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
+            [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
+            [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
+            [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
+            [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
+            [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
+
+            [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
+            [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
+            [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
+            [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
+            [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
+            [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
+            [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
+            [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
+            [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
+            [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
+            [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
+            [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
+            [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
+            [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
+            [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
+            [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
+            [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
+            [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
+            [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
+            [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
+            [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
+            [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
+            [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
+            [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
+            [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
+            [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
+            [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
+            [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
+            // Create a placeholder for aWebUrl. This param can only initiated by admin
+            // manually through https://golearn.com.my/admin/admin-portal.html
+            [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
+            [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
+            [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
+            [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
+            [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
+            [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
+            [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
+          }
+
+          // Set tutorInfoObj as sessionStorage
+          sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
+
+          // Set the nav user name and public profile link
+          document.getElementById("user").textContent = doc.data().name;
+
+          if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
+            document.getElementById("navPublicProfile").href = "#"  ;
+            document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
+          } else{
+            document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
+            document.getElementById("navPublicProfile").target = "_blank";
+          }
+          
+          if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
+            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
+            document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
+            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
+            document.getElementById("btnActivateAccount").target = "_blank";
+          }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
+            document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
+            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
+            document.getElementById("btnActivateAccount").target = "_blank";
+          }else {
+            let activationNavItem = document.querySelector('#activationNavItem');
+            let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
+            console.log(activationNavItemIsExist)
+            // Remove NavItem if exist
+            if (activationNavItemIsExist){
+              activationNavItem.parentNode.removeChild(activationNavItem);
+            }else{
+              // Do nothing
+            }
+          }
+
+
+          //------ update.html specific Start -------------//
+
+          document.getElementById("modeHomeTutorToStudent").checked = doc.data().modeHomeTutorToStudent;
+          document.getElementById("modeHomeStudentToTutor").checked = doc.data().modeHomeStudentToTutor;
+          document.getElementById("modeGroup").checked = doc.data().modeGroup;
+          document.getElementById("modeOnline").checked = doc.data().modeOnline;
+          document.getElementById("modeOnlineGroup").checked = doc.data().modeOnlineGroup;
+
+          document.getElementById("lanEng").checked = doc.data().lanEng;
+          document.getElementById("lanBm").checked = doc.data().lanBm;
+          document.getElementById("lanBc").checked = doc.data().lanBc;
+          document.getElementById("lanBt").checked = doc.data().lanBt;
+          document.getElementById("lanOther").checked = doc.data().lanOther;
+
+          document.getElementById("yearsExperience").value = doc.data().yearsExperience;
+          document.getElementById("qualification").value = doc.data().qualification;
+
+          // Load success, Renabled the inputs
+          var input = document.getElementsByTagName("input");
+          var inputList = Array.prototype.slice.call(input);
+          inputList.forEach(item => {
+            // console.log(item.id);
+            item.removeAttribute('disabled');
+          });
+          document.getElementById('qualification').removeAttribute('disabled');
+          document.getElementById('qualification').setAttribute('style','pointer-events: auto; ');
+          document.getElementById('btnUpdate').removeAttribute('disabled');
+          document.getElementById('btnUpdate').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
+          //------ update.html specific End -------------//
+
+
+        } else {
+            
+        }
+      });
+
+    };
+
+    // Sign out
+    function signOutFunction(){
+      $('#signOutModal').modal('show');
+      $("#signOutModal").appendTo("body");
+    }
+  
+    function removeTimeSlot(id){
+      $( "#timeSlot-"+id ).remove();
+    }
+  
+  </script>
+  <script>
+    $( document ).ready(function() {
+      
+      // Testing 
+
+      $('#btnAddTimeSlot').on('click', function(e) {
+
+        e.preventDefault();
+        var x = document.getElementById("timeSlot-container").childElementCount;
+        // alert(x)
+        // <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">End Time</span> 
+
+        let dayOfWeek_form_label = document.createElement('span');
+        dayOfWeek_form_label.className = "";
+        dayOfWeek_form_label.textContent = "Day of Week";
+        dayOfWeek_form_label.setAttribute("style", "font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;");
+        let dayOfWeek_form_input = document.createElement('input');
+        dayOfWeek_form_input.type = "text";
+        dayOfWeek_form_input.className = "form-control";
+        dayOfWeek_form_input.setAttribute("id", "DayOfWeek" + (x+1));
+        let dayOfWeek_form_div = document.createElement('div');
+        dayOfWeek_form_div.className = "form-group bmd-form-group";
+        dayOfWeek_form_div.appendChild(dayOfWeek_form_label)
+        dayOfWeek_form_div.appendChild(dayOfWeek_form_input)
+        let dayOfWeek_div = document.createElement('div');
+        dayOfWeek_div.className = "col-md-5";
+        dayOfWeek_div.appendChild(dayOfWeek_form_div)
+
+        let startTime_form_label = document.createElement('span');
+        startTime_form_label.className = "";
+        startTime_form_label.textContent = "Start Time";
+        startTime_form_label.setAttribute("style", "font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;");
+        let startTime_form_input = document.createElement('input');
+        startTime_form_input.type = "text";
+        startTime_form_input.className = "form-control";
+        startTime_form_input.setAttribute("id", "StartTime" + (x+1));
+        let startTime_form_div = document.createElement('div');
+        startTime_form_div.className = "form-group bmd-form-group";
+        startTime_form_div.appendChild(startTime_form_label)
+        startTime_form_div.appendChild(startTime_form_input)
+        let startTime_div = document.createElement('div');
+        startTime_div.className = "col-md-3";
+        startTime_div.appendChild(startTime_form_div)
+
+        let endTime_form_label = document.createElement('span');
+        endTime_form_label.className = "";
+        endTime_form_label.textContent = "End Time";
+        endTime_form_label.setAttribute("style", "font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;");
+        let endTime_form_input = document.createElement('input');
+        endTime_form_input.type = "text";
+        endTime_form_input.className = "form-control";
+        endTime_form_input.setAttribute("id", "EndTime" + (x+1));
+        let endTime_form_div = document.createElement('div');
+        endTime_form_div.className = "form-group bmd-form-group";
+        endTime_form_div.appendChild(endTime_form_label)
+        endTime_form_div.appendChild(endTime_form_input)
+        let endTime_div = document.createElement('div');
+        endTime_div.className = "col-md-3";
+        endTime_div.appendChild(endTime_form_div)
+        
+        let blogsHtml_btn = '';
+        blogsHtml_btn += "<i class='material-icons' style='color: red;'>remove</i>";
+        let btnRemove_a = document.createElement('a');
+        btnRemove_a.innerHTML = blogsHtml_btn;
+        btnRemove_a.className = "btn btn-sm btn-outline-danger btn-round"
+        btnRemove_a.setAttribute("id", "btnRemoveTimeSlot" + (x+1))
+        btnRemove_a.setAttribute("onclick", "removeTimeSlot("+(x+1)+")")
+        let btnRemove_div = document.createElement('div');
+        btnRemove_div.className = "col-md-1  d-flex align-items-center";
+        btnRemove_div.appendChild(btnRemove_a)
+
+        let timeSlotTop_div = document.createElement('div');
+        timeSlotTop_div.setAttribute("id", "timeSlot-"+(x+1));
+        timeSlotTop_div.setAttribute("style", "padding: 0rem 3rem 0rem 0rem; border: solid #2e74b6; border-width: thin; margin-top: 1rem;");
+        timeSlotTop_div.className = "row"
+        timeSlotTop_div.appendChild(dayOfWeek_div)
+        timeSlotTop_div.appendChild(startTime_div)
+        timeSlotTop_div.appendChild(endTime_div)
+        timeSlotTop_div.appendChild(btnRemove_div)
+
+        const timeSlot_container = document.getElementById("timeSlot-container");
+        timeSlot_container.appendChild(timeSlotTop_div);
+
+      });
+
+
+
+      $('#btnAddTimeSlot').on('click', function(e) {
+        btnRemoveTimeSlot
+      });
+
+			// Sign-out
+			// $("#btn-logout").click(function(){
+      //   $('#signOutModal').modal('show');
+			// });
+      $('#btnSignOutModalUpdate').on('click', function (e) {
+      
+        firebase.auth().signOut().then(() => {
+            // Sign-out successful.
+          }).catch((error) => {
+            window.alert("Logging out failed");
+            func.showNotification('top','center', 'danger', 'error_outline', "Logging out failed." );
+          });
+        // Do something
+        $('#signOutModal').modal('hide');
+      });
+
+      $('#btnSignOutModalClose1').on('click', function (e) {
+        $('#signOutModal').modal('hide');
+      });
+      $('#btnSignOutModalClose2').on('click', function (e) {
+        $('#signOutModal').modal('hide');
+      });
+    
+      // Activate Account
+      $('#btnActivationModalUpdate').on('click', function (e) {
+        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
+          window.location = "https://golearn.com.my/join-us/";
+        }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+          window.location = "https://golearn.com.my/contact-us/";
+        }else {
+          window.location = "https://golearn.com.my/pricing/";
+        }
+        // Do something
+        $('#activationModal').modal('hide');
+      });
+
+      $('#btnActivationModalClose1').on('click', function (e) {
+        $('#activationModal').modal('hide');
+      });
+      $('#btnActivationModalClose2').on('click', function (e) {
+        $('#activationModal').modal('hide');
+      });
+    
+      // Update Basic Details
+			$("#btnUpdate").click(function(){
+        $('#updateBasicDetailsModal').modal('show');
+			});
+      $('#btnUpdateBasicDetailsModalUpdate').on('click', function (e) {
+
+        var docRef = db.collection("Tutor").doc(tutorId);
+
+        var docRefWithMerge = docRef.set({
+          // [CHECK_HOMETUTOR_KEY]: document.getElementById("mode").checked,
+          // [CHECK_PRIVATETUTOR_KEY]: document.getElementById("email").value,
+          // [CHECK_GROUPTUTOR_KEY]: document.getElementById("phone").value,
+          // [CHECK_ONLINETUTOR_KEY]: document.getElementById("address1").value,
+          [ADMIN_WEB_URL_KEY]: current_aweburl,
+          [CHECK_HOME_TUTOR_TO_STUDENT_KEY]: (document.getElementById("modeHomeTutorToStudent").checked)? true : false,
+          [CHECK_HOME_STUDENT_TO_TUTOR_KEY]: (document.getElementById("modeHomeStudentToTutor").checked)? true : false,
+          [CHECK_GROUP_KEY]: (document.getElementById("modeGroup").checked)? true : false,
+          [CHECK_ONLINE_KEY]: (document.getElementById("modeOnline").checked)? true : false,
+          [CHECK_ONLINE_GROUP_KEY]: (document.getElementById("modeOnlineGroup").checked)? true : false,
+
+          [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY]: (document.getElementById("lanEng").checked)? true : false,
+          [CHECK_TEACHING_LANGUAGE_BM_KEY]: (document.getElementById("lanBm").checked)? true : false,
+          [CHECK_TEACHING_LANGUAGE_BC_KEY]: (document.getElementById("lanBc").checked)? true : false,
+          [CHECK_TEACHING_LANGUAGE_BT_KEY]: (document.getElementById("lanBt").checked)? true : false,
+          [CHECK_TEACHING_LANGUAGE_OTHER_KEY]: (document.getElementById("lanOther").checked)? true : false,
+          [YEARS_EXPERIENCE_KEY]: document.getElementById("yearsExperience").value,
+          // [TUTORING_EXPERIENCE_KEY]: document.getElementById("tutoringExperience").value,
+          // [TUTORING_APPROACH_KEY]: document.getElementById("tutoringApproach").value,
+          [QUALIFICATION_KEY]: document.getElementById("qualification").value,
+          // [PREFERED_SUBJECT_LIST_KEY]: null,
+          // [PREFERED_AREA_LIST_KEY]: null
+        }, { merge: true });
+
+        $('#updateBasicDetailsModal').modal('hide');
+        func.showNotification('top','center', 'success', 'check_circle', "Your basic details are updated.");
+
+      });
+
+      $('#btnUpdateBasicDetailsModalClose1').on('click', function (e) {
+        $('#updateBasicDetailsModal').modal('hide');
+      });
+      $('#btnUpdateBasicDetailsModalClose2').on('click', function (e) {
+        $('#updateBasicDetailsModal').modal('hide');
+      });
+    
+    
+    });
+
+  </script>
+  
+</body>
+
+</html>

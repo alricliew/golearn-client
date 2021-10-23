@@ -1,0 +1,2593 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>GoLearn Admin Space</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous"> -->
+  <!-- Material Kit CSS -->
+  <link href="assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <link href="assets/demo/demo.css" rel="stylesheet" />
+  <!-- Firebase Init -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+  <script src="js/firebase.js"></script>
+</head>
+
+<body>
+
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/img/sidebar-1.jpg">
+      <!--
+      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+      Tip 2: you can also add an image using data-image tag
+  -->
+      <div class="logo">
+        <a href="#" class="simple-text logo-mini">
+			<img src="source/logo.png" style="width: 216px; height: auto;" alt=""></img>
+			
+        </a>
+		
+        <a href="#" class="simple-text logo-normal">
+         Admin Portal
+        </a>
+		
+      </div>
+
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+			<li class="nav-item ">
+				<a class="nav-link" href="./">
+				  <i class="material-icons">dashboard</i>
+				  <p>Dashboard</p>
+				</a>
+			  </li>
+			  
+			  <li class="nav-item">
+				<a class="nav-link" href="./account-activation.html">
+				  <i class="material-icons">manage_accounts</i>
+				  <p>Tutor Account</p>
+				</a>
+			  </li>
+			  <!-- your sidebar here -->
+			  <li class="nav-item active">
+				<a class="nav-link" href="./job.html">
+				  <i class="material-icons">work</i>
+				  <p>Job</p>
+				</a>
+			  </li>
+			  <!-- <li class="nav-item ">
+				<a class="nav-link" href="./class.html">
+				  <i class="material-icons">content_paste</i>
+				  <p>Class</p>
+				</a>
+			  </li> -->
+
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">Create and Update Jobs</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="navbar-brand" href="javascript:;">
+                   Welcome <span id="user"> </span>
+                </a> 
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:;">
+                  <i class="material-icons">notifications</i> Notifications
+                </a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                  <a class="dropdown-item" href="#">Another Notification</a>
+                  <a class="dropdown-item" href="#">Another One</a>
+                </div>
+              </li>
+              <!-- your navbar here -->
+			  
+			  <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">person</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                  <a class="dropdown-item" href="#">Profile (Under Construction)</a>
+                  <a class="dropdown-item" href="#">Settings (Under Construction)</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#" id="btn-logout">Log out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid">
+          <!-- your content here -->
+
+		  <!-- Modal Start -->	 
+		  <div class="row">
+			<div class="col-lg-12 col-md-12">
+				<!-- Modal Update Job -->
+				<div class="modal fade" id="modalUpdateJob" tabindex="-1" role="dialog" aria-labelledby="modalUpdateJobTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Update Job</h5>
+						<button type="button" class="close" id="btnModalUpdateJobClose2" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						</div>
+						<div class="modal-body">
+						Are you sure you want to update the job?
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" id="btnModalUpdateJobClose" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" id="btnModalUpdateJobConfirm">Save changes</button>
+						</div>
+					</div>
+					</div>
+				</div>
+  
+				<!-- Modal Delete Job -->
+				<div class="modal fade" id="modalDeleteJob" tabindex="-1" role="dialog" aria-labelledby="modalDeleteJobTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Delete Job</h5>
+						<button type="button" class="close" id="btnModalDeleteJobClose2" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						</div>
+						<div class="modal-body">
+							<p>Are you sure you want to delete this job? </p>
+							<p style="font-weight: 700; color: rgb(233, 29, 29);" >Note: You cannot undo delete. </p>
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" id="btnModalDeleteJobClose" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" id="btnModalDeleteJobConfirm">Delete</button>
+						</div>
+					</div>
+					</div>
+				</div>
+
+				<!-- Modal Create Job -->
+				<div class="modal fade" id="modalCreateJob" tabindex="-1" role="dialog" aria-labelledby="modalCreateJobTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Create a New Job</h5>
+						<button type="button" class="close" id="btnModalCreateJobClose2" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						</div>
+						<div class="modal-body">
+						<form>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label  >Job Code</label>
+										<input type="text" class="form-control" id="modalCreateJobId">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group" >
+										<label >Name (Requester)</label>
+										<input type="text" class="form-control"  placeholder="" id="modalCreateJobName">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group" >
+										<label >Phone (IMPORTANT)</label>
+										<input type="text" class="form-control"  placeholder="" id="modalCreateJobPhone">
+									</div>
+
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label  >Email</label>
+										<input type="text" class="form-control" id="modalCreateJobEmail">
+									</div>
+								</div>
+							</div>
+
+							<p style="color: red;">Change the phone number format to "+60138252818". (Add "+60", remove spacing and dash, ignore ("...") quatation mark)</p>
+							<p >This is important to ensure we can generate class summary report, track progress, tuition fee calculation and many other info related to this number.</p>
+
+						</form>
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" id="btnModalCreateJobClose" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" id="btnModalCreateJobConfirm" data-dismiss="modal">Create</button>
+						</div>
+					</div>
+					</div>
+				</div>
+
+				<!-- Modal Add  Tutor -->
+				<div class="modal fade" id="modalAddTutor" tabindex="-1" role="dialog" aria-labelledby="modalAddTutorTitle" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLongTitle">Add a Tutor</h5>
+								<button type="button" class="close" id="btnModalAddTutorClose2" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="row">
+										<div class="col-lg-4 col-md-4"> 
+											<div class="input-group no-border">
+												<input type="text" value="" class="form-control" placeholder="Search Phone/Email..." id="searchAddTutorinput">
+												<button type="submit" class="btn btn-white btn-round btn-just-icon" id="searchAddTutor">
+													<i class="material-icons">search</i>
+													<div class="ripple-container"></div>
+												</button>
+												
+											</div>
+										</div>
+										<div class="col-lg-8 col-md-8"> 
+											<p class="text-primary" style="margin: 0;"> Example Phone (main): "+60138252818" (Add "+60")</p>
+											<p class="text-primary" style="margin: 0;"> Example Email: "golearn.my@gmail.com" (Use full email)</p>
+										</div>
+									</div>
+
+									<hr style="margin-top: 2em; margin-bottom: 2em;">
+
+									<div class="row">
+										<div class="col-md-4">
+											<div class="" style="height: 150px; width: 150px;">
+												<a href="javascript:;">
+												<img class="img"  style="height: 100%; width:100%; object-fit: cover; border-radius: 50%" id="addTutorImgUrl" src="source/icon_boy01.png" />
+												</a>
+											</div>
+										</div>
+										
+										<div class="col-md-8">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label  >Name</label>
+														<input type="text" class="form-control" id="addTutorName" disabled>
+													</div>
+													<p style="font-size: 0.8rem;">Tutor's Profile Link Preview: https://golearn.com.my/tutor/<span id="addTutorWebUrl"></span></p>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" id="btnModalAddTutorClose" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="btnModalAddTutorConfirm" data-dismiss="modal">Create</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+
+				<!-- Modal Delete Tutor 1 -->
+				<div class="modal fade" id="modalDeleteTutor1" tabindex="-1" role="dialog" aria-labelledby="modalDeleteTutor1Title" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Delete Tutor 1</h5>
+						<button type="button" class="close" id="btnModalDeleteTutor1Close2" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						</div>
+						<div class="modal-body">
+						Are you sure you want to delete Tutor 1 from this job?
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" id="btnModalDeleteTutor1Close" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" id="btnDeleteTutor1Confirm">Remove</button>
+						</div>
+					</div>
+					</div>
+				</div>
+
+				<!-- Modal Delete Tutor 2 -->
+				<div class="modal fade" id="modalDeleteTutor2" tabindex="-1" role="dialog" aria-labelledby="modalDeleteTutor2Title" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Delete Tutor 2</h5>
+						<button type="button" class="close" id="btnModalDeleteTutor2Close2" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						</div>
+						<div class="modal-body">
+						Are you sure you want to delete Tutor 2 from this job?
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" id="btnModalDeleteTutor2Close" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" id="btnDeleteTutor2Confirm">Remove</button>
+						</div>
+					</div>
+					</div>
+				</div>
+
+				<!-- Modal Delete Tutor 3 -->
+				<div class="modal fade" id="modalDeleteTutor3" tabindex="-1" role="dialog" aria-labelledby="modalDeleteTutor3Title" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Delete Tutor 3</h5>
+						<button type="button" class="close" id="btnModalDeleteTutor3Close2" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						</div>
+						<div class="modal-body">
+						Are you sure you want to delete Tutor 3 from this job?
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" id="btnModalDeleteTutor3Close" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" id="btnDeleteTutor3Confirm">Remove</button>
+						</div>
+					</div>
+					</div>
+				</div>
+				<!-- Modal End -->
+			</div> 
+		  </div> 
+
+		  <!-- Search Job -->
+		  <div class="row">
+            <div class="col-lg-4 col-md-4"> 
+				<div class="input-group no-border">
+					<input type="text" value="" class="form-control" placeholder="Search Job Code..." id="searchJobCodeInput">
+					<button type="submit" class="btn btn-white btn-round btn-just-icon" id="searchJobCode">
+					  <i class="material-icons">search</i>
+					  <div class="ripple-container"></div>
+					</button>
+					
+				</div>
+			</div>
+            <div class="col-lg-4 col-md-4"> 
+				<p class="text-primary" style="margin: 0;"> Example: Job Code "PV01001A"</p>
+				<p class="text-primary" style="margin: 0;"> No dash spacing in the Job Code</p>
+			</div>
+
+			<div class="col-lg-2 col-md-2"> 
+				<button type="submit" class="btn btn-success" id="btnCreateNewJob">Create New Job</button>
+			</div>
+			<div class="col-lg-2 col-md-2"> 
+				<button type="submit" class="btn btn-danger" id="btnDeleteJob">Delete this Job</button>
+			</div>
+          </div>
+		
+		  <!-- Main Information -->
+		  <div class="row">
+			<div class="col-md-12">
+				<div class="card">
+				<div class="card-header card-header-primary">
+					<h4 class="card-title">Main Information</h4>
+					<p class="card-category">This is client detail, subject information, our offering and tutor proposal.</p>
+				</div>
+				<div class="card-body">
+					<form>
+						<h4 style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="No info">Client's Detail   (Only last 4 digit of phone number will be shown to client)</h4>
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label  >Job Code</label>
+									<input type="text" class="form-control" style="background: #F5F5F5;" id="main_JobId" disabled >
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group" >
+									<label >Name</label>
+									<input type="text" class="form-control"  placeholder="" id="main_name_client">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group" >
+									<label >Phone</label>
+									<input type="text" class="form-control"  placeholder="" id="main_phone_client">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label  >Email</label>
+									<input type="text" class="form-control" id="main_email_client">
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="form-group" >
+									<label >Address (for Home Tuition) </label>
+									<input type="text" class="form-control"  placeholder="" id="main_address_client">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label  >Student's Gender</label>
+									<input type="text" class="form-control" id="main_cStuGen">
+								</div>
+							</div>
+						</div>
+						
+						<h4 style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="No info">Subject Information   (Info here will be shown to client)</h4>
+
+						
+						<!-- online only -->
+						<div class="row">
+							<!-- <div class="col-md-2"><span class="org-txt"><strong>Online Only</strong></span></div> -->
+							<div class="col-md-12">
+								<div class="form-check">
+									<label class="form-check-label"> Online Only
+										<input class="form-check-input" type="checkbox" value="" id="main_online" >
+										<span class="form-check-sign">
+										<span class="check"></span>
+										</span>
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<!-- State, Area, Education Level, Subjects -->
+						<div class="row">
+							<!-- <div class="col-md-2"><span class="org-txt"><strong>State :</strong></span></div> -->
+							<div class="col-md-3">
+								<div class="form-group">
+									<label  >State</label>
+									<select class="form-control" name="cover_area_state[]" id="state_drop">
+										<option value="">Select state</option>
+									</select>
+								</div>
+							</div>
+	
+							<!-- <div class="col-md-2"> <span class="org-txt"><strong>Area :</strong></span> </div> -->
+							<div class="col-md-3">
+								<div class="form-group">
+									<label  >Area</label>
+									<select class="form-control" name="cover_area_state[]" id="area_drop">
+										<option value="">Select area</option>
+									<!-- To be populated -->
+									</select>
+								</div>
+							</div>
+							<!-- <div class="col-md-2">
+								<span class="org-txt"><strong>Education Level :</strong> <br> <i style="color: red; font-size: x-small; margin: 0;"></i></span> 
+							</div> -->
+							<div class="col-md-3">
+								<!-- Education Level -->
+								<div class="form-group">
+									<label  >Education Level</label>
+									<select class="form-control" name="tutor_course[]" id="level_drop">
+										<option value="">Select education level</option>
+									</select>
+								</div>
+							</div>
+							<!-- <div class="col-md-2"><span class="org-txt"><strong>Subjects :</strong></span></div> -->
+							<div class="col-md-3">
+								<!-- Subjects -->
+								<div class="form-group">
+									<label  >Subject</label>
+									<select class="form-control" name="tutor_course[]" id="subject_drop">
+										<option value="">Select subject</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<h4 style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="No info">Our Offering   (Info here will be shown to client)</h4>
+
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label  >Duration</label>
+									<input type="number" class="form-control" id="main_duration">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group" >
+									<label >Class/Week</label>
+									<input type="number" class="form-control"  placeholder="" id="main_classPerWeek">
+								</div>
+							</div>
+		
+	
+							<div class="col-md-3">
+								<div class="form-group">
+									<label  >Fees (RM)</label>
+									<input type="number" class="form-control" id="main_fees">
+								</div>
+							</div>
+							<div class="col-md-3">
+				
+							</div>
+
+							<div class="col-md-3">
+								<label  >Fees Type</label>
+
+								<div class="form-check form-check-radio">
+									<label class="form-check-label">
+										<input class="form-check-input" type="radio" name="feeTypeRadios" id="radio-feeType_Per_Month" value="option1" >
+										Per Month
+										<span class="circle">
+											<span class="check"></span>
+										</span>
+									</label>
+								</div>
+								<div class="form-check form-check-radio">
+									<label class="form-check-label">
+										<input class="form-check-input" type="radio" name="feeTypeRadios" id="radio-feeType_Per_Hour" value="option2">
+										Per Hour
+										<span class="circle">
+											<span class="check"></span>
+										</span>
+									</label>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<label  >Commission Policy (For Tutor)</label>
+								<div class="form-check form-check-radio">
+									<label class="form-check-label">
+										<input class="form-check-input" type="radio" name="comPolRadios" id="radio-comPol_2622181614pc" value="option1" >
+										26%->22%->18%->16%->14% onward
+										<span class="circle">
+											<span class="check"></span>
+										</span>
+									</label>
+								</div>
+								<div class="form-check form-check-radio">
+									<label class="form-check-label">
+										<input class="form-check-input" type="radio" name="comPolRadios" id="radio-comPol_50pc" value="option2">
+										50% First month tuition fee
+										<span class="circle">
+											<span class="check"></span>
+										</span>
+									</label>
+								</div>
+								<div class="form-check form-check-radio">
+									<label class="form-check-label">
+										<input class="form-check-input" type="radio" name="comPolRadios" id="radio-comPol_40pc" value="option1" >
+										40% First month tuition fee
+										<span class="circle">
+											<span class="check"></span>
+										</span>
+									</label>
+								</div>
+								<div class="form-check form-check-radio">
+									<label class="form-check-label">
+										<input class="form-check-input" type="radio" name="comPolRadios" id="radio-comPol_30pc" value="option2">
+										30% First month tuition fee
+										<span class="circle">
+											<span class="check"></span>
+										</span>
+									</label>
+								</div>
+								<div class="form-check form-check-radio">
+									<label class="form-check-label">
+										<input class="form-check-input" type="radio" name="comPolRadios" id="radio-comPol_20pc" value="option2">
+										20% First month tuition fee
+										<span class="circle">
+											<span class="check"></span>
+										</span>
+									</label>
+								</div>
+								<div class="form-check form-check-radio">
+									<label class="form-check-label">
+										<input class="form-check-input" type="radio" name="comPolRadios" id="radio-comPol_10pc" value="option2">
+										10% First month tuition fee
+										<span class="circle">
+											<span class="check"></span>
+										</span>
+									</label>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class="form-group">
+										<label>Job Description (Used for parents and tutor)</label>
+									 	 <textarea class="form-control" rows="6" id="main_jobDetail"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<h4 style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="No info">Job Status </h4>
+							
+						<div class="row">
+							<div class="col-md-6">
+								<!-- <label  >Job Status</label> -->
+								<div class="form-check form-check-radio">
+									<label class="form-check-label">
+										<input class="form-check-input" type="radio" name="jobStatusRadios" id="radio-jobStatus-open" value="option-open" >
+										Open
+										<span class="circle">
+											<span class="check"></span>
+										</span>
+									</label>
+								</div>
+								<div class="form-check form-check-radio">
+									<label class="form-check-label">
+										<input class="form-check-input" type="radio" name="jobStatusRadios" id="radio-jobStatus-success" value="option-success">
+										Success
+										<span class="circle">
+											<span class="check"></span>
+										</span>
+									</label>
+								</div>
+								<div class="form-check form-check-radio">
+									<label class="form-check-label">
+										<input class="form-check-input" type="radio" name="jobStatusRadios" id="radio-jobStatus-failed" value="option-failed">
+										Failed
+										<span class="circle">
+											<span class="check"></span>
+										</span>
+									</label>
+								</div>
+								<div class="form-check form-check-radio disabled">
+									<label class="form-check-label">
+										<input class="form-check-input" type="radio" name="jobStatusRadios" id="radio-jobStatus-full" value="option-full" disabled>
+										Full  (Open, but no longer accepting new applications)
+										<span class="circle">
+											<span class="check"></span>
+										</span>
+									</label>
+								</div>
+								<div class="form-check form-check-radio disabled">
+									<label class="form-check-label">
+										<input class="form-check-input" type="radio" name="jobStatusRadios" id="radio-jobStatus-closed" value="option-closed" disabled>
+											Closed (Equivalent to Success and Failed)
+										<span class="circle">
+											<span class="check"></span>
+										</span>
+									</label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Job Satus Explanation (If failed or any message)</label>
+									<div class="form-group">
+									  <textarea class="form-control" rows="4" id="main_jobMessage"></textarea>
+									</div>
+								  </div>
+							</div>
+						</div>
+					</form>
+				</div>
+				</div>
+			</div>
+		  </div>
+
+		  <!-- <div class="col-lg-12 col-md-12"> 
+			<button type="submit" class="btn btn-primary" id="btnAddTutor" >Add Tutor</button>
+		  </div> -->
+		
+		  <!-- Recommended Tutors -->
+		  <div class="row">
+			<div class="col-md-12">
+				<div class="card">
+				<div class="card-header card-header-primary">
+					<h4 class="card-title">Recommended Tutors</h4>
+					<p class="card-category">For tutors that do not have access to golearn tutor platform or have not registered yet, send their tutor profile using traditional Whatsapp method.</p>
+				</div>
+				<div class="card-body">
+
+					<!-- Tutor 1 -->
+					<div class="row">
+						<div class="col-lg-12 col-md-12"> 
+							<h4 style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="No info">Tutor 1</h4>
+						</div>
+						<div class="col-lg-4 col-md-4"> 
+							<div class="input-group no-border">
+								<input type="text" value="" class="form-control" placeholder="Search Tutor 1's Phone/Email..." id="searchTutor1">
+								<button type="submit" class="btn btn-white btn-round btn-just-icon" id="btnAddTutor1">
+								  <i class="material-icons">person_add</i>
+								  <div class="ripple-container"></div>
+								</button>
+								
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6"> 
+							<p class="text-primary" style="margin: 0;"> Phone (main): "+60138252818" (Add "+60", No dash or spacing)</p>
+							<p class="text-primary" style="margin: 0;"> Email: "golearn.my@gmail.com" (Use full email)</p>
+						</div>
+						<div class="col-lg-2 col-md-2"> 
+							<button class="btn btn-primary" id="btnDeleteTutor1" >Remove Tutor 1</button>
+						</div>
+					</div>
+
+					<form>
+						<!-- Tutor 1 -->
+						<div class="row">
+							<div class="col-md-2">
+								<div class="" style="height: 150px; width: 150px;">
+									<a href="javascript:;">
+									<img class="img"  style="height: 100%; width:100%; object-fit: cover; border-radius: 50%" id="tutor1ImgUrl" src="source/icon_boy01.png" />
+									</a>
+								</div>
+							</div>
+							<div class="col-md-10">
+								<div class="row">
+									<div class="col-md-8">
+										<div class="form-group">
+											<label  >Name</label>
+											<input type="text" class="form-control" style="background: #F5F5F5;" id="tutor1Name" disabled>
+										</div>
+									<p style="font-size: 0.8rem;">Tutor 1's Public Profile : https://golearn.com.my/tutor/<span id="tutor1WebUrl"></span></p>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group" >
+											<label >Age</label>
+											<input type="text" class="form-control"  style="background: #F5F5F5;" id="tutor1Age" disabled>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label >Phone</label>
+											<input type="email" class="form-control" style="background: #F5F5F5;" id="tutor1Phone" disabled>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label >Email</label>
+											<input type="email" class="form-control" style="background: #F5F5F5;" id="tutor1Email" disabled>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Years of Teaching Experience</label>
+											<input type="email" class="form-control" style="background: #F5F5F5;" id="tutor1YearsExperience" disabled>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<div class="form-group">
+												<label>Education</label>
+											  <textarea class="form-control" style="background: #F5F5F5;" id="tutor1Education" disabled rows="4"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- <button type="submit" class="btn btn-primary pull-right" disabled>Update Profile</button> -->
+						<div class="clearfix"></div>
+					</form>
+
+					<!-- Tutor 2 -->
+					<div class="row">
+						<div class="col-lg-12 col-md-12"> 
+							<h4 style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="No info">Tutor 2</h4>
+
+						</div>
+						<div class="col-lg-4 col-md-4"> 
+							<div class="input-group no-border">
+								<input type="text" value="" class="form-control" placeholder="Search Tutor 2's Phone/Email..." id="searchTutor2">
+								<button type="submit" class="btn btn-white btn-round btn-just-icon" id="btnAddTutor2">
+								  <i class="material-icons">person_add</i>
+								  <div class="ripple-container"></div>
+								</button>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6"> 
+							<p class="text-primary" style="margin: 0;"> Phone (main): "+60138252818" (Add "+60", No dash or spacing)</p>
+							<p class="text-primary" style="margin: 0;"> Email: "golearn.my@gmail.com" (Use full email)</p>
+						</div>
+
+						<div class="col-lg-2 col-md-2"> 
+							<button class="btn btn-primary" id="btnDeleteTutor2" >Remove Tutor 2</button>
+						</div>
+					</div>
+					
+					<form>
+						<div class="row">
+							<div class="col-md-2">
+								<div class="" style="height: 150px; width: 150px;">
+									<a href="javascript:;">
+									<img class="img"  style="height: 100%; width:100%; object-fit: cover; border-radius: 50%" id="tutor2ImgUrl" src="source/icon_boy01.png" />
+									</a>
+								</div>
+							</div>
+							<div class="col-md-10">
+								<div class="row">
+									<div class="col-md-8">
+										<div class="form-group">
+											<label >Name</label>
+											<input type="text" class="form-control" style="background: #F5F5F5;" id="tutor2Name" disabled>
+										</div>
+									<p style="font-size: 0.8rem;">Tutor 2's Public Profile : https://golearn.com.my/tutor/<span id="tutor2WebUrl"></span></p>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group" >
+											<label >Age</label>
+											<input type="text" class="form-control"  style="background: #F5F5F5;" id="tutor2Age" disabled>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label >Phone</label>
+											<input type="email" class="form-control" style="background: #F5F5F5;" id="tutor2Phone" disabled>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label >Email</label>
+											<input type="email" class="form-control" style="background: #F5F5F5;" id="tutor2Email" disabled>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label >Years of Teaching Experience</label>
+											<input type="email" class="form-control" style="background: #F5F5F5;" id="tutor2YearsExperience" disabled>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											
+											<div class="form-group">
+											  <label>Education</label>
+											  <textarea class="form-control" style="background: #F5F5F5;" id="tutor2Education" disabled rows="4"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- <button type="submit" class="btn btn-primary pull-right" disabled>Update Profile</button> -->
+						<div class="clearfix"></div>
+					</form>
+
+					<!-- Tutor 3 -->
+					<div class="row">
+						<div class="col-lg-12 col-md-12"> 
+							<h4 style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="No info">Tutor 3</h4>
+
+						</div>
+						<div class="col-lg-4 col-md-4"> 
+							<div class="input-group no-border">
+								<input type="text" value="" class="form-control" placeholder="Search Tutor 3's Phone/Email..." id="searchTutor3">
+								<button type="submit" class="btn btn-white btn-round btn-just-icon" id="btnAddTutor3">
+									<i class="material-icons">person_add</i>
+									<div class="ripple-container"></div>
+								</button>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6"> 
+							<p class="text-primary" style="margin: 0;"> Phone (main): "+60138252818" (Add "+60", No dash or spacing)</p>
+							<p class="text-primary" style="margin: 0;"> Email: "golearn.my@gmail.com" (Use full email)</p>
+						</div>
+
+						<div class="col-lg-2 col-md-2"> 
+							<button class="btn btn-primary" id="btnDeleteTutor3" >Remove Tutor 3</button>
+						</div>
+					</div>
+					
+					<form>
+						<div class="row">
+							<div class="col-md-2">
+								<div class="" style="height: 150px; width: 150px;">
+									<a href="javascript:;">
+									<img class="img"  style="height: 100%; width:100%; object-fit: cover; border-radius: 50%" id="tutor3ImgUrl" src="source/icon_boy01.png" />
+									</a>
+								</div>
+							</div>
+							<div class="col-md-10">
+								<div class="row">
+									<div class="col-md-8">
+										<div class="form-group">
+											<label  >Name</label>
+											<input type="text" class="form-control" style="background: #F5F5F5;" id="tutor3Name" disabled>
+										</div>
+									<p style="font-size: 0.8rem;">Tutor 3's Public Profile : https://golearn.com.my/tutor/<span id="tutor3WebUrl"></span></p>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group" >
+											<label >Age</label>
+											<input type="text" class="form-control"  style="background: #F5F5F5;" id="tutor3Age" disabled>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label >Phone</label>
+											<input type="email" class="form-control" style="background: #F5F5F5;" id="tutor3Phone" disabled>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label >Email</label>
+											<input type="email" class="form-control" style="background: #F5F5F5;" id="tutor3Email" disabled>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label >Years of Teaching Experience</label>
+											<input type="email" class="form-control" style="background: #F5F5F5;" id="tutor3YearsExperience" disabled>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											
+											<div class="form-group">
+												<label>Education</label>
+												<textarea class="form-control" style="background: #F5F5F5;" id="tutor3Education" disabled rows="4"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- <button type="submit" class="btn btn-primary pull-right" disabled>Update Profile</button> -->
+						<div class="clearfix"></div>
+					</form>
+						
+				</div>
+				</div>
+			</div>
+			  
+		  </div>
+		   <!-- Information From Request Forms or Whatsapp -->
+		  <div class="row">
+			<div class="col-md-12">
+				<div class="card">
+				<div class="card-header card-header-primary">
+					<h4 class="card-title">Other Information from Request Forms or Whatsapp</h4>
+					<p class="card-category">Note: Client's Name, Phone, Email, Duration and Lesson/Week is in another section</p>
+					<p class="card-category">We need this so we would not lose anything if the original request is deleted. This could be useful for future analysis.</p>
+				</div>
+				<div class="card-body">
+					<form>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group" >
+								<label >I am a (Parents/Student)</label>
+								<input type="text" class="form-control"  placeholder="" id="main_cType">
+								</div>
+							</div>
+		
+							<div class="col-md-4">
+								<div class="form-group" >
+								<label >Current School (if any)</label>
+								<input type="text" class="form-control"  id="main_cSchool">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group" >
+								<label >Budget (if any)</label>
+								<input type="text" class="form-control"  placeholder="" id="main_cBudget">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group" >
+									<label >Start date</label>
+									<input type="text" class="form-control"  placeholder="" id="main_cStartDate">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group" >
+								<label >Length of commitment:</label>
+								<input type="text" class="form-control"  placeholder="" id="main_cLOC">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group" >
+								<label >Preferred Days of Week</label>
+								<input type="text" class="form-control"  placeholder="" id="main_cPDOW">
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="form-group" >
+									<label >Preferred Time Slot</label>
+									<input type="text" class="form-control"  placeholder="" id="main_cPSlot">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group" >
+								<label >Preferred Tutor Gender</label>
+								<input type="text" class="form-control"  placeholder="" id="main_cPTGen">
+								</div>
+							</div>
+			
+							<div class="col-md-4">
+								<div class="form-group" >
+									<label >Preference for Tutor's Race</label>
+									<input type="text" class="form-control"  placeholder="" id="main_cPTRace">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group" >
+								<label >Note from Client</label>
+								<input type="text" class="form-control"  placeholder="" id="main_cNote">
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="form-group" >
+									<label >Survey 1: Where do you find us?</label>
+									<input type="text" class="form-control"  placeholder="" id="main_cSurvey1">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group" >
+								<label >Survey 2: The reason why you want a private tutor?</label>
+								<input type="text" class="form-control"  placeholder="" id="main_cSurvey2">
+								</div>
+						</div>
+						</div>
+					</form>
+				</div>
+				</div>
+			</div>
+		  </div>
+
+		  <div class="row">
+			<div class="col-lg-12">
+				<button type="submit" class="btn btn-primary" id="btnUpdateJob">Update Jobs</button>
+			</div>
+		  </div>
+
+		  <div class="card">
+			<div class="card-header card-header-primary">
+			  	<h4 class="card-title">Recommended Tutor Link (for Client): </h4>
+			  	<a id="btnViewRecommendedTutor" href="#" class="simple-text logo-normal" target="_blank" style="background-color: #F5F5F5; padding: 0.3rem;">
+					https://golearn.com.my/view?id=<span id="id_view_url"></span>&id_client=<span id="id_client_view_url"></span>
+				</a>
+			  	<!-- <p class="card-category" href="" target="_blank"></p> -->
+				<br>
+			  	<h4 class="card-title">Tuition Job Link:</h4>
+			  	<p class="card-category">-----Under Construction-----</p>
+			</div>
+			<div class="card-body">
+
+			</div>
+		  </div>
+
+        </div>
+      </div>
+	  <footer class="footer">
+		<div class="container-fluid">
+			<nav class="float-left">
+			<ul>
+				<li>
+				<a href="https://golearn.com.my">
+					GoLearn Admin Portal
+				</a>
+				</li>
+			</ul>
+			</nav>
+			<div class="copyright float-right">
+			&copy;
+			<script>
+				document.write(new Date().getFullYear())
+			</script>, made with <i class="material-icons">favorite</i> by
+			<a href="#" >Boring Alric</a>
+			</div>
+			<!-- your footer here -->
+		</div>
+	  </footer>
+    </div>
+	  
+  </div>
+
+  <div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+      <a href="#" data-toggle="dropdown">
+        <i class="fa fa-cog fa-2x"> </i>
+      </a>
+      <ul class="dropdown-menu">
+        <li class="header-title"> Sidebar Filters</li>
+        <li class="adjustments-line">
+          <a href="javascript:void(0)" class="switch-trigger active-color">
+            <div class="badge-colors ml-auto mr-auto">
+              <span class="badge filter badge-purple" data-color="purple"></span>
+              <span class="badge filter badge-azure" data-color="azure"></span>
+              <span class="badge filter badge-green" data-color="green"></span>
+              <span class="badge filter badge-warning" data-color="orange"></span>
+              <span class="badge filter badge-danger" data-color="danger"></span>
+              <span class="badge filter badge-rose active" data-color="rose"></span>
+            </div>
+            <div class="clearfix"></div>
+          </a>
+        </li>
+        <li class="header-title">Images</li>
+        <li class="active">
+          <a class="img-holder switch-trigger" href="javascript:void(0)">
+            <img src="assets/img/sidebar-1.jpg" alt="">
+          </a>
+        </li>
+        <li>
+          <a class="img-holder switch-trigger" href="javascript:void(0)">
+            <img src="assets/img/sidebar-2.jpg" alt="">
+          </a>
+        </li>
+        <li>
+          <a class="img-holder switch-trigger" href="javascript:void(0)">
+            <img src="assets/img/sidebar-3.jpg" alt="">
+          </a>
+        </li>
+        <li>
+          <a class="img-holder switch-trigger" href="javascript:void(0)">
+            <img src="assets/img/sidebar-4.jpg" alt="">
+          </a>
+        </li>
+        <li class="button-container">
+          <a href="https://www.creative-tim.com/product/material-dashboard" target="_blank" class="btn btn-primary btn-block">Free Download</a>
+        </li>
+        <!-- <li class="header-title">Want more components?</li>
+            <li class="button-container">
+                <a href="https://www.creative-tim.com/product/material-dashboard-pro" target="_blank" class="btn btn-warning btn-block">
+                  Get the pro version
+                </a>
+            </li> -->
+        <li class="button-container">
+          <a href="https://demos.creative-tim.com/material-dashboard/docs/2.1/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block">
+            View Documentation
+          </a>
+        </li>
+        <li class="button-container github-star">
+          <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
+        </li>
+        <li class="header-title">Thank you for 95 shares!</li>
+        <li class="button-container text-center">
+          <button id="twitter" class="btn btn-round btn-twitter"><i class="fa fa-twitter"></i> &middot; 45</button>
+          <button id="facebook" class="btn btn-round btn-facebook"><i class="fa fa-facebook-f"></i> &middot; 50</button>
+          <br>
+          <br>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <script src="assets/js/core/jquery.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src="assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="assets/js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <script src="assets/js/plugins/jquery.validate.min.js"></script>
+  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+  <!-- <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script> -->
+  <!-- 	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <!-- <script src="assets/js/plugins/bootstrap-selectpicker.js"></script> -->
+  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+  <!-- <script src="assets/js/plugins/bootstrap-datetimepicker.min.js"></script> -->
+  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+  <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
+  <!-- 	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+  <!-- <script src="assets/js/plugins/bootstrap-tagsinput.js"></script> -->
+  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+  <!-- <script src="assets/js/plugins/jasny-bootstrap.min.js"></script> -->
+  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+  <!-- <script src="assets/js/plugins/fullcalendar.min.js"></script> -->
+  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+  <!-- <script src="assets/js/plugins/jquery-jvectormap.js"></script> -->
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <!-- <script src="assets/js/plugins/nouislider.min.js"></script> -->
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> -->
+  <!-- Library for adding dinamically elements -->
+  <script src="assets/js/plugins/arrive.min.js"></script>
+  <!--  Google Maps Plugin    -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+  <!-- Chartist JS -->
+  <!-- <script src="assets/js/plugins/chartist.min.js"></script> -->
+  <!--  Notifications Plugin    -->
+  <!-- <script src="assets/js/plugins/bootstrap-notify.js"></script> -->
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
+  <script src="js/common.js"></script>
+  <script src="js/const.js"></script>
+
+  <script>
+	var db = firebase.firestore();
+
+	db.settings({ timestampsInSnapshots: true });
+
+  </script>
+  <script>
+	$("#btn-logout").click(function(){
+		firebase.auth().signOut().then(() => {
+			// Sign-out successful.
+			// <!-- window.alert("Logging out successfull"); -->
+		  }).catch((error) => {
+			// An error happened.
+			window.alert("LOgging out failed");
+		  });
+	})
+  </script>
+  <script>
+	firebase.auth().onAuthStateChanged(function(user){
+	   if(!user){
+		   window.location.href = "signin.html"
+	   }else{
+			document.getElementById("user").textContent = firebase.auth().currentUser.displayName;
+		}
+	})
+  </script>
+  <script>
+	$( document ).ready(function() {
+		
+		// Declare Global Variable
+		// Main Information //
+		// String Type
+		var id, name_client, id_client, email_client, phone_client, address_client, cStuGen, 
+		category, subject, areaId, stateId, jobDetail, feeType, comPol, jobStatus, jobMessage;
+
+		var state ='';
+		var area ='';
+		var category ='';
+		var categoryId ='';
+		var subject ='';
+		var subjectId ='';
+		var online = false;
+
+		// Boolean Type
+		var status;
+		// Integer Type
+		var classPerWeek;
+		// Double Type
+		var duration, fees;
+		// Timestamp
+		var  dateCreated, dateClosed;
+
+		// Tutor Recommendation -LIMITED to 3 ONLY//
+		// Array List <String>
+		var tutorNameList = ["","",""]; 
+		var tutorIdList = ["","",""];
+		var tutorWebUrlList = ["","",""]; 
+		// Array List <Boolean>
+		var tutorStatusList = [false, false, false];
+
+		// Other Information //
+		// String Type
+		var cType, cSchool, cBudget,  cLOC,  cStartDate,  cPDOW,  cPSlot,  cPTGen,  cPTRace,  cNote,  cSurvey1,  cSurvey2,  cSurvey3;
+
+
+		// Other Misc Variable
+		var tutor_name, tutor_age, tutor_yearOfExperience, tutor_gender, tutor_imgUrl = "";
+		
+
+		checkSelection(online);
+
+		// Search Job Code
+		$('#searchJobCode').on('click', function(){
+
+			let inputVal = document.getElementById("searchJobCodeInput").value;
+			// Remove all special char and to lower case the jobcode
+			if (inputVal == null || inputVal=="" || inputVal.length <= 6){
+				alert("Enter a valid Job Code.");
+			}else{
+				id = inputVal.replace(/\W/g,"").toLowerCase();
+			}
+
+
+			// if (inputVal.length <= 6){
+			// 	alert("Enter a phone number (with +60) or a valid email.");
+
+			// }
+			// if (inputVal= == null || inputVal==""){
+			// 	alert("Enter a phone number (with +60) or a valid email.");
+
+			// }else if(validateEmail(inputVal)){
+			// 	tutor_id = inputVal.replace(/\W/g,"").toLowerCase();
+			// 	// <!-- tutor_id = inputVal.replaceAll("[^a-zA-Z0-9]", "_").toLowerCase(); -->
+			// }
+			// else if (validatePhone(inputVal)){
+			// 	tutor_id = inputVal;
+				
+			// }else{
+			// 	alert("Enter a valid phone number or email.");
+			// }
+			
+			// Load Job Info
+			db.collection("JobRequests").doc(id)
+			.onSnapshot((doc) => {
+				if (!doc.exists || doc.empty ){
+					alert("Job Code "+id.toUpperCase() + " not found.");
+					// document.getElementById("updatetutoraccount").disabled = true;
+				}
+				else{
+					// Assign to global variables
+					name_client = doc.data().name_client;
+					phone_client = doc.data().phone_client;
+					email_client = doc.data().email_client;
+					address_client = doc.data().address_client;
+					cType = doc.data().cType; 
+					cStuGen = doc.data().cStuGen;
+					cSchool = doc.data().cSchool;
+					cBudget = doc.data().cBudget;
+					cLOC = doc.data().cLOC;
+					cStartDate = doc.data().cStartDate;
+					cPDOW = doc.data().cPDOW;
+					cPSlot = doc.data().cPSlot;
+					cPTGen = doc.data().cPTGen;
+					cPTRace = doc.data().cPTRace;
+					cNote = doc.data().cNote;
+					cSurvey1 = doc.data().cSurvey1;
+					cSurvey2 = doc.data().cSurvey2;
+					cSurvey3 = "";
+					online = (doc.data().online)? true: false;
+					jobDetail = doc.data().jobDetail;
+					duration = doc.data().duration;
+					fees = doc.data().fees;
+					feeType = doc.data().feeType;
+					classPerWeek = doc.data().classPerWeek;
+					comPol = doc.data().comPol;
+					jobStatus = doc.data().jobStatus;
+					jobMessage = doc.data().jobMessage;
+					category = doc.data().category;
+					categoryId = doc.data().categoryId;
+					subject = doc.data().subject;
+					subjectId = doc.data().subjectId;
+					area = doc.data().area;
+					state = doc.data().state;
+					tutorIdList = doc.data().tutorIdList;
+					tutorNameList = doc.data().tutorNameList;
+					tutorStatusList = doc.data().tutorStatusList;
+					tutorWebUrlList = doc.data().tutorWebUrlList;
+
+					document.getElementById("main_JobId").value = id.toUpperCase();
+					document.getElementById("main_name_client").value = name_client;
+					document.getElementById("main_phone_client").value = phone_client;
+					document.getElementById("main_email_client").value = email_client
+					document.getElementById("main_address_client").value = address_client
+					document.getElementById("main_cType").value = cType;
+					document.getElementById("main_cStuGen").value= cStuGen;
+					document.getElementById("main_cSchool").value= cSchool;
+					document.getElementById("main_cBudget").value= cBudget;
+					document.getElementById("main_cLOC").value= cLOC;
+					document.getElementById("main_cStartDate").value= cStartDate;
+					document.getElementById("main_cPDOW").value = cPDOW;
+					document.getElementById("main_cPSlot").value = cPSlot;
+					document.getElementById("main_cPTGen").value = cPTGen;
+					document.getElementById("main_cPTRace").value = cPTRace;
+					document.getElementById("main_cNote").value = cNote;
+					document.getElementById("main_cSurvey1").value = cSurvey1;
+					document.getElementById("main_cSurvey2").value = cSurvey2;
+					document.getElementById("main_online").checked = (online)? true: false;
+					document.getElementById("main_jobDetail").value = jobDetail;
+					document.getElementById("main_duration").value = duration;
+					document.getElementById("main_fees").value = fees;
+					document.getElementById("main_classPerWeek").value = classPerWeek;
+					document.getElementById("main_jobMessage").value = jobMessage;
+
+					if (feeType == FEES_TYPE_PER_MONTH_KEY ){
+						document.getElementById("radio-feeType_Per_Month").checked = true;
+					}else if (feeType == FEES_TYPE_PER_HOUR_KEY){
+						document.getElementById("radio-feeType_Per_Hour").checked = true;
+					}else {
+						// Do nothing
+					}
+					
+					if (comPol == COMMISSION_POLICY_2622181614_KEY){
+						document.getElementById("radio-comPol_2622181614pc").checked = true;
+					}else if (comPol == COMMISSION_POLICY_50_KEY){
+						document.getElementById("radio-comPol_50pc").checked = true
+					} else if (comPol == COMMISSION_POLICY_40_KEY){
+						document.getElementById("radio-comPol_40pc").checked = true;
+					} else if (comPol == COMMISSION_POLICY_30_KEY){
+						document.getElementById("radio-comPol_30pc").checked = true;
+					} else if (comPol == COMMISSION_POLICY_20_KEY){
+						document.getElementById("radio-comPol_20pc").checked = true;
+					}else if (comPol == COMMISSION_POLICY_10_KEY){
+						document.getElementById("radio-comPol_10pc").checked = true;
+					}else {
+						// Do nothing
+					}
+					
+					if (jobStatus == JOB_STATUS_OPEN_KEY){
+						document.getElementById("radio-jobStatus-open").checked
+					}else if (jobStatus == JOB_STATUS_SUCCESS_KEY){
+						document.getElementById("radio-jobStatus-success").checked
+					} else if (jobStatus == JOB_STATUS_FAILED_KEY){
+						document.getElementById("radio-jobStatus-failed").checked
+					} else if (jobStatus == JOB_STATUS_FULL_KEY){
+						document.getElementById("radio-jobStatus-full").checked
+					} else if (jobStatus == JOB_STATUS_CLOSED_KEY){
+						document.getElementById("radio-jobStatus-closed").checked
+					}else {
+						// Do nothing
+					}
+							
+					// Initialize with existing state and area settings //
+					var select_state = document.getElementById("state_drop"); 
+					var select_area = document.getElementById("area_drop"); 
+
+					// Clear the area option first, except the first one. 50 is simply a huge number
+					for(i=1; i <= 50; i++){
+						select_area.remove(1);
+					}   
+
+					// Since the state is already populated, so we just select the index. Always +1 for index
+					if (doc.data().state == "" || doc.data().state == null){
+						select_state.selectedIndex = 0;
+					}else{
+						select_state.selectedIndex = MYAllStateId.indexOf(doc.data().state) + 1;
+						// Refill the area option based on stateId
+						var options = selectCityBasedOnStateId(doc.data().state);
+						for (var i = 0; i < options.length; i++) {
+							var opt = options[i];
+							var el = document.createElement("option");
+							el.textContent = opt;
+							el.value = opt;
+							select_area.appendChild(el);
+						}
+					}
+
+					if (doc.data().area == "" || doc.data().area == null){
+						select_area.selectedIndex = 0;
+					}else{
+						select_area.selectedIndex = options.indexOf(doc.data().area) + 1;
+					}
+
+					// Reselect the area option based on stateId
+					console.log("State Index: "+doc.data().area);
+
+
+					// Initialize with existing education level and subject settings //
+					var select_level = document.getElementById("level_drop"); 
+					var subject_drop = document.getElementById("subject_drop"); 
+
+					// Clear the subject option first, except the first one. 50 is a just a huge number
+					for(i=1; i <= 50; i++){
+						subject_drop.remove(1);
+					}   
+
+					// Since the state is already populated, so we just select the index.
+					if (doc.data().categoryId == "" || doc.data().categoryId == null){
+						select_level.selectedIndex = 0;
+					}else{
+						select_level.selectedIndex = CategoryId.indexOf(doc.data().categoryId) + 1;
+
+						var subjectInfo = selectSubjectListBasedOnLevelId(doc.data().categoryId);// Get the subject info
+						var options = subjectInfo[0];
+						var optionIds = subjectInfo[1];
+
+						for (var i = 0; i < options.length; i++) {
+							var opt = options[i];
+							var optId = optionIds[i];
+							var el = document.createElement("option");
+							el.textContent = opt;
+							el.value = optId;
+							subject_drop.appendChild(el);
+						}	
+					}
+
+					// console.log("Category Id："+doc.data().categoryId);
+					if (doc.data().subjectId == "" || doc.data().subjectId == null){
+						subject_drop.selectedIndex = 0;
+					}else{
+						subject_drop.selectedIndex = optionIds.indexOf(doc.data().subjectId) + 1;
+					}
+
+					if (doc.data().online){
+						document.getElementById("state_drop").disabled=true;
+						document.getElementById("state_drop").setAttribute("style", "background-color: #E9EBEE");
+						document.getElementById("area_drop").disabled=true;
+						document.getElementById("area_drop").setAttribute("style", "background-color: #E9EBEE");
+
+					} else {
+						document.getElementById("state_drop").disabled=false;
+						document.getElementById("state_drop").setAttribute("style", "background-color: white");
+						document.getElementById("area_drop").disabled=false;
+						document.getElementById("area_drop").setAttribute("style", "background-color: white");
+
+					}
+
+					if (doc.data().tutorIdList[0] == null || doc.data().tutorIdList[0] == ""){
+						// Do nothing
+					}else{
+						loadTutor1(doc.data().tutorIdList[0], doc.data().tutorNameList[0]);
+					}
+
+					if (doc.data().tutorIdList[1] == null || doc.data().tutorIdList[1] == ""){
+						// Do nothing
+					}else{
+						loadTutor2(doc.data().tutorIdList[1], doc.data().tutorNameList[1]);
+					}
+					if (doc.data().tutorIdList[2] == null || doc.data().tutorIdList[2] == ""){
+						// Do nothing
+					}else{
+						loadTutor3(doc.data().tutorIdList[2], doc.data().tutorNameList[2]);
+					}
+
+
+					// Update Urls
+					let jobId_temp = doc.data().id.replace(/-|\s/g,"").toLowerCase();
+					document.getElementById("id_view_url").textContent = encodeURIComponent(jobId_temp);;
+
+					// validatePhone(inputVal)
+					// Remove spacing and hyphens(dash) if any
+					let id_client_temp = doc.data().id_client.replace(/-|\s/g,"");
+					document.getElementById("id_client_view_url").textContent = encodeURIComponent(id_client_temp);
+
+					document.getElementById("btnViewRecommendedTutor").href = "https://golearn.com.my/view?id=" + encodeURIComponent(jobId_temp) + "&id_client=" + encodeURIComponent(id_client_temp);
+
+				}
+
+			});
+		});
+
+		// Search Tutor 1's Profile
+		$('#btnAddTutor1').on('click', function(){
+
+			let inputVal = document.getElementById("searchTutor1").value;
+			if (inputVal == null || inputVal==""){
+				alert("Enter a phone number (with +60) or a valid email.");
+
+			}else if(validateEmail(inputVal)){
+				tutor_id = inputVal.replace(/\W/g,"_").toLowerCase();
+				// <!-- tutor_id = inputVal.replaceAll("[^a-zA-Z0-9]", "_").toLowerCase(); -->
+			}
+			else if (validatePhone(inputVal)){
+				tutor_id = inputVal;
+				
+			}else{
+				alert("Enter a valid phone number or email.");
+			}
+
+			// Load Tutor
+			db.collection("Tutor").doc(tutor_id)
+			.onSnapshot((doc) => {
+				if (!doc.exists || doc.empty ){
+					alert("Tutor not found.");
+					// document.getElementById("updatetutoraccount").disabled = true;
+				}
+				else{
+					// Assign to global variables
+					tutorNameList[0] = doc.data().name;
+					tutorIdList[0] = tutor_id;
+					tutorWebUrlList[0] = doc.data().aWebUrl;
+					tutorStatusList[0] = false;
+
+					document.getElementById("tutor1WebUrl").textContent = doc.data().aWebUrl;
+					document.getElementById("tutor1Name").value = doc.data().name;
+					document.getElementById("tutor1Age").value = doc.data().age;
+					document.getElementById("tutor1Phone").value = doc.data().phone;
+					document.getElementById("tutor1Email").value = doc.data().email;
+					document.getElementById("tutor1YearsExperience").value = doc.data().yearsExperience;
+					document.getElementById("tutor1Education").value = doc.data().qualification;
+					document.getElementById("tutor1ImgUrl").src = doc.data().imgUrl;
+				}
+
+			});
+		});
+
+		// Search Tutor 2's Profile
+		$('#btnAddTutor2').on('click', function(){
+
+			let inputVal = document.getElementById("searchTutor2").value;
+			if (inputVal == null || inputVal==""){
+				alert("Enter a phone number (with +60) or a valid email.");
+
+			}else if(validateEmail(inputVal)){
+				tutor_id = inputVal.replace(/\W/g,"_").toLowerCase();
+				// <!-- tutor_id = inputVal.replaceAll("[^a-zA-Z0-9]", "_").toLowerCase(); -->
+			}
+			else if (validatePhone(inputVal)){
+				tutor_id = inputVal;
+				
+			}else{
+				alert("Enter a valid phone number or email.");
+			}
+
+			// Load Tutor
+			db.collection("Tutor").doc(tutor_id)
+			.onSnapshot((doc) => {
+				if (!doc.exists || doc.empty ){
+					alert("Tutor not found.");
+					// document.getElementById("updatetutoraccount").disabled = true;
+				}
+				else{
+					// Assign to global variables
+					tutorNameList[1] = doc.data().name;
+					tutorIdList[1] = tutor_id;
+					tutorWebUrlList[1] = doc.data().aWebUrl;
+					tutorStatusList[1] = false;
+
+					document.getElementById("tutor2WebUrl").textContent = doc.data().aWebUrl;
+					document.getElementById("tutor2Name").value = doc.data().name;
+					document.getElementById("tutor2Age").value = doc.data().age;
+					document.getElementById("tutor2Phone").value = doc.data().phone;
+					document.getElementById("tutor2Email").value = doc.data().email;
+					document.getElementById("tutor2YearsExperience").value = doc.data().yearsExperience;
+					document.getElementById("tutor2Education").value = doc.data().qualification;
+					document.getElementById("tutor2ImgUrl").src = doc.data().imgUrl;
+				}
+
+			});
+		});
+
+		// Search Tutor 3's Profile
+		$('#btnAddTutor3').on('click', function(){
+
+			let inputVal = document.getElementById("searchTutor3").value;
+			if (inputVal == null || inputVal==""){
+				alert("Enter a phone number (with +60) or a valid email.");
+
+			}else if(validateEmail(inputVal)){
+				tutor_id = inputVal.replace(/\W/g,"_").toLowerCase();
+				// <!-- tutor_id = inputVal.replaceAll("[^a-zA-Z0-9]", "_").toLowerCase(); -->
+			}
+			else if (validatePhone(inputVal)){
+				tutor_id = inputVal;
+				
+			}else{
+				alert("Enter a valid phone number or email.");
+			}
+
+			// Load Tutor
+			db.collection("Tutor").doc(tutor_id)
+			.onSnapshot((doc) => {
+				if (!doc.exists || doc.empty ){
+					alert("Tutor not found.");
+					// document.getElementById("updatetutoraccount").disabled = true;
+				}
+				else{
+					// Assign to global variables
+					tutorNameList[2] = doc.data().name;
+					tutorIdList[2] = tutor_id;
+					tutorWebUrlList[2] = doc.data().aWebUrl;
+					tutorStatusList[2] = false;
+
+					document.getElementById("tutor3WebUrl").textContent = doc.data().aWebUrl;
+					document.getElementById("tutor3Name").value = doc.data().name;
+					document.getElementById("tutor3Age").value = doc.data().age;
+					document.getElementById("tutor3Phone").value = doc.data().phone;
+					document.getElementById("tutor3Email").value = doc.data().email;
+					document.getElementById("tutor3YearsExperience").value = doc.data().yearsExperience;
+					document.getElementById("tutor3Education").value = doc.data().qualification;
+					document.getElementById("tutor3ImgUrl").src = doc.data().imgUrl;
+				}
+
+			});
+		});
+		
+		// $("#full-name-as-nric").on("input", function(){
+		// 	// Print entered value in a div box
+		//    let str = $(this).val();
+		//    str = str.replace(/\W+(?!$)/g, '-').toLowerCase();
+		//    str = str.replace(/\W$/, '').toLowerCase();
+		//    $("#tutor_url").text(str);
+		// });
+		
+		// Show modal
+		$('#btnCreateNewJob').on('click', function(){
+			$('#modalCreateJob').modal('show');
+		});
+		
+		// Disable update when someone type in the search bar
+		$("#searchinput").on("change keyup paste", function(){
+			document.getElementById("updatetutoraccount").disabled = true;
+		})
+
+
+		// Disable update when someone type in the search bar
+		$("#main_phone_client").on("change keyup paste", function(){
+
+			let jobId_temp = id.replace(/-|\s/g,"").toLowerCase();
+
+			// Remove spacing and hyphens(dash) if any
+			let id_client_temp = phone_client.replace(/-|\s/g,"");
+			document.getElementById("id_client_view_url").textContent =  encodeURIComponent(id_client_temp);
+
+			document.getElementById("btnViewRecommendedTutor").href = "https://golearn.com.my/view?id=" + encodeURIComponent(jobId_temp) + "&id_client=" + encodeURIComponent(id_client_temp);
+
+			
+		})
+		
+		// ------State Dropdown start------- //
+		var state_select = document.getElementById("state_drop"); 
+		var state = MYAllState; 
+		var stateId = MYAllStateId; 
+		for (var i = 0; i < state.length; i++) {
+			var opt = state[i];
+			var el = document.createElement("option");
+			// el.setAttribute("value", stateId[i]);
+			el.textContent = opt;
+			el.value = stateId[i];
+			state_select.appendChild(el);
+		}   
+
+		// Populate Area based on selected State
+		$('#state_drop').on('change', function(){
+
+			// Initialization
+			// Disable the search button because the when we change state, the area resetted
+			// document.getElementById("searchtutor").disabled=true;
+
+			// Reasign area after the statre change. It suppose to be defaulted to "Select area"
+			area = ''; 
+
+			var StateId = $(this).val(); // Value of the selected item
+			state = StateId;
+			
+			// Get the text of the selected item
+			var select_state = document.getElementById("state_drop"); 
+			var StateTxt = select_state.options[select_state.selectedIndex].text; // Get the text component of selection
+			console.log(StateTxt) 
+			
+			var select_area = document.getElementById("area_drop"); 
+
+			// Clear the area option first, except the first one. 50 is simply a huge number
+			for(i=1; i <= 50; i++){
+				select_area.remove(1);
+			}   
+			// Input: Johor
+			var options = selectCityBasedOnState (StateTxt);
+			for (var i = 0; i < options.length; i++) {
+				// console.log("The number is " + options[i]);
+				var opt = options[i];
+				var el = document.createElement("option");
+				// el.setAttribute("value", "volvocar");
+				el.textContent = opt;
+				el.value = opt;
+				select_area.appendChild(el);
+			}
+
+			console.log("State:" + state +" Area:" + area+" Level:"+categoryId+" Subject:"+subjectId+" Online?"+online);
+		});
+		// ------State Dropdown End------- //
+
+		// ------Area Dropdown Start------- //
+		$('#area_drop').on('change', function(){
+			var select_area = $(this).val() 
+			area = select_area;
+			checkSelection(online);
+			console.log("State:" + state +" Area:" + area+" Level:"+categoryId+" Subject:"+subjectId+" Online?"+online);
+
+		});
+		// ------Area Dropdown End------- //
+		// ------Education Level Dropdown End------- //
+		// Populate Education Level
+		var level_select = document.getElementById("level_drop"); 
+		var level = Category; 
+		var catId = CategoryId; 
+		for (var i = 0; i < level.length; i++) {
+			var opt = level[i];
+			var el = document.createElement("option");
+			el.setAttribute("value", catId[i]);
+			el.textContent = opt;
+			el.value = catId[i];
+			level_select.appendChild(el);
+		}
+
+		// Populate Subject based on selected education level
+		$('#level_drop').on('change', function(){
+
+			// Initialization
+			// Disable the search button because the when we change edu level, the subject resetted
+			// document.getElementById("searchtutor").disabled=true;
+
+			// Reasign subject after the level change. It suppose to be defaulted to "Select subject"
+			subjectId = ''; 
+
+			// Get the text of the selected item
+			var select_level = document.getElementById("level_drop"); 
+			var LevelTxt = select_level.options[select_level.selectedIndex].text; // Get the text component of selection
+			console.log(LevelTxt) 
+			category = LevelTxt;
+
+			let LevelId_selected = $(this).val(); // Value of the selected item
+			categoryId = LevelId_selected;
+
+			// Clear the area option first, except the first one. 50 is a just a huge number
+			var subject_drop = document.getElementById("subject_drop"); 
+			for(i=1; i <= 50; i++){
+				subject_drop.remove(1);
+			}   
+
+			var subjectInfo = selectSubjectListBasedOnLevelId(LevelId_selected);// Get the subject info
+			var options = subjectInfo[0];
+			var optionIds = subjectInfo[1];
+			// console.log("Subjects: "+ options); 
+
+			for (var i = 0; i < options.length; i++) {
+				var opt = options[i];
+				var optId = optionIds[i];
+				var el = document.createElement("option");
+				// el.setAttribute("value", "volvocar");
+				el.textContent = opt;
+				el.value = optId;
+				subject_drop.appendChild(el);
+			}
+			console.log("State:" + state +" Area:" + area+" Level:"+categoryId+" Subject:"+subjectId+" Online?"+online);
+
+		});
+		// ------Education Level Dropdown End------- //
+
+		// ------Subject Dropdown Start------- //
+		$('#subject_drop').on('change', function(){
+			var select_subject = $(this).val() 
+			subjectId = select_subject;
+			checkSelection(online);
+
+			// Get the text of the selected item
+			var select_subjectTxt = document.getElementById("subject_drop"); 
+			var subjectTxt = select_subjectTxt.options[select_subjectTxt.selectedIndex].text; // Get the text component of selection
+			console.log(subjectTxt) 
+			subject = subjectTxt;
+
+			console.log("State:" + state +" Area:" + area+" Level:"+categoryId+" Subject:"+subjectId+" Online?"+online);
+
+		});
+		// ------Subject Dropdown End------- //
+
+		$('#main_online').on('change', function(){
+			// Get the checkbox
+			var onlineonly_check = document.getElementById("main_online");
+			online = onlineonly_check.checked;
+			// If the checkbox is checked, display the output text
+			if (onlineonly_check.checked == true){
+				document.getElementById("state_drop").disabled=true;
+				document.getElementById("state_drop").setAttribute("style", "background-color: #E9EBEE");
+				document.getElementById("area_drop").disabled=true;
+				document.getElementById("area_drop").setAttribute("style", "background-color: #E9EBEE");
+
+			} else {
+				document.getElementById("state_drop").disabled=false;
+				document.getElementById("state_drop").setAttribute("style", "background-color: white");
+				document.getElementById("area_drop").disabled=false;
+				document.getElementById("area_drop").setAttribute("style", "background-color: white");
+
+			}
+			checkSelection(onlineonly_check.checked);
+			console.log("State:" + state +" Area:" + area+" Level:"+categoryId+" Subject:"+subjectId+" Online?"+online);
+
+		});
+
+
+		// Create Job Modal Confirm
+		$('#btnModalCreateJobConfirm').on('click', function (e) {
+			id = document.getElementById("modalCreateJobId").value;
+			name_client = document.getElementById("modalCreateJobName").value;
+			phone_client = document.getElementById("modalCreateJobPhone").value;
+			email_client = document.getElementById("modalCreateJobEmail").value;
+
+			document.getElementById("main_JobId").value = id;
+			document.getElementById("main_name_client").value = name_client;
+			document.getElementById("main_phone_client").value = phone_client;
+			document.getElementById("main_email_client").value = email_client;
+			
+
+			let jobId_temp = id.replace(/-|\s/g,"").toLowerCase();
+			document.getElementById("id_view_url").textContent = encodeURIComponent(jobId_temp);;
+
+			// validatePhone(inputVal)
+			// Remove spacing and hyphens(dash) if any
+			let id_client_temp = phone_client.replace(/-|\s/g,"");
+			document.getElementById("id_client_view_url").textContent = encodeURIComponent(id_client_temp);;
+
+			document.getElementById("btnViewRecommendedTutor").href = "https://golearn.com.my/view?id=" + encodeURIComponent(jobId_temp) + "&id_client=" + encodeURIComponent(id_client_temp);
+
+
+			// Clear the fields  and reset global variable
+			address_client = "";
+			cType = "";
+			cStuGen = "";
+			cSchool = "";
+			cBudget = "";
+			cLOC = "";
+			cStartDate = "";
+			cPDOW = "";
+			cPSlot = "";
+			cPTGen ="";
+			cPTRace = "";
+			cNote = "";
+			cSurvey1 = "";
+			cSurvey2 = "";
+			cSurvey3 = "";
+			online = false;
+			jobDetail = "";
+			duration = "";
+			fees = "";
+			feeType = "";
+			classPerWeek = "";
+			comPol = "";
+			jobStatus = "";
+			jobMessage = "";
+
+			document.getElementById("main_address_client").value = "";
+			document.getElementById("main_cType").value = "";
+			document.getElementById("main_cStuGen").value= "";
+			document.getElementById("main_cSchool").value= "";
+			document.getElementById("main_cBudget").value= "";
+			document.getElementById("main_cLOC").value= "";
+			document.getElementById("main_cStartDate").value= "";
+			document.getElementById("main_cPDOW").value = "";
+			document.getElementById("main_cPSlot").value = "";
+			document.getElementById("main_cPTGen").value = "";
+			document.getElementById("main_cPTRace").value = "";
+			document.getElementById("main_cNote").value = "";
+			document.getElementById("main_cSurvey1").value = "";
+			document.getElementById("main_cSurvey2").value = "";
+			document.getElementById("main_online").checked = false;
+			document.getElementById("main_jobDetail").value = "";
+			document.getElementById("main_duration").value = "";
+			document.getElementById("main_fees").value = "";
+			document.getElementById("main_classPerWeek").value = "";
+			document.getElementById("main_jobMessage").value = "";
+			document.getElementById("radio-feeType_Per_Month").checked = false;
+			document.getElementById("radio-feeType_Per_Hour").checked = false;
+			document.getElementById("radio-comPol_2622181614pc").checked = false;
+			document.getElementById("radio-comPol_50pc").checked = false
+			document.getElementById("radio-comPol_40pc").checked = false;
+			document.getElementById("radio-comPol_30pc").checked = false;
+			document.getElementById("radio-comPol_20pc").checked = false;
+			document.getElementById("radio-comPol_10pc").checked = false;
+			document.getElementById("radio-jobStatus-open").checked = false;
+			document.getElementById("radio-jobStatus-success").checked = false;
+			document.getElementById("radio-jobStatus-failed").checked = false;
+			document.getElementById("radio-jobStatus-full").checked = false;
+			document.getElementById("radio-jobStatus-closed").checked = false;
+
+			// Clear Tutor 1
+			tutorNameList[0] = "";
+			tutorIdList[0] = "";
+			tutorWebUrlList[0] = "";
+			tutorStatusList[0] = "";
+			document.getElementById("searchTutor1").value ="";
+			document.getElementById("tutor1WebUrl").textContent ="";
+			document.getElementById("tutor1Name").value = "";
+			document.getElementById("tutor1Age").value = "";
+			document.getElementById("tutor1Phone").value = "";
+			document.getElementById("tutor1Email").value = "";
+			document.getElementById("tutor1YearsExperience").value = "";
+			document.getElementById("tutor1Education").value = "";
+			document.getElementById("tutor1ImgUrl").src = "source/icon_boy01.png";
+			// Clear Tutor 2	
+			tutorNameList[1] = "";
+			tutorIdList[1] = "";
+			tutorWebUrlList[1] = "";
+			tutorStatusList[1] = "";
+			document.getElementById("searchTutor2").value ="";
+			document.getElementById("tutor2WebUrl").textContent ="";
+			document.getElementById("tutor2Name").value = "";
+			document.getElementById("tutor2Age").value = "";
+			document.getElementById("tutor2Phone").value = "";
+			document.getElementById("tutor2Email").value = "";
+			document.getElementById("tutor2YearsExperience").value = "";
+			document.getElementById("tutor2Education").value = "";
+			document.getElementById("tutor2ImgUrl").src = "source/icon_boy01.png";
+			// Clear Tutor 3
+			tutorNameList[2] = "";
+			tutorIdList[2] = "";
+			tutorWebUrlList[2] = "";
+			tutorStatusList[2] = "";
+			document.getElementById("searchTutor3").value ="";
+			document.getElementById("tutor3WebUrl").textContent ="";
+			document.getElementById("tutor3Name").value = "";
+			document.getElementById("tutor3Age").value = "";
+			document.getElementById("tutor3Phone").value = "";
+			document.getElementById("tutor3Email").value = "";
+			document.getElementById("tutor3YearsExperience").value = "";
+			document.getElementById("tutor3Education").value = "";
+			document.getElementById("tutor3ImgUrl").src = "source/icon_boy01.png";
+
+
+			// Remove spacing and hyphens(dash) if any
+			let id_client = phone_client.replace(/-|\s/g,"");
+
+			// Remove spacing and hyphens(dash) and to lower case the job code
+			let jobId = id.replace(/-|\s/g,"").toLowerCase();
+
+			var docData = {
+				name_client: name_client,
+				id_client : id_client,
+				email_client : email_client,
+				phone_client : phone_client,
+				id : jobId,
+				dateCreated : firebase.firestore.Timestamp.fromDate(new Date()),
+				jobStatus : JOB_STATUS_OPEN_KEY,
+				jobMessage : "",
+				status : true
+			};
+
+			
+			// Set data
+			db.collection("JobRequests").doc(jobId)
+				.set(docData);
+		
+
+			$('#modalCreateJob').modal('hide');
+
+			// alert(id+ name_client+ phone_client+ email_client);
+		});
+
+		// Update Job Modal Confirm
+
+		$('#btnUpdateJob').on('click', function (e) {
+
+			if (online) 
+			{
+				if (id =="" || name_client == "" || phone_client == "" ||
+				email_client =="" || id_client	== "" || 
+				categoryId == '' || categoryId == "Select education level" || 
+				subjectId == '' || subjectId == 'Select subject' )
+				{
+					alert("Ensure these fields are filled: Job Code, Name, Phone, Email, Education Level or Subject");
+					// document.getElementById("searchtutor").disabled=true;
+				}
+				else
+				{
+					$('#modalUpdateJob').modal('show');
+
+					// document.getElementById("searchtutor").disabled=false;
+				}
+					
+			}
+			else
+			{
+				if (id =="" || name_client == "" || phone_client == "" ||
+				email_client =="" || id_client	== "" || 
+				categoryId == '' || categoryId == "Select education level" || 
+				subjectId == '' || subjectId == 'Select subject' ||
+				state == '' || state == 'Select state'  ||
+				area == '' || area == 'Select area' )
+				{
+					alert("Ensure these fields are filled: Job Code, Name, Phone, Email, Area, State, Education Level or Subject");
+
+					// document.getElementById("searchtutor").disabled=true;
+				}
+				else
+				{
+					$('#modalUpdateJob').modal('show');
+
+					// document.getElementById("searchtutor").disabled=false;
+				}
+			}
+
+		});
+
+		$('#btnModalUpdateJobClose').on('click', function (e) {
+			$('#modalUpdateJob').modal('hide');
+		});
+		$('#btnModalUpdateJobClose2').on('click', function (e) {
+			$('#modalUpdateJob').modal('hide');
+		});
+		$('#btnModalUpdateJobConfirm').on('click', function (e) {
+
+			id = document.getElementById("main_JobId").value;
+			name_client = document.getElementById("main_name_client").value;
+			phone_client = document.getElementById("main_phone_client").value;			
+			email_client = document.getElementById("main_email_client").value;
+			address_client = document.getElementById("main_address_client").value;
+			cType = document.getElementById("main_cType").value;
+			cStuGen = document.getElementById("main_cStuGen").value;
+			cSchool = document.getElementById("main_cSchool").value;
+			cBudget = document.getElementById("main_cBudget").value;
+			cLOC = document.getElementById("main_cLOC").value;
+			cStartDate = document.getElementById("main_cStartDate").value;
+			cPDOW = document.getElementById("main_cPDOW").value;
+			cPSlot = document.getElementById("main_cPSlot").value;
+			cPTGen = document.getElementById("main_cPTGen").value;
+			cPTRace = document.getElementById("main_cPTRace").value;
+			cNote = document.getElementById("main_cNote").value;
+			cSurvey1 = document.getElementById("main_cSurvey1").value;
+			cSurvey2 = document.getElementById("main_cSurvey2").value;
+			cSurvey3 = "";
+			online = (document.getElementById("main_online").checked)? true: false;
+			jobDetail = document.getElementById("main_jobDetail").value;
+			duration = document.getElementById("main_duration").value;
+			fees = document.getElementById("main_fees").value;
+			// feeType = document.getElementById("main_feeType").value;
+			let feeType = "";
+			if (document.getElementById("radio-feeType_Per_Month").checked){
+				feeType = FEES_TYPE_PER_MONTH_KEY;
+			}else if (document.getElementById("radio-feeType_Per_Hour").checked){
+				feeType = FEES_TYPE_PER_HOUR_KEY;
+			}else {
+				feeType = FEES_TYPE_PER_HOUR_KEY;
+			}
+
+			classPerWeek = document.getElementById("main_classPerWeek").value;
+			// comPol = document.getElementById("main_comPol").value;
+
+			let comPol = "";
+			if (document.getElementById("radio-comPol_2622181614pc").checked){
+				comPol = COMMISSION_POLICY_2622181614_KEY;
+			}else if (document.getElementById("radio-comPol_50pc").checked){
+				comPol = COMMISSION_POLICY_50_KEY;
+			} else if (document.getElementById("radio-comPol_40pc").checked){
+				comPol = COMMISSION_POLICY_40_KEY;
+			} else if (document.getElementById("radio-comPol_30pc").checked){
+				comPol = COMMISSION_POLICY_30_KEY;
+			} else if (document.getElementById("radio-comPol_20pc").checked){
+				comPol = COMMISSION_POLICY_20_KEY;
+			}else if (document.getElementById("radio-comPol_10pc").checked){
+				comPol = COMMISSION_POLICY_10_KEY;
+			}else {
+				comPol = COMMISSION_POLICY_2622181614_KEY;
+			}
+			
+			let jobStatus = "";
+			if (document.getElementById("radio-jobStatus-open").checked){
+				jobStatus = JOB_STATUS_OPEN_KEY;
+			}else if (document.getElementById("radio-jobStatus-success").checked){
+				jobStatus = JOB_STATUS_SUCCESS_KEY;
+			} else if (document.getElementById("radio-jobStatus-failed").checked){
+				jobStatus = JOB_STATUS_FAILED_KEY;
+			} else if (document.getElementById("radio-jobStatus-full").checked){
+				jobStatus = JOB_STATUS_FULL_KEY;
+			} else if (document.getElementById("radio-jobStatus-closed").checked){
+				jobStatus = JOB_STATUS_CLOSED_KEY;
+			}else {
+				jobStatus = JOB_STATUS_OPEN_KEY;
+			}
+			jobMessage = document.getElementById("main_jobMessage").value;
+
+			let category_temp = null;
+			let categoryId_temp = null;
+			let subject_temp = null;
+			let subjectId_temp = null;
+
+			if (document.getElementById("main_online").checked){
+				if (area == null || area =="" || area =="Select area" ||
+					state == null || state ==""  || state == "Select state"){
+						area = null;
+						state = null;
+					}
+			}
+		
+			// Remove spacing and hyphens(dash) if any
+			let clientId = phone_client.replace(/-|\s/g,"");
+
+			// Remove spacing and hyphens(dash) and to lower case the job code
+			let jobId = id.replace(/-|\s/g,"").toLowerCase();
+
+			if (document.getElementById("radio-jobStatus-closed").checked){
+				dateClosed = firebase.firestore.Timestamp.fromDate(new Date()); 
+			}else{
+				dateClosed = null;
+			}
+
+			var docData = {
+				name_client: name_client, //main
+				id_client : clientId, //main
+				email_client : email_client, //main
+				phone_client : phone_client, //main
+				address_client : address_client, 
+				cType : cType,
+				cStuGen : cStuGen,
+				cSchool : cSchool,
+				cBudget : cBudget,
+				cLOC : cLOC,
+				cStartDate : cStartDate,
+				cPDOW : cPDOW,
+				cPSlot : cPSlot,
+				cPTGen : cPTGen,
+				cPTRace : cPTRace,
+				cNote : cNote,
+				cSurvey1 : cSurvey1,
+				cSurvey2 : cSurvey2,
+				cSurvey3 : cSurvey3,
+				id : jobId, //main
+				category : category,
+				categoryId : categoryId,
+				subject : subject,
+				subjectId : subjectId,
+				area : area,
+				// areaId : areaId,
+				state : state,
+				// stateId : stateId,
+				online : online,
+				jobDetail : jobDetail,
+				fees : fees,
+				feeType : feeType,
+				duration : duration,
+				classPerWeek : classPerWeek,
+				tutorNameList : tutorNameList,
+				tutorIdList : tutorIdList,
+				tutorWebUrlList : tutorWebUrlList,
+				tutorStatusList : tutorStatusList,
+				comPol : comPol,
+				// dateCreated : firebase.firestore.Timestamp.fromDate(new Date()), //main
+				dateClosed : dateClosed,
+				jobStatus : jobStatus, //main
+				jobMessage : jobMessage,
+				status : true //main 
+			}
+
+			// Set data
+			db.collection("JobRequests").doc(jobId)
+				.set(docData, {merge: true});
+
+			$('#modalUpdateJob').modal('hide');
+
+		});
+
+
+		// Create New Job
+		$('#btnModalCreateJobClose').on('click', function (e) {
+			$('#modalCreateJob').modal('hide');
+		});
+		$('#btnModalCreateJobClose2').on('click', function (e) {
+			$('#modalCreateJob').modal('hide');
+		});
+
+		// Delete Job
+		$('#btnDeleteJob').on('click', function (e) {
+			$('#modalDeleteJob').modal('show');
+		});
+
+		$('#btnModalDeleteJobClose').on('click', function (e) {
+			$('#modalDeleteJob').modal('hide');
+		});
+		$('#btnModalDeleteJobClose2').on('click', function (e) {
+			$('#modalDeleteJob').modal('hide');
+		});
+
+		$('#btnModalDeleteJobConfirm').on('click', function (e) {
+			let docData = {
+				dateClosed : firebase.firestore.Timestamp.fromDate(new Date()),
+				status : false 
+			}
+
+			// Remove spacing and hyphens(dash) and to lower case the job code
+			let jobId = document.getElementById("main_JobId").value;
+
+			if (jobId == "" || jobId == null ){
+				alert("No job is loaded");
+			}else{
+				// Set data
+				db.collection("JobRequests").doc(jobId)
+					.set(docData, {merge: true});
+			}
+				
+			$('#modalDeleteJob').modal('hide');
+		});
+
+		// Add tutor ( Depreciated)
+		// $('#btnAddTutor').on('click', function () {
+		// 	$('#modalAddTutor').modal('show');
+		// });
+
+		$('#btnModalAddTutorClose').on('click', function (e) {
+			$('#modalAddTutor').modal('hide');
+		});
+
+		$('#btnModalAddTutorClose2').on('click', function (e) {
+			$('#modalAddTutor').modal('hide');
+		});
+
+
+		// Delete Tutor 1
+		$('#btnDeleteTutor1').on('click', function (e) {
+			$('#modalDeleteTutor1').modal('show');
+		});
+
+		$('#btnModalDeleteTutor1Close').on('click', function (e) {
+			$('#modalDeleteTutor1').modal('hide');
+		});
+
+		$('#btnModalDeleteTutor1Close2').on('click', function (e) {
+			$('#modalDeleteTutor1').modal('hide');
+		});
+
+		$('#btnDeleteTutor1Confirm').on('click', function (e) {
+			// Assign to global variables
+			tutorNameList[0] = "";
+			tutorIdList[0] = "";
+			tutorWebUrlList[0] = "";
+			tutorStatusList[0] = "";
+
+			document.getElementById("searchTutor1").value ="";
+			document.getElementById("tutor1WebUrl").textContent ="";
+			document.getElementById("tutor1Name").value = "";
+			document.getElementById("tutor1Age").value = "";
+			document.getElementById("tutor1Phone").value = "";
+			document.getElementById("tutor1Email").value = "";
+			document.getElementById("tutor1YearsExperience").value = "";
+			document.getElementById("tutor1Education").value = "";
+			document.getElementById("tutor1ImgUrl").src = "source/icon_boy01.png";
+			$('#modalDeleteTutor1').modal('hide');
+		});
+
+		
+		// Delete Tutor 2
+		$('#btnDeleteTutor2').on('click', function (e) {
+			$('#modalDeleteTutor2').modal('show');
+		});
+
+		$('#btnModalDeleteTutor2Close').on('click', function (e) {
+			$('#modalDeleteTutor2').modal('hide');
+		});
+
+		$('#btnModalDeleteTutor2Close2').on('click', function (e) {
+			$('#modalDeleteTutor2').modal('hide');
+		});
+
+		$('#btnDeleteTutor2Confirm').on('click', function (e) {
+			// Assign to global variables
+			tutorNameList[1] = "";
+			tutorIdList[1] = "";
+			tutorWebUrlList[1] = "";
+			tutorStatusList[1] = "";
+
+			document.getElementById("searchTutor2").value ="";
+			document.getElementById("tutor2WebUrl").textContent ="";
+			document.getElementById("tutor2Name").value = "";
+			document.getElementById("tutor2Age").value = "";
+			document.getElementById("tutor2Phone").value = "";
+			document.getElementById("tutor2Email").value = "";
+			document.getElementById("tutor2YearsExperience").value = "";
+			document.getElementById("tutor2Education").value = "";
+			document.getElementById("tutor2ImgUrl").src = "source/icon_boy01.png";
+			$('#modalDeleteTutor2').modal('hide');
+		});
+
+
+		
+		// Delete Tutor 3
+		$('#btnDeleteTutor3').on('click', function (e) {
+			$('#modalDeleteTutor3').modal('show');
+		});
+
+		$('#btnModalDeleteTutor3Close').on('click', function (e) {
+			$('#modalDeleteTutor3').modal('hide');
+		});
+
+		$('#btnModalDeleteTutor3Close2').on('click', function (e) {
+			$('#modalDeleteTutor3').modal('hide');
+		});
+
+		$('#btnDeleteTutor3Confirm').on('click', function (e) {
+			// Assign to global variables
+			tutorNameList[2] = "";
+			tutorIdList[2] = "";
+			tutorWebUrlList[2] = "";
+			tutorStatusList[2] = "";
+
+			document.getElementById("searchTutor3").value ="";
+			document.getElementById("tutor3WebUrl").textContent ="";
+			document.getElementById("tutor3Name").value = "";
+			document.getElementById("tutor3Age").value = "";
+			document.getElementById("tutor3Phone").value = "";
+			document.getElementById("tutor3Email").value = "";
+			document.getElementById("tutor3YearsExperience").value = "";
+			document.getElementById("tutor3Education").value = "";
+			document.getElementById("tutor3ImgUrl").src = "source/icon_boy01.png";
+			$('#modalDeleteTutor3').modal('hide');
+		});
+
+
+		function validateEmail(email) {
+			const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return re.test(String(email).toLowerCase());
+		}
+		
+		function validatePhone(phone){
+			// <!-- const re = new RegExp('+6*'); -->
+			// <!-- const regex = new RegExp('^[\+]'); -->
+			const re = /^[\+]/im;
+			return re.test(phone);
+		}
+		
+		function create_tutor(aWebUrl, name, detail, imgUrl){
+			// This function create-tutor publich profile based on aweburl param.
+			// All the data fields are required to contruct the static meta data of the profile
+			var temp_name = encodeURIComponent(name);
+			var temp_detail = encodeURIComponent(detail);
+			var temp_imgUrl = encodeURIComponent(imgUrl);
+
+			let param = "https://golearn.com.my/tutor/a-source/create-tutor.php?aweburl="+aWebUrl+"&name="+temp_name+"&detail="+temp_detail+"&imgUrl="+temp_imgUrl;
+			console.log("param: " +param );
+			$.ajax({
+				type: "GET",
+				url: param,
+				data: $(this).serialize(),
+				success: function(response)
+				{
+					var jsonData = JSON.parse(response);
+	  
+					// user is logged in successfully in the back-end
+					// let's redirect
+					if (jsonData.success == "1")
+					{
+						//  location.href = 'my_profile.php';
+						alert('Tutor Created!');
+					}
+					else
+					{
+						alert('Invalid Credentials!');
+					}
+			   }
+			});
+			
+			// Add the url to sitemap
+			let sitemapParam = "https://golearn.com.my/update-sitemap.php?action=add&path=tutor/"+aWebUrl+"&lastmod=";
+			$.ajax({
+				type: "GET",
+				url: sitemapParam,
+				data: $(this).serialize(),
+				success: function(response)
+				{
+					var jsonData = JSON.parse(response);
+	  
+					// user is logged in successfully in the back-end
+					// let's redirect
+					if (jsonData.success == "1")
+					{
+						// <!-- location.href = 'my_profile.php'; -->
+						alert('Tutor Created!');
+					}
+					else
+					{
+						alert('Invalid Credentials!');
+					}
+			   }
+			});
+		}
+
+		// This function check if all the required column is filled
+		function checkSelection(online)
+		{
+			if (online) 
+			{
+				if (categoryId == '' || categoryId == "Select education level" || 
+				subjectId == '' || subjectId == 'Select subject' )
+				{
+					// document.getElementById("searchtutor").disabled=true;
+				}
+				else
+				{
+					// document.getElementById("searchtutor").disabled=false;
+				}
+					
+			}
+			else
+			{
+				if (categoryId == '' || categoryId == "Select education level" || 
+				subjectId == '' || subjectId == 'Select subject' ||
+				state == '' || state == 'Select state'  ||
+				area == '' || area == 'Select area' )
+				{
+					// document.getElementById("searchtutor").disabled=true;
+				}
+				else
+				{
+					// document.getElementById("searchtutor").disabled=false;
+				}
+			}
+		}
+
+
+		function loadTutor1(tutorId, tutorName){
+			db.collection("Tutor").doc(tutorId)
+			.onSnapshot((doc) => {
+				if (!doc.exists || doc.empty ){
+					alert("Tutor 1 "+tutorName + " not found.");
+					// document.getElementById("updatetutoraccount").disabled = true;
+				}
+				else{
+					document.getElementById("searchTutor1").value = tutorId;
+					document.getElementById("tutor1WebUrl").textContent = doc.data().aWebUrl;
+					document.getElementById("tutor1Name").value = doc.data().name;
+					document.getElementById("tutor1Age").value = doc.data().age;
+					document.getElementById("tutor1Phone").value = doc.data().phone;
+					document.getElementById("tutor1Email").value = doc.data().email;
+					document.getElementById("tutor1YearsExperience").value = doc.data().yearsExperience;
+					document.getElementById("tutor1Education").value = doc.data().qualification;
+					document.getElementById("tutor1ImgUrl").src = doc.data().imgUrl;
+				}
+			});
+		}
+		function loadTutor2(tutorId, tutorName){
+			db.collection("Tutor").doc(tutorId)
+			.onSnapshot((doc) => {
+				if (!doc.exists || doc.empty ){
+					alert("Tutor 2 "+tutorName + " not found.");
+					// document.getElementById("updatetutoraccount").disabled = true;
+				}
+				else{
+					document.getElementById("searchTutor2").value = tutorId;
+					document.getElementById("tutor2WebUrl").textContent = doc.data().aWebUrl;
+					document.getElementById("tutor2Name").value = doc.data().name;
+					document.getElementById("tutor2Age").value = doc.data().age;
+					document.getElementById("tutor2Phone").value = doc.data().phone;
+					document.getElementById("tutor2Email").value = doc.data().email;
+					document.getElementById("tutor2YearsExperience").value = doc.data().yearsExperience;
+					document.getElementById("tutor2Education").value = doc.data().qualification;
+					document.getElementById("tutor2ImgUrl").src = doc.data().imgUrl;
+				}
+			});
+		}
+
+		function loadTutor3(tutorId, tutorName){
+			db.collection("Tutor").doc(tutorId)
+			.onSnapshot((doc) => {
+				if (!doc.exists || doc.empty ){
+					alert("Tutor 3 "+tutorName + " not found.");
+					// document.getElementById("updatetutoraccount").disabled = true;
+				}
+				else{
+					
+					document.getElementById("searchTutor3").val = tutorId;
+					document.getElementById("tutor3WebUrl").textContent = doc.data().aWebUrl;
+					document.getElementById("tutor3Name").value = doc.data().name;
+					document.getElementById("tutor3Age").value = doc.data().age;
+					document.getElementById("tutor3Phone").value = doc.data().phone;
+					document.getElementById("tutor3Email").value = doc.data().email;
+					document.getElementById("tutor3YearsExperience").value = doc.data().yearsExperience;
+					document.getElementById("tutor3Education").value = doc.data().qualification;
+					document.getElementById("tutor3ImgUrl").src = doc.data().imgUrl;
+
+				}
+			});
+		}
+
+	});
+
+  </script>
+  
+  <script>
+	  function getAllTutorWebUrl(aWebUrl){
+
+			var colFillAllWebUrl = db.collection("Tutor")
+			.where("aWebUrl", "!=", null);
+
+			colFillAllWebUrl
+			.get()
+			.then((querySnapshot) => {
+				var docId;
+				querySnapshot.forEach((doc) => {
+					docId = doc.id;
+					console.log(doc.data().aWebUrl);
+				});
+
+				console.log("Number of aWebUrl: "+querySnapshot.docs.length);
+
+			}).catch((error) => {
+				console.log("Error getting documents: ", error);
+			});
+		}
+
+  </script>
+  
+</body>
+
+</html>

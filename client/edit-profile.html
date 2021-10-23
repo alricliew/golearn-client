@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>GoLearn Tutor</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!-- Fonts and icons -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
+  <!-- Material Kit CSS -->
+  <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <!-- Tutor specific css -->
+  <link href="../assets/css/tutor.css" rel="stylesheet" />
+  <!-- Firebase Init -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+  <script src="../assets/js/firebase.js"></script>
+</head>
+
+<body>
+
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/img/sidebar-3.jpg">
+
+      <div class="logo">
+        <a href="./" class="simple-text logo-mini">
+			    <img src="../assets/img/logo.png" style="width: 216px; height: auto;" alt=""></img>
+          
+        </a>
+        <a href="./" class="simple-text logo-normal">
+          Welcome!
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active  ">
+            <a class="nav-link" href="./">
+              <i class="material-icons">home</i>
+              <p>Home</p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="./class/">
+              <i class="material-icons">school</i>
+              <p>My Classes</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./dependant/">
+              <i class="material-icons">escalator_warning</i>
+              <p>My Dependant</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">Home</a>
+          </div>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <form class="navbar-form">
+              <!-- Put empty placeholder here -->
+            </form>
+
+            <ul class="navbar-nav">
+              <li class="nav-item" id="activationNavItem">
+                <a href="#" class="btn btn-danger btn-round" style="visibility: hidden;" id="btnActivateAccount" ></a>
+              </li>
+              <li class="nav-item">
+                <a class="navbar-brand" href="javascript:;">
+                   Hi <span id="user"></span> !
+                </a> 
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i> Notifications
+                </a>
+                <!-- <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i>
+                  <span class="notification">5</span>
+                  <p class="d-lg-none d-md-block">
+                    Some Actions
+                  </p>
+                </a> -->
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+									<p style="padding: 1em;" >No notification</p>
+                  <!-- <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                  <a class="dropdown-item" href="#">Another Notification</a>
+                  <a class="dropdown-item" href="#">Another One</a> -->
+                </div>
+              </li>
+              <!-- your navbar here -->
+			  
+			  			<li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">person</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                  <a class="dropdown-item" href="./edit-profile.html">Edit Profile</a>
+									<a class="display:block; dropdown-item" href="./about.html">About</a>
+									<div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
+									<!-- <div class="dropdown-divider"></div> -->
+									<!-- <a style="font-weight: 500 ;padding: 0.5em ;text-align: center; width: 200px; background-color: #428dd4 ;display: block; color: #fff;" href="https://golearn.com.my/pricing/" target="_blank" id="btnUpgradeToPro">Upgrade to Pro</a> -->
+
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+
+      <!-- Modal Start -->
+
+      <!-- Activation modal -->
+      <div class="row">
+        <div class="modal fade" id="activationModal" tabindex="-1" role="dialog" aria-labelledby="activationModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="activationModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnActivationModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="activationModalBody">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnActivationModalClose2">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnActivationModalUpdate">Join Us</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Uploading Progress modal -->
+      <div class="row">
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="uploadModalLabel">Uploading...</h5>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnSignOutModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+              </div>
+              <div class="modal-body" id="uploadModalBody">
+                <div id="myProgress" style="width: 100%; background-color: grey;">
+                  <div id="myBar" style="width: 1%; height: 30px; background-color: green;"></div>
+                </div>
+              </div>
+              <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSignOutModalClose2">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSignOutModalUpdate">Confirm</button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Update Profile modal -->
+      <div class="row">
+        <div class="modal fade" id="updateProfileModal" tabindex="-1" role="dialog" aria-labelledby="updateProfileModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="updateProfileLabel">Updating Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnUpdateProfileModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="signOutModalBody">
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnUpdateProfileModalClose2">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnUpdateProfileModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sign-out modal -->
+      <div class="row">
+        <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="signOutModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="signOutLabel">Logging Out</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnSignOutModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="signOutModalBody">
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSignOutModalClose2">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSignOutModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal End -->
+
+      <div class="content">
+        <div class="container-fluid">
+
+          <!-- profile -->
+          <div class="col-md-12" id="tutorNull">
+            <div class="card card-profile">
+              <div class="card-avatar" style="height: 150px;width: 150px;">
+                <a href="javascript:;" >
+                  <img class="img" id="tutorImgUrl" style="height: 100%; width:100%; object-fit: cover; border-radius: 50%; pointer-events: none;" src="../assets/img/empty-photo.png"/>
+                </a>
+              </div>
+              <div class="card-body">
+                <input type="file" id="select_image" name="image" style="display:none" accept="image/x-png,image/jpeg"> </input>
+
+                <div class="input-group" style="padding: 1rem;">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">perm_identity</i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" id="name" placeholder="Name">
+                </div>
+                
+                <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">phone</i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" id="phone" placeholder="Phone Number">
+                </div>
+
+                <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">email</i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" id="email" placeholder="Email Address">
+                </div>
+ 
+                <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons" style="margin-left: 24px;"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" id="address1" placeholder="Address 1">
+                </div>
+                <div class="input-group" style="padding-top: 0.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">place</i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" id="address2" placeholder="Address 2">
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="input-group" style="padding-top: 0.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons"  style="margin-left: 24px;" ></i>
+                        </span>
+                      </div>
+                      <input type="number" class="form-control" id="addressPostCode" placeholder="Postcode">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="input-group" style="padding-top: 0.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <!-- <i class="material-icons">contacts</i> -->
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" id="addressState" placeholder="State">
+                    </div>
+                  </div>
+                </div>
+                <a href="javascript:;" class="btn btn-lg btn-primary btn-round" id="btnUpdateProfile" style="background-color: grey; pointer-events: none;" >Update Profile</a>
+              </div>
+            </div>
+
+          </div>
+
+          <div id="preview">
+
+          </div>
+		    </div>
+      </div>
+
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav class="float-left">
+          <ul>
+            <li>
+            <a href="https://golearn.com.my/" target="_blank">
+              Visit GoLearn
+            </a>
+            </li>
+          </ul>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </div>
+  
+  <div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+      <a href="#" data-toggle="dropdown">
+				<i class="material-icons" style="font-size: 36px; padding: 0.2em; color: white;">apps</i>
+      </a>
+      <ul class="dropdown-menu">
+		    <br>
+        <li class="header-title">Get More Tuition Jobs?</li>
+        <li class="button-container">
+          <a href="https://golearn.com.my/job/" target="_blank" class="btn btn-primary btn-block">Apply Now</a>
+        </li>
+        
+        <li class="button-container">
+          <a href="https://golearn.com.my/" target="_blank" class="btn btn-default btn-block">
+            Visit our website
+          </a>
+        </li>
+       
+        <li class="header-title">Follow and Like Us!</li>
+        <li class="button-container text-center">
+			    <button id="facebook" class="btn btn-round btn-facebook" onclick="window.open('https://www.facebook.com/FindTutorInMalaysia/', '_blank');"><i class="fa fa-facebook-f"></i> &middot; facebook</button>
+          <button id="twitter"  class="btn btn-round btn-twitter" onclick="window.open('https://twitter.com/golearnmalaysia', '_blank');"><i class="fa fa-twitter"></i> &middot; twitter</button>
+          <button id="instagram"  class="btn btn-round btn-twitter" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); " onclick="window.open('https://www.instagram.com/golearn.education/', '_blank');"><i class="fa fa-instagram"></i> &middot; instagram</button>
+          <br>
+          <br>
+        </li>
+        <li class="header-title">Found a problem? </li>
+        <li class="button-container">
+          <a href="https://golearn.com.my/submit-anything-to-us/" target="_blank" class="btn btn-warning btn-block">
+            Let us know
+          </a>
+          <br>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src="../assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="../assets/js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+  <!-- Common constants -->
+  <script src="../assets/js/common.js" type="text/javascript"></script>
+  <!-- Core Tutor Js -->
+  <script src="../assets/js/tutor-core.js" type="text/javascript"></script>
+  
+  <script>
+    // Global Variables
+    var userId;
+    var current_name, current_email, current_phone, current_imgUri, current_nric,
+      current_address1, current_address2, current_addressPostCode, current_addressState, current_address;
+     
+		var db = firebase.firestore();
+		db.settings({ timestampsInSnapshots: true });
+
+		firebase.auth().onAuthStateChanged(function(user){
+      
+			if(!user){
+        // Return to login if user does not exist.
+				window.location.href = "login.html"
+			}else{
+        // if the displayName is null, it means user register using Phone
+        if (firebase.auth().currentUser.displayName == null ){
+            userId = firebase.auth().currentUser.phoneNumber;
+        }else
+            userId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+
+        loadUserInfo(userId);
+        
+			}
+		});
+
+    // Tutor Specific
+    function loadUserInfo(userId){
+      // Tutor Id must be a phone with +60, no spacing or other chars
+      var docRef = db.collection("Users").doc(userId);
+      
+
+      // docRef.get().then((doc) => {
+      docRef.onSnapshot((doc) => {
+
+        if (doc.exists) {
+          current_name = (doc.data().name == null || doc.data().name == "")? "New User" : doc.data().name;
+          current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email;
+          current_phone = (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone; 
+          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/empty-photo.png" : doc.data().imgUrl;
+          current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
+          current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
+          current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
+          current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
+          current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
+
+          // Set the nav user name and public profile link
+          document.getElementById("user").textContent = doc.data().name;
+
+
+          //------ edit-profile.html specific Start -------------//
+          document.getElementById("tutorImgUrl").src = current_imgUri;
+          imgUrl_temp = current_imgUri;
+          document.getElementById("name").value = doc.data().name;
+          document.getElementById("email").value = doc.data().email;
+          document.getElementById("phone").value = doc.data().phone;
+          document.getElementById("address1").value = doc.data().address1;
+          document.getElementById("address2").value = doc.data().address2;
+          document.getElementById("addressPostCode").value = doc.data().addressPostCode;
+          document.getElementById("addressState").value = doc.data().addressState;
+
+          // Re-Enable img upload and save button
+          document.getElementById("tutorImgUrl").setAttribute("style", "height: 100%; width:100%; object-fit: cover; border-radius: 50%; pointer-events: auto;");
+          document.getElementById('btnUpdateProfile').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
+
+          //------ edit-profile.html specific End -------------//
+
+        } else {
+          console.log("No user! Redirecting to login");
+          window.location = "login.html"
+        }
+      });
+
+    };
+
+    // Sign out
+    function signOutFunction(){
+      $('#signOutModal').modal('show');
+      $("#signOutModal").appendTo("body");
+    }
+
+  </script>
+
+  <script>
+
+    var imgUrl_temp;
+
+    // Img specific param
+    var imgFile, type, size, width, height;// name, imgFile is a jSON obj
+
+    //, name_temp, email_temp, phone_temp, address1_temp, address2_temp, addressPostCode_temp, addressState_temp, age_temp, gender_temp;
+
+		$( document ).ready(function() {
+
+			// Update Profile
+			$("#btnUpdateProfile").click(function(){
+        $('#updateProfileModal').modal('show');
+			});
+      $('#btnUpdateProfileModalUpdate').on('click', function (e) {
+
+        // Step 1: Upload image and get the imgUrl.
+        // uploadImage(imgFile, type, size, width, height);
+
+        // Step 2: Update tutor profile
+
+        var docRef = db.collection("Users").doc(userId);
+        var docRefWithMerge = docRef.set({
+          [NAME_KEY]: document.getElementById("name").value,
+          [EMAIL_KEY]: document.getElementById("email").value,
+          [PHONE_KEY]: document.getElementById("phone").value,
+          [ADDRESS_1_KEY]: document.getElementById("address1").value,
+          [ADDRESS_2_KEY]: document.getElementById("address2").value,
+          [ADDRESS_POSTCODE_KEY]: document.getElementById("addressPostCode").value,
+          [ADDRESS_STATE_KEY]: document.getElementById("addressState").value,
+          // [IMAGE_KEY]: imgUrl_temp,
+          // [AGE_KEY]: parseInt(document.getElementById("age").value, 10),
+          // [GENDER_KEY]: gender_temp
+        }, { merge: true });
+
+        // TODO: Update to all active classes
+        // Update all active course
+        let final_address = document.getElementById("address1").value + ", " +
+          document.getElementById("address2").value + ", " + 
+          document.getElementById("addressPostCode").value + ", " +
+          document.getElementById("addressState").value;
+
+        var allActiveCourseData = {
+          [NAME_KEY]: document.getElementById("name").value,
+          [EMAIL_KEY]: document.getElementById("email").value,
+          [PHONE_KEY]: document.getElementById("phone").value,
+          [ADDRESS_KEY]: final_address,
+          // [AGE_KEY]: parseInt(document.getElementById("age").value, 10),
+          // [GENDER_KEY]: gender_temp,
+          [IMAGE_KEY]: imgUrl_temp,
+        }
+        // Update the profile pic, name, & etc of all the active courses..
+        // updateInfoInAllActiveCourse(allActiveCourseData);
+        // TODO: Use promise to Update all courses under tutor profile
+        // updateInfoInTutorCourse(allActiveCourseData);
+
+        $('#updateProfileModal').modal('hide');
+        
+        func.showNotification('top','center', 'success', 'check_circle', "Your profile is updated.");
+      });
+
+      $('#btnUpdateProfileModalClose1').on('click', function (e) {
+        $('#updateProfileModal').modal('hide');
+      });
+      $('#btnUpdateProfileModalClose2').on('click', function (e) {
+        $('#updateProfileModal').modal('hide');
+      });
+
+			function validateEmail(email) {
+				const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				return re.test(String(email).toLowerCase());
+			}
+			
+			function validatePhone(phone){
+				// <!-- const re = new RegExp('+6*'); -->
+				// <!-- const regex = new RegExp('^[\+]'); -->
+				const re = /^[\+]/im;
+				return re.test(phone);
+			}
+
+      // Script to trigger the select image
+      $('#tutorImgUrl').click(function(){
+         $('#select_image').trigger('click'); 
+      });
+
+      $('#btnSignOutModalUpdate').on('click', function (e) {
+      
+        firebase.auth().signOut().then(() => {
+            // Sign-out successful.
+          }).catch((error) => {
+            // window.alert("Logging out failed");
+            func.showNotification('top','center', 'danger', 'error_outline', "Logging out failed." );
+          });
+        // Do something
+        $('#signOutModal').modal('hide');
+      });
+
+      $('#btnSignOutModalClose1').on('click', function (e) {
+        $('#signOutModal').modal('hide');
+      });
+      $('#btnSignOutModalClose2').on('click', function (e) {
+        $('#signOutModal').modal('hide');
+      });
+
+
+      
+      $('#btnActivationModalUpdate').on('click', function (e) {
+        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
+          window.location = "https://golearn.com.my/join-us/";
+        }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+          window.location = "https://golearn.com.my/contact-us/";
+        }else {
+          window.location = "https://golearn.com.my/pricing/";
+        }
+        // Do something
+        $('#activationModal').modal('hide');
+      });
+
+      $('#btnActivationModalClose1').on('click', function (e) {
+        $('#activationModal').modal('hide');
+      });
+      $('#btnActivationModalClose2').on('click', function (e) {
+        $('#activationModal').modal('hide');
+      });
+
+      
+		});
+
+    // Image related script
+    function uploadImage( file, type, size, width, height ){
+
+      if(file != null) {
+        $('#uploadModal').modal('show');
+
+        // Create a root reference
+        var storageRef = firebase.storage().ref("uploads");
+
+        var metadata = {
+          contentType: type, // Predefined by firestore
+          customMetadata: {
+            'id': userId,
+            'size': size,
+            'width': width,
+            'height': height
+          }
+        };
+
+        // Upload file and metadata to the object 'images/mountains.jpg'
+        // var uploadTask = storageRef.child('images_user/' + userId).put(file, metadata);
+        var uploadTask = storageRef.child('images_user/' + userId).putString(file, 'data_url', metadata);
+        var elem = document.getElementById("myBar");
+        // Listen for state changes, errors, and completion of the upload.
+        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+          (snapshot) => {
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            // console.log('Upload is ' + progress + '% done');
+            elem.style.width = progress + "%";
+
+            switch (snapshot.state) {
+              case firebase.storage.TaskState.PAUSED: // or 'paused'
+                // console.log('Upload is paused');
+
+                func.showNotification('top','center', 'danger', 'error_outline', "Upload is paused. Please try again." );
+
+                break;
+              case firebase.storage.TaskState.RUNNING: // or 'running'
+                // console.log('Upload is running');
+                break;
+            }
+            
+          }, 
+          (error) => {
+            // A full list of error codes is available at
+            // https://firebase.google.com/docs/storage/web/handle-errors
+            switch (error.code) {
+              case 'storage/unauthorized':
+                // User doesn't have permission to access the object
+                func.showNotification('top','center', 'danger', 'error_outline', "You do not have permission to upload. Please contact us." );
+
+                $('#uploadModal').modal('hide');
+                break;
+              case 'storage/canceled':
+                // User canceled the upload
+                func.showNotification('top','center', 'danger', 'error_outline', "Upload canceled." );
+
+                $('#uploadModal').modal('hide');
+                break;
+
+              case 'storage/unknown':
+                func.showNotification('top','center', 'danger', 'error_outline', "Upload failed. Please try again." );
+
+                $('#uploadModal').modal('hide');
+                // Unknown error occurred, inspect error.serverResponse
+                break;
+            }
+          }, 
+          () => {
+            // Upload completed successfully, now we can get the download URL
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              imgUrl_temp = downloadURL;
+
+
+              // Once uploaded, update the new url
+              var docRef = db.collection("Users").doc(userId);
+              var docRefWithMerge = docRef.set({
+                [IMAGE_KEY]: imgUrl_temp
+              }, { merge: true });
+
+
+              // var allActiveCourseData = {
+              //   [IMAGE_KEY]: imgUrl_temp,
+              // }
+              // Update the profile pic, name, & etc of all the active courses..
+              // updateInfoInAllActiveCourse(allActiveCourseData);
+              // TODO: Use promise to Update all courses under tutor profile
+              // updateInfoInTutorCourse(allActiveCourseData);
+
+              $('#uploadModal').modal('hide');
+
+            });
+          }
+        );
+ 
+      }
+    }
+
+    // Update all active courses
+    function updateInfoInAllActiveCourse(allActiveCourseData) {
+
+			var allActiveCourseCol = db.collection("Tutor").doc(userId).collection("Courses")
+			.where("status", "==", true);
+
+			allActiveCourseCol
+			.get()
+			.then((querySnapshot) => {
+				var docId;
+				querySnapshot.forEach((doc) => {
+					docId = doc.id;
+					console.log(doc.data().aWebUrl);
+
+          if (doc.data().online){
+            // Online class
+
+            var allSubjectColRef = 
+              db.collection("country")
+              .doc("malaysia")
+              .collection("state")
+              .doc("online")
+              .collection("category")
+              .doc(doc.data().categoryId)
+              .collection("subject")
+              .doc(doc.data().subjectId)
+              .collection("tutor")
+              .doc(userId);
+
+              // Update the course
+              allSubjectColRef.set(allActiveCourseData, { merge: true });
+
+              // Update the history as well
+              allSubjectColRef.collection("AllCourses").doc(docId)
+              .set(allActiveCourseData, { merge: true });
+
+          }else{
+            // Offline class
+            for ( let i = 0; i <  doc.data().preferedAreaList.length; i++){
+              let State_Area = doc.data().preferedAreaList[i].split("-");
+
+              var allSubjectColRef = 
+                db.collection("country")
+                .doc("malaysia")
+                .collection("state")
+                .doc(State_Area[0].toLowerCase())
+                .collection("area")
+                .doc(State_Area[1])
+                .collection("category")
+                .doc(doc.data().categoryId)
+                .collection("subject")
+                .doc(doc.data().subjectId)
+                .collection("tutor")
+                .doc(userId);
+
+                // Update the course
+                allSubjectColRef.set(allActiveCourseData, { merge: true });
+
+                // Update the history as well
+                allSubjectColRef.collection("AllCourses").doc(docId)
+                .set(allActiveCourseData, { merge: true });
+            }
+          }
+        });
+
+			}).catch((error) => {
+				console.log("Error getting documents: ", error);
+			});
+
+    }
+  
+    
+    function updateInfoInTutorCourse(allActiveCourseData) {
+
+      var allActiveCourseCol = db.collection("Tutor").doc(userId).collection("Courses")
+      .where("status", "==", true);
+
+      let courseIdList = [];
+      allActiveCourseCol
+      .get()
+      .then((querySnapshot) => {
+        var docId;
+        querySnapshot.forEach((doc) => {
+          docId = doc.id;
+          // console.log(docId);
+          courseIdList.push(docId);
+          // console.log(courseIdList);
+          // allActiveCourseCol.doc(docId).set(allActiveCourseData, { merge: true });
+        });
+
+        
+      }).then(
+        
+      )
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+
+      // Update the active courses
+      var allActiveCourse2Col = db.collection("Tutor").doc(userId).collection("Courses");
+
+      courseIdList.forEach((courseItem) => {
+        console.log(courseItem);
+
+        allActiveCourse2Col.doc(courseItem).set(allActiveCourseData, { merge: true });
+      });
+
+    }
+
+  
+  </script>
+
+  <script>
+    // Ref: https://github.com/josefrichter/resize/blob/master/public/preprocess.js
+    var fileinput = document.getElementById('select_image');
+
+    var preview = document.getElementById('preview');
+
+    var form = document.getElementById('tutorImgUrl');
+    
+    function processfile(file) {
+      
+        if( !( /image/i ).test( file.type ) )
+            {
+                alert( "File "+ file.name +" is not an image." );
+                return false;
+            }
+
+        // read the files
+        var reader = new FileReader();
+        reader.readAsArrayBuffer(file);
+        
+        reader.onload = function (event) {
+          // blob stuff
+          var blob = new Blob([event.target.result]); // create blob...
+          window.URL = window.URL || window.webkitURL;
+          var blobURL = window.URL.createObjectURL(blob); // and get it's URL
+          
+          // helper Image object
+          var image = new Image();
+          image.src = blobURL;
+          //preview.appendChild(image); // preview commented out, I am using the canvas instead
+          image.onload = function() {
+            // have to wait till it's loaded
+            var resized = resizeMe(image); // send it to canvas
+            var newinput = document.createElement("input");
+            newinput.type = 'hidden';
+            newinput.name = 'images[]';
+            newinput.value = resized; // put result from canvas into new hidden input
+            // form.appendChild(newinput);
+            // form.src = newinput;
+            form.src = resized;
+            var head = 'data:image/png;base64,';
+            // console.log(Math.round((resized.length - head.length)*3/4));
+            size = Math.round((resized.length - head.length)*3/4)
+
+            // let image2 = new Image();
+            // image2.src = resized;
+            // console.log(resized);
+            // console.log(resized.width);
+            // var blob2 = new Blob([resized]); // create blob...
+            // window.URL = window.URL || window.webkitURL;
+            // var blobURL2 = window.URL.createObjectURL(blob2); // and get it's URL
+            // console.log(blob2);
+            // console.log(blobURL2);
+
+            uploadImage(resized, type, size, width, height);
+          }
+        };
+    }
+
+    function readfiles(files) {
+      
+        // remove the existing canvases and hidden inputs if user re-selects new pics
+        var existinginputs = document.getElementsByName('images[]');
+        var existingcanvases = document.getElementsByTagName('canvas');
+        while (existinginputs.length > 0) { // it's a live list so removing the first element each time
+          // DOMNode.prototype.remove = function() {this.parentNode.removeChild(this);}
+          form.removeChild(existinginputs[0]);
+          preview.removeChild(existingcanvases[0]);
+        } 
+      
+        for (var i = 0; i < files.length; i++) {
+          // console.log(i)
+          processfile(files[i]); // process each file at once
+        }
+        fileinput.value = ""; //remove the original files from fileinput
+        // TODO remove the previous hidden inputs if user selects other files
+    }
+
+    // this is where it starts. event triggered when user selects files
+    fileinput.onchange = function(){
+      if ( !( window.File && window.FileReader && window.FileList && window.Blob ) ) {
+        alert('The File APIs are not fully supported in this browser.');
+        return false;
+        }
+      readfiles(fileinput.files);
+    }
+
+    // === RESIZE ====
+    var max_height = 1024; 
+    var max_width = 1024;
+    var width = 0;
+    var height = 0;
+    function resizeMe(img) {
+      
+      var canvas = document.createElement('canvas');
+
+      // console.log(width,height )
+      width = img.width;
+      height = img.height;
+      // calculate the width and height, constraining the proportions
+      if (width > height) {
+        if (width > max_width) {
+          //height *= max_width / width;
+          height = Math.round(height *= max_width / width);
+          width = max_width;
+        }
+      } else {
+        if (height > max_height) {
+          //width *= max_height / height;
+          width = Math.round(width *= max_height / height);
+          height = max_height;
+        }
+      }
+      
+      // resize the canvas and draw the image data into it
+      canvas.width = width;
+      canvas.height = height;
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, width, height);
+      
+      preview.appendChild(canvas); // do the actual resized preview
+      
+      return canvas.toDataURL("image/jpeg",0.7); // get the data from canvas as 70% JPG (can be also PNG, etc.)
+
+    }
+
+  </script>
+</body>
+
+</html>

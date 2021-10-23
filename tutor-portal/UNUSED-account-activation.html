@@ -1,0 +1,1068 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>GoLearn Admin Space</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous"> -->
+  <!-- Material Kit CSS -->
+  <link href="assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <link href="assets/demo/demo.css" rel="stylesheet" />
+  <!-- Firebase Init -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+  <script src="js/firebase.js"></script>
+</head>
+
+<body>
+
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white"data-image="assets/img/sidebar-1.jpg">
+      <!--
+      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+      Tip 2: you can also add an image using data-image tag
+  -->
+      <div class="logo">
+        <a href="#" class="simple-text logo-mini">
+			<img src="source/logo.png" style="width: 216px; height: auto;" alt=""></img>
+          
+        </a>
+        <a href="#" class="simple-text logo-normal">
+         Admin Portal
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+			<li class="nav-item ">
+				<a class="nav-link" href="./">
+				  <i class="material-icons">dashboard</i>
+				  <p>Dashboard</p>
+				</a>
+			  </li>
+			  
+			  <li class="nav-item active">
+				<a class="nav-link" href="./account-activation.html">
+				  <i class="material-icons">manage_accounts</i>
+				  <p>Tutor Account</p>
+				</a>
+			  </li>
+			  <!-- your sidebar here -->
+			  <li class="nav-item ">
+				<a class="nav-link" href="./job.html">
+				  <i class="material-icons">work</i>
+				  <p>Job</p>
+				</a>
+			  </li>
+			  <!-- <li class="nav-item ">
+				<a class="nav-link" href="./class.html">
+				  <i class="material-icons">content_paste</i>
+				  <p>Class</p>
+				</a>
+			  </li> -->
+
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">Update Tutor's Account</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="navbar-brand" href="javascript:;">
+                   Welcome <span id="user"> </span>
+                </a> 
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:;">
+                  <i class="material-icons">notifications</i> Notifications
+                </a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                  <a class="dropdown-item" href="#">Another Notification</a>
+                  <a class="dropdown-item" href="#">Another One</a>
+                </div>
+              </li>
+              <!-- your navbar here -->
+			  
+			  <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">person</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                  <a class="dropdown-item" href="#">Profile (Under Construction)</a>
+                  <a class="dropdown-item" href="#">Settings (Under Construction)</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#" id="btn-logout">Log out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid">
+          <!-- your content here -->
+		  <div class="row">
+            <div class="col-lg-4 col-md-4"> 
+				<div class="input-group no-border">
+					<input type="text" value="" class="form-control" placeholder="Search Phone/Email..." id="searchinput">
+					<button type="submit" class="btn btn-white btn-round btn-just-icon" id="searchtutor">
+					  <i class="material-icons">search</i>
+					  <div class="ripple-container"></div>
+					</button>
+					
+				</div>
+			</div>
+            <div class="col-lg-8 col-md-8"> 
+				<p class="text-primary" style="margin: 0;"> Phone: "+60138252818" (Add "+60", No dash or spacing in front, middle or end of phone number)</p>
+				<p class="text-primary" style="margin: 0;"> Email: "golearn.my@gmail.com" (Use full email)</p>
+			</div>
+
+			<!-- Modal Start -->
+			<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Confirmation</h5>
+					<button type="button" class="close" id="btn-modelclose2" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body">
+					Are you sure you want to update the tutor profile?
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" id="btn-modelclose" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" id="btn-modelsave">Save changes</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="modal fade" id="TutorAutoMessageModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			  <div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Instruction: Send this Message to Tutor</h5>
+					<button type="button" class="close" id="btn-automessagemodelclose2" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body">
+					<p> 1. Check if the link generated is working. If not, please contact Alric (+60138252818) immediately.</p>
+					 <p> 2. Copy the the 'Congratulation Message' below and send it to the tutor, either through Whatsapp (preferred) or email.</p>
+					 <p> MESSAGE START </p>
+					 <hr>
+					 <p> *Congratulation* <span id="tutor_name"></span></p>
+					 <br>
+					 <p> Your tutor account has been activated. You can view your public tutor profile at https://golearn.com.my/tutor/<span id="aweburl"></span></p>
+					 <p> Your profile is visible to all your potential clients (parents and students) who search for a tutor. We will be sending the same profile to the parents too if you applied for our tuition jobs."</p>
+					 <br>
+					 <p> *TIPS for You to Get More Tuition Opportunities* 😃</p>
+					 <p> 1. First impressions matter! Upload an attractive profile picture to show that you are confident, positive or professional. Passport photo is NOT encouraged.</p>
+					 <p> 2. Make your profile looks appealing by updating your academic qualification, the subjects that you teach and other details</p>
+					 <p> 3. Take some time to write your teaching approaches and past experiences. Keep it clean, precise and make sure it is not lengthy. Do avoid getting system penalty® by including numbers or words aliking phone number.</p>
+					 <br>
+					 <p> With ❤️ by GoLearn Crew</p>
+					 <p> This message is auto generated. Do not reply</p>
+					 <hr>
+					 <p> MESSAGE END </p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="btn-automessagemodelclose" data-dismiss="modal">Sent</button>
+					<!-- <a class="btn btn-primary" href="#" role="button" id="btn-automessagemodelsend" target="_blank">Send Now (Whatsapp)</a> -->
+
+					<!-- <button type="button" class="btn btn-primary" id="btn-automessagemodelsend">Send Now (Whatsapp)</button> -->
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<!-- Modal End -->
+			
+			<div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Tutor Profile</h4>
+                  <!-- <p class="card-category">Complete your profile</p> -->
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="row">
+										
+											<div class="col-md-2">
+
+												<div class="" style="height: 150px; width: 150px;">
+													<a href="javascript:;">
+													<img class="img"  style="height: 100%; width:100%; object-fit: cover; border-radius: 50%" id="tutor-profile-img" src="source/icon_boy01.png" />
+													</a>
+												</div>
+											</div>
+											<div class="col-md-10">
+													<div class="row">
+													<div class="col-md-6">
+													<div class="form-group">
+														<label >Full Name (as NRIC)</label>
+														<input type="text" class="form-control" id="full-name-as-nric">
+														<p ><span style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="This field will create the tutor permanant url. i.e https://golearn.com.my/tutor/liew-tian-chin/. This can ONLY BE DONE ONCE for every tutor and VERY COSTLY TO CHANGE/MODIFY in future because this is a public link and will be shared to parents, across websites and the whole golearn database . So you should key in the tutor's name accurately with correct spacing as NRIC. Substitute special characters with single or no space depending on the name. i.e Shanti a/p Shunkar -> Shanti ap Shunkar, Malliam D. -> Malliam D, Megan-Soh -> Megan Soh, Dato' Jaafar -> Dato Jaafar"> EXTREMELY IMPORTANT! Check What To Write!  </span></p>
+													</div>
+													<p style="font-size: 0.8rem;">Tutor's Profile Link Preview: https://golearn.com.my/tutor/<span id="tutor_url"></span></p>
+													</div>
+													<div class="col-md-6">
+													<div class="form-group" >
+														<label>Name</label>
+														<input type="text" class="form-control"  style="background: #F5F5F5;" placeholder="" id="name" disabled>
+													</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-3">
+													<div class="form-group">
+														<label>IC Number (as NRIC)</label>
+														<input type="email" class="form-control" id="nric" >
+														<p ><span style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="Tutor will fill in their IC. In case the number is not the same as the IC submitted. You can overwrite it here. Only number, no dash and spacing."> NOTE! Check What To Write! </span></p>
+													</div>
+													</div>
+													<div class="col-md-3">
+													<div class="form-group">
+														<label>Phone</label>
+														<input type="email" style="background: #F5F5F5;" class="form-control" id="phone" disabled >
+														</div>
+													</div>
+														<div class="col-md-3">
+													<div class="form-group">
+														<label>Email address</label>
+														<input type="email" style="background: #F5F5F5;" class="form-control" id="email" disabled>
+													</div>
+													</div>
+													
+														<div class="col-md-3">
+													<div class="form-group">
+														<label>Age</label>
+														<input type="email" style="background: #F5F5F5;" class="form-control" id="age" disabled>
+													</div>
+													</div>			
+												</div>
+											</div>
+										</div>
+                    <!-- <button type="submit" class="btn btn-primary pull-right" disabled>Update Profile</button> -->
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+		  <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <div class="card">
+                <div class="card-header card-header-tabs card-header-primary">
+                  <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                      <span class="nav-tabs-title">Task:</span>
+                      <ul class="nav nav-tabs" data-tabs="tabs">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="#settings" data-toggle="tab">
+                            <i class="material-icons">cloud</i>Profile Verification
+                            <div class="ripple-container"></div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="settings">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input class="form-check-input" type="checkbox" value="" id="check-profile" >
+                                  <span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                </label>
+                              </div>
+                            </td>
+                            <td >Name valid? <span style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="1. Did IC submitted?">   TIPS</span></td>
+ 
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input class="form-check-input" type="checkbox" value="" id="check-phone">
+                                  <span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                </label>
+                              </div>
+                            </td>
+                            <td>Phone number valid? <span style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="1. Is the number can be reach?   2. Is the email looks proper?   alric@gmail.com / ..@hotmail.com / other common mail - OK   test123@...(Fake- Not OK) ...@xxx.edu.my /...@xxx.gov.my(Gov. - Not OK)   ...@golearn.com.my(Private - Not OK)">   TIPS</span> </td>
+        
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input class="form-check-input" type="checkbox" value="" id="check-qualification">
+                                  <span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                </label>
+                              </div>
+                            </td>
+                            <td>Academically qualified? <span style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="1. Did academic cert(s) submitted?  2. Highest qualification ABOVE SPM?  3. Submitted result for single subject only? i.e MUET result only - Not OK">   TIPS</span></td>
+   
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input class="form-check-input" type="checkbox" value="" id="check-location">
+                                  <span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                </label>
+                              </div>
+                            </td>
+                            <td>Location valid? <span style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="1. Did tutor submit any utility bill (water, electric)?   2. Submitted official document with address? (Not an unofficial letter/email screenshot)">   TIPS</span></td>
+      
+                          </tr>
+						  
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+			
+			
+            <div class="col-lg-6 col-md-12">
+              <div class="card">
+                <div class="card-header card-header-tabs card-header-primary">
+                  <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                      <span class="nav-tabs-title">Task:</span>
+                      <ul class="nav nav-tabs" data-tabs="tabs">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="#settings" data-toggle="tab">
+                            <i class="material-icons">cloud</i>Account Status
+                            <div class="ripple-container"></div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="settings">
+						<div class="form-check form-check-radio">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="radio-activate" value="option1" >
+								ACTIVATE
+								<span class="circle">
+									<span class="check"></span>
+								</span>
+							</label>
+						</div>
+						<div class="form-check form-check-radio">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="radio-deactivated" value="option2">
+								DEACTIVATE
+								<span class="circle">
+									<span class="check"></span>
+								</span>
+							</label>
+						</div>
+
+						<div class="form-check form-check-radio">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="radio-suspended" value="option3">
+								SUSPEND
+								<span class="circle">
+									<span class="check"></span>
+								</span>
+							</label>
+						</div>
+						<div class="form-check form-check-radio">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="radio-premium-vip-1" value="option4">
+								PREMIUM VIP 1 (RM10/mo, 20 premium subjects, up to 40 subjects) 
+								<span class="circle">
+									<span class="check"></span>
+								</span>
+							</label>
+						</div>
+						<div class="form-check form-check-radio">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="radio-premium-vip-2" value="option5">
+								PREMIUM VIP 2 (RM17/mo, 40 premium subjects, up to 80 subjects) 
+								<span class="circle">
+									<span class="check"></span>
+								</span>
+							</label>
+						</div>
+						<div class="form-check form-check-radio">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="radio-premium-vip-3" value="option6">
+								PREMIUM VIP 3 (RM47/mo, unlimited subjects) 
+								<span class="circle">
+									<span class="check"></span>
+								</span>
+							</label>
+						</div>
+						<div class="form-check form-check-radio disabled">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="radio-delete" value="option7" disabled>
+								DELETE ACCOUNT 
+								<span class="circle">
+									<span class="check"></span>
+								</span>
+							</label>
+						</div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+		  </div>
+		  
+		  <div class="row">
+			
+			<div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Premium Account Settings</h4>
+                  <p class="card-category">Edit premium account settings only when Account Status is set to Premium VIP N</p>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="row">
+					
+						<div class="col-md-12">
+						    <div class="row">
+							  <div class="col-md-4">
+								<div class="form-group">
+								  <label >Premium Subject Number</label>
+								  <input type="text" class="form-control" id="aPremiumSubjectLimit">
+								  <p style="color: #2e74b6;">Set the premium courses tutor can create at Profile > My Courses </p>
+								  <p style="color: #2e74b6;">Default(Free): 10, VIP1 : 20, VIP2: 40 , VIP3: 999</p>
+								</div>
+							  </div>
+							  <div class="col-md-4">
+								<div class="form-group" >
+								  <label>Total Subject Number</label>
+								  <input type="text" class="form-control"  placeholder="" id="aTotalSubjectLimit">
+								  <p style="color: #2e74b6;">Set the number of courses a tutor can create at Profile > My Courses </p>
+								  <p style="color: #2e74b6;">Default(Free, VIP1): 40, VIP2 : 80, VIP3: 999 </p>
+								</div>
+							  </div>
+							  <div class="col-md-4">
+								<div class="form-group" >
+								  <label>Preferred Subject Number </label>
+								  <input type="text" class="form-control"  placeholder="" id="aPreferredSubjectLimit">
+								  <p style="color: #2e74b6;">Set the subjects number tutor can enter at Profile > Update Information > General > Add Preferred Subjects </p>
+								  <p style="color: #2e74b6;">Default(Free, VIP1): 40, VIP2 : 80, VIP3: 999 </p>
+								</div>
+							  </div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+									  <label>Preferred Area Number</label>
+									  <input type="text" class="form-control" id="aPreferredAreaLimit">
+									  <p style="color: #2e74b6;">Set the premium courses tutor can create at Profile > My Courses </p>
+									  <p style="color: #2e74b6;">Default(Free, VIP1): 5, VIP3 : Based on the branches they have </p>
+									</div>
+								  </div>
+								  <div class="col-md-4">
+									<div class="form-group" >
+									  <label>Premium Connect Number</label>
+									  <input type="text" class="form-control"  style="background: #F5F5F5;" placeholder="" id="aPremiumConnectLimit" disabled>
+									  <!-- <p >Set the number of courses a tutor can create at Profile > My Courses </p> -->
+									</div>
+								  </div>
+								  <div class="col-md-4">
+									<div class="form-group" >
+									  <label>Total Connect Number </label>
+									  <input type="text" class="form-control"  style="background: #F5F5F5;" placeholder="" id="aTotalConnectLimit" disabled>
+									  <!-- <p >Set the subjects number tutor can enter at Profile > Update Information > General > Add Preferred Subjects </p> -->
+									</div>
+								  </div>		
+							</div>
+						</div>
+					</div>
+                    <!-- <button type="submit" class="btn btn-primary pull-right" disabled>Update Profile</button> -->
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+		  <div class="row">
+			<div class="col-lg-12">
+				<button type="submit" class="btn btn-primary" id="updatetutoraccount" disabled>Update Tutor's Account</button>
+			</div>
+		  </div>
+        </div>
+      </div>
+	  <footer class="footer">
+		<div class="container-fluid">
+			<nav class="float-left">
+			<ul>
+				<li>
+				<a href="https://golearn.com.my">
+					GoLearn Admin Portal
+				</a>
+				</li>
+			</ul>
+			</nav>
+			<div class="copyright float-right">
+			&copy;
+			<script>
+				document.write(new Date().getFullYear())
+			</script>, made with <i class="material-icons">favorite</i> by
+			<a href="#" >Boring Alric</a>
+			</div>
+			<!-- your footer here -->
+		</div>
+	  </footer>
+    </div>
+	  
+  </div>
+  
+  <div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+      <a href="#" data-toggle="dropdown">
+        <i class="fa fa-cog fa-2x"> </i>
+      </a>
+      <ul class="dropdown-menu">
+        <li class="header-title"> Sidebar Filters</li>
+        <li class="adjustments-line">
+          <a href="javascript:void(0)" class="switch-trigger active-color">
+            <div class="badge-colors ml-auto mr-auto">
+              <span class="badge filter badge-purple" data-color="purple"></span>
+              <span class="badge filter badge-azure" data-color="azure"></span>
+              <span class="badge filter badge-green" data-color="green"></span>
+              <span class="badge filter badge-warning" data-color="orange"></span>
+              <span class="badge filter badge-danger" data-color="danger"></span>
+              <span class="badge filter badge-rose active" data-color="rose"></span>
+            </div>
+            <div class="clearfix"></div>
+          </a>
+        </li>
+        <li class="header-title">Images</li>
+        <li class="active">
+          <a class="img-holder switch-trigger" href="javascript:void(0)">
+            <img src="assets/img/sidebar-1.jpg" alt="">
+          </a>
+        </li>
+        <li>
+          <a class="img-holder switch-trigger" href="javascript:void(0)">
+            <img src="assets/img/sidebar-2.jpg" alt="">
+          </a>
+        </li>
+        <li>
+          <a class="img-holder switch-trigger" href="javascript:void(0)">
+            <img src="assets/img/sidebar-3.jpg" alt="">
+          </a>
+        </li>
+        <li>
+          <a class="img-holder switch-trigger" href="javascript:void(0)">
+            <img src="assets/img/sidebar-4.jpg" alt="">
+          </a>
+        </li>
+        <li class="button-container">
+          <a href="https://www.creative-tim.com/product/material-dashboard" target="_blank" class="btn btn-primary btn-block">Free Download</a>
+        </li>
+        <!-- <li class="header-title">Want more components?</li>
+            <li class="button-container">
+                <a href="https://www.creative-tim.com/product/material-dashboard-pro" target="_blank" class="btn btn-warning btn-block">
+                  Get the pro version
+                </a>
+            </li> -->
+        <li class="button-container">
+          <a href="https://demos.creative-tim.com/material-dashboard/docs/2.1/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block">
+            View Documentation
+          </a>
+        </li>
+        <li class="button-container github-star">
+          <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
+        </li>
+        <li class="header-title">Thank you for 95 shares!</li>
+        <li class="button-container text-center">
+          <button id="twitter" class="btn btn-round btn-twitter"><i class="fa fa-twitter"></i> &middot; 45</button>
+          <button id="facebook" class="btn btn-round btn-facebook"><i class="fa fa-facebook-f"></i> &middot; 50</button>
+          <br>
+          <br>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="assets/js/core/jquery.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src="assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="assets/js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <!-- <script src="assets/js/plugins/jquery.validate.min.js"></script> -->
+  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+  <!-- <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script> -->
+  <!-- 	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <!-- <script src="assets/js/plugins/bootstrap-selectpicker.js"></script> -->
+  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+  <!-- <script src="assets/js/plugins/bootstrap-datetimepicker.min.js"></script> -->
+  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+  <!-- <script src="assets/js/plugins/jquery.dataTables.min.js"></script> -->
+  <!-- 	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+  <!-- <script src="assets/js/plugins/bootstrap-tagsinput.js"></script> -->
+  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+  <!-- <script src="assets/js/plugins/jasny-bootstrap.min.js"></script> -->
+  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+  <!-- <script src="assets/js/plugins/fullcalendar.min.js"></script> -->
+  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+  <!-- <script src="assets/js/plugins/jquery-jvectormap.js"></script> -->
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <!-- <script src="assets/js/plugins/nouislider.min.js"></script> -->
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> -->
+  <!-- Library for adding dinamically elements -->
+  <!-- <script src="assets/js/plugins/arrive.min.js"></script> -->
+  <!--  Google Maps Plugin    -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+  <!-- Chartist JS -->
+  <!-- <script src="assets/js/plugins/chartist.min.js"></script> -->
+  <!--  Notifications Plugin    -->
+  <!-- <script src="assets/js/plugins/bootstrap-notify.js"></script> -->
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
+  <script>
+	var db = firebase.firestore();
+
+	db.settings({ timestampsInSnapshots: true });
+
+  </script>
+  <script>
+	$("#btn-logout").click(function(){
+		firebase.auth().signOut().then(() => {
+			// Sign-out successful.
+			// <!-- window.alert("Logging out successfull"); -->
+		  }).catch((error) => {
+			// An error happened.
+			window.alert("LOgging out failed");
+		  });
+	})
+  </script>
+  <script>
+	firebase.auth().onAuthStateChanged(function(user){
+	   if(!user){
+		   window.location.href = "signin.html"
+	   }else{
+			document.getElementById("user").textContent = firebase.auth().currentUser.displayName;
+		}
+	})
+  </script>
+  <script>
+	$( document ).ready(function() {
+		var tutor_name, tutor_age, tutor_yearOfExperience, tutor_gender, tutor_imgUrl = "";
+		
+
+
+		// Search Tutor Profile
+		$('#searchtutor').on('click', function(){
+
+			let inputVal = document.getElementById("searchinput").value;
+			if (inputVal == null || inputVal==""){
+				alert("Enter a phone number (with +60) or a valid email.");
+
+			}else if(validateEmail(inputVal)){
+				tutor_id = inputVal.replace(/\W/g,"_").toLowerCase();
+				// <!-- tutor_id = inputVal.replaceAll("[^a-zA-Z0-9]", "_").toLowerCase(); -->
+			}
+			else if (validatePhone(inputVal)){
+				tutor_id = inputVal;
+				
+			}else{
+				alert("Enter a valid phone number or email.");
+			}
+			
+			// Load Tutor
+			db.collection("Tutor").doc(tutor_id)
+			.onSnapshot((doc) => {
+				if (!doc.exists || doc.empty ){
+					alert("Tutor not found.");
+					document.getElementById("updatetutoraccount").disabled = true;
+				}
+				else{
+					// Assign to global variables
+					tutor_name = doc.data().name;
+					tutor_age = doc.data().age;
+					tutor_gender = (doc.data().gender == 0)? "Male" : "Female";
+					tutor_yearOfExperience = doc.data().yearsExperience;
+					tutor_imgUrl = doc.data().imgUrl;
+					console.log("tutor_imgUrl: " +tutor_imgUrl );
+					
+					document.getElementById("tutor_url").textContent = doc.data().aWebUrl;
+					
+					document.getElementById("updatetutoraccount").disabled = false;
+					document.getElementById("name").value = doc.data().name;
+					document.getElementById("nric").value = doc.data().nric;
+					document.getElementById("email").value = doc.data().email;
+					document.getElementById("phone").value = doc.data().phone;
+					document.getElementById("age").value = doc.data().age;
+					document.getElementById("tutor-profile-img").src = doc.data().imgUrl;
+					document.getElementById("check-profile").checked = doc.data().profileStatus[0];
+					document.getElementById("check-phone").checked = doc.data().profileStatus[1];
+					document.getElementById("check-qualification").checked = doc.data().profileStatus[2];
+					document.getElementById("check-location").checked = doc.data().profileStatus[3];
+					
+					if (doc.data().accountStatus == "activate"){
+						document.getElementById("radio-activate").checked = true;
+					} else if (doc.data().accountStatus == "deactivated"){
+						document.getElementById("radio-deactivated").checked = true;
+					} else if (doc.data().accountStatus == "suspended"){
+						document.getElementById("radio-suspended").checked = true;
+					} else if (doc.data().accountStatus == "premium1"){
+						document.getElementById("radio-premium-vip-1").checked = true;
+					} else if (doc.data().accountStatus == "premium2"){
+						document.getElementById("radio-premium-vip-2").checked = true;
+					} else if (doc.data().accountStatus == "premium3"){
+						document.getElementById("radio-premium-vip-3").checked = true;
+					} else{
+						document.getElementById("radio-deactivated").checked = true;
+					}
+					
+					if (doc.data().aFullNameAsNric =="" || doc.data().aFullNameAsNric ==null ){
+						document.getElementById("full-name-as-nric").disabled = false;
+						document.getElementById("full-name-as-nric").value = "";
+					}else{
+						// IMPORTANT! if exist, disable the full name as nric field. We do not want to modify it anymore.
+						// To update, superadmin must go to db to delete the aWebUrl. Highly not recommended.
+						document.getElementById("full-name-as-nric").disabled = true;
+						document.getElementById("full-name-as-nric").value = doc.data().aFullNameAsNric;
+					}
+					// <!-- if (doc.data().aWebUrl != "" || doc.data().aWebUrl != null){ -->
+
+					// <!-- }else{ -->
+
+					// <!-- } -->
+
+					document.getElementById("aPremiumSubjectLimit").value = doc.data().aPremiumSubjectLimit;
+					document.getElementById("aTotalSubjectLimit").value = doc.data().aTotalSubjectLimit;
+					document.getElementById("aPremiumConnectLimit").value = doc.data().aPremiumConnectLimit;
+					document.getElementById("aTotalConnectLimit").value = doc.data().aTotalConnectLimit;
+					document.getElementById("aPreferredAreaLimit").value = doc.data().aPreferredAreaLimit;
+					document.getElementById("aPreferredSubjectLimit").value = doc.data().aPreferredSubjectLimit;
+				}
+
+			});
+		});
+		
+		$("#full-name-as-nric").on("input", function(){
+			// Print entered value in a div box
+		   let str = $(this).val();
+		   str = str.replace(/\W+(?!$)/g, '-').toLowerCase();
+		   str = str.replace(/\W$/, '').toLowerCase();
+		   $("#tutor_url").text(str);
+		});
+		
+		// Show modal
+		$('#updatetutoraccount').on('click', function(){
+			$('#exampleModalCenter').modal('show');
+			// <!-- $('#TutorAutoMessageModalCenter').modal('show'); -->
+		});
+		
+		// Disable update when someone type in the search bar
+		$("#searchinput").on("change keyup paste", function(){
+			document.getElementById("updatetutoraccount").disabled = true;
+		})
+		
+		// popup model comfirmation
+		// TODO: Update the related field in all classes. 
+		// TODO: Disable classes when deactivated or suspended
+		$('#btn-modelsave').on('click', function (e) {
+			
+			let inputVal = document.getElementById("searchinput").value;
+			if (inputVal == null || inputVal==""){
+				alert("Enter a phone number (with +60) or a valid email.");
+			}else if(validateEmail(inputVal)){
+				tutor_id = inputVal.replace(/\W/g,"_").toLowerCase();
+			}
+			else if (validatePhone(inputVal)){
+				tutor_id = inputVal;
+				
+			}else{
+				alert("Enter a valid phone number or email.");
+			}
+			
+			
+			let nric = document.getElementById("nric").value;
+			let aFullNameAsNric = document.getElementById("full-name-as-nric").value;
+			// Convert full name to lower case and substitue space with dash.
+			// i.e Alric Liew -> alric-liew
+			// <!-- let aWebUrl = aFullNameAsNric.replace(/\s+/g, '-').toLowerCase(); -->
+			let aWebUrl = aFullNameAsNric.replace(/\W+(?!$)/g, '-').toLowerCase();
+			aWebUrl = aWebUrl.replace(/\W$/, '').toLowerCase();
+			
+			
+			let accountStatus = ""
+			if (document.getElementById("radio-activate").checked){
+				accountStatus = "activate"
+			}else if (document.getElementById("radio-deactivated").checked){
+				accountStatus = "deactivated"
+			} else if (document.getElementById("radio-suspended").checked){
+				accountStatus = "suspended"
+			} else if (document.getElementById("radio-premium-vip-1").checked){
+				accountStatus = "premium1"
+			} else if (document.getElementById("radio-premium-vip-2").checked){
+				accountStatus = "premium2"
+			}else if (document.getElementById("radio-premium-vip-3").checked){
+				accountStatus = "premium3"
+			}else {
+				accountStatus = "deactivated"
+			}
+			
+			let profileStatus = [false, false, false, false];
+			profileStatus[0] = document.getElementById("check-profile").checked? true : false;
+			profileStatus[1] = document.getElementById("check-phone").checked? true : false;
+			profileStatus[2] = document.getElementById("check-qualification").checked? true : false;
+			profileStatus[3] = document.getElementById("check-location").checked? true : false;
+
+
+			let aPremiumSubjectLimit = +document.getElementById("aPremiumSubjectLimit").value;
+			let aTotalSubjectLimit = +document.getElementById("aTotalSubjectLimit").value;
+			let aPreferredAreaLimit = +document.getElementById("aPreferredAreaLimit").value;
+			let aPreferredSubjectLimit = +document.getElementById("aPreferredSubjectLimit").value;
+
+			// profileStatus[1] = document.getElementById("check-phone").checked? true : false;
+			// profileStatus[2] = document.getElementById("check-qualification").checked? true : false;
+			// profileStatus[3] = document.getElementById("check-location").checked? true : false;
+
+			var tutorRef = db.collection('Tutor').doc(tutor_id);
+
+			// This is not a good practise. But what it does is we do not want to update the aWebUrl and aFullNameAsNric if they already exists.
+			var setAccountWithMerge = tutorRef.set({
+				accountStatus: accountStatus,
+				profileStatus: profileStatus,
+				nric: nric,
+				aPremiumSubjectLimit: aPremiumSubjectLimit,
+				aTotalSubjectLimit: aTotalSubjectLimit,
+				aPreferredAreaLimit: aPreferredAreaLimit,
+				aPreferredSubjectLimit: aPreferredSubjectLimit,
+			}, { merge: true });
+			var setAccountAndAweburlWithMerge = tutorRef.set({
+				accountStatus: accountStatus,
+				profileStatus: profileStatus,
+				nric: nric,
+				aPremiumSubjectLimit: aPremiumSubjectLimit,
+				aTotalSubjectLimit: aTotalSubjectLimit,
+				aPreferredAreaLimit: aPreferredAreaLimit,
+				aPreferredSubjectLimit: aPreferredSubjectLimit,
+				aFullNameAsNric: aFullNameAsNric,
+				aWebUrl: aWebUrl
+			}, { merge: true });
+			
+			if (document.getElementById("full-name-as-nric").disabled){
+			// The full-name-as-nric already populated
+				setAccountWithMerge
+				.then(() => {
+					console.log("Document successfully written!");
+					// Dismiss the modal
+					$('#exampleModalCenter').modal('hide')
+				});
+			}else if (document.getElementById("full-name-as-nric").value == "" || document.getElementById("full-name-as-nric").value == null) {
+			// If the profile is new and admin do not enter anything to the Full Name (as nric) field
+				setAccountWithMerge
+				.then(() => {
+					console.log("Document successfully written!");
+					// Dismiss the modal
+					$('#exampleModalCenter').modal('hide')
+				});
+			}else{
+			// If the profile is new and admin ENTERED the Full Name (as nric) field
+				setAccountAndAweburlWithMerge
+				.then(() => {
+					console.log("Document successfully written!");
+					// Dismiss the modal
+					$('#exampleModalCenter').modal('hide')
+				});
+				
+				// Create Tutor Public profile
+				let detail =""
+			    if (tutor_yearOfExperience == 0 || tutor_yearOfExperience == null)
+					detail = tutor_gender + " | " + tutor_age;
+				else if (tutor_yearOfExperience == 1)
+					detail = tutor_gender + " | " + tutor_age + " |  1 year of experience";
+				else
+					detail = tutor_gender + " | " + tutor_age + " | "+ tutor_yearOfExperience + " years of experience";
+				
+				let tutor_imgUrl_final = ""
+				if (tutor_imgUrl =="" || tutor_imgUrl == null || !tutor_imgUrl.exists){
+					if (tutor_gender == 0)
+						tutor_imgUrl_final = "https://golearn.com.my/tutor/a-source/source/man.png";
+					else
+						tutor_imgUrl_final = "https://golearn.com.my/tutor/a-source/source/woman.png";
+				}else
+					tutor_imgUrl_final = tutor_imgUrl;
+				console.log("tutor_imgUrl_final: " +tutor_imgUrl_final );	
+				create_tutor(aWebUrl, tutor_name, detail, tutor_imgUrl_final);
+				$('#exampleModalCenter').modal('hide');
+				
+				// This is used in modal popup after creating tutor profile
+				document.getElementById("aweburl").textContent = aWebUrl; 
+				document.getElementById("tutor_name").textContent = tutor_name; 
+				$('#TutorAutoMessageModalCenter').modal('show');
+			}
+		});
+		
+		$('#btn-modelclose').on('click', function (e) {
+			$('#exampleModalCenter').modal('hide')
+		});
+		$('#btn-modelclose2').on('click', function (e) {
+			$('#exampleModalCenter').modal('hide')
+		});
+		$('#btn-automessagemodelclose').on('click', function (e) {
+			$('#TutorAutoMessageModalCenter').modal('hide')
+		});
+		$('#btn-automessagemodelclose2').on('click', function (e) {
+			$('#TutorAutoMessageModalCenter').modal('hide')
+		});
+
+		function validateEmail(email) {
+			const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return re.test(String(email).toLowerCase());
+		}
+		
+		function validatePhone(phone){
+			// <!-- const re = new RegExp('+6*'); -->
+			// <!-- const regex = new RegExp('^[\+]'); -->
+			const re = /^[\+]/im;
+			return re.test(phone);
+		}
+		
+		function create_tutor(aWebUrl, name, detail, imgUrl){
+			// This function create-tutor publich profile based on aweburl param.
+			// All the data fields are required to contruct the static meta data of the profile
+			var temp_name = encodeURIComponent(name);
+			var temp_detail = encodeURIComponent(detail);
+			var temp_imgUrl = encodeURIComponent(imgUrl);
+
+			let param = "https://golearn.com.my/tutor/a-source/create-tutor.php?aweburl="+aWebUrl+"&name="+temp_name+"&detail="+temp_detail+"&imgUrl="+temp_imgUrl;
+			console.log("param: " +param );
+			$.ajax({
+				type: "GET",
+				url: param,
+				data: $(this).serialize(),
+				success: function(response)
+				{
+					var jsonData = JSON.parse(response);
+	  
+					// user is logged in successfully in the back-end
+					// let's redirect
+					if (jsonData.success == "1")
+					{
+						//  location.href = 'my_profile.php';
+						alert('Tutor Created!');
+					}
+					else
+					{
+						alert('Invalid Credentials!');
+					}
+			   }
+			});
+			
+			// Add the url to sitemap
+			let sitemapParam = "https://golearn.com.my/update-sitemap.php?action=add&path=tutor/"+aWebUrl+"&lastmod=";
+			$.ajax({
+				type: "GET",
+				url: sitemapParam,
+				data: $(this).serialize(),
+				success: function(response)
+				{
+					var jsonData = JSON.parse(response);
+	  
+					// user is logged in successfully in the back-end
+					// let's redirect
+					if (jsonData.success == "1")
+					{
+						// <!-- location.href = 'my_profile.php'; -->
+						alert('Tutor Created!');
+					}
+					else
+					{
+						alert('Invalid Credentials!');
+					}
+			   }
+			});
+		}
+	});
+
+  </script>
+  
+  <script>
+	  function getAllTutorWebUrl(aWebUrl){
+
+			var colFillAllWebUrl = db.collection("Tutor")
+			.where("aWebUrl", "!=", null);
+
+			colFillAllWebUrl
+			.get()
+			.then((querySnapshot) => {
+				var docId;
+				querySnapshot.forEach((doc) => {
+					docId = doc.id;
+					console.log(doc.data().aWebUrl);
+				});
+
+				console.log("Number of aWebUrl: "+querySnapshot.docs.length);
+
+			}).catch((error) => {
+				console.log("Error getting documents: ", error);
+			});
+		}
+
+  </script>
+  
+</body>
+
+</html>
