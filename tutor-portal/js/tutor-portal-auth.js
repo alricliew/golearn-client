@@ -29,8 +29,8 @@ function render() {
 function phoneAuth() {
     //get the number
     // let number = document.getElementById('phone').value;
-    let number = inputPhone.getNumber();
-    // consoles.log(number)
+    let number = itiPhone.getNumber();
+    console.log(number)
     //phone number authentication function of firebase
     //it takes two parameter first one is number,,,second one is recaptcha
     firebase.auth().signInWithPhoneNumber(number,window.recaptchaVerifier).then(function (confirmationResult) {
@@ -116,7 +116,7 @@ function codeverify() {
                     [TOKEN_KEY]: null,    //main
                     [NAME_KEY] : 'New Tutor',    //main
                     [EMAIL_KEY]  : "", //main
-                    [PHONE_KEY]  : document.getElementById('phone').value, //main
+                    [PHONE_KEY]  : itiPhone.getNumber(), //main
                     [AGE_KEY]  : 18, 
                     [GENDER_KEY]  : 1, // Female
                     [ADDRESS_1_KEY]  : "",
