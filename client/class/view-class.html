@@ -41,11 +41,7 @@
 
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../../assets/img/sidebar-3.jpg">
-      <!--
-      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
-      Tip 2: you can also add an image using data-image tag
-  -->
       <div class="logo">
         <a href="../" class="simple-text logo-mini">
 			    <img src="../../assets/img/logo.png" style="width: 216px; height: auto;" alt=""></img>
@@ -101,7 +97,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Classes <span><i class="material-icons" style="color: gray;">chevron_right</i></span> Edit Class</a>
+            <a class="navbar-brand" href="javascript:;">Classes <span><i class="material-icons" style="color: gray;">chevron_right</i></span> <span id="titleClassName">View Class</span></a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -154,13 +150,9 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
                   <a class="dropdown-item" href="../edit-profile.html">Edit Profile</a>
-                  <a id="navPublicProfile" class="dropdown-item" href="#">My Public Profile</a>
 									<a class="display:block; dropdown-item" href="../about.html">About</a>
 									<div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
-									<div class="dropdown-divider"></div>
-									<a style="font-weight: 500 ;padding: 0.5em ;text-align: center; width: 200px; background-color: #428dd4 ;display: block; color: #fff;" href="https://golearn.com.my/pricing/" target="_blank" id="btnUpgradeToPro">Upgrade to Pro</a>
-
                 </div>
               </li>
             </ul>
@@ -750,8 +742,11 @@
         <div class="container" style="padding-right: 0; padding-left: 0;">
           <!-- Back button -->
           <div class="row" id="desciption-row" >
-            <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
+            <div class="col-md-12 d-flex flex-row">
+              <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
             <!-- <a href="" class="btn btn-primary btn-round" id="btnSave" data-toggle="modal" data-target="#saveModal"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</a> -->            
+
+            </div>
           </div>
           
           <div class="container overflow-hidden">
@@ -901,7 +896,7 @@
                               <textarea class="form-control" maxlength="255" rows="3" id="inClassDesc" data-compulsory="false" readonly></textarea>
                             </div>
             
-                            <div class="row" style="margin-top: 0.5rem;">
+                            <div class="row" style="margin-top: 0.5rem; display: none;" >
                               <div class="col-md-6">
                                   <!-- Education Level -->
                                 <div class="form-group">
@@ -938,7 +933,7 @@
                               <textarea class="form-control" maxlength="255" rows="3"  id="inVenue" data-compulsory="false" readonly></textarea>
                             </div>
             
-                            <div class="row" style="margin-top: 0.5rem;">
+                            <div class="row" style="margin-top: 0.5rem; display: none;">
                               <div class="col-md-6">
                                   <!-- State -->
                                 <div class="form-group">
@@ -1049,61 +1044,33 @@
                             <div class="container" id="students-container">
                               <!-- Student header -->
                               <div class="row lesson-header">
-                                <div class="col-md-11" >
+                                <div class="col-md-12" >
                                   <div class="row" >
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                       <p>Student Name</p>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-3">
                                       <p>Gender</p>
                                     </div>
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                       <p>Guardian Name</p>
                                     </div>
                                     <div class="col-md-2">
                                       <p>Guardian Phone</p>
-                                    </div>
-                                    <div class="col-md-1">
+                                    </div> -->
+                                    <div class="col-3">
                                       <p>Status</p>
                                     </div>
-                                    <div class="col-md-2">
+                                    <!-- <div class="col-md-2">
                                       <p>Date Joined</p>
-                                    </div>
+                                    </div> -->
                                   </div>
                                 </div>
-                                <div class="col-md-1">
+                                <!-- <div class="col-md-1">
                                   <p>Action</p> 
-                                </div>
+                                </div> -->
                               </div>
-                              <!-- Student List Start -->
-                              <!-- <div class="row lesson-wrapper">
-                                <div class="col-md-11" >
-                                  <div class="row" >
-                                    <div class="col-md-3">
-                                      <p class="lesson-item" style="margin-bottom: 0;">Student Name</p>
-                                    </div>
-                                    <div class="col-md-1">
-                                      <p class="lesson-item">Gender</p>
-                                    </div>
-                                    <div class="col-md-3">
-                                      <p class="lesson-item">Guardian</p>
-                                    </div>
-                                    <div class="col-md-2">
-                                      <p class="lesson-item">Contact No.</p>
-                                    </div>
-                                    <div class="col-md-1">
-                                      <p class="lesson-item card-student-status-label pending" >Pending</p>
-                                    </div>
-                                    <div class="col-md-2">
-                                      <p class="lesson-item">Date Joined</p>
-                                    </div>
-                                  </div>
-                                </div>
 
-                                <div class="col-md-1">
-                                  <a href="#" class="btn btn-sm btn-outline-danger btn-round" id="btnRemoveTimeSlot" data-toggle="modal" data-target="#delLessonModal" data-id="lessonId"><i class="material-icons" style="color: red;">remove</i></a>
-                                </div>
-                              </div> -->
                             </div>
                           </div>
 
@@ -1415,35 +1382,31 @@
 
   <div class="fixed-plugin">
     <div class="dropdown show-dropdown">
-      <a href="#" data-toggle="dropdown">
-				<i class="material-icons" style="font-size: 36px; padding: 0.2em; color: white;">apps</i>
+      <a href="javascript:;" data-toggle="dropdown">
+        <i class="material-icons" style="font-size: 36px; padding: 0.2em; color: white;">apps</i>
       </a>
       <ul class="dropdown-menu">
 		    <br>
-        <li class="header-title">Get More Tuition Jobs?</li>
-        <li class="button-container">
-          <a href="https://golearn.com.my/job/" target="_blank" class="btn btn-primary btn-block">Apply Now</a>
+		    <li class="button-container text-center">
+          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >CONTACT US</p>
+          <button id="twitter" style="background-color: #128C7E;" class="btn btn-round btn-facebook" onclick="location.href = 'https://api.whatsapp.com/send?phone=601115131661&text=Hello!%20I%27m%20looking%20for%20a%20tutor.';"><i class="fa fa-whatsapp"></i> &middot; Reply in 1 hour</button>
         </li>
-        
-        <li class="button-container">
-          <a href="https://golearn.com.my/" target="_blank" class="btn btn-default btn-block">
-            Visit our website
-          </a>
-        </li>
-       
-        <li class="header-title">Follow and Like Us!</li>
+        <br>
         <li class="button-container text-center">
-			    <button id="facebook" class="btn btn-round btn-facebook" onclick="window.open('https://www.facebook.com/FindTutorInMalaysia/', '_blank');"><i class="fa fa-facebook-f"></i> &middot; facebook</button>
-          <button id="twitter"  class="btn btn-round btn-twitter" onclick="window.open('https://twitter.com/golearnmalaysia', '_blank');"><i class="fa fa-twitter"></i> &middot; twitter</button>
-          <button id="instagram"  class="btn btn-round btn-twitter" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); " onclick="window.open('https://www.instagram.com/golearn.education/', '_blank');"><i class="fa fa-instagram"></i> &middot; instagram</button>
-          <br>
-          <br>
+          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >I want more subjects.</p>
+          <a href="https://golearn.com.my/request-a-tutor/" target="_blank" class="btn btn-primary btn-block">Request A Tutor Now</a>
         </li>
-        <li class="header-title">Found a problem? </li>
-        <li class="button-container">
-          <a href="https://golearn.com.my/submit-anything-to-us/" target="_blank" class="btn btn-warning btn-block">
-            Let us know
+        <li class="button-container text-center">
+          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >Check us out now.</p>
+          <a href="https://golearn.com.my/" target="_blank" class="btn btn-warning btn-block">
+            Visit GoLearn
           </a>
+        </li>
+        <li class="button-container text-center">
+          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >CONTACT US</p>
+			    <button id="facebook" class="btn btn-round btn-facebook" onclick="location.href = 'https://www.facebook.com/FindTutorInMalaysia/';"><i class="fa fa-facebook-f"></i> &middot; facebook</button>
+          <button id="twitter"  class="btn btn-round btn-twitter" onclick="location.href = 'https://twitter.com/golearnmalaysia';"><i class="fa fa-twitter"></i> &middot; twitter</button>
+          <br>
           <br>
         </li>
       </ul>
@@ -1482,27 +1445,9 @@
 
   <script>
     // Global Variables
-    var tutorId;
-    var current_name, current_email, current_phone, current_age, current_gender, current_imgUri, current_nric,
-      current_address1, current_address2, current_addressPostCode, current_addressState,
-      current_rating, current_ratingTimes, current_ratingFinal, current_profileStatus,
-      current_token, current_agent, current_accountStatus;
-    var currentYearsExperience, currentTutoringExperience, currentTutoringApproach, currentQualification, 
-      current_preferedAreaList, current_preferedSubjectList;
-    // Depreciated
-    // var current_chk_homeTutor, current_chk_privateTutor, current_chk_groupTutor, current_chk_onlineTutor;
-    var isModeHomeStudentToTutor, isModeHomeTutorToStudent, isModeGroup, isModeOnline, isModeOnlineGroup;
-    var isLanEng, isLanBm, isLanBc, isLanBt, isLanOther;
-    var current_chk_homeStudentToTutor, current_chk_homeTutorToStudent, current_chk_group, current_chk_online, current_chk_onlineGroup;
-    var current_mon_8am, current_mon_12pm, current_mon_3pm, current_mon_6pm, 
-      current_tue_8am, current_tue_12pm, current_tue_3pm, current_tue_6pm, 
-      current_wed_8am, current_wed_12pm, current_wed_3pm, current_wed_6pm, 
-      current_thu_8am, current_thu_12pm, current_thu_3pm, current_thu_6pm, 
-      current_fri_8am, current_fri_12pm, current_fri_3pm, current_fri_6pm,
-      current_sat_8am, current_sat_12pm, current_sat_3pm, current_sat_6pm, 
-      current_sun_8am, current_sun_12pm, current_sun_3pm, current_sun_6pm;
-    var current_aweburl, current_aPremiumSubjectLimit, current_aPremiumConnectLimit, current_aTotalSubjectLimit, 
-     current_aTotalConnectLimit, current_aPreferredSubjectLimit, current_aPreferredAreaLimit;
+    var userId;
+    var current_name, current_email, current_phone, current_imgUri, current_nric,
+      current_address1, current_address2, current_addressPostCode, current_addressState, current_address;
 
     var latestLessonDoc = null;// Store last document - Used for Lesson Load More btn
     var latestStuDoc = null;// Store last document - Used for Student Load More btn
@@ -1537,6 +1482,9 @@
     function updatePageContent(currentClassObj){
 
       //------ add-class.html specific -------------//
+      // Navbar
+      document.getElementById("titleClassName").textContent = currentClassObj[CLASS_NAME];
+
       // Lesson Panel
       document.getElementById("inClassAnnouncement").value = currentClassObj[CLASS_ANNOUNCEMENT];
 
@@ -1572,7 +1520,6 @@
         }
       }
 
-
       // Tutor Panel
       document.getElementById("inTutor1ImgUrl").src = currentClassObj[CLASS_TUTOR_IMG_URL_ARR][0];
       document.getElementById("inTutor1Name").value = currentClassObj[CLASS_TUTOR_NAME_ARR][0];
@@ -1592,17 +1539,6 @@
         document.getElementById("inTutor2Name").value = currentClassObj[CLASS_TUTOR_NAME_ARR][1];
         document.getElementById("inTutor2Phone").value = currentClassObj[CLASS_TUTOR_PHONE_ARR][1];
         document.getElementById("inTutor2Name").setAttribute("data-tutor2Id", currentClassObj[CLASS_TUTOR_ID_ARR][1]);
-      }
-
-      // Enable changes to Tutor 1
-      if (current_accountStatus === PREMIUM_ACCOUNT_2_STATUS_KEY || current_accountStatus === PREMIUM_ACCOUNT_3_STATUS_KEY){
-        // document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "modal");
-        // document.getElementById("btnAddTeacher1").setAttribute("style", "pointer-events: fill; background-color: #fff;");
-        // document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "modal");
-        // document.getElementById("btnAddTeacher2").setAttribute("style", "pointer-events: fill; background-color: #fff;");
-      }else {
-        // document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "");
-        // document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "");
       }
 
       // Fee Panel
@@ -1650,29 +1586,6 @@
     }
     stuLoadmore.addEventListener('click', stuLoadMoreHandleClick );
 
-    // Set the nav name and global var, if user already login and have session Storage 
-    var tutorInfoObj = null;
-    if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
-      // Do nothing
-    }
-    else{
-      // Set the nav user name
-      tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
-      document.getElementById("user").textContent = tutorInfoObj.name;
-
-      current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
-      // current_email, 
-      current_phone = tutorInfoObj.phone;
-      current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
-      current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
-      current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
-      current_accountStatus = tutorInfoObj.accountStatus; // bool
-      current_aweburl = tutorInfoObj.aWebUrl
-
-      // updatePageView(current_accountStatus);
-
-    }
-
 		firebase.auth().onAuthStateChanged(function(user){
       
 			if(!user){
@@ -1681,11 +1594,11 @@
 			}else{
         // if the displayName is null, it means user register using Phone
         if (firebase.auth().currentUser.displayName == null ){
-            tutorId = firebase.auth().currentUser.phoneNumber;
+            userId = firebase.auth().currentUser.phoneNumber;
         }else
-            tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+            userId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
 
-        loadUserInfo(tutorId);
+        loadUserInfo(userId);
 
 			}
 		});
@@ -1711,160 +1624,194 @@
     }
     tutorAdminLoadmore.addEventListener('click', tutorAdminLoadMoreHandleClick );
 
-    // Tutor Specific
-    function loadUserInfo(tutorId){
-      // Tutor Id must be a phone with +60, no spacing or other chars
-      var docRef = db.collection("Tutor").doc(tutorId);
+    // // Tutor Specific
+    // function loadUserInfo(userId){
+    //   // Tutor Id must be a phone with +60, no spacing or other chars
+    //   var docRef = db.collection("User").doc(userId);
 
+    //   // docRef.get().then((doc) => {
+    //   docRef.onSnapshot((doc) => {
+
+    //     if (doc.exists) {
+    //       // console.log("Document data:", doc.data());
+
+    //       current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
+    //       // current_email, 
+    //       current_phone = doc.data().phone;
+    //       current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
+    //       current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
+    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
+    //       current_accountStatus = doc.data().accountStatus; 
+    //       currentYearsExperience = doc.data().yearsExperience; // number
+    //       currentTutoringExperience = doc.data().tutoringExperience;
+    //       currentTutoringApproach = doc.data().tutoringApproach;
+    //       currentQualification= doc.data().qualification;
+         
+    //       // Store data to sessionStorage
+    //       var tutorDataObj = {
+    //         [NAME_KEY] : doc.data().name,
+    //         [EMAIL_KEY] : doc.data().email,
+    //         [PHONE_KEY] : doc.data().phone,
+    //         [AGE_KEY] : doc.data().age,
+    //         [GENDER_KEY] : doc.data().gender,
+    //         [ADDRESS_1_KEY] :doc.data().address1,
+    //         [ADDRESS_2_KEY] :doc.data().address2,
+    //         [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
+    //         [ADDRESS_STATE_KEY] :doc.data().addressState,
+    //         [IMAGE_KEY] : doc.data().imgUrl,
+    //         // [NRIC_KEY] : doc.data().name,
+    //         [RATING_KEY] : doc.data().rating,
+    //         [RATING_TIMES_KEY] : doc.data().ratingTimes,
+    //         [RATING_FINAL_KEY] : doc.data().ratingFinal,
+    //         [PROFILE_STATUS_KEY] : doc.data().profileStatus,
+    //         // [CHECK_HOMETUTOR_KEY] : doc.data().name,
+    //         // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
+    //         // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
+    //         // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
+    //         [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
+    //         [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
+    //         [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
+    //         [QUALIFICATION_KEY] : doc.data().qualification,
+    //         [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
+    //         [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
+    //         [AGENT_KEY] : doc.data().agent,
+    //         [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
+            
+    //         [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
+    //         [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
+    //         [CHECK_GROUP_KEY] : doc.data().modeGroup,
+    //         [CHECK_ONLINE_KEY] : doc.data().modeOnline,
+    //         [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
+    //         [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
+    //         [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
+    //         [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
+    //         [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
+    //         [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
+    //         [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
+    //         [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
+    //         [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
+    //         [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
+    //         [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
+    //         [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
+    //         [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
+    //         [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
+    //         [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
+    //         [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
+    //         [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
+    //         [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
+    //         [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
+    //         [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
+    //         [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
+    //         [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
+    //         [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
+    //         [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
+    //         [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
+    //         [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
+    //         [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
+    //         [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
+    //         [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
+    //         [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
+    //         [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
+    //         [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
+    //         [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
+    //         [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
+    //         // Create a placeholder for aWebUrl. This param can only initiated by admin
+    //         // manually through https://golearn.com.my/admin/admin-portal.html
+    //         [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
+    //         [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
+    //         [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
+    //         [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
+    //         [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
+    //         [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
+    //         [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
+    //       }
+
+    //       // Set tutorInfoObj as sessionStorage
+    //       sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
+
+    //       // Set the nav user name and public profile link
+    //       document.getElementById("user").textContent = doc.data().name;
+
+    //       if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
+    //         document.getElementById("navPublicProfile").href = "#"  ;
+    //         document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
+    //       } else{
+    //         document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
+    //         document.getElementById("navPublicProfile").target = "_blank";
+    //       }
+          
+    //       if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
+    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
+    //         document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
+    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
+    //         document.getElementById("btnActivateAccount").target = "_blank";
+    //       }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
+    //         document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
+    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
+    //         document.getElementById("btnActivateAccount").target = "_blank";
+    //       }else {
+    //         let activationNavItem = document.querySelector('#activationNavItem');
+    //         let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
+    //         // Remove NavItem if exist
+    //         if (activationNavItemIsExist){
+    //           activationNavItem.parentNode.removeChild(activationNavItem);
+    //         }else{
+    //           // Do nothing
+    //         }
+    //       }
+
+    //     } else {
+    //         // Do nothing
+    //     }
+    //   });
+
+    // };
+
+    // User Specific
+    function loadUserInfo(userId){
+      // Tutor Id must be a phone with +60, no spacing or other chars
+      var docRef = db.collection("Users").doc(userId);
+      
       // docRef.get().then((doc) => {
       docRef.onSnapshot((doc) => {
-
         if (doc.exists) {
           // console.log("Document data:", doc.data());
+          current_name = (doc.data().name == null || doc.data().name == "")? "New User" : doc.data().name;
+          current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email;
+          current_phone = (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone; 
+          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/empty-photo.png" : doc.data().imgUrl;
+          current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
+          current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
+          current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
+          current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
+          current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
 
-          current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
-          // current_email, 
-          current_phone = doc.data().phone;
-          current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
-          current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
-          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
-          current_accountStatus = doc.data().accountStatus; 
-          currentYearsExperience = doc.data().yearsExperience; // number
-          currentTutoringExperience = doc.data().tutoringExperience;
-          currentTutoringApproach = doc.data().tutoringApproach;
-          currentQualification= doc.data().qualification;
-         
           // Store data to sessionStorage
-          var tutorDataObj = {
-            [NAME_KEY] : doc.data().name,
-            [EMAIL_KEY] : doc.data().email,
-            [PHONE_KEY] : doc.data().phone,
-            [AGE_KEY] : doc.data().age,
-            [GENDER_KEY] : doc.data().gender,
-            [ADDRESS_1_KEY] :doc.data().address1,
-            [ADDRESS_2_KEY] :doc.data().address2,
-            [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
-            [ADDRESS_STATE_KEY] :doc.data().addressState,
-            [IMAGE_KEY] : doc.data().imgUrl,
-            // [NRIC_KEY] : doc.data().name,
-            [RATING_KEY] : doc.data().rating,
-            [RATING_TIMES_KEY] : doc.data().ratingTimes,
-            [RATING_FINAL_KEY] : doc.data().ratingFinal,
-            [PROFILE_STATUS_KEY] : doc.data().profileStatus,
-            // [CHECK_HOMETUTOR_KEY] : doc.data().name,
-            // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
-            // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
-            // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
-            [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
-            [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
-            [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
-            [QUALIFICATION_KEY] : doc.data().qualification,
-            [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
-            [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
-            [AGENT_KEY] : doc.data().agent,
-            [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
-            
-            [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
-            [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
-            [CHECK_GROUP_KEY] : doc.data().modeGroup,
-            [CHECK_ONLINE_KEY] : doc.data().modeOnline,
-            [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
-            [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
-            [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
-            [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
-            [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
-            [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
-            [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
-            [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
-            [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
-            [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
-            [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
-            [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
-            [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
-            [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
-            [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
-            [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
-            [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
-            [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
-            [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
-            [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
-            [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
-            [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
-            [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
-            [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
-            [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
-            [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
-            [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
-            [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
-            [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
-            [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
-            [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
-            [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
-            [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
-            [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
-            // Create a placeholder for aWebUrl. This param can only initiated by admin
-            // manually through https://golearn.com.my/admin/admin-portal.html
-            [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
-            [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
-            [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
-            [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
-            [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
-            [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
-            [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
-          }
+          // var tutorDataObj = {
+          //   [NAME_KEY] : doc.data().name,
+          //   [EMAIL_KEY] : doc.data().email,
+          //   [PHONE_KEY] : doc.data().phone,
+          //   [ADDRESS_1_KEY] :doc.data().address1,
+          //   [ADDRESS_2_KEY] :doc.data().address2,
+          //   [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
+          //   [ADDRESS_STATE_KEY] :doc.data().addressState,
+          //   [IMAGE_KEY] : doc.data().imgUrl,
+          //   [PROFILE_STATUS_KEY] : doc.data().profileStatus,
+          // }
 
           // Set tutorInfoObj as sessionStorage
-          sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
+          // sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
 
           // Set the nav user name and public profile link
           document.getElementById("user").textContent = doc.data().name;
-
-          if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
-            document.getElementById("navPublicProfile").href = "#"  ;
-            document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
-          } else{
-            document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
-            document.getElementById("navPublicProfile").target = "_blank";
-          }
+        } 
+        else {
+          console.log("No user! Redirecting to login");
+          window.location = "login.html"
           
-          if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-            document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
-            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
-            document.getElementById("btnActivateAccount").target = "_blank";
-          }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-            document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
-            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
-            document.getElementById("btnActivateAccount").target = "_blank";
-          }else {
-            let activationNavItem = document.querySelector('#activationNavItem');
-            let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
-            // Remove NavItem if exist
-            if (activationNavItemIsExist){
-              activationNavItem.parentNode.removeChild(activationNavItem);
-            }else{
-              // Do nothing
-            }
-          }
-
-          // Enable add other teacher based on Account Status
-          // Enable changes to Tutor 1
-          if (current_accountStatus === PREMIUM_ACCOUNT_2_STATUS_KEY || current_accountStatus === PREMIUM_ACCOUNT_3_STATUS_KEY){
-            // document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "modal");
-            // document.getElementById("btnAddTeacher1").setAttribute("style", "pointer-events: fill; background-color: #fff;");
-            // document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "modal");
-            // document.getElementById("btnAddTeacher2").setAttribute("style", "pointer-events: fill; background-color: #fff;");
-          }else {
-            // document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "");
-            // document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "");
-          }
-
-        } else {
-            
         }
       });
-
     };
 
 
@@ -1919,7 +1866,7 @@
         [CLASS_TIMESLOT_START_ARR]: startTimeArr,
         [CLASS_TIMESLOT_END_ARR]: endTimeArr,
         // IDs
-        [CLASS_ADMIN_ID]: tutorId,
+        [CLASS_ADMIN_ID]: userId,
         [CLASS_TUTOR_ID_ARR]: [tutor1_id, tutor2_id],
         [CLASS_TUTOR_NAME_ARR]: [document.getElementById("inTutor1Name").value, document.getElementById("inTutor2Name").value],
         [CLASS_TUTOR_PHONE_ARR]: [document.getElementById("inTutor1Phone").value, document.getElementById("inTutor2Phone").value],
@@ -2321,29 +2268,6 @@
 
     }
 
-    // Load all Class Info UNUSED
-    function loadAllClassInfo(tutorId){
-      // Tutor Id must be a phone with +60, no spacing or other chars
-      var docRef = db.collection("Class")
-          .doc("v1")
-          .collection("Class")
-          .where("adminId", "==", tutorId);
-      docRef
-      .get()
-      .then((querySnapshot) => {
-
-        // Session Storage data
-        let docsObj = [];
-
-        querySnapshot.forEach((doc) => {
-          console.log(doc.data().id);
-          
-        });
-      });
-
-    };
-
-
     // Load Lesson Details
     function LoadLessonInfo(){
       let today = new Date();
@@ -2360,21 +2284,15 @@
       docRef
       .get()
       .then((querySnapshot) => {
-        console.log('Total Lessons Found: '+querySnapshot.docs.length)
+        // console.log('Total Lessons Found: '+querySnapshot.docs.length)
         querySnapshot.forEach((doc) => {
-          console.log(doc.data());
-          // latestLessonDoc = doc.data()[LESSON_DATE];
-          // console.log(latestLessonDoc);
+          // console.log(doc.data());
+          addLesson(type='LOAD', doc, '');
 
-          // Due to limitation, Do a secondary filter at client side based on the status.
-          // if (doc.data()[LESSON_STATUS])
-            addLesson(type='LOAD', doc, '');
-
-          
         });
 
         latestLessonDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
-        console.log(querySnapshot.docs.length)
+        // console.log(querySnapshot.docs.length)
         // Handle Lesson Load more btn
         if (querySnapshot.empty){
           lessonLoadmore.removeEventListener('click', lessonLoadMoreHandleClick );
@@ -2560,7 +2478,7 @@
       docRef
       .get()
       .then((querySnapshot) => {
-        console.log('Total Students Found: '+querySnapshot.docs.length)
+        // console.log('Total Students Found: '+querySnapshot.docs.length)
         querySnapshot.forEach((doc) => {
           allClassStuDoc.push(doc.data());
           // console.log(doc.data().stuName);
@@ -2568,8 +2486,8 @@
         });
  
         latestStuDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
-        console.log("allClassStuDoc")
-        console.log(allClassStuDoc)
+        // console.log("allClassStuDoc")
+        // console.log(allClassStuDoc)
         // Handle Lesson Load more btn
         if (querySnapshot.empty){
           stuLoadmore.removeEventListener('click', stuLoadMoreHandleClick );
@@ -2595,14 +2513,14 @@
       stuName_p.className = "student-item";
       stuName_p.textContent = doc.data()[CLASS_STUDENT_STU_NAME];
       let stuName_div = document.createElement('div');
-      stuName_div.className = "col-md-3";
+      stuName_div.className = "col-md-4";
       stuName_div.appendChild(stuName_p);
 
       let stuGender_p = document.createElement('p');
       stuGender_p.className = "student-item";
       stuGender_p.textContent = (doc.data()[CLASS_STUDENT_STU_GENDER] === 0) ? 'Male' : 'Female';
       let stuGender_div = document.createElement('div');
-      stuGender_div.className = "col-md-1";
+      stuGender_div.className = "col-3";
       stuGender_div.appendChild(stuGender_p);
 
       let gurName_p = document.createElement('p');
@@ -2628,7 +2546,8 @@
         status_p.className = "student-item card-student-status-label active";
       }
       let status_div = document.createElement('div');
-      status_div.className = "col-md-1";
+      status_div.className = "col-3";
+      status_div.setAttribute('style','margin-bottom: 0.5rem;')
       status_div.appendChild(status_p);
 
       let dateJoined_p = document.createElement('p');
@@ -2660,14 +2579,14 @@
       stuDetail_div.className = 'row';
       stuDetail_div.appendChild(stuName_div);
       stuDetail_div.appendChild(stuGender_div);
-      stuDetail_div.appendChild(gurName_div);
-      stuDetail_div.appendChild(gurPhone_div);
+      // stuDetail_div.appendChild(gurName_div);
+      // stuDetail_div.appendChild(gurPhone_div);
       stuDetail_div.appendChild(status_div);
-      stuDetail_div.appendChild(dateJoined_div);
+      // stuDetail_div.appendChild(dateJoined_div);
       let stuDetailTop_div = document.createElement('div');
-      stuDetailTop_div.className = 'col-md-11 lesson-active';
-      stuDetailTop_div.setAttribute('data-toggle', 'modal');
-      stuDetailTop_div.setAttribute('data-target', '#editStudentModal');
+      stuDetailTop_div.className = 'col-md-12 lesson-active';
+      // stuDetailTop_div.setAttribute('data-toggle', 'modal');
+      // stuDetailTop_div.setAttribute('data-target', '#editStudentModal');
       stuDetailTop_div.setAttribute('data-id', doc.data()[CLASS_STUDENT_ID]);
       stuDetailTop_div.setAttribute('data-stuname', doc.data()[CLASS_STUDENT_STU_NAME]);
       stuDetailTop_div.setAttribute('data-enrollmentstatus', doc.data()[CLASS_STUDENT_ENROLLMENT_STATUS]);
@@ -2676,7 +2595,7 @@
       let stuTop_div = document.createElement('div');
       stuTop_div.className = 'row student-wrapper';
       stuTop_div.appendChild(stuDetailTop_div);
-      stuTop_div.appendChild(del_div);
+      // stuTop_div.appendChild(del_div);
 
       const students_container = document.getElementById("students-container");
       students_container.appendChild(stuTop_div)

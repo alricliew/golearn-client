@@ -164,7 +164,7 @@
               </div>
               
 
-              <form class="form" method="" action="">
+              <!-- <form class="form" method="" action=""> -->
                 <div class="card-body">
                   <div class="form-group">
                     <div class="input-group">
@@ -193,7 +193,7 @@
 
                 </div>
 
-              </form>
+              <!-- </form> -->
 
               <div class="social">
 
@@ -203,7 +203,7 @@
                   <p>Enter the 6-digit verification code from your SMS.</p>
               </div>
 
-              <form class="form" method="" action="">
+              <!-- <form class="form" method="" action=""> -->
                 <div class="card-body">
                   <div class="form-group">
                     <div class="input-group">
@@ -236,7 +236,7 @@
                 <!-- <div class="modal-footer justify-content-center">
                   <a href="#pablo" class="btn btn-primary btn-round">Confirm</a>
                 </div> -->
-              </form>
+              <!-- </form> -->
 
 
             </div>
@@ -264,13 +264,8 @@
               </button>
             </div>
           </div> -->
-
-
-
-
-
 		  </div>
-      </div>
+    </div>
 
 	  <footer class="footer">
 		<div class="container-fluid">
@@ -396,12 +391,12 @@
       //Disable the step 1 button
       document.getElementById("btnVerify").setAttribute("style", "background-color: #c1c1c1");
       document.getElementById("btnVerify").style.cursor='not-allowed';
-      document.getElementById("btnVerify").disabled = true;
+      // document.getElementById("btnVerify").disabled = true;
 
       //Disable the step 2 button
       document.getElementById("btnLogin").setAttribute("style", "background-color: #c1c1c1");
       document.getElementById("btnLogin").style.cursor='not-allowed';
-      document.getElementById("btnLogin").disabled = true;
+      // document.getElementById("btnLogin").disabled = true;
 
         
       // var docRef = db.collection("Tutor").doc("+60123456789");
@@ -421,10 +416,10 @@
 
       $('#btnVerify').on('click', function(){
         phoneAuth();
-        document.getElementById("btnVerify").setAttribute("style", "background-color: #c1c1c1");
-        document.getElementById("btnVerify").disabled = true;
-        document.getElementById("phone").setAttribute("style", "background-color: #c1c1c1");
-        document.getElementById("phone").disabled = true;
+        document.getElementById("btnVerify").setAttribute("style", "background-color: #c1c1c1; pointer-event: none;");
+        // document.getElementById("btnVerify").disabled = true;
+        document.getElementById("phone").setAttribute("style", "background-color: #c1c1c1; pointer-event: none");
+        // document.getElementById("phone").disabled = true;
       });
 
 

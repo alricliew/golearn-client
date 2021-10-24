@@ -7,12 +7,14 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <!-- Fonts and icons -->
+  <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous"> -->
   <!-- Material Kit CSS -->
   <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
+  <!-- <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
+  <link href="../css/tutor-portal.css" rel="stylesheet" />
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
@@ -20,20 +22,27 @@
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
   <script src="../js/firebase.js"></script>
-  <!-- Tutor Portal specific CSS -->
-  <link href="../css/tutor-portal.css" rel="stylesheet" />
+  <link href="../../assets/css/multistepform.css" rel="stylesheet" />
+  <link href="../../assets/css/multitabform.css" rel="stylesheet" />
+  <link href="../../assets/css/mc-calendar.min.css" rel="stylesheet"/>
+  <link href="../../assets/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
 
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-3.jpg">
+      <!--
+      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+      Tip 2: you can also add an image using data-image tag
+  -->
       <div class="logo">
-        <a href="../" class="simple-text logo-mini">
+        <a href="#" class="simple-text logo-mini">
 			<img src="../source/logo.png" style="width: 216px; height: auto;" alt=""></img>
           
         </a>
-        <a href="../" class="simple-text logo-normal">
+        <a href="#" class="simple-text logo-normal">
          Welcome!
         </a>
       </div>
@@ -45,18 +54,24 @@
               <p>Class</p>
             </a>
           </li>
-		  		<li class="nav-item">
-            <a class="nav-link" href="../student/">
+		  		<li class="nav-item active">
+            <a class="nav-link" href="./">
               <i class="material-icons">work_outline</i>
               <p>Students</p>
             </a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="./">
+          <li class="nav-item ">
+            <a class="nav-link" href="../teacher/">
               <i class="material-icons">format_list_bulleted</i>
               <p>Teachers</p>
             </a>
           </li>
+          <!-- <li class="nav-item active">
+            <a class="nav-link" href="./update.html">
+              <i class="material-icons">note_alt</i>
+              <p>Update Information</p>
+            </a>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -65,7 +80,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Teachers</a>
+            <a class="navbar-brand" href="javascript:;">Student</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -134,36 +149,25 @@
       <!-- End Navbar -->
 
 			<!-- Modal Start -->
-      
-      <!-- Add Tutor modal -->
+
+      <!-- Delete Student modal -->
       <div class="row">
-        <div class="modal fade" id="addTutorModal" tabindex="-1" role="dialog" aria-labelledby="addTutorModalLabel" aria-hidden="true">
+        <div class="modal fade" id="delStuModal" tabindex="-1" role="dialog" aria-labelledby="delStuModalLabel" aria-hidden="true">
           <div class="modal-dialog  modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="addTutorModalLabel">Invite New Teacher</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnAddTutorModalClose1">
+                <h5 class="modal-title" id="delStuModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnDelStuModalClose1">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body" id="addTutorModalBody">
-
-                <div class="form-group" style="margin-top: 0rem;">
-                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">New Teacher Registration Link</span> 
-                  <div class="input-group">
-                    <span class="d-flex align-items-center input-group-addon" style="margin-right: 0.5em; cursor: pointer;" onclick="copyText('inAutoJoinLink')">
-                      <span class="material-icons">
-                        content_copy
-                      </span>
-                    </span>
-                    <input type="text" value='' class="form-control" style="background-color: #f5f5f5; pointer-events: none;" id="inAutoJoinLink">
-                  </div>
-                </div>
-
+              <div class="modal-body" id="delStuModalBody">
+                <div id="delStuId" value=""></div>
+                Are you sure you want to continue?
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnAddTutorModalClose2">Not Now</button>
-                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddTutorModalUpdate"></button> -->
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnDelStuModalClose2">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnDelStuModalUpdate">Confirm</button>
               </div>
             </div>
           </div>
@@ -173,7 +177,7 @@
       <!-- Activation modal -->
       <div class="row">
         <div class="modal fade" id="activationModal" tabindex="-1" role="dialog" aria-labelledby="activationModalLabel" aria-hidden="true">
-          <div class="modal-dialog  modal-dialog-centered" role="document">
+          <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="activationModalLabel">New message</h5>
@@ -192,10 +196,10 @@
         </div>
       </div>
 			
-      <!-- Sign Out modal -->
+      <!-- Sign-out modal -->
       <div class="row">
         <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="signOutModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="signOutLabel">Logging Out</h5>
@@ -215,136 +219,112 @@
         </div>
       </div>
 
-      <!-- View Tutor Modal -->
-       <div class="row">
-        <div class="modal fade" id="viewTutorModal" tabindex="-1" role="dialog" aria-labelledby="viewTutorModalLabel" aria-hidden="true">
-          <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="viewTutorModalLabel">Tutor Profile</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-4 text-center">
-                    <div style="height: 140px;width: 140px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
-                      <img id="viewTutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/test.jpg"/>
-                    </div>
 
-                  </div>
-
-                  <div class="col-md-8">
-                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Name</span> 
-                    <input id="viewTutorName"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-
-                    <div class="row">
-                      <div class="col-md-6">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Phone</span> 
-                        <input id="viewTutorPhone"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-    
-                      </div>
-                      <div class="col-md-6">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Email</span> 
-                        <input id="viewTutorEmail"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-    
-                      </div>
-                    </div>
-
-   
-                    <div class="row">
-                      <div class="col-md-6">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Gender</span> 
-                        <div class="form-group">
-                          <div class="form-check form-check-radio form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioMale" value="optionActive" data-compulsory="false" disabled>
-                              Male
-                              <span class="circle">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                          <div class="form-check form-check-radio form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioFemale" value="optionInactive" data-compulsory="false" disabled>
-                              Female
-                              <span class="circle">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Age</span> 
-                        <input id="viewTutorAge"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-    
-                      </div>
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-              <div class="modal-footer">
-                <a type="button" class="btn btn-primary" href="#" id="btnViewTutorModalFullProfile" disabled>View Full Profile</a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnViewTutorModalUpdate">Update</button> -->
-              </div>
+      <div class="content">
+        <div class="container-fluid">
+          <!-- Main content -->
+          <div class="row" id="desciption-row" >
+            <!-- Update button -->
+            <div class="d-flex flex-row">
+              <a href="./add-student.html" class="btn btn-primary btn-round" id="btnAddClass" style="background-color: #2e74b6;">Add Student <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
             </div>
           </div>
         </div>
-      </div>
+        <div class="container-fluid" >
 
-      <!-- Main content -->
-      <div class="content">
-        <div class="container-fluid">
-          <!-- your content here -->
+          <div class="row" id="card-all-students">
 
-          <!-- Main content -->
-          <div class="row" id="desciption-row" >
-            <!-- button -->
-            <div class="d-flex flex-row">
-              <a href="#" class="btn btn-primary btn-round" style="background-color: #2e74b6;" data-target="#addTutorModal" data-toggle="modal">Add Teacher <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-6 ">
-              <!-- <a class="d-flex justify-content-end" href="javascript:;" id="btnUpdate" style="margin-top: 1rem;" >About Premium Subjects</a> -->
-            </div>
-          </div>
-
-          <!-- All Class -->
-          <div class="row" id="card-all-tutor">
-            <!-- <div class="col-lg-2 col-md-3 col-6">
-              <div class="card-tutor text-center ">
-                <div style="height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
-                  <img id="tutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/test.jpg"/>
+            <div class="col-md-12 card-student">
+              <div class="row" >
+                <div class="col-md-11" style="padding: 0;">
+                  <div class="row" style="margin: 0;">
+                    <div class="col-md-3">
+                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Student Name</h6>
+                    </div>
+                    <div class="col-md-1">
+                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Gender</h6>
+                    </div>
+                    <div class="col-md-3">
+                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Guardian</h6>
+                    </div>
+                    <div class="col-md-2">
+                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Contact No.</h6>
+                    </div>
+                    <div class="col-md-1">
+                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Status</h6>
+                    </div>
+                    <div class="col-md-2">
+                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Date Added</h6>
+                    </div>
+                  </div>
                 </div>
-                <div style="margin-top:1rem">
-                  <h4 id="className">Alric Liew </h4>
+                <div class="col-md-1">
+                  <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Action</h6>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Student List Start -->
+            <!-- <div class="col-md-12 card-student-item">
+              <div class="row">
+                <div class="col-md-11" style="padding: 0;">
+                  <div class="row" style="margin: 0;">
+                    <div class="col-md-3">
+                      <p>Alric Liew</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Male</p>
+                    </div>
+                    <div class="col-md-3">
+                      <p >A Bong</p>
+                    </div>
+                    <div class="col-md-2">
+                      <p>+60138252818</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p class="card-student-status-label active">ACTIVE</p>
+                    </div>
+                    <div class="col-md-2">
+                      <p>12/2/2021</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <a href="#" style="margin: 0; padding: 0.3em;" class="btn btn-sm btn-outline-danger btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" ><i class="material-icons" style="color: red;">remove</i></a>
                 </div>
               </div>
             </div> -->
+    
           </div>
-        </div>
 
-        <footer class="footer">
-          <div class="container-fluid">
-            <nav class="float-left">
-            <ul>
-              <!-- <li>
-              <a href="https://golearn.com.my/join-us" target="_blank">
-                Visit GoLearn Tutor
-              </a>
-              </li> -->
-            </ul>
-            </nav>
-          </div>
-        </footer>
+        </div>
       </div>
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav class="float-left">
+          <ul>
+            <!-- <li>
+            <a href="https://golearn.com.my/join-us" target="_blank">
+              Visit GoLearn Tutor
+            </a>
+            </li> -->
+          </ul>
+          </nav>
+          <!-- <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script> 
+            , made with <i class="material-icons">favorite</i> by <a href="#" >GoLearn Team</a>
+          </div> -->
+          <!-- your footer here -->
+        </div>
+      </footer>
     </div>
+	  
+  </div>
+
 
   <div class="fixed-plugin">
     <div class="dropdown show-dropdown">
@@ -429,7 +409,14 @@
   <script src="../../assets/js/common.js" type="text/javascript"></script>
   <!-- Core Tutor Js -->
   <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
-	<script>
+  <!-- Datepicker -->
+  <script src="../../assets/js/mc-calendar.min.js" type="text/javascript"></script>
+  <!-- ClockPicker -->
+  <script type="text/javascript" src="../../assets/js/bootstrap-clockpicker.min.js"></script>
+  <script src="../../assets/js/star-rating.js" type="text/javascript"></script>
+  <script src="../../assets/js/star-rating-theme.js" type="text/javascript"></script>
+  
+  <script>
     // Global Variables
     var tutorId;
     var current_name, current_email, current_phone, current_age, current_gender, current_imgUri, current_nric,
@@ -453,8 +440,6 @@
     var current_aweburl, current_aPremiumSubjectLimit, current_aPremiumConnectLimit, current_aTotalSubjectLimit, 
      current_aTotalConnectLimit, current_aPreferredSubjectLimit, current_aPreferredAreaLimit;
      
-    // Course-specific var
-    var allCourseSize;
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
@@ -462,8 +447,7 @@
     var tutorInfoObj = null;
     if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
       // Do nothing
-    }
-    else{
+    }else{
       // Set the nav user name
       tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
       document.getElementById("user").textContent = tutorInfoObj.name;
@@ -475,14 +459,7 @@
       current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
       current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
       current_accountStatus = tutorInfoObj.accountStatus; // bool
-      currentYearsExperience = tutorInfoObj.yearsExperience; // number
-      currentTutoringExperience = tutorInfoObj.tutoringExperience;
-      currentTutoringApproach = tutorInfoObj.tutoringApproach;
-      currentQualification= tutorInfoObj.qualification;
-      
       current_aweburl = tutorInfoObj.aWebUrl
-
-      // updatePageView(current_accountStatus);
     }
 
 		firebase.auth().onAuthStateChanged(function(user){
@@ -494,18 +471,14 @@
         // if the displayName is null, it means user register using Phone
         if (firebase.auth().currentUser.displayName == null ){
             tutorId = firebase.auth().currentUser.phoneNumber;
-        }else{
-          tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-        }
-        loadUserInfo(tutorId)
-        loadAllTutorInfo()
-          
-        // Update Add Teacher Registration Link
-        let uriAdminId = encodeURIComponent(tutorId);
-        document.getElementById("inAutoJoinLink").value = 'https://app.golearn.com.my/tutor-portal/tutor-registration.html?aid='+uriAdminId;
+        }else
+            tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
 
+        loadUserInfo(tutorId);
+        loadAllStudentInfo(tutorId);
 			}
 		});
+
 
     // Tutor Specific
     function loadUserInfo(tutorId){
@@ -674,23 +647,28 @@
               // Do nothing
             }
           }
+
+
+          //------ update.html specific Start -------------//
+          //------ update.html specific End -------------//
+
+
         } else {
-           // Do nothing 
+            
         }
       });
 
     };
 
-
     // Tutor Specific
-    function loadAllTutorInfo(){
-      let docRef = db.collection("Class")
+    function loadAllStudentInfo(tutorId){
+      // Tutor Id must be a phone with +60, no spacing or other chars
+      var docRef = db.collection("Class")
           .doc("v1")
-          .collection("Tutor")
+          .collection("Student")
           .where("adminId", "==", tutorId)
           .where("statusAdmin", "==", true);
       
-
       docRef
       .get()
       .then((querySnapshot) => {
@@ -699,122 +677,137 @@
         let docsObj = [];
 
         querySnapshot.forEach((doc) => {
-
+          // console.log(doc.data())
           docsObj.push(doc.data());
           // courseId = doc.id;
-          console.log(doc.data())
-          renderAllActiveTutor(doc);
+          renderAllActiveClasses(doc, false)
 
         });
 
         // Store all docs data to sessionStorage
-        sessionStorage.setItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY, JSON.stringify(docsObj));
-        sessionStorage.setItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY, null);
- 
+        sessionStorage.setItem(SESSION_STORAGE_STUDENT_ALL_DOCS_KEY, JSON.stringify(docsObj));
+        sessionStorage.setItem(SESSION_STORAGE_STUDENT_CURRENT_DOC_KEY, null);
       });
 
     };
 
-    function renderAllActiveTutor(doc){
-      // <div class="col-lg-2 col-md-3 col-6">
-      //   <div class="card-tutor text-center" >
-          // <div style="height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
-          //   <img id="tutorImgUrl" style="height: 100% ;width: 100%; object-fit: cover;" src="../../assets/img/sidebar-1.jpg"/>
-          // </div>
-      //     <div style="margin-top:1rem">
-      //       <h4 id="className">Alric Liew </h4>
-      //     </div>
-      //   </div>
-      // </div>
-
-      let img = document.createElement('img');
-      img.setAttribute('style', 'height: 100%; width: 100%; object-fit: cover;');
-      img.setAttribute('src', doc.data()[TUTOR_TUTOR_IMG_URL]);
-      let img_div = document.createElement('div');
-      img_div.setAttribute('style', 'height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;')
-      img_div.appendChild(img)
-
-      let name_h4 = document.createElement('h4');
-      name_h4.textContent = doc.data()[TUTOR_TUTOR_NAME];
-      let name_div = document.createElement('div');
-      name_div.setAttribute('style', 'margin-top:1rem;');
-      name_div.appendChild(name_h4);
-      
-      let tutor_div = document.createElement('div');
-      tutor_div.className = "card-tutor text-center";
-      tutor_div.appendChild(img_div);
-      tutor_div.appendChild(name_div);
-
-      let tutor_card_div = document.createElement('div');
-      tutor_card_div.className = 'col-lg-2 col-md-3 col-6';
-      tutor_card_div.setAttribute('onclick', 'viewTutorFunction(this)');
-      tutor_card_div.setAttribute('data-target', '#viewTutorModal');
-      tutor_card_div.setAttribute('data-toggle', 'modal');
-      tutor_card_div.setAttribute('data-id', doc.data()[TUTOR_ID]);
-      tutor_card_div.appendChild(tutor_div)
-        
-      const card_all_tutor = document.getElementById("card-all-tutor");
-      card_all_tutor.appendChild(tutor_card_div);
-    }
-
-	  function viewTutorFunction(elem){
-      // Get attribute and 
-      if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY)) == null ){
-        console.log("Error: Impossible to reach this state");
-        // Because this func only trigger when there's active class loaded
-        return;
+    
+    function renderAllActiveClasses(doc, renderNull){
+    // <div class="col-md-12 card-student-item">
+    //   <div class="row">
+    //     <div class="col-md-3">
+    //       <p>Alric Liew</p>
+    //     </div>
+    //     <div class="col-md-1">
+    //       <p>Male</p>
+    //     </div>
+    //     <div class="col-md-2">
+    //       <p >A Bong</p>
+    //     </div>
+    //     <div class="col-md-2">
+    //       <p>+60138252818</p>
+    //     </div>
+    //     <div class="col-md-1">
+    //       <p>ACTIVE</p>
+    //     </div>
+    //     <div class="col-md-2">
+    //       <p>12/2/2021</p>
+    //     </div>
+    //     <div class="col-md-1">
+    //       <a href="#" style="margin: 0; padding: 0.3em;" class="btn btn-sm btn-outline-danger btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" ><i class="material-icons" style="color: red;">remove</i></a>
+    //     </div>
+    //   </div>
+    // </div>
+      // Reference: https://codepen.io/Corsurath/pen/abbxNpj
+      // Student Name
+      let stuName_p = document.createElement('p');
+      stuName_p.textContent = doc.data().childName;
+      let stuName_div = document.createElement('div');
+      stuName_div.className = "col-md-3";
+      stuName_div.appendChild(stuName_p);
+      // Gender
+      let stuGender_p = document.createElement('p');
+      stuGender_p.textContent = (doc.data().childGender === 0) ? 'Male' : 'Female';
+      let stuGender_div = document.createElement('div');
+      stuGender_div.className = "col-md-1";
+      stuGender_div.appendChild(stuGender_p);
+      // Gurdian Name
+      let gurName_p = document.createElement('p');
+      gurName_p.textContent = doc.data().gurName;
+      let gurName_div = document.createElement('div');
+      gurName_div.className = "col-md-3";
+      gurName_div.appendChild(gurName_p);
+      // Gurdian Phone
+      let gurPhone_p = document.createElement('p');
+      gurPhone_p.textContent = doc.data().gurPhone;
+      let gurPhone_div = document.createElement('div');
+      gurPhone_div.className = "col-md-2";
+      gurPhone_div.appendChild(gurPhone_p);
+      // Status
+      let status_p = document.createElement('p');
+      status_p.textContent = doc.data().statusEnrollment;
+      if (doc.data().statusEnrollment === STU_ENROLLMENT_STATUS_ACTIVE){
+        status_p.className = "card-student-status-label active";
       }else{
-
-        let allClassList = null;
-
-        // Set the fields
-        allClassList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY));
-        allClassList.forEach((item) => {
-          if (item.id === elem.getAttribute('data-id')){
-            // Assign the data to viewTutorModal
-            document.getElementById("viewTutorName").value = item[TUTOR_TUTOR_NAME];
-            document.getElementById("viewTutorPhone").value = item[TUTOR_TUTOR_PHONE];
-            document.getElementById("viewTutorEmail").value = item[TUTOR_TUTOR_EMAIL];
-            document.getElementById("viewTutorGenderRadioMale").checked = item[TUTOR_TUTOR_GENDER] == 0 ? true: false;
-            document.getElementById("viewTutorGenderRadioFemale").checked = item[TUTOR_TUTOR_GENDER] == 1 ? true: false;
-            document.getElementById("viewTutorAge").value = item[TUTOR_TUTOR_AGE];
-            document.getElementById("viewTutorImgUrl").src = item[TUTOR_TUTOR_IMG_URL];
-            console.log(item[TUTOR_TUTOR_WEB_URL])
-            if (item[TUTOR_TUTOR_WEB_URL] == null || item[TUTOR_TUTOR_WEB_URL] == ''){
-              document.getElementById("btnViewTutorModalFullProfile").disabled = true;  
-              document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','#'); 
-              document.getElementById("btnViewTutorModalFullProfile").setAttribute('target',''); 
-            }
-            else{
-              document.getElementById("btnViewTutorModalFullProfile").disabled = false;      
-              document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','https://golearn.com.my/tutor/'+item[TUTOR_TUTOR_WEB_URL]); 
-              document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','_blank'); 
-            }
-
-            // sessionStorage.setItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY, JSON.stringify(item));
-            // sessionStorage.setItem(SESSION_STORAGE_CLASS_LOAD_KEY, true);
-          }
-          // window.location = './edit-class.html?id=';
-
-          // console.log(item);
-        });
-        
+        status_p.className = "card-student-status-label pending";
       }
-		}
-    // Copy a text based on element ID
-    function copyText(targetElemId){
-      /* Get the text field */
-      let copyText = document.getElementById(targetElemId);
-      console.log(copyText)
-      console.log(copyText.select())
-      /* Select the text field */
-      copyText.focus();
-      copyText.select();
-      copyText.setSelectionRange(0, 99999); /* For mobile devices */
+      let status_div = document.createElement('div');
+      status_div.className = "col-md-1";
+      status_div.appendChild(status_p);
+      // Date Join
+      let dateAdd_p = document.createElement('p');
+      dateAdd_p.textContent = doc.data().dateAdd.toDate().toLocaleDateString("en-GB") ;
+      let dateAdd_div = document.createElement('div');
+      dateAdd_div.className = "col-md-2";
+      dateAdd_div.appendChild(dateAdd_p);
 
-      /* Copy the text inside the text field */
-      navigator.clipboard.writeText(copyText.value);
+      // Student Detail 
+      let detail_div = document.createElement('div');
+      detail_div.className = 'row';
+      detail_div.setAttribute("style","margin: 0;");
+      detail_div.appendChild(stuName_div);
+      detail_div.appendChild(stuGender_div);
+      detail_div.appendChild(gurName_div);
+      detail_div.appendChild(gurPhone_div);
+      detail_div.appendChild(status_div);
+      detail_div.appendChild(dateAdd_div);
+      let detail_top_div = document.createElement('div');
+      detail_top_div.className = "col-md-11";
+      detail_top_div.setAttribute("style","padding: 0;");
+      detail_top_div.setAttribute("onclick","editStudentFunction(this)");
+      detail_top_div.setAttribute("data-id", doc.data().id);
+      detail_top_div.appendChild(detail_div);
 
+      //Del btn
+      let blogsHtml_btn = '';
+      blogsHtml_btn += "<i class='material-icons' style='color: red;''>remove</i>";
+      let btn_a = document.createElement('a');
+      btn_a.innerHTML = blogsHtml_btn;
+      btn_a.className = "btn btn-sm btn-outline-danger btn-round";
+      btn_a.setAttribute("id","btnDelStudent");
+      btn_a.setAttribute("href","javascript:;");
+      btn_a.setAttribute("style","margin: 0; padding: 0.3em;");
+      btn_a.setAttribute("data-toggle","modal");
+      btn_a.setAttribute("data-target","#delStuModal");
+      btn_a.setAttribute("data-id", doc.data().id);
+      btn_a.setAttribute("data-studentname",  doc.data().childName);
+      let btn_div = document.createElement('div');
+      btn_div.className = "col-md-1";
+      btn_div.appendChild(btn_a);
+ 
+      // Student Top
+      let card_div = document.createElement('div');
+      card_div.className = "row"
+      card_div.appendChild(detail_top_div);
+      card_div.appendChild(btn_div);
+
+      // Card top
+      let card_top_div = document.createElement('div');
+      card_top_div.className = "col-md-12 card-student-item"
+      card_top_div.appendChild(card_div);
+
+      const card_all_students = document.getElementById("card-all-students");
+      card_all_students.appendChild(card_top_div);
     }
 
     // Sign out
@@ -822,65 +815,86 @@
       $('#signOutModal').modal('show');
       $("#signOutModal").appendTo("body");
     }
+
+    // Edit Student Function
+    function editStudentFunction(elem){
+      // Get attribute and 
+      if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_STUDENT_ALL_DOCS_KEY)) == null ){
+        console.log("Error: Impossible to reach this state");
+        // Because this func only trigger when there's active class loaded
+        return;
+      }else{
+
+        let Obj = null;
+        let allList = null;
+
+        // Set the fields
+        allList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_STUDENT_ALL_DOCS_KEY));
+        allList.forEach((item) => {
+          if (item.id === elem.getAttribute('data-id')){
+            sessionStorage.setItem(SESSION_STORAGE_STUDENT_CURRENT_DOC_KEY, JSON.stringify(item));
+          }
+            window.location = './edit-student.html';
+        });
+        
+      }
+		}
   
   </script>
-
   <script>
-		$( document ).ready(function() {
-
-      // Class Announcement
-      // KEY, DATETIME, ID, JOB_STATUS and JOB_EXPLANATION var is global var used to simplify modal fire and hide.
-      var KEY = ""; // Extract info from data-* attributes
-      var DATETIME = ""; // Extract info from data-* attributes
-      var ID = ""; // Extract info from data-* attributes
-      var ANNOUNCEMENT = ""; // Extract info from data-* attributes
-
-      // Update Class Annoucement
-      $('#btnEditClassModalUpdate').on('click', function (e) {
-        var docData = {
-          [CLASS_ANNOUNCEMENT]: document.getElementById("modalClassAnnouncement").value,
-        }
-        // Set data
-        db.collection("Class")        
-          .doc("v1")
-          .collection("Class")
-          .doc(ID)
-          .set(docData, {merge: true})
-          .then(() => {
-            window.location = './class.html';
-          })
-          .catch((error) => {
-              console.error("Error writing document: ", error);
-          });;
-
-			  $('#editClassModal').modal('hide');
-		  });
-
-      $('#editClassModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button/Components that triggered the modal
-        ID = button.data('id') // Extract info from data-* attributes
-        ANNOUNCEMENT = button.data('announcement') // Extract info from data-* attributes
-        // Load Desription 
-        document.getElementById("modalClassAnnouncement").textContent = ANNOUNCEMENT;
-
-      });
+    // Edit Lesson Modal
+    // Extract info from data-* attributes
+    var STUDENT_NAME = ""; 
+    var STUDENT_ID = ""; 
+    var START = ""; 
+    $( document ).ready(function() {
       
-      // Clear key and fields in modal when modal dismiss
-      $('#editClassModal').on('hide.bs.modal', function (event) {
-        ID = "";
-        ANNOUNCEMENT = "";
-        document.getElementById("modalClassAnnouncement").textContent = "";
+      // Delete Student Modal
+      $('#delStuModal').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget) // Button that triggered the modal
+        STUDENT_ID = button.data('id') // Extract info from data-* attributes
+        STUDENT_NAME = button.data('studentname') // Extract info from data-* attributes
+        
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('Delete '+ STUDENT_NAME);
+        // modal.find('#delStuId').set("value", STUDENT_ID);
+        document.getElementById("delStuId").setAttribute('value', STUDENT_ID);
       });
 
+      $('#btnDelStuModalUpdate').on('click', function (e) {
+        let studentId = document.getElementById("delStuId").getAttribute('value');
+
+        var docRef = db.collection("Class")
+          .doc("v1")
+          .collection("Student")
+          .doc(studentId);
+
+        let data = {
+          [STU_DATE_DEL]: new Date(),
+          [STU_STATUS_ADMIN]: false,
+          // [STU_STATUS_USER]: true,
+        }  
+        // console.log(studentId);
+        // console.log(data);
+        var docRefWithMerge = docRef.set(data , { merge: true })
+        .then(() => {
+          window.location.reload(true); 
+        }).catch((error) => {
+          console.log("Error getting document:", error);
+        });
+
+      
+      });
 
       $('#btnSignOutModalUpdate').on('click', function (e) {
       
         firebase.auth().signOut().then(() => {
             // Sign-out successful.
           }).catch((error) => {
-            // window.alert("Logging out failed");
+            window.alert("Logging out failed");
             func.showNotification('top','center', 'danger', 'error_outline', "Logging out failed." );
-
           });
         // Do something
         $('#signOutModal').modal('hide');
@@ -892,59 +906,31 @@
       $('#btnSignOutModalClose2').on('click', function (e) {
         $('#signOutModal').modal('hide');
       });
-
-			// Add New Course
-			$("#btnAddClass").click(function(){
-        window.location = "./add-class.html"
-
-        // if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-        //   func.showNotification('top','center', 'danger', 'error_outline', "Activate your account to add new courses." );
-        // }else if  (allCourseSize >= current_aTotalSubjectLimit){
-        //   func.showNotification('top','center', 'danger', 'error_outline', "You have reach maximum ("+current_aTotalSubjectLimit+") subjects. Upgrade to Pro now!" );
-        // }else if (current_preferedAreaList == null || current_preferedAreaList.length == 0){
-        //   func.showNotification('top','center', 'danger', 'error_outline', "Please fill in Update Information > Preferred Area");
-        // }
-        // else{
-        //   window.location = "./add-class.html"
-        // }
-			});
     
-		});
+      // Activate Account
+      $('#btnActivationModalUpdate').on('click', function (e) {
+        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
+          window.location = "https://golearn.com.my/join-us/";
+        }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+          window.location = "https://golearn.com.my/contact-us/";
+        }else {
+          window.location = "https://golearn.com.my/pricing/";
+        }
+        // Do something
+        $('#activationModal').modal('hide');
+      });
 
-  </script>
+      $('#btnActivationModalClose1').on('click', function (e) {
+        $('#activationModal').modal('hide');
+      });
+      $('#btnActivationModalClose2').on('click', function (e) {
+        $('#activationModal').modal('hide');
+      });
   
-  <!-- More functions -->
-  <script>
-	  function editClassFunction(elem){
-      // Get attribute and 
-      if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_ALL_DOCS_KEY)) == null ){
-        console.log("Error: Impossible to reach this state");
-        // Because this func only trigger when there's active class loaded
-        return;
-      }else{
-
-        let classObj = null;
-        let allClassList = null;
-
-        // Set the fields
-        allClassList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_ALL_DOCS_KEY));
-        // allClassList = classObj[SESSION_STORAGE_ALL_DOCS_KEY];
-        allClassList.forEach((item) => {
-          if (item.id === elem.getAttribute('data-id')){
-            sessionStorage.setItem(SESSION_STORAGE_CLASS_CURRENT_DOC_KEY, JSON.stringify(item));
-            sessionStorage.setItem(SESSION_STORAGE_CLASS_LOAD_KEY, true);
-          }
-          // window.location = './edit-class.html?id='+elem.getAttribute('data-id');
-          window.location = './edit-class.html?id=';
-
-          // console.log(item);
-        });
-        
-      }
-		}
+    });
 
   </script>
- 
+
 </body>
 
 </html>

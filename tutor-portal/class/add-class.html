@@ -10,10 +10,8 @@
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous"> -->
   <!-- Material Kit CSS -->
   <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-  <!-- <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
   <link href="../css/tutor-portal.css" rel="stylesheet" />
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
@@ -32,31 +30,31 @@
 <body>
 
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/img/sidebar-3.jpg">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-3.jpg">
       <!--
       Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
       Tip 2: you can also add an image using data-image tag
   -->
       <div class="logo">
-        <a href="#" class="simple-text logo-mini">
+        <a href="../" class="simple-text logo-mini">
 			<img src="../source/logo.png" style="width: 216px; height: auto;" alt=""></img>
           
         </a>
-        <a href="#" class="simple-text logo-normal">
+        <a href="../" class="simple-text logo-normal">
          Welcome!
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item active">
-            <a class="nav-link" href="./class.html">
+            <a class="nav-link" href="./">
               <i class="material-icons">home</i>
               <p>Class</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../student/student.html">
+            <a class="nav-link" href="../student/">
               <i class="material-icons">work_outline</i>
               <p>Students</p>
             </a>
@@ -145,9 +143,9 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                  <a class="dropdown-item" href="./edit-profile.html">Edit Profile</a>
+                  <a class="dropdown-item" href="../edit-profile.html">Edit Profile</a>
                   <a id="navPublicProfile" class="dropdown-item" href="#">My Public Profile</a>
-									<a class="display:block; dropdown-item" href="./about.html">About</a>
+									<a class="display:block; dropdown-item" href="../about.html">About</a>
 									<div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
 									<div class="dropdown-divider"></div>
@@ -429,7 +427,7 @@
           <div class="row" id="desciption-row" >
             
             <div class="col-lg-4 col-md-4 col-sm-4">
-              <a href="./class.html" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
+              <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
             </div>
           </div>
 
@@ -442,7 +440,7 @@
                     <div class="multisteps-form__progress">
                       <button class="multisteps-form__progress-btn js-active" type="button" title="General Info">General</button>
                       <button class="multisteps-form__progress-btn" type="button" title="Timeslot">Time</button>
-                      <button class="multisteps-form__progress-btn" type="button" title="Teacher">Tutor</button>
+                      <button class="multisteps-form__progress-btn" type="button" title="Teacher">Teacher</button>
                       <button class="multisteps-form__progress-btn" type="button" title="Fee">Fee</button>
                       <button class="multisteps-form__progress-btn" type="button" title="Advanced Settings">Advanced</button>
                     </div>
@@ -473,21 +471,21 @@
                             <div class="col-md-12">
 
                               <div class="form-group" style="margin-top: 2rem;">
-                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Name*</span> 
-                                <input type="text" class="form-control" id="inClassName" data-compulsory="true" oninput="this.className = 'form-control'">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Name* <span id="countClassName" style="color: grey; margin-left: 1rem;">0/40</span></span> 
+                                <input type="text" class="form-control" id="inClassName" data-compulsory="true" oninput="this.className = 'form-control'" maxlength="40">
                               </div>
                               
                               <div class="form-group" style="margin-top: 1.5rem;" >
-                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Description</span> 
-                                <textarea class="form-control" maxlength="255" rows="3" id="inClassDesc" data-compulsory="false"></textarea>
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Description <span id="countClassDesc" style="color: grey; margin-left: 1rem;">0/400</span></span> 
+                                <textarea class="form-control" maxlength="400" rows="4" id="inClassDesc" data-compulsory="false"></textarea>
                               </div>
               
-                              <div class="row" style="margin-top: 0.5rem;">
+                              <div class="row" style="margin-top: 0.5rem; display: none;">
                                 <div class="col-md-6">
                                     <!-- Education Level -->
                                   <div class="form-group">
                                     <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Education Level*</span> 
-                                    <select class="form-control" name="tutor_course[]" id="level_drop" data-compulsory="true" oninput="this.className = 'form-control'">
+                                    <select class="form-control" name="tutor_course[]" id="level_drop" data-compulsory="false" oninput="this.className = 'form-control'">
                                       <option value="">Select education level</option>
                                       <!-- <option value="1" >Pre-School</option>
                                       <option value="2" >Lower Primary (Tahun 1-3)</option>
@@ -505,7 +503,7 @@
                                   <!-- Subjects -->
                                   <div class="form-group">
                                     <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Subject*</span>
-                                    <select class="form-control" name="tutor_course[]" id="subject_drop" data-compulsory="true" oninput="this.className = 'form-control'">
+                                    <select class="form-control" name="tutor_course[]" id="subject_drop" data-compulsory="false" oninput="this.className = 'form-control'">
                                       <option value="">Select subject</option>
                                     </select>
                                   </div>
@@ -524,16 +522,16 @@
                               </div>
               
                               <div class="form-group" style="margin-top: 2rem;">
-                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Venue</span> 
-                                <textarea class="form-control" maxlength="255" rows="3"  id="inVenue" data-compulsory="false"></textarea>
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Venue <span id="countClassVenue" style="color: grey; margin-left: 1rem;">0/250</span></span> 
+                                <textarea class="form-control" maxlength="250" rows="3"  id="inVenue" data-compulsory="false"></textarea>
                               </div>
               
-                              <div class="row" style="margin-top: 0.5rem;">
+                              <div class="row" style="margin-top: 0.5rem; display: none;">
                                 <div class="col-md-6">
                                     <!-- State -->
                                   <div class="form-group">
                                     <span class="" style="font-size: smaller; font-weight: 300; color: gray;">State</span> 
-                                    <select class="form-control" name="tutor_course[]" id="state_drop" data-compulsory="true" oninput="this.className = 'form-control'">
+                                    <select class="form-control" name="tutor_course[]" id="state_drop" data-compulsory="false" oninput="this.className = 'form-control'">
                                       <option value="">Select state</option>
                         
                                     </select>
@@ -543,7 +541,7 @@
                                   <!-- Area -->
                                   <div class="form-group">
                                     <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Area</span>
-                                    <select class="form-control" name="tutor_course[]" id="area_drop" data-compulsory="true" oninput="this.className = 'form-control'">
+                                    <select class="form-control" name="tutor_course[]" id="area_drop" data-compulsory="false" oninput="this.className = 'form-control'">
                                       <option value="">Select area</option>
                                     </select>
                                   </div>
@@ -662,7 +660,7 @@
                         </div>
                         <!--Teacher form panel-->
                         <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                          <h4 class="multisteps-form__title">Teacher</h4>
+                          <h4 class="multisteps-form__title">Teachers</h4>
                           <div class="multisteps-form__content">
                             <!-- Teacher 1  -->
                             <div class="row" style="margin-top: 1.0rem;">
@@ -723,7 +721,7 @@
                           <div class="multisteps-form__content">
       
                             <div class="form-group" style="margin-top: 2rem;">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Fee*</span> 
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Fee* (RM)</span> 
                               <input type="number" step=".01" pattern="^\d*(\.\d{0,2})?$" class="form-control" id="inFee" data-compulsory="true" oninput="this.className = 'form-control'">
                             </div>
 
@@ -1406,7 +1404,7 @@
 
         }, { merge: true })
         .then(() => {
-          window.location.href='./class.html'
+          window.location.href='./'
         });
     }
 
@@ -1589,6 +1587,19 @@
 
     $( document ).ready(function() {
       
+      // Character limitations
+      $('#inClassName').on('input', function(){        
+        document.getElementById("countClassName").textContent = this.value.length + '/40'
+      });
+
+      $('#inClassDesc').on('input', function(){        
+        document.getElementById("countClassDesc").textContent = this.value.length + '/400'
+      });
+      
+      $('#inVenue').on('input', function(){        
+        document.getElementById("countClassVenue").textContent = this.value.length + '/250'
+      });
+
       // ------Education Level Dropdown End------- //
       // Populate Education Level
       var level_select = document.getElementById("level_drop"); 

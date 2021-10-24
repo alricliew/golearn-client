@@ -57,7 +57,7 @@ function phoneAuth() {
         document.getElementById("btnVerify").setAttribute("style", "background-color: #c1c1c1");
         document.getElementById("btnVerify").style.cursor='not-allowed';
         document.getElementById("btnVerify").disabled = true;
-        // console.log("Phone Verification Failed Error Code: "+ error);
+        console.log("Phone Verification Failed Error Code: "+ error);
         func.showNotification('top','center', 'danger', 'error_outline', "Phone Verification Failed. Please make sure you enter a valid phone number." );
 
         // alert("Phone Verification Failed. Please make sure you enter a valid phone number.")

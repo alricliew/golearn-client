@@ -12,7 +12,6 @@
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
   <!-- Material Kit CSS -->
   <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
@@ -28,10 +27,10 @@
 
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-3.jpg">
+
       <div class="logo">
         <a href="../" class="simple-text logo-mini">
-			<img src="../source/logo.png" style="width: 216px; height: auto;" alt=""></img>
-          
+			    <img src="../source/logo.png" style="width: 216px; height: auto;" alt=""></img>
         </a>
         <a href="../" class="simple-text logo-normal">
          Welcome!
@@ -39,8 +38,13 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="../class/">
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="javascript:;">
+              <h4>Teaching</h4>
+            </a>
+          </li> -->
+          <li class="nav-item  active">
+            <a class="nav-link" href="./">
               <i class="material-icons">home</i>
               <p>Class</p>
             </a>
@@ -51,12 +55,35 @@
               <p>Students</p>
             </a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="./">
+          <li class="nav-item ">
+            <a class="nav-link" href="../teacher/">
               <i class="material-icons">format_list_bulleted</i>
               <p>Teachers</p>
             </a>
           </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="javascript:;">
+              <h4>Personal</h4>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="./job.html">
+              <i class="material-icons">work_outline</i>
+              <p>Tuition Jobs</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./course.html">
+              <i class="material-icons">format_list_bulleted</i>
+              <p>My Public Courses</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="./update.html">
+              <i class="material-icons">note_alt</i>
+              <p>Update Information</p>
+            </a>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -65,7 +92,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Teachers</a>
+            <a class="navbar-brand" href="javascript:;">Classes</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -135,36 +162,157 @@
 
 			<!-- Modal Start -->
       
-      <!-- Add Tutor modal -->
+      <!-- Add Class modal -->
       <div class="row">
-        <div class="modal fade" id="addTutorModal" tabindex="-1" role="dialog" aria-labelledby="addTutorModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addClassModal" tabindex="-1" role="dialog" aria-labelledby="addClassModalLabel" aria-hidden="true">
           <div class="modal-dialog  modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="addTutorModalLabel">Invite New Teacher</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnAddTutorModalClose1">
+                <h5 class="modal-title" id="addClassModalLabel">Add Class</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnAddClassModalClose1">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body" id="addTutorModalBody">
-
-                <div class="form-group" style="margin-top: 0rem;">
-                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">New Teacher Registration Link</span> 
-                  <div class="input-group">
-                    <span class="d-flex align-items-center input-group-addon" style="margin-right: 0.5em; cursor: pointer;" onclick="copyText('inAutoJoinLink')">
-                      <span class="material-icons">
-                        content_copy
-                      </span>
-                    </span>
-                    <input type="text" value='' class="form-control" style="background-color: #f5f5f5; pointer-events: none;" id="inAutoJoinLink">
+              <div class="modal-body" id="addClassModalBody" style="height: 300px;">
+                <div class="container overflow-hidden">
+                  <!--multisteps-form-->
+                  <div class="multisteps-form">
+                    <!--progress bar-->
+                    <div class="row">
+                      <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
+                        <div class="multisteps-form__progress">
+                          <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">User Info</button>
+                          <button class="multisteps-form__progress-btn" type="button" title="Address">Address</button>
+                          <button class="multisteps-form__progress-btn" type="button" title="Order Info">Order Info</button>
+                          <button class="multisteps-form__progress-btn" type="button" title="Comments">Comments        </button>
+                        </div>
+                      </div>
+                    </div>
+                    <!--form panels-->
+                    <div class="row">
+                      <div class="col-12 col-lg-8">
+                        <form class="multisteps-form__form" style="height: 300px;">
+                          <!--single form panel-->
+                          <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
+                            <h3 class="multisteps-form__title">Your User Info</h3>
+                            <div class="multisteps-form__content">
+                              <div class="form-row mt-4">
+                                <div class="col-12 col-sm-6">
+                                  <input class="multisteps-form__input form-control" type="text" placeholder="First Name"/>
+                                </div>
+                                <div class="col-12 col-sm-6 mt-4 mt-sm-0">
+                                  <input class="multisteps-form__input form-control" type="text" placeholder="Last Name"/>
+                                </div>
+                              </div>
+                              <div class="form-row mt-4">
+                                <div class="col-12 col-sm-6">
+                                  <input class="multisteps-form__input form-control" type="text" placeholder="Login"/>
+                                </div>
+                                <div class="col-12 col-sm-6 mt-4 mt-sm-0">
+                                  <input class="multisteps-form__input form-control" type="email" placeholder="Email"/>
+                                </div>
+                              </div>
+                              <div class="form-row mt-4">
+                                <div class="col-12 col-sm-6">
+                                  <input class="multisteps-form__input form-control" type="password" placeholder="Password"/>
+                                </div>
+                                <div class="col-12 col-sm-6 mt-4 mt-sm-0">
+                                  <input class="multisteps-form__input form-control" type="password" placeholder="Repeat Password"/>
+                                </div>
+                              </div>
+                              <div class="button-row d-flex mt-4">
+                                <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                              </div>
+                            </div>
+                          </div>
+                          <!--single form panel-->
+                          <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                            <h3 class="multisteps-form__title">Your Address</h3>
+                            <div class="multisteps-form__content">
+                              <div class="form-row mt-4">
+                                <div class="col">
+                                  <input class="multisteps-form__input form-control" type="text" placeholder="Address 1"/>
+                                </div>
+                              </div>
+                              <div class="form-row mt-4">
+                                <div class="col">
+                                  <input class="multisteps-form__input form-control" type="text" placeholder="Address 2"/>
+                                </div>
+                              </div>
+                              <div class="form-row mt-4">
+                                <div class="col-12 col-sm-6">
+                                  <input class="multisteps-form__input form-control" type="text" placeholder="City"/>
+                                </div>
+                                <div class="col-6 col-sm-3 mt-4 mt-sm-0">
+                                  <select class="multisteps-form__select form-control">
+                                    <option selected="selected">State...</option>
+                                    <option>...</option>
+                                  </select>
+                                </div>
+                                <div class="col-6 col-sm-3 mt-4 mt-sm-0">
+                                  <input class="multisteps-form__input form-control" type="text" placeholder="Zip"/>
+                                </div>
+                              </div>
+                              <div class="button-row d-flex mt-4">
+                                <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                              </div>
+                            </div>
+                          </div>
+                          <!--single form panel-->
+                          <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                            <h3 class="multisteps-form__title">Your Order Info</h3>
+                            <div class="multisteps-form__content">
+                              <div class="row">
+                                <div class="col-12 col-md-6 mt-4">
+                                  <div class="card shadow-sm">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Item Title</h5>
+                                      <p class="card-text">Small and nice item description</p><a class="btn btn-primary" href="#" title="Item Link">Item Link</a>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-12 col-md-6 mt-4">
+                                  <div class="card shadow-sm">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Item Title</h5>
+                                      <p class="card-text">Small and nice item description</p><a class="btn btn-primary" href="#" title="Item Link">Item Link</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="button-row d-flex mt-4 col-12">
+                                  <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                  <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--single form panel-->
+                          <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                            <h3 class="multisteps-form__title">Additional Comments</h3>
+                            <div class="multisteps-form__content">
+                              <div class="form-row mt-4">
+                                <textarea class="multisteps-form__textarea form-control" placeholder="Additional Comments and Requirements"></textarea>
+                              </div>
+                              <div class="button-row d-flex mt-4">
+                                <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                <button class="btn btn-success ml-auto" type="button" title="Send">Send</button>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnAddTutorModalClose2">Not Now</button>
-                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddTutorModalUpdate"></button> -->
-              </div>
+              <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"  data-dismiss="modal" id="btnAddClassModalClose2">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddClassModalUpdate">Add</button>
+              </div> -->
             </div>
           </div>
         </div>
@@ -215,83 +363,25 @@
         </div>
       </div>
 
-      <!-- View Tutor Modal -->
+      <!-- Edit Class Modal -->
        <div class="row">
-        <div class="modal fade" id="viewTutorModal" tabindex="-1" role="dialog" aria-labelledby="viewTutorModalLabel" aria-hidden="true">
-          <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal fade" id="editClassModal" tabindex="-1" role="dialog" aria-labelledby="editClassModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="viewTutorModalLabel">Tutor Profile</h5>
+                <h5 class="modal-title" id="editClassModalLabel">Update Announcement</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-4 text-center">
-                    <div style="height: 140px;width: 140px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
-                      <img id="viewTutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/test.jpg"/>
-                    </div>
-
-                  </div>
-
-                  <div class="col-md-8">
-                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Name</span> 
-                    <input id="viewTutorName"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-
-                    <div class="row">
-                      <div class="col-md-6">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Phone</span> 
-                        <input id="viewTutorPhone"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-    
-                      </div>
-                      <div class="col-md-6">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Email</span> 
-                        <input id="viewTutorEmail"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-    
-                      </div>
-                    </div>
-
-   
-                    <div class="row">
-                      <div class="col-md-6">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Gender</span> 
-                        <div class="form-group">
-                          <div class="form-check form-check-radio form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioMale" value="optionActive" data-compulsory="false" disabled>
-                              Male
-                              <span class="circle">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                          <div class="form-check form-check-radio form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioFemale" value="optionInactive" data-compulsory="false" disabled>
-                              Female
-                              <span class="circle">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Age</span> 
-                        <input id="viewTutorAge"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-    
-                      </div>
-                    </div>
-
-                  </div>
-
+                <div class="form-group">
+                  <textarea class="form-control" id="modalClassAnnouncement"maxlength="511"  rows="4" placeholder="Write something ..."></textarea>
                 </div>
               </div>
               <div class="modal-footer">
-                <a type="button" class="btn btn-primary" href="#" id="btnViewTutorModalFullProfile" disabled>View Full Profile</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnViewTutorModalUpdate">Update</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnEditClassModalUpdate">Update</button>
               </div>
             </div>
           </div>
@@ -305,9 +395,21 @@
 
           <!-- Main content -->
           <div class="row" id="desciption-row" >
-            <!-- button -->
-            <div class="d-flex flex-row">
-              <a href="#" class="btn btn-primary btn-round" style="background-color: #2e74b6;" data-target="#addTutorModal" data-toggle="modal">Add Teacher <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
+            <!-- Update button -->
+
+            <div class="col-md-12 d-flex flex-row">
+              <a href="javascript:;" class="btn btn-primary btn-round" id="btnAddClass" style="background-color: #2e74b6;">Add Class <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
+
+              <!-- <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle bg-white text-dark text-right" type="button" id="SortBy" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Sort By
+                </button>
+                <div class="dropdown-menu" aria-labelledby="SortBy" id="sort-dropdown-menu">
+                  <a class="dropdown-item"  href="#">Price Low to High</a>
+                  <a class="dropdown-item"  href="#">Price High to Low</a>
+                  <a class="dropdown-item"  href="#">Highest Rated</a>
+                </div>
+              </div> -->
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-6 ">
@@ -316,35 +418,124 @@
           </div>
 
           <!-- All Class -->
-          <div class="row" id="card-all-tutor">
-            <!-- <div class="col-lg-2 col-md-3 col-6">
-              <div class="card-tutor text-center ">
-                <div style="height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
-                  <img id="tutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/test.jpg"/>
+          <div class="row" id="card-all-classes">
+            <!-- <div class="col-md-3">
+              <div class="card-class">
+                <div class="card-class-wrapper" style="padding: 0;">
+                  <h4 id="className">Y5 Bm Tuition Class <span class="card-class-online-label">OL</span></h4>
+
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Notice</span> 
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" > This is Announcement<span id="main_fees_sentence"></span></p>
+                  </a>
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Schedule</span> 
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" ><span id="main_duration">Wednesday, 3-4:00pm</span> </p>
+                  </a>
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Venue</span> 
+
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" >Pusat Tuisuyen cermerlang, Jalan Lama<span id="main_classPerWeek"></span></p>
+                  </a>
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Teacher</span> 
+
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" >Cikgu Faizal</p>
+                  </a>
                 </div>
-                <div style="margin-top:1rem">
-                  <h4 id="className">Alric Liew </h4>
+                <a class="btn btn-primary btn-round" id="btnUpdateClass" style="color: white;" data-toggle="modal" data-target="#editClassModal">Update <i class='fas fa-bullhorn fa-fw' style="margin-left: 0.5rem;"></i></a>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card-class">
+                <div class="card-class-wrapper" style="padding: 0;">
+                  <h4 id="className">SPM Bahasa Malaysia <span class="card-class-online-label">OL</span></h4>
+                  <p class="card-class-item" style="font-size: x-small;" >Last update: 12/2/2021</p>
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" ><i class="fas fa-bullhorn fa-fw" id="classAnnounce"></i>This is Announcement<span id="main_fees_sentence"></span></p>
+                  </a>
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" ><i class="fas fa-calendar-alt fa-fw" id="classTimeSlot"></i>Wednesday, 3-4:00pm<span id="main_duration"></span> </p>
+                  </a>
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" ><i class="fas fa-map-marker-alt fa-fw" id="classStudent"></i>Students<span id="main_classPerWeek"></span></p>
+                  </a>
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" ><i class='fas fa-chalkboard-teacher fa-fw' id="classTutor"></i>Cikgu Faizal</p>
+                  </a>
                 </div>
+                
+                <a class="btn btn-primary btn-round" id="btnUpdateClass" style="color: white;" data-toggle="modal" data-target="#editClassModal">Update <i class='fas fa-bullhorn fa-fw' style="margin-left: 0.5rem;"></i></a>
+
+              </div>
+            </div> -->
+            <!-- <div class="col-md-3">
+              <div class="card-class">
+                <div class="card-class-wrapper" style="padding: 0;">
+                  <h4 id="className">SPM Bahasa Malaysia <span class="card-class-online-label">OL</span></h4>
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" ><i class="fas fa-bullhorn fa-fw" id="classAnnounce"></i>Announcement<span id="main_fees_sentence"></span></p>
+                  </a>
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" ><i class="fas fa-calendar-alt fa-fw" id="classTimeSlot"></i>Schedule<span id="main_duration"></span> </p>
+                  </a>
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" ><i class="fas fa-user-graduate fa-fw" id="classStudent"></i>Students<span id="main_classPerWeek"></span></p>
+                  </a>
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" ><i class='fas fa-chalkboard-teacher fa-fw' id="classTutor"></i>Teacher</p>
+                  </a>
+                </div>
+                <a class="btn btn-primary btn-round" id="btnUpdateClass" style="color: white;" data-toggle="modal" data-target="#editClassModal">Update <i class='fas fa-bullhorn fa-fw' style="margin-left: 0.5rem;"></i></a>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card-class">
+                <div class="card-class-wrapper" style="padding: 0;">
+                  <h4 id="className">SPM Bahasa Malaysia <span class="card-class-online-label">OL</span></h4>
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" ><i class="fas fa-bullhorn fa-fw" id="classAnnounce"></i>Announcement<span id="main_fees_sentence"></span></p>
+                  </a>
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" ><i class="fas fa-calendar-alt fa-fw" id="classTimeSlot"></i>Schedule<span id="main_duration"></span> </p>
+                  </a>
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" ><i class="fas fa-user-graduate fa-fw" id="classStudent"></i>Students<span id="main_classPerWeek"></span></p>
+                  </a>
+                  <a class="card-class-item-wrapper">			
+                    <p class="card-class-item" ><i class='fas fa-chalkboard-teacher fa-fw' id="classTutor"></i>Teacher</p>
+                  </a>
+                </div>
+                <a class="btn btn-primary btn-round" id="btnUpdateClass" style="color: white;" data-toggle="modal" data-target="#editClassModal">Update <i class='fas fa-bullhorn fa-fw' style="margin-left: 0.5rem;"></i></a>
               </div>
             </div> -->
           </div>
-        </div>
 
-        <footer class="footer">
-          <div class="container-fluid">
-            <nav class="float-left">
-            <ul>
-              <!-- <li>
-              <a href="https://golearn.com.my/join-us" target="_blank">
-                Visit GoLearn Tutor
-              </a>
-              </li> -->
-            </ul>
-            </nav>
+          <!-- Load More -->
+          <div class="row" id="desciption-row" >
+            <div class="col-md-12 d-flex flex-row" style="margin-top: 1rem;">
+              <a href="javascript:;" class="btn btn-outline-primary btn-round" id="btnClassLoadMore">Load More <i class="material-icons" style="color: #2e74b6; margin-left: 0.5em; padding-bottom: 0.2em;">expand_more</i></a>
+            </div>
           </div>
-        </footer>
+        </div>
       </div>
+
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav class="float-left">
+          <ul>
+            <!-- <li>
+            <a href="https://golearn.com.my/join-us" target="_blank">
+              Visit GoLearn Tutor
+            </a>
+            </li> -->
+          </ul>
+          </nav>
+        </div>
+      </footer>
     </div>
+	  
+  </div>
 
   <div class="fixed-plugin">
     <div class="dropdown show-dropdown">
@@ -427,6 +618,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
   <!-- Common constants -->
   <script src="../../assets/js/common.js" type="text/javascript"></script>
+  <!-- General Info -->
+  <script src="../../assets/js/const.js" type="text/javascript"></script>
   <!-- Core Tutor Js -->
   <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
 	<script>
@@ -455,6 +648,12 @@
      
     // Course-specific var
     var allCourseSize;
+
+    var latestClassDoc = null;// Store last document - Used for Class Load More btn
+    // Session Storage data
+    var docsObj = [];
+
+
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
@@ -462,8 +661,7 @@
     var tutorInfoObj = null;
     if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
       // Do nothing
-    }
-    else{
+    }else{
       // Set the nav user name
       tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
       document.getElementById("user").textContent = tutorInfoObj.name;
@@ -494,24 +692,28 @@
         // if the displayName is null, it means user register using Phone
         if (firebase.auth().currentUser.displayName == null ){
             tutorId = firebase.auth().currentUser.phoneNumber;
-        }else{
-          tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-        }
-        loadUserInfo(tutorId)
-        loadAllTutorInfo()
+        }else
+            tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+        
+        loadAllClassInfo();
+        loadUserInfo(tutorId);
           
-        // Update Add Teacher Registration Link
-        let uriAdminId = encodeURIComponent(tutorId);
-        document.getElementById("inAutoJoinLink").value = 'https://app.golearn.com.my/tutor-portal/tutor-registration.html?aid='+uriAdminId;
-
 			}
 		});
+
+    //---------- Load all class details ----------//
+    // Lesson Load More Button - Init
+    const classLoadmore = document.querySelector('#btnClassLoadMore');
+    classLoadmore.style.visibility='hidden';
+    const classLoadMoreHandleClick = () =>{
+      loadAllClassInfo();
+    }
+    classLoadmore.addEventListener('click', classLoadMoreHandleClick );
 
     // Tutor Specific
     function loadUserInfo(tutorId){
       // Tutor Id must be a phone with +60, no spacing or other chars
       var docRef = db.collection("Tutor").doc(tutorId);
-      
 
       // docRef.get().then((doc) => {
       docRef.onSnapshot((doc) => {
@@ -521,7 +723,7 @@
 
           current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
           // current_email, 
-          // current_phone, 
+          current_phone = doc.data().phone;
           current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
           current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
           current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
@@ -530,35 +732,7 @@
           currentTutoringExperience = doc.data().tutoringExperience;
           currentTutoringApproach = doc.data().tutoringApproach;
           currentQualification= doc.data().qualification;
-          current_mon_8am = doc.data().tMon8am;
-          current_mon_12pm= doc.data().tMon12pm; 
-          current_mon_3pm = doc.data().tMon3pm;  
-          current_mon_6pm = doc.data().tMon6pm;  
-          current_tue_8am = doc.data().tTue8am;  
-          current_tue_12pm= doc.data().tTue12pm;  
-          current_tue_3pm = doc.data().tTue3pm;  
-          current_tue_6pm = doc.data().tTue6pm;  
-          current_wed_8am = doc.data().tWed8am;  
-          current_wed_12pm= doc.data().tWed12pm;  
-          current_wed_3pm = doc.data().tWed3pm;  
-          current_wed_6pm = doc.data().tWed6pm;  
-          current_thu_8am = doc.data().tThu8am;  
-          current_thu_12pm= doc.data().tThu12pm;  
-          current_thu_3pm = doc.data().tThu3pm;  
-          current_thu_6pm = doc.data().tThu6pm;  
-          current_fri_8am = doc.data().tFri8am;  
-          current_fri_12pm= doc.data().tFri12pm;  
-          current_fri_3pm = doc.data().tFri3pm;  
-          current_fri_6pm = doc.data().tFri6pm; 
-          current_sat_8am = doc.data().tSat8am;  
-          current_sat_12pm= doc.data().tSat12pm;  
-          current_sat_3pm = doc.data().tSat3pm;  
-          current_sat_6pm = doc.data().tSat6pm;  
-          current_sun_8am = doc.data().tSun8am;  
-          current_sun_12pm= doc.data().tSun12pm;  
-          current_sun_3pm = doc.data().tSun3pm;  
-          current_sun_6pm = doc.data().tSun6pm; 
-
+         
           // Store data to sessionStorage
           var tutorDataObj = {
             [NAME_KEY] : doc.data().name,
@@ -599,7 +773,6 @@
             [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
             [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
             [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
-
             [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
             [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
             [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
@@ -666,7 +839,6 @@
           }else {
             let activationNavItem = document.querySelector('#activationNavItem');
             let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
-            console.log(activationNavItemIsExist)
             // Remove NavItem if exist
             if (activationNavItemIsExist){
               activationNavItem.parentNode.removeChild(activationNavItem);
@@ -674,8 +846,10 @@
               // Do nothing
             }
           }
+
+
         } else {
-           // Do nothing 
+            
         }
       });
 
@@ -683,140 +857,209 @@
 
 
     // Tutor Specific
-    function loadAllTutorInfo(){
-      let docRef = db.collection("Class")
+    function loadAllClassInfo(){
+      // Tutor Id must be a phone with +60, no spacing or other chars
+      var docRef = db.collection("Class")
           .doc("v1")
-          .collection("Tutor")
+          .collection("Class")
           .where("adminId", "==", tutorId)
-          .where("statusAdmin", "==", true);
+          .orderBy('name', 'asc')
+          .startAfter(latestClassDoc)
+          .limit(10);
       
 
       docRef
       .get()
       .then((querySnapshot) => {
 
-        // Session Storage data
-        let docsObj = [];
+
 
         querySnapshot.forEach((doc) => {
-
+          // console.log(doc.data())
           docsObj.push(doc.data());
           // courseId = doc.id;
-          console.log(doc.data())
-          renderAllActiveTutor(doc);
+          renderAllActiveClasses(doc, "", false);
 
         });
 
-        // Store all docs data to sessionStorage
-        sessionStorage.setItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY, JSON.stringify(docsObj));
-        sessionStorage.setItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY, null);
- 
+        sessionStorage.setItem(SESSION_STORAGE_CLASS_ALL_DOCS_KEY, JSON.stringify(docsObj));
+        sessionStorage.setItem(SESSION_STORAGE_CLASS_CURRENT_DOC_KEY, null);
+        sessionStorage.setItem(SESSION_STORAGE_CLASS_CURRENT_DOC_ID_KEY, null);
+        sessionStorage.setItem(SESSION_STORAGE_CLASS_LOAD_KEY, false);
+
+        // Load more handling
+        latestClassDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+        // console.log(querySnapshot.docs.length)
+        // console.log(latestClassDoc.data())
+
+        // Handle Lesson Load more btn
+        if (querySnapshot.empty){
+          classLoadmore.removeEventListener('click', classLoadMoreHandleClick );
+        }
+        if (querySnapshot.docs.length == 10){
+          classLoadmore.style.visibility='visible';
+        }else{
+          classLoadmore.style.visibility='hidden';
+        }
       });
 
     };
 
-    function renderAllActiveTutor(doc){
-      // <div class="col-lg-2 col-md-3 col-6">
-      //   <div class="card-tutor text-center" >
-          // <div style="height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
-          //   <img id="tutorImgUrl" style="height: 100% ;width: 100%; object-fit: cover;" src="../../assets/img/sidebar-1.jpg"/>
-          // </div>
-      //     <div style="margin-top:1rem">
-      //       <h4 id="className">Alric Liew </h4>
+    function renderAllActiveClasses(doc, courseId, renderNull){
+
+      // <div class="col-md-3">
+      //   <div class="card-class">
+      //     <div class="card-class-wrapper" style="padding: 0;">
+      //       <h4 id="className">SPM Bahasa Malaysia <span class="card-class-online-label">OL</span></h4>
+      //       <p class="card-class-item" style="font-size: x-small;" >Last update: 12/2/2021</p>
+      //       <a class="card-class-item-wrapper">			
+      //         <p class="card-class-item" ><i class="fas fa-bullhorn fa-fw" id="classAnnounce"></i>Announcement<span id="main_fees_sentence"></span></p>
+      //       </a>
+      //       <a class="card-class-item-wrapper">			
+      //         <p class="card-class-item" ><i class="fas fa-calendar-alt fa-fw" id="classTimeSlot"></i>Schedule<span id="main_duration"></span> </p>
+      //       </a>
+      //       <a class="card-class-item-wrapper">			
+      //         <p class="card-class-item" ><i class="fas fa-user-graduate fa-fw" id="classStudent"></i>Students<span id="main_classPerWeek"></span></p>
+      //       </a>
+      //       <a class="card-class-item-wrapper">			
+      //         <p class="card-class-item" ><i class='fas fa-chalkboard-teacher fa-fw' id="classTutor"></i>Teacher</p>
+      //       </a>
       //     </div>
+      //     <a class="btn btn-primary btn-round" id="btnUpdateClass" style="color: white;" data-toggle="modal" data-target="#editClassModal">Update <i class='fas fa-bullhorn fa-fw' style="margin-left: 0.5rem;"></i></a>
       //   </div>
       // </div>
 
-      let img = document.createElement('img');
-      img.setAttribute('style', 'height: 100%; width: 100%; object-fit: cover;');
-      img.setAttribute('src', doc.data()[TUTOR_TUTOR_IMG_URL]);
-      let img_div = document.createElement('div');
-      img_div.setAttribute('style', 'height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;')
-      img_div.appendChild(img)
-
-      let name_h4 = document.createElement('h4');
-      name_h4.textContent = doc.data()[TUTOR_TUTOR_NAME];
-      let name_div = document.createElement('div');
-      name_div.setAttribute('style', 'margin-top:1rem;');
-      name_div.appendChild(name_h4);
-      
-      let tutor_div = document.createElement('div');
-      tutor_div.className = "card-tutor text-center";
-      tutor_div.appendChild(img_div);
-      tutor_div.appendChild(name_div);
-
-      let tutor_card_div = document.createElement('div');
-      tutor_card_div.className = 'col-lg-2 col-md-3 col-6';
-      tutor_card_div.setAttribute('onclick', 'viewTutorFunction(this)');
-      tutor_card_div.setAttribute('data-target', '#viewTutorModal');
-      tutor_card_div.setAttribute('data-toggle', 'modal');
-      tutor_card_div.setAttribute('data-id', doc.data()[TUTOR_ID]);
-      tutor_card_div.appendChild(tutor_div)
-        
-      const card_all_tutor = document.getElementById("card-all-tutor");
-      card_all_tutor.appendChild(tutor_card_div);
-    }
-
-	  function viewTutorFunction(elem){
-      // Get attribute and 
-      if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY)) == null ){
-        console.log("Error: Impossible to reach this state");
-        // Because this func only trigger when there's active class loaded
-        return;
+      // Reference: https://codepen.io/Corsurath/pen/abbxNpj
+      // subject
+      let blogsHtml_subject = '';
+      if (doc.data().online){
+        blogsHtml_subject += doc.data()[CLASS_NAME]+"<span class='card-class-online-label'>OL</span>";
       }else{
-
-        let allClassList = null;
-
-        // Set the fields
-        allClassList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY));
-        allClassList.forEach((item) => {
-          if (item.id === elem.getAttribute('data-id')){
-            // Assign the data to viewTutorModal
-            document.getElementById("viewTutorName").value = item[TUTOR_TUTOR_NAME];
-            document.getElementById("viewTutorPhone").value = item[TUTOR_TUTOR_PHONE];
-            document.getElementById("viewTutorEmail").value = item[TUTOR_TUTOR_EMAIL];
-            document.getElementById("viewTutorGenderRadioMale").checked = item[TUTOR_TUTOR_GENDER] == 0 ? true: false;
-            document.getElementById("viewTutorGenderRadioFemale").checked = item[TUTOR_TUTOR_GENDER] == 1 ? true: false;
-            document.getElementById("viewTutorAge").value = item[TUTOR_TUTOR_AGE];
-            document.getElementById("viewTutorImgUrl").src = item[TUTOR_TUTOR_IMG_URL];
-            console.log(item[TUTOR_TUTOR_WEB_URL])
-            if (item[TUTOR_TUTOR_WEB_URL] == null || item[TUTOR_TUTOR_WEB_URL] == ''){
-              document.getElementById("btnViewTutorModalFullProfile").disabled = true;  
-              document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','#'); 
-              document.getElementById("btnViewTutorModalFullProfile").setAttribute('target',''); 
-            }
-            else{
-              document.getElementById("btnViewTutorModalFullProfile").disabled = false;      
-              document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','https://golearn.com.my/tutor/'+item[TUTOR_TUTOR_WEB_URL]); 
-              document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','_blank'); 
-            }
-
-            // sessionStorage.setItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY, JSON.stringify(item));
-            // sessionStorage.setItem(SESSION_STORAGE_CLASS_LOAD_KEY, true);
-          }
-          // window.location = './edit-class.html?id=';
-
-          // console.log(item);
-        });
-        
+        blogsHtml_subject += doc.data()[CLASS_NAME];
       }
-		}
-    // Copy a text based on element ID
-    function copyText(targetElemId){
-      /* Get the text field */
-      let copyText = document.getElementById(targetElemId);
-      console.log(copyText)
-      console.log(copyText.select())
-      /* Select the text field */
-      copyText.focus();
-      copyText.select();
-      copyText.setSelectionRange(0, 99999); /* For mobile devices */
+      let subject_h4 = document.createElement('h4');
+      subject_h4.innerHTML = blogsHtml_subject;
 
-      /* Copy the text inside the text field */
-      navigator.clipboard.writeText(copyText.value);
+      let lastUpdate_p = document.createElement('p');
+      lastUpdate_p.className = "card-class-item";
+      lastUpdate_p.setAttribute("style","font-size: x-small; line-height: 1.5em;");
+      lastUpdate_p.textContent = 'Last updated: ' + doc.data()[CLASS_DATE_EDIT].toDate().toLocaleDateString("en-GB") + ' '+ doc.data()[CLASS_EDIT_MSG] ;
+
+      // Announcement
+      let blogsHtml_announcement = '';
+      if (doc.data().announcement == '' || doc.data().announcement == null){
+        blogsHtml_announcement += "<i class='fas fa-bullhorn fa-fw'></i>No recent announcement.";
+      }else{
+        blogsHtml_announcement += "<i class='fas fa-bullhorn fa-fw'></i>"+doc.data()[CLASS_ANNOUNCEMENT];
+      }
+      let announcement_p = document.createElement('p');
+      announcement_p.className = "card-class-item";
+      announcement_p.innerHTML = blogsHtml_announcement;
+      let announcement_a = document.createElement('a');
+      announcement_a.className = "card-class-item-wrapper"
+      announcement_a.appendChild(announcement_p);
+     // Timeslot
+      let myDayOfWeekId = MyDayOfWeekId; 
+      let myDayOfWeek = MyDayOfWeek; 
+      let timeslot = '';
+      let startTime, endTime = '';
+
+      for (let i = 0; i<doc.data()[CLASS_TIMESLOT_DAY_OF_WEEK_ARR].length; i++){
+        if (doc.data()[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i] == null || doc.data()[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i] == ''){
+          continue;
+        }
+
+        startTime = doc.data()[CLASS_TIMESLOT_START_ARR][i];
+        endTime = doc.data()[CLASS_TIMESLOT_END_ARR][i];
+        // console.log(parseInt(startTime.substring(0, 2)))
+        startTime = (parseInt(startTime.substring(0, 2))>12) ? (parseInt(startTime.substring(0, 2)) - 12) + startTime.substring(2, 5) + 'PM' : startTime + 'AM';
+        endTime = (parseInt(endTime.substring(0, 2))>12) ? (parseInt(endTime.substring(0, 2)) - 12) + endTime.substring(2, 5) + 'PM' : endTime + 'AM';
+
+        
+        timeslot += myDayOfWeek[myDayOfWeekId.indexOf(doc.data()[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i])] +' '+startTime+'-'+endTime;
+        // console.log
+        if (i == doc.data()[CLASS_TIMESLOT_DAY_OF_WEEK_ARR].length - 1){
+          // Last item
+        }else{
+          timeslot += ', '
+        }
+      }
+      let blogsHtml_timeslot = '';
+      blogsHtml_timeslot += "<i class='fas fa-calendar fa-fw'></i>"+timeslot;
+      let timeslot_p = document.createElement('p');
+      timeslot_p.className = "card-class-item";
+      timeslot_p.innerHTML = blogsHtml_timeslot;
+      let timeslot_a = document.createElement('a');
+      timeslot_a.className = "card-class-item-wrapper"
+      timeslot_a.appendChild(timeslot_p);
+     // Venue
+      let blogsHtml_student = '';
+      blogsHtml_student += "<i class='fas fa-map-marker-alt fa-fw'></i>"+doc.data()[CLASS_VENUE];
+      let student_p = document.createElement('p');
+      student_p.className = "card-class-item";
+      student_p.innerHTML = blogsHtml_student;
+      let student_a = document.createElement('a');
+      student_a.className = "card-class-item-wrapper"
+      student_a.appendChild(student_p);
+      // Teacher
+      let blogsHtml_teacher = '';
+      blogsHtml_teacher += "<i class='fas fa-chalkboard-teacher fa-fw'></i>"+doc.data()[CLASS_TUTOR_NAME_ARR][0];
+      let teacher_p = document.createElement('p');
+      teacher_p.className = "card-class-item";
+      teacher_p.innerHTML = blogsHtml_teacher;
+      let teacher_a = document.createElement('a');
+      teacher_a.className = "card-class-item-wrapper"
+      teacher_a.appendChild(teacher_p);
+
+      // Card top
+      let card_div = document.createElement('div');
+      card_div.className = "card-class-wrapper"
+      card_div.setAttribute("style","padding: 0;");
+      card_div.setAttribute("onclick","editClassFunction(this)");
+      card_div.setAttribute("data-id", doc.data().id);
+      card_div.appendChild(subject_h4);
+      card_div.appendChild(lastUpdate_p);
+      card_div.appendChild(announcement_a);
+      card_div.appendChild(timeslot_a);
+      card_div.appendChild(student_a);
+      card_div.appendChild(teacher_a);
+      //Update btn
+      let blogsHtml_btn = '';
+      blogsHtml_btn += "Update <i class='fas fa-bullhorn fa-fw' style='margin-left: 0.5rem;'></i>";
+      let btn_a = document.createElement('a');
+      btn_a.innerHTML = blogsHtml_btn;
+      btn_a.className = "btn btn-primary btn-round";
+      btn_a.setAttribute("style","color: white;");
+      btn_a.setAttribute("data-toggle","modal");
+      btn_a.setAttribute("data-target","#editClassModal");
+      btn_a.setAttribute("data-id", doc.data().id);
+      if (doc.data().announcement == '' || doc.data().announcement == null){
+        btn_a.setAttribute("data-announcement",  "");
+      }else{
+        btn_a.setAttribute("data-announcement",  doc.data().announcement);
+      }
+
+      // Create card-class
+      let card_top_div = document.createElement('div');
+      card_top_div.className = "card-class"
+      card_top_div.appendChild(card_div);
+      card_top_div.appendChild(btn_a);
+
+      let card_top = document.createElement('div');
+      card_top.className = "col-md-3 col-lg-3 col-sm-3";
+      // If the course size is less than 2, we need to render empty placeholder so bootstrap looks good.
+      if (renderNull){
+        // render nothing
+      }else{
+        card_top.appendChild(card_top_div);
+      }
+
+      const card_all_courses = document.getElementById("card-all-classes");
+      card_all_courses.appendChild(card_top);
 
     }
 
+     
     // Sign out
     function signOutFunction(){
       $('#signOutModal').modal('show');
@@ -839,6 +1082,10 @@
       $('#btnEditClassModalUpdate').on('click', function (e) {
         var docData = {
           [CLASS_ANNOUNCEMENT]: document.getElementById("modalClassAnnouncement").value,
+          // [CLASS_DATE_ADD]: '',
+          [CLASS_DATE_EDIT]: new Date(),
+          // [CLASS_DATE_DEL]: '',
+          [CLASS_EDIT_MSG]: 'New announcement from '+ current_name, // Update: CLASS_DATE_EDIT + CLASS_EDIT_MSG
         }
         // Set data
         db.collection("Class")        
@@ -935,7 +1182,7 @@
             sessionStorage.setItem(SESSION_STORAGE_CLASS_LOAD_KEY, true);
           }
           // window.location = './edit-class.html?id='+elem.getAttribute('data-id');
-          window.location = './edit-class.html?id=';
+          window.location = './edit-class.html';
 
           // console.log(item);
         });

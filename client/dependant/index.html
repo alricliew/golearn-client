@@ -27,14 +27,14 @@
 <body>
 
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/img/sidebar-3.jpg">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../../assets/img/sidebar-3.jpg">
 
       <div class="logo">
-        <a href="./" class="simple-text logo-mini">
+        <a href="../" class="simple-text logo-mini">
 			    <img src="../../assets/img/logo.png" style="width: 216px; height: auto;" alt=""></img>
           
         </a>
-        <a href="./" class="simple-text logo-normal">
+        <a href="../" class="simple-text logo-normal">
           Welcome!
         </a>
       </div>
@@ -66,7 +66,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Dependant</a>
+            <a class="navbar-brand" href="javascript:;">Dependants</a>
           </div>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,8 +119,8 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                  <a class="dropdown-item" href="./edit-profile.html">Edit Profile</a>
-									<a class="display:block; dropdown-item" href="./about.html">About</a>
+                  <a class="dropdown-item" href="../edit-profile.html">Edit Profile</a>
+									<a class="display:block; dropdown-item" href="../about.html">About</a>
 									<div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
 									<!-- <div class="dropdown-divider"></div> -->
@@ -307,35 +307,31 @@
   
   <div class="fixed-plugin">
     <div class="dropdown show-dropdown">
-      <a href="#" data-toggle="dropdown">
-				<i class="material-icons" style="font-size: 36px; padding: 0.2em; color: white;">apps</i>
+      <a href="javascript:;" data-toggle="dropdown">
+        <i class="material-icons" style="font-size: 36px; padding: 0.2em; color: white;">apps</i>
       </a>
       <ul class="dropdown-menu">
 		    <br>
-        <li class="header-title">Get More Tuition Jobs?</li>
-        <li class="button-container">
-          <a href="https://golearn.com.my/job/" target="_blank" class="btn btn-primary btn-block">Apply Now</a>
+		    <li class="button-container text-center">
+          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >CONTACT US</p>
+          <button id="twitter" style="background-color: #128C7E;" class="btn btn-round btn-facebook" onclick="location.href = 'https://api.whatsapp.com/send?phone=601115131661&text=Hello!%20I%27m%20looking%20for%20a%20tutor.';"><i class="fa fa-whatsapp"></i> &middot; Reply in 1 hour</button>
         </li>
-        
-        <li class="button-container">
-          <a href="https://golearn.com.my/" target="_blank" class="btn btn-default btn-block">
-            Visit our website
-          </a>
-        </li>
-       
-        <li class="header-title">Follow and Like Us!</li>
+        <br>
         <li class="button-container text-center">
-			    <button id="facebook" class="btn btn-round btn-facebook" onclick="window.open('https://www.facebook.com/FindTutorInMalaysia/', '_blank');"><i class="fa fa-facebook-f"></i> &middot; facebook</button>
-          <button id="twitter"  class="btn btn-round btn-twitter" onclick="window.open('https://twitter.com/golearnmalaysia', '_blank');"><i class="fa fa-twitter"></i> &middot; twitter</button>
-          <button id="instagram"  class="btn btn-round btn-twitter" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); " onclick="window.open('https://www.instagram.com/golearn.education/', '_blank');"><i class="fa fa-instagram"></i> &middot; instagram</button>
-          <br>
-          <br>
+          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >I want more subjects.</p>
+          <a href="https://golearn.com.my/request-a-tutor/" target="_blank" class="btn btn-primary btn-block">Request A Tutor Now</a>
         </li>
-        <li class="header-title">Found a problem? </li>
-        <li class="button-container">
-          <a href="https://golearn.com.my/submit-anything-to-us/" target="_blank" class="btn btn-warning btn-block">
-            Let us know
+        <li class="button-container text-center">
+          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >Check us out now.</p>
+          <a href="https://golearn.com.my/" target="_blank" class="btn btn-warning btn-block">
+            Visit GoLearn
           </a>
+        </li>
+        <li class="button-container text-center">
+          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >CONTACT US</p>
+			    <button id="facebook" class="btn btn-round btn-facebook" onclick="location.href = 'https://www.facebook.com/FindTutorInMalaysia/';"><i class="fa fa-facebook-f"></i> &middot; facebook</button>
+          <button id="twitter"  class="btn btn-round btn-twitter" onclick="location.href = 'https://twitter.com/golearnmalaysia';"><i class="fa fa-twitter"></i> &middot; twitter</button>
+          <br>
           <br>
         </li>
       </ul>
@@ -418,7 +414,7 @@
       }
 		});
 
-    // Tutor Specific
+    // User Specific
     function loadUserInfo(userId){
       // Tutor Id must be a phone with +60, no spacing or other chars
       var docRef = db.collection("Users").doc(userId);
