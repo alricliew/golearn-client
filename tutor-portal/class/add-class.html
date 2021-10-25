@@ -1350,10 +1350,10 @@
           [CLASS_ID]: docRef.id,
           [CLASS_NAME]: document.getElementById("inClassName").value,
           [CLASS_DESC]: document.getElementById("inClassDesc").value,
-          [CLASS_CATEGORY_KEY]: category,
-          [CLASS_CATEGORY_ID_KEY]: categoryId,
-          [CLASS_SUBJECT_KEY]: subject,
-          [CLASS_SUBJECT_ID_KEY]: subjectId,
+          // [CLASS_CATEGORY_KEY]: category,
+          // [CLASS_CATEGORY_ID_KEY]: categoryId,
+          // [CLASS_SUBJECT_KEY]: subject,
+          // [CLASS_SUBJECT_ID_KEY]: subjectId,
           [CLASS_ONLINE_KEY]: document.getElementById("onlineonly_check").checked,
           [CLASS_STUDENT_LIMIT]: document.getElementById("inStudentLimit").value,
           [CLASS_ANNOUNCEMENT]: "",
@@ -1361,10 +1361,10 @@
           [CLASS_TYPE]: (document.getElementById("classTypeRadioPrivate").checked)? CLASS_TYPE_PRIVATE : CLASS_TYPE_PUBLIC,
           [CLASS_STATUS]: (document.getElementById("classStatusRadioActive").checked)? CLASS_STATUS_ACTIVE : CLASS_STATUS_INACTIVE,
           [CLASS_VENUE]: document.getElementById("inVenue").value,
-          [CLASS_STATE_KEY]: gStateName,
-          [CLASS_STATE_ID_KEY]: gState,
-          [CLASS_AREA_KEY]: gAreaName,
-          [CLASS_AREA_ID_KEY]: gArea,
+          // [CLASS_STATE_KEY]: gStateName,
+          // [CLASS_STATE_ID_KEY]: gState,
+          // [CLASS_AREA_KEY]: gAreaName,
+          // [CLASS_AREA_ID_KEY]: gArea,
 
           // Time slot
           [CLASS_TIMESLOT_DAY_OF_WEEK_ARR]: dayOfWeekArr,
@@ -1600,19 +1600,19 @@
         document.getElementById("countClassVenue").textContent = this.value.length + '/250'
       });
 
-      // ------Education Level Dropdown End------- //
-      // Populate Education Level
-      var level_select = document.getElementById("level_drop"); 
-      var level = Category; 
-      var catId = CategoryId; 
-      for (var i = 0; i < level.length; i++) {
-        var opt = level[i];
-        var el = document.createElement("option");
-        el.setAttribute("value", catId[i]);
-        el.textContent = opt;
-        el.value = catId[i];
-        level_select.appendChild(el);
-      }
+      // // ------Education Level Dropdown End------- //
+      // // Populate Education Level
+      // var level_select = document.getElementById("level_drop"); 
+      // var level = Category; 
+      // var catId = CategoryId; 
+      // for (var i = 0; i < level.length; i++) {
+      //   var opt = level[i];
+      //   var el = document.createElement("option");
+      //   el.setAttribute("value", catId[i]);
+      //   el.textContent = opt;
+      //   el.value = catId[i];
+      //   level_select.appendChild(el);
+      // }
 
       // Populate Subject based on selected education level
       $('#level_drop').on('change', function(){
@@ -1680,14 +1680,14 @@
         // checkSelection(onlineonly_check.checked);
        });
 
-      // ------State Dropdown start------- //
-      let state_select = document.getElementById("state_drop"); 
-      for (let i = 0; i < MYAllState.length; i++) {
-        let el = document.createElement("option");
-        el.textContent = MYAllState[i];
-        el.value = MYAllStateId[i];
-        state_select.appendChild(el);
-      }   
+      // // ------State Dropdown start------- //
+      // let state_select = document.getElementById("state_drop"); 
+      // for (let i = 0; i < MYAllState.length; i++) {
+      //   let el = document.createElement("option");
+      //   el.textContent = MYAllState[i];
+      //   el.value = MYAllStateId[i];
+      //   state_select.appendChild(el);
+      // }   
 
       // Populate Area based on selected State
       $('#state_drop').on('change', function(){

@@ -945,12 +945,12 @@
                               <textarea class="form-control" maxlength="255" rows="3" id="inClassDesc" data-compulsory="false"></textarea>
                             </div>
             
-                            <div class="row" style="margin-top: 0.5rem;">
+                            <div class="row" style="margin-top: 0.5rem; display: none;">
                               <div class="col-md-6">
                                   <!-- Education Level -->
-                                <div class="form-group">
+                                <div class="form-group" >
                                   <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Education Level*</span> 
-                                  <select class="form-control" name="tutor_course[]" id="level_drop" data-compulsory="true" oninput="this.className = 'form-control'">
+                                  <select class="form-control" name="tutor_course[]" id="level_drop" data-compulsory="false" oninput="this.className = 'form-control'">
                                     <option value="">Select education level</option>
                                     <!-- <option value="1" >Pre-School</option>
                                     <option value="2" >Lower Primary (Tahun 1-3)</option>
@@ -968,7 +968,7 @@
                                 <!-- Subjects -->
                                 <div class="form-group">
                                   <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Subject*</span>
-                                  <select class="form-control" name="tutor_course[]" id="subject_drop" data-compulsory="true" oninput="this.className = 'form-control'">
+                                  <select class="form-control" name="tutor_course[]" id="subject_drop" data-compulsory="false" oninput="this.className = 'form-control'">
                                     <option value="">Select subject</option>
                                   </select>
                                 </div>
@@ -991,7 +991,7 @@
                               <textarea class="form-control" maxlength="255" rows="3"  id="inVenue" data-compulsory="false"></textarea>
                             </div>
             
-                            <div class="row" style="margin-top: 0.5rem;">
+                            <div class="row" style="margin-top: 0.5rem; display: none;" >
                               <div class="col-md-6">
                                   <!-- State -->
                                 <div class="form-group">
@@ -1195,7 +1195,7 @@
                               </div>
                             </div>
                             <div class="col-md-2 d-flex align-items-center">
-                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher1" data-toggle="" data-target="#myTeacherModal" data-num='1' href="javascript:;" style="pointer-events:none; background-color: #f5f5f5;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
+                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher1" data-toggle="modal" data-target="#myTeacherModal" data-num='1' href="javascript:;" style="pointer-events:none; background-color: #f5f5f5;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
                             </div>
                           </div>
                           <!-- Teacher 2  -->
@@ -1680,16 +1680,17 @@
       tutor2Name = currentClassObj[CLASS_TUTOR_NAME_ARR][1];
       tutor2Phone = currentClassObj[CLASS_TUTOR_PHONE_ARR][1];
 
-      // Enable changes to Tutor 1
-      if (current_accountStatus === PREMIUM_ACCOUNT_2_STATUS_KEY || current_accountStatus === PREMIUM_ACCOUNT_3_STATUS_KEY){
-        document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "modal");
-        document.getElementById("btnAddTeacher1").setAttribute("style", "pointer-events: fill; background-color: #fff;");
-        document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "modal");
-        document.getElementById("btnAddTeacher2").setAttribute("style", "pointer-events: fill; background-color: #fff;");
-      }else {
-        document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "");
-        document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "");
-      }
+      // Enable changes to Tutor 1 and 2 
+      // if (current_accountStatus === PREMIUM_ACCOUNT_2_STATUS_KEY || current_accountStatus === PREMIUM_ACCOUNT_3_STATUS_KEY){
+        // document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "modal");
+        // document.getElementById("btnAddTeacher1").setAttribute("data-target", "#myTeacherModal");
+        // document.getElementById("btnAddTeacher1").setAttribute("style", "pointer-events: fill; background-color: #fff;");
+        // document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "modal");
+        // document.getElementById("btnAddTeacher2").setAttribute("style", "pointer-events: fill; background-color: #fff;");
+      // }else {
+      //   document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "");
+      //   document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "");
+      // }
 
       // Fee Panel
       document.getElementById("inFee").value = currentClassObj[FEES_KEY];
@@ -1937,15 +1938,15 @@
 
           // Enable add other teacher based on Account Status
           // Enable changes to Tutor 1
-          if (current_accountStatus === PREMIUM_ACCOUNT_2_STATUS_KEY || current_accountStatus === PREMIUM_ACCOUNT_3_STATUS_KEY){
+          // if (current_accountStatus === PREMIUM_ACCOUNT_2_STATUS_KEY || current_accountStatus === PREMIUM_ACCOUNT_3_STATUS_KEY){
             document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "modal");
             document.getElementById("btnAddTeacher1").setAttribute("style", "pointer-events: fill; background-color: #fff;");
             document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "modal");
             document.getElementById("btnAddTeacher2").setAttribute("style", "pointer-events: fill; background-color: #fff;");
-          }else {
-            document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "");
-            document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "");
-          }
+          // }else {
+          //   document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "");
+          //   document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "");
+          // }
 
           // Update Myself in Add Teacher Modal
           document.getElementById("viewTutorMySelfImgUrl").src = current_imgUri;
@@ -1995,10 +1996,10 @@
         [CLASS_ID]: docRef.id,
         [CLASS_NAME]: document.getElementById("inClassName").value,
         [CLASS_DESC]: document.getElementById("inClassDesc").value,
-        [CLASS_CATEGORY_KEY]: category,
-        [CLASS_CATEGORY_ID_KEY]: categoryId,
-        [CLASS_SUBJECT_KEY]: subject,
-        [CLASS_SUBJECT_ID_KEY]: subjectId,
+        // [CLASS_CATEGORY_KEY]: category,
+        // [CLASS_CATEGORY_ID_KEY]: categoryId,
+        // [CLASS_SUBJECT_KEY]: subject,
+        // [CLASS_SUBJECT_ID_KEY]: subjectId,
         [CLASS_ONLINE_KEY]: document.getElementById("onlineonly_check").checked,
         [CLASS_STUDENT_LIMIT]: document.getElementById("inStudentLimit").value,
         [CLASS_ANNOUNCEMENT]: document.getElementById("inClassAnnouncement").value,
@@ -2006,10 +2007,10 @@
         [CLASS_TYPE]: (document.getElementById("classTypeRadioPrivate").checked)? CLASS_TYPE_PRIVATE : CLASS_TYPE_PUBLIC,
         [CLASS_STATUS]: (document.getElementById("classStatusRadioActive").checked)? CLASS_STATUS_ACTIVE : CLASS_STATUS_INACTIVE,
         [CLASS_VENUE]: document.getElementById("inVenue").value,
-        [CLASS_STATE_KEY]: gStateName,
-        [CLASS_STATE_ID_KEY]: gState,
-        [CLASS_AREA_KEY]: gAreaName,
-        [CLASS_AREA_ID_KEY]: gArea,
+        // [CLASS_STATE_KEY]: gStateName,
+        // [CLASS_STATE_ID_KEY]: gState,
+        // [CLASS_AREA_KEY]: gAreaName,
+        // [CLASS_AREA_ID_KEY]: gArea,
 
         // Time slot
         [CLASS_TIMESLOT_DAY_OF_WEEK_ARR]: dayOfWeekArr,
@@ -2021,8 +2022,8 @@
         [CLASS_TUTOR_NAME_ARR]: [document.getElementById("inTutor1Name").value, document.getElementById("inTutor2Name").value],
         [CLASS_TUTOR_PHONE_ARR]: [document.getElementById("inTutor1Phone").value, document.getElementById("inTutor2Phone").value],
         [CLASS_TUTOR_IMG_URL_ARR]: [document.getElementById("inTutor1ImgUrl").src, document.getElementById("inTutor2ImgUrl").src],
-        [CLASS_STUDENT_ID_ARR]: [],
-        [CLASS_VIEWER_ID_ARR]:[],
+        // [CLASS_STUDENT_ID_ARR]: [],
+        // [CLASS_VIEWER_ID_ARR]:[],
         // Fee type
         [CLASS_FEES_KEY]: parseFloat(document.getElementById("inFee").value),
         [CLASS_FEES_PER_MONTH_KEY]: (document.getElementById("feeTypePerMonthRadio").checked)? parseFloat(document.getElementById("inFee").value) : parseFloat(document.getElementById("inFee").value * 2 * 4),
@@ -2767,7 +2768,7 @@
       let selectedStuModuleDoc = null;
 
       allStuModuleDoc.forEach((doc) => {
-        console.log(doc);
+        // console.log(doc);
         if (id === doc.id){
           selectedStuModuleDoc = doc;
         }
@@ -3623,59 +3624,59 @@
     $( document ).ready(function() {
       
       // Init variable
-      categoryId = currentClassObj[CATEGORY_ID_KEY];
-      category = currentClassObj[CATEGORY_KEY];
-      subjectId = currentClassObj[SUBJECT_ID_KEY];
-      subject = currentClassObj[SUBJECT_KEY];
+      // categoryId = currentClassObj[CATEGORY_ID_KEY];
+      // category = currentClassObj[CATEGORY_KEY];
+      // subjectId = currentClassObj[SUBJECT_ID_KEY];
+      // subject = currentClassObj[SUBJECT_KEY];
       online = currentClassObj[ONLINE_KEY];
-      gState = currentClassObj[STATE_ID_KEY];
-      gStateName = currentClassObj[STATE_KEY];
-      gArea = currentClassObj[AREA_ID_KEY];
-      gAreaName = currentClassObj[AREA_KEY];
+      // gState = currentClassObj[STATE_ID_KEY];
+      // gStateName = currentClassObj[STATE_KEY];
+      // gArea = currentClassObj[AREA_ID_KEY];
+      // gAreaName = currentClassObj[AREA_KEY];
 
 
       // ------Education Level Dropdown End------- //
       // Populate Education Level
-      var level_select = document.getElementById("level_drop"); 
-      var level = Category; 
-      var catId = CategoryId; 
-      for (var i = 0; i < level.length; i++) {
-        var opt = level[i];
-        var el = document.createElement("option");
-        el.setAttribute("value", catId[i]);
-        el.textContent = opt;
-        el.value = catId[i];
-        // Update Level
-        if (catId[i] === currentClassObj[CATEGORY_ID_KEY]) {
-          el.selected = true;
-        }
-        level_select.appendChild(el);
+      // var level_select = document.getElementById("level_drop"); 
+      // var level = Category; 
+      // var catId = CategoryId; 
+      // for (var i = 0; i < level.length; i++) {
+      //   var opt = level[i];
+      //   var el = document.createElement("option");
+      //   el.setAttribute("value", catId[i]);
+      //   el.textContent = opt;
+      //   el.value = catId[i];
+      //   // Update Level
+      //   if (catId[i] === currentClassObj[CATEGORY_ID_KEY]) {
+      //     el.selected = true;
+      //   }
+      //   level_select.appendChild(el);
 
-      }
+      // }
 
-      // Update Subjects
-      // Clear the area option first, except the first one. 50 is a just a huge number
-      var subject_drop = document.getElementById("subject_drop"); 
-        for(i=1; i <= 50; i++){
-          subject_drop.remove(1);
-        } 
-      // Load default selected subject and respective subject lists
-      var subjectInfo = selectSubjectListBasedOnLevelId(currentClassObj[CATEGORY_ID_KEY]);// Get the subject info
-      var optionsName = subjectInfo[0];
-      var optionId = subjectInfo[1];
-      // console.log("Subjects: "+ options); 
+      // // Update Subjects
+      // // Clear the area option first, except the first one. 50 is a just a huge number
+      // var subject_drop = document.getElementById("subject_drop"); 
+      //   for(i=1; i <= 50; i++){
+      //     subject_drop.remove(1);
+      //   } 
+      // // Load default selected subject and respective subject lists
+      // var subjectInfo = selectSubjectListBasedOnLevelId(currentClassObj[CATEGORY_ID_KEY]);// Get the subject info
+      // var optionsName = subjectInfo[0];
+      // var optionId = subjectInfo[1];
+      // // console.log("Subjects: "+ options); 
 
-      for (var i = 0; i < optionsName.length; i++) {
-        var el = document.createElement("option");
-        // el.setAttribute("value", "volvocar");
-        el.textContent = optionsName[i];
-        el.value = optionId[i];
-        // Default selection based on existing class
-        if (optionId[i] === currentClassObj[SUBJECT_ID_KEY]) {
-          el.selected = true;
-        }
-        subject_drop.appendChild(el);
-      }
+      // for (var i = 0; i < optionsName.length; i++) {
+      //   var el = document.createElement("option");
+      //   // el.setAttribute("value", "volvocar");
+      //   el.textContent = optionsName[i];
+      //   el.value = optionId[i];
+      //   // Default selection based on existing class
+      //   if (optionId[i] === currentClassObj[SUBJECT_ID_KEY]) {
+      //     el.selected = true;
+      //   }
+      //   subject_drop.appendChild(el);
+      // }
 
       // Populate Subject based on selected education level
       $('#level_drop').on('change', function(){
@@ -3740,44 +3741,44 @@
         // checkSelection(onlineonly_check.checked);
        });
 
-      // ------State Dropdown start------- //
-      let state_select = document.getElementById("state_drop"); 
-      let state = MYAllState; 
-      let stateId = MYAllStateId; 
-      for (let i = 0; i < state.length; i++) {
-          let el = document.createElement("option");
-          el.textContent = state[i];
-          el.value = stateId[i];
+      // // ------State Dropdown start------- //
+      // let state_select = document.getElementById("state_drop"); 
+      // let state = MYAllState; 
+      // let stateId = MYAllStateId; 
+      // for (let i = 0; i < state.length; i++) {
+      //     let el = document.createElement("option");
+      //     el.textContent = state[i];
+      //     el.value = stateId[i];
           
-          // Update State
-          if (state[i] === currentClassObj[STATE_KEY]) {
-            el.selected = true;
-          }
-          state_select.appendChild(el);
-      }   
+      //     // Update State
+      //     if (state[i] === currentClassObj[STATE_KEY]) {
+      //       el.selected = true;
+      //     }
+      //     state_select.appendChild(el);
+      // }   
 
-      // Update Area
-      // Clear the area option first, except the first one. 100 is just a huge number
-      let select_area = document.getElementById("area_drop"); 
-      for(i=1; i <= 100; i++){
-          select_area.remove(1);
-      }  
-      if (!(currentClassObj[STATE_KEY] == null || currentClassObj[STATE_KEY] =='')){
-        // let options = selectCityBasedOnState (currentClassObj[STATE_KEY]);
-        let cityInfo = selectCityListBasedOnStateId(currentClassObj[STATE_ID_KEY]);
-        let cityName = cityInfo[0];
-        let cityId = cityInfo[1];
-        for (let i = 0; i < cityName.length; i++) {
-            let el = document.createElement("option");
-            el.textContent = cityName[i];
-            el.value = cityId[i];
-            // Default selection based on existing class
-            if (cityName[i] === currentClassObj[AREA_KEY]) {
-              el.selected = true;
-            }
-            select_area.appendChild(el);
-        }
-      }
+      // // Update Area
+      // // Clear the area option first, except the first one. 100 is just a huge number
+      // let select_area = document.getElementById("area_drop"); 
+      // for(i=1; i <= 100; i++){
+      //     select_area.remove(1);
+      // }  
+      // if (!(currentClassObj[STATE_KEY] == null || currentClassObj[STATE_KEY] =='')){
+      //   // let options = selectCityBasedOnState (currentClassObj[STATE_KEY]);
+      //   let cityInfo = selectCityListBasedOnStateId(currentClassObj[STATE_ID_KEY]);
+      //   let cityName = cityInfo[0];
+      //   let cityId = cityInfo[1];
+      //   for (let i = 0; i < cityName.length; i++) {
+      //       let el = document.createElement("option");
+      //       el.textContent = cityName[i];
+      //       el.value = cityId[i];
+      //       // Default selection based on existing class
+      //       if (cityName[i] === currentClassObj[AREA_KEY]) {
+      //         el.selected = true;
+      //       }
+      //       select_area.appendChild(el);
+      //   }
+      // }
 
       // Populate Area based on selected State
       $('#state_drop').on('change', function(){
@@ -4084,7 +4085,7 @@
         let selectedClassStuDoc = null;
 
         allClassStuDoc.forEach((doc) => {
-          console.log(doc);
+          // console.log(doc);
           if (STUDENT_ID === doc.id){
             selectedClassStuDoc = doc;
           }
