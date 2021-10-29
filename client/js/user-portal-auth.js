@@ -17,6 +17,9 @@ function render() {
             document.getElementById("btnVerify").style.cursor='pointer';
             document.getElementById("btnVerify").disabled = false;
 
+            document.getElementById("verificationCode").style.backgroundColor = '#eeeeee'
+            document.getElementById("verificationCode").focus();
+
         },
         'expired-callback': () => {
             // Response expired. Ask user to solve reCAPTCHA again.
