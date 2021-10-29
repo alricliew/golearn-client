@@ -13,6 +13,7 @@
   <!-- Material Kit CSS -->
   <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <link href="../css/tutor-portal.css" rel="stylesheet" />
+  <link href="../css/golearn.css" rel="stylesheet" >
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
@@ -32,6 +33,34 @@
     #addStudentModal{
       overflow-y:auto;
     }
+
+    .tooltiptext-general {
+      /* This is for the tooltip text */
+      visibility: hidden;
+      width: 300px;
+      /* background-color: #adadad; */
+      /* color: #adadad; */
+      background-color: white;
+      text-align: left;
+      font-size: smaller;
+      padding: 5px;
+      border-radius: 5px; /* This defines tooltip text position */
+      position: absolute;
+      z-index: 1;
+      bottom: 100%;
+      left: 50%;
+      /* This makes the margin half of the width to the center */
+      margin-left: -50px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      border: thin solid #2e74b6 ;
+      ;
+    }
+
+    .tooltiptext-trigger:hover .tooltiptext-general {
+      /* Makes tooltip text visible when text is hovered on */
+      visibility: visible;
+    }
+
   </style>
 </head>
 
@@ -95,7 +124,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Classes <span><i class="material-icons" style="color: gray;">chevron_right</i></span> Edit Class</a>
+            <a class="navbar-brand" href="javascript:;">Classes <span><i class="material-icons" style="color: gray;">chevron_right</i></span> <span id="titleClassName"></span></a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -737,6 +766,55 @@
         </div>
       </div>
 
+      <!-- Image Uploading Progress modal -->
+      <div class="row">
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="uploadModalLabel">Uploading...</h5>
+              </div>
+              <div class="modal-body" id="uploadModalBody">
+                <div id="myProgress" style="width: 100%; background-color: grey;">
+                  <div id="myBar" style="width: 1%; height: 30px; background-color: green;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delete Class modal -->
+      <div class="row">
+        <div class="modal fade" id="delClassModal" tabindex="-1" role="dialog" aria-labelledby="delClassModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="delClassModalLabel">Are you absolutely sure? </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnDelClassModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="delClassModalBody">
+                <p>This action cannot be <strong style="color: red;">undone</strong>. This will permanently delete the class details, lesson histories, assigned teachers, and remove all enrolled students.</p>
+                <p>Your students and teachers will not be able to view this class under their accounts. </p> 
+                <p>If you still want to keep this class, you may set the Class Status to <strong style="color: #2e74b6 ;">Inactive</strong>.</p> 
+
+                <p>Please type <strong>DELETE</strong> to confirm.</p>
+
+
+                <input type="text" class="form-control" id="delClassModalIn">
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnDelClassModalUpdate" disabled>I understand the consequences. Delete this class.</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Activation modal -->
       <div class="row">
         <div class="modal fade" id="activationModal" tabindex="-1" role="dialog" aria-labelledby="activationModalLabel" aria-hidden="true">
@@ -806,11 +884,11 @@
                     <div class="d-flex flex-wrap multitabs-form__progress">
                       <button class="multitabs-form__progress-btn js-active" type="button" title="Lessons">Lessons</button>
                       <button class="multitabs-form__progress-btn" type="button" title="General Info">General</button>
-                      <button class="multitabs-form__progress-btn" type="button" title="Time Slot">Time Slot</button>
+                      <button class="multitabs-form__progress-btn" type="button" title="Time Slot">Schedule</button>
                       <button class="multitabs-form__progress-btn" type="button" title="Students">Students</button>
                       <button class="multitabs-form__progress-btn" type="button" title="Teacher">Teacher</button>
                       <button class="multitabs-form__progress-btn" type="button" title="Fee">Fee</button>
-                      <button class="multitabs-form__progress-btn" type="button" title="Advanced Settings">Advanced <span class='card-class-status-label'>Admin</span></button>
+                      <button class="multitabs-form__progress-btn" type="button" title="Advanced Settings" id="advancedSettingsTab">Advanced <span class='card-class-status-label'>Admin</span></button>
                       
                     </div>
                   </div>
@@ -876,6 +954,13 @@
                                 </div>
                               </div>
 
+                              <!-- No data placeholder -->
+                              <div class="row" style="display: none;" id="lessonNoDataPlaceholder">
+                                <div class="col-md-12 text-center">
+                                  No lesson
+                                </div>
+                              </div>
+
                               <!-- Add new lesson here .... -->
                               <!-- Lesson List Start -->
                               <!-- <div class="row lesson-wrapper">
@@ -936,82 +1021,77 @@
                             </div>
 
                             <div class="form-group" style="margin-top: 2rem;">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Name*</span> 
-                              <input type="text" class="form-control" id="inClassName" data-compulsory="true" oninput="this.className = 'form-control'">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Name* <span id="countClassName" style="color: grey; margin-left: 1rem;">0/40</span></span> 
+                              <input type="text" class="form-control" id="inClassName" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
                             </div>
-                            
+
+
+                            <div class="form-group" style="margin-top: 2rem;">
+                              <p class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 1rem;">Class Icon</p> 
+                              <div style="height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%; cursor: pointer;">
+                                <img id="tutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+                              </div>
+                              <input type="file" id="select_image" name="image" style="display:none" accept="image/x-png,image/jpeg"> </input>
+                            </div>
+
                             <div class="form-group" style="margin-top: 1.5rem;" >
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Description</span> 
-                              <textarea class="form-control" maxlength="255" rows="3" id="inClassDesc" data-compulsory="false"></textarea>
-                            </div>
-            
-                            <div class="row" style="margin-top: 0.5rem; display: none;">
-                              <div class="col-md-6">
-                                  <!-- Education Level -->
-                                <div class="form-group" >
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Education Level*</span> 
-                                  <select class="form-control" name="tutor_course[]" id="level_drop" data-compulsory="false" oninput="this.className = 'form-control'">
-                                    <option value="">Select education level</option>
-                                    <!-- <option value="1" >Pre-School</option>
-                                    <option value="2" >Lower Primary (Tahun 1-3)</option>
-                                    <option value="3" >Upper Primary (UPSR)</option>
-                                    <option value="4" >Form 1-3 (PT3)</option>
-                                    <option value="5" >Form 4-5 (SPM)</option>
-                                    <option value="6" >Primary (International Syllabus)</option>
-                                    <option value="7" >Lower Secondary (International Syllabus)</option>
-                                    <option value="8" >Year 10-11 (IGCSE)</option>
-                                    <option value="9" >Others</option> -->
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-md-6">
-                                <!-- Subjects -->
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Subject*</span>
-                                  <select class="form-control" name="tutor_course[]" id="subject_drop" data-compulsory="false" oninput="this.className = 'form-control'">
-                                    <option value="">Select subject</option>
-                                  </select>
-                                </div>
-                              </div>
-                            </div>
-            
-                            <!-- Online Only  -->
-                            <div class="form-check" style="margin-top: 1.0rem;">
-                              <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" value="" id="onlineonly_check" data-compulsory="false">
-                                <span class="form-check-sign">
-                                  <span class="check"></span>
-                                </span>
-                                Online Only?
-                              </label>
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Description <span id="countClassDesc" style="color: grey; margin-left: 1rem;">0/400</span></span> 
+                              <textarea class="form-control" maxlength="400" rows="4" id="inClassDesc" data-compulsory="false"></textarea>
                             </div>
             
                             <div class="form-group" style="margin-top: 2rem;">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Venue</span> 
-                              <textarea class="form-control" maxlength="255" rows="3"  id="inVenue" data-compulsory="false"></textarea>
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Venue <span id="countClassVenue" style="color: grey; margin-left: 1rem;">0/250</span></span> 
+                              <textarea class="form-control" maxlength="250" rows="3"  id="inVenue" data-compulsory="false"></textarea>
                             </div>
-            
-                            <div class="row" style="margin-top: 0.5rem; display: none;" >
-                              <div class="col-md-6">
-                                  <!-- State -->
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray;">State</span> 
-                                  <select class="form-control" name="tutor_course[]" id="state_drop" data-compulsory="false">
-                                    <option value="">Select state</option>
-                      
-                                  </select>
-                                </div>
+
+                            <div class="form-group" style="margin-top: 2rem;">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Link</span>
+                              <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
+                                <span class="tooltiptext-general" style="left: 10%;">
+                                  <h6 style="margin: 0; color: #2e74b6;">Class Link</h6>
+                                  <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">Link to the platform where this class will be conducted. I.e Google Meet, Zoom or other platforms.</p>
+                                </span> 
+                              </span>
+                              <div class="input-group">
+                                <span class="d-flex align-items-center input-group-addon" id="inUrlClassIconWrapper" style="margin-right: 0.5em; cursor: pointer;" onclick="RedirectTo('')">
+                                  <img id='inUrlClassIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
+                                </span>
+                                <input type="text" class="form-control" id="inUrlClass" data-compulsory="true" oninput="this.className = 'form-control'">
                               </div>
-                              <div class="col-md-6">
-                                <!-- Area -->
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Area</span>
-                                  <select class="form-control" name="tutor_course[]" id="area_drop" data-compulsory="false">
-                                    <option value="">Select area</option>
-                                  </select>
-                                </div>
+                            </div>
+
+
+                            <div class="form-group" style="margin-top: 2rem;">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Chat Group Link</span> 
+                              <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
+                                <span class="tooltiptext-general" style="left: 10%;">
+                                  <h6 style="margin: 0; color: #2e74b6;">Chat Group Link</h6>
+                                  <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">Link to this class chat group. I.e Whatsapp, Telegram, Facebook group or other groups.</p>
+                                </span> 
+                              </span>
+                              <div class="input-group">
+                                <span class="d-flex align-items-center input-group-addon" id="inUrlGroupIconWrapper" style="margin-right: 0.5em; cursor: pointer;" onclick="RedirectTo('')">
+                                  <img id='inUrlGroupIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
+                                </span>
+                                <input type="text" class="form-control" id="inUrlGroup" data-compulsory="true" oninput="this.className = 'form-control'" >
                               </div>
-                            </div>           
+                            </div>
+
+                            <div class="form-group" style="margin-top: 2rem;">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Lesson Material Link </span>
+                              <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
+                                <span class="tooltiptext-general" style="left: 10%;">
+                                  <h6 style="margin: 0; color: #2e74b6;">Lesson Material Link</h6>
+                                  <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">Link to material that will be used for the class. I.e Google Classroom, Drive, or other storage places.</p>
+                                </span> 
+                              </span>
+                              <div class="input-group">
+                                <span class="d-flex align-items-center input-group-addon" id="inUrlMaterialIconWrapper" style="margin-right: 0.5em; cursor: pointer;" onclick="RedirectTo('')">
+                                  <img id='inUrlMaterialIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
+                                </span>
+                                <input type="text" class="form-control" id="inUrlMaterial" data-compulsory="true" oninput="this.className = 'form-control'">
+                              </div>
+                            </div>
   
                           </div>
 
@@ -1022,7 +1102,7 @@
                       </div>
                       <!--Time Slot form panel-->
                       <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                        <h4 class="multitabs-form__title">Timeslot</h4>
+                        <h4 class="multitabs-form__title">Class Schedule</h4>
                         <div class="multitabs-form__content">
                           <div class="col-md-12" id="timeSlotTop">
                           
@@ -1131,6 +1211,13 @@
                                   <p>Action</p> 
                                 </div>
                               </div>
+
+                              <!-- No data placeholder -->
+                              <div class="row" style="display: none;" id="studentNoDataPlaceholder">
+                                <div class="col-md-12 text-center">
+                                  No student
+                                </div>
+                              </div>
                               <!-- Student List Start -->
                               <!-- <div class="row lesson-wrapper">
                                 <div class="col-md-11" >
@@ -1173,7 +1260,7 @@
                       </div>
                       <!--Teacher form panel-->
                       <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                        <h4 class="multitabs-form__title">Teacher</h4>
+                        <h4 class="multitabs-form__title">Teachers</h4>
                         <div class="multitabs-form__content">
                           <!-- Teacher 1  -->
                           <div class="row" style="margin-top: 1.0rem;">
@@ -1185,17 +1272,17 @@
                             <div class="col-md-5">
                               <div class="form-group">
                                 <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Teacher 1's Name*</span> 
-                                <input type="text" class="form-control" style="background-color: #f5f5f5;" disabled  id="inTutor1Name" data-tutor1id="bobo">
+                                <input type="text" class="form-control" style="background-color: #e9ecef;" disabled  id="inTutor1Name" data-tutor1id="bobo">
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
                                 <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Teacher 1's Phone*</span> 
-                                <input type="text" class="form-control" style="background-color: #f5f5f5;" disabled  id="inTutor1Phone">
+                                <input type="text" class="form-control" style="background-color: #e9ecef;" disabled  id="inTutor1Phone">
                               </div>
                             </div>
                             <div class="col-md-2 d-flex align-items-center">
-                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher1" data-toggle="modal" data-target="#myTeacherModal" data-num='1' href="javascript:;" style="pointer-events:none; background-color: #f5f5f5;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
+                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher1" data-toggle="modal" data-target="#myTeacherModal" data-num='1' href="javascript:;" style="pointer-events:none; background-color: #e9ecef;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
                             </div>
                           </div>
                           <!-- Teacher 2  -->
@@ -1208,18 +1295,18 @@
                             <div class="col-md-5">
                               <div class="form-group">
                                 <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Teacher 2's Name</span> 
-                                <input type="text" class="form-control" style="background-color: #f5f5f5;" disabled id="inTutor2Name" data-tutor2id="bobo2">
+                                <input type="text" class="form-control" style="background-color: #e9ecef;" disabled id="inTutor2Name" data-tutor2id="bobo2">
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="form-group" >
                                 <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Teacher 2's Phone</span> 
-                                <input type="text" class="form-control" style="background-color: #f5f5f5;" disabled id="inTutor2Phone">
+                                <input type="text" class="form-control" style="background-color: #e9ecef;" disabled id="inTutor2Phone">
                               </div>
                             </div>
                             <div class="col-md-2 d-flex align-items-center">
-                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher2" data-toggle="" data-target="#myTeacherModal" data-num='2' style="pointer-events:none; background-color: #f5f5f5;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
-                              <a class="btn btn-sm btn-outline-danger btn-round" id="" data-toggle="modal" data-target="#delTutor2Modal" href="javascript:;" ><i class="material-icons" style="color: red;">remove</i></a>
+                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher2" data-toggle="" data-target="#myTeacherModal" data-num='2' style="pointer-events:none; background-color: #e9ecef;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
+                              <a class="btn btn-sm btn-outline-danger btn-round" id="btnDelTeacher2" data-toggle="modal" data-target="#delTutor2Modal" href="javascript:;" ><i class="material-icons" style="color: red;">remove</i></a>
                             </div>
                           </div>
                           <div class="button-row d-flex mt-4">
@@ -1230,11 +1317,11 @@
                       </div>
                       <!--Fee form panel-->
                       <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                        <h4 class="multitabs-form__title">Fee</h4>
+                        <h4 class="multitabs-form__title">Tutoring Fee</h4>
                         <div class="multitabs-form__content">
     
                           <div class="form-group" style="margin-top: 2rem;">
-                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Fee*</span> 
+                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Fee* (RM)</span> 
                             <input type="number" step=".01" pattern="^\d*(\.\d{0,2})?$" class="form-control" id="inFee" data-compulsory="true" oninput="this.className = 'form-control'">
                           </div>
 
@@ -1271,45 +1358,20 @@
                       <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                         <h4 class="multitabs-form__title">Advanced Settings</h4>
                         <div class="multitabs-form__content">
-                          <!-- Invite Links -->
-                          <div class="form-group" style="margin-top: 0rem;">
-                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Student Registration Link</span> 
-                            <div class="input-group">
-                              <span class="d-flex align-items-center input-group-addon" style="margin-right: 0.5em; cursor: pointer;" onclick="copyText('inAutoJoinLink')">
-                                <span class="material-icons">
-                                  content_copy
-                                </span>
+      
+                          <!-- Type -->
+                          <div class="row">
+                            <div class="col-sm-12 text-left">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-top: 1.0rem;">Class Type</span> 
+                              <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
+                                <span class="tooltiptext-general" style="left: 10%;">
+                                  <h6 style="margin: 0; color: #2e74b6;">Class Type</h6>
+                                  <p style="margin: 0; color: grey; font-size: small;">Set to <strong style="color: #2e74b6;">Public</strong> to be discovered by other. </p>
+                                </span> 
                               </span>
-                              <input type="text" value='' class="form-control" style="background-color: #f5f5f5; pointer-events: none;" id="inAutoJoinLink">
-                              <!-- <textarea class="form-control" rows="2" id="inAutoJoinLink" style="margin-right: 0.5em; cursor: pointer;" onclick="copyText('inAutoJoinLink')"></textarea> -->
                             </div>
                           </div>
 
-                          <!-- Status -->
-                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Class Status</span> 
-                          <div class="form-group">
-                            <div class="form-check form-check-radio form-check-inline">
-                              <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="classStatus" id="classStatusRadioActive" value="optionActive" data-compulsory="false" checked>
-                                Active
-                                <span class="circle">
-                                  <span class="check"></span>
-                                </span>
-                              </label>
-                            </div>
-                            <div class="form-check form-check-radio form-check-inline">
-                              <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="classStatus" id="classStatusRadioInactive" value="optionInactive" data-compulsory="false">
-                                Inactive
-                                <span class="circle">
-                                  <span class="check"></span>
-                                </span>
-                              </label>
-                            </div>
-                          </div>
-        
-                          <!-- Type -->
-                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem; margin-top: 1.0rem;">Class Type</span> 
                           <div class="form-group" >
                             <div class="form-check form-check-radio form-check-inline">
                               <label class="form-check-label">
@@ -1330,20 +1392,188 @@
                               </label>
                             </div>
                           </div>
-        
+
+                          <!-- Level and Subject  -->
+                          <div class="row" style="margin: 0.5rem 0 0 0.5rem;  display: flex;" id="levelSubjectTop">
+                            <div class="col-md-6">
+                                <!-- Education Level -->
+                              <div class="form-group" >
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Education Level*</span> 
+                                <select class="form-control" name="tutor_course[]" id="level_drop" data-compulsory="false" oninput="this.className = 'form-control'">
+                                  <option value="">Select education level</option>
+                                  <!-- <option value="1" >Pre-School</option>
+                                  <option value="2" >Lower Primary (Tahun 1-3)</option>
+                                  <option value="3" >Upper Primary (UPSR)</option>
+                                  <option value="4" >Form 1-3 (PT3)</option>
+                                  <option value="5" >Form 4-5 (SPM)</option>
+                                  <option value="6" >Primary (International Syllabus)</option>
+                                  <option value="7" >Lower Secondary (International Syllabus)</option>
+                                  <option value="8" >Year 10-11 (IGCSE)</option>
+                                  <option value="9" >Others</option> -->
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <!-- Subjects -->
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Subject*</span>
+                                <select class="form-control" name="tutor_course[]" id="subject_drop" data-compulsory="false" oninput="this.className = 'form-control'">
+                                  <option value="">Select subject</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+          
+                          <!-- Online Only  -->
+                          <div class="row" style="margin: 0.5rem 0 0 1.5rem; display: flex;" id="onlineOnlyTop">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" value="" id="onlineonly_check" data-compulsory="false">
+                                <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                                Online Only?
+                              </label>
+                            </div>
+                          </div>
+
+    
+          
+                          <!-- Area and State -->   
+                          <div class="row" style="margin: 0.5rem 0 1.5rem 0.5rem; display: flex;" id="areaStateTop">
+                            <div class="col-md-6">
+                                <!-- State -->
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray;">State</span> 
+                                <select class="form-control" name="tutor_course[]" id="state_drop" data-compulsory="false">
+                                  <option value="">Select state</option>
+                    
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <!-- Area -->
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Area</span>
+                                <select class="form-control" name="tutor_course[]" id="area_drop" data-compulsory="false">
+                                  <option value="">Select area</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>           
+
+                          <!-- Spacer  -->
+                          <!-- <div style="margin-top: 2rem;"></div> -->
                         
                           <!-- Student Limit -->
                           <div class="form-group" style="margin-top: 0rem;">
                             <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Student Limit</span> 
-                            <input type="number" class="form-control" value="20" style="background-color: #f5f5f5;" disabled id="inStudentLimit" data-compulsory="true" oninput="this.className = 'form-control'">
+                            <input type="number" class="form-control" value="20" style="background-color: #e9ecef;" disabled id="inStudentLimit" data-compulsory="true" oninput="this.className = 'form-control'">
                           </div>
           
                           <!-- Spacer  -->
-                          <div style="margin-top: 2rem;"></div>
+                          <div style="margin-top: 1.5rem;"></div>
           
                           <!-- Permission -->
                           <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Special Permissions</span> 
                           <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="stuAutoJoinEn" checked>
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Allow students to join class through invitation link.
+                            </label>
+                          </div>
+
+                          <!-- Invite Link: Show when above is checked -->
+                          <div class="form-group"  style="padding: 0.5rem; margin-top: 1rem; display: none; " id="inAutoJoinLinkTop">
+                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Copy Student Registration Link:</span> 
+                            <div class="input-group">
+                              <span class="d-flex align-items-center input-group-addon" id="btnCopyAutoJoinLink" style="margin-right: 0.5em; cursor: pointer;" onclick="copyText('inAutoJoinLink')">
+                                <span class="material-icons">
+                                  content_copy
+                                </span>
+                              </span>
+                              <input type="text" value='' class="form-control" style="background-color: #e9ecef; pointer-events: none;" id="inAutoJoinLink">
+                            </div>
+                          </div>
+
+                          <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="tAddEditLessonEn">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Authorize teachers to create and edit lessons. 
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="tDelLessonEn">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Authorize teachers to remove lessons. 
+                            </label>
+                          </div>
+
+                          <!-- Spacer  -->
+                          <div style="margin-top: 2rem;"></div>
+
+                          <!-- Status -->
+                          <div class="row">
+                            <div class="col-sm-12 text-left">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Class Status</span> 
+                              <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
+                                <span class="tooltiptext-general" style="left: 10%;">
+                                  <h6 style="margin: 0; color: #2e74b6;">Class Status</h6>
+                                  <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">Set to <strong style="color: #2e74b6;">Inactive</strong> to pause the class new intake, hide from the public, and disallow edits to the class.</p>
+                                </span> 
+                              </span>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="form-check form-check-radio form-check-inline">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="classStatus" id="classStatusRadioActive" value="optionActive" data-compulsory="false" checked>
+                                Active
+                                <span class="circle">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                            <div class="form-check form-check-radio form-check-inline">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="classStatus" id="classStatusRadioInactive" value="optionInactive" data-compulsory="false">
+                                Inactive
+                                <span class="circle">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <!-- Delete Class -->
+                          <div class="row">
+                            <div class="col-sm-12 text-left">
+                              <span class="" style="font-size: smaller; font-weight: 400; color: grey;">Delete This Class</span> 
+                              <span class="tooltiptext-trigger" style="background-color: red; padding: 0.2em 0.6em 0.2em 0.6em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer; font-weight: 400;">!
+                                <span class="tooltiptext-general" style="left: 10%;">
+                                  <h6 style="margin: 0; color: red;">Delete This Class</h6>
+                                  <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">This action cannot be <strong style="color: red;">undone</strong>. This will permanently delete the class details, lesson histories, assigned teachers, and remove all enrolled students.</p>
+                                </span> 
+                              </span>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12" >
+                              <a class="btn btn-sm btn-outline-danger btn-round" id="btnDelClass" style="color: red; background-color: white;" data-toggle='modal' data-target='#delClassModal'>Delete Class <i class="fas fa-exclamation-triangle" style="color: red;"></i></a> 
+                            </div>
+                          </div>
+        
+                          <!-- <div class="form-check" style="margin-top: 1.0rem;">
                             <label class="form-check-label">
                               <input class="form-check-input" type="checkbox" value="" id="t1AddEditStuEn" checked disabled>
                               <span class="form-check-sign">
@@ -1423,7 +1653,7 @@
                               </span>
                               Auto Enrolment through Invitation Link
                             </label>
-                          </div>
+                          </div> -->
 
                           <div class="button-row d-flex mt-4">
                             <!-- <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button> -->
@@ -1614,31 +1844,62 @@
         // Set the fields
         currentClassObj = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_CURRENT_DOC_KEY));
         updatePageContent(currentClassObj);
+
+        // If user is NOT the admin of this class, disable non admin edits
+        console.log('SESSION_STORAGE_CLASS_NON_ADMIN_KEY')
+        console.log(JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_NON_ADMIN_KEY)));
+
+        if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_NON_ADMIN_KEY))){
+          console.log('I am here')
+          disableAllEditsForNonAdmin();
+
+        }
+
       }
     }
     function updatePageContent(currentClassObj){
+      // Title
+      document.getElementById("titleClassName").textContent = currentClassObj[CLASS_NAME];
 
-      //------ add-class.html specific -------------//
       // Lesson Panel
       document.getElementById("inClassAnnouncement").value = currentClassObj[CLASS_ANNOUNCEMENT];
 
       // General Panel
       document.getElementById("inClassName").value = currentClassObj[CLASS_NAME];
+      document.getElementById("countClassName").textContent = currentClassObj[CLASS_NAME].length + '/40'
+      document.getElementById("tutorImgUrl").src = currentClassObj[CLASS_IMG_URL] == null || currentClassObj[CLASS_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : currentClassObj[CLASS_IMG_URL];
       document.getElementById("inClassDesc").value = currentClassObj[CLASS_DESC];
-      document.getElementById("onlineonly_check").checked = currentClassObj[ONLINE_KEY];
-      if (currentClassObj[ONLINE_KEY]){
-        document.getElementById("state_drop").disabled=true;
-        document.getElementById("area_drop").disabled=true;
-        document.getElementById("state_drop").style.backgroundColor = "#f5f5f5" ;
-        document.getElementById("area_drop").style.backgroundColor="#f5f5f5" ;
-      } else {
-        document.getElementById("state_drop").disabled=false;
-        document.getElementById("area_drop").disabled=false;
-        document.getElementById("state_drop").style.backgroundColor = "#fff" ;
-        document.getElementById("area_drop").style.backgroundColor="#fff" ;
+      document.getElementById("countClassDesc").textContent = currentClassObj[CLASS_DESC].length + '/400'
+      document.getElementById("inVenue").value = currentClassObj[CLASS_VENUE];
+      document.getElementById("countClassVenue").textContent = currentClassObj[CLASS_VENUE].length + '/250'
+      document.getElementById("inUrlClass").value = currentClassObj[CLASS_CLASS_URL];
+
+      if (isValidHttpUrl(currentClassObj[CLASS_CLASS_URL])){
+        document.getElementById("inUrlClassIcon").src = "http://www.google.com/s2/favicons?domain="+currentClassObj[CLASS_CLASS_URL];
+        document.getElementById("inUrlClassIconWrapper").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_CLASS_URL]+"')");
+      }else{
+        document.getElementById("inUrlClassIcon").src = "../../assets/img/broken-link.png";
+        document.getElementById("inUrlClassIconWrapper").setAttribute("onclick", "");
       }
 
-      document.getElementById("inVenue").value = currentClassObj[CLASS_VENUE];
+      document.getElementById("inUrlGroup").value = currentClassObj[CLASS_CHAT_GROUP_URL];
+      if (isValidHttpUrl(currentClassObj[CLASS_CHAT_GROUP_URL])){
+        document.getElementById("inUrlGroupIcon").src = "http://www.google.com/s2/favicons?domain="+currentClassObj[CLASS_CHAT_GROUP_URL];
+        document.getElementById("inUrlGroupIconWrapper").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_CHAT_GROUP_URL]+"')");
+      }else{
+        document.getElementById("inUrlGroupIcon").src = "../../assets/img/broken-link.png";
+        document.getElementById("inUrlGroupIconWrapper").setAttribute("onclick", "");
+      }
+
+      document.getElementById("inUrlMaterial").value = currentClassObj[CLASS_MATERIAL_URL];
+      if (isValidHttpUrl(currentClassObj[CLASS_MATERIAL_URL])){
+        document.getElementById("inUrlMaterialIcon").src = "http://www.google.com/s2/favicons?domain="+currentClassObj[CLASS_MATERIAL_URL];
+        document.getElementById("inUrlMaterialIconWrapper").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_MATERIAL_URL]+"')");
+      }else{
+        document.getElementById("inUrlMaterialIcon").src = "../../assets/img/broken-link.png";
+        document.getElementById("inUrlMaterialIconWrapper").setAttribute("onclick", "");
+      }
+
 
       // Time Slot Panel
       //    1st Slot
@@ -1682,11 +1943,11 @@
 
       // Enable changes to Tutor 1 and 2 
       // if (current_accountStatus === PREMIUM_ACCOUNT_2_STATUS_KEY || current_accountStatus === PREMIUM_ACCOUNT_3_STATUS_KEY){
-        // document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "modal");
+        document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "modal");
         // document.getElementById("btnAddTeacher1").setAttribute("data-target", "#myTeacherModal");
-        // document.getElementById("btnAddTeacher1").setAttribute("style", "pointer-events: fill; background-color: #fff;");
-        // document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "modal");
-        // document.getElementById("btnAddTeacher2").setAttribute("style", "pointer-events: fill; background-color: #fff;");
+        document.getElementById("btnAddTeacher1").setAttribute("style", "pointer-events: fill; background-color: #fff;");
+        document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "modal");
+        document.getElementById("btnAddTeacher2").setAttribute("style", "pointer-events: fill; background-color: #fff;");
       // }else {
       //   document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "");
       //   document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "");
@@ -1698,22 +1959,62 @@
       document.getElementById("feeTypePerHourRadio").checked = currentClassObj[FEES_TYPE_KEY] === FEES_TYPE_PER_HOUR_KEY ;
 
       // Admin Panel
+      document.getElementById("onlineonly_check").checked = currentClassObj[ONLINE_KEY];
+      if (currentClassObj[ONLINE_KEY]){
+        document.getElementById("state_drop").disabled=true;
+        document.getElementById("area_drop").disabled=true;
+        document.getElementById("state_drop").style.backgroundColor = "#e9ecef" ;
+        document.getElementById("area_drop").style.backgroundColor="#e9ecef" ;
+      } else {
+        document.getElementById("state_drop").disabled=false;
+        document.getElementById("area_drop").disabled=false;
+        document.getElementById("state_drop").style.backgroundColor = "#fff" ;
+        document.getElementById("area_drop").style.backgroundColor="#fff" ;
+      }
+
       let uriAdminId = encodeURIComponent(currentClassObj[CLASS_ADMIN_ID]);
       let uriClassId = encodeURIComponent(currentClassObj[CLASS_ID]);
-      document.getElementById("inAutoJoinLink").value = 'https://app.golearn.com.my/client/online-registration.html?aid='+uriAdminId+'&cid='+uriClassId;
       document.getElementById("classStatusRadioActive").checked = currentClassObj[CLASS_STATUS] === CLASS_STATUS_ACTIVE ;
       document.getElementById("classStatusRadioInactive").checked = currentClassObj[CLASS_STATUS] === CLASS_STATUS_INACTIVE ;
       document.getElementById("classTypeRadioPrivate").checked = currentClassObj[CLASS_TYPE] === CLASS_TYPE_PRIVATE ;
       document.getElementById("classTypeRadioPublic").checked = currentClassObj[CLASS_TYPE] === CLASS_TYPE_PUBLIC;
-      document.getElementById("t1AddEditStuEn").checked = currentClassObj[CLASS_TUTOR1_ADD_EDIT_STUDENT_ENABLE];
-      document.getElementById("t1DelStuEn").checked = currentClassObj[CLASS_TUTOR1_REMOVE_STUDENT_ENABLE];
-      document.getElementById("t1AddEditLessonEn").checked = currentClassObj[CLASS_TUTOR1_ADD_EDIT_LESSON_ENABLE];
-      document.getElementById("t1DelLessonEn").checked = currentClassObj[CLASS_TUTOR1_REMOVE_LESSON_ENABLE];
-      document.getElementById("t2AddEditStuEn").checked = currentClassObj[CLASS_TUTOR2_ADD_EDIT_STUDENT_ENABLE];
-      document.getElementById("t2DelStuEn").checked = currentClassObj[CLASS_TUTOR2_REMOVE_STUDENT_ENABLE];
-      document.getElementById("t2AddEditLessonEn").checked = currentClassObj[CLASS_TUTOR2_ADD_EDIT_LESSON_ENABLE];
-      document.getElementById("t2DelLessonEn").checked = currentClassObj[CLASS_TUTOR2_REMOVE_LESSON_ENABLE];
+
+      if (currentClassObj[CLASS_TYPE] === CLASS_TYPE_PUBLIC){
+        document.getElementById("levelSubjectTop").style.display = 'flex';
+        document.getElementById("onlineOnlyTop").style.display = 'flex';
+        document.getElementById("areaStateTop").style.display = 'flex';
+      } else { //CLASS_TYPE_PRIVATE
+        document.getElementById("levelSubjectTop").style.display = 'none';
+        document.getElementById("onlineOnlyTop").style.display = 'none';
+        document.getElementById("areaStateTop").style.display = 'none';
+      }
+
+      // document.getElementById("t1AddEditStuEn").checked = currentClassObj[CLASS_TUTOR1_ADD_EDIT_STUDENT_ENABLE];
+      // document.getElementById("t1DelStuEn").checked = currentClassObj[CLASS_TUTOR1_REMOVE_STUDENT_ENABLE];
+      // document.getElementById("t1AddEditLessonEn").checked = currentClassObj[CLASS_TUTOR1_ADD_EDIT_LESSON_ENABLE];
+      // document.getElementById("t1DelLessonEn").checked = currentClassObj[CLASS_TUTOR1_REMOVE_LESSON_ENABLE];
+      // document.getElementById("t2AddEditStuEn").checked = currentClassObj[CLASS_TUTOR2_ADD_EDIT_STUDENT_ENABLE];
+      // document.getElementById("t2DelStuEn").checked = currentClassObj[CLASS_TUTOR2_REMOVE_STUDENT_ENABLE];
+      // document.getElementById("t2AddEditLessonEn").checked = currentClassObj[CLASS_TUTOR2_ADD_EDIT_LESSON_ENABLE];
+      // document.getElementById("t2DelLessonEn").checked = currentClassObj[CLASS_TUTOR2_REMOVE_LESSON_ENABLE];
       document.getElementById("stuAutoJoinEn").checked = currentClassObj[CLASS_STUDENT_AUTO_JOIN_ENABLE];
+      document.getElementById("tAddEditLessonEn").checked = currentClassObj[CLASS_TUTOR_ADD_EDIT_LESSON_ENABLE];
+      document.getElementById("tDelLessonEn").checked = currentClassObj[CLASS_TUTOR_REMOVE_LESSON_ENABLE];
+      document.getElementById("inAutoJoinLink").value = 'https://app.golearn.com.my/client/online-registration.html?aid='+uriAdminId+'&cid='+uriClassId;
+
+      if (currentClassObj[CLASS_STUDENT_AUTO_JOIN_ENABLE]){
+        document.getElementById("inAutoJoinLinkTop").style.display = 'initial';
+      }else{
+        document.getElementById("inAutoJoinLinkTop").style.display = 'none';
+      }
+
+      // Check if class status
+      if (currentClassObj[CLASS_STATUS] === CLASS_STATUS_INACTIVE){
+        disableAllEdits();
+      }
+      
+
+
     }
 
     //---------- Load all lessons details ----------//
@@ -1757,7 +2058,6 @@
       current_accountStatus = tutorInfoObj.accountStatus; // bool
       current_aweburl = tutorInfoObj.aWebUrl
 
-      // updatePageView(current_accountStatus);
 
     }
 
@@ -1939,10 +2239,12 @@
           // Enable add other teacher based on Account Status
           // Enable changes to Tutor 1
           // if (current_accountStatus === PREMIUM_ACCOUNT_2_STATUS_KEY || current_accountStatus === PREMIUM_ACCOUNT_3_STATUS_KEY){
-            document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "modal");
-            document.getElementById("btnAddTeacher1").setAttribute("style", "pointer-events: fill; background-color: #fff;");
-            document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "modal");
-            document.getElementById("btnAddTeacher2").setAttribute("style", "pointer-events: fill; background-color: #fff;");
+
+            // document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "modal");
+            // document.getElementById("btnAddTeacher1").setAttribute("style", "pointer-events: fill; background-color: #fff;");
+            // document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "modal");
+            // document.getElementById("btnAddTeacher2").setAttribute("style", "pointer-events: fill; background-color: #fff;");
+
           // }else {
           //   document.getElementById("btnAddTeacher1").setAttribute("data-toggle", "");
           //   document.getElementById("btnAddTeacher2").setAttribute("data-toggle", "");
@@ -1985,40 +2287,45 @@
 
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-      let idInput1 = $('#inTutor1Name')
+      let idInput1 = $('#inTutor1Name');
       let tutor1_id = idInput1.data("tutor1id");
-      let idInput2 = $('#inTutor2Name')
-      let tutor2_id = idInput2.data('tutor2id')
+      let idInput2 = $('#inTutor2Name');
+      let tutor2_id = idInput2.data('tutor2id');
 
         // Notice that I use .add(..), instead of .set(..). This is because the docRef do not specify the docId.
-      var docRefWithMerge = docRef.set({
-      // var docRefWithMerge = {
-        [CLASS_ID]: docRef.id,
+      // var docRefWithMerge = docRef.set({
+      var data = {
+        // [CLASS_ID]: docRef.id,
         [CLASS_NAME]: document.getElementById("inClassName").value,
+        [CLASS_IMG_URL]: imgUrl_temp,
         [CLASS_DESC]: document.getElementById("inClassDesc").value,
-        // [CLASS_CATEGORY_KEY]: category,
-        // [CLASS_CATEGORY_ID_KEY]: categoryId,
-        // [CLASS_SUBJECT_KEY]: subject,
-        // [CLASS_SUBJECT_ID_KEY]: subjectId,
+        [CLASS_CATEGORY_KEY]: category,
+        [CLASS_CATEGORY_ID_KEY]: categoryId,
+        [CLASS_SUBJECT_KEY]: subject,
+        [CLASS_SUBJECT_ID_KEY]: subjectId,
         [CLASS_ONLINE_KEY]: document.getElementById("onlineonly_check").checked,
         [CLASS_STUDENT_LIMIT]: document.getElementById("inStudentLimit").value,
         [CLASS_ANNOUNCEMENT]: document.getElementById("inClassAnnouncement").value,
-        [CLASS_URL]: "UNUSED",
+
         [CLASS_TYPE]: (document.getElementById("classTypeRadioPrivate").checked)? CLASS_TYPE_PRIVATE : CLASS_TYPE_PUBLIC,
         [CLASS_STATUS]: (document.getElementById("classStatusRadioActive").checked)? CLASS_STATUS_ACTIVE : CLASS_STATUS_INACTIVE,
         [CLASS_VENUE]: document.getElementById("inVenue").value,
-        // [CLASS_STATE_KEY]: gStateName,
-        // [CLASS_STATE_ID_KEY]: gState,
-        // [CLASS_AREA_KEY]: gAreaName,
-        // [CLASS_AREA_ID_KEY]: gArea,
+        [CLASS_CLASS_URL]: document.getElementById("inUrlClass").value,
+        [CLASS_CHAT_GROUP_URL]: document.getElementById("inUrlGroup").value,
+        [CLASS_MATERIAL_URL]: document.getElementById("inUrlMaterial").value,
+
+        [CLASS_STATE_KEY]: gStateName,
+        [CLASS_STATE_ID_KEY]: gState,
+        [CLASS_AREA_KEY]: gAreaName,
+        [CLASS_AREA_ID_KEY]: gArea,
 
         // Time slot
         [CLASS_TIMESLOT_DAY_OF_WEEK_ARR]: dayOfWeekArr,
         [CLASS_TIMESLOT_START_ARR]: startTimeArr,
         [CLASS_TIMESLOT_END_ARR]: endTimeArr,
         // IDs
-        [CLASS_ADMIN_ID]: tutorId,
-        [CLASS_TUTOR_ID_ARR]: [tutor1_id, tutor2_id],
+        [CLASS_ADMIN_ID]: currentClassObj[CLASS_ADMIN_ID],
+        [CLASS_TUTOR_ID_ARR]: [tutor1_id, tutor2_id, currentClassObj[CLASS_ADMIN_ID]],
         [CLASS_TUTOR_NAME_ARR]: [document.getElementById("inTutor1Name").value, document.getElementById("inTutor2Name").value],
         [CLASS_TUTOR_PHONE_ARR]: [document.getElementById("inTutor1Phone").value, document.getElementById("inTutor2Phone").value],
         [CLASS_TUTOR_IMG_URL_ARR]: [document.getElementById("inTutor1ImgUrl").src, document.getElementById("inTutor2ImgUrl").src],
@@ -2029,30 +2336,105 @@
         [CLASS_FEES_PER_MONTH_KEY]: (document.getElementById("feeTypePerMonthRadio").checked)? parseFloat(document.getElementById("inFee").value) : parseFloat(document.getElementById("inFee").value * 2 * 4),
         [CLASS_FEES_TYPE_KEY]: (document.getElementById("feeTypePerMonthRadio").checked)? FEES_TYPE_PER_MONTH_KEY : FEES_TYPE_PER_HOUR_KEY,
         // Special Permission
-        [CLASS_TUTOR1_ADD_EDIT_STUDENT_ENABLE]: (document.getElementById("t1AddEditStuEn").checked)? true : false,
-        [CLASS_TUTOR1_REMOVE_STUDENT_ENABLE]: (document.getElementById("t1DelStuEn").checked)? true : false,
-        [CLASS_TUTOR1_ADD_EDIT_LESSON_ENABLE]: (document.getElementById("t1AddEditLessonEn").checked)? true : false,
-        [CLASS_TUTOR1_REMOVE_LESSON_ENABLE]: (document.getElementById("t1DelLessonEn").checked)? true : false,
-        [CLASS_TUTOR2_ADD_EDIT_STUDENT_ENABLE]: (document.getElementById("t2AddEditStuEn").checked)? true : false,
-        [CLASS_TUTOR2_REMOVE_STUDENT_ENABLE]: (document.getElementById("t2DelStuEn").checked)? true : false,
-        [CLASS_TUTOR2_ADD_EDIT_LESSON_ENABLE]: (document.getElementById("t2AddEditLessonEn").checked)? true : false,
-        [CLASS_TUTOR2_REMOVE_LESSON_ENABLE]: (document.getElementById("t2DelLessonEn").checked)? true : false,
+        // [CLASS_TUTOR1_ADD_EDIT_STUDENT_ENABLE]: (document.getElementById("t1AddEditStuEn").checked)? true : false,
+        // [CLASS_TUTOR1_REMOVE_STUDENT_ENABLE]: (document.getElementById("t1DelStuEn").checked)? true : false,
+        // [CLASS_TUTOR1_ADD_EDIT_LESSON_ENABLE]: (document.getElementById("t1AddEditLessonEn").checked)? true : false,
+        // [CLASS_TUTOR1_REMOVE_LESSON_ENABLE]: (document.getElementById("t1DelLessonEn").checked)? true : false,
+        // [CLASS_TUTOR2_ADD_EDIT_STUDENT_ENABLE]: (document.getElementById("t2AddEditStuEn").checked)? true : false,
+        // [CLASS_TUTOR2_REMOVE_STUDENT_ENABLE]: (document.getElementById("t2DelStuEn").checked)? true : false,
+        // [CLASS_TUTOR2_ADD_EDIT_LESSON_ENABLE]: (document.getElementById("t2AddEditLessonEn").checked)? true : false,
+        // [CLASS_TUTOR2_REMOVE_LESSON_ENABLE]: (document.getElementById("t2DelLessonEn").checked)? true : false,
         [CLASS_STUDENT_AUTO_JOIN_ENABLE]: (document.getElementById("stuAutoJoinEn").checked)? true : false,
+        [CLASS_TUTOR_ADD_EDIT_LESSON_ENABLE]: (document.getElementById("tAddEditLessonEn").checked)? true : false,
+        [CLASS_TUTOR_REMOVE_LESSON_ENABLE]: (document.getElementById("tDelLessonEn").checked)? true : false,
 
         // [CLASS_DATE_ADD]: '',
         [CLASS_DATE_EDIT]: new Date(),
         // [CLASS_DATE_DEL]: '',
-        [CLASS_EDIT_MSG]: 'by '+ current_name, // Update: CLASS_DATE_EDIT + CLASS_EDIT_MSG
+        [CLASS_EDIT_MSG]: 'Updated by '+ current_name, // Update: CLASS_DATE_EDIT + CLASS_EDIT_MSG
         [STATUS_KEY]: true,
 
       }
-      , { merge: true })
+      // console.log("Saving...")
+      // console.log(data)
+
+      docRef.set(data, { merge: true })
       .then(() => {
         window.location.href='./'
       });
 
+
+    }
+
+    // Delete Class
+    function DeleteClass(classId){
+      var docRef = db.collection("Class")
+          .doc("v1")
+          .collection("Class")
+          .doc(classId);
+
+      var data = {
+        // [CLASS_ID]: docRef.id,
+        // [CLASS_NAME]: document.getElementById("inClassName").value,
+        // [CLASS_IMG_URL]: imgUrl_temp,
+        // [CLASS_DESC]: document.getElementById("inClassDesc").value,
+        // [CLASS_CATEGORY_KEY]: category,
+        // [CLASS_CATEGORY_ID_KEY]: categoryId,
+        // [CLASS_SUBJECT_KEY]: subject,
+        // [CLASS_SUBJECT_ID_KEY]: subjectId,
+        // [CLASS_ONLINE_KEY]: document.getElementById("onlineonly_check").checked,
+        // [CLASS_STUDENT_LIMIT]: document.getElementById("inStudentLimit").value,
+        // [CLASS_ANNOUNCEMENT]: document.getElementById("inClassAnnouncement").value,
+
+        [CLASS_TYPE]: CLASS_TYPE_PRIVATE,
+        [CLASS_STATUS]: CLASS_STATUS_INACTIVE,
+        // [CLASS_VENUE]: document.getElementById("inVenue").value,
+        // [CLASS_CLASS_URL]: document.getElementById("inUrlClass").value,
+        // [CLASS_CHAT_GROUP_URL]: document.getElementById("inUrlGroup").value,
+        // [CLASS_MATERIAL_URL]: document.getElementById("inUrlMaterial").value,
+
+        // [CLASS_STATE_KEY]: gStateName,
+        // [CLASS_STATE_ID_KEY]: gState,
+        // [CLASS_AREA_KEY]: gAreaName,
+        // [CLASS_AREA_ID_KEY]: gArea,
+
+        // Time slot
+        // [CLASS_TIMESLOT_DAY_OF_WEEK_ARR]: dayOfWeekArr,
+        // [CLASS_TIMESLOT_START_ARR]: startTimeArr,
+        // [CLASS_TIMESLOT_END_ARR]: endTimeArr,
+        // IDs
+        // [CLASS_ADMIN_ID]: currentClassObj[CLASS_ADMIN_ID],
+        // [CLASS_TUTOR_ID_ARR]: [tutor1_id, tutor2_id, currentClassObj[CLASS_ADMIN_ID]],
+        // [CLASS_TUTOR_NAME_ARR]: [document.getElementById("inTutor1Name").value, document.getElementById("inTutor2Name").value],
+        // [CLASS_TUTOR_PHONE_ARR]: [document.getElementById("inTutor1Phone").value, document.getElementById("inTutor2Phone").value],
+        // [CLASS_TUTOR_IMG_URL_ARR]: [document.getElementById("inTutor1ImgUrl").src, document.getElementById("inTutor2ImgUrl").src],
+        // [CLASS_STUDENT_ID_ARR]: [],
+        // [CLASS_VIEWER_ID_ARR]:[],
+        // Fee type
+        // [CLASS_FEES_KEY]: parseFloat(document.getElementById("inFee").value),
+        // [CLASS_FEES_PER_MONTH_KEY]: (document.getElementById("feeTypePerMonthRadio").checked)? parseFloat(document.getElementById("inFee").value) : parseFloat(document.getElementById("inFee").value * 2 * 4),
+        // [CLASS_FEES_TYPE_KEY]: (document.getElementById("feeTypePerMonthRadio").checked)? FEES_TYPE_PER_MONTH_KEY : FEES_TYPE_PER_HOUR_KEY,
+        // Special Permission
+        // [CLASS_STUDENT_AUTO_JOIN_ENABLE]: (document.getElementById("stuAutoJoinEn").checked)? true : false,
+        // [CLASS_TUTOR_ADD_EDIT_LESSON_ENABLE]: (document.getElementById("tAddEditLessonEn").checked)? true : false,
+        // [CLASS_TUTOR_REMOVE_LESSON_ENABLE]: (document.getElementById("tDelLessonEn").checked)? true : false,
+
+        // [CLASS_DATE_ADD]: '',
+        // [CLASS_DATE_EDIT]: new Date(),
+        [CLASS_DATE_DEL]:  new Date(),
+        [CLASS_EDIT_MSG]: 'Deleted by '+ current_name, // Update: CLASS_DATE_EDIT + CLASS_EDIT_MSG
+        [STATUS_KEY]: false,
+
+      }
       // console.log("Saving...")
-      // console.log(docRefWithMerge)
+      // console.log(data)
+
+      docRef.set(data, { merge: true })
+      .then(() => {
+        window.location.href='./'
+      });
+
+
     }
 
     // Add Time Slot
@@ -2437,7 +2819,11 @@
       docRef
       .get()
       .then((querySnapshot) => {
-        console.log('Total Lessons Found: '+querySnapshot.docs.length)
+        console.log('Total Lessons Found: '+querySnapshot.docs.length);
+
+        if ( querySnapshot.docs.length== null || querySnapshot.docs.length == 0){
+          document.getElementById("lessonNoDataPlaceholder").style.display = 'initial';
+        }
         querySnapshot.forEach((doc) => {
           console.log(doc.data());
           // latestLessonDoc = doc.data()[LESSON_DATE];
@@ -2508,6 +2894,7 @@
         
         // Reset the paginnation cursor, remove all lesson-wrapper & reload the lessons
         latestLessonDoc = null;
+        document.getElementById("lessonNoDataPlaceholder").style.display = 'none';
         removeElementsByClass('row lesson-wrapper');
         LoadLessonInfo();
 
@@ -2637,7 +3024,11 @@
       docRef
       .get()
       .then((querySnapshot) => {
-        console.log('Total Students Found: '+querySnapshot.docs.length)
+        console.log('Total Students Found: '+querySnapshot.docs.length);
+
+        if (querySnapshot.docs.length == null || querySnapshot.docs.length == 0){
+          document.getElementById("studentNoDataPlaceholder").style.display = 'initial';
+        }
         querySnapshot.forEach((doc) => {
           allClassStuDoc.push(doc.data());
           // console.log(doc.data().stuName);
@@ -2817,6 +3208,7 @@
         // window.location.reload(true); 
         // Reset the paginnation cursor, remove all student-wrapper & reload the lessons
         latestStuDoc = null;
+        document.getElementById("studentNoDataPlaceholder").style.display = 'none';
         removeElementsByClass('row student-wrapper');
         loadAllStudents();
 
@@ -2900,7 +3292,7 @@
       console.log(data);
       docRef.set( data, { merge: true })
       .then(() => {
-        func.showNotification('top','center', 'success', 'check_circle', "New tutor added.");
+        // func.showNotification('top','center', 'success', 'check_circle', "New student added.");
       });
 
     }
@@ -2985,8 +3377,6 @@
 
     }
 
-
-
     // Remove a student from class
     function removeStudent(studentClassId, studentName, studentId, guardianId){
       // studentClassId is the id of student in Student_Class Module
@@ -3048,9 +3438,9 @@
       let docRef = db.collection("Class")
           .doc("v1")
           .collection("Student")
-          .where("adminId", "==", currentClassObj[CLASS_ADMIN_ID])
-          .where("status", "==", true)
-          .orderBy('childName', 'asc')
+          .where(STU_ADMIN_ID, "==", currentClassObj[CLASS_ADMIN_ID])
+          .where(STU_STATUS_ADMIN, "==", true)
+          .orderBy(STU_CHILD_NAME, 'asc')
           .startAfter(latestAdminStuDoc)
           .limit(10);
 
@@ -3394,7 +3784,7 @@
         // [CLASS_TIMESLOT_END_ARR]: endTimeArr,
         // IDs
         // [CLASS_ADMIN_ID]: tutorId,
-        [CLASS_TUTOR_ID_ARR]: [tutor1_id, tutor2_id],
+        [CLASS_TUTOR_ID_ARR]: [tutor1_id, tutor2_id, currentClassObj[CLASS_ADMIN_ID]],
         [CLASS_TUTOR_NAME_ARR]: [tutor1_name, tutor2_name],
         [CLASS_TUTOR_PHONE_ARR]: [tutor1_phone, tutor2_phone],
         [CLASS_TUTOR_IMG_URL_ARR]: [tutor1_imgurl, tutor2_imgurl],
@@ -3421,8 +3811,8 @@
         [CLASS_EDIT_MSG]: tutorName + ' joined as tutor.', // Update: CLASS_DATE_EDIT + CLASS_EDIT_MSG
         // [STATUS_KEY]: true,
       }
-      // console.log('Tutors Data');
-      // console.log(data);
+      console.log('Tutors Data');
+      console.log(data);
       docRef.set( data, { merge: true })
       .then(() => {
         func.showNotification('top','center', 'success', 'check_circle', "New tutor added.");
@@ -3480,7 +3870,7 @@
         // [CLASS_TIMESLOT_END_ARR]: endTimeArr,
         // IDs
         // [CLASS_ADMIN_ID]: tutorId,
-        [CLASS_TUTOR_ID_ARR]: [tutor1_id, ''],
+        [CLASS_TUTOR_ID_ARR]: [tutor1_id, '', currentClassObj[CLASS_ADMIN_ID]],
         [CLASS_TUTOR_NAME_ARR]: [tutor1_name, ''],
         [CLASS_TUTOR_PHONE_ARR]: [tutor1_phone, ''],
         [CLASS_TUTOR_IMG_URL_ARR]: [tutor1_imgurl, ''],
@@ -3567,6 +3957,294 @@
       // alert("Copied the text: " + copyText.value);
     }
 
+    // Redirect to specific url
+    function RedirectTo(url){
+      // window.location.href = url;
+      window.open(
+        url,
+        '_blank' // <- This is what makes it open in a new window.
+      );
+    }
+
+    // Check if valid url. Return true if valid.
+    function isValidHttpUrl(string) {
+      let url;
+      try {
+        url = new URL(string);
+      } catch (_) {
+        return false;  
+      }
+      return true;
+    }
+
+    // Used when user set Class Status to Active
+    function enableAllEdits() {
+      // Title
+      document.getElementById("titleClassName").textContent = currentClassObj[CLASS_NAME];
+
+      // Lesson Panel
+      document.getElementById("btnEditLessonModalUpdate").style.pointerEvents= 'auto';
+      document.getElementById("btnEditLessonModalUpdate").style.backgroundColor = '#2e74b6';
+      document.getElementById("btnDelLessonModalUpdate").style.pointerEvents= 'auto';
+      document.getElementById("btnDelLessonModalUpdate").style.backgroundColor = '#2e74b6';
+      document.getElementById("btnAddLesson").style.pointerEvents= 'auto';
+      document.getElementById("btnAddLesson").style.backgroundColor = '#fff';
+
+      // General Panel
+      document.getElementById("inClassAnnouncement").removeAttribute("readonly");
+      document.getElementById("inClassAnnouncement").disabled=false;
+      document.getElementById("inClassAnnouncement").style.backgroundColor = "#fff" ;
+      document.getElementById("inClassName").removeAttribute("readonly");
+      document.getElementById("inClassName").disabled=false;
+      document.getElementById("inClassName").style.backgroundColor = "#fff" ;
+      document.getElementById("inClassDesc").removeAttribute("readonly");
+      document.getElementById("inClassDesc").disabled=false;
+      document.getElementById("inClassDesc").style.backgroundColor = "#fff" ;
+      document.getElementById("inVenue").removeAttribute("readonly");
+      document.getElementById("inVenue").disabled=false;
+      document.getElementById("inVenue").style.backgroundColor = "#fff" ;
+      document.getElementById("inUrlClass").removeAttribute("readonly");
+      document.getElementById("inUrlClass").disabled=false;
+      document.getElementById("inUrlClass").style.backgroundColor = "#fff" ;
+      document.getElementById("inUrlGroup").removeAttribute("readonly");
+      document.getElementById("inUrlGroup").disabled=false;
+      document.getElementById("inUrlGroup").style.backgroundColor = "#fff" ;
+      document.getElementById("inUrlMaterial").removeAttribute("readonly");
+      document.getElementById("inUrlMaterial").disabled=false;
+      document.getElementById("inUrlMaterial").style.backgroundColor = "#fff" ;
+
+      
+      // Time Slot Panel
+      document.getElementById("btnAddTimeSlot").style.pointerEvents= 'auto';
+      document.getElementById("btnAddTimeSlot").style.backgroundColor = '#fff';
+      document.getElementById("timeSlot-container").style.pointerEvents= 'auto';
+      document.getElementById("timeSlot-container").style.backgroundColor = '#fff';
+
+      // Student Panel
+      document.getElementById("btnAddStudent").style.pointerEvents= 'auto';
+      document.getElementById("btnAddStudent").style.backgroundColor = '#fff';
+      document.getElementById("btnEditStudentModalUpdate").style.pointerEvents= 'auto';
+      document.getElementById("btnEditStudentModalUpdate").style.backgroundColor = '#2e74b6';
+      document.getElementById("btnDelStudentModalUpdate").style.pointerEvents= 'auto';
+      document.getElementById("btnDelStudentModalUpdate").style.backgroundColor = '#2e74b6';
+
+      // Tutor Panel
+      document.getElementById("btnAddTeacher1").style.pointerEvents = 'auto';
+      document.getElementById("btnAddTeacher1").style.backgroundColor = '#fff';
+      document.getElementById("btnAddTeacher2").style.pointerEvents = 'auto';
+      document.getElementById("btnAddTeacher2").style.backgroundColor = '#fff';
+      document.getElementById("btnDelTeacher2").style.pointerEvents = 'auto';
+      document.getElementById("btnDelTeacher2").style.backgroundColor = '#fff';
+
+      // Fee Panel
+      document.getElementById("inFee").removeAttribute("readonly");
+      document.getElementById("inFee").disabled=false;
+      document.getElementById("inFee").style.backgroundColor = "#fff" ;
+      document.getElementById("feeTypePerMonthRadio").removeAttribute("disabled");
+      document.getElementById("feeTypePerHourRadio").removeAttribute("disabled");
+
+      // Admin Panel
+      document.getElementById("onlineonly_check").removeAttribute("disabled");
+      document.getElementById("state_drop").disabled=false;
+      document.getElementById("area_drop").disabled=false;
+      document.getElementById("state_drop").style.backgroundColor = "#fff" ;
+      document.getElementById("area_drop").style.backgroundColor="#fff" ;
+      document.getElementById("level_drop").disabled=false;
+      document.getElementById("subject_drop").disabled=false;
+      document.getElementById("level_drop").style.backgroundColor = "#fff" ;
+      document.getElementById("subject_drop").style.backgroundColor="#fff" ;
+
+      document.getElementById("classTypeRadioPrivate").removeAttribute("disabled");
+      document.getElementById("classTypeRadioPublic").removeAttribute("disabled");
+
+      document.getElementById("stuAutoJoinEn").removeAttribute("disabled");
+      document.getElementById("btnCopyAutoJoinLink").setAttribute("onclick", "copyText('inAutoJoinLink')");
+      let uriAdminId = encodeURIComponent(currentClassObj[CLASS_ADMIN_ID]);
+      let uriClassId = encodeURIComponent(currentClassObj[CLASS_ID]);
+      document.getElementById("inAutoJoinLink").value = 'https://app.golearn.com.my/client/online-registration.html?aid='+uriAdminId+'&cid='+uriClassId;
+
+      document.getElementById("tAddEditLessonEn").removeAttribute("disabled");
+      document.getElementById("tDelLessonEn").removeAttribute("disabled");
+
+    }
+
+
+
+    // Used when user set Class Status to Inactive
+    function disableAllEdits() {
+      // Title
+      document.getElementById("titleClassName").textContent = currentClassObj[CLASS_NAME] + ' (Inactive)';
+
+      // Lesson Panel
+      document.getElementById("btnEditLessonModalUpdate").style.pointerEvents= 'none';
+      document.getElementById("btnEditLessonModalUpdate").style.backgroundColor = 'grey';
+      document.getElementById("btnDelLessonModalUpdate").style.pointerEvents= 'none';
+      document.getElementById("btnDelLessonModalUpdate").style.backgroundColor = 'grey';
+      document.getElementById("btnAddLesson").style.pointerEvents= 'none';
+      document.getElementById("btnAddLesson").style.backgroundColor = '#e9ecef';
+
+      // General Panel
+      document.getElementById("inClassAnnouncement").setAttribute("readonly", true);
+      document.getElementById("inClassAnnouncement").disabled=true;
+      document.getElementById("inClassAnnouncement").style.backgroundColor = "#e9ecef" ;
+      document.getElementById("inClassName").setAttribute("readonly", true);
+      document.getElementById("inClassName").disabled=true;
+      document.getElementById("inClassName").style.backgroundColor = "#e9ecef" ;
+      document.getElementById("inClassDesc").setAttribute("readonly", true);
+      document.getElementById("inClassDesc").disabled=true;
+      document.getElementById("inClassDesc").style.backgroundColor = "#e9ecef" ;
+      document.getElementById("inVenue").setAttribute("readonly", true);
+      document.getElementById("inVenue").disabled=true;
+      document.getElementById("inVenue").style.backgroundColor = "#e9ecef" ;
+      document.getElementById("inUrlClass").setAttribute("readonly", true);
+      document.getElementById("inUrlClass").disabled=true;
+      document.getElementById("inUrlClass").style.backgroundColor = "#e9ecef" ;
+      document.getElementById("inUrlGroup").setAttribute("readonly", true);
+      document.getElementById("inUrlGroup").disabled=true;
+      document.getElementById("inUrlGroup").style.backgroundColor = "#e9ecef" ;
+      document.getElementById("inUrlMaterial").setAttribute("readonly", true);
+      document.getElementById("inUrlMaterial").disabled=true;
+      document.getElementById("inUrlMaterial").style.backgroundColor = "#e9ecef" ;
+      
+      
+      // Time Slot Panel
+      document.getElementById("btnAddTimeSlot").style.pointerEvents= 'none';
+      document.getElementById("btnAddTimeSlot").style.backgroundColor = '#e9ecef';
+      document.getElementById("timeSlot-container").style.pointerEvents= 'none';
+      document.getElementById("timeSlot-container").style.backgroundColor = '#e9ecef';
+
+      // Student Panel
+      document.getElementById("btnAddStudent").style.pointerEvents= 'none';
+      document.getElementById("btnAddStudent").style.backgroundColor = '#e9ecef';
+      document.getElementById("btnEditStudentModalUpdate").style.pointerEvents= 'none';
+      document.getElementById("btnEditStudentModalUpdate").style.backgroundColor = 'grey';
+      document.getElementById("btnDelStudentModalUpdate").style.pointerEvents= 'none';
+      document.getElementById("btnDelStudentModalUpdate").style.backgroundColor = 'grey';
+
+      // Tutor Panel
+      document.getElementById("btnAddTeacher1").style.pointerEvents = 'none';
+      document.getElementById("btnAddTeacher1").style.backgroundColor = '#e9ecef';
+      document.getElementById("btnAddTeacher2").style.pointerEvents = 'none';
+      document.getElementById("btnAddTeacher2").style.backgroundColor = '#e9ecef';
+      document.getElementById("btnDelTeacher2").style.pointerEvents = 'none';
+      document.getElementById("btnDelTeacher2").style.backgroundColor = '#e9ecef';
+
+      // Fee Panel
+      document.getElementById("inFee").setAttribute("readonly", true);
+      document.getElementById("inFee").disabled=true;
+      document.getElementById("inFee").style.backgroundColor = "#e9ecef" ;
+      document.getElementById("feeTypePerMonthRadio").setAttribute("disabled", true);
+      document.getElementById("feeTypePerHourRadio").setAttribute("disabled", true);
+
+      // Admin Panel
+      document.getElementById("onlineonly_check").setAttribute("disabled", true);
+      document.getElementById("state_drop").disabled=true;
+      document.getElementById("area_drop").disabled=true;
+      document.getElementById("state_drop").style.backgroundColor = "#e9ecef" ;
+      document.getElementById("area_drop").style.backgroundColor="#e9ecef" ;
+      document.getElementById("level_drop").disabled=true;
+      document.getElementById("subject_drop").disabled=true;
+      document.getElementById("level_drop").style.backgroundColor = "#e9ecef" ;
+      document.getElementById("subject_drop").style.backgroundColor="#e9ecef" ;
+
+      document.getElementById("classTypeRadioPrivate").setAttribute("disabled", true);
+      document.getElementById("classTypeRadioPublic").setAttribute("disabled", true);
+
+      document.getElementById("stuAutoJoinEn").setAttribute("disabled", true);
+      // document.getElementById("btnCopyAutoJoinLink").setAttribute("disabled", true);
+      document.getElementById("btnCopyAutoJoinLink").setAttribute("onclick", "");
+      document.getElementById("inAutoJoinLink").value = 'No link';
+      
+
+      document.getElementById("tAddEditLessonEn").setAttribute("disabled", true);
+      document.getElementById("tDelLessonEn").setAttribute("disabled", true);
+
+    }
+
+    // Used when user is not Admin
+    function disableAllEditsForNonAdmin() {
+
+      if (!currentClassObj[CLASS_TUTOR_ADD_EDIT_LESSON_ENABLE]){
+
+        // Lesson Panel
+        document.getElementById("btnEditLessonModalUpdate").style.pointerEvents= 'none';
+        document.getElementById("btnEditLessonModalUpdate").style.backgroundColor = 'grey';
+        // document.getElementById("btnDelLessonModalUpdate").style.pointerEvents= 'none';
+        // document.getElementById("btnDelLessonModalUpdate").style.backgroundColor = 'grey';
+        document.getElementById("btnAddLesson").style.pointerEvents= 'none';
+        document.getElementById("btnAddLesson").style.backgroundColor = '#e9ecef';
+
+      }
+    
+      if (!currentClassObj[CLASS_TUTOR_REMOVE_LESSON_ENABLE]){
+        // Lesson Panel
+        // document.getElementById("btnEditLessonModalUpdate").style.pointerEvents= 'none';
+        // document.getElementById("btnEditLessonModalUpdate").style.backgroundColor = 'grey';
+        document.getElementById("btnDelLessonModalUpdate").style.pointerEvents= 'none';
+        document.getElementById("btnDelLessonModalUpdate").style.backgroundColor = 'grey';
+        // document.getElementById("btnAddLesson").style.pointerEvents= 'none';
+        // document.getElementById("btnAddLesson").style.backgroundColor = '#e9ecef';
+      }
+    
+      // Common settings
+      document.getElementById("advancedSettingsTab").style.display = 'none';
+
+      // General Panel
+      // document.getElementById("inClassAnnouncement").setAttribute("readonly", true);
+      // document.getElementById("inClassAnnouncement").disabled=true;
+      // document.getElementById("inClassAnnouncement").style.backgroundColor = "#e9ecef" ;
+      document.getElementById("inClassName").setAttribute("readonly", true);
+      document.getElementById("inClassName").disabled=true;
+      document.getElementById("inClassName").style.backgroundColor = "#e9ecef" ;
+      // document.getElementById("inClassDesc").setAttribute("readonly", true);
+      // document.getElementById("inClassDesc").disabled=true;
+      // document.getElementById("inClassDesc").style.backgroundColor = "#e9ecef" ;
+      // document.getElementById("inVenue").setAttribute("readonly", true);
+      // document.getElementById("inVenue").disabled=true;
+      // document.getElementById("inVenue").style.backgroundColor = "#e9ecef" ;
+      // document.getElementById("inUrlClass").setAttribute("readonly", true);
+      // document.getElementById("inUrlClass").disabled=true;
+      // document.getElementById("inUrlClass").style.backgroundColor = "#e9ecef" ;
+      // document.getElementById("inUrlGroup").setAttribute("readonly", true);
+      // document.getElementById("inUrlGroup").disabled=true;
+      // document.getElementById("inUrlGroup").style.backgroundColor = "#e9ecef" ;
+      // document.getElementById("inUrlMaterial").setAttribute("readonly", true);
+      // document.getElementById("inUrlMaterial").disabled=true;
+      // document.getElementById("inUrlMaterial").style.backgroundColor = "#e9ecef" ;
+      
+      
+      // Time Slot Panel
+      // document.getElementById("btnAddTimeSlot").style.pointerEvents= 'none';
+      // document.getElementById("btnAddTimeSlot").style.backgroundColor = '#e9ecef';
+      // document.getElementById("timeSlot-container").style.pointerEvents= 'none';
+      // document.getElementById("timeSlot-container").style.backgroundColor = '#e9ecef';
+
+      // Student Panel
+      document.getElementById("btnAddStudent").style.pointerEvents= 'none';
+      document.getElementById("btnAddStudent").style.backgroundColor = '#e9ecef';
+      document.getElementById("btnEditStudentModalUpdate").style.pointerEvents= 'none';
+      document.getElementById("btnEditStudentModalUpdate").style.backgroundColor = 'grey';
+      document.getElementById("btnDelStudentModalUpdate").style.pointerEvents= 'none';
+      document.getElementById("btnDelStudentModalUpdate").style.backgroundColor = 'grey';
+
+      // Tutor Panel
+      document.getElementById("btnAddTeacher1").style.pointerEvents = 'none';
+      document.getElementById("btnAddTeacher1").style.backgroundColor = '#e9ecef';
+      document.getElementById("btnAddTeacher2").style.pointerEvents = 'none';
+      document.getElementById("btnAddTeacher2").style.backgroundColor = '#e9ecef';
+      document.getElementById("btnDelTeacher2").style.pointerEvents = 'none';
+      document.getElementById("btnDelTeacher2").style.backgroundColor = '#e9ecef';
+
+      // Fee Panel
+      document.getElementById("inFee").setAttribute("readonly", true);
+      document.getElementById("inFee").disabled=true;
+      document.getElementById("inFee").style.backgroundColor = "#e9ecef" ;
+      document.getElementById("feeTypePerMonthRadio").setAttribute("disabled", true);
+      document.getElementById("feeTypePerHourRadio").setAttribute("disabled", true);
+      
+    }
+
+
   </script>
 
   <!-- Script -->
@@ -3589,6 +4267,8 @@
     var subjectId= ''; 
     var subject= ''; 
     var online = false;
+
+    var imgUrl_temp = '';
 
     // Teacher 1 & 2
     var tutor1Id = '';
@@ -3624,59 +4304,62 @@
     $( document ).ready(function() {
       
       // Init variable
-      // categoryId = currentClassObj[CATEGORY_ID_KEY];
-      // category = currentClassObj[CATEGORY_KEY];
-      // subjectId = currentClassObj[SUBJECT_ID_KEY];
-      // subject = currentClassObj[SUBJECT_KEY];
-      online = currentClassObj[ONLINE_KEY];
-      // gState = currentClassObj[STATE_ID_KEY];
-      // gStateName = currentClassObj[STATE_KEY];
-      // gArea = currentClassObj[AREA_ID_KEY];
-      // gAreaName = currentClassObj[AREA_KEY];
+      categoryId = currentClassObj[CLASS_CATEGORY_ID_KEY];
+      category = currentClassObj[CLASS_CATEGORY_KEY];
+      subjectId = currentClassObj[CLASS_SUBJECT_ID_KEY];
+      subject = currentClassObj[CLASS_SUBJECT_KEY];
+      online = currentClassObj[CLASS_ONLINE_KEY];
+      gState = currentClassObj[CLASS_STATE_ID_KEY];
+      gStateName = currentClassObj[CLASS_STATE_KEY];
+      gArea = currentClassObj[CLASS_AREA_ID_KEY];
+      gAreaName = currentClassObj[CLASS_AREA_KEY];
 
-
+      imgUrl_temp = currentClassObj[CLASS_IMG_URL];
       // ------Education Level Dropdown End------- //
       // Populate Education Level
-      // var level_select = document.getElementById("level_drop"); 
-      // var level = Category; 
-      // var catId = CategoryId; 
-      // for (var i = 0; i < level.length; i++) {
-      //   var opt = level[i];
-      //   var el = document.createElement("option");
-      //   el.setAttribute("value", catId[i]);
-      //   el.textContent = opt;
-      //   el.value = catId[i];
-      //   // Update Level
-      //   if (catId[i] === currentClassObj[CATEGORY_ID_KEY]) {
-      //     el.selected = true;
-      //   }
-      //   level_select.appendChild(el);
+      var level_select = document.getElementById("level_drop"); 
+      var level = Category; 
+      var catId = CategoryId; 
+      for (var i = 0; i < level.length; i++) {
+        var opt = level[i];
+        var el = document.createElement("option");
+        el.setAttribute("value", catId[i]);
+        el.textContent = opt;
+        el.value = catId[i];
+        // Update Level
+        if (catId[i] === currentClassObj[CLASS_CATEGORY_ID_KEY]) {
+          el.selected = true;
+        }
+        level_select.appendChild(el);
 
-      // }
+      }
 
-      // // Update Subjects
-      // // Clear the area option first, except the first one. 50 is a just a huge number
-      // var subject_drop = document.getElementById("subject_drop"); 
-      //   for(i=1; i <= 50; i++){
-      //     subject_drop.remove(1);
-      //   } 
-      // // Load default selected subject and respective subject lists
-      // var subjectInfo = selectSubjectListBasedOnLevelId(currentClassObj[CATEGORY_ID_KEY]);// Get the subject info
-      // var optionsName = subjectInfo[0];
-      // var optionId = subjectInfo[1];
-      // // console.log("Subjects: "+ options); 
+      // Update Subjects
+      // Clear the area option first, except the first one. 50 is a just a huge number
+      var subject_drop = document.getElementById("subject_drop"); 
+        for(i=1; i <= 50; i++){
+          subject_drop.remove(1);
+        } 
+      // Load default selected subject and respective subject lists
+      var subjectInfo = selectSubjectListBasedOnLevelId(currentClassObj[CLASS_CATEGORY_ID_KEY]);// Get the subject info
+      var optionsName = subjectInfo[0];
+      var optionId = subjectInfo[1];
 
-      // for (var i = 0; i < optionsName.length; i++) {
-      //   var el = document.createElement("option");
-      //   // el.setAttribute("value", "volvocar");
-      //   el.textContent = optionsName[i];
-      //   el.value = optionId[i];
-      //   // Default selection based on existing class
-      //   if (optionId[i] === currentClassObj[SUBJECT_ID_KEY]) {
-      //     el.selected = true;
-      //   }
-      //   subject_drop.appendChild(el);
-      // }
+      if (!(currentClassObj[CLASS_CATEGORY_ID_KEY] == null || currentClassObj[CLASS_CATEGORY_ID_KEY] =='')){
+        for (var i = 0; i < optionsName.length; i++) {
+          var el = document.createElement("option");
+          // el.setAttribute("value", "volvocar");
+          el.textContent = optionsName[i];
+          el.value = optionId[i];
+          // Default selection based on existing class
+          if (optionId[i] === currentClassObj[CLASS_SUBJECT_ID_KEY]) {
+            el.selected = true;
+          }
+          subject_drop.appendChild(el);
+        }
+
+      }
+
 
       // Populate Subject based on selected education level
       $('#level_drop').on('change', function(){
@@ -3730,8 +4413,8 @@
         if (onlineonly_check.checked == true){
             document.getElementById("state_drop").disabled=true;
             document.getElementById("area_drop").disabled=true;
-            document.getElementById("state_drop").style.backgroundColor = "#f5f5f5" ;
-            document.getElementById("area_drop").style.backgroundColor="#f5f5f5" ;
+            document.getElementById("state_drop").style.backgroundColor = "#e9ecef" ;
+            document.getElementById("area_drop").style.backgroundColor="#e9ecef" ;
         } else {
             document.getElementById("state_drop").disabled=false;
             document.getElementById("area_drop").disabled=false;
@@ -3741,44 +4424,45 @@
         // checkSelection(onlineonly_check.checked);
        });
 
-      // // ------State Dropdown start------- //
-      // let state_select = document.getElementById("state_drop"); 
-      // let state = MYAllState; 
-      // let stateId = MYAllStateId; 
-      // for (let i = 0; i < state.length; i++) {
-      //     let el = document.createElement("option");
-      //     el.textContent = state[i];
-      //     el.value = stateId[i];
-          
-      //     // Update State
-      //     if (state[i] === currentClassObj[STATE_KEY]) {
-      //       el.selected = true;
-      //     }
-      //     state_select.appendChild(el);
-      // }   
+      // ------State Dropdown start------- //
+      let state_select = document.getElementById("state_drop"); 
+      let state = MYAllState; 
+      let stateId = MYAllStateId; 
+      for (let i = 0; i < state.length; i++) {
+        let el = document.createElement("option");
+        el.textContent = state[i];
+        el.value = stateId[i];
+        
+        // Update State
+        if (state[i] === currentClassObj[STATE_KEY]) {
+          el.selected = true;
+        }
+        state_select.appendChild(el);
+      }   
 
-      // // Update Area
-      // // Clear the area option first, except the first one. 100 is just a huge number
-      // let select_area = document.getElementById("area_drop"); 
-      // for(i=1; i <= 100; i++){
-      //     select_area.remove(1);
-      // }  
-      // if (!(currentClassObj[STATE_KEY] == null || currentClassObj[STATE_KEY] =='')){
-      //   // let options = selectCityBasedOnState (currentClassObj[STATE_KEY]);
-      //   let cityInfo = selectCityListBasedOnStateId(currentClassObj[STATE_ID_KEY]);
-      //   let cityName = cityInfo[0];
-      //   let cityId = cityInfo[1];
-      //   for (let i = 0; i < cityName.length; i++) {
-      //       let el = document.createElement("option");
-      //       el.textContent = cityName[i];
-      //       el.value = cityId[i];
-      //       // Default selection based on existing class
-      //       if (cityName[i] === currentClassObj[AREA_KEY]) {
-      //         el.selected = true;
-      //       }
-      //       select_area.appendChild(el);
-      //   }
-      // }
+      // Update Area
+      // Clear the area option first, except the first one. 100 is just a huge number
+      let select_area = document.getElementById("area_drop"); 
+      for(i=1; i <= 100; i++){
+          select_area.remove(1);
+      } 
+
+      if (!(currentClassObj[CLASS_STATE_KEY] == null || currentClassObj[CLASS_STATE_KEY] =='')){
+        // let options = selectCityBasedOnState (currentClassObj[STATE_KEY]);
+        let cityInfo = selectCityListBasedOnStateId(currentClassObj[CLASS_STATE_ID_KEY]);
+        let cityName = cityInfo[0];
+        let cityId = cityInfo[1];
+        for (let i = 0; i < cityName.length; i++) {
+            let el = document.createElement("option");
+            el.textContent = cityName[i];
+            el.value = cityId[i];
+            // Default selection based on existing class
+            if (cityName[i] === currentClassObj[CLASS_AREA_KEY]) {
+              el.selected = true;
+            }
+            select_area.appendChild(el);
+        }
+      }
 
       // Populate Area based on selected State
       $('#state_drop').on('change', function(){
@@ -4016,6 +4700,60 @@
         CURRENT_LESSON_DATE = "";
       });
 
+      // General Panel: Character limitations
+      $('#inClassName').on('input', function(){        
+        document.getElementById("countClassName").textContent = this.value.length + '/40'
+      });
+
+      $('#inClassDesc').on('input', function(){        
+        document.getElementById("countClassDesc").textContent = this.value.length + '/400'
+      });
+      
+      $('#inVenue').on('input', function(){        
+        document.getElementById("countClassVenue").textContent = this.value.length + '/250'
+      });
+
+      $('#inUrlClass').on('change', function(){  
+
+        if (isValidHttpUrl(this.value)){
+          document.getElementById("inUrlClassIcon").src = "http://www.google.com/s2/favicons?domain="+this.value;
+          document.getElementById("inUrlClassIconWrapper").setAttribute("onclick", "RedirectTo('"+this.value+"')");
+        }else{
+          document.getElementById("inUrlClassIcon").src = "../../assets/img/broken-link.png";
+          document.getElementById("inUrlClassIconWrapper").setAttribute("onclick", "");
+        }
+      });
+
+      $('#inUrlGroup').on('change', function(){  
+
+        if (isValidHttpUrl(this.value)){
+          document.getElementById("inUrlGroupIcon").src = "http://www.google.com/s2/favicons?domain="+this.value;
+          document.getElementById("inUrlGroupIconWrapper").setAttribute("onclick", "RedirectTo('"+this.value+"')");
+        }else{
+          document.getElementById("inUrlGroupIcon").src = "../../assets/img/broken-link.png";
+          document.getElementById("inUrlGroupIconWrapper").setAttribute("onclick", "");
+        }
+      });
+
+      $('#inUrlMaterial').on('change', function(){  
+
+        if (isValidHttpUrl(this.value)){
+          document.getElementById("inUrlMaterialIcon").src = "http://www.google.com/s2/favicons?domain="+this.value;
+          document.getElementById("inUrlMaterialIconWrapper").setAttribute("onclick", "RedirectTo('"+this.value+"')");
+        }else{
+          document.getElementById("inUrlMaterialIcon").src = "../../assets/img/broken-link.png";
+          document.getElementById("inUrlMaterialIconWrapper").setAttribute("onclick", "");
+        }
+      });
+
+
+      // General Panel: Script to trigger the select image
+      $('#tutorImgUrl').click(function(){
+        if (document.getElementById("classStatusRadioActive").checked){
+          $('#select_image').trigger('click'); 
+        }
+      });
+
 
       // Load all Admin Students
       $('#addStudentModal').on('show.bs.modal', function (event) {
@@ -4169,6 +4907,69 @@
       // Remove Teacher 2 
       $('#btnDelTutor2ModalUpdate').on('click', function (event) {
         removeTutor2FromDB();
+      });
+
+      // Advanced Panel 
+      $('#classTypeRadioPublic').on('change', function (event) {
+        if (this.checked){
+          document.getElementById("levelSubjectTop").style.display = 'flex';
+          document.getElementById("onlineOnlyTop").style.display = 'flex';
+          document.getElementById("areaStateTop").style.display = 'flex';
+        }else{
+          document.getElementById("levelSubjectTop").style.display = 'none';
+          document.getElementById("onlineOnlyTop").style.display = 'none';
+          document.getElementById("areaStateTop").style.display = 'none';
+        }
+      });
+      
+      $('#classTypeRadioPrivate').on('change', function (event) {
+        if (this.checked){
+          document.getElementById("levelSubjectTop").style.display = 'none';
+          document.getElementById("onlineOnlyTop").style.display = 'none';
+          document.getElementById("areaStateTop").style.display = 'none';
+        }else{
+          document.getElementById("levelSubjectTop").style.display = 'flex';
+          document.getElementById("onlineOnlyTop").style.display = 'flex';
+          document.getElementById("areaStateTop").style.display = 'flex';
+        }
+      });
+
+      // Advanced panel: Class Status
+      $('#classStatusRadioInactive').on('change', function (event) {
+        if (this.checked){
+          disableAllEdits()
+        }
+      });
+
+      $('#classStatusRadioActive').on('change', function (event) {
+        if (this.checked){
+          enableAllEdits()
+        }
+      });
+
+      $('#stuAutoJoinEn').on('change', function (event) {
+        if (this.checked){
+          document.getElementById("inAutoJoinLinkTop").style.display = 'initial';
+        }else{
+          document.getElementById("inAutoJoinLinkTop").style.display = 'none';
+        }
+      });
+      
+      // Advanced panel: Delete Class
+      $('#delClassModalIn').on('input', function(){
+        if (this.value === 'DELETE'){
+          $('#btnDelClassModalUpdate').prop('disabled', false);
+        }
+        else{
+          $('#btnDelClassModalUpdate').prop('disabled', true);
+        }
+      });
+
+      // Advanced panel: Delete Class btn clicked
+      $('#btnDelClassModalUpdate').on('click', function (event) {
+        // alert('Deleted Class');
+        DeleteClass(currentClassObj[CLASS_ID]);
+
       });
 
 
@@ -4631,6 +5432,220 @@
     });
 
   </script>
+
+  <!-- Upload Class Icon -->
+  <script>
+
+    var fileinput = document.getElementById('select_image');
+
+    var form = document.getElementById('tutorImgUrl');
+
+    // === RESIZE ====
+    var max_height = 1024; 
+    var max_width = 1024;
+    var width = 0;
+    var height = 0;
+    
+    function uploadImage( file, type, id, size, width, height ){
+
+      if(file != null) {
+        $('#uploadModal').modal('show');
+
+        // Create a root reference
+        var storageRef = firebase.storage().ref("uploads");
+        // Create a reference to 'tutorId.<imgType>'
+        var metadata = {
+          contentType: type, // Predefined by firestore
+          customMetadata: {
+            'id': id,
+            'size': size,
+            'width': width,
+            'height': height
+          }
+        };
+
+        // Upload file and metadata to the object 'images/mountains.jpg'
+        var uploadTask = storageRef.child('class_icon/' + currentClassObj[CLASS_ID]).putString(file, 'data_url', metadata);
+
+        var elem = document.getElementById("myBar");
+        // Listen for state changes, errors, and completion of the upload.
+        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+          (snapshot) => {
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            elem.style.width = progress + "%";
+
+            switch (snapshot.state) {
+              case firebase.storage.TaskState.PAUSED: // or 'paused'
+                console.log('Upload is paused');
+                func.showNotification('top','center', 'danger', 'error_outline', "Upload is paused. Please try again." );
+
+                break;
+              case firebase.storage.TaskState.RUNNING: // or 'running'
+                console.log('Upload is running');
+                break;
+            }
+            
+          }, 
+          (error) => {
+            // A full list of error codes is available at
+            // https://firebase.google.com/docs/storage/web/handle-errors
+            switch (error.code) {
+              case 'storage/unauthorized':
+                // User doesn't have permission to access the object
+                // alert("Upload failed. Please try again.")
+                func.showNotification('top','center', 'danger', 'error_outline', "You do not have permission to upload. Please contact us." );
+
+                $('#uploadModal').modal('hide');
+                break;
+              case 'storage/canceled':
+                // User canceled the upload
+                // alert("Upload canceled.")
+                func.showNotification('top','center', 'danger', 'error_outline', "Upload canceled." );
+
+                $('#uploadModal').modal('hide');
+                break;
+
+              // ...
+
+              case 'storage/unknown':
+                // alert("Upload failed. Please try again.");
+                func.showNotification('top','center', 'danger', 'error_outline', "Upload failed. Please try again." );
+
+                $('#uploadModal').modal('hide');
+                // Unknown error occurred, inspect error.serverResponse
+                break;
+            }
+          }, 
+          () => {
+            // Upload completed successfully, now we can get the download URL
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+
+              imgUrl_temp = downloadURL;
+
+              // Once uploaded, update the new url
+              let docRef = db.collection("Class").doc('v1').collection("Class").doc(currentClassObj[CLASS_ID]);
+              let docRefWithMerge = docRef.set({
+                [CLASS_IMG_URL]: imgUrl_temp
+              }, { merge: true });
+
+
+              $('#uploadModal').modal('hide');
+              func.showNotification('top','center', 'success', 'check_circle', "New class icon added." );
+            });
+          }
+        );
+
+      }
+    }
+
+
+    function processfile(file) {
+      
+        if( !( /image/i ).test( file.type ) )
+            {
+                alert( "File "+ file.name +" is not an image." );
+                return false;
+            }
+
+        // read the files
+        var reader = new FileReader();
+        reader.readAsArrayBuffer(file);
+        
+        reader.onload = function (event) {
+          // blob stuff
+          var blob = new Blob([event.target.result]); // create blob...
+          window.URL = window.URL || window.webkitURL;
+          var blobURL = window.URL.createObjectURL(blob); // and get it's URL
+          
+          // helper Image object
+          var image = new Image();
+          image.src = blobURL;
+          //preview.appendChild(image); // preview commented out, I am using the canvas instead
+          image.onload = function() {
+            // have to wait till it's loaded
+            var resized = resizeMe(image); // send it to canvas
+            // var newinput = document.createElement("input");
+            // newinput.type = 'hidden';
+            // newinput.name = 'images[]';
+            // newinput.value = resized; // put result from canvas into new hidden input
+            form.src = resized;
+            var head = 'data:image/jpeg;base64,';
+            // console.log(Math.round((resized.length - head.length)*3/4));
+            size = Math.round((resized.length - head.length)*3/4)
+
+            // Set classId = '' because we dont created it yet
+            uploadImage(resized, 'image/jpeg', currentClassObj[CLASS_ID], size, width, height);
+          }
+        };
+    }
+
+    function readfiles(files) {
+      
+        // remove the existing canvases and hidden inputs if user re-selects new pics
+        var existinginputs = document.getElementsByName('images[]');
+        var existingcanvases = document.getElementsByTagName('canvas');
+        while (existinginputs.length > 0) { // it's a live list so removing the first element each time
+          // DOMNode.prototype.remove = function() {this.parentNode.removeChild(this);}
+          form.removeChild(existinginputs[0]);
+          // preview.removeChild(existingcanvases[0]);
+        } 
+      
+        for (var i = 0; i < files.length; i++) {
+          // console.log(i)
+          processfile(files[i]); // process each file at once
+        }
+        fileinput.value = ""; //remove the original files from fileinput
+        // TODO remove the previous hidden inputs if user selects other files
+    }
+
+    // this is where it starts. event triggered when user selects files
+    fileinput.onchange = function(){
+      if ( !( window.File && window.FileReader && window.FileList && window.Blob ) ) {
+        alert('The File APIs are not fully supported in this browser.');
+        return false;
+        }
+      readfiles(fileinput.files);
+    }
+
+
+    function resizeMe(img) {
+      
+      var canvas = document.createElement('canvas');
+
+      // console.log(width,height )
+      width = img.width;
+      height = img.height;
+      // calculate the width and height, constraining the proportions
+      if (width > height) {
+        if (width > max_width) {
+          //height *= max_width / width;
+          height = Math.round(height *= max_width / width);
+          width = max_width;
+        }
+      } else {
+        if (height > max_height) {
+          //width *= max_height / height;
+          width = Math.round(width *= max_height / height);
+          height = max_height;
+        }
+      }
+      
+      // resize the canvas and draw the image data into it
+      canvas.width = width;
+      canvas.height = height;
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, width, height);
+      
+      // preview.appendChild(canvas); // do the actual resized preview
+      
+      return canvas.toDataURL("image/jpeg",0.7); // get the data from canvas as 70% JPG (can be also PNG, etc.)
+
+    }
+
+  </script>
+
 
 </body>
 

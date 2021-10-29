@@ -745,11 +745,12 @@
       gurPhone_div.appendChild(gurPhone_p);
       // Status
       let status_p = document.createElement('p');
-      status_p.textContent = doc.data().statusEnrollment;
-      if (doc.data().statusEnrollment === STU_ENROLLMENT_STATUS_ACTIVE){
+      if (doc.data()[STU_ENROLLMENT_STATUS] === STU_ENROLLMENT_STATUS_ACTIVE){
         status_p.className = "card-student-status-label active";
+        status_p.textContent = 'Active';
       }else{
         status_p.className = "card-student-status-label pending";
+        status_p.textContent = 'Pending';
       }
       let status_div = document.createElement('div');
       status_div.className = "col-md-1";

@@ -588,7 +588,7 @@
       admin_address1, admin_address2, admin_addressPostCode, admin_addressState, admin_address,
       admin_weburl;
     var currentObj = null; // Session Storage for Dependant Module
-    var action; // Action: JOINSTUDENT(enroll as student), JOINSTUDENTNCLASS (enroll as student and class)
+    // var action; // Action: JOINSTUDENT(enroll as student), JOINSTUDENTNCLASS (enroll as student and class)
     const JOIN_AS_STUDENT = 'joinAsStudent';
     const JOIN_AS_STUDENT_AND_CLASS = 'joinAsStudentNClass';
     const JOIN_AS_STUDENT_AND_ADD_DEPENDANT = 'joinAsStudentNAddDependant';
@@ -1301,7 +1301,7 @@
       const activePanel = findParent(eventTarget, `${DOMstrings.stepFormPanelClass}`);
 
       let activePanelNum = Array.from(DOMstrings.stepFormPanels).indexOf(activePanel);
-      console.log(action);
+      // console.log(action);
 
       //check if we clicked on `PREV` or NEXT` buttons
       if (eventTarget.classList.contains(`${DOMstrings.stepSendBtnClass}`))

@@ -349,6 +349,7 @@ const ADMIN_PARAM_COMMISSION_POLICY_MONTH_12_KEY = "aMonth12";
 // GoLearn CLASS Module
 const CLASS_ID = "id";
 const CLASS_NAME = "name";
+const CLASS_IMG_URL = "imgUrl";
 const CLASS_DESC = "desc";
 const CLASS_CATEGORY_KEY = "category";
 const CLASS_CATEGORY_ID_KEY = "categoryId";
@@ -371,7 +372,7 @@ const CLASS_FEES_KEY = "fees";
 const CLASS_FEES_PER_MONTH_KEY = "feesPerMonth"; // NEW FEATURE 2.0
 const CLASS_FEES_TYPE_KEY = "feesType";
 
-const CLASS_URL = "classUrl";
+// const CLASS_URL = "classUrl";
 const CLASS_TYPE = "classType";
     const CLASS_TYPE_PRIVATE = "private";
     const CLASS_TYPE_PUBLIC = "public";
@@ -386,18 +387,21 @@ const CLASS_TUTOR_PHONE_ARR = "tutorPhoneArr";
 const CLASS_TUTOR_IMG_URL_ARR = "tutorImgUrlArr";
 const CLASS_STUDENT_ID_ARR = "stuIdArr";
 const CLASS_VIEWER_ID_ARR = "viewerIdArr";
-// const CLASS_GROUP_URL = "groupUrl";
-// const CLASS_VIDEO_URL = "vidUrl";
-// const CLASS_GCLASS_URL = "gClassUrl";
-const CLASS_TUTOR1_ADD_EDIT_STUDENT_ENABLE = "perT1AddEditStuEn";
-const CLASS_TUTOR1_REMOVE_STUDENT_ENABLE = "perT1DelStuEn";
-const CLASS_TUTOR1_ADD_EDIT_LESSON_ENABLE = "perT1AddEditLessonEn";
-const CLASS_TUTOR1_REMOVE_LESSON_ENABLE = "perT1AddDelLessonEn";
-const CLASS_TUTOR2_ADD_EDIT_STUDENT_ENABLE = "perT2AddEditStuEn";
-const CLASS_TUTOR2_REMOVE_STUDENT_ENABLE = "perT2DelStuEn";
-const CLASS_TUTOR2_ADD_EDIT_LESSON_ENABLE = "perT2AddEditLessonEn";
-const CLASS_TUTOR2_REMOVE_LESSON_ENABLE = "perT2AddDelLessonEn";
+const CLASS_CLASS_URL = "urlClass"; // Zoom
+const CLASS_CHAT_GROUP_URL = "urlGroup"; // Whatsapp / Telegrame
+const CLASS_MATERIAL_URL = "urlMaterial"; // GClass
+
+// const CLASS_TUTOR1_ADD_EDIT_STUDENT_ENABLE = "perT1AddEditStuEn";
+// const CLASS_TUTOR1_REMOVE_STUDENT_ENABLE = "perT1DelStuEn";
+// const CLASS_TUTOR1_ADD_EDIT_LESSON_ENABLE = "perT1AddEditLessonEn";
+// const CLASS_TUTOR1_REMOVE_LESSON_ENABLE = "perT1AddDelLessonEn";
+// const CLASS_TUTOR2_ADD_EDIT_STUDENT_ENABLE = "perT2AddEditStuEn";
+// const CLASS_TUTOR2_REMOVE_STUDENT_ENABLE = "perT2DelStuEn";
+// const CLASS_TUTOR2_ADD_EDIT_LESSON_ENABLE = "perT2AddEditLessonEn";
+// const CLASS_TUTOR2_REMOVE_LESSON_ENABLE = "perT2AddDelLessonEn";
 const CLASS_STUDENT_AUTO_JOIN_ENABLE = "perStuAutoJoinEn";
+const CLASS_TUTOR_ADD_EDIT_LESSON_ENABLE = "perTAddLesEn";
+const CLASS_TUTOR_REMOVE_LESSON_ENABLE = "perTDelLesEn";
 
 const CLASS_DATE_ADD = "dateAdd";
 const CLASS_DATE_EDIT = "dateEdit";
@@ -552,6 +556,7 @@ const SESSION_STORAGE_CLASS_ALL_DOCS_KEY = "allDocs";
 const SESSION_STORAGE_CLASS_CURRENT_DOC_KEY = "currentDoc";
 const SESSION_STORAGE_CLASS_CURRENT_DOC_ID_KEY = "currentDocId";
 const SESSION_STORAGE_CLASS_LOAD_KEY = "load"; // True => load/show, vice versa
+const SESSION_STORAGE_CLASS_NON_ADMIN_KEY = "nonAdmin";
 // const SESSION_STORAGE_CLASS_KEY = "sessionStorageClass";
 // TUTOR: Student Module 
 const SESSION_STORAGE_STUDENT_ALL_DOCS_KEY = "allStudentsDocs";
