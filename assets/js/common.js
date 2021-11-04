@@ -550,6 +550,22 @@ const TUTOR_TUTOR_ADDR = "tutorAddr";
 const TUTOR_TUTOR_IMG_URL = "tutorImgUrl";
 const TUTOR_TUTOR_WEB_URL = "tutorWebUrl";
 
+// Golearn Tutor Settings
+const SET_ID = "id";
+const SET_TUTOR_ID = "tutorId"; // main
+const SET_BIZ_NAME = "bizName";
+const SET_BIZ_PHONE = "bizPhone";
+const SET_BIZ_EMAIL = "bizEmail";
+const SET_BIZ_ADDR = "bizAddr";
+const SET_BIZ_IMG_URL = "bizImgUrl";
+const SET_BANK_ACC_NAME = "bankAccName";
+const SET_BANK_ACC_NUM = "bankAccNum";
+const SET_BANK_NAME = "bankName";
+
+const SET_INV_NOTE = "invNote";
+const SET_INV_FOOTER_NOTE = "invFooterNote";
+
+
 // -------------- Session Storage Key Start -------------- //
 // TUTOR: Class Module 
 const SESSION_STORAGE_CLASS_ALL_DOCS_KEY = "allDocs";

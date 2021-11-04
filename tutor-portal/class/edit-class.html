@@ -98,24 +98,12 @@
               <p>Teachers</p>
             </a>
           </li>
-		  		<!-- <li class="nav-item">
-            <a class="nav-link" href="./job.html">
-              <i class="material-icons">work_outline</i>
-              <p>Tuition Jobs</p>
+          <li class="nav-item">
+            <a class="nav-link" href="../financial/">
+              <i class="material-icons">attach_money</i>
+              <p>Financial</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./course.html">
-              <i class="material-icons">format_list_bulleted</i>
-              <p>My Courses</p>
-            </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="./update.html">
-              <i class="material-icons">note_alt</i>
-              <p>Update Information</p>
-            </a>
-          </li> -->
         </ul>
       </div>
     </div>
@@ -2805,8 +2793,7 @@
 
     // Load Lesson Details
     function LoadLessonInfo(){
-      let today = new Date();
-
+      let today = new Date(2100, 12, 31);// Set a big dates
       let docRef = db.collection("Class")
           .doc("v1")
           .collection("Lesson")
