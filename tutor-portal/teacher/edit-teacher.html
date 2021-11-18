@@ -57,14 +57,14 @@
               <p>Classes</p>
             </a>
           </li>
-		  		<li class="nav-item active">
-            <a class="nav-link" href="./">
+		  		<li class="nav-item">
+            <a class="nav-link" href="../student/">
               <i class="fas fa-user-graduate fa-fw nav-icon"></i>
               <p>Students</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="../teacher/">
+          <li class="nav-item active">
+            <a class="nav-link" href="./">
               <i class="fas fa-chalkboard-teacher fa-fw nav-icon"></i>
               <p>Teachers</p>
             </a>
@@ -125,7 +125,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Student <span><i class="material-icons" style="color: gray;">chevron_right</i></span> Add Student</a>
+            <a class="navbar-brand" href="javascript:;">Teachers <span><i class="material-icons" style="color: gray;">chevron_right</i></span> Edit</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -171,6 +171,7 @@
                   <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
 									<div class="dropdown-divider"></div>
 									<a style="font-weight: 500 ;padding: 0.5em ;text-align: center; width: 200px; background-color: #428dd4 ;display: block; color: #fff;" href="https://golearn.com.my/pricing/" target="_blank" id="btnUpgradeToPro">Upgrade to Pro</a>
+
                 </div>
               </li>
             </ul>
@@ -180,6 +181,84 @@
       <!-- End Navbar -->
 
 			<!-- Modal Start -->
+      <!-- Delete Class modal -->
+      <div class="row">
+        <div class="modal fade" id="delClassModal" tabindex="-1" role="dialog" aria-labelledby="delClassModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="delClassModalLabel">Are you absolutely sure? </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnDelClassModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="delClassModalBody">
+                <p>This action cannot be <strong style="color: red;">undone</strong>. This will permanently delete the teacher's details.</p>
+                <p>The teacher will <strong style="color: #2e74b6 ;">continue with their existing classes</strong> until they are changed or removed. </p> 
+                <p>If you still want to keep this teacher, you may set the Employment Status to <strong style="color: #2e74b6 ;">Inactive</strong>.</p> 
+
+                <p>Please type <strong>DELETE</strong> to confirm.</p>
+
+
+                <input type="text" class="form-control" id="delClassModalIn">
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnDelClassModalUpdate" disabled>I understand the consequences. Delete this person.</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Approve New Student modal -->
+      <div class="row">
+        <div class="modal fade" id="approveStuModal" tabindex="-1" role="dialog" aria-labelledby="approveStuModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="approveStuModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnApproveStuModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="approveStuModalBody">
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnApproveStuModalClose2">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnApproveStuModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delete Student modal -->
+      <div class="row">
+      <div class="modal fade" id="delStuModal" tabindex="-1" role="dialog" aria-labelledby="delStuModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="delStuModalLabel"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnDelStuModalClose1">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="delStuModalBody">
+              <div id="delStuId" value=""></div>
+              Are you sure you want to continue?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnDelStuModalClose2">Not Now</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnDelStuModalUpdate">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
       <!-- Save Student modal -->
       <div class="row">
         <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
@@ -202,10 +281,11 @@
           </div>
         </div>
       </div>
+
       <!-- Activation modal -->
       <div class="row">
         <div class="modal fade" id="activationModal" tabindex="-1" role="dialog" aria-labelledby="activationModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="activationModalLabel">New message</h5>
@@ -227,7 +307,7 @@
       <!-- Sign-out modal -->
       <div class="row">
         <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="signOutModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="signOutLabel">Logging Out</h5>
@@ -247,12 +327,24 @@
         </div>
       </div>
 
+
       <div class="content">
+
+
         <div class="container">
+
           <!-- Back button -->
-          <div class="row" id="desciption-row" >
-            <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
-            <a href="javascript:;" class="btn btn-primary btn-round" id="btnSave"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</a>
+          <div class="row d-flex" id="desciption-row" >
+            <div class="p-2">
+              <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
+            </div>
+            <div class="p-2">
+              <a href="javascript:;" class="btn btn-primary btn-round" id="btnSave"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</a>
+            </div>
+
+            <div class="ml-auto p-2">
+              <!-- <a href="javascript:;" class="btn btn-danger btn-round" data-toggle="modal" data-target="#delStuModal"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">remove</i> Remove</a> -->
+            </div>
           </div>
           
           <div class="container overflow-hidden">
@@ -262,8 +354,8 @@
                 <div class="row" >
                   <div class="col-12 col-lg-12 ml-auto mr-auto mb-4">
                     <div class="d-flex flex-wrap multitabs-form__progress">
-                      <button class="multitabs-form__progress-btn js-active" type="button" title="Student Info">Student Profile</button>
-                      <button class="multitabs-form__progress-btn" type="button" title="Guardian Info">Guardian Profile</button>
+                      <button class="multitabs-form__progress-btn js-active" type="button" title="Student Info">Teacher Profile</button>
+                      <button class="multitabs-form__progress-btn" type="button" title="Guardian Info">Employment Details  <span class='card-class-status-label'>Admin</span></button>
                     </div>
                   </div>
                 </div>
@@ -276,200 +368,184 @@
                       <form class="multitabs-form__form">
                         <!-- Student form panel-->
                         <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
-                          <h4 class="multitabs-form__title">Student Profile</h4>
+                          <h4 class="multitabs-form__title">Teacher Profile</h4>
                           <div class="multitabs-form__content">
                             <div class="row">
-                               <!-- Name -->
-                              <div class="col-md-6">
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Full Name*</span> 
-                                  <input type="text" class="form-control" id="inStuName" data-compulsory="true" oninput="this.className = 'form-control'">
-                                </div>
-                              </div>
-
-                              <!-- Phone -->
-                              <div class="col-md-6">
-                                <div class="form-group" style="padding-bottom: 0;">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Phone</span> 
-                                </div>
-                                <div class="form-group" style="margin-top: 0;">
-                                  <!-- <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Phone*</span>  -->
-                                  <!-- <i style="margin-right: 1rem;" class="material-icons">smartphone</i> -->
-                                  <input id="phoneStudent" name="phone" type="tel" class="form-control" oninput="onInputNumber()">
-                                  <span id="valid-msgStudent" class="hide" style="color: #42ba96;">✓ Valid</span>
-                                  <span id="error-msgStudent" class="hide" style="color: #F32013;"></span>
-                                </div>
-                              </div>
-                            </div>
-                              
-                            <div class="row">
-                              <!-- Email -->
-                              <div class="col-md-6">
-                                <div class="form-group" >
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Email</span> 
-                                  <input type="text" class="form-control" id="inStuEmail" data-compulsory="false">
-                                </div>
-                              </div>
-
-                              <!-- Gender -->
-                              <div class="col-md-6">
-                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;" >Gender</span> 
-                                <div class="form-group" >
-                                  <div class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="StudentGender" id="inStuMaleChecked" value="option1" data-compulsory="false" checked>
-                                      Male
-                                      <span class="circle">
-                                        <span class="check"></span>
-                                      </span>
-                                    </label>
-                                  </div>
-                                  <div class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="StudentGender" id="inStuFemaleChecked" value="option2" data-compulsory="false">
-                                      Female
-                                      <span class="circle">
-                                        <span class="check"></span>
-                                      </span>
-                                    </label>
+                              <div class="col-md-4">
+                                <div class="row">
+                                  <div class="col-md-12 text-center">
+                                    <div style="height: 140px;width: 140px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
+                                      <img id="viewTutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+                                    </div>
                                   </div>
                                 </div>
+
+                                <div class="row">
+                                  <div class="col-md-12 text-center">
+                                    <a type="button" class="btn btn-primary" href="#" id="btnViewTutorModalFullProfile" style="display: none;">View Full Profile</a>
+                                  </div>
+
+                                </div>
+
                               </div>
+            
+                              <div class="col-md-8">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Name</span> 
+                                <input id="viewTutorName"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
+            
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Phone</span> 
+                                    <input id="viewTutorPhone"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
+                
+                                  </div>
+                                  <div class="col-md-6">
+                                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Email</span> 
+                                    <input id="viewTutorEmail"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
+                
+                                  </div>
+                                </div>
+            
+               
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Gender</span> 
+                                    <div class="form-group">
+                                      <div class="form-check form-check-radio form-check-inline">
+                                        <label class="form-check-label">
+                                          <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioMale" value="optionActive" data-compulsory="false" disabled>
+                                          Male
+                                          <span class="circle">
+                                            <span class="check"></span>
+                                          </span>
+                                        </label>
+                                      </div>
+                                      <div class="form-check form-check-radio form-check-inline">
+                                        <label class="form-check-label">
+                                          <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioFemale" value="optionInactive" data-compulsory="false" disabled>
+                                          Female
+                                          <span class="circle">
+                                            <span class="check"></span>
+                                          </span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Age</span> 
+                                    <input id="viewTutorAge"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
+                
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Date Joined</span> 
+                                    <input id="viewTutorDateAdd"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
+              
+                                  </div>
+                                </div>
+            
+                              </div>
+            
                             </div>
 
-                            <div class="row">
-                              <!-- School -->
-                             <div class="col-md-12">
-                               <div class="form-group">
-                                 <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">School</span> 
-                                 <input type="text" class="form-control" id="inStuSchool" data-compulsory="false">
-                               </div>
-                             </div>
-                           </div>
                           </div>
                         </div>
 
-                        <!-- Guardian form panel-->
+                        <!-- Employment Details form panel-->
                         <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                          <h4 class="multitabs-form__title">Guardian Profile</h4>
+                          <h4 class="multitabs-form__title">Employment Details</h4>
                           <div class="multitabs-form__content">
+
+
                             <div class="row">
-                               <!-- Name -->
+                               <!-- Bank Name -->
                               <div class="col-md-6">
                                 <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Name*</span> 
-                                  <input type="text" class="form-control" id="inGurName" data-compulsory="true" oninput="this.className = 'form-control'" >
+                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Name</span> 
+                                  <input type="text" class="form-control" id="inBankName" data-compulsory="false" oninput="this.className = 'form-control'" >
                                 </div>
                               </div>
 
-                              <!-- Phone -->
+                              <!-- Bank Account Number -->
                               <div class="col-md-6">
-                                <div class="form-group" style="padding-bottom: 0;">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Phone*</span> 
-                                </div>
-                                <div class="form-group" style="margin-top: 0;">
-                                  <!-- <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Phone*</span>  -->
-                                  <!-- <i style="margin-right: 1rem;" class="material-icons">smartphone</i> -->
-                                  <input id="phoneGurdian" name="phone" type="tel" class="form-control" data-compulsory="true" oninput="this.className = 'form-control'">
-                                  <span id="valid-msgGuardian" class="hide" style="color: #42ba96;">✓ Valid</span>
-                                  <span id="error-msgGuardian" class="hide" style="color: #F32013;"></span>
+                                <div class="form-group">
+                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Account No</span> 
+                                  <input type="text" class="form-control" id="inBankAcNo" data-compulsory="false" oninput="this.className = 'form-control'" >
                                 </div>
                               </div>
-
 
                             </div>
                               
                             <div class="row">
-                              <!-- Email -->
+                              <!-- EPF No -->
                               <div class="col-md-6">
                                 <div class="form-group" >
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Email</span> 
-                                  <input type="text" class="form-control" id="inGurEmail" data-compulsory="false">
+                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">EPF No</span> 
+                                  <input type="text" class="form-control" id="inEPFNo" data-compulsory="false" oninput="this.className = 'form-control'">
                                 </div>
                               </div>
 
-                              <!-- Gender -->
+                              <!-- Socso No -->
                               <div class="col-md-6">
-                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;" >Gender</span> 
                                 <div class="form-group" >
-                                  <div class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="GurdianGender" id="inGurMaleChecked" value="option1" data-compulsory="false" checked>
-                                      Male
-                                      <span class="circle">
-                                        <span class="check"></span>
-                                      </span>
-                                    </label>
-                                  </div>
-                                  <div class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="GurdianGender" id="inGurFemaleChecked" value="option2" data-compulsory="false">
-                                      Female
-                                      <span class="circle">
-                                        <span class="check"></span>
-                                      </span>
-                                    </label>
-                                  </div>
+                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Socso No</span> 
+                                  <input type="text" class="form-control" id="inSocsoNo" data-compulsory="false" oninput="this.className = 'form-control'">
                                 </div>
                               </div>
+
                             </div>
 
+                            <!-- Status -->
                             <div class="row">
-                              <!-- Relationship -->
-                              <div class="col-md-6">
-                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;" >Relationship</span> 
-                                <div class="form-group" >
-                                  <div class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="GuardianRelationship" id="inRelParentsChecked" value="option1" data-compulsory="false" checked>
-                                        Parents
-                                      <span class="circle">
-                                        <span class="check"></span>
-                                      </span>
-                                    </label>
-                                  </div>
-                                  <div class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="GuardianRelationship" id="inRelGurdianChecked" value="option2" data-compulsory="false">
-                                        Legal Guardian
-                                      <span class="circle">
-                                        <span class="check"></span>
-                                      </span>
-                                    </label>
-                                  </div>
-                                </div>
+                              <div class="col-sm-12 text-left">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Employment Status</span> 
+                                <span class="tooltiptext-trigger">? 
+                                  <span class="tooltiptext-general">
+                                    <h6>Employment Status</h6>
+                                    <p>Set to <strong style="color: #2e74b6;">Inactive</strong> to keep the teacher profile, but disallowed from joining future classes and payrolls.</p>
+                                  </span> 
+                                </span>
                               </div>
-
-                              <!-- Address -->
                               <div class="col-md-12">
-                                <div class="form-group" style="margin-top: 1.5rem;" >
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Address</span> 
-                                  <textarea class="form-control" maxlength="511" rows="3" id="inGurAddress" data-compulsory="false" placeholder="Write something ..."></textarea>
+                                <div class="form-group">
+                                  <div class="form-check form-check-radio form-check-inline">
+                                    <label class="form-check-label">
+                                      <input class="form-check-input" type="radio" name="employmentStatus" id="employmentStatusRadioActive" value="optionActive" data-compulsory="false" checked>
+                                      Active
+                                      <span class="circle">
+                                        <span class="check"></span>
+                                      </span>
+                                    </label>
+                                  </div>
+                                  <div class="form-check form-check-radio form-check-inline">
+                                    <label class="form-check-label">
+                                      <input class="form-check-input" type="radio" name="employmentStatus" id="employmentStatusRadioInactive" value="optionInactive" data-compulsory="false">
+                                      Inactive
+                                      <span class="circle">
+                                        <span class="check"></span>
+                                      </span>
+                                    </label>
+                                  </div>
                                 </div>
                               </div>
                             </div>
 
-                            <div class="row" style="margin-top: 0.5rem;">
-                              <div class="col-md-6">
-                                  <!-- State -->
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray;">State</span> 
-                                  <select class="form-control" name="tutor_course[]" id="state_drop" data-compulsory="false">
-                                    <option value="">Select state</option>
-                      
-                                  </select>
-                                </div>
+                            <!-- Delete Class -->
+                            <div class="row">
+                              <div class="col-sm-12 text-left">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: grey;">Remove This Teacher / Employee</span> 
+                                <span class="tooltiptext-trigger" style="background-color: red; padding: 0.2em 0.6em 0.2em 0.6em;">!
+                                  <span class="tooltiptext-general" style="border: thin solid red;">
+                                    <h6 style="color: red;">Remove This Teacher / Employee</h6>
+                                    <p>This action cannot be <strong style="color: red;">undone</strong>. This will permanently delete the teacher's details. The teacher will still continue with their existing classes until they are changed or removed.</p>
+                                  </span> 
+                                </span>
                               </div>
-                              <div class="col-md-6">
-                                <!-- Area -->
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Area</span>
-                                  <select class="form-control" name="tutor_course[]" id="area_drop" data-compulsory="false">
-                                    <option value="">Select area</option>
-                                  </select>
-                                </div>
+                              <div class="col-md-12" >
+                                <a class="btn btn-sm btn-outline-danger btn-round" id="btnDelClass" style="color: red; background-color: white;" data-toggle='modal' data-target='#delClassModal'>Delete Person <i class="fas fa-exclamation-triangle" style="color: red;"></i></a> 
                               </div>
-                            </div>   
+                            </div>
 
                           </div>
                         </div>
@@ -629,14 +705,80 @@
     var current_aweburl, current_aPremiumSubjectLimit, current_aPremiumConnectLimit, current_aTotalSubjectLimit, 
      current_aTotalConnectLimit, current_aPreferredSubjectLimit, current_aPreferredAreaLimit;
      
+
+    const inBankName = document.getElementById("inBankName");
+    const inBankAcNo = document.getElementById("inBankAcNo");
+    const inEPFNo = document.getElementById("inEPFNo");
+    const inSocsoNo = document.getElementById("inSocsoNo");
+
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
+
+    // Check the current CLASS in session Storage - Valid only if user come from class.html
+    var currentTeacherObj = null;
+    getStudentObject()
+
+    function getStudentObject(){
+      // Check if there are valid class data in session storage.
+      if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY)) == null || 
+        JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY)).id == null || 
+        JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY)).id == '' ){
+        // TODO: Flag warning
+        
+        return;
+      }else{
+        // Set the fields
+        currentTeacherObj = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY));
+        console.log(currentTeacherObj);
+        updatePageContent(currentTeacherObj);
+        return;
+
+      }
+    }
+
+    function updatePageContent(currentObj){
+      // Teacher Profile
+      document.getElementById("viewTutorName").value = currentObj[TUTOR_TUTOR_NAME];
+      document.getElementById("viewTutorPhone").value = currentObj[TUTOR_TUTOR_PHONE];
+      document.getElementById("viewTutorEmail").value = currentObj[TUTOR_TUTOR_EMAIL];
+      document.getElementById("viewTutorGenderRadioMale").checked = currentObj[TUTOR_TUTOR_GENDER] == 0 ? true: false;
+      document.getElementById("viewTutorGenderRadioFemale").checked = currentObj[TUTOR_TUTOR_GENDER] == 1 ? true: false;
+      document.getElementById("viewTutorAge").value = currentObj[TUTOR_TUTOR_AGE];
+      document.getElementById("viewTutorDateAdd").value = new Date(currentObj[TUTOR_DATE_ADD].seconds * 1000).toLocaleDateString("en-GB");
+      document.getElementById("viewTutorImgUrl").src = currentObj[TUTOR_TUTOR_IMG_URL];
+      console.log(currentObj[TUTOR_TUTOR_WEB_URL])
+      if (currentObj[TUTOR_TUTOR_WEB_URL] == null || currentObj[TUTOR_TUTOR_WEB_URL] == ''){
+        document.getElementById("btnViewTutorModalFullProfile").setAttribute('style', 'none');     
+        document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','#'); 
+        document.getElementById("btnViewTutorModalFullProfile").setAttribute('target',''); 
+      }
+      else{
+        document.getElementById("btnViewTutorModalFullProfile").setAttribute('style', 'visible');     
+        document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','https://golearn.com.my/tutor/'+currentObj[TUTOR_TUTOR_WEB_URL]); 
+        document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','_blank'); 
+      }
+
+
+      // Employment Details 
+      console.log(currentObj[TUTOR_AC_NO])
+      inBankName.value = (currentObj[TUTOR_BANK_NAME] == null || currentObj[TUTOR_BANK_NAME] == '')? '' : currentObj[TUTOR_BANK_NAME];
+      inBankAcNo.value = (currentObj[TUTOR_AC_NO] == null || currentObj[TUTOR_AC_NO] == '') ?  '' : currentObj[TUTOR_AC_NO];
+      inEPFNo.value = (currentObj[TUTOR_EPF] == null || currentObj[TUTOR_EPF] == '')? '' : currentObj[TUTOR_EPF];
+      inSocsoNo.value = (currentObj[TUTOR_SOCSO] == null || currentObj[TUTOR_SOCSO] == '')? '' : currentObj[TUTOR_SOCSO];
+
+      document.getElementById("employmentStatusRadioActive").checked = currentObj[TUTOR_STATUS_ADMIN] === TUTOR_STATUS_TYPE_ACTIVE ? true: false;
+      document.getElementById("employmentStatusRadioInactive").checked = currentObj[TUTOR_STATUS_ADMIN] === TUTOR_STATUS_TYPE_ACTIVE ? false: true;
+
+
+
+    }
 
     // Set the nav name and global var, if user already login and have session Storage 
     var tutorInfoObj = null;
     if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
       // Do nothing
-    }else{
+    }
+    else{
       // Set the nav user name
       tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
       document.getElementById("user").textContent = tutorInfoObj.name;
@@ -647,11 +789,7 @@
       current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
       current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
       current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
-      current_accountStatus = tutorInfoObj.accountStatus; // bool
-      currentYearsExperience = tutorInfoObj.yearsExperience; // number
-      currentTutoringExperience = tutorInfoObj.tutoringExperience;
-      currentTutoringApproach = tutorInfoObj.tutoringApproach;
-      currentQualification= tutorInfoObj.qualification;
+      current_accountStatus = tutorInfoObj.accountStatus;
       current_aweburl = tutorInfoObj.aWebUrl
 
       // updatePageView(current_accountStatus);
@@ -689,16 +827,16 @@
           current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
           // current_email, 
           current_phone= (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone;
-          
           current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
           current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
           current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
-          current_accountStatus = doc.data().accountStatus; 
+          current_accountStatus = doc.data().accountStatus;
           current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
           current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
           current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
           current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
           current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
+
           // Store data to sessionStorage
           var tutorDataObj = {
             [NAME_KEY] : doc.data().name,
@@ -806,7 +944,6 @@
           }else {
             let activationNavItem = document.querySelector('#activationNavItem');
             let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
-            console.log(activationNavItemIsExist)
             // Remove NavItem if exist
             if (activationNavItemIsExist){
               activationNavItem.parentNode.removeChild(activationNavItem);
@@ -822,55 +959,28 @@
 
     };
 
-    // Add New Student
-    function AddStudentToDB(){
-      var docRef = db.collection("Class")
-          .doc("v1")
-          .collection("Student")
-          .doc();
-
+    // Update Student Info
+    function UpdateStudentToDB(docId){
+      let docRef = db.collection("Class")
+        .doc('v1')
+        .collection('Tutor')
+        .doc(docId);
       let data = {
-        [STU_ID]: docRef.id,
-        // [STU_USER_ID]: '',
-        [STU_ADMIN_ID]: tutorId,
-        [STU_DEPENDENT_ID]: '',
-        [STU_VIEWER_ID]: [itiGuardian.getNumber(),itiStudent.getNumber()],
-        [STU_DATE_ADD]: new Date(),
-        [STU_DATE_EDIT]: '',
-        [STU_DATE_DEL]: '',
-        [STU_ENROLLMENT_STATUS]: STU_ENROLLMENT_STATUS_ACTIVE,
-        [STU_STATUS]: true,
-        [STU_STATUS_ADMIN]: true,
-        [STU_STATUS_USER]: true,
-        [STU_ADMIN_NAME]: current_name,
-        [STU_ADMIN_PHONE]: current_phone,
-        [STU_ADMIN_ADDR]: current_address,
-        [STU_ADMIN_IMG_URL]: current_imgUri,
-        [STU_GUR_ID]: itiGuardian.getNumber(),
-        [STU_GUR_RELATIONSHIP]: document.getElementById("inRelParentsChecked").checked ? STU_GUR_RELATIONSHIP_PARENTS : STU_GUR_RELATIONSHIP_GUARDIAN,
-        [STU_GUR_NAME]: document.getElementById("inGurName").value,
-        [STU_GUR_PHONE]: itiGuardian.getNumber(),
-        [STU_GUR_GENDER]: document.getElementById("inGurMaleChecked").checked ? 0 : 1,
-        [STU_GUR_EMAIL]: document.getElementById("inGurEmail").value,
-        [STU_GUR_ADDR]: document.getElementById("inGurAddress").value,
-        [STU_GUR_STATE_ID]: gState,
-        [STU_GUR_AREA_ID]: gArea,
-        [STU_CHILD_ID]: itiStudent.getNumber(),
-        [STU_CHILD_NAME]: document.getElementById("inStuName").value,
-        [STU_CHILD_PHONE]: itiStudent.getNumber(),
-        [STU_CHILD_GENDER]: document.getElementById("inStuMaleChecked").checked ? 0 : 1,
-        [STU_CHILD_EMAIL]: document.getElementById("inStuEmail").value,
-        [STU_CHILD_SCHOOL]: document.getElementById("inStuSchool").value,
-        
-      }  
-      // console.log(data);
-      var docRefWithMerge = docRef.set(data , { merge: true })
-      .then(() => {
-        window.location = "./";
-      }).catch((error) => {
-        console.log("Error getting document:", error);
+        [TUTOR_DATE_EDIT]: new Date(),
+        [TUTOR_BANK_NAME]: inBankName.value,
+        [TUTOR_AC_NO]: inBankAcNo.value,
+        [TUTOR_EPF]: inEPFNo.value,
+        [TUTOR_SOCSO]: inSocsoNo.value,
+        [TUTOR_STATUS_ADMIN]: document.getElementById("employmentStatusRadioActive").checked? TUTOR_STATUS_TYPE_ACTIVE : TUTOR_STATUS_TYPE_PASSIVE,
+   
+      }
+      docRef
+      .set(data, { merge: true })
+      .then(()=> {
+        $('#saveModal').modal('hide');
+        window.location = './'
+        func.showNotification('top','center', 'success', 'error_outline', "Updated successfully!");
       });
-
     }
 
     // Sign out
@@ -881,72 +991,15 @@
   
   </script>
   <script>
-
-    // Global var
-    var gState ='';
-    var gArea ='';
-    var gStateName='';
-    var gAreaName ='';
-
-
     $( document ).ready(function() {
 
-      // ------State Dropdown start------- //
-      let state_select = document.getElementById("state_drop"); 
-      for (let i = 0; i < MYAllState.length; i++) {
-        let el = document.createElement("option");
-        el.textContent = MYAllState[i];
-        el.value = MYAllStateId[i];
-        state_select.appendChild(el);
-      }   
-
-      // Populate Area based on selected State
-      $('#state_drop').on('change', function(){
-          // Initialization
-          // Reasign area after the statre change. It suppose to be defaulted to "Select area"
-          gArea = ''; 
-          gAreaName = ''; 
-
-          // Get the val and txt of the selected state
-          let StateId = $(this).val();
-          let StateName = $(this).find("option:selected").text(); 
-          gState = StateId;
-          gStateName = StateName
-          
-          let select_area = document.getElementById("area_drop"); 
-          // Clear the area option first, except the first one. 100 is just a magic number
-          for(i=1; i <= 100; i++){
-              select_area.remove(1);
-          } 
-
-          // Generate all cities based on stateId
-          if  (!(StateId == "" || StateId == null )){
-            let stateInfo = selectCityListBasedOnStateId (gState);
-            for (let i = 0; i < stateInfo[0].length; i++) {
-              let el = document.createElement("option");
-              el.textContent = stateInfo[0][i];
-              el.value = stateInfo[1][i];;
-              select_area.appendChild(el);
-            }
-          }
-      });
-      // ------Area Dropdown Start------- //
-      $('#area_drop').on('change', function(){
-          gArea = $(this).val() 
-          gAreaName = $(this).find("option:selected").text(); 
-      });
-
-
+      // Save student info
       $('#btnSave').on('click', function (e) {
-        let fieldsValid = ValidateFields('multitabs_form');
-        let phoneValid = ValidatePhone('phoneGurdian');
-        if (fieldsValid && phoneValid){
-          $('#saveModal').modal('show');
-        }
+        $('#saveModal').modal('show');
       });
 
       $('#btnSaveModalUpdate').on('click', function (e) {
-        AddStudentToDB();
+        UpdateStudentToDB(currentTeacherObj[TUTOR_ID]);
       });
 
       $('#btnSaveModalClose1').on('click', function (e) {
@@ -956,6 +1009,74 @@
       $('#btnSaveModalClose2').on('click', function (e) {
         $('#saveModal').modal('hide');
       });
+
+      // Approve New Student Modal
+      $('#approveStuModal').on('show.bs.modal', function (event) {
+  
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('New Student: '+ currentTeacherObj[STU_CHILD_NAME] +'. Approve ?');
+
+      });
+
+      $('#btnApproveStuModalUpdate').on('click', function (e) {
+
+        var docRef = db.collection("Class")
+          .doc("v1")
+          .collection("Student")
+          .doc(currentTeacherObj[STU_ID]);
+
+        let data = {
+          [STU_ENROLLMENT_STATUS]: STU_ENROLLMENT_STATUS_ACTIVE,
+        }  
+        // console.log(studentId);
+        console.log(data);
+        var docRefWithMerge = docRef.set(data , { merge: true })
+        .then(() => {
+          window.location = "./student.html";
+        }).catch((error) => {
+          console.log("Error getting document:", error);
+        });
+
+      
+      });
+
+
+      // Delete Student Modal
+      $('#delStuModal').on('show.bs.modal', function (event) {
+        
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('Delete '+ currentTeacherObj[STU_CHILD_NAME] +' ?');
+
+      });
+
+      $('#btnDelStuModalUpdate').on('click', function (e) {
+
+        var docRef = db.collection("Class")
+          .doc("v1")
+          .collection("Student")
+          .doc(currentTeacherObj[STU_ID]);
+
+        let data = {
+          [STU_DATE_EDIT]: new Date(),
+          [STU_STATUS_ADMIN]: false,
+          // [STU_STATUS_USER]: true,
+        }  
+        // console.log(studentId);
+        // console.log(data);
+        var docRefWithMerge = docRef.set(data , { merge: true })
+        .then(() => {
+          window.location = "./student.html";
+        }).catch((error) => {
+          console.log("Error getting document:", error);
+        });
+
+      
+      });
+
 
       $('#btnSignOutModalUpdate').on('click', function (e) {
       
@@ -1229,153 +1350,15 @@
       return valid; // return the valid status
     }
 
-    function getAllTimeSlots() {
-      dayOfWeekArr = [];
-      startTimeArr = [];
-      endTimeArr = [];
-      // This function deals with validation of the form fields with data-compulsory = 'true'
-      var x, y, i, valid = true;
-      x = document.getElementById("timeSlotTop");
-      console.log(x)
-      // y = x[activePanelNum].getElementsByTagName("input") && x[activePanelNum].querySelectorAll('[type="text"]');
-      y =x.querySelectorAll('[data-compulsory="true"]');
-
-      // A loop that checks every input field in the current tab:
-      for (i = 0; i < y.length; i++) {
-
-        if (i % 3 === 0){
-          dayOfWeekArr.push(y[i].value)
-        }
-        if (i % 3 === 1){
-          startTimeArr.push(y[i].value)
-        }
-        if (i % 3 === 2){
-          endTimeArr.push(y[i].value)
-        }
-   
-        
-        // If a field is empty...
-        if (y[i].value == "") {
-          // add an "invalid" class to the field:
-          // y[i].className += " invalid";
-          // and set the current valid status to false:
-          valid = false;
-        }
-      }
-
-      // console.log(dayOfWeekArr)
-      // console.log(startTimeArr)
-      // console.log(endTimeArr)
-      return valid; // return the valid status
-    }
-
-
   </script>
 
   <script>
-    // Phone
-    var inputStudent = document.querySelector("#phoneStudent");
-    var inputGuardian = document.querySelector("#phoneGurdian");
-    var itiStudent = intlTelInput(inputStudent,{
-      // allowDropdown: false,
-      autoHideDialCode: false,
-      // autoPlaceholder: "off",
-      // dropdownContainer: document.body,
-      // excludeCountries: ["my"],
-      // formatOnDisplay: true,
-      // geoIpLookup: function(callback) {
-      //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-      //     var countryCode = (resp && resp.country) ? resp.country : "";
-      //     callback(countryCode);
-      //   });
-      // },
-      // hiddenInput: "full_number",
-      // initialCountry: "auto",
-      // localizedCountries: { 'de': 'Deutschland' },
-      nationalMode: false,
-      onlyCountries: ['my'],
-      // placeholderNumberType: "MOBILE",
-      // preferredCountries: ['cn', 'jp'],
-      // separateDialCode: true,
-      utilsScript: "../js/utils.js",
-      });
-   
-    var itiGuardian = intlTelInput(inputGuardian,{
-    autoHideDialCode: false,
-    nationalMode: false,
-    onlyCountries: ['my'],
-    utilsScript: "../js/utils.js",
-    });
-   
-    var errorMsgStudent = document.querySelector("#error-msgStudent");
-    var validMsgStudent = document.querySelector("#valid-msgStudent");
-    var errorMsgGuardian = document.querySelector("#error-msgGuardian");
-    var validMsgGuardian = document.querySelector("#valid-msgGuardian");
-
-    // here, the index maps to the error code returned from getValidationError - see readme
-    var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
-    var resetStudent = function() {
-      inputStudent.classList.remove("error");
-      errorMsgStudent.innerHTML = "";
-      errorMsgStudent.classList.add("hide");
-      validMsgStudent.classList.add("hide");
-    };
-    var resetGuardian = function() {
-      inputGuardian.classList.remove("error");
-      errorMsgGuardian.innerHTML = "";
-      errorMsgGuardian.classList.add("hide");
-      validMsgGuardian.classList.add("hide");
-    };
-    // on blur: validate
-    inputStudent.addEventListener('blur', function() {
-      resetStudent();
-      if (inputStudent.value.trim()) {
-        if (itiStudent.isValidNumber()) {
-          validMsgStudent.classList.remove("hide");
-        } else {
-          inputStudent.classList.add("error");
-          var errorCode = itiStudent.getValidationError();
-          errorMsgStudent.innerHTML = errorMap[errorCode];
-          errorMsgStudent.classList.remove("hide");
-        }
-      }
-    });
-    inputGuardian.addEventListener('blur', function() {
-      resetGuardian();
-      if (inputGuardian.value.trim()) {
-        if (itiGuardian.isValidNumber()) {
-          validMsgGuardian.classList.remove("hide");
-        } else {
-          inputGuardian.classList.add("error");
-          var errorCode = itiGuardian.getValidationError();
-          errorMsgGuardian.innerHTML = errorMap[errorCode];
-          errorMsgGuardian.classList.remove("hide");
-        }
-      }
-    });
-
-    // on keyup / change flag: reset
-    inputStudent.addEventListener('change', resetStudent);
-    inputStudent.addEventListener('keyup', resetStudent);
-    inputGuardian.addEventListener('change', resetGuardian);
-    inputGuardian.addEventListener('keyup', resetGuardian);
   
-    function onInputNumber() {      
-      console.log(itiStudent.getNumber())      
-      console.log(itiStudent.getExtension())
-      console.log(itiStudent.getNumberType())
-      console.log(itiStudent.isValidNumber())
-      // console.log('fuck u')
-      // if iti.getNumber())
-    }
-
     // Validate fields in based on parents. 
     function ValidateFields(parentId){
       // This function deals with validation of the form fields with data-compulsory = 'true'
       var x, y, i, valid = true;
       x = document.getElementById(parentId);
-      
       y =x.querySelectorAll('[data-compulsory="true"]');
 
       // A loop that checks every input field in the current tab:
@@ -1407,6 +1390,7 @@
       }
       return valid; // return the valid status
     }
+    
   </script>
 
   

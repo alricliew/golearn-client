@@ -11,8 +11,7 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
   <!-- Material Kit CSS -->
-  <link href="assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-  <link href="assets/demo/demo.css" rel="stylesheet" />
+  <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
@@ -43,38 +42,76 @@
       </div>
 
       <div class="sidebar-wrapper">
-        <ul class="nav">
+        <ul class="nav" style="margin-bottom: 50px;">
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Teaching</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./class/">
+              <i class="fas fa-chalkboard fa-fw nav-icon"></i>
+              <p>Classes</p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="./student/">
+              <i class="fas fa-user-graduate fa-fw nav-icon"></i>
+              <p>Students</p>
+            </a>
+          </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./">
-              <i class="material-icons">home</i>
-              <p>Home</p>
+            <a class="nav-link" href="./teacher/">
+              <i class="fas fa-chalkboard-teacher fa-fw nav-icon"></i>
+              <p>Teachers</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Financial</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./transaction/">
+              <i class="fas fa-wallet fa-fw nav-icon"></i>
+              <p>Transactions</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./invoice/">
+              <i class="fas fa-file-invoice-dollar fa-fw nav-icon"></i>
+              <p>Invoices</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./payroll/">
+              <i class="fas fa-hand-holding-usd fa-fw nav-icon"></i>
+              <p>Payroll <span style="visibility: hidden;">PRO</span></p>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="./transaction/settings.html">
+              <i class="fab fa-expeditedssl fa-fw nav-icon"></i>
+              <p>Settings</p>
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Public</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./course.html">
+              <i class="fas fa-book-open fa-fw nav-icon"></i>
+              <p>My Public Courses</p>
             </a>
           </li>
 		  		<li class="nav-item">
             <a class="nav-link" href="./job.html">
-              <i class="material-icons">work_outline</i>
+              <i class="fas fa-briefcase fa-fw nav-icon"></i>
               <p>Tuition Jobs</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./course.html">
-              <i class="material-icons">format_list_bulleted</i>
-              <p>My Courses</p>
-            </a>
-          </li>
-          <li class="nav-item ">
             <a class="nav-link" href="./update.html">
-              <i class="material-icons">note_alt</i>
+              <i class="fas fa-user-cog fa-fw nav-icon"></i>
               <p>Update Information</p>
             </a>
           </li>
-
-          <!-- <li class="nav-item active-pro" style="margin-bottom: 4rem;">
-            <a class="nav-link" href="./upgrade.html">
-              <i class="material-icons">unarchive</i>
-              <p>Upgrade to PRO</p>
-            </a>
-          </li> -->
         </ul>
       </div>
     </div>
@@ -374,11 +411,11 @@
         <div class="container-fluid">
           <nav class="float-left">
           <ul>
-            <li>
+            <!-- <li>
             <a href="https://golearn.com.my/join-us" target="_blank">
               Visit GoLearn Tutor
             </a>
-            </li>
+            </li> -->
           </ul>
           </nav>
           <!-- <div class="copyright float-right">

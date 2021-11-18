@@ -10,10 +10,9 @@
   <!-- Fonts and icons -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
 
   <!-- Material Kit CSS -->
-  <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <link href="../../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
@@ -23,34 +22,12 @@
   <script src="../js/firebase.js"></script>
   <!-- Tutor Portal specific CSS -->
   <link href="../css/tutor-portal.css" rel="stylesheet" />
-
+  <!-- Date Picker -->
+  <link href="../../assets/css/mc-calendar.min.css" rel="stylesheet"/>
+  <link href="../../assets/css/intlTelInput.css" rel="stylesheet" >
   <!-- Rich Text Editor Init -->
   <script src="https://cdn.tiny.cloud/1/5dm77axvxwkliu22hg2ejlaqh4s246uo83bz98ogo4c3yeev/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-  <script>
-    tinymce.init({
-      selector:'#invNotes',
-      plugins: "link",
-      // toolbar: "link | undo redo",
-      // menubar: false,
-      setup: function (editor) {
-        editor.on('change', function (e) {
-          // console.log(e);
-          invNotesOnChangeHandler();
-        });
-      }
-    });
-    tinymce.init({
-      selector:'#invFooterNotes',
-      plugins: "link",
-      setup: function (editor) {
-        editor.on('change', function (e) {
-          // console.log(e);
-          invFooterNotesOnChangeHandler();
-        });
-      }
-    });
-  </script>
-
+ 
   <style>
     .table {
         border: 1px solid #ccc;
@@ -159,29 +136,74 @@
         </a>
       </div>
       <div class="sidebar-wrapper">
-        <ul class="nav">
+        <ul class="nav" style="margin-bottom: 50px;">
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Teaching</h4>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="../class/">
-              <i class="material-icons">home</i>
-              <p>Class</p>
+              <i class="fas fa-chalkboard fa-fw nav-icon"></i>
+              <p>Classes</p>
             </a>
           </li>
 		  		<li class="nav-item">
             <a class="nav-link" href="../student/">
-              <i class="material-icons">work_outline</i>
+              <i class="fas fa-user-graduate fa-fw nav-icon"></i>
               <p>Students</p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item ">
             <a class="nav-link" href="../teacher/">
-              <i class="material-icons">format_list_bulleted</i>
+              <i class="fas fa-chalkboard-teacher fa-fw nav-icon"></i>
               <p>Teachers</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Financial</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../transaction/">
+              <i class="fas fa-wallet fa-fw nav-icon"></i>
+              <p>Transactions</p>
             </a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="./">
-              <i class="material-icons">attach_money</i>
-              <p>Financial</p>
+              <i class="fas fa-file-invoice-dollar fa-fw nav-icon"></i>
+              <p>Invoices</p>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="../payroll/">
+              <i class="fas fa-hand-holding-usd fa-fw nav-icon"></i>
+              <p>Payroll <span style="visibility: hidden;">PRO</span></p>
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="../transaction/settings.html">
+              <i class="fab fa-expeditedssl fa-fw nav-icon"></i>
+              <p>Settings</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Public</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../course.html">
+              <i class="fas fa-book-open fa-fw nav-icon"></i>
+              <p>My Public Courses</p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="../job.html">
+              <i class="fas fa-briefcase fa-fw nav-icon"></i>
+              <p>Tuition Jobs</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="../update.html">
+              <i class="fas fa-user-cog fa-fw nav-icon"></i>
+              <p>Update Information</p>
             </a>
           </li>
         </ul>
@@ -192,7 +214,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Financial <span><i class="material-icons" style="color: gray;">chevron_right</i></span> Create Invoice</a>
+            <a class="navbar-brand" href="javascript:;">Invoices <span><i class="material-icons" style="color: gray;">chevron_right</i></span> Create</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -262,6 +284,29 @@
 
 			<!-- Modal Start -->
 
+      <!-- Save Invoice modal -->
+      <div class="row">
+        <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="saveLabel">Save Draft and Proceed</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnSaveModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="saveModalBody">
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSaveModalClose2">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSaveModalUpdate">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Edit Selected Client modal -->
       <div class="row">
         <div class="modal fade" id="editClientModal" tabindex="-1" role="dialog" aria-labelledby="editClientModalLabel" aria-hidden="true">
@@ -282,11 +327,16 @@
 
                 <div class="form-group">
                   <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Contact*</span> 
-                  <input type="text" class="form-control" id="inClientContact" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" readonly>
+                  <div class="input-group">
+                    <input id="inClientContact" name="phone" type="tel"  class="form-control" data-compulsory="true" oninput="this.className = 'form-control'" >
+                    <span id="valid-msg" class="hide" style="color: #42ba96;">✓ Valid</span>
+                    <span id="error-msg" class="hide" style="color: #F32013;"></span>
+                  </div>
+                  <!-- <input type="text" class="form-control" id="inClientContact" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" readonly> -->
                 </div>
                 <div class="form-group">
                   <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Email (Optional)</span> 
-                  <input type="text" class="form-control" id="inClientEmail" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
+                  <input type="text" class="form-control" id="inClientEmail" data-compulsory="false" maxlength="40">
                 </div>
                 <div class="form-group">
                   <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Address (Optional) </span> 
@@ -321,15 +371,6 @@
                     <div class="container" id="add-student-modal-container">
                       <!-- Student header -->
                       <div class="row lesson-header">
-                        <!-- <div class="col-md-3">
-                          <p>Student Name</p>
-                        </div>
-                        <div class="col-md-3">
-                          <p>Gender</p>
-                        </div>
-                        <div class="col-md-3">
-                          <p>Guardian Name</p>
-                        </div> -->
                         <div class="col-md-3">
                           <p>Guardian Phone</p>
                         </div>
@@ -344,21 +385,37 @@
                         </div>
                       </div>
 
+                
+                      <!-- <div class="row student-wrapper">
+                        <div class="col-md-6">
+                          <p class="student-item">+60138252818</p>
+                        </div>
+                        <div class="col-md-3">
+                          <p class="student-item">Join as Student Parent</p>
+                        </div>
+                        <div class="col-md-3">
+                          <p class="student-item">Join as Student</p>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                      </div> -->
+
                       <!-- Student List Start -->
                       
                     </div>
         
                   </div>
                 </div>
+
+
                 <div class="row">
                   <div class="col-md-12 align-content-center">
                     <button type="button" class="btn btn-outline-primary btn-sm btn-round" id="btnAddAdminStudentModalLoadMore" >Load More</button>
                   </div>
                 </div>
-
               </div>
               <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-success" data-dismiss="modal" id="" >Add New Teacher</button> -->
+                <button class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#editClientModal" type="button" data-gurid="" data-gurname="" data-gurphone="" data-guremail="" data-guraddr="">Add Unregistered Client</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddStudentModalUpdate" >Add</button> -->
               </div>
@@ -402,7 +459,24 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnAddBusinessDetailModalClose2">Not Now</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddBusinessDetailModalUpdate">Confirm</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddBusinessDetailModalUpdate" disabled>Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading Modal -->
+      <div class="row">
+        <div class="modal fade" tabindex="-1" role="dialog" id="loadingModal" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="container-fluid">
+              <div class="row d-flex">
+                <span class="fa fa-spinner fa-spin fa-5x w-100" style="color: #fff ;"></span>
+                <div class="col align-self-center">
+                  <!-- <h5 class="modal-title" style="color: white;">Generating invoice in progress. </h5> -->
+                  <!-- <h5 class="modal-title" style="color: white;"> Please do not close this window.</h5> -->
+                </div>
               </div>
             </div>
           </div>
@@ -549,11 +623,10 @@
             </div>
             <div class="p-2">
               <!-- <button type="button" id="btnDownloadPdf"></button>  -->              
-              <a href="javascript:;" class="btn btn-outline-primary btn-round" id="" onclick="generatePDFeKoopmans('invTemplate')"> Download as PDF</a>
+              <a href="javascript:;" class="btn btn-outline-primary btn-round" id="" onclick="generatePDFeKoopmans('invTemplate')" disabled> Download as PDF</a>
             </div>
-
             <div class="ml-auto p-2">
-              <a href="" class="btn btn-primary btn-round" id="btnSave" data-toggle="modal" data-target="#saveModal">Save and Continue <i class="material-icons" style="color: #fff; margin-left: 0.5em; padding-bottom: 0.2em;">east</i> </a>
+              <button href="javascript:;" class="btn btn-primary btn-round" id="btnSave" data-toggle="" data-target="#saveModal" onclick="validateForm('accordionExample'); fieldChecker();" disabled>Save and Continue <i class="material-icons" style="color: #fff; margin-left: 0.5em; padding-bottom: 0.2em;">east</i> </button>
             </div>
           </div>
 
@@ -577,8 +650,8 @@
 
                           <div class="form-group">
                             
-                            <div style="height: 150px;width: 225px; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
-                              <img id="tutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+                            <div style="height: 150px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
+                              <img id="tutorImgUrl" style="height: 100%; width: auto;" src="../../assets/img/empty-photo.png"/>
                             </div>
                             <input type="file" id="select_image" name="image" style="display:none" accept="image/x-png,image/jpeg"> </input>
 
@@ -596,7 +669,7 @@
 
                           <div class="form-group">
                             <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Summary (e.g class name, description of invoice) <span id="countTitle" style="color: grey; margin-left: 1rem;">0/40</span></span> 
-                            <input type="text" class="form-control" id="invTitle" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" style="border: solid #2e74b6 thin; display: block;  padding-left: 0.5rem;">
+                            <input type="text" class="form-control" id="invTitle" data-compulsory="false" oninput="this.className = 'form-control'"  maxlength="40" style="border: solid #2e74b6 thin; display: block;  padding-left: 0.5rem;">
                           </div>
                           <h4 id="invBizName" style="font-weight: 500;">Your Name</h4>
                           <h6 id="invBizDetails"  style="text-transform: none; font-weight: 300;"></h6>
@@ -614,10 +687,11 @@
                     <div class="row">
                       <div class="col-md-4">
                         <h6>Billed To:</h6>
+                        <div id="invClientId" value=''></div>
                         <h4 id="invClientName" style="font-weight: 500;"></h4>
                         <h6 id="invClientDetails" style="text-transform: none; font-weight: 300;"></h6>
                         <div class="div">
-                          <a href="javascript:;" data-toggle="modal" data-target="#addStudentModal">Add Client</a>
+                          <a id="invAllStudentLink" href="javascript:;" data-toggle="modal" data-target="">Add Client*</a>
                         </div>
                       </div>
 
@@ -626,23 +700,23 @@
                         <div class="row">
                           <div class="col-6 text-right" style="padding-right: 0;">
                             <div style="margin-top: 0.8rem;">
-                              <p style="font-weight: 500; text-transform: uppercase;">Invoice Number</p>                            
+                              <p style="font-weight: 500; text-transform: uppercase;">Invoice Number*</p>                            
                             </div>
                             <div style="margin-top: 0.8rem;">
-                              <p style="font-weight: 500; text-transform: uppercase;">Invoice Date</p>                           
+                              <p style="font-weight: 500; text-transform: uppercase;">Invoice Date*</p>                           
                             </div>
                             <div style="margin-top: 0.8rem;">
-                              <p style="font-weight: 500; text-transform: uppercase; color: red; ">Payment Due</p>                            
+                              <p style="font-weight: 500; text-transform: uppercase; color: red; ">Payment Due*</p>                            
                             </div>
                             <div style="margin-top: 0.8rem;">
                               <p style="font-weight: 500; text-transform: uppercase;">Status</p>                            
                             </div>
                           </div>
                           <div class="col-6 text-left">
-                            <input type="text" class="form-control" id="invNum" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" style="border: solid #2e74b6 thin; display: block; margin: 0.3rem; padding-left: 0.5rem;">
-                            <input type="text" class="form-control" id="invIssueDate" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" style="border: solid #2e74b6 thin; display: block; margin: 0.3rem; padding-left: 0.5rem;">
-                            <input type="text" class="form-control" id="invPaymentDue" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" style="border: solid #2e74b6 thin; display: block; margin: 0.3rem; padding-left: 0.5rem;">
-                            <input type="text" class="form-control" id="invStatus" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" style="border: solid #2e74b6 thin; display: block; margin: 0.3rem; padding-left: 0.5rem;" value='New' readonly>
+                            <input type="text" class="form-control" id="invNum" data-compulsory="true" oninput="this.className = 'form-control'; enableSaveModal();"  maxlength="40" style="border: solid #2e74b6 thin; display: block; margin: 0.3rem; padding-left: 0.5rem;">
+                            <input type="text" class="form-control" id="invIssueDate" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" style="border: solid #2e74b6 thin; display: block; margin: 0.3rem; padding-left: 0.5rem; cursor: pointer; cursor: pointer;">
+                            <input type="text" class="form-control" id="invPaymentDue" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" style="border: solid #2e74b6 thin; display: block; margin: 0.3rem; padding-left: 0.5rem; cursor: pointer; cursor: pointer;" >
+                            <input type="text" class="form-control" id="invStatus" data-compulsory="false" oninput="this.className = 'form-control'"  maxlength="40" style="border: solid #2e74b6 thin; display: block; margin: 0.3rem; padding-left: 0.5rem;" value='New' readonly>
                           </div>
                         </div>
                       </div>
@@ -652,7 +726,7 @@
                     
                     <div class="row">
                       <div class="col-12"  style="overflow-x:auto;">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of classes, hour of lessons conducated or relevant items</span>
+                        <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
 
                         <table id="table" class="table-light table-sm" cellspacing="0" width="100%">
                           <thead  style="background-color: grey; color: white;">
@@ -727,8 +801,8 @@
 
                       <div class="col-12">
                         <div class="form-group">
-                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Enter Notes <span id="countNotes" style="color: grey; margin-left: 1rem;">0/250</span></span> 
-                          <textarea class="form-control" maxlength="250" rows="3"  id="invNotes" data-compulsory="false" placeholder="Enter notes that are visible to your client. (e.g payment guidelines) " oninput="" ></textarea>
+                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Enter Notes <span id="countNotes" style="color: grey; margin-left: 1rem;">0/400</span></span> 
+                          <textarea class="form-control" maxlength="400" rows="5"  id="invNotes" data-compulsory="false" placeholder="Enter notes that are visible to your client. (e.g payment guidelines) " oninput="" ></textarea>
                         </div>
                       </div>
                     </div>
@@ -746,8 +820,8 @@
                   <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample" style="padding: 0; margin: 0; ">
                     <div class="card-body" style="padding-top: 0; margin-top: 0; ">
                       <div class="form-group">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Enter Footer Notes <span id="countFooterNotes" style="color: grey; margin-left: 1rem;">0/250</span></span> 
-                        <textarea class="form-control" maxlength="250" rows="3"  id="invFooterNotes" data-compulsory="false" placeholder="Write something ..."></textarea>
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Enter Footer Notes <span id="countFooterNotes" style="color: grey; margin-left: 1rem;">0/200</span></span> 
+                        <textarea class="form-control" maxlength="200" rows="3"  id="invFooterNotes" data-compulsory="false" placeholder="Write something ..."></textarea>
                       </div>
                     </div>
                   </div>
@@ -756,6 +830,11 @@
             </div>
           </div>
 
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <h3> - Preview - </h3>
+            </div>
+          </div>
           <!-- Preview -->
           <page size="A4" id="invTemplate" style="position: relative;">
 
@@ -765,8 +844,8 @@
 
                   <div class="form-group">
                     <!-- <canvas id="myCanvas" style="height: 150px;width: 225px; object-fit: cover;" ></canvas> -->
-                    <div style="height: 150px;width: 225px; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
-                      <img id="previewTutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png" crossorigin="anonymous" alt = ""/>
+                    <div style="height: 115px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
+                      <img id="previewTutorImgUrl" style="height: 100%; width: auto; " src="../../assets/img/empty-photo.png" crossorigin="anonymous" alt = ""/>
                       <!-- <canvas id="myCanvas" ></canvas> -->
                     </div>
                   </div>
@@ -815,7 +894,7 @@
                       <h6 id="previewInvNum" style="font-weight: normal;"> - </h6>
                       <h6 id="previewInvIssueDate"> - </h6>
                       <h6 id="previewInvPaymentDue" style="color: red;"> - </h6>
-                      <h6 id="previewInvStatus"> - </h6>
+                      <h6 id="previewInvStatus"> New </h6>
                       <!-- <p style="margin: 0.3rem;">0100010101</p>  
                       <p style="margin: 0.3rem;">Status</p>  
                       <p style="margin: 0.3rem;">Status</p>  
@@ -829,7 +908,7 @@
               
               <div class="row">
                 <div class="col-12"  style="overflow-x:auto;">
-                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of classes, hour of lessons conducated or relevant items</span>
+                  <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
                   <table id="tablePreview" class="table-light table-sm" cellspacing="0" width="100%" >
                     <thead style="background-color: grey; color: white;">
                       <tr>
@@ -876,7 +955,7 @@
                 </div>
 
                 <div class="col-12">
-                  <h3 style="text-align: right; font-weight: 500;">Total <span style="margin-left: 2rem;" id="previewGrandTotal">RM0.00</span></h3>
+                  <h4 style="text-align: right; font-weight: 500;">Total <span style="margin-left: 2rem;" id="previewGrandTotal">RM0.00</span></h4>
                 </div>
 
                 <div class="col-12">
@@ -1002,10 +1081,106 @@
   <script src="../../assets/js/common.js" type="text/javascript"></script>
   <!-- Core Tutor Js -->
   <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
-  <!-- HTML -> PDF -->
-  <!-- <script src="../../assets/js/html2pdf.js" type="text/javascript"></script> -->
+  <!-- Datepicker -->
+  <script src="../../assets/js/mc-calendar.min.js" type="text/javascript"></script>
+  <!-- International Telephone Input -->
+  <script src="../../assets/js/plugins/intlTelInput/intlTelInput.js"></script>
 
   <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script> 
+  
+  <!-- <script src="../../assets/js/html2canvas.min.js" type="text/javascript"></script> -->
+  <!-- Tinymce init -->
+  <script>
+    tinymce.init({
+      mode : "exact",
+      selector:'#invNotes',
+      plugins: "link",
+      max_chars: 400,
+      setup: function (ed) {
+        var allowedKeys = [8, 13, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40, 46];
+        ed.on('keydown', function (e) {
+          console.log(tinymce_getContentLength());
+          invNotesOnChangeHandler();
+          if (allowedKeys.indexOf(e.keyCode) != -1){
+            return true;
+          }
+          if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
+            func.showNotification('top','center', 'warning', 'error_outline', 'You have reach maximum allowed number of ' + ed.settings.max_chars + ' characters.' );
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+          return true;
+        });
+      },
+           
+      init_instance_callback: function () { // initialize counter div
+        $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
+        tinymce_updateCharCounter(this, tinymce_getContentLength());
+      },
+      paste_preprocess: function (plugin, args) {
+        var editor = tinymce.get(tinymce.activeEditor.id);
+        var len = editor.contentDocument.body.innerText.length;
+        var text = $(args.content).text();
+        if (len + text.length > editor.settings.max_chars) {
+            func.showNotification('top','center', 'warning', 'error_outline', 'Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.' );
+            args.content = '';
+        } else {
+            tinymce_updateCharCounter(editor, len + text.length);
+        }
+      }
+
+    });
+    tinymce.init({
+      mode : "exact",
+      selector:'#invFooterNotes',
+      plugins: "link",
+      max_chars: 200,
+      setup: function (ed) {
+        var allowedKeys = [8, 13, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40, 46];
+
+        ed.on('keydown', function (e) {
+          console.log(tinymce_getContentLength());
+          invFooterNotesOnChangeHandler();
+          if (allowedKeys.indexOf(e.keyCode) != -1){
+            return true;
+          }
+          if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
+            func.showNotification('top','center', 'warning', 'error_outline', 'You have reach maximum allowed number of ' + ed.settings.max_chars + ' characters.' );
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+          return true;
+        });
+
+      },
+      
+      init_instance_callback: function () { // initialize counter div
+        $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
+        tinymce_updateCharCounter(this, tinymce_getContentLength());
+      },
+      paste_preprocess: function (plugin, args) {
+        var editor = tinymce.get(tinymce.activeEditor.id);
+        var len = editor.contentDocument.body.innerText.length;
+        var text = $(args.content).text();
+        if (len + text.length > editor.settings.max_chars) {
+            func.showNotification('top','center', 'warning', 'error_outline', 'Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.' );
+            args.content = '';
+        } else {
+            tinymce_updateCharCounter(editor, len + text.length);
+        }
+      },
+    });
+
+    function tinymce_updateCharCounter(el, len) {
+      $('#' + el.id).prev().find('.char_count').text(len + '/' + el.settings.max_chars);
+    }
+
+    function tinymce_getContentLength() {
+      return tinymce.get(tinymce.activeEditor.id).contentDocument.body.innerText.length;
+    }
+  </script>
 
 
 	<script>
@@ -1037,6 +1212,8 @@
 
     var latestAdminStuDoc = null;// Store last document - Used for Admin's Student Load More btn in Add Student Modal
 
+    var allItemsArr = [];
+
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
@@ -1064,7 +1241,6 @@
       
       current_aweburl = tutorInfoObj.aWebUrl
 
-      // updatePageView(current_accountStatus);
     }
 
 		firebase.auth().onAuthStateChanged(function(user){
@@ -1081,9 +1257,15 @@
         }
         loadUserInfo(tutorId);
         loadUserSettings(tutorId);
+
+        // Enable Add Student Modal
+        document.getElementById("invAllStudentLink").setAttribute('data-target', '#addStudentModal');
+        
+        // Enable Save Inv Modal
+        document.getElementById("btnSave").removeAttribute('disabled');
+
 			}
 		});
-
 
     // Load Tutor Settings
     function loadUserSettings(tutorId){
@@ -1093,6 +1275,7 @@
       
       docRef.get().then((doc) => {
         updatePageContent(doc);
+        $('#loadingModal').modal('hide');
       })
     }
 
@@ -1106,47 +1289,61 @@
       bizDetail += (doc.data()[SET_BIZ_EMAIL] == null || doc.data()[SET_BIZ_EMAIL] == '') ? '' : ', <br>' + doc.data()[SET_BIZ_EMAIL];
       bizDetail += (doc.data()[SET_BIZ_ADDR] == null || doc.data()[SET_BIZ_ADDR] == '') ? '' : ', <br>' + doc.data()[SET_BIZ_ADDR];
       document.getElementById("invBizDetails").innerHTML = bizDetail;
+      if (doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == ''){
+        document.getElementById("tutorImgUrl").style.display = 'none';
+        document.getElementById("tutorImgUrl").src =  '';
+      }
+      else{
+        document.getElementById("tutorImgUrl").src =  doc.data()[SET_BIZ_IMG_URL];
+      }
       // document.getElementById("tutorImgUrl").src = doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : doc.data()[SET_BIZ_IMG_URL];
-      document.getElementById("tutorImgUrl").src = 'https://golearn.com.my/wp-content/uploads/Schedule-Management-Final.png';
 
       document.getElementById("invIssueDate").value = new Date().toLocaleDateString("en-GB");
 
       tinymce.get("invNotes").setContent(doc.data()[SET_INV_NOTE]);
-      tinymce.get("invFooterNotes").setContent(doc.data()[SET_INV_FOOTER_NOTE]);
-      // document.getElementById("invFooterNotes").innerHTML = doc.data()[SET_INV_FOOTER_NOTE];
+      let invNotesContent = tinymce.get("invNotes").getContent({ format: "text" });
+      document.getElementById("countNotes").textContent = invNotesContent.length + '/400';
 
+      tinymce.get("invFooterNotes").setContent(doc.data()[SET_INV_FOOTER_NOTE]);
+      let invFooterNotesContent = tinymce.get("invFooterNotes").getContent({ format: "text" });
+      document.getElementById("countFooterNotes").textContent = invFooterNotesContent.length + '/200';
 
       // Preview 
       // document.getElementById("previewTutorImgUrl").src = doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : doc.data()[SET_BIZ_IMG_URL];
       // document.getElementById("previewTutorImgUrl").src = 'https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png';
       // document.getElementById("previewTutorImgUrl").src = '../../assets/img/empty-photo.png';
 
+      // Sample test img
+      // https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0
+      // https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png'
+      // https://github.com/softius/php-cross-domain-proxy
 
-      // var c = document.getElementById("myCanvas");
-      // var ctx = c.getContext("2d");
-      // var img = document.getElementById("tutorImgUrl");
-      // img.onload = function(){
-      //   ctx.drawImage(img,0,0); // Or at whatever offset you like
-      // };
+      if (doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == ''){
+        document.getElementById("previewTutorImgUrl").style.display = 'none';
+        // document.getElementById("previewTutorImgUrl");
+      }
+      else {
+        toDataURL(
+          // 'https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0',
+          // 'https://murmuring-headland-66106.herokuapp.com/https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0',
+          // 'https://murmuring-headland-66106.herokuapp.com/https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png',
+          // 'https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png',
+          // 'https://cors-anywhere.herokuapp.com/https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png',
+          // doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : 'https://golearn.com.my/proxy.php?csurl='+doc.data()[SET_BIZ_IMG_URL],
+          doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : 'https://murmuring-headland-66106.herokuapp.com/'+doc.data()[SET_BIZ_IMG_URL],
 
-      toDataURL(
-        doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : doc.data()[SET_BIZ_IMG_URL],
-        function(dataUrl) {
-          console.log('RESULT:', dataUrl)
-          
-        }
-      );
+          function(dataUrl) {
+            // console.log('RESULT:', dataUrl)
+          },
+        );
+      }
 
-      
       // document.getElementById("previewInvTitle").textContent = doc.data()[SET_BIZ_NAME];
       document.getElementById("previewInvBizName").textContent = doc.data()[SET_BIZ_NAME];
       document.getElementById("previewInvBizDetails").innerHTML = bizDetail;
-
       document.getElementById("previewInvIssueDate").textContent = new Date().toLocaleDateString("en-GB");
-
       document.getElementById("previewInvNotes").innerHTML = doc.data()[SET_INV_NOTE];
       document.getElementById("previewInvFooterNotes").innerHTML = doc.data()[SET_INV_FOOTER_NOTE];
-
     }
 
 
@@ -1498,6 +1695,9 @@
     // Load client's active classes
     function loadAllClientClassInfo(clientId){
 
+      // Clear the preview
+      clearItems();
+
       var docRef = db.collection("Class")
           .doc("v1")
           .collection("Class")
@@ -1704,6 +1904,91 @@
       // itemBody.appendChild(tr);
     }
 
+    // Clear all items, reset items preview. Used when client change 
+    function clearItems(){
+      let itemBody = document.getElementById('itemBody');
+      itemBody.querySelectorAll('tr').forEach(function (row, index) {
+
+        if (row.className === 'item') {
+          row.remove();
+        }
+        else{
+          // Do nothing
+        } 
+      });
+    }
+
+    // Get all the items, subtotal, additional items and total. Used when save.
+    function getAllItems(){
+
+      allItemsArr = [];
+
+      allItemsArr.push('ITEM');
+      table.querySelectorAll('tr').forEach(function (row, index) {
+        // Ignore the header
+        // We don't want user to change the order of header
+        if (index === 0) {
+          return;
+        }
+        // Ignore row with certain class name
+        else if(row.className != 'item'){
+          return;
+        }
+
+        // Get the value of each item row
+        let desc = row.children[1].getElementsByTagName("input")[0].value;
+        let quantity = row.children[2].getElementsByTagName("input")[0].value;
+        let price = row.children[3].getElementsByTagName("input")[0].value;
+        let amount = row.children[4].textContent;
+        allItemsArr.push(desc+'; '+ quantity+'; '+  price+'; '+  amount)
+
+      });
+      allItemsArr.push('SUBTOTAL');
+      let subTotal = calculateSubtotal();
+      let total = calculateTotal(subTotal);
+      allItemsArr.push(subTotal);
+      allItemsArr.push('ADDITIONAL_ITEM');
+      tableAdditionalItem.querySelectorAll('tr').forEach(function (row, index) {
+        // Ignore the header
+        // We don't want user to change the order of header
+        if (index === 0) {
+          return;
+        }
+        // Ignore row with certain class name
+        else if(row.className != 'additional'){
+          return;
+        }
+
+        // Get the value of each additional item row
+        let additionalSelector = row.children[1].getElementsByTagName("a")[0].textContent;
+        let additionalItem = row.children[2].getElementsByTagName("input")[0].value;
+        let additionalItemValue = row.children[3].getElementsByTagName("input")[0].value;
+        let amount = row.children[4].textContent;
+        
+        if (additionalSelector === 'Select one'){
+          // Do nothing
+        }
+        else if (additionalSelector === 'Discount ( - )'){
+          allItemsArr.push(additionalSelector+'; '+ additionalItem+'; '+  additionalItemValue+'; '+  amount)
+          // printAdditionalItem(additionalItem, amount);
+
+        }
+        else if (additionalSelector === 'Tax Rate (%)'){
+          allItemsArr.push(additionalSelector+'; '+ additionalItem+'; '+  additionalItemValue+'; '+  amount)
+
+          // printAdditionalItem(additionalItem+' ('+additionalItemValue +'%)', amount);
+        }
+        else 
+        {
+          // Do nothing
+        }
+
+      });
+
+      allItemsArr.push('TOTAL');
+      allItemsArr.push(total);
+
+    }
 
 
     //-------- Item Table Handling Start-----------------/
@@ -1990,7 +2275,7 @@
       // Calculate Subtotal of Item
       let subTotal = calculateSubtotal();
 
-      console.log(trParent);
+      // console.log(trParent);
     }
 
     // Calculate the amount for Normal Items based on quantity and unit price
@@ -2130,12 +2415,14 @@
           totalText = 'INVALID';
           // console.log(totalText)
           document.getElementById("grandTotal").textContent = totalText;
+          return 0;
         }
       else 
       {
         totalText = (total >= 0) ? 'RM'+total.toFixed(2) : '- RM'+ Math.abs(total).toFixed(2)
         // console.log(totalText)
         document.getElementById("grandTotal").textContent = totalText;
+        return total;
       }
 
     }
@@ -2538,6 +2825,8 @@
       // alert("The HTML is now:" + inst.getBody().innerHTML);
 
       document.getElementById("previewInvNotes").innerHTML = tinymce.get("invNotes").getContent();
+      let invNotesContent = tinymce.get("invNotes").getContent({ format: "text" });
+      document.getElementById("countNotes").textContent = invNotesContent.length + '/400';
 
     }
 
@@ -2545,8 +2834,192 @@
       // alert("Some one modified something");
       // alert("The HTML is now:" + inst.getBody().innerHTML);
       document.getElementById("previewInvFooterNotes").innerHTML = tinymce.get("invFooterNotes").getContent();
+      let invFooterNotesContent = tinymce.get("invFooterNotes").getContent({ format: "text" });
+      document.getElementById("countFooterNotes").textContent = invFooterNotesContent.length + '/200';
 
     }
+
+
+    //-------- Save and Create Invoice-----------------/
+    function CreateInvoice() {
+      
+      var docRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Invoice")
+          .doc();
+
+      let invDocId = docRef.id
+
+      // Issue date
+      let issueDate = document.getElementById("invIssueDate").value;
+      issueDate = issueDate.split("/");
+      let newIssueDate = new Date( issueDate[2], issueDate[1] - 1, issueDate[0]);
+      let issueDateFinal = firebase.firestore.Timestamp.fromDate(newIssueDate);
+      // Payment Due
+      let dueDate = document.getElementById("invPaymentDue").value;
+      dueDate = dueDate.split("/");
+      let newDueDate = new Date( dueDate[2], dueDate[1] - 1, dueDate[0]);
+      let dueDateFinal = firebase.firestore.Timestamp.fromDate(newDueDate);
+
+      // Get all items, subtotal, additional items and grand total
+      getAllItems();
+
+      var data = {
+        [INV_ID]: invDocId,
+        [INV_SENDER_ID]: tutorId,
+        [INV_RECEIVER_ID]: document.getElementById("invClientId").getAttribute('value'),
+        [INV_SENDER_NAME]: document.getElementById("invBizName").textContent,
+        [INV_SENDER_DETAILS]: document.getElementById("invBizDetails").textContent,
+        [INV_SENDER_IMG_URL]: (document.getElementById("tutorImgUrl").src == null || document.getElementById("tutorImgUrl").src == '') ? '' : document.getElementById("tutorImgUrl").src,
+      
+        [INV_RECEIVER_NAME]: document.getElementById("invClientName").textContent,
+        [INV_RECEIVER_DETAILS]: document.getElementById("invClientDetails").textContent,
+        [INV_TITLE]: document.getElementById("invTitle").value,
+        [INV_NUMBER]: document.getElementById("invNum").value,
+        [INV_ISSUE_DATE]: issueDateFinal,
+        [INV_DUE_DATE]: dueDateFinal,
+        [INV_INV_STATUS]: INV_STATUS_DRAFT,
+
+        // Inv Contents
+        [INV_ITEMS_ARR]: allItemsArr,
+        [INV_TOTAL]: document.getElementById("grandTotal").textContent,
+        [INV_NOTES]: tinymce.get("invNotes").getContent(),
+        [INV_FOOTER_NOTES]: tinymce.get("invFooterNotes").getContent(),
+
+        [INV_PAYMENT_DATE]: '',
+        [INV_PAYMENT_AMOUNT]: '',
+        [INV_PAYMENT_NOTE]: '',
+
+        [INV_DATE_ADD]: new Date(),
+        [INV_DATE_EDIT]: '',
+        [INV_DATE_DEL]: '',
+        [INV_STATUS]: true,
+      }
+
+      console.log("*Invoice Data...")
+      console.log(data)
+
+      var transDocRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Transaction")
+          .doc();
+
+      var transData = {
+        [TRANS_ID]: transDocRef.id,
+        [TRANS_DOC_ID]: invDocId,
+        [TRANS_DOC_NUM]: document.getElementById("invNum").value,
+        [TRANS_SENDER_ID]: tutorId,
+        [TRANS_RECEIVER_ID]: document.getElementById("invClientId").getAttribute('value'),
+        [TRANS_SENDER_NAME]: document.getElementById("invBizName").textContent,
+        [TRANS_RECEIVER_NAME]: document.getElementById("invClientName").textContent,
+        [TRANS_VIEWER_ARR]: [tutorId, document.getElementById("invClientId").getAttribute('value')],
+        [TRANS_DATE]: issueDateFinal,
+        [TRANS_TYPE]: TRANS_TYPE_INV,
+        [TRANS_DOC_STATUS] : TRANS_INV_STATUS_DRAFT,
+        [TRANS_TITLE]: document.getElementById("invTitle").value,
+        [TRANS_TOTAL]: document.getElementById("grandTotal").textContent,
+        [TRANS_DATE_EDIT]: new Date(),
+        [TRANS_STATUS]: true,
+      }
+
+      console.log("Transaction Data...")
+      console.log(transData)
+
+
+      // Store in session storage to be used in view-invoice.html
+      sessionStorage.setItem(SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY, JSON.stringify(data));
+      sessionStorage.setItem(SESSION_STORAGE_TRANSACTION_CURRENT_DOC_KEY, JSON.stringify(transData));
+
+      docRef.set(data, { merge: true })
+      .then(() => {
+        // 
+
+        transDocRef.set(transData, { merge: true })
+        .then(() => {
+          window.location.href='./view.html'
+          $('#loadingModal').modal('hide');
+        });
+
+      });
+
+
+
+
+
+
+    }
+
+    
+    function validateForm(id) {
+
+      const parentElement = document.getElementById(id);
+
+      // This function deals with validation of the form fields with data-compulsory = 'true'
+      var x, y, i, valid = true;
+      // x = document.getElementsByClassName("multitabs-form__panel");
+      // y = x[activePanelNum].getElementsByTagName("input") && x[activePanelNum].querySelectorAll('[type="text"]');
+      y =parentElement.querySelectorAll('[data-compulsory="true"]');
+
+      // A loop that checks every input field in the current tab:
+      for (i = 0; i < y.length; i++) {
+        // console.log(y[i].value)
+        // If a field is empty...
+        if (y[i].value == "") {
+          // add an "invalid" class to the field:
+          y[i].className += " invalid";
+          // and set the current valid status to false:
+          valid = false;
+        }
+      }
+      // If the valid status is true, mark the step as finished and valid:
+      if (valid) {
+        // document.getElementsByClassName("step")[activePanelNum].className += " finish";
+      }
+      return valid; // return the valid status
+    }
+
+    // Enable / Disable save modal
+    function enableSaveModal(){
+      let invBizName = document.getElementById("invBizName").textContent;
+      let invClientName = document.getElementById("invClientName").textContent;
+      let invNum = document.getElementById("invNum").value;
+      let invIssueDate = document.getElementById("invIssueDate").value;
+      let invPaymentDue = document.getElementById("invPaymentDue").value;
+
+      // console.log('invBizName: ' + invBizName)
+      // console.log('invClientName: ' + invClientName)
+      // console.log('invNum: ' + invNum)
+      // console.log('invIssueDate: ' + invIssueDate)
+      // console.log('invPaymentDue: ' + invPaymentDue)
+      if (invBizName == null || invBizName =='' ||
+        invClientName == null || invClientName =='' ||
+        invNum == null || invNum =='' ||
+        invIssueDate == null || invIssueDate =='' ||
+        invPaymentDue == null || invPaymentDue =='' ){
+          document.getElementById("btnSave").setAttribute('data-toggle', '');
+      } 
+      else{
+        document.getElementById("btnSave").setAttribute('data-toggle', 'modal');
+      }
+    }
+
+    function fieldChecker(){
+      let invBizName = document.getElementById("invBizName").textContent;
+      let invClientName = document.getElementById("invClientName").textContent;
+      let invNum = document.getElementById("invNum").value;
+      let invIssueDate = document.getElementById("invIssueDate").value;
+      let invPaymentDue = document.getElementById("invPaymentDue").value;
+
+      if (invBizName == null || invBizName =='' ||
+        invClientName == null || invClientName =='' ||
+        invNum == null || invNum =='' ||
+        invIssueDate == null || invIssueDate =='' ||
+        invPaymentDue == null || invPaymentDue =='' ){
+        func.showNotification('top','center', 'warning', 'error_outline', "Please ensure all the compulsory fields are filled up." );
+      } 
+    }
+
+    
 
 
     // Sign out
@@ -2566,31 +3039,9 @@
 		$( document ).ready(function() {
 
 
-
-
-      // Drop down function
-      // $("#sort-dropdown-menu .dropdown-item").click(function(){
-        // $("#SortBy:first-child").text($(this).text());
-        // $("#SortBy:first-child").val($(this).text());
-
-        // 1. Duplicate a new row
-        // 2. Change the 'Add item' => text, remove the exisiting dropdown and change it to input
-        // 3. Add delete button to the first row. 
-
-      // });
-
-      // Find a <table> element with id="table":
-
-      
+      // Invoice Body specific
       $('#addRow').on( 'click', function () {
         addRow();
-        // <tr class="item">
-        //   <td style="font-size: small;"></td>
-        //   <td style="text-align: right; font-size: small;"></td>
-        //   <td style="text-align: right; font-size: small;"></td>
-        //   <td style="text-align: right; font-size: small;"></td>
-        // </tr>
-
       });
 
       $('#addAdditionalRow').on( 'click', function () {
@@ -2599,8 +3050,16 @@
 
       // Populate the fields
       $('#addBusinessDetailModal').on('show.bs.modal', function (event) {
-        document.getElementById("inName").value = document.getElementById("invBizName").textContent;
+        let inName = document.getElementById("invBizName").textContent;
+        document.getElementById("inName").value = inName;
         document.getElementById("inDetails").textContent = document.getElementById("invBizDetails").textContent;
+
+        if (inName.length >= 0){
+          document.getElementById("btnAddBusinessDetailModalUpdate").removeAttribute("disabled");
+        }
+        else{
+          document.getElementById("btnAddBusinessDetailModalUpdate").setAttribute("disabled", true);
+        }
       });
 
       // Edit Business Details
@@ -2632,27 +3091,30 @@
       $('#invNum').on('input', function(){        
         document.getElementById("previewInvNum").textContent = this.value;
       });
-      $('#invIssueDate').on('input', function(){        
-        document.getElementById("previewInvvIssueDate").textContent = this.value;
-      });
-      $('#invPaymentDue').on('input', function(){        
-        document.getElementById("previewInvPaymentDue").textContent = this.value;
-      });
+      // $('#invIssueDate').on('input', function(){        
+      //   document.getElementById("previewInvIssueDate").textContent = this.value;
+      // });
+      // $('#invPaymentDue').on('input', function(){        
+      //   document.getElementById("previewInvPaymentDue").textContent = this.value;
+      // });
       $('#invStatus').on('input', function(){        
         document.getElementById("previewStatus").textContent = this.value;
       });
       
-
-      $('#invNotes').on('input', function(event){        
-        document.getElementById("countNotes").textContent = this.value.length + '/250'
-        document.getElementById("previewInvNotes").innerHTML = this.value;
-
+      $('#inName').on('input', function(event){        
+        document.getElementById("countName").textContent = this.value.length + '/400'
+        if (this.value.length > 0){
+          document.getElementById("btnAddBusinessDetailModalUpdate").removeAttribute("disabled");
+        }
+        else{
+          document.getElementById("btnAddBusinessDetailModalUpdate").setAttribute("disabled", true);
+        }
       });
 
-      $('#invFooterNotes').on('input', function(){        
-        document.getElementById("countFooterNotes").textContent = this.value.length + '/250'
-        document.getElementById("previewInvFooterNotes").textContent = this.value;
-      });
+      // $('#invFooterNotes').on('input', function(){        
+      //   document.getElementById("countFooterNotes").textContent = this.value.length + '/250'
+      //   document.getElementById("previewInvFooterNotes").textContent = this.value;
+      // });
 
       // Load all Admin Students
       $('#addStudentModal').on('show.bs.modal', function (event) {
@@ -2682,7 +3144,38 @@
         document.getElementById("inClientEmail").value = EMAIL;
         document.getElementById("inClientAddr").value = ADDRESS;
 
+        if (ID == null || ID == ''){
+          document.getElementById("inClientName").removeAttribute('readonly');
+          document.getElementById("inClientContact").removeAttribute('readonly'); 
+          // Disable Button Update
+          document.getElementById("btnEditClientModalUpdate").setAttribute('disabled', true); 
+
+        }else{
+          document.getElementById("inClientName").setAttribute('readonly', true);
+          document.getElementById("inClientContact").setAttribute('readonly', true); 
+          // Enable Button Update
+          document.getElementById("btnEditClientModalUpdate").removeAttribute('disabled'); 
+        }
+
       });
+
+      // Check input in editClientModal 
+      $('#inClientName').on('change', function(){
+        if( $(this).val().length === 0 || inputPhone.value.length === 0 || !itiPhone.isValidNumber()) {
+          $('#btnEditClientModalUpdate').prop('disabled', true);
+        }else{
+          $('#btnEditClientModalUpdate').prop('disabled', false);
+        }
+      });
+
+      $('#inClientContact').on('change', function(){
+        if( $(this).val().length === 0 || !itiPhone.isValidNumber()|| $('#inClientName').val().length === 0) {
+          $('#btnEditClientModalUpdate').prop('disabled', true);
+        }else{
+          $('#btnEditClientModalUpdate').prop('disabled', false);
+        }
+      });
+
 
       // Clear key and fields in modal when modal dismiss
       $('#editClientModal').on('hide.bs.modal', function (event) {
@@ -2696,6 +3189,11 @@
         document.getElementById("inClientContact").value = '';
         document.getElementById("inClientEmail").value = '';
         document.getElementById("inClientAddr").value = '';
+
+        // Init Phone Message
+        document.getElementById("valid-msg").className = 'hide';
+        document.getElementById("error-msg").className = 'hide';
+        
       });
 
       // Once confirmed, update the client view in Invoice
@@ -2703,11 +3201,14 @@
 
         let clientName = document.getElementById("inClientName").value;
         let ClientId = document.getElementById("inClientId").getAttribute('value');
-        let clientContact = document.getElementById("inClientContact").value;
+        // let clientContact = document.getElementById("inClientContact").value;
+        let clientContact = itiPhone.getNumber();
         let ClientEmail = document.getElementById("inClientEmail").value;
         let ClientAddr = document.getElementById("inClientAddr").value;
 
+        document.getElementById("invClientId").setAttribute('value', ClientId);
         document.getElementById("invClientName").textContent = clientName;
+
 
         let clientDetails = '';
         clientDetails += (clientContact == null || clientContact == '')? '' : clientContact;
@@ -2720,12 +3221,37 @@
         document.getElementById("previewInvClientName").textContent = clientName;
         document.getElementById("previewInvClientDetails").innerHTML = clientDetails;
 
+        // Validate fields in editClientModal modal
+        validateForm('editClientModal');
+
+        // Enable save modal
+        enableSaveModal();
+
         // Load all client's active class of this month.
-        loadAllClientClassInfo(ClientId);
+        if (ClientId == null || ClientId == ''){
+          // Do nothing
+        }else
+        // Load all the client's classes of the month
+          loadAllClientClassInfo(ClientId);
         
 		  });
       
 
+      // Save and Proceed - Save btn clicked
+      $('#btnSaveModalUpdate').on('click', function (event) {
+        $('#loadingModal').modal('show');
+        // Validate fields in editClientModal modal
+        let accordionFieldsValid =  validateForm('accordionExample');
+        
+        CreateInvoice();
+      });
+
+      // Active Register Class Modal
+      $('#loadingModal').modal({
+        backdrop:'static',
+        keyboard:false
+      });
+      $('#loadingModal').modal('show');
 
       $('#btnSignOutModalUpdate').on('click', function (e) {
       
@@ -2820,63 +3346,227 @@
       });
       assignDraggable();
     });
-</script>
+  </script>
  
+  <!-- Datepicker -->
+  <script>
+      // Date picker
+      // Source: https://mcdatepicker.netlify.app/docs/
+      const calendarTheme = {
+        theme_color: '#2e74b6', //#19212b
+        main_background: '#FBFBFB',
+        active_text_color: 'rgba(62,85,110,0.85)',
+        inactive_text_color: '#cfe6ff',
+        picker_header: {
+          active: '#8ea5bd'
+        },
+        weekday: {
+          foreground: '#2e74b6' //rgba(35,68,97,0.8)
+        },
+        display: {
+          foreground: '#8ea5bd'
+        },
+        date: {
+          active: {
+            picked: {
+              background: '#2e74b6'
+            }
+          },
+          marcked: {
+            foreground: '#53a6fa'
+          }
+        },
+        button: {
+          danger: {
+            foreground: '#af002a'
+          },
+          success: {
+            foreground: '#2e74b6'
+          }
+        }
+      };
+    
+      const issueDateDatePicker = MCDatepicker.create({
+        el: '#invIssueDate',
+        bodyType: 'inline',
+        dateFormat: 'dd/mm/yyyy',
+        selectedDate: new Date(),
+        firstWeekday: 1,
+        minDate: new Date(2020, 0, 1),
+        theme: calendarTheme
+      });
 
+      issueDateDatePicker.onClose(() => {
+        // Remove invalid background if the user input smt
+        document.getElementById("previewInvIssueDate").textContent = document.getElementById("invIssueDate").value;
 
+        if ( document.getElementById("invIssueDate").value.length > 0){
+          document.getElementById("invIssueDate").className = 'form-control';
+        }
+        enableSaveModal();
+      });
 
+      const paymentDueDatePicker = MCDatepicker.create({
+        el: '#invPaymentDue',
+        bodyType: 'inline',
+        dateFormat: 'dd/mm/yyyy',
+        selectedDate: new Date(),
+        firstWeekday: 1,
+        minDate: new Date(2020, 0, 1),
+        theme: calendarTheme
+      });
 
-<script>
-  // Generate PDF
-  // https://ekoopmans.github.io/html2pdf.js/
-  function generatePDFeKoopmans(id){
+      paymentDueDatePicker.onClose(() => {
 
-    element = document.getElementById(id);
+        document.getElementById("previewInvPaymentDue").textContent =document.getElementById("invPaymentDue").value;
 
-    var opt = {
-      margin:       [0, 0, 0, 0],
-      filename:     'myfile.pdf',
-      pagebreak:    { before: '.beforeClass', after: ['#after1', '#after2'], avoid: 'img' },
-      image:        { type: 'jpeg', quality: 0.95 },
-      html2canvas:  { scale: 2 },
-      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        // Remove invalid background if the user input smt
+        
+        if ( document.getElementById("invPaymentDue").value.length > 0){
+          document.getElementById("invPaymentDue").className = 'form-control';
+        }
+        enableSaveModal();
+      });
+      
+      var inputPhone = document.querySelector("#inClientContact");
+      var itiPhone = intlTelInput(inputPhone, {
+      // allowDropdown: false,
+      autoHideDialCode: false,
+      // autoPlaceholder: "off",
+      // dropdownContainer: document.body,
+      // excludeCountries: ["my"],
+      // formatOnDisplay: false,
+      // geoIpLookup: function(callback) {
+      //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+      //     var countryCode = (resp && resp.country) ? resp.country : "";
+      //     callback(countryCode);
+      //   });
+      // },
+      // hiddenInput: "full_number",
+      // initialCountry: "auto",
+      // localizedCountries: { 'de': 'Deutschland' },
+      nationalMode: false,
+      // onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
+      // placeholderNumberType: "MOBILE",
+      preferredCountries: ['MY', 'SG'],
+      separateDialCode: true,
+      utilsScript: "../js/utils.js",
+    });
+
+    var errorMsg = document.querySelector("#error-msg");
+    var validMsg = document.querySelector("#valid-msg");
+
+    // here, the index maps to the error code returned from getValidationError - see readme
+    var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+    var reset = function() {
+      inputPhone.classList.remove("error");
+      errorMsg.innerHTML = "";
+      errorMsg.classList.add("hide");
+      validMsg.classList.add("hide");
     };
 
-    html2pdf().set(opt).from(element).save();
-  }
+    // on blur: validate
+    
+    inputPhone.addEventListener('blur', function() {
+      reset();
+      
+      if (inputPhone.value.trim()) {
+        if (itiPhone.isValidNumber()) {
+          validMsg.classList.remove("hide");
+        } else {
+          inputPhone.classList.add("error");
+          var errorCode = itiPhone.getValidationError();
+          errorMsg.innerHTML = errorMap[errorCode];
+          errorMsg.classList.remove("hide");
+        }
+      }
+    });
+
+    // on keyup / change flag: reset
+    inputPhone.addEventListener('change', reset);
+    inputPhone.addEventListener('keyup', reset);
+  </script>
+
+  </script>
+
+  <!-- Generate PDF -->
+  <script>
+
+    // https://ekoopmans.github.io/html2pdf.js/
+    function generatePDFeKoopmans(id){
+
+      element = document.getElementById(id);
+
+      var opt = {
+        margin:       [0, 0, 0, 0],
+        filename:     'myfile.pdf',
+        pagebreak:    { before: '.beforeClass', after: ['#after1', '#after2'], avoid: 'img' },
+        image:        { type: 'jpeg', quality: 0.95 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save();
+    }
 
     function toDataURL(src, callback, outputFormat) {
-    // var img = new Image();
-    var img = document.getElementById("previewTutorImgUrl");
-    var dataURL;
-    // img.crossOrigin = 'Anonymous';
-    img.onload = function() {
-      var canvas = document.createElement('CANVAS');
-      var ctx = canvas.getContext('2d');
-      
-      canvas.height = this.naturalHeight;
-      canvas.width = this.naturalWidth;
-      ctx.drawImage(this, 0, 0);
-      dataURL = canvas.toDataURL(outputFormat);
-      // img.src = dataURL;
-      callback(dataURL);
-    };
-    // img.src = src;
-    // img.src = dataURL;
-    if (img.complete || img.complete === undefined) {
-      img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+      var img = new Image();
+      // var img = document.getElementById("tutorImgUrl");
+      var dataURL;
+      img.crossOrigin = 'Anonymous';
       img.src = src;
+      img.onload = function() {
+        var canvas = document.createElement('CANVAS');
+        var ctx = canvas.getContext('2d');
+        
+        canvas.height = this.naturalHeight;
+        canvas.width = this.naturalWidth;
+        ctx.drawImage(this, 0, 0);
+        dataURL = canvas.toDataURL(outputFormat);
+        // img.src = dataURL;
+        // console.log(dataURL)
+        var imgTarget = document.getElementById("previewTutorImgUrl");
+        imgTarget.src = dataURL;
+        callback(dataURL);
+      };
+      // img.src = src;
+      // img.src = dataURL;
+      if (img.complete || img.complete === undefined) {
+        img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+        img.src = src;
+      }
     }
-  }
 
-  // toDataURL(
-  //   'https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0',
-  //   function(dataUrl) {
-  //     // console.log('RESULT:', dataUrl)
-  //   }
-  // )
-  
-</script>
+    // toDataURL(
+    //   'https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0',
+    //   function(dataUrl) {
+        // console.log('RESULT:', dataUrl)
+    //   }
+    // )
+
+    function getBase64Image(img) {
+      // Create an empty canvas element
+      var canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      // Copy the image contents to the canvas
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+
+      // Get the data-URL formatted image
+      // Firefox supports PNG and JPEG. You could check img.src to
+      // guess the original format, but be aware the using "image/jpg"
+      // will re-encode the image.
+      var dataURL = canvas.toDataURL("image/png");
+      console.log(dataURL)
+      return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+      // return dataURL;
+
+  }
+    
+  </script>
 
 </body>
 

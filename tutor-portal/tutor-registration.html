@@ -606,8 +606,9 @@
     var adminId = '';
     adminId = url.searchParams.get("aid");
 
+    // http://127.0.0.1:8080/tutor-portal/tutor-registration.html?aid=%2B60138252818
     // ?aid=%2B60138252818
-    console.log(adminId);
+    // console.log(adminId);
     // Check validity of URL params
     if (adminId === "" || adminId == null){
       // console.log('Invalid Url params');
@@ -755,9 +756,9 @@
       let docRef = db.collection("Class")
         .doc("v1")
         .collection("Tutor")
-        .where("adminId", "==", adminId)
-        .where("tutorId", "==", tutorId)
-        .where("statusAdmin", "==", true);
+        .where(TUTOR_ADMIN_ID, "==", adminId)
+        .where(TUTOR_TUTOR_ID, "==", tutorId)
+        .where(TUTOR_STATUS_ADMIN, "in", [TUTOR_STATUS_TYPE_ACTIVE, TUTOR_STATUS_TYPE_PASSIVE]);
         
       docRef
         .get()
@@ -766,18 +767,40 @@
             // CREATE NEW Tutor 
             AddTutorToTutorDB();
           }else{
-            registrationCompletePage();
-            func.showNotification('top','center', 'warning', 'error_outline', "You are already registered. Action skipped.");
+            querySnapshot.forEach((doc) =>{
+              // console.log(doc.data())
+              // console.log(doc.data()[TUTOR_ID])
+              SetAdminStatusToActive(doc.data()[TUTOR_ID]);
+
+            })
+
           }
         });
+    }
+    // Set the statuses to active
+    function SetAdminStatusToActive(docId){
+      // NEW: Add tutor to the Tutor Module
+      let tutorModuleDocRef = db.collection("Class").doc('v1').collection('Tutor').doc(docId);
+      let tutorModuleData = {
+        [TUTOR_DATE_EDIT]: new Date(),
+        [TUTOR_STATUS_ADMIN]: TUTOR_STATUS_TYPE_ACTIVE,
+        [TUTOR_STATUS_TUTOR]: TUTOR_STATUS_TYPE_ACTIVE,
+   
+      }
+      tutorModuleDocRef
+      .set(tutorModuleData, { merge: true })
+      .then(()=> {
+        func.showNotification('top','center', 'success', 'error_outline', "You are successfully registered!");
+        registrationCompletePage();
+      });
     }
 
 
     // Add New Student to Student Module
     function AddTutorToTutorDB(){
       
-     // NEW: Add tutor to the Tutor Module
-     let tutorModuleDocRef = db.collection("Class").doc('v1').collection('Tutor').doc();
+      // NEW: Add tutor to the Tutor Module
+      let tutorModuleDocRef = db.collection("Class").doc('v1').collection('Tutor').doc();
       let tutorModuleData = {
         [TUTOR_ID]: tutorModuleDocRef.id,
         [TUTOR_ADMIN_ID]: adminId,
@@ -785,8 +808,8 @@
         [TUTOR_DATE_ADD]: new Date(),
         [TUTOR_DATE_EDIT]: '',
         [TUTOR_DATE_DEL]: '',
-        [TUTOR_STATUS_ADMIN]: true,
-        [TUTOR_STATUS_TUTOR]: true,
+        [TUTOR_STATUS_ADMIN]: TUTOR_STATUS_TYPE_ACTIVE,
+        [TUTOR_STATUS_TUTOR]: TUTOR_STATUS_TYPE_ACTIVE,
         // Admin specific
         [TUTOR_ADMIN_NAME]: admin_name,
         [TUTOR_ADMIN_PHONE]: admin_phone,
@@ -803,6 +826,11 @@
         [TUTOR_TUTOR_ADDR]: final_address,
         [TUTOR_TUTOR_IMG_URL]: imgUrl_temp,
         [TUTOR_TUTOR_WEB_URL]: current_aweburl,
+        // Employement (Entered by Admin only)
+        [TUTOR_BANK_NAME]: '',
+        [TUTOR_AC_NO]: '',
+        [TUTOR_EPF]: '',
+        [TUTOR_SOCSO]: '',
       }
       tutorModuleDocRef
       .set(tutorModuleData, { merge: true })
@@ -831,7 +859,9 @@
       }
       // console.log("imgUrl: "+ imgUrl_temp);
 
+
       let docRef = db.collection("Tutor").doc(tutorId);
+
       let data = {
         [NAME_KEY]: document.getElementById("name").value,
         [EMAIL_KEY]: document.getElementById("email").value,
@@ -869,9 +899,10 @@
         [IMAGE_KEY]: imgUrl_temp,
       }
       // Update the profile pic, name, & etc of all the active courses..
-      // console.log('allActiveCourseData');
-      // console.log(allActiveCourseData);
+
       updateInfoInAllActiveCourse(allActiveCourseData);
+
+
       // If admin is filling the form themselves, skill action
       if (admin_weburl == current_aweburl){
         func.showNotification('top','center', 'warning', 'error_outline', "You are attempting to add yourself as tutor. Action restricted.");
@@ -880,8 +911,7 @@
 
       }
       else{
-        ValidateTutorInTutorDB()
-        registrationCompletePage();
+        ValidateTutorInTutorDB();
 
       }
 
@@ -940,11 +970,10 @@
         let docId;
         querySnapshot.forEach((doc) => {
           docId = doc.id;
-
           // Updating Offline class
           if (doc.data().online){
             // Online class
-            console.log('Updating online class: '+doc.data().id);
+            // console.log('Updating online class: '+doc.data().id);
             var allSubjectColRef = 
               db.collection("country")
               .doc("malaysia")
@@ -968,7 +997,7 @@
           // Updating Offline class
           else{
             // Offline class
-            console.log('Updating Offline class: '+doc.data().id);
+            // console.log('Updating Offline class: '+doc.data().id);
             for ( let i = 0; i <  doc.data().preferedAreaList.length; i++){
               let State_Area = doc.data().preferedAreaList[i].split("-");
 
@@ -1400,8 +1429,8 @@
     var itiPhone = intlTelInput(inputPhone,{
       autoHideDialCode: false,
       nationalMode: false,
-      onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
-      preferredCountries: ['MY', 'SG'],
+      // onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
+      preferredCountries: ['MY', 'SG', 'ID'],
       separateDialCode: true,
       utilsScript: "js/utils.js",
     });
@@ -1409,8 +1438,8 @@
     var itiStudent = intlTelInput(inputStudent,{
       autoHideDialCode: false,
       nationalMode: false,
-      onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
-      preferredCountries: ['MY', 'SG'],
+      // onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
+      preferredCountries: ['MY', 'SG', 'ID'],
       separateDialCode: true,
       utilsScript: "js/utils.js",
       });

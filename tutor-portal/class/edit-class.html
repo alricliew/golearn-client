@@ -11,9 +11,9 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
   <!-- Material Kit CSS -->
-  <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <link href="../../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <link href="../css/tutor-portal.css" rel="stylesheet" />
-  <link href="../css/golearn.css" rel="stylesheet" >
+  <!-- <link href="../css/golearn.css" rel="stylesheet" > -->
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
@@ -29,39 +29,6 @@
   <!-- ClockPicker Stylesheet -->
   <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap-clockpicker.min.css">
 
-  <style>
-    #addStudentModal{
-      overflow-y:auto;
-    }
-
-    .tooltiptext-general {
-      /* This is for the tooltip text */
-      visibility: hidden;
-      width: 300px;
-      /* background-color: #adadad; */
-      /* color: #adadad; */
-      background-color: white;
-      text-align: left;
-      font-size: smaller;
-      padding: 5px;
-      border-radius: 5px; /* This defines tooltip text position */
-      position: absolute;
-      z-index: 1;
-      bottom: 100%;
-      left: 50%;
-      /* This makes the margin half of the width to the center */
-      margin-left: -50px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      border: thin solid #2e74b6 ;
-      ;
-    }
-
-    .tooltiptext-trigger:hover .tooltiptext-general {
-      /* Makes tooltip text visible when text is hovered on */
-      visibility: visible;
-    }
-
-  </style>
 </head>
 
 <body>
@@ -70,38 +37,82 @@
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-3.jpg">
 
       <div class="logo">
-        <a href="#" class="simple-text logo-mini">
-			<img src="../source/logo.png" style="width: 216px; height: auto;" alt=""></img>
-          
+        <a href="../" class="simple-text logo-mini">
+			    <img src="../source/logo.png" style="width: 216px; height: auto;" alt=""></img>
         </a>
-        <a href="#" class="simple-text logo-normal">
+        <a href="../" class="simple-text logo-normal">
          Welcome!
         </a>
       </div>
       <div class="sidebar-wrapper">
-        <ul class="nav">
+        <ul class="nav" style="margin-bottom: 50px;">
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Teaching</h4>
+          </li>
           <li class="nav-item active">
             <a class="nav-link" href="./">
-              <i class="material-icons">home</i>
-              <p>Class</p>
+              <i class="fas fa-chalkboard fa-fw nav-icon"></i>
+              <p>Classes</p>
             </a>
           </li>
 		  		<li class="nav-item">
             <a class="nav-link" href="../student/">
-              <i class="material-icons">work_outline</i>
+              <i class="fas fa-user-graduate fa-fw nav-icon"></i>
               <p>Students</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="../teacher/">
-              <i class="material-icons">format_list_bulleted</i>
+              <i class="fas fa-chalkboard-teacher fa-fw nav-icon"></i>
               <p>Teachers</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../financial/">
-              <i class="material-icons">attach_money</i>
-              <p>Financial</p>
+            <h4 class="nav-link" style="margin-left: 1rem;">Financial</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../transaction/">
+              <i class="fas fa-wallet fa-fw nav-icon"></i>
+              <p>Transactions</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../invoice/">
+              <i class="fas fa-file-invoice-dollar fa-fw nav-icon"></i>
+              <p>Invoices</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../payroll/">
+              <i class="fas fa-hand-holding-usd fa-fw nav-icon"></i>
+              <p>Payroll <span style="visibility: hidden;">PRO</span></p>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="../transaction/settings.html">
+              <i class="fab fa-expeditedssl fa-fw nav-icon"></i>
+              <p>Settings</p>
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Public</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../course.html">
+              <i class="fas fa-book-open fa-fw nav-icon"></i>
+              <p>My Public Courses</p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="../job.html">
+              <i class="fas fa-briefcase fa-fw nav-icon"></i>
+              <p>Tuition Jobs</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="../update.html">
+              <i class="fas fa-user-cog fa-fw nav-icon"></i>
+              <p>Update Information</p>
             </a>
           </li>
         </ul>
@@ -1034,10 +1045,10 @@
 
                             <div class="form-group" style="margin-top: 2rem;">
                               <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Link</span>
-                              <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
-                                <span class="tooltiptext-general" style="left: 10%;">
-                                  <h6 style="margin: 0; color: #2e74b6;">Class Link</h6>
-                                  <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">Link to the platform where this class will be conducted. I.e Google Meet, Zoom or other platforms.</p>
+                              <span class="tooltiptext-trigger">? 
+                                <span class="tooltiptext-general">
+                                  <h6>Class Link</h6>
+                                  <p>Link to the platform where this class will be conducted. I.e Google Meet, Zoom or other platforms.</p>
                                 </span> 
                               </span>
                               <div class="input-group">
@@ -1051,10 +1062,10 @@
 
                             <div class="form-group" style="margin-top: 2rem;">
                               <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Chat Group Link</span> 
-                              <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
-                                <span class="tooltiptext-general" style="left: 10%;">
-                                  <h6 style="margin: 0; color: #2e74b6;">Chat Group Link</h6>
-                                  <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">Link to this class chat group. I.e Whatsapp, Telegram, Facebook group or other groups.</p>
+                              <span class="tooltiptext-trigger">? 
+                                <span class="tooltiptext-general">
+                                  <h6>Chat Group Link</h6>
+                                  <p>Link to this class chat group. I.e Whatsapp, Telegram, Facebook group or other groups.</p>
                                 </span> 
                               </span>
                               <div class="input-group">
@@ -1067,10 +1078,10 @@
 
                             <div class="form-group" style="margin-top: 2rem;">
                               <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Lesson Material Link </span>
-                              <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
-                                <span class="tooltiptext-general" style="left: 10%;">
-                                  <h6 style="margin: 0; color: #2e74b6;">Lesson Material Link</h6>
-                                  <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">Link to material that will be used for the class. I.e Google Classroom, Drive, or other storage places.</p>
+                              <span class="tooltiptext-trigger">? 
+                                <span class="tooltiptext-general">
+                                  <h6>Lesson Material Link</h6>
+                                  <p>Link to material that will be used for the class. I.e Google Classroom, Drive, or other storage places.</p>
                                 </span> 
                               </span>
                               <div class="input-group">
@@ -1351,10 +1362,10 @@
                           <div class="row">
                             <div class="col-sm-12 text-left">
                               <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-top: 1.0rem;">Class Type</span> 
-                              <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
-                                <span class="tooltiptext-general" style="left: 10%;">
-                                  <h6 style="margin: 0; color: #2e74b6;">Class Type</h6>
-                                  <p style="margin: 0; color: grey; font-size: small;">Set to <strong style="color: #2e74b6;">Public</strong> to be discovered by other. </p>
+                              <span class="tooltiptext-trigger">? 
+                                <span class="tooltiptext-general">
+                                  <h6>Class Type</h6>
+                                  <p>Set to <strong style="color: #2e74b6;">Public</strong> to be discovered by other. </p>
                                 </span> 
                               </span>
                             </div>
@@ -1458,6 +1469,20 @@
                             <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Student Limit</span> 
                             <input type="number" class="form-control" value="20" style="background-color: #e9ecef;" disabled id="inStudentLimit" data-compulsory="true" oninput="this.className = 'form-control'">
                           </div>
+
+                          <!-- First Class Date -->
+                          <div class="form-group" style="margin-top: 0rem;">
+                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">First Lesson Date</span> 
+                            <span class="tooltiptext-trigger">? 
+                              <span class="tooltiptext-general">
+                                <h6>First Lesson Date</h6>
+                                <p>Set the first lesson date. Useful for custom payment cycle. Default: The date this class is created.</p>
+                              </span> 
+                            </span>
+                            <input id="firstClassDatePicker" class="form-control" type="text" data-compulsory="false" oninput="this.className = 'form-control'" style="cursor:pointer;" readonly>
+
+                            <!-- <input type="number" class="form-control" value="20" style="background-color: #e9ecef;" disabled id="inStudentLimit" data-compulsory="true" oninput="this.className = 'form-control'"> -->
+                          </div>
           
                           <!-- Spacer  -->
                           <div style="margin-top: 1.5rem;"></div>
@@ -1513,10 +1538,10 @@
                           <div class="row">
                             <div class="col-sm-12 text-left">
                               <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Class Status</span> 
-                              <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
-                                <span class="tooltiptext-general" style="left: 10%;">
-                                  <h6 style="margin: 0; color: #2e74b6;">Class Status</h6>
-                                  <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">Set to <strong style="color: #2e74b6;">Inactive</strong> to pause the class new intake, hide from the public, and disallow edits to the class.</p>
+                              <span class="tooltiptext-trigger">? 
+                                <span class="tooltiptext-general">
+                                  <h6>Class Status</h6>
+                                  <p>Set to <strong style="color: #2e74b6;">Inactive</strong> to pause the class new intake, hide from the public, and disallow edits to the class.</p>
                                 </span> 
                               </span>
                             </div>
@@ -1547,10 +1572,10 @@
                           <div class="row">
                             <div class="col-sm-12 text-left">
                               <span class="" style="font-size: smaller; font-weight: 400; color: grey;">Delete This Class</span> 
-                              <span class="tooltiptext-trigger" style="background-color: red; padding: 0.2em 0.6em 0.2em 0.6em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer; font-weight: 400;">!
-                                <span class="tooltiptext-general" style="left: 10%;">
-                                  <h6 style="margin: 0; color: red;">Delete This Class</h6>
-                                  <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">This action cannot be <strong style="color: red;">undone</strong>. This will permanently delete the class details, lesson histories, assigned teachers, and remove all enrolled students.</p>
+                              <span class="tooltiptext-trigger" style="background-color: red; padding: 0.2em 0.6em 0.2em 0.6em;">!
+                                <span class="tooltiptext-general" style="border: thin solid red;">
+                                  <h6 style="color: red;">Delete This Class</h6>
+                                  <p>This action cannot be <strong style="color: red;">undone</strong>. This will permanently delete the class details, lesson histories, assigned teachers, and remove all enrolled students.</p>
                                 </span> 
                               </span>
                             </div>
@@ -1976,7 +2001,10 @@
         document.getElementById("onlineOnlyTop").style.display = 'none';
         document.getElementById("areaStateTop").style.display = 'none';
       }
-
+      
+      // *1000 because the input of new Date is miliseconds, firstore uses second instead.
+      document.getElementById("firstClassDatePicker").value = (currentClassObj[CLASS_FIRST_CLASS_DATE] == null || currentClassObj[CLASS_FIRST_CLASS_DATE] == '') ? new Date(currentClassObj[CLASS_DATE_ADD].seconds * 1000).toLocaleDateString("en-GB") : new Date(currentClassObj[CLASS_FIRST_CLASS_DATE].seconds * 1000).toLocaleDateString("en-GB");
+      
       // document.getElementById("t1AddEditStuEn").checked = currentClassObj[CLASS_TUTOR1_ADD_EDIT_STUDENT_ENABLE];
       // document.getElementById("t1DelStuEn").checked = currentClassObj[CLASS_TUTOR1_REMOVE_STUDENT_ENABLE];
       // document.getElementById("t1AddEditLessonEn").checked = currentClassObj[CLASS_TUTOR1_ADD_EDIT_LESSON_ENABLE];
@@ -2053,7 +2081,7 @@
       
 			if(!user){
         // Return to login if user does not exist.
-				window.location.href = "./login.html"
+				window.location.href = "../login.html"
 			}else{
         // if the displayName is null, it means user register using Phone
         if (firebase.auth().currentUser.displayName == null ){
@@ -2280,6 +2308,10 @@
       let idInput2 = $('#inTutor2Name');
       let tutor2_id = idInput2.data('tutor2id');
 
+      let myDate = document.getElementById("firstClassDatePicker").value;
+      myDate = myDate.split("/");
+      let newDate = new Date( myDate[2], myDate[1] - 1, myDate[0]);
+
         // Notice that I use .add(..), instead of .set(..). This is because the docRef do not specify the docId.
       // var docRefWithMerge = docRef.set({
       var data = {
@@ -2293,6 +2325,7 @@
         [CLASS_SUBJECT_ID_KEY]: subjectId,
         [CLASS_ONLINE_KEY]: document.getElementById("onlineonly_check").checked,
         [CLASS_STUDENT_LIMIT]: document.getElementById("inStudentLimit").value,
+        [CLASS_FIRST_CLASS_DATE]: newDate,
         [CLASS_ANNOUNCEMENT]: document.getElementById("inClassAnnouncement").value,
 
         [CLASS_TYPE]: (document.getElementById("classTypeRadioPrivate").checked)? CLASS_TYPE_PRIVATE : CLASS_TYPE_PUBLIC,
@@ -2313,7 +2346,7 @@
         [CLASS_TIMESLOT_END_ARR]: endTimeArr,
         // IDs
         [CLASS_ADMIN_ID]: currentClassObj[CLASS_ADMIN_ID],
-        [CLASS_TUTOR_ID_ARR]: [tutor1_id, tutor2_id, currentClassObj[CLASS_ADMIN_ID]],
+        [CLASS_TUTOR_ID_ARR]: [document.getElementById("inTutor1Name").getAttribute('data-tutor1id'), document.getElementById("inTutor2Name").getAttribute('data-tutor2id'), currentClassObj[CLASS_ADMIN_ID]],
         [CLASS_TUTOR_NAME_ARR]: [document.getElementById("inTutor1Name").value, document.getElementById("inTutor2Name").value],
         [CLASS_TUTOR_PHONE_ARR]: [document.getElementById("inTutor1Phone").value, document.getElementById("inTutor2Phone").value],
         [CLASS_TUTOR_IMG_URL_ARR]: [document.getElementById("inTutor1ImgUrl").src, document.getElementById("inTutor2ImgUrl").src],
@@ -2793,7 +2826,7 @@
 
     // Load Lesson Details
     function LoadLessonInfo(){
-      let today = new Date(2100, 12, 31);// Set a big dates
+      let today = new Date(2100, 12, 31);// Set a big date
       let docRef = db.collection("Class")
           .doc("v1")
           .collection("Lesson")
@@ -3581,7 +3614,7 @@
           .doc("v1")
           .collection("Tutor")
           .where(TUTOR_ADMIN_ID, "==", tutorId)
-          .where(TUTOR_STATUS_ADMIN, "==", true)
+          .where(TUTOR_STATUS_ADMIN, "==", TUTOR_STATUS_TYPE_ACTIVE)
           .orderBy(TUTOR_TUTOR_NAME, 'asc')
           .startAfter(latestAdminTutorDoc)
           .limit(10);
@@ -3803,6 +3836,8 @@
       docRef.set( data, { merge: true })
       .then(() => {
         func.showNotification('top','center', 'success', 'check_circle', "New tutor added.");
+
+        // markTutor
       });
 
     }
@@ -5384,6 +5419,15 @@
     });
     const editLessonModalDatePicker = MCDatepicker.create({
       el: '#editLessonDatepicker',
+      bodyType: 'inline',
+      dateFormat: 'dd/mm/yyyy',
+      selectedDate: new Date(),
+      firstWeekday: 1,
+      minDate: new Date(2020, 0, 1),
+      theme: calendarTheme
+    });
+    const firstClassDatePicker = MCDatepicker.create({
+      el: '#firstClassDatePicker',
       bodyType: 'inline',
       dateFormat: 'dd/mm/yyyy',
       selectedDate: new Date(),

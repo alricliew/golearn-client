@@ -366,6 +366,7 @@ const CLASS_TIMESLOT_DAY_OF_WEEK_ARR = "timeSlotDayOfWeekArr";
 const CLASS_TIMESLOT_START_ARR = "timeSlotStartArr";
 const CLASS_TIMESLOT_END_ARR = "timeSlotEndArr";
 const CLASS_STUDENT_LIMIT = "stuLimit";
+const CLASS_FIRST_CLASS_DATE = "firstClass";
 const CLASS_ANNOUNCEMENT = "announcement";
 
 const CLASS_FEES_KEY = "fees";
@@ -533,6 +534,9 @@ const TUTOR_DATE_EDIT = "dateEdit";
 const TUTOR_DATE_DEL = "dateDel";
 const TUTOR_STATUS_ADMIN = "statusAdmin";
 const TUTOR_STATUS_TUTOR = "statusTutor";
+    const TUTOR_STATUS_TYPE_ACTIVE = 'active';
+    const TUTOR_STATUS_TYPE_PASSIVE = 'passive';
+    const TUTOR_STATUS_TYPE_DELETE = 'delete';
 
 const TUTOR_ADMIN_NAME = "adName";
 const TUTOR_ADMIN_PHONE = "adPhone";
@@ -550,6 +554,14 @@ const TUTOR_TUTOR_ADDR = "tutorAddr";
 const TUTOR_TUTOR_IMG_URL = "tutorImgUrl";
 const TUTOR_TUTOR_WEB_URL = "tutorWebUrl";
 
+const TUTOR_BANK_NAME = "bankName";
+const TUTOR_AC_NO = "bankACNo";
+const TUTOR_EPF = "noEpf";
+const TUTOR_SOCSO = "noSocso";
+
+// const TUTOR_CLASS_ACTIVE = "classActive";
+// const TUTOR_CLASS_ID_ARR = "classIdArr";
+
 // Golearn Tutor Settings
 const SET_ID = "id";
 const SET_TUTOR_ID = "tutorId"; // main
@@ -564,6 +576,104 @@ const SET_BANK_NAME = "bankName";
 
 const SET_INV_NOTE = "invNote";
 const SET_INV_FOOTER_NOTE = "invFooterNote";
+
+//  Transaction
+const TRANS_ID = "id";
+const TRANS_DOC_ID = "docId"; //id of the ori doc
+const TRANS_DOC_NUM = "docNo"; //invoice / payslip no.
+const TRANS_SENDER_ID = "idS";
+const TRANS_RECEIVER_ID = "idR"; 
+const TRANS_SENDER_NAME = "nameS";
+const TRANS_RECEIVER_NAME = "nameR";
+const TRANS_VIEWER_ARR = "viewerArr"; //main
+const TRANS_DATE = "date";
+const TRANS_TITLE = "title";
+const TRANS_TYPE = "type"; // main
+    const TRANS_TYPE_INV = "inv";
+    const TRANS_TYPE_PAY = "pay";
+const TRANS_DOC_STATUS = "docStatus"; // document specific statuses
+    const TRANS_INV_STATUS_DRAFT = "draft";
+    const TRANS_INV_STATUS_NEW = "new";
+    const TRANS_INV_STATUS_PAID = "paid";
+    // const TRANS_PAY_STATUS = "";
+const TRANS_TOTAL = "total";
+const TRANS_DATE_EDIT = "dateEdit";
+const TRANS_STATUS = "status";
+
+//  Invoice
+const INV_ID = "id";
+const INV_SENDER_ID = "idS"; // main
+const INV_RECEIVER_ID = "idR";
+const INV_SENDER_NAME = "nameS";
+const INV_SENDER_DETAILS = "descS";
+const INV_SENDER_IMG_URL = "logoUrl";
+const INV_RECEIVER_NAME = "nameR";
+const INV_RECEIVER_DETAILS = "descR";
+const INV_TITLE = "title";
+const INV_NUMBER = "invNo";
+const INV_ISSUE_DATE = "invDate";
+const INV_DUE_DATE = "invDue";
+const INV_INV_STATUS = "invStatus";
+    const INV_STATUS_DRAFT = "draft";
+    const INV_STATUS_NEW = "new";
+    const INV_STATUS_PAID = "paid";
+
+const INV_ITEMS_ARR = "invItemsArr";
+const INV_TOTAL = "invTotal";
+const INV_NOTES = "note";
+const INV_FOOTER_NOTES = "noteFooter";
+
+const INV_PAYMENT_DATE = "payDate";
+const INV_PAYMENT_AMOUNT = "payAmount";
+const INV_PAYMENT_NOTE = "payNote";
+
+const INV_DATE_ADD = "dateAdd";
+const INV_DATE_EDIT = "dateEdit";
+const INV_DATE_DEL = "dateDel";
+const INV_STATUS = "status";
+
+//  Payroll
+const PAYROLL_ID = "id";
+const PAYROLL_NAME = "name"; // main
+const PAYROLL_DATE_START = "start";
+const PAYROLL_DATE_END = "end";
+const PAYROLL_EMPLOYEE_NUM = "num";
+const PAYROLL_STATUS = "status";
+
+//  Payslip (Payroll)
+const PAY_ID = "id";
+const PAY_PAYROLL_ID = "payrollId";
+const PAY_PAYROLL_NAME = "payrollName";
+const PAY_SENDER_ID = "idS"; // main
+const PAY_RECEIVER_ID = "idR";
+const PAY_SENDER_NAME = "nameS";
+const PAY_SENDER_DETAILS = "descS";
+const PAY_SENDER_IMG_URL = "logoUrl";
+const PAY_RECEIVER_NAME = "nameR";
+const PAY_RECEIVER_DETAILS = "descR";
+const PAY_TITLE = "title";
+const PAY_NUMBER = "invNo";
+const PAY_ISSUE_DATE = "invDate";
+const PAY_DUE_DATE = "invDue";
+const PAY_PAY_STATUS = "invStatus";
+    const PAY_STATUS_DRAFT = "draft";
+    const PAY_STATUS_NEW = "new";
+    const PAY_STATUS_PAID = "paid";
+
+const PAY_ITEMS_ARR = "invItemsArr";
+const PAY_TOTAL = "invTotal";
+const PAY_NOTES = "note";
+const PAY_FOOTER_NOTES = "noteFooter";
+
+const PAY_PAYMENT_DATE = "payDate";
+const PAY_PAYMENT_AMOUNT = "payAmount";
+const PAY_PAYMENT_NOTE = "payNote";
+
+const PAY_DATE_ADD = "dateAdd";
+const PAY_DATE_EDIT = "dateEdit";
+const PAY_DATE_DEL = "dateDel";
+const PAY_STATUS = "status";
+
 
 
 // -------------- Session Storage Key Start -------------- //
@@ -584,7 +694,21 @@ const SESSION_STORAGE_DEPENDANT_CURRENT_DOC_KEY = "currentDependantDoc";
 const SESSION_STORAGE_TUTOR_ALL_DOCS_KEY = "allTutorsDocs";
 const SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY = "currentTutorDoc";
 
+// TUTOR:Transaction Module
+const SESSION_STORAGE_TRANSACTION_ALL_DOCS_KEY = "allTransactionDocs";
+const SESSION_STORAGE_TRANSACTION_CURRENT_DOC_KEY = "currentTransactionDoc";
+
+// TUTOR:Invoice Module
+const SESSION_STORAGE_INVOICE_ALL_DOCS_KEY = "allInvoiceDocs";
+const SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY = "currentInvoiceDoc";
+
 // CLIENT: Class Module
 const SESSION_STORAGE_CLIENT_CLASS_ALL_DOCS_KEY = "allClientClassDocs";
 const SESSION_STORAGE_CLIENT_CLASS_CURRENT_DOC_KEY = "currentClientClassDoc";
+
+// CLIENT:Invoice Module
+const SESSION_STORAGE_CLIENT_INVOICE_ALL_DOCS_KEY = "allClientInvoiceDocs";
+const SESSION_STORAGE_CLIENT_INVOICE_CURRENT_DOC_KEY = "currentClientInvoiceDoc";
+
+
 // -------------- Session Storage Key End   -------------- //

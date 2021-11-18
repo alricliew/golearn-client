@@ -11,33 +11,28 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
   <!-- Material Kit CSS -->
-  <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <link href="../../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
-  <script src="js/firebase.js"></script>
+  <script src="../js/firebase.js"></script>
   <!-- Tutor Portal specific CSS -->
-  <link href="css/tutor-portal.css" rel="stylesheet" />
+  <link href="../css/tutor-portal.css" rel="stylesheet" />
 </head>
 
 <body>
 
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/img/sidebar-3.jpg">
-      <!--
-      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-      Tip 2: you can also add an image using data-image tag
-  -->
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-3.jpg">
       <div class="logo">
-        <a href="./" class="simple-text logo-mini">
-			<img src="source/logo.png" style="width: 216px; height: auto;" alt=""></img>
+        <a href="../" class="simple-text logo-mini">
+			<img src="../source/logo.png" style="width: 216px; height: auto;" alt=""></img>
           
         </a>
-        <a href="./" class="simple-text logo-normal">
+        <a href="../" class="simple-text logo-normal">
          Welcome!
         </a>
       </div>
@@ -47,19 +42,19 @@
             <h4 class="nav-link" style="margin-left: 1rem;">Teaching</h4>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./class/">
+            <a class="nav-link" href="../class/">
               <i class="fas fa-chalkboard fa-fw nav-icon"></i>
               <p>Classes</p>
             </a>
           </li>
 		  		<li class="nav-item">
-            <a class="nav-link" href="./student/">
+            <a class="nav-link" href="../student/">
               <i class="fas fa-user-graduate fa-fw nav-icon"></i>
               <p>Students</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./teacher/">
+            <a class="nav-link" href="../teacher/">
               <i class="fas fa-chalkboard-teacher fa-fw nav-icon"></i>
               <p>Teachers</p>
             </a>
@@ -68,25 +63,25 @@
             <h4 class="nav-link" style="margin-left: 1rem;">Financial</h4>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./transaction/">
+            <a class="nav-link" href="../transaction/">
               <i class="fas fa-wallet fa-fw nav-icon"></i>
               <p>Transactions</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./invoice/">
+          <li class="nav-item active">
+            <a class="nav-link" href="./">
               <i class="fas fa-file-invoice-dollar fa-fw nav-icon"></i>
               <p>Invoices</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./payroll/">
+            <a class="nav-link" href="../payroll/">
               <i class="fas fa-hand-holding-usd fa-fw nav-icon"></i>
               <p>Payroll <span style="visibility: hidden;">PRO</span></p>
             </a>
           </li>
           <!-- <li class="nav-item">
-            <a class="nav-link" href="./transaction/settings.html">
+            <a class="nav-link" href="../transaction/settings.html">
               <i class="fab fa-expeditedssl fa-fw nav-icon"></i>
               <p>Settings</p>
             </a>
@@ -94,20 +89,20 @@
           <li class="nav-item">
             <h4 class="nav-link" style="margin-left: 1rem;">Public</h4>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="./course.html">
+          <li class="nav-item">
+            <a class="nav-link" href="../course.html">
               <i class="fas fa-book-open fa-fw nav-icon"></i>
               <p>My Public Courses</p>
             </a>
           </li>
 		  		<li class="nav-item">
-            <a class="nav-link" href="./job.html">
+            <a class="nav-link" href="../job.html">
               <i class="fas fa-briefcase fa-fw nav-icon"></i>
               <p>Tuition Jobs</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./update.html">
+            <a class="nav-link" href="../update.html">
               <i class="fas fa-user-cog fa-fw nav-icon"></i>
               <p>Update Information</p>
             </a>
@@ -120,7 +115,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">My Courses</a>
+            <a class="navbar-brand" href="javascript:;">Invoices</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -172,9 +167,9 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                  <a class="dropdown-item" href="./edit-profile.html">Edit Profile</a>
+                  <a class="dropdown-item" href="../edit-profile.html">Edit Profile</a>
                   <a id="navPublicProfile" class="dropdown-item" href="#">My Public Profile</a>
-									<a class="display:block; dropdown-item" href="./about.html">About</a>
+									<a class="display:block; dropdown-item" href="../about.html">About</a>
 									<div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
 									<div class="dropdown-divider"></div>
@@ -189,6 +184,56 @@
       <!-- End Navbar -->
 
 			<!-- Modal Start -->
+
+      <!-- Record Invoice Payment modal -->
+      <div class="row">
+        <div class="modal fade" id="recordPaymentModal" tabindex="-1" role="dialog" aria-labelledby="recordPaymentModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Record Payment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payment Date*</span> 
+                  <input type="text" class="form-control" id="inPaymentDate" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" style="cursor: pointer; cursor: pointer;" >                
+                </div>
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payment Amount</span> 
+                  <input type="text" class="form-control" id="inPaymentAmount" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
+                </div>
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Notes / Memo</span> 
+                  <textarea class="form-control" maxlength="200" rows="4"  id="inPaymentNotes" data-compulsory="false"></textarea>
+                </div>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnRecordPaymentModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <!-- Loading Modal -->
+      <div class="row">
+        <div class="modal fade" tabindex="-1" role="dialog" id="loadingModal" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="container-fluid">
+              <div class="row d-flex">
+                <span class="fa fa-spinner fa-spin fa-5x w-100" style="color: #fff ;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Activation modal -->
       <div class="row">
         <div class="modal fade" id="activationModal" tabindex="-1" role="dialog" aria-labelledby="activationModalLabel" aria-hidden="true">
@@ -234,208 +279,120 @@
         </div>
       </div>
 
-      <!-- Edit Course Modal -->
-       <div class="row">
-        <div class="modal fade" id="editCourseModal" tabindex="-1" role="dialog" aria-labelledby="editCourseModalLabel" aria-hidden="true">
-          <div class="modal-dialog  modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="editCourseModalLabel">New message</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <h5 >Availability</h5>
-                <form>
-                  <div class="form-group">
-                    <div class="form-check form-check-radio form-check-inline">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio-open" value="option1" >
-                        Open
-                        <span class="circle">
-                          <span class="check"></span>
-                        </span>
-                      </label>
-                    </div>
-                    <div class="form-check form-check-radio form-check-inline">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio-busy" value="option2">
-                        Busy
-                        <span class="circle">
-                          <span class="check"></span>
-                        </span>
-                      </label>
-                    </div>
-        
-                    <div class="form-check form-check-radio form-check-inline">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio-closed" value="option3">
-                        Closed
-                        <span class="circle">
-                          <span class="check"></span>
-                        </span>
-                      </label>
-                    </div>
-                  </div>
-      
-                </form>
-
-                <h5 >Description</h5>
-                <div class="form-group">
-                  
-                  <!-- <label for="message-text" class="col-form-label">Message:</label> -->
-                  <textarea class="form-control" id="modalDescription" rows="4"></textarea>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnEditCourseModalUpdate">Update</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Main content -->
       <div class="content">
         <div class="container-fluid">
           <!-- your content here -->
 
           <!-- Main content -->
-          <div class="row" id="desciption-row" >
-            <!-- Update button -->
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <a href="javascript:;" class="btn btn-lg btn-primary btn-round" id="btnAddCourse" style="background-color: grey; pointer-events: none; ">Add New Course <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
+          <div class="row  d-flex" id="desciption-row" >
+            <!-- button -->
+            <div class="p-2">
+              <a href="settings.html" class="btn btn-outline-primary btn-round" id="btnBack"><i class="fas fa-cog" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;"></i> Financial Settings</a>
             </div>
 
-            <div class="col-lg-6 col-md-6 col-sm-6 ">
-              <!-- <a class="d-flex justify-content-end" href="javascript:;" id="btnUpdate" style="margin-top: 1rem;" >About Premium Subjects</a> -->
+            <div class="ml-auto p-2">
+              <a href="create-invoice.html" class="btn btn-primary btn-round" style="background-color: #2e74b6;">Create Invoice <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
             </div>
-
-            <!-- <div class="col-md-4 ">
-              <div style="transform: scale(1.05) !important; cursor: pointer;"  class="card" id="spm-bm" data-toggle="modal" data-target="#editCourseModal" data-key="tMon8am"  data-datetime="Monday, 8am - 12pm">
-                <div class="card-header card-header-primary">
-
-                <h4 class="card-title">SPM Bahasa Malaysia <span class="card-course-online-label">ONLINE</span></h4>
-                <p class="card-category">Home Tuition</p>
-                </div>
-                <div class="card-body">
-                  <a class="" style="display: flex; ">			
-                    <p style="font-weight: 600; color: #525252;" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >paid</i> Fee:  <span id="main_fees_sentence"></span></p>
-                  </a>
-                  <p style="font-weight: 300; color: #525252;" id="main_fees_monthly_est" >Estimated monthly tuition fee = <span class="text-success" id="main_fees_sentence_est"></span> x  <span class="text-success" id="main_classPerWeek_est"></span> x <span class="text-success" id="main_duration_est"></span> x 4 weeks in a month = RM<span class="text-success" style="font-weight: 500;" id="main_fees_estimation"> / month</span></p>
-      
-                  <a class="card-course-item-wrapper">			
-                    <p style="font-weight: 600; color: #525252;" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >schedule</i> Duration: <span id="main_duration"></span> </p>
-                  </a>
-                  <a class="" style="display: flex; ">			
-                    <p style="font-weight: 600; color: #525252;" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >date_range</i> Class per week: <span id="main_classPerWeek"></span></p>
-                  </a>
-      
-      
-                  <a class="" style="display: flex; ">			
-                    <p style="font-weight: 600; color: #525252;" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >description</i> Description</p>
-                  </a>
-                  <p style="font-weight: 300; color: #525252;" id="main_jobDetail"></p>
-      
-                </div>
-              </div>
-            </div> -->
 
           </div>
 
-          
-          <!-- All Courses -->
-          <div class="row" id="card-all-courses">
-            <!-- <div class="col-md-4">
-              <div class="card-course card-1 "id="spm-bm" data-toggle="modal" data-target="#editCourseModal" data-key="tMon8am">
-                <h3>SPM Bahasa Malaysia <span class="card-course-online-label">ONLINE</span></h3>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >paid</i> Fee:  <span id="main_fees_sentence"></span></p>
-                </a>
-    
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >schedule</i> Duration: <span id="main_duration"></span> </p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >date_range</i> Class per week: <span id="main_classPerWeek"></span></p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >description</i> Description</p>
-                </a>
-                <p>A curated set of ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
+          <div class="container-fluid" >
+
+            <div class="row" id="card-main">
+  
+              <div class="col-md-12 card-student">
+                <div class="row" >
+                  <div class="col-md-11" style="padding: 0;">
+                    <div class="row" style="margin: 0;">
+                      <div class="col-md-2">
+                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Date Issued</h6>
+                      </div>
+                      <div class="col-md-2">
+                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Invoice No.</h6>
+                      </div>
+                      <div class="col-md-3">
+                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Description</h6>
+                      </div>
+                      <div class="col-md-2">
+                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Client</h6>
+                      </div>
+                      <div class="col-md-2">
+                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Amount</h6>
+                      </div>
+                      <div class="col-md-1">
+                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Status</h6>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Action</h6>
+                  </div>
+  
+                </div>
+              </div>
+
+              <!-- No data placeholder -->
+              <div class="col-md-12 text-center" style="display: none; margin: 1rem;" id="noDataPlaceholder">
+                <p>No data</p>
+                  
+              </div>
+  
+              <!-- Invoice List Start -->
+              <!-- <div class="col-md-12 card-student-item">
+                <div class="row">
+                  <div class="col-md-11" style="padding: 0;">
+                    <div class="row" style="margin: 0;">
+                      <div class="col-md-2">
+                        <p>12/2/2021</p>
+                      </div>
+                      <div class="col-md-2">
+                        <p>INV-0293874728</p>
+                      </div>
+                      <div class="col-md-4">
+                        <p></p>
+                      </div>
+                      <div class="col-md-3">
+                        <p>Nur Aisha</p>
+                      </div>
+                      <div class="col-md-1">
+                        <p class="card-student-status-label active">ACTIVE</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <a href="#" style="margin: 0; padding: 0.3em;" class="btn btn-sm btn-outline-danger btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" ><i class="material-icons" style="color: red;">remove</i></a>
+
+                  </div>
+                </div>
+              </div> -->
+      
+            </div>
+            <!-- Load more button -->
+            <div class="row">
+              <div class="col-md-12" >
+                <a class="btn btn-sm btn-outline-primary btn-round" id="btnInvoiceLoadMore">Load More <i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">expand_more</i></a> 
               </div>
             </div>
-
-            <div class="col-md-4">
-              <div class="card-course card-2">
-                <h3>Cambridge Lower Secondary English <span class="card-course-online-label">ONLINE</span></h3>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >paid</i> Fee:  <span id="main_fees_sentence"></span></p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >schedule</i> Duration: <span id="main_duration"></span> </p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >date_range</i> Class per week: <span id="main_classPerWeek"></span></p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >description</i> Description</p>
-                </a>
-                <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="card-course card-3">
-                <h3>Primary Mandarin</h3>
-
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >paid</i> Fee:  <span id="main_fees_sentence"></span></p>
-                </a>
-    
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >schedule</i> Duration: <span id="main_duration"></span> </p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >date_range</i> Class per week: <span id="main_classPerWeek"></span></p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >description</i> Description</p>
-                </a>
-                <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
-              </div>
-            </div> -->
           </div>
 
         </div>
+
+        <footer class="footer">
+          <div class="container-fluid">
+            <nav class="float-left">
+            <ul>
+              <!-- <li>
+              <a href="https://golearn.com.my/join-us" target="_blank">
+                Visit GoLearn Tutor
+              </a>
+              </li> -->
+            </ul>
+            </nav>
+          </div>
+        </footer>
       </div>
-
-      <footer class="footer">
-        <div class="container-fluid">
-          <nav class="float-left">
-          <ul>
-            <li>
-            <a href="https://golearn.com.my/join-us" target="_blank">
-              Visit GoLearn Tutor
-            </a>
-            </li>
-          </ul>
-          </nav>
-          <!-- <div class="copyright float-right">
-            &copy;
-            <script>
-              document.write(new Date().getFullYear())
-            </script> 
-            , made with <i class="material-icons">favorite</i> by <a href="#" >GoLearn Team</a>
-          </div> -->
-          <!-- your footer here -->
-        </div>
-      </footer>
     </div>
-	  
-  </div>
 
   <div class="fixed-plugin">
     <div class="dropdown show-dropdown">
@@ -474,16 +431,16 @@
     </div>
   </div>
   
-  <script src="assets/js/core/jquery.min.js"></script>
-  <script src="assets/js/core/popper.min.js"></script>
-  <script src="assets/js/core/bootstrap-material-design.min.js"></script>
-  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!-- Plugin for the momentJs  -->
-  <script src="assets/js/plugins/moment.min.js"></script>
+  <script src="../assets/js/plugins/moment.min.js"></script>
   <!--  Plugin for Sweet Alert -->
-  <script src="assets/js/plugins/sweetalert2.js"></script>
+  <script src="../assets/js/plugins/sweetalert2.js"></script>
   <!-- Forms Validations Plugin -->
-  <script src="assets/js/plugins/jquery.validate.min.js"></script>
+  <script src="../assets/js/plugins/jquery.validate.min.js"></script>
   <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
   <!-- <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script> -->
   <!-- 	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
@@ -511,15 +468,15 @@
   <!-- Chartist JS -->
   <!-- <script src="assets/js/plugins/chartist.min.js"></script> -->
   <!--  Notifications Plugin    -->
-  <script src="assets/js/plugins/bootstrap-notify.js"></script>
+  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+  <script src="../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
   <!-- Common constants -->
-  <script src="../assets/js/common.js" type="text/javascript"></script>
+  <script src="../../assets/js/common.js" type="text/javascript"></script>
   <!-- Core Tutor Js -->
-  <script src="../assets/js/tutor-core.js" type="text/javascript"></script>
+  <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
 	<script>
     // Global Variables
     var tutorId;
@@ -546,6 +503,9 @@
      
     // Course-specific var
     var allCourseSize;
+
+    var latestInvoiceDoc = null;// Store last document - Used for Lesson Load More btn
+
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
@@ -553,7 +513,8 @@
     var tutorInfoObj = null;
     if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
       // Do nothing
-    }else{
+    }
+    else{
       // Set the nav user name
       tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
       document.getElementById("user").textContent = tutorInfoObj.name;
@@ -569,34 +530,7 @@
       currentTutoringExperience = tutorInfoObj.tutoringExperience;
       currentTutoringApproach = tutorInfoObj.tutoringApproach;
       currentQualification= tutorInfoObj.qualification;
-      current_mon_8am = tutorInfoObj.tMon8am;
-      current_mon_12pm= tutorInfoObj.tMon12pm; 
-      current_mon_3pm = tutorInfoObj.tMon3pm;  
-      current_mon_6pm = tutorInfoObj.tMon6pm;  
-      current_tue_8am = tutorInfoObj.tTue8am;  
-      current_tue_12pm= tutorInfoObj.tTue12pm;  
-      current_tue_3pm = tutorInfoObj.tTue3pm;  
-      current_tue_6pm = tutorInfoObj.tTue6pm;  
-      current_wed_8am = tutorInfoObj.tWed8am;  
-      current_wed_12pm= tutorInfoObj.tWed12pm;  
-      current_wed_3pm = tutorInfoObj.tWed3pm;  
-      current_wed_6pm = tutorInfoObj.tWed6pm;  
-      current_thu_8am = tutorInfoObj.tThu8am;  
-      current_thu_12pm= tutorInfoObj.tThu12pm;  
-      current_thu_3pm = tutorInfoObj.tThu3pm;  
-      current_thu_6pm = tutorInfoObj.tThu6pm;  
-      current_fri_8am = tutorInfoObj.tFri8am;  
-      current_fri_12pm= tutorInfoObj.tFri12pm;  
-      current_fri_3pm = tutorInfoObj.tFri3pm;  
-      current_fri_6pm = tutorInfoObj.tFri6pm; 
-      current_sat_8am = tutorInfoObj.tSat8am;  
-      current_sat_12pm= tutorInfoObj.tSat12pm;  
-      current_sat_3pm = tutorInfoObj.tSat3pm;  
-      current_sat_6pm = tutorInfoObj.tSat6pm;  
-      current_sun_8am = tutorInfoObj.tSun8am;  
-      current_sun_12pm= tutorInfoObj.tSun12pm;  
-      current_sun_3pm = tutorInfoObj.tSun3pm;  
-      current_sun_6pm = tutorInfoObj.tSun6pm;
+      
       current_aweburl = tutorInfoObj.aWebUrl
 
       // updatePageView(current_accountStatus);
@@ -606,21 +540,17 @@
       
 			if(!user){
         // Return to login if user does not exist.
-				window.location.href = "login.html"
+				window.location.href = "../login.html"
 			}else{
         // if the displayName is null, it means user register using Phone
         if (firebase.auth().currentUser.displayName == null ){
-            tutorId = firebase.auth().currentUser.phoneNumber;
-        }else
-            tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-
-
-        // loadAllActiveCourses(tutorId);
-
-        updateInfoInAllActiveCourse(tutorId)
-        
+          tutorId = firebase.auth().currentUser.phoneNumber;
+        }else{
+          tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+        }
         loadUserInfo(tutorId);
-        
+        loadAllInvoice();
+
 			}
 		});
 
@@ -641,7 +571,7 @@
           // current_phone, 
           current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
           current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
-          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
+          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/empty-photo.png" : doc.data().imgUrl;
           current_accountStatus = doc.data().accountStatus; 
           currentYearsExperience = doc.data().yearsExperience; // number
           currentTutoringExperience = doc.data().tutoringExperience;
@@ -675,19 +605,6 @@
           current_sun_12pm= doc.data().tSun12pm;  
           current_sun_3pm = doc.data().tSun3pm;  
           current_sun_6pm = doc.data().tSun6pm; 
-          current_preferedSubjectList = doc.data().preferedSubjectList;
-          current_preferedAreaList = doc.data().preferedAreaList;
-          current_aPreferredSubjectLimit = doc.data().aPreferredSubjectLimit;
-          current_aPreferredAreaLimit = doc.data().aPreferredAreaLimit;
-          current_rating = doc.data().rating;
-          current_ratingTimes = doc.data().ratingTimes; 
-          current_ratingFinal = doc.data().ratingFinal;
-          current_profileStatus = doc.data().profileStatus;
-          current_aweburl = doc.data().aWebUrl;
-          current_aPremiumSubjectLimit  = doc.data().aPremiumSubjectLimit; 
-          // current_aPremiumConnectLimit = doc.data().profileStatus; 
-          current_aTotalSubjectLimit = doc.data().aTotalSubjectLimit; 
-          // current_aTotalConnectLimit = doc.data().profileStatus; 
 
           // Store data to sessionStorage
           var tutorDataObj = {
@@ -788,17 +705,11 @@
             document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
             document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
             document.getElementById("btnActivateAccount").target = "_blank";
-
-            func.showNotification('top','center', 'danger', 'error_outline', "Activate your account to add or edit courses." );
-
           }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
             document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
             document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
             document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
             document.getElementById("btnActivateAccount").target = "_blank";
-
-            func.showNotification('top','center', 'danger', 'error_outline', "Activate your account to add or edit courses." );
-
           }else {
             let activationNavItem = document.querySelector('#activationNavItem');
             let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
@@ -809,224 +720,382 @@
             }else{
               // Do nothing
             }
-
           }
-
-        // Renable the button
-        document.getElementById('btnAddCourse').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
-
         } else {
-            // Do nothing
+           // Do nothing 
         }
       });
 
     };
 
 
-    // Update all active courses
-    function updateInfoInAllActiveCourse(tutorId) {
-
-			var allActiveCourseCol = db.collection("Tutor").doc(tutorId).collection("Courses")
-			.where("status", "==", true);
-
-			allActiveCourseCol
-			.get()
-			.then((querySnapshot) => {
-				var courseId;
-
-        allCourseSize = querySnapshot.docs.length;
-
-        // Render empty placeholder card to it appear normal for less than 3 courses
-        if (querySnapshot.docs.length == 1 ){
-
-          renderAllActiveCourses(querySnapshot.docs[0], querySnapshot.docs[0].id, false);
-          // Use any snapshot so it dont break.
-          // renderAllActiveCourses(querySnapshot.docs[0], courseId, true);
-          // renderAllActiveCourses(querySnapshot.docs[0], courseId, true);
-
-        } else if(querySnapshot.docs.length == 2){
-          renderAllActiveCourses(querySnapshot.docs[0], querySnapshot.docs[0].id, false);
-          renderAllActiveCourses(querySnapshot.docs[1], querySnapshot.docs[1].id, false);
-          // Use any snapshot so it dont break.
-          renderAllActiveCourses(querySnapshot.docs[0], courseId, true);
-        }
-        else{
-          querySnapshot.forEach((doc) => {
-					courseId = doc.id;
-
-          renderAllActiveCourses(doc, courseId, false);
-
-          });
-        }
-				
-
-			}).catch((error) => {
-				console.log("Error getting documents: ", error);
-			});
-
+    // Invoice Load More Button - Init
+    const invoiceLoadmore = document.querySelector('#btnInvoiceLoadMore');
+    invoiceLoadmore.style.visibility='hidden';
+    const invoiceLoadmoreHandleClick = () =>{
+      loadAllInvoice();
     }
-  
-    function renderAllActiveCourses(doc, courseId, renderNull){
-    // <div class="col-md-4">
-    //   <div class="card-course card-1 data-toggle="modal" data-target="#editCourseModal" data-category="SPM" data-subject="Bahasa Malaysia" data-course-id="sadadsadas">
-    //     <h3>SPM Bahasa Malaysia <span class="card-course-online-label">ONLINE</span></h3>
-    //     <a class="card-course-item-wrapper">			
-    //       <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >paid</i> Fee:  <span id="main_fees_sentence"></span></p>
-    //     </a>
-    //     <a class="card-course-item-wrapper">			
-    //       <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >schedule</i> Duration: <span id="main_duration"></span> </p>
-    //     </a>
-    //     <a class="card-course-item-wrapper">			
-    //       <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >date_range</i> Class per week: <span id="main_classPerWeek"></span></p>
-    //     </a>
-    //     <a class="card-course-item-wrapper">			
-    //       <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >description</i> Description</p>
-    //     </a>
-    //     <p>A curated set of ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
+    invoiceLoadmore.addEventListener('click', invoiceLoadmoreHandleClick );
+    
+    // Tutor Specific
+    function loadAllInvoice(){
+      let today = new Date(2100, 12, 31);// Set a big date
+
+      let docRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Transaction")
+          .where(TRANS_VIEWER_ARR, "array-contains", tutorId)
+          .where(TRANS_STATUS, "==", true)
+          .orderBy(TRANS_DATE, 'desc')
+          .startAfter(latestInvoiceDoc || today)
+          .limit(20);
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0) && latestInvoiceDoc == null){
+          document.getElementById("noDataPlaceholder").style.display = 'initial';
+        }
+
+        // Session Storage data
+        let docsObj = [];
+
+        querySnapshot.forEach((doc) => {
+
+          docsObj.push(doc.data());
+          // courseId = doc.id;
+          console.log(doc.data())
+          renderAllInvoice(doc);
+
+        });
+
+        // Hide loading modal
+        $('#loadingModal').modal('hide');
+
+        // Store all docs data to sessionStorage
+        sessionStorage.setItem(SESSION_STORAGE_TRANSACTION_ALL_DOCS_KEY, JSON.stringify(docsObj));
+        sessionStorage.setItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY, null);
+ 
+        latestInvoiceDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+        console.log(querySnapshot.docs.length)
+        // Handle Lesson Load more btn
+        if (querySnapshot.empty){
+          invoiceLoadmore.removeEventListener('click', invoiceLoadmoreHandleClick );
+        }
+        if (querySnapshot.docs.length == 20){
+          invoiceLoadmore.style.visibility='visible';
+        }else{
+          invoiceLoadmore.style.visibility='hidden';
+        }
+
+      });
+
+    };
+
+    function renderAllInvoice(doc){
+    // <div class="col-md-12 card-student-item">
+    //   <div class="row">
+    //     <div class="col-md-11" style="padding: 0;">
+    //       <div class="row" style="margin: 0;">
+    //         <div class="col-md-2">
+    //           <p>12/2/2021</p>
+    //         </div>
+    //         <div class="col-md-2">
+    //           <p>INV-0293874728</p>
+    //         </div>
+    //         <div class="col-md-3">
+    //           <p></p>
+    //         </div>
+    //         <div class="col-md-2">
+    //           <p>Nur Aisha</p>
+    //         </div>
+    //         <div class="col-md-2">
+    //           <p>RM298321</p>
+    //         </div>
+    //         <div class="col-md-1">
+    //           <p class="card-student-status-label active">ACTIVE</p>
+    //         </div>
+    //       </div>
+    //     </div>
+    //     <div class="col-md-1">
+    //       <a href="#" style="margin: 0; padding: 0.3em;" class="btn btn-sm btn-outline-danger btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" ><i class="material-icons" style="color: red;">remove</i></a>
+    //     </div>
     //   </div>
     // </div>
 
-      // Reference: https://codepen.io/Corsurath/pen/abbxNpj
-      // subject
-      let blogsHtml_subject = '';
-      if (doc.data().online){
-        blogsHtml_subject += doc.data().category+"  "+doc.data().subject+"<span class='card-course-online-label'>ONLINE</span>";
-      }else{
-        blogsHtml_subject += doc.data().category+"  "+doc.data().subject;
-      }
-      let subject_h3 = document.createElement('h3');
-      subject_h3.innerHTML = blogsHtml_subject;
-      
-      // fee
-      let blogsHtml_fee = '';
-      if (doc.data().feesType == "Per Hour"){
-        blogsHtml_fee += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >paid</i> Fee:  RM <span id='main_fees_sentence'>"+doc.data().fees+"</span> /hour";
-      }else{
-        blogsHtml_fee += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >paid</i> Fee:  RM <span id='main_fees_sentence'>"+ doc.data().fees +"</span>/month";
-      }
-      let fee_p = document.createElement('p');
-      fee_p.className = "card-course-item";
-      fee_p.innerHTML = blogsHtml_fee;
-      let fee_a = document.createElement('a');
-      fee_a.className = "card-course-item-wrapper"
-      fee_a.appendChild(fee_p);
+      // Trans Date
+      let transDate_p = document.createElement('p');
+      transDate_p.textContent = doc.data()[TRANS_DATE].toDate().toLocaleDateString("en-GB");;
+      let transDate_div = document.createElement('div');
+      transDate_div.className = "col-md-2";
+      transDate_div.appendChild(transDate_p);
 
-      // duration
-      let blogsHtml_duration = '';
-      if (blogsHtml_duration > 1){
-        blogsHtml_duration += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >schedule</i> Duration: <span id='main_fees_sentence'>"+doc.data().duration+"</span> hours / lesson";
-      }else{
-        blogsHtml_duration += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >schedule</i> Duration: <span id='main_fees_sentence'>"+doc.data().duration+"</span> hour / lesson";
-      }
-      let duration_p = document.createElement('p');
-      duration_p.className = "card-course-item";
-      duration_p.innerHTML = blogsHtml_duration;
-      let duration_a = document.createElement('a');
-      duration_a.className = "card-course-item-wrapper"
-      duration_a.appendChild(duration_p);
-
-      // Class / week
-      let blogsHtml_classPerWeek = '';
-      if (doc.data().classPerWeek > 1)
-        blogsHtml_classPerWeek += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >date_range</i> Class per week: <span id='main_fees_sentence'>"+doc.data().classPerWeek+"</span> classes";
-      else
-        blogsHtml_classPerWeek += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >date_range</i> Class per week: <span id='main_fees_sentence'>"+doc.data().classPerWeek+"</span> class";
-
-      let classPerWeek_p = document.createElement('p');
-      classPerWeek_p.className = "card-course-item";
-      classPerWeek_p.innerHTML = blogsHtml_classPerWeek;
-      let classPerWeek_a = document.createElement('a');
-      classPerWeek_a.className = "card-course-item-wrapper"
-      classPerWeek_a.appendChild(classPerWeek_p);
+      // Doc Number
+      let docNum_p = document.createElement('p');
+      docNum_p.textContent = doc.data()[TRANS_DOC_NUM];
+      let docNum_div = document.createElement('div');
+      docNum_div.className = "col-md-2";
+      docNum_div.appendChild(docNum_p);
 
       // Description
-      let blogsHtml_description = '';
-      blogsHtml_description += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >description</i> Description";
-      let description_p = document.createElement('p');
-      description_p.className = "card-course-item";
-      description_p.innerHTML = blogsHtml_description;
-      let description_a = document.createElement('a');
-      description_a.className = "card-course-item-wrapper"
-      description_a.appendChild(description_p);
-      
-      let description_content_p = document.createElement('p');
-      if (doc.data().subjectDescription == null || doc.data().subjectDescription == ""){
-        description_content_p.textContent = "No description.";
+      let desc_p = document.createElement('p');
+      desc_p.textContent = doc.data()[TRANS_TITLE];
+      let desc_div = document.createElement('div');
+      desc_div.className = "col-md-3";
+      desc_div.appendChild(desc_p);
 
+      // Client
+      let clientName = '';
+      if (tutorId === doc.data()[TRANS_SENDER_ID]){
+        clientName = doc.data()[TRANS_RECEIVER_NAME];
       }else{
-        description_content_p.textContent = doc.data().subjectDescription;
+        clientName = doc.data()[TRANS_SENDER_NAME];
       }
+      let clientName_p = document.createElement('p');
+      clientName_p.textContent = clientName;
+      let clientName_div = document.createElement('div');
+      clientName_div.className = "col-md-2";
+      clientName_div.appendChild(clientName_p);
+
+      // Amount
+      let total_p = document.createElement('p');
+      total_p.textContent = doc.data()[TRANS_TOTAL];
+      let total_div = document.createElement('div');
+      total_div.className = "col-md-2";
+      total_div.appendChild(total_p);
+
+
+      // Status
+      let status_p = document.createElement('p');
+      if (doc.data()[TRANS_TYPE] === TRANS_TYPE_INV){
+        if(doc.data()[TRANS_DOC_STATUS] === TRANS_INV_STATUS_DRAFT){
+          status_p.className = "card-student-status-label passive";
+          status_p.textContent = 'DRAFT';
+        }else if(doc.data()[TRANS_DOC_STATUS] === TRANS_INV_STATUS_NEW){
+          status_p.className = "card-student-status-label pending";
+          status_p.textContent = 'NEW';
+        }else if(doc.data()[TRANS_DOC_STATUS] === TRANS_INV_STATUS_PAID){
+          status_p.className = "card-student-status-label active";
+          status_p.textContent = 'PAID';
+        }else{
+          status_p.className = "card-student-status-label passive";
+          status_p.textContent = 'Unknown';
+        }
+      }
+      else if(doc.data()[TRANS_TYPE] === TRANS_TYPE_PAY){
+        status_p.className = "card-student-status-label passive";
+        status_p.textContent = 'Payslip';
+      }
+      else{
+        status_p.className = "card-student-status-label passive";
+        status_p.textContent = 'Unknown';
+      }
+      let status_div = document.createElement('div');
+      status_div.className = "col-md-1";
+      status_div.appendChild(status_p);
+
+
+      // Student Detail 
+      let detail_div = document.createElement('div');
+      detail_div.className = 'row';
+      detail_div.setAttribute("style","margin: 0;");
+      detail_div.appendChild(transDate_div);
+      detail_div.appendChild(docNum_div);
+      detail_div.appendChild(desc_div);
+      detail_div.appendChild(clientName_div);
+      detail_div.appendChild(total_div);
+      detail_div.appendChild(status_div);
+      let detail_top_div = document.createElement('div');
+      detail_top_div.className = "col-md-11";
+      detail_top_div.setAttribute("style","padding: 0;");
+      detail_top_div.setAttribute("onclick","viewInvFunction(this)");
+      detail_top_div.setAttribute("data-id", doc.data()[TRANS_ID]);
+      detail_top_div.appendChild(detail_div);
+
+      //Edit btn
+      let blogsHtml_editbtn = '';
+      blogsHtml_editbtn += "<i class='fas fa-receipt fa-lg fa-fw '></i>";
+      let btn_edit = document.createElement('a');
+      btn_edit.innerHTML = blogsHtml_editbtn;
+      btn_edit.className = "btn btn-sm btn-outline-primary btn-round";
+      btn_edit.setAttribute("id","btnDelStudent");
+      btn_edit.setAttribute("href","javascript:;");
+      btn_edit.setAttribute("style","margin: 0; padding: 0.4em;");
+      btn_edit.setAttribute("data-toggle","modal");
+      btn_edit.setAttribute("data-target","#recordPaymentModal");
+      btn_edit.setAttribute("data-id", doc.data()[TRANS_ID]);
+      btn_edit.setAttribute("data-docid", doc.data()[TRANS_DOC_ID]);
+
+      //Del btn
+      let blogsHtml_btn = '';
+      blogsHtml_btn += "<i class='material-icons' style='color: red;''>remove</i>";
+      let btn_a = document.createElement('a');
+      btn_a.innerHTML = blogsHtml_btn;
+      btn_a.className = "btn btn-sm btn-outline-danger btn-round";
+      btn_a.setAttribute("id","btnDelStudent");
+      btn_a.setAttribute("href","javascript:;");
+      btn_a.setAttribute("style","margin: 0; padding: 0.3em;");
+      btn_a.setAttribute("data-toggle","modal");
+      btn_a.setAttribute("data-target","#delStuModal");
+      // btn_a.setAttribute("data-id", doc.data().id);
+      // btn_a.setAttribute("data-studentname",  doc.data().childName);
+      let btn_div = document.createElement('div');
+      btn_div.className = "col-md-1";
+      // btn_div.appendChild(btn_edit);
+      // btn_div.appendChild(btn_a);
+ 
+      // Student Top
+      let card_div = document.createElement('div');
+      card_div.className = "row"
+      card_div.appendChild(detail_top_div);
+      card_div.appendChild(btn_div);
 
       // Card top
-      let card_div = document.createElement('div');
-      if (doc.data().categoryId == "recep" || doc.data().categoryId == "camPri" ||
-      doc.data().categoryId == "camLowerSec" || doc.data().categoryId == "igcse" ||
-      doc.data().categoryId == "alevel"){
-        card_div.className = "card-course card-cambridge";
-      }else if(doc.data().categoryId == "ibEyp" || doc.data().categoryId == "ibPyp" ||
-      doc.data().categoryId == "ibMyp" || doc.data().categoryId == "ibDiploma"){
-        card_div.className = "card-course card-ib";
-      }else if(doc.data().categoryId == "kindergarten" || doc.data().categoryId == "upsr" ||
-      doc.data().categoryId == "pt3" || doc.data().categoryId == "spm" || 
-      doc.data().categoryId == "stpm"){
-        card_div.className = "card-course card-kpm";
-      }else if(doc.data().categoryId == "uecJun" || doc.data().categoryId == "uecSen"){
-        card_div.className = "card-course card-uec";
-      }else if(doc.data().categoryId == "engExam" || doc.data().categoryId == "adultLanguage"){
-        card_div.className = "card-course card-language-and-english-exam";
-      }else if(doc.data().categoryId == "music"){
-        card_div.className = "card-course card-music";
-      }else if(doc.data().categoryId == "computer"){
-        card_div.className = "card-course card-computer-programming";
-      }else{
-        card_div.className = "card-course card-language-and-english-exam";
-      }
-      
-      // card_div.setAttribute("data-toggle","modal");
-      // card_div.setAttribute("data-target","#editCourseModal");
-      card_div.setAttribute("data-category",doc.data().category);
-      card_div.setAttribute("data-category-id",doc.data().categoryId);
-      card_div.setAttribute("data-subject", doc.data().subject);
-      card_div.setAttribute("data-subject-id", doc.data().subjectId);
-      card_div.setAttribute("data-online", doc.data().online);
-      card_div.setAttribute("data-course-id",courseId);
-      card_div.setAttribute("onclick","editCourseFunction(this)");
-      card_div.appendChild(subject_h3);
-      card_div.appendChild(fee_a);
-      card_div.appendChild(duration_a);
-      card_div.appendChild(classPerWeek_a);
-      card_div.appendChild(description_a);
-      card_div.appendChild(description_content_p);
+      let card_top_div = document.createElement('div');
+      card_top_div.className = "col-md-12 card-student-item"
+      card_top_div.appendChild(card_div);
 
-
-      let card_top = document.createElement('div');
-      card_top.className = "col-md-4 col-lg-4 col-sm-4";
-
-      // If the course size is less than 2, we need to render empty placeholder so bootstrap looks good.
-      if (renderNull){
-        // render nothing
-      }else{
-        card_top.appendChild(card_div);
-      }
-      const card_all_courses = document.getElementById("card-all-courses");
-      card_all_courses.appendChild(card_top);
+      const card_all_students = document.getElementById("card-main");
+      card_all_students.appendChild(card_top_div);
 
     }
+
     
+	  function viewInvFunction(elem){
+
+      // show loading modal
+      $('#loadingModal').modal('show');
+
+      // Get attribute and 
+      if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TRANSACTION_ALL_DOCS_KEY)) == null ){
+        console.log("Error: Impossible to reach this state");
+        // Because this func only trigger when there's active class loaded
+        return;
+      }else{
+
+        let Obj = null;
+        let allObjList = null;
+
+        // Set the fields
+        allObjList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TRANSACTION_ALL_DOCS_KEY));
+        allObjList.forEach((item) => {
+          if (item[TRANS_ID] === elem.getAttribute('data-id')){
+            sessionStorage.setItem(SESSION_STORAGE_TRANSACTION_CURRENT_DOC_KEY, JSON.stringify(item));
+            // console.log('Go To view-invoice:')
+            // console.log(JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TRANSACTION_CURRENT_DOC_KEY)))
+          
+            // Check if invoice or payslip is clicked
+            if (item[TRANS_TYPE] === TRANS_TYPE_INV){
+              getInvoice(item[TRANS_DOC_ID]);
+            }
+            else{
+              // TODO: payslip 
+              console.log('Payslip is click. Nothing happen.')
+            }
+          }
+
+        });
+        
+      }
+		}
+
+
+    function getInvoice(invoiceId){
+      let docRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Invoice")
+          .doc(invoiceId);
+
+      docRef
+      .get()
+      .then((doc) => {
+        // Hide loading modal
+        $('#loadingModal').modal('hide');
+
+        if (doc.exists) {
+          // console.log('invoice data')
+          // console.log(doc.data())
+          sessionStorage.setItem(SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY, JSON.stringify(doc.data()));
+
+          // Redirect to view-invoice.html
+          window.location = './view.html';
+
+        } 
+        else {
+          console.log("No such document!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
+    }
+
+
     // Sign out
     function signOutFunction(){
       $('#signOutModal').modal('show');
       $("#signOutModal").appendTo("body");
     }
+  
   </script>
 
   <script>
 		$( document ).ready(function() {
 
-			// Sign-out
-			// $("#btn-logout").click(function(){
-      //   $('#signOutModal').modal('show');
-			// });
+      // Class Announcement
+      // KEY, DATETIME, ID, JOB_STATUS and JOB_EXPLANATION var is global var used to simplify modal fire and hide.
+      var KEY = ""; // Extract info from data-* attributes
+      var DATETIME = ""; // Extract info from data-* attributes
+      var ID = ""; // Extract info from data-* attributes
+      var ANNOUNCEMENT = ""; // Extract info from data-* attributes
+
+      // Active Register Class Modal
+      $('#loadingModal').modal({
+        backdrop:'static',
+        keyboard:false
+      });
+      $('#loadingModal').modal('show');
+
+
+      // Update Class Annoucement
+      $('#btnEditClassModalUpdate').on('click', function (e) {
+        var docData = {
+          [CLASS_ANNOUNCEMENT]: document.getElementById("modalClassAnnouncement").value,
+        }
+        // Set data
+        db.collection("Class")        
+          .doc("v1")
+          .collection("Class")
+          .doc(ID)
+          .set(docData, {merge: true})
+          .then(() => {
+            window.location = './class.html';
+          })
+          .catch((error) => {
+              console.error("Error writing document: ", error);
+          });;
+
+			  $('#editClassModal').modal('hide');
+		  });
+
+      $('#editClassModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button/Components that triggered the modal
+        ID = button.data('id') // Extract info from data-* attributes
+        ANNOUNCEMENT = button.data('announcement') // Extract info from data-* attributes
+        // Load Desription 
+        document.getElementById("modalClassAnnouncement").textContent = ANNOUNCEMENT;
+
+      });
+      
+      // Clear key and fields in modal when modal dismiss
+      $('#editClassModal').on('hide.bs.modal', function (event) {
+        ID = "";
+        ANNOUNCEMENT = "";
+        document.getElementById("modalClassAnnouncement").textContent = "";
+      });
+
+
       $('#btnSignOutModalUpdate').on('click', function (e) {
       
         firebase.auth().signOut().then(() => {
@@ -1048,52 +1117,25 @@
       });
 
 			// Add New Course
-			$("#btnAddCourse").click(function(){
+			$("#btnAddClass").click(function(){
+        window.location = "./add-class.html"
 
-        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-          func.showNotification('top','center', 'danger', 'error_outline', "Activate your account to add new courses." );
-        }else if  (allCourseSize >= current_aTotalSubjectLimit){
-          func.showNotification('top','center', 'danger', 'error_outline', "You have reach maximum ("+current_aTotalSubjectLimit+") subjects. Upgrade to Pro now!" );
-        }else if (current_preferedAreaList == null || current_preferedAreaList.length == 0){
-          func.showNotification('top','center', 'danger', 'error_outline', "Please fill in Update Information > Preferred Area");
-
-        }
-        else{
-          window.location = "./add-course.html"
-        }
+        // if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+        //   func.showNotification('top','center', 'danger', 'error_outline', "Activate your account to add new courses." );
+        // }else if  (allCourseSize >= current_aTotalSubjectLimit){
+        //   func.showNotification('top','center', 'danger', 'error_outline', "You have reach maximum ("+current_aTotalSubjectLimit+") subjects. Upgrade to Pro now!" );
+        // }else if (current_preferedAreaList == null || current_preferedAreaList.length == 0){
+        //   func.showNotification('top','center', 'danger', 'error_outline', "Please fill in Update Information > Preferred Area");
+        // }
+        // else{
+        //   window.location = "./add-class.html"
+        // }
 			});
     
 		});
 
   </script>
-  
-  <script>
-	  function editCourseFunction(elem){
-      console.log(elem.id);
-
-      // Get attribute
-      console.log(elem.getAttribute('data-category-id'));
-      console.log(elem.getAttribute('data-subject-id'));
-      console.log(elem.getAttribute('data-course-id'));
-
-      // Store data to sessionStorage
-      var courseDataObj = {
-        [CATEGORY_KEY] : elem.getAttribute('data-category'),
-        [CATEGORY_ID_KEY] : elem.getAttribute('data-category-id'),
-        [SUBJECT_KEY] : elem.getAttribute('data-subject'),
-        [SUBJECT_ID_KEY] : elem.getAttribute('data-subject-id'),
-        [ONLINE_KEY] : elem.getAttribute('data-online'),
-        [COURSE_ID_KEY] : elem.getAttribute('data-course-id')
-      }
-
-      // Set courseDataObj as sessionStorage
-      sessionStorage.setItem("courseDataObj", JSON.stringify(courseDataObj));
-
-      window.location = './edit-course.html';
-		}
-
-  </script>
-  
+ 
 </body>
 
 </html>

@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
   <!-- Material Kit CSS -->
-  <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <link href="../../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <link href="../css/tutor-portal.css" rel="stylesheet" />
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
@@ -24,36 +24,6 @@
 <!-- ClockPicker Stylesheet -->
 <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap-clockpicker.min.css">
 
-
-<style>
-  .tooltiptext-general {
-    /* This is for the tooltip text */
-    visibility: hidden;
-    width: 300px;
-    /* background-color: #adadad; */
-    /* color: #adadad; */
-    background-color: white;
-    text-align: left;
-    font-size: smaller;
-    padding: 5px;
-    border-radius: 5px; /* This defines tooltip text position */
-    position: absolute;
-    z-index: 1;
-    bottom: 100%;
-    left: 50%;
-    /* This makes the margin half of the width to the center */
-    margin-left: -50px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    border: thin solid #2e74b6 ;
-    ;
-  }
-
-  .tooltiptext-trigger:hover .tooltiptext-general {
-    /* Makes tooltip text visible when text is hovered on */
-    visibility: visible;
-  }
-
-</style>
 </head>
 
 <body>
@@ -75,29 +45,74 @@
         </a>
       </div>
       <div class="sidebar-wrapper">
-        <ul class="nav">
+        <ul class="nav" style="margin-bottom: 50px;">
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Teaching</h4>
+          </li>
           <li class="nav-item active">
             <a class="nav-link" href="./">
-              <i class="material-icons">home</i>
-              <p>Class</p>
+              <i class="fas fa-chalkboard fa-fw nav-icon"></i>
+              <p>Classes</p>
             </a>
           </li>
-          <li class="nav-item">
+		  		<li class="nav-item">
             <a class="nav-link" href="../student/">
-              <i class="material-icons">work_outline</i>
+              <i class="fas fa-user-graduate fa-fw nav-icon"></i>
               <p>Students</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="../teacher/">
-              <i class="material-icons">format_list_bulleted</i>
+              <i class="fas fa-chalkboard-teacher fa-fw nav-icon"></i>
               <p>Teachers</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../financial/">
-              <i class="material-icons">attach_money</i>
-              <p>Financial</p>
+            <h4 class="nav-link" style="margin-left: 1rem;">Financial</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../transaction/">
+              <i class="fas fa-wallet fa-fw nav-icon"></i>
+              <p>Transactions</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../invoice/">
+              <i class="fas fa-file-invoice-dollar fa-fw nav-icon"></i>
+              <p>Invoices</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../payroll/">
+              <i class="fas fa-hand-holding-usd fa-fw nav-icon"></i>
+              <p>Payroll <span style="visibility: hidden;">PRO</span></p>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="../transaction/settings.html">
+              <i class="fab fa-expeditedssl fa-fw nav-icon"></i>
+              <p>Settings</p>
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Public</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../course.html">
+              <i class="fas fa-book-open fa-fw nav-icon"></i>
+              <p>My Public Courses</p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="../job.html">
+              <i class="fas fa-briefcase fa-fw nav-icon"></i>
+              <p>Tuition Jobs</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="../update.html">
+              <i class="fas fa-user-cog fa-fw nav-icon"></i>
+              <p>Update Information</p>
             </a>
           </li>
         </ul>
@@ -465,10 +480,10 @@
 
                               <div class="form-group" style="margin-top: 2rem;">
                                 <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Link</span>
-                                <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: small; cursor: pointer;">? 
-                                  <span class="tooltiptext-general" style="left: 10%;">
-                                    <h6 style="margin: 0; color: #2e74b6;">Class Link</h6>
-                                    <p style="margin: 0; color: grey; line-height: 1.6;">Link to the platform where this class will be conducted. I.e Google Meet, Zoom or other platforms.</p>
+                                <span class="tooltiptext-trigger">? 
+                                  <span class="tooltiptext-general">
+                                    <h6>Class Link</h6>
+                                    <p>Link to the platform where this class will be conducted. I.e Google Meet, Zoom or other platforms.</p>
                                   </span> 
                                 </span>
                                 <input type="text" class="form-control" id="inUrlClass" data-compulsory="false" oninput="this.className = 'form-control'">
@@ -476,10 +491,10 @@
 
                               <div class="form-group" style="margin-top: 2rem;">
                                 <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Chat Group Link</span> 
-                                <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: small; cursor: pointer;">? 
-                                  <span class="tooltiptext-general" style="left: 10%;">
-                                    <h6 style="margin: 0; color: #2e74b6;">Chat Group Link</h6>
-                                    <p style="margin: 0; color: grey; line-height: 1.6;">Link to this class chat group. I.e Whatsapp, Telegram, Facebook group or other groups.</p>
+                                <span class="tooltiptext-trigger">? 
+                                  <span class="tooltiptext-general">
+                                    <h6>Chat Group Link</h6>
+                                    <p>Link to this class chat group. I.e Whatsapp, Telegram, Facebook group or other groups.</p>
                                   </span> 
                                 </span>
                                 <input type="text" class="form-control" id="inUrlGroup" data-compulsory="false" oninput="this.className = 'form-control'" >
@@ -487,10 +502,10 @@
 
                               <div class="form-group" style="margin-top: 2rem;">
                                 <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Lesson Material Link </span>
-                                <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: small; cursor: pointer;">? 
-                                  <span class="tooltiptext-general" style="left: 10%;">
-                                    <h6 style="margin: 0; color: #2e74b6;">Lesson Material Link</h6>
-                                    <p style="margin: 0; color: grey; line-height: 1.6;">Link to material that will be used for the class. I.e Google Classroom, Drive, or other storage places.</p>
+                                <span class="tooltiptext-trigger">? 
+                                  <span class="tooltiptext-general">
+                                    <h6>Lesson Material Link</h6>
+                                    <p>Link to material that will be used for the class. I.e Google Classroom, Drive, or other storage places.</p>
                                   </span> 
                                 </span>
                                 <input type="text" class="form-control" id="inUrlMaterial" data-compulsory="false" oninput="this.className = 'form-control'">
@@ -709,10 +724,10 @@
                             <div class="row">
                               <div class="col-sm-12 text-left">
                                 <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-top: 1.0rem;">Class Type</span> 
-                                <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: small; cursor: pointer;">? 
-                                  <span class="tooltiptext-general" style="left: 10%;">
-                                    <h6 style="margin: 0; color: #2e74b6;">Class Type</h6>
-                                    <p style="margin: 0; color: grey;">Set to <strong style="color: #2e74b6;">Public</strong> to be discovered by other. </p>
+                                <span class="tooltiptext-trigger">? 
+                                  <span class="tooltiptext-general">
+                                    <h6>Class Type</h6>
+                                    <p>Set to <strong style="color: #2e74b6;">Public</strong> to be discovered by other. </p>
                                   </span> 
                                 </span>
                               </div>
@@ -869,10 +884,10 @@
                             <div class="row">
                               <div class="col-sm-12 text-left">
                                 <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Class Status</span> 
-                                <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: small; cursor: pointer;">? 
-                                  <span class="tooltiptext-general" style="left: 10%;">
-                                    <h6 style="margin: 0; color: #2e74b6;">Class Status</h6>
-                                    <p style="margin: 0; color: grey; line-height: 1.6;">Set to <strong style="color: #2e74b6;">Inactive</strong> to pause the class new intake, hide from the public, and disallow edits to the class.</p>
+                                <span class="tooltiptext-trigger">? 
+                                  <span class="tooltiptext-general">
+                                    <h6>Class Status</h6>
+                                    <p>Set to <strong style="color: #2e74b6;">Inactive</strong> to pause the class new intake, hide from the public, and disallow edits to the class.</p>
                                   </span> 
                                 </span>
                               </div>
@@ -1128,7 +1143,7 @@
       
 			if(!user){
         // Return to login if user does not exist.
-				window.location.href = "./login.html"
+				window.location.href = "../login.html"
 			}else{
         // if the displayName is null, it means user register using Phone
         if (firebase.auth().currentUser.displayName == null ){
@@ -1464,7 +1479,7 @@
           .doc("v1")
           .collection("Tutor")
           .where(TUTOR_ADMIN_ID, "==", tutorId)
-          .where(TUTOR_STATUS_ADMIN, "==", true)
+          .where(TUTOR_STATUS_ADMIN, "==", TUTOR_STATUS_TYPE_ACTIVE)
           .orderBy(TUTOR_TUTOR_NAME, 'asc')
           .startAfter(latestAdminTutorDoc)
           .limit(10);
