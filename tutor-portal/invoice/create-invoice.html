@@ -650,7 +650,7 @@
 
                           <div class="form-group">
                             
-                            <div style="height: 150px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
+                            <div style="height: 115px; width: 100%; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
                               <img id="tutorImgUrl" style="height: 100%; width: auto;" src="../../assets/img/empty-photo.png"/>
                             </div>
                             <input type="file" id="select_image" name="image" style="display:none" accept="image/x-png,image/jpeg"> </input>
@@ -836,146 +836,151 @@
             </div>
           </div>
           <!-- Preview -->
-          <page size="A4" id="invTemplate" style="position: relative;">
+          <div class="row">
+            <div class="col-md-12" style="overflow-x:auto; padding: 1rem;" >
+              <page size="A4" id="invTemplate" style="position: relative;">
 
-            <div class="card-body" >
-              <div class="row">
-                <div class="col-4 text-center">
-
-                  <div class="form-group">
-                    <!-- <canvas id="myCanvas" style="height: 150px;width: 225px; object-fit: cover;" ></canvas> -->
-                    <div style="height: 115px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
-                      <img id="previewTutorImgUrl" style="height: 100%; width: auto; " src="../../assets/img/empty-photo.png" crossorigin="anonymous" alt = ""/>
-                      <!-- <canvas id="myCanvas" ></canvas> -->
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-2">
-                  <!--  Do nothing -->
-                </div>
-
-                <div class="col-6 text-right">
-                  <h4 style="font-size: xx-large;margin-top: 1rem;">INVOICE</h4> 
-                  <h5 id="previewInvTitle"  style="font-weight: 500;"></h5>
-                  <h4 id="previewInvBizName" style="font-weight: 500;">Your Name</h4>
-                  <h6 id="previewInvBizDetails" style="text-transform: none; font-weight: 300;"></p>
-                </div>
-
-              </div>
-            
-            </div>
-
-            <hr style="margin: 0rem">
-            <!-- style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;" -->
-            <div class="card-body" style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;"> 
-              <div class="row">
-                <div class="col-4">
-                  <h6>Billed To:</h6>
-                  <h4 id="previewInvClientName" style="font-weight: 500;"></h4>
-                  <h6 id="previewInvClientDetails"  style="text-transform: none; font-weight: 300;"></h6>
-                </div>
-
-                <div class="col-3"></div>
-                <div class="col-5">
+                <div class="card-body" >
                   <div class="row">
-                    <div class="col-6 text-right" style="padding-right: 0;">
-                      <h6>Invoice Number</h6>
-                      <h6>Invoice Date</h6>
-                      <h6 style="color: red;">Payment Due</h6>
-                      <h6>Status</h6>
-                      
-                      <!-- <p style="margin: 0.3rem; font-weight: bold;">Invoice Number</p>                            
-                      <p style="margin: 0.3rem; font-weight: bold;">Invoice Date</p>                           
-                      <p style="margin: 0.3rem; font-weight: bold;">Payment Due</p>                            
-                      <p style="margin: 0.3rem; font-weight: bold;">Status</p> -->
+                    <div class="col-4 text-center">
+    
+                      <div class="form-group">
+                        <!-- <canvas id="myCanvas" style="height: 150px;width: 225px; object-fit: cover;" ></canvas> -->
+                        <div style="height: 115px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
+                          <img id="previewTutorImgUrl" style="height: 100%; width: auto; " src="../../assets/img/empty-photo.png" crossorigin="anonymous" alt = ""/>
+                          <!-- <canvas id="myCanvas" ></canvas> -->
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-6 text-left">
-                      <h6 id="previewInvNum" style="font-weight: normal;"> - </h6>
-                      <h6 id="previewInvIssueDate"> - </h6>
-                      <h6 id="previewInvPaymentDue" style="color: red;"> - </h6>
-                      <h6 id="previewInvStatus"> New </h6>
-                      <!-- <p style="margin: 0.3rem;">0100010101</p>  
-                      <p style="margin: 0.3rem;">Status</p>  
-                      <p style="margin: 0.3rem;">Status</p>  
-                      <p style="margin: 0.3rem;">Status</p>   -->
-                     </div>
+    
+                    <div class="col-2">
+                      <!--  Do nothing -->
+                    </div>
+    
+                    <div class="col-6 text-right">
+                      <h4 style="font-size: xx-large;margin-top: 1rem;">INVOICE</h4> 
+                      <h5 id="previewInvTitle"  style="font-weight: 500;"></h5>
+                      <h4 id="previewInvBizName" style="font-weight: 500;">Your Name</h4>
+                      <h6 id="previewInvBizDetails" style="text-transform: none; font-weight: 300;"></p>
+                    </div>
+    
+                  </div>
+                
+                </div>
+    
+                <hr style="margin: 0rem">
+                <!-- style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;" -->
+                <div class="card-body" style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;"> 
+                  <div class="row">
+                    <div class="col-4">
+                      <h6>Billed To:</h6>
+                      <h4 id="previewInvClientName" style="font-weight: 500;"></h4>
+                      <h6 id="previewInvClientDetails"  style="text-transform: none; font-weight: 300;"></h6>
+                    </div>
+    
+                    <div class="col-3"></div>
+                    <div class="col-5">
+                      <div class="row">
+                        <div class="col-6 text-right" style="padding-right: 0;">
+                          <h6>Invoice Number</h6>
+                          <h6>Invoice Date</h6>
+                          <h6 style="color: red;">Payment Due</h6>
+                          <h6>Status</h6>
+                          
+                          <!-- <p style="margin: 0.3rem; font-weight: bold;">Invoice Number</p>                            
+                          <p style="margin: 0.3rem; font-weight: bold;">Invoice Date</p>                           
+                          <p style="margin: 0.3rem; font-weight: bold;">Payment Due</p>                            
+                          <p style="margin: 0.3rem; font-weight: bold;">Status</p> -->
+                        </div>
+                        <div class="col-6 text-left">
+                          <h6 id="previewInvNum" style="font-weight: normal;"> - </h6>
+                          <h6 id="previewInvIssueDate"> - </h6>
+                          <h6 id="previewInvPaymentDue" style="color: red;"> - </h6>
+                          <h6 id="previewInvStatus"> New </h6>
+                          <!-- <p style="margin: 0.3rem;">0100010101</p>  
+                          <p style="margin: 0.3rem;">Status</p>  
+                          <p style="margin: 0.3rem;">Status</p>  
+                          <p style="margin: 0.3rem;">Status</p>   -->
+                         </div>
+                      </div>
+                    </div>
+                  </div>
+    
+                  <div style="margin-top: 1rem;"></div>
+                  
+                  <div class="row">
+                    <div class="col-12"  style="overflow-x:auto;">
+                      <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
+                      <table id="tablePreview" class="table-light table-sm" cellspacing="0" width="100%" >
+                        <thead style="background-color: grey; color: white;">
+                          <tr>
+                            <th style="min-width: 200px; font-size: small;">Items</th>
+                            <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity</th>
+                            <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Price</th>
+                            <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody id="previewItemBody">
+                          <!-- <tr class="item">
+                            <td style="font-size: small;"></td>
+                            <td style="text-align: right; font-size: small;"></td>
+                            <td style="text-align: right; font-size: small;"></td>
+                            <td style="text-align: right; font-size: small;"></td>
+                          </tr> -->
+                          <tr class="subtotal" id='previewItemSubtotal'>
+                            <td></td>
+                            <td></td>
+                            <td style="text-align: right; font-weight: 500; font-size: small;">Subtotal</td>
+                            <td style="text-align: right; font-weight: 500; font-size: small;" id="previewSubtotalItem"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+    
+                      <table id="tableAdditionalItemPreview" class="table-light table-sm" cellspacing="0" width="100%">
+                        <thead style="visibility: collapse;">
+                          <tr>
+                            <th style="min-width: 200px;">Items</th>
+                            <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
+                            <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
+                            <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody id="previewAdditionalItemBody">
+                          <tr class="additional">
+                            <td></td>
+                            <td></td>
+                            <td style="text-align: right; font-size: small;"></td>
+                            <td style="text-align: right; font-size: small;"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+    
+                    <div class="col-12">
+                      <h4 style="text-align: right; font-weight: 500;">Total <span style="margin-left: 2rem;" id="previewGrandTotal">RM0.00</span></h4>
+                    </div>
+    
+                    <div class="col-12">
+                      <!-- <p><strong>Solution with JS (only deals with line breaks): </strong> <textarea class="textarea resize-ta"></textarea></p> -->
+    
+                      <!-- <div class="form-group"> -->
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Notes</span>
+                        <span  id="previewInvNotes"></span>
+                        <!-- <textarea class="form-control" maxlength="250" rows='3' oninput="console.log(this.scrollHeight); this.style.height = (this.scrollHeight) + 'px';// this.setAttribute('rows', 12)" style="height: 4300px; max-height: max-content; overflow: hidden;" id="previewInvNotes" data-compulsory="false" placeholder="Enter notes that are visible to your client. (e.g payment guidelines) " ></textarea> -->
+    
+                      <!-- </div> -->
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div style="margin-top: 1rem;"></div>
-              
-              <div class="row">
-                <div class="col-12"  style="overflow-x:auto;">
-                  <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
-                  <table id="tablePreview" class="table-light table-sm" cellspacing="0" width="100%" >
-                    <thead style="background-color: grey; color: white;">
-                      <tr>
-                        <th style="min-width: 200px; font-size: small;">Items</th>
-                        <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity</th>
-                        <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Price</th>
-                        <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
-                      </tr>
-                    </thead>
-                    <tbody id="previewItemBody">
-                      <!-- <tr class="item">
-                        <td style="font-size: small;"></td>
-                        <td style="text-align: right; font-size: small;"></td>
-                        <td style="text-align: right; font-size: small;"></td>
-                        <td style="text-align: right; font-size: small;"></td>
-                      </tr> -->
-                      <tr class="subtotal" id='previewItemSubtotal'>
-                        <td></td>
-                        <td></td>
-                        <td style="text-align: right; font-weight: 500; font-size: small;">Subtotal</td>
-                        <td style="text-align: right; font-weight: 500; font-size: small;" id="previewSubtotalItem"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <table id="tableAdditionalItemPreview" class="table-light table-sm" cellspacing="0" width="100%">
-                    <thead style="visibility: collapse;">
-                      <tr>
-                        <th style="min-width: 200px;">Items</th>
-                        <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
-                        <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
-                        <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
-                      </tr>
-                    </thead>
-                    <tbody id="previewAdditionalItemBody">
-                      <tr class="additional">
-                        <td></td>
-                        <td></td>
-                        <td style="text-align: right; font-size: small;"></td>
-                        <td style="text-align: right; font-size: small;"></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                
+                <div class="card-body" id="preview-footer" style="padding-top: 0; margin-top: 0; position: absolute; bottom: 0; width: 100%;">
+                  <p id="previewInvFooterNotes" ></p>
                 </div>
-
-                <div class="col-12">
-                  <h4 style="text-align: right; font-weight: 500;">Total <span style="margin-left: 2rem;" id="previewGrandTotal">RM0.00</span></h4>
-                </div>
-
-                <div class="col-12">
-                  <!-- <p><strong>Solution with JS (only deals with line breaks): </strong> <textarea class="textarea resize-ta"></textarea></p> -->
-
-                  <!-- <div class="form-group"> -->
-                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Notes</span>
-                    <span  id="previewInvNotes"></span>
-                    <!-- <textarea class="form-control" maxlength="250" rows='3' oninput="console.log(this.scrollHeight); this.style.height = (this.scrollHeight) + 'px';// this.setAttribute('rows', 12)" style="height: 4300px; max-height: max-content; overflow: hidden;" id="previewInvNotes" data-compulsory="false" placeholder="Enter notes that are visible to your client. (e.g payment guidelines) " ></textarea> -->
-
-                  <!-- </div> -->
-                </div>
-              </div>
+    
+              </page>
             </div>
-            
-            <div class="card-body" id="preview-footer" style="padding-top: 0; margin-top: 0; position: absolute; bottom: 0; width: 100%;">
-              <p id="previewInvFooterNotes" ></p>
-            </div>
+          </div>
 
-          </page>
 
 
         </div>
@@ -2117,8 +2122,10 @@
         y = e.clientY;
 
         // Attach the listeners to `document`
-        document.addEventListener('mousemove', mouseMoveHandler);
-        document.addEventListener('mouseup', mouseUpHandler);
+        // document.addEventListener('mousemove', mouseMoveHandler);
+        // document.addEventListener('mouseup', mouseUpHandler);
+        document.addEventListener('pointermove', mouseMoveHandler);
+        document.addEventListener('pointerup', mouseUpHandler);
     };
 
     const mouseMoveHandler = function (e) {
@@ -2212,8 +2219,10 @@
         table.style.removeProperty('visibility');
 
         // Remove the handlers of `mousemove` and `mouseup`
-        document.removeEventListener('mousemove', mouseMoveHandler);
-        document.removeEventListener('mouseup', mouseUpHandler);
+        // document.removeEventListener('mousemove', mouseMoveHandler);
+        // document.removeEventListener('mouseup', mouseUpHandler);
+        document.removeEventListener('pointermove', mouseMoveHandler);
+        document.removeEventListener('pointerup', mouseUpHandler);
     };
 
     // Run first 
@@ -2233,7 +2242,9 @@
         // console.log(row.className)
         const firstCell = row.firstElementChild;
         firstCell.classList.add('draggable');
-        firstCell.addEventListener('mousedown', mouseDownHandler);
+        // firstCell.addEventListener('mousedown', mouseDownHandler);
+        firstCell.addEventListener('pointerdown', mouseDownHandler);
+
       });
     }
 
@@ -2942,11 +2953,6 @@
 
       });
 
-
-
-
-
-
     }
 
     
@@ -3342,7 +3348,9 @@
         // console.log(row.className)
         const firstCell = row.firstElementChild;
         firstCell.classList.add('draggable');
-        firstCell.addEventListener('mousedown', mouseDownHandler);
+        // firstCell.addEventListener('mousedown', mouseDownHandler);
+        firstCell.addEventListener('pointerdown', mouseDownHandler);
+
       });
       assignDraggable();
     });
