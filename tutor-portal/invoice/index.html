@@ -20,7 +20,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
   <script src="../js/firebase.js"></script>
   <!-- Tutor Portal specific CSS -->
-  <link href="../css/tutor-portal.css" rel="stylesheet" />
+  <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -285,10 +285,10 @@
           <!-- your content here -->
 
           <!-- Main content -->
-          <div class="row  d-flex" id="desciption-row" >
+          <div class="row d-flex">
             <!-- button -->
             <div class="p-2">
-              <a href="settings.html" class="btn btn-outline-primary btn-round" id="btnBack"><i class="fas fa-cog" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;"></i> Financial Settings</a>
+              <!-- <a href="settings.html" class="btn btn-outline-primary btn-round" id="btnBack"><i class="fas fa-cog" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;"></i> Financial Settings</a> -->
             </div>
 
             <div class="ml-auto p-2">
@@ -309,16 +309,16 @@
                         <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Date Issued</h6>
                       </div>
                       <div class="col-md-2">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Invoice No.</h6>
+                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Client</h6>
                       </div>
                       <div class="col-md-3">
                         <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Description</h6>
                       </div>
                       <div class="col-md-2">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Client</h6>
+                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Amount</h6>
                       </div>
                       <div class="col-md-2">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Amount</h6>
+                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Invoice No.</h6>
                       </div>
                       <div class="col-md-1">
                         <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Status</h6>
@@ -508,6 +508,12 @@
 
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
+
+    // Init session storage
+    sessionStorage.setItem(SESSION_STORAGE_TRANSACTION_ALL_DOCS_KEY, null);
+    sessionStorage.setItem(SESSION_STORAGE_TRANSACTION_CURRENT_DOC_KEY, null);
+    sessionStorage.setItem(SESSION_STORAGE_INVOICE_ALL_DOCS_KEY, null);
+    sessionStorage.setItem(SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY, null);
 
     // Set the nav name and global var, if user already login and have session Storage 
     var tutorInfoObj = null;
@@ -745,6 +751,7 @@
           .doc("v1")
           .collection("Transaction")
           .where(TRANS_VIEWER_ARR, "array-contains", tutorId)
+          .where(TRANS_TYPE, "==", TRANS_TYPE_INV)
           .where(TRANS_STATUS, "==", true)
           .orderBy(TRANS_DATE, 'desc')
           .startAfter(latestInvoiceDoc || today)
@@ -771,12 +778,24 @@
         });
 
         // Hide loading modal
-        $('#loadingModal').modal('hide');
+        // $('#loadingModal').modal('hide');
 
-        // Store all docs data to sessionStorage
-        sessionStorage.setItem(SESSION_STORAGE_TRANSACTION_ALL_DOCS_KEY, JSON.stringify(docsObj));
-        sessionStorage.setItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY, null);
- 
+        // Store all docs data to sessionStorage. If loadmore is clicked, we concat the newly loaded and previous docs.
+        let allObjList = null;
+        // Set the fields
+        allObjList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TRANSACTION_ALL_DOCS_KEY));
+        if (allObjList == null ){
+          // console.log("First time loading the data");
+          sessionStorage.setItem(SESSION_STORAGE_TRANSACTION_ALL_DOCS_KEY, JSON.stringify(docsObj));
+          sessionStorage.setItem(SESSION_STORAGE_TRANSACTION_CURRENT_DOC_KEY, null);
+        }
+        else{
+          // console.log("Nth time loading the data");
+          allObjList = allObjList.concat(docsObj);
+          sessionStorage.setItem(SESSION_STORAGE_TRANSACTION_ALL_DOCS_KEY, JSON.stringify(allObjList));
+          sessionStorage.setItem(SESSION_STORAGE_TRANSACTION_CURRENT_DOC_KEY, null);
+        }
+        
         latestInvoiceDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
         console.log(querySnapshot.docs.length)
         // Handle Lesson Load more btn
@@ -860,7 +879,7 @@
 
       // Amount
       let total_p = document.createElement('p');
-      total_p.textContent = doc.data()[TRANS_TOTAL];
+      total_p.textContent = 'RM'+ parseFloat(doc.data()[TRANS_TOTAL]).toFixed(2);
       let total_div = document.createElement('div');
       total_div.className = "col-md-2";
       total_div.appendChild(total_p);
@@ -871,13 +890,13 @@
       if (doc.data()[TRANS_TYPE] === TRANS_TYPE_INV){
         if(doc.data()[TRANS_DOC_STATUS] === TRANS_INV_STATUS_DRAFT){
           status_p.className = "card-student-status-label passive";
-          status_p.textContent = 'DRAFT';
+          status_p.textContent = 'Draft';
         }else if(doc.data()[TRANS_DOC_STATUS] === TRANS_INV_STATUS_NEW){
           status_p.className = "card-student-status-label pending";
-          status_p.textContent = 'NEW';
+          status_p.textContent = 'Unpaid';
         }else if(doc.data()[TRANS_DOC_STATUS] === TRANS_INV_STATUS_PAID){
           status_p.className = "card-student-status-label active";
-          status_p.textContent = 'PAID';
+          status_p.textContent = 'Paid';
         }else{
           status_p.className = "card-student-status-label passive";
           status_p.textContent = 'Unknown';
@@ -901,14 +920,15 @@
       detail_div.className = 'row';
       detail_div.setAttribute("style","margin: 0;");
       detail_div.appendChild(transDate_div);
-      detail_div.appendChild(docNum_div);
-      detail_div.appendChild(desc_div);
       detail_div.appendChild(clientName_div);
+      detail_div.appendChild(desc_div);
       detail_div.appendChild(total_div);
+      detail_div.appendChild(docNum_div);
       detail_div.appendChild(status_div);
+
       let detail_top_div = document.createElement('div');
       detail_top_div.className = "col-md-11";
-      detail_top_div.setAttribute("style","padding: 0;");
+      detail_top_div.setAttribute("style"," padding: 12px 0px 12px 0px;");
       detail_top_div.setAttribute("onclick","viewInvFunction(this)");
       detail_top_div.setAttribute("data-id", doc.data()[TRANS_ID]);
       detail_top_div.appendChild(detail_div);
@@ -921,7 +941,7 @@
       btn_edit.className = "btn btn-sm btn-outline-primary btn-round";
       btn_edit.setAttribute("id","btnDelStudent");
       btn_edit.setAttribute("href","javascript:;");
-      btn_edit.setAttribute("style","margin: 0; padding: 0.4em;");
+      // btn_edit.setAttribute("style","margin: 0; padding: 0.4em;");
       btn_edit.setAttribute("data-toggle","modal");
       btn_edit.setAttribute("data-target","#recordPaymentModal");
       btn_edit.setAttribute("data-id", doc.data()[TRANS_ID]);
@@ -965,7 +985,7 @@
 	  function viewInvFunction(elem){
 
       // show loading modal
-      $('#loadingModal').modal('show');
+      // $('#loadingModal').modal('show');
 
       // Get attribute and 
       if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TRANSACTION_ALL_DOCS_KEY)) == null ){
@@ -994,8 +1014,10 @@
               console.log('Payslip is click. Nothing happen.')
             }
           }
-
+          console.log(item[TRANS_TITLE]);
         });
+
+        
         
       }
 		}
@@ -1011,7 +1033,7 @@
       .get()
       .then((doc) => {
         // Hide loading modal
-        $('#loadingModal').modal('hide');
+        // $('#loadingModal').modal('hide');
 
         if (doc.exists) {
           // console.log('invoice data')
@@ -1055,7 +1077,7 @@
         backdrop:'static',
         keyboard:false
       });
-      $('#loadingModal').modal('show');
+      // $('#loadingModal').modal('show');
 
 
       // Update Class Annoucement

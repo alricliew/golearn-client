@@ -230,6 +230,7 @@
   padding-right: 0.5rem;
   padding-top: 0.1rem;
   padding-bottom: 0.1rem;
+  margin: 0;
   display: inline-block;
   box-shadow: 2px 2px 4px rgb(46, 46, 46);
 }
@@ -266,7 +267,7 @@
   transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
     0.3s box-shadow,
     0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
-  padding: 14px 24px 14px 24px;
+  /* padding: 14px 24px 14px 24px; */
   cursor: pointer;
   border-bottom: solid #ababab;
   border-width: thin;
@@ -288,6 +289,7 @@
 .card-student-item p {
   font-size: smaller;
   font-weight: 300;
+  margin: 0;
 }
 
 /* Tutor Specific */
@@ -412,6 +414,18 @@
   top: 20px;
   right: 15px;
   max-height: 120px;
+}
+
+/* *Utilities - Card general */
+.card-general {
+  margin-top: 1rem;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  padding: 14px 24px 14px 24px;
 }
 
 /* Used for multistep form */

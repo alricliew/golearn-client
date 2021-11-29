@@ -288,6 +288,7 @@
 .card-student-item p {
   font-size: smaller;
   font-weight: 300;
+  margin: 0;
 }
 
 /* Tutor Specific */

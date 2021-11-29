@@ -509,7 +509,7 @@
 
       // Amount
       let amount_p = document.createElement('p');
-      amount_p.textContent = doc.data()[INV_TOTAL];
+      amount_p.textContent = 'RM'+parseFloat(doc.data()[INV_TOTAL]).toFixed(2);
       let amount_div = document.createElement('div');
       amount_div.className = "col-md-2";
       amount_div.appendChild(amount_p);
@@ -553,7 +553,7 @@
       detail_div.appendChild(due_p);
       let detail_top_div = document.createElement('div');
       detail_top_div.className = "col-md-11";
-      detail_top_div.setAttribute("style","padding: 0;");
+      detail_top_div.setAttribute("style"," padding: 12px 0px 12px 0px;");
       detail_top_div.setAttribute("onclick","editClassFunction(this)");
       detail_top_div.setAttribute("data-id", doc.data()[INV_ID]);
       detail_top_div.appendChild(detail_div);
@@ -572,7 +572,7 @@
       btn_a.setAttribute("data-id", doc.data()[INV_ID]);
       // btn_a.setAttribute("data-studentname",  doc.data()[INV_TITLE]);
       let btn_div = document.createElement('div');
-      btn_div.className = "col-md-1";
+      btn_div.className = "col-md-1  align-self-center";
       btn_div.appendChild(btn_a);
 
  

@@ -21,7 +21,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
   <script src="../js/firebase.js"></script>
   <!-- Tutor Portal specific CSS -->
-  <link href="../css/tutor-portal.css" rel="stylesheet" />
+  <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
   <!-- Date Picker -->
   <link href="../../assets/css/mc-calendar.min.css" rel="stylesheet"/>
   <link href="../../assets/css/intlTelInput.css" rel="stylesheet" >
@@ -301,6 +301,31 @@
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSaveModalClose2">Cancel</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSaveModalUpdate">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delete Student modal -->
+      <div class="row">
+        <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="delModalLabel">Delete this invoice?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="delModalBody">
+                <div id="delStuId" value=""></div>
+                This action will remove this invoice completely. You and the invoice receiver will no longer be able to see it.
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnDelModalUpdate">Confirm</button>
               </div>
             </div>
           </div>
@@ -623,10 +648,9 @@
             </div>
             <div class="p-2">
               <a href="javascript:;" class="btn btn-outline-primary btn-round" id="btnSave" style="background-color: #2e74b6; color: white;" data-toggle="modal" data-target="#saveModal" onclick="validateForm('accordionExample'); fieldChecker();" disabled> <i class="material-icons" style="color: #fff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save </a>
-              <!-- <a href="javascript:;" class="btn btn-outline-primary btn-round" id="" onclick="generatePDFeKoopmans('invTemplate')" disabled> Download as PDF</a> -->
             </div>
             <div class="ml-auto p-2">
-              <!-- <button href="javascript:;" class="btn btn-primary btn-round" id="btnSave" data-toggle="" data-target="#saveModal" onclick="validateForm('accordionExample'); fieldChecker();" disabled>Save and Continue <i class="material-icons" style="color: #fff; margin-left: 0.5em; padding-bottom: 0.2em;">east</i> </button> -->
+              <a href="javascript:;" class="btn btn-danger btn-round" data-toggle="modal" data-target="#delModal"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">remove</i> Remove</a>
             </div>
           </div>
 
@@ -700,7 +724,7 @@
                         <div class="row">
                           <div class="col-6 text-right" style="padding-right: 0;">
                             <div style="margin-top: 0.8rem;">
-                              <p style="font-weight: 500; text-transform: uppercase;">Invoice Number*</p>                            
+                              <p style="font-weight: 500; text-transform: uppercase;">Invoice No*</p>                            
                             </div>
                             <div style="margin-top: 0.8rem;">
                               <p style="font-weight: 500; text-transform: uppercase;">Invoice Date*</p>                           
@@ -836,7 +860,7 @@
             </div>
           </div>
           <!-- Preview -->
-          <page size="A4" id="invTemplate" style="position: relative;">
+          <page size="A4" id="invTemplate" style="position: relative;  overflow-x:auto;">
 
             <div class="card-body" >
               <div class="row">
@@ -880,7 +904,7 @@
                 <div class="col-5">
                   <div class="row">
                     <div class="col-6 text-right" style="padding-right: 0;">
-                      <h6>Invoice Number</h6>
+                      <h6>Invoice No</h6>
                       <h6>Invoice Date</h6>
                       <h6 style="color: red;">Payment Due</h6>
                       <h6>Status</h6>
@@ -3083,8 +3107,14 @@
       // Get all items, subtotal, additional items and grand total
       getAllItems();
 
+      // Get Total
+      let subTotal = calculateSubtotal();
+      let total = calculateTotal(subTotal);
+
+
       var data = {
         // [INV_ID]: invDocId,
+        // [INV_TRANS_ID]: transDocId,
         // [INV_SENDER_ID]: tutorId,
         [INV_RECEIVER_ID]: document.getElementById("invClientId").getAttribute('value'),
         [INV_SENDER_NAME]: document.getElementById("invBizName").textContent,
@@ -3101,7 +3131,7 @@
 
         // Inv Contents
         [INV_ITEMS_ARR]: allItemsArr,
-        [INV_TOTAL]: document.getElementById("grandTotal").textContent,
+        [INV_TOTAL]: total,
         [INV_NOTES]: tinymce.get("invNotes").getContent(),
         [INV_FOOTER_NOTES]: tinymce.get("invFooterNotes").getContent(),
 
@@ -3132,7 +3162,7 @@
         // [TRANS_TYPE]: TRANS_TYPE_INV,
         // [TRANS_DOC_STATUS] : TRANS_INV_STATUS_DRAFT,
         [TRANS_TITLE]: document.getElementById("invTitle").value,
-        [TRANS_TOTAL]: document.getElementById("grandTotal").textContent,
+        [TRANS_TOTAL]: total,
         [TRANS_DATE_EDIT]: new Date(),
         // [TRANS_STATUS]: true,
       }
@@ -3540,6 +3570,67 @@
         
         UpdateInvoice();
       });
+
+      // Delete Student Modal
+      $('#delModal').on('show.bs.modal', function (event) {
+        
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        // var modal = $(this)
+        // modal.find('.modal-title').text('Delete this invoice'+ currentStudentObj[STU_CHILD_NAME] +' ?');
+
+      });
+
+      $('#btnDelModalUpdate').on('click', function (e) {
+
+        $('#loadingModal').modal('show');
+
+
+        var docRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Invoice")
+          .doc(invId);
+
+        var data = {
+          [INV_DATE_DEL]:  new Date(),
+          [INV_STATUS]: false,
+        }
+
+        console.log("*Invoice Data...")
+        console.log(data)
+
+        var transDocRef = db.collection("Financial")
+            .doc("v1")
+            .collection("Transaction")
+            .doc(transId);
+
+        var transData = {
+          [TRANS_DATE_EDIT]: new Date(),
+          [TRANS_STATUS]: false,
+        }
+
+        console.log("Transaction Data...")
+        console.log(transData)
+
+        docRef.set(data, { merge: true })
+        .then(() => {
+          // 
+
+          transDocRef.set(transData, { merge: true })
+          .then(() => {
+
+            $('#loadingModal').modal('hide');
+            window.location = './'
+ 
+          });
+
+        });
+
+      
+      });
+
+
+
 
       // Active Register Class Modal
       $('#loadingModal').modal({

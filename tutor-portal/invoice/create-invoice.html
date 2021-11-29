@@ -21,7 +21,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
   <script src="../js/firebase.js"></script>
   <!-- Tutor Portal specific CSS -->
-  <link href="../css/tutor-portal.css" rel="stylesheet" />
+  <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
   <!-- Date Picker -->
   <link href="../../assets/css/mc-calendar.min.css" rel="stylesheet"/>
   <link href="../../assets/css/intlTelInput.css" rel="stylesheet" >
@@ -700,7 +700,7 @@
                         <div class="row">
                           <div class="col-6 text-right" style="padding-right: 0;">
                             <div style="margin-top: 0.8rem;">
-                              <p style="font-weight: 500; text-transform: uppercase;">Invoice Number*</p>                            
+                              <p style="font-weight: 500; text-transform: uppercase;">Invoice No*</p>                            
                             </div>
                             <div style="margin-top: 0.8rem;">
                               <p style="font-weight: 500; text-transform: uppercase;">Invoice Date*</p>                           
@@ -882,12 +882,12 @@
                     <div class="col-5">
                       <div class="row">
                         <div class="col-6 text-right" style="padding-right: 0;">
-                          <h6>Invoice Number</h6>
+                          <h6>Invoice No</h6>
                           <h6>Invoice Date</h6>
                           <h6 style="color: red;">Payment Due</h6>
                           <h6>Status</h6>
                           
-                          <!-- <p style="margin: 0.3rem; font-weight: bold;">Invoice Number</p>                            
+                          <!-- <p style="margin: 0.3rem; font-weight: bold;">Invoice No</p>                            
                           <p style="margin: 0.3rem; font-weight: bold;">Invoice Date</p>                           
                           <p style="margin: 0.3rem; font-weight: bold;">Payment Due</p>                            
                           <p style="margin: 0.3rem; font-weight: bold;">Status</p> -->
@@ -2290,7 +2290,7 @@
     }
 
     // Calculate the amount for Normal Items based on quantity and unit price
-    function calculateAmount (){
+    function calculateAmount(){
       // // Get the value of Quantity at 3rd cell
       // let itemParent = findAscendingTag(elem, "TR");
       // let quantity = itemParent.children[2].getElementsByTagName("input")[0].value;
@@ -2374,11 +2374,11 @@
         // Ignore the header
         // We don't want user to change the order of header
         if (index === 0) {
-          return;
+          return ;
         }
         // Ignore row with certain class name
         else if(row.className != 'additional'){
-          return;
+          return ;
         }
 
         // console.log(row)
@@ -2855,12 +2855,17 @@
     function CreateInvoice() {
       
       var docRef = db.collection("Financial")
-          .doc("v1")
-          .collection("Invoice")
-          .doc();
+        .doc("v1")
+        .collection("Invoice")
+        .doc();
 
-      let invDocId = docRef.id
+      var transDocRef = db.collection("Financial")
+        .doc("v1")
+        .collection("Transaction")
+        .doc();
 
+      let invDocId = docRef.id;
+      let transDocId = transDocRef.id;
       // Issue date
       let issueDate = document.getElementById("invIssueDate").value;
       issueDate = issueDate.split("/");
@@ -2875,8 +2880,14 @@
       // Get all items, subtotal, additional items and grand total
       getAllItems();
 
+      // Get Total
+      let subTotal = calculateSubtotal();
+      let total = calculateTotal(subTotal);
+
+
       var data = {
         [INV_ID]: invDocId,
+        [INV_TRANS_ID]: transDocId,
         [INV_SENDER_ID]: tutorId,
         [INV_RECEIVER_ID]: document.getElementById("invClientId").getAttribute('value'),
         [INV_SENDER_NAME]: document.getElementById("invBizName").textContent,
@@ -2893,7 +2904,7 @@
 
         // Inv Contents
         [INV_ITEMS_ARR]: allItemsArr,
-        [INV_TOTAL]: document.getElementById("grandTotal").textContent,
+        [INV_TOTAL]: total,
         [INV_NOTES]: tinymce.get("invNotes").getContent(),
         [INV_FOOTER_NOTES]: tinymce.get("invFooterNotes").getContent(),
 
@@ -2910,13 +2921,8 @@
       console.log("*Invoice Data...")
       console.log(data)
 
-      var transDocRef = db.collection("Financial")
-          .doc("v1")
-          .collection("Transaction")
-          .doc();
-
       var transData = {
-        [TRANS_ID]: transDocRef.id,
+        [TRANS_ID]: transDocId,
         [TRANS_DOC_ID]: invDocId,
         [TRANS_DOC_NUM]: document.getElementById("invNum").value,
         [TRANS_SENDER_ID]: tutorId,
@@ -2928,7 +2934,7 @@
         [TRANS_TYPE]: TRANS_TYPE_INV,
         [TRANS_DOC_STATUS] : TRANS_INV_STATUS_DRAFT,
         [TRANS_TITLE]: document.getElementById("invTitle").value,
-        [TRANS_TOTAL]: document.getElementById("grandTotal").textContent,
+        [TRANS_TOTAL]: total,
         [TRANS_DATE_EDIT]: new Date(),
         [TRANS_STATUS]: true,
       }

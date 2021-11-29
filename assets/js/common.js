@@ -595,6 +595,8 @@ const TRANS_DOC_STATUS = "docStatus"; // document specific statuses
     const TRANS_INV_STATUS_DRAFT = "draft";
     const TRANS_INV_STATUS_NEW = "new";
     const TRANS_INV_STATUS_PAID = "paid";
+    const TRANS_PAY_STATUS_NEW = "new";
+    const TRANS_PAY_STATUS_PAID = "paid";
     // const TRANS_PAY_STATUS = "";
 const TRANS_TOTAL = "total";
 const TRANS_DATE_EDIT = "dateEdit";
@@ -602,6 +604,7 @@ const TRANS_STATUS = "status";
 
 //  Invoice
 const INV_ID = "id";
+const INV_TRANS_ID = "transId";
 const INV_SENDER_ID = "idS"; // main
 const INV_RECEIVER_ID = "idR";
 const INV_SENDER_NAME = "nameS";
@@ -634,34 +637,44 @@ const INV_STATUS = "status";
 
 //  Payroll
 const PAYROLL_ID = "id";
-const PAYROLL_NAME = "name"; // main
+const PAYROLL_ADMIN_ID = "adminId"; // main
+const PAYROLL_NAME = "name";
 const PAYROLL_DATE_START = "start";
 const PAYROLL_DATE_END = "end";
-const PAYROLL_EMPLOYEE_NUM = "num";
+const PAYROLL_DOC_ID_ARR = "docIdArr";
+const PAYROLL_DOC_TOTAL_ARR = "docTotalArr";
+const PAYROLL_TOTAL = "total";
 const PAYROLL_STATUS = "status";
 
 //  Payslip (Payroll)
 const PAY_ID = "id";
 const PAY_PAYROLL_ID = "payrollId";
 const PAY_PAYROLL_NAME = "payrollName";
+const PAY_TRANS_ID = "transId";
 const PAY_SENDER_ID = "idS"; // main
 const PAY_RECEIVER_ID = "idR";
 const PAY_SENDER_NAME = "nameS";
 const PAY_SENDER_DETAILS = "descS";
 const PAY_SENDER_IMG_URL = "logoUrl";
 const PAY_RECEIVER_NAME = "nameR";
-const PAY_RECEIVER_DETAILS = "descR";
+// const PAY_RECEIVER_DETAILS = "descR";
+const PAY_RECEIVER_POSITION = "position";
+const PAY_RECEIVER_EPF = "epf";
+const PAY_RECEIVER_SOCSO = "socso";
+const PAY_RECEIVER_BANK_NAME = "bank";
+const PAY_RECEIVER_AC_NO = "acno";
+
 const PAY_TITLE = "title";
-const PAY_NUMBER = "invNo";
-const PAY_ISSUE_DATE = "invDate";
-const PAY_DUE_DATE = "invDue";
-const PAY_PAY_STATUS = "invStatus";
-    const PAY_STATUS_DRAFT = "draft";
+const PAY_NUMBER = "payNo";
+const PAY_DATE = "date";
+// const PAY_DUE_DATE = "invDue";
+const PAY_PAY_STATUS = "payStatus";
+    // const PAY_STATUS_DRAFT = "draft";
     const PAY_STATUS_NEW = "new";
     const PAY_STATUS_PAID = "paid";
 
-const PAY_ITEMS_ARR = "invItemsArr";
-const PAY_TOTAL = "invTotal";
+const PAY_ITEMS_ARR = "payItemsArr";
+const PAY_TOTAL = "payTotal";
 const PAY_NOTES = "note";
 const PAY_FOOTER_NOTES = "noteFooter";
 
@@ -701,6 +714,13 @@ const SESSION_STORAGE_TRANSACTION_CURRENT_DOC_KEY = "currentTransactionDoc";
 // TUTOR:Invoice Module
 const SESSION_STORAGE_INVOICE_ALL_DOCS_KEY = "allInvoiceDocs";
 const SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY = "currentInvoiceDoc";
+
+// TUTOR:Payslip Module
+const SESSION_STORAGE_PAYSLIP_ALL_DOCS_KEY = "allPayslipDocs";
+const SESSION_STORAGE_PAYSLIP_CURRENT_DOC_KEY = "currentPayslipDoc";
+// TUTOR:Salary Module
+const SESSION_STORAGE_SALARY_ALL_DOCS_KEY = "allSalaryDocs";
+const SESSION_STORAGE_SALARY_CURRENT_DOC_KEY = "currentSalaryDoc";
 
 // CLIENT: Class Module
 const SESSION_STORAGE_CLIENT_CLASS_ALL_DOCS_KEY = "allClientClassDocs";

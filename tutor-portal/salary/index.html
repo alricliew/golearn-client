@@ -21,8 +21,6 @@
   <script src="../js/firebase.js"></script>
   <!-- Tutor Portal specific CSS -->
   <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
-  <!-- Date rage picker -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
   <style>
     /* page view for A4  */
@@ -93,14 +91,14 @@
               <p>Invoices</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../salary/">
+          <li class="nav-item active">
+            <a class="nav-link" href="./">
               <i class="fas fa-money-bill-wave fa-fw nav-icon"></i>
               <p>Salaries</p>
             </a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="./">
+          <li class="nav-item">
+            <a class="nav-link" href="../payroll/">
               <i class="fas fa-hand-holding-usd fa-fw nav-icon"></i>
               <p>Payroll <span style="visibility: hidden;">PRO</span></p>
             </a>
@@ -140,7 +138,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Payroll</a>
+            <a class="navbar-brand" href="javascript:;">Salaries</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -209,246 +207,176 @@
       <!-- End Navbar -->
 
 			<!-- Modal Start -->
-       <!-- Preview modal -->
-       <div class="row" >
-        <div class="modal fade" tabindex="-1" role="dialog" id="previewModal" aria-labelledby="staticBackdropLabel" aria-hidden="true"  >
-          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content" style="background-color: transparent;  box-shadow: none; border: none;">
-              <div class="modal-body" style="background-color: transparent; box-shadow: none;  border: none;">
-               <!-- Preview -->
-               <div class="row" style="overflow-y:auto;">
-                <div class="col-12" style="overflow-x:auto;  padding: 1rem;">
-                  <a href="javascript:;" class="btn btn-primary btn-round" style="text-transform: none; background-color: white; color: #2e74b6;" onclick="generatePDFeKoopmans('invTemplate')">Download As PDF</a>
+      <!-- Preview modal -->
+      <div class="row" >
+      <div class="modal fade" tabindex="-1" role="dialog" id="previewModal" aria-labelledby="staticBackdropLabel" aria-hidden="true"  >
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content" style="background-color: transparent;  box-shadow: none; border: none;">
+            <div class="modal-body" style="background-color: transparent; box-shadow: none;  border: none;">
+              <!-- Preview -->
+              <div class="row" style="overflow-y:auto;">
+              <div class="col-12" style="overflow-x:auto;  padding: 1rem;">
+                <a href="javascript:;" class="btn btn-primary btn-round" style="text-transform: none; background-color: white; color: #2e74b6;" onclick="generatePDFeKoopmans('invTemplate')">Download As PDF</a>
 
-                  <span id="netpayview_preview" style="color: white;"></span>
+                <span id="netpayview_preview" style="color: white;"></span>
 
-                  <page size="A4" id="invTemplate" style="position: relative;">
+                <page size="A4" id="invTemplate" style="position: relative;">
 
-                    <div class="card-body" >
-                      <div class="row">
-                        <div class="col-4 text-center">
-    
-                          <div class="form-group">
-                            <!-- <canvas id="myCanvas" style="height: 150px;width: 225px; object-fit: cover;" ></canvas> -->
-                            <div style="height: 115px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
-                              <img id="previewTutorImgUrl" style="height: 100%; width: auto; " src="../../assets/img/empty-photo.png" crossorigin="anonymous" alt = ""/>
-                              <!-- <canvas id="myCanvas" ></canvas> -->
-                            </div>
+                  <div class="card-body" >
+                    <div class="row">
+                      <div class="col-4 text-center">
+  
+                        <div class="form-group">
+                          <!-- <canvas id="myCanvas" style="height: 150px;width: 225px; object-fit: cover;" ></canvas> -->
+                          <div style="height: 115px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
+                            <img id="previewTutorImgUrl" style="height: 100%; width: auto; " src="../../assets/img/empty-photo.png" crossorigin="anonymous" alt = ""/>
+                            <!-- <canvas id="myCanvas" ></canvas> -->
                           </div>
                         </div>
-    
-                        <div class="col-2">
-                          <!--  Do nothing -->
-                        </div>
-    
-                        <div class="col-6 text-right">
-                          <h4 style="font-size: xx-large;margin-top: 1rem;">PAYSLIP</h4> 
-                          <h5 id="previewTitle"  style="font-weight: 500;">Payslip of November 2021</h5>
-                          <h4 id="previewBizName" style="font-weight: 500;">Your Name</h4>
-                          <h6 id="previewBizDetails" style="text-transform: none; font-weight: 300;">Your Biz Details</p>
-                        </div>
+                      </div>
+  
+                      <div class="col-2">
+                        <!--  Do nothing -->
+                      </div>
+  
+                      <div class="col-6 text-right">
+                        <h4 style="font-size: xx-large;margin-top: 1rem;">PAYSLIP</h4> 
+                        <h5 id="previewTitle"  style="font-weight: 500;">Payslip of November 2021</h5>
+                        <h4 id="previewBizName" style="font-weight: 500;">Your Name</h4>
+                        <h6 id="previewBizDetails" style="text-transform: none; font-weight: 300;">Your Biz Details</p>
                       </div>
                     </div>
-    
-                    <hr style="margin: 0rem">
-                    <div class="card-body" style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;"> 
-                      <div class="row">
-                        <div class="col-4">
-                          <h6>Paid To:</h6>
-                          <h4 id="previewClientName" style="font-weight: 500;">Tutor's Name</h4>
-                          <h6 id="previewClientPosition"  style="text-transform: none; font-weight: 300;"> Tutor </h6>
-                        </div>
-    
-                        <div class="col-3"></div>
-                        <div class="col-5">
-                          <div class="row">
-                            <div class="col-6 text-right" style="padding-right: 0;">
-                              <h6>Ref No</h6>
-                              <h6>Date</h6>
-                              <h6>Status</h6>
-                            </div>
-                            <div class="col-6 text-left">
-                              <h6 id="previewRefNo" style="font-weight: normal; text-transform: none;"> - </h6>
-                              <h6 id="previewDate" style="font-weight: normal; text-transform: none;"> - </h6>
-                              <h6 id="previewStatus" style="font-weight: normal; text-transform: none;"> - </h6>
-                            </div>
-                          </div>
-                        </div>
+                  </div>
+  
+                  <hr style="margin: 0rem">
+                  <div class="card-body" style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;"> 
+                    <div class="row">
+                      <div class="col-4">
+                        <h6>Paid To:</h6>
+                        <h4 id="previewClientName" style="font-weight: 500;">Tutor's Name</h4>
+                        <h6 id="previewClientPosition"  style="text-transform: none; font-weight: 300;"> Tutor </h6>
                       </div>
-    
-                      <div style="margin-top: 1rem;"></div>
-                      
-                      <div class="row">
-                        <div class="col-12"  style="overflow-x:auto;">
-                          <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
-                          <table id="tablePreview" class="table-light table-sm" cellspacing="0" width="100%" >
-                            <thead id='thead_item_preview' style="background-color: grey; color: white;">
-                              <tr>
-                                <th style="min-width: 200px; font-size: small;">Items</th>
-                                <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity</th>
-                                <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Price</th>
-                                <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
-                              </tr>
-                            </thead>
-                            <tbody id="tbody_item_preview">
-                              <tr class="subtotal" id='previewItemSubtotal'>
-                                <td></td>
-                                <td></td>
-                                <td style="text-align: right; font-weight: 500; font-size: small;">Subtotal</td>
-                                <td style="text-align: right; font-weight: 500; font-size: small;" id="grosspay_preview"></td>
-                              </tr>
-                            </tbody>
-                          </table>
-    
-                          <table id="table_additem_preview" class="table-light table-sm" cellspacing="0" width="100%">
-                            <thead id='thead_additem_preview' style="visibility: collapse;">
-                              <tr>
-                                <th style="min-width: 200px;">Items</th>
-                                <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
-                                <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
-                                <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
-                              </tr>
-                            </thead>
-                            <tbody id="tbody_additem_preview">
-                              <tr class="additional">
-                                <td></td>
-                                <td></td>
-                                <td style="text-align: right; font-size: small;"></td>
-                                <td style="text-align: right; font-size: small;"></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-    
-                        <div class="col-12">
-                          <h4 style="text-align: right; font-weight: 500;">Net Pay <span style="margin-left: 2rem;" id="netpay_preview">RM0.00</span></h4>
-                        </div>
-    
-                        <!-- <div class="col-12">
-                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Notes</span>
-                          <span id="previewInvNotes"></span>
-                        </div> -->
-                      </div>
-                    </div>
-
-                    <hr style="margin: 0rem">
-                    <div class="card-body" >
-                      <div class="row">
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-6 text-right" style="padding-right: 0;">
-                              <h6>Bank Name</h6>
-                              <h6>AC No</h6>
-                            </div>
-                            <div class="col-6 text-left">
-                              <h6 id="previewBankName" style="font-weight: normal;"> - </h6>
-                              <h6 id="previewAcNo"> - </h6>
-                            </div>
+  
+                      <div class="col-3"></div>
+                      <div class="col-5">
+                        <div class="row">
+                          <div class="col-6 text-right" style="padding-right: 0;">
+                            <h6>Ref No</h6>
+                            <h6>Date</h6>
+                            <h6>Status</h6>
                           </div>
-                        </div>
-
-    
-                        <!-- <div class="col-4"></div> -->
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-6 text-right" style="padding-right: 0;">
-                              <h6 id='previewEpfTitle' style="display: none;">EPF No</h6>
-                              <h6 id='previewSocsoTitle' style="display: none;">Socso</h6>
-                            </div>
-                            <div class="col-6 text-left">
-                              <h6 id="previewEpf" style="display: none;"> - </h6>
-                              <h6 id="previewSocso" style="display: none;"> - </h6>
-                            </div>
+                          <div class="col-6 text-left">
+                            <h6 id="previewRefNo" style="font-weight: normal; text-transform: none;"> - </h6>
+                            <h6 id="previewDate" style="font-weight: normal; text-transform: none;"> - </h6>
+                            <h6 id="previewStatus" style="font-weight: normal; text-transform: none;"> - </h6>
                           </div>
                         </div>
                       </div>
                     </div>
+  
+                    <div style="margin-top: 1rem;"></div>
                     
-                    <!-- <div class="card-body" id="preview-footer" style="padding-top: 0; margin-top: 0; position: absolute; bottom: 0; width: 100%;">
-                      <p id="previewInvFooterNotes"></p>
-                    </div> -->
-    
-                  </page>
+                    <div class="row">
+                      <div class="col-12"  style="overflow-x:auto;">
+                        <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
+                        <table id="tablePreview" class="table-light table-sm" cellspacing="0" width="100%" >
+                          <thead id='thead_item_preview' style="background-color: grey; color: white;">
+                            <tr>
+                              <th style="min-width: 200px; font-size: small;">Items</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Price</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
+                            </tr>
+                          </thead>
+                          <tbody id="tbody_item_preview">
+                            <tr class="subtotal" id='previewItemSubtotal'>
+                              <td></td>
+                              <td></td>
+                              <td style="text-align: right; font-weight: 500; font-size: small;">Subtotal</td>
+                              <td style="text-align: right; font-weight: 500; font-size: small;" id="grosspay_preview"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+  
+                        <table id="table_additem_preview" class="table-light table-sm" cellspacing="0" width="100%">
+                          <thead id='thead_additem_preview' style="visibility: collapse;">
+                            <tr>
+                              <th style="min-width: 200px;">Items</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
+                            </tr>
+                          </thead>
+                          <tbody id="tbody_additem_preview">
+                            <tr class="additional">
+                              <td></td>
+                              <td></td>
+                              <td style="text-align: right; font-size: small;"></td>
+                              <td style="text-align: right; font-size: small;"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+  
+                      <div class="col-12">
+                        <h4 style="text-align: right; font-weight: 500;">Net Pay <span style="margin-left: 2rem;" id="netpay_preview">RM0.00</span></h4>
+                      </div>
+  
+                      <!-- <div class="col-12">
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Notes</span>
+                        <span id="previewInvNotes"></span>
+                      </div> -->
+                    </div>
+                  </div>
 
+                  <hr style="margin: 0rem">
+                  <div class="card-body" >
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="row">
+                          <div class="col-6 text-right" style="padding-right: 0;">
+                            <h6>Bank Name</h6>
+                            <h6>AC No</h6>
+                          </div>
+                          <div class="col-6 text-left">
+                            <h6 id="previewBankName" style="font-weight: normal;"> - </h6>
+                            <h6 id="previewAcNo"> - </h6>
+                          </div>
+                        </div>
+                      </div>
+
+  
+                      <!-- <div class="col-4"></div> -->
+                      <div class="col-6">
+                        <div class="row">
+                          <div class="col-6 text-right" style="padding-right: 0;">
+                            <h6 id='previewEpfTitle' style="display: none;">EPF No</h6>
+                            <h6 id='previewSocsoTitle' style="display: none;">Socso</h6>
+                          </div>
+                          <div class="col-6 text-left">
+                            <h6 id="previewEpf" style="display: none;"> - </h6>
+                            <h6 id="previewSocso" style="display: none;"> - </h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   
-                </div>
-              </div>
-              </div>
-            </div>
+                  <!-- <div class="card-body" id="preview-footer" style="padding-top: 0; margin-top: 0; position: absolute; bottom: 0; width: 100%;">
+                    <p id="previewInvFooterNotes"></p>
+                  </div> -->
+  
+                </page>
 
-          </div>
-        </div>
-      </div>
-
-      <!-- Record Payment modal -->
-      <div class="row">
-        <div class="modal fade" id="recordPaymentModal" tabindex="-1" role="dialog" aria-labelledby="recordPaymentModalLabel" aria-hidden="true">
-          <div class="modal-dialog  modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="recordPaymentModalTitle">Record Payment</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-
-                <div class="row">
-                  <div class="col-sm-12 text-left">
-                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-top: 1.0rem;">Status</span> 
-                    <span class="tooltiptext-trigger">? 
-                      <span class="tooltiptext-general">
-                        <h6>Status</h6>
-                        <p>Set to <strong style="color: #2e74b6;">Paid</strong> to indicate you have completed the payment and to let your employee view this payslip. </p>
-                      </span> 
-                    </span>
-                  </div>
-                </div>
-
-                <div class="form-group" >
-                  <div class="form-check form-check-radio form-check-inline">
-                    <label class="form-check-label">
-                      <input class="form-check-input" type="radio" name="statusRadio" id="statusNew" value="option1">
-                        New
-                      <span class="circle">
-                        <span class="check"></span>
-                      </span>
-                    </label>
-                  </div>
-                  <div class="form-check form-check-radio form-check-inline">
-                    <label class="form-check-label">
-                      <input class="form-check-input" type="radio" name="statusRadio" id="statusPaid" value="option2">
-                        Paid
-                      <span class="circle">
-                        <span class="check"></span>
-                      </span>
-                    </label>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payment Date*</span> 
-                  <input type="text" class="form-control" id="inPaymentDate" style="cursor: pointer; cursor: pointer;">
-
-                </div>
-                <div class="form-group">
-                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payment Amount (RM)</span> 
-                  <input type="number" class="form-control" id="inPaymentAmount" oninput="checkRecordPaymentModalFields();"  maxlength="40">
-                </div>
-                <div class="form-group">
-                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Notes / Memo</span> 
-                  <textarea class="form-control" maxlength="200" rows="4"  id="inPaymentNotes" data-compulsory="false"></textarea>
-                </div>
                 
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Not Now</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnRecordPaymentModalUpdate" disabled>Confirm</button>
-              </div>
+            </div>
             </div>
           </div>
+
         </div>
       </div>
+    </div>
 
       <!-- Activation modal -->
       <div class="row">
@@ -501,140 +429,29 @@
           <!-- your content here -->
 
           <!-- Main content -->
-          <div class="row d-flex">
+          <div class="row  d-flex" id="desciption-row" >
             <!-- button -->
             <div class="p-2">
               <!-- <a href="settings.html" class="btn btn-outline-primary btn-round" id="btnBack"><i class="fas fa-cog" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;"></i> Financial Settings</a> -->
             </div>
 
             <div class="ml-auto p-2">
-              <!-- <a href="./employee.html" class="btn btn-primary btn-round" style="background-color: #2e74b6;">Employee <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a> -->
-            </div>
 
-          </div>
-
-          <div class="container-fluid" >
-
-            <div class="row">
-              <div class="col-md-12 card-general">
-
-                <div class="row">
-                  <div class="col-md-10">
-                    <div class="social">
-                      <!-- <h4 style="font-size: x-large;"><span> <button  id="btnStep1" class="btn btn-primary btn-just-icon btn-round" style="margin-right: 1rem;">
-                        <p>1</p>
-                        </button></span> 
-                        Create Invoice
-                      </h4> -->
-                      <h4 style="font-size: x-large;">Run payroll</h4>
-
-                      <p>Create payslips for all your employees.</p>
-         
-
-                    </div>
-
-
-                  </div>
-
-                  <div class="col-md-2 align-self-center">
-
-                    <a href="./run-payroll.html" class="btn btn-primary btn-round" style="background-color: #2e74b6;">Run Payroll <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
-  
-                  </div>
-
-                  <!-- <div class="col-md-2"> -->
-                    <!-- <div class="form-group"> -->
-                      <!-- <input class="form-control" type="text" name="daterange" id='daterange' value="Select date range"/> -->
-                    <!-- </div> -->
-                  <!-- </div> -->
-
-                  <div class="col-md-12" id="payrollList">
-
-                    <a href="javascript:;" name="daterange" id='daterange' style="padding:0.2rem 0.5rem 0.2rem 0.2rem; border: solid thin #2e74b6; width: 500px;">
-                      <i class="fa fa-calendar"></i>&nbsp;
-                      <span>Select date range</span> <i class="fa fa-caret-down"></i> 
-                    </a>
-
-
-                    <!-- <div id="daterange" name="daterange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: fit-content;">
-                      <i class="fa fa-calendar"></i>&nbsp;
-                      <span>Select date range</span> <i class="fa fa-caret-down"></i>
-                    </div> -->
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-
-
-
-            <div class="row" id="card-all-students">
-  
-              <!-- <div class="col-md-12 card-student">
-                <div class="row" >
-                  <div class="col-md-11" style="padding: 0;">
-                    <div class="row" style="margin: 0;">
-                      <div class="col-md-3">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Student Name</h6>
-                      </div>
-                      <div class="col-md-1">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Gender</h6>
-                      </div>
-                      <div class="col-md-3">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Guardian</h6>
-                      </div>
-                      <div class="col-md-2">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Contact No.</h6>
-                      </div>
-                      <div class="col-md-1">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Status</h6>
-                      </div>
-                      <div class="col-md-2">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Date Added</h6>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-1">
-                    <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Action</h6>
-                  </div>
-  
+              <!-- <div class="btn-group">
+                <button class="btn btn-primary btn-round" type="button">
+                  Create
+                </button>
+                <button type="button" class="btn btn-primary btn-round dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="../invoice/create-invoice.html">Create Invoice</a>
+                  <a class="dropdown-item" href="../payroll/run-payroll.html">Run Payroll</a>
                 </div>
               </div> -->
-  
-              <!-- Student List Start -->
-              <!-- <div class="col-md-12 card-student-item">
-                <div class="row">
-                  <div class="col-md-11" style="padding: 0;">
-                    <div class="row" style="margin: 0;">
-                      <div class="col-md-3">
-                        <p>Alric Liew</p>
-                      </div>
-                      <div class="col-md-1">
-                        <p>Male</p>
-                      </div>
-                      <div class="col-md-3">
-                        <p >A Bong</p>
-                      </div>
-                      <div class="col-md-2">
-                        <p>+60138252818</p>
-                      </div>
-                      <div class="col-md-1">
-                        <p class="card-student-status-label active">ACTIVE</p>
-                      </div>
-                      <div class="col-md-2">
-                        <p>12/2/2021</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-1">
-                    <a href="#" style="margin: 0; padding: 0.3em;" class="btn btn-sm btn-outline-danger btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" ><i class="material-icons" style="color: red;">remove</i></a>
-                  </div>
-                </div>
-              </div> -->
-      
+
             </div>
-  
+
           </div>
 
 
@@ -650,7 +467,7 @@
                         <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Date</h6>
                       </div>
                       <div class="col-md-3">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="Client Name">Name</h6>
+                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="Client Name">Employer</h6>
                       </div>
                       <div class="col-md-3">
                         <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="Description">Description</h6>
@@ -679,7 +496,7 @@
                   
               </div>
   
-              <!-- Invoice List Start -->
+              <!-- Transaction List Start -->
               <!-- <div class="col-md-12 card-student-item">
                 <div class="row">
                   <div class="col-md-11" style="padding: 0;">
@@ -716,7 +533,7 @@
               </div>
             </div>
           </div>
-          
+
         </div>
 
         <footer class="footer">
@@ -811,18 +628,15 @@
   <!--  Notifications Plugin    -->
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+  <script src="../../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
   <!-- Common constants -->
   <script src="../../assets/js/common.js" type="text/javascript"></script>
   <!-- Core Tutor Js -->
   <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
-  <!-- Date range picker -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-  <!-- Html 2 PDF -->
-  <script src="../../assets/js/html2pdf.js" type="text/javascript"></script>
-
+    <!-- Html 2 PDF -->
+    <script src="../../assets/js/html2pdf.js" type="text/javascript"></script>
 	<script>
     // Global Variables
     var tutorId;
@@ -853,13 +667,13 @@
     // Store last document - Used for payroll
     var latestInvoiceDoc = null;
 
+    // Init session storage
+    sessionStorage.setItem(SESSION_STORAGE_SALARY_ALL_DOCS_KEY, null);
+    sessionStorage.setItem(SESSION_STORAGE_SALARY_CURRENT_DOC_KEY, null);
+
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
-    // Init session storage
-    sessionStorage.setItem(SESSION_STORAGE_PAYSLIP_ALL_DOCS_KEY, null);
-    sessionStorage.setItem(SESSION_STORAGE_PAYSLIP_CURRENT_DOC_KEY, null);
-           
     // Set the nav name and global var, if user already login and have session Storage 
     var tutorInfoObj = null;
     if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
@@ -895,23 +709,18 @@
 			}else{
         // if the displayName is null, it means user register using Phone
         if (firebase.auth().currentUser.displayName == null ){
-          tutorId = firebase.auth().currentUser.phoneNumber;
+            tutorId = firebase.auth().currentUser.phoneNumber;
         }else{
           tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
         }
-        loadUserInfo(tutorId);
-        
-        loadAllPayslip();
-
-        loadPayroll();
-
-      
+        loadUserInfo(tutorId)
+          
+        loadAllTransDoc();
 
 			}
 		});
 
-
-    // Tutor 
+    // Tutor Specific
     function loadUserInfo(tutorId){
       // Tutor Id must be a phone with +60, no spacing or other chars
       var docRef = db.collection("Tutor").doc(tutorId);
@@ -1085,134 +894,17 @@
 
     };
 
-    // Load recent payrolls
-    function loadPayroll(){
-      var docRef = db.collection("Financial")
-          .doc("v1")
-          .collection("Payroll")
-          .where(PAYROLL_ADMIN_ID, '==', tutorId)
-          .where(PAYROLL_STATUS, '==', true)
-          .orderBy(PAYROLL_DATE_START, 'desc')
-          .limit(2)
 
-      docRef
-      .get()
-      .then((querySnapshot) => {
-
-        if(querySnapshot.empty) {
-
-          // console.log("Empty, Create a new payroll");
-
-        } 
-        else {
-          querySnapshot.forEach((doc) => {
-            console.log("Payroll found");
-            console.log(doc.data());
-
-            renderPayroll(doc);
-            
-          });
-
-        }
- 
-      }).catch((error) => {
-          console.log("Error getting document:", error);
-      });
-
-    }
-
-    // Render payroll
-    function renderPayroll(doc){
-      // <div class="col-md-12" id="payrollList">
-      //   <a href="javascript:;" style="margin-right:0.5rem">1/10/2021 - 31/10/2021 </a>
-      //   <a href="javascript:;" style="margin-right:0.5rem">1/11/2021 - 30/11/2021 </a>
-      //   <a href="javascript:;" style="margin-right:0.5rem">1/12/2021 - 31/12/2021 </a>
-      //   <a href="javascript:;" style="margin-right:0.5rem">Other payrolls </a>
-      // </div>
-      // Card top
-      let payroll_a = document.createElement('a');
-      payroll_a.setAttribute('href', 'javascript:;');
-      payroll_a.setAttribute('style', 'margin-right:1rem');
-      payroll_a.setAttribute('onclick', 'loadPayslipFixed('+doc.data()[PAYROLL_DATE_START].seconds +', '+ doc.data()[PAYROLL_DATE_END].seconds+');');
-      payroll_a.textContent = doc.data()[PAYROLL_NAME];
-
-      const payrollList = document.getElementById("payrollList");
-      payrollList.insertBefore( payroll_a, payrollList.children[0])
-      // payrollList.appendChild(payroll_a);
-
-      
-
-    }
-
-
-    // Load payslip based on selected date range
-    function loadPayslipFixed(start, end){
-
-      // Note: start/end is in seconds
-      console.log(start, end)
-
-      // Reload the payslip views
-      let studentItemList = document.getElementById('card-main').querySelectorAll('div.card-student-item');
-      // console.log(studentItemList);
-      studentItemList.forEach((row, index)=> {
-        row.remove();
-      })
-      
-      latestInvoiceDoc = null;
-
-      
-      let start1 = new Date('2021-11-04').setSeconds(start-1000);
-      let end2 = new Date('2021-11-13').setSeconds(end+1000);
-
-      let docRef = db.collection("Financial")
-          .doc("v1")
-          .collection("Transaction")
-          .where(TRANS_VIEWER_ARR, "array-contains", tutorId)
-          .where(TRANS_TYPE, "==", TRANS_TYPE_PAY)
-          .where(TRANS_DATE, ">=",  new Date((start)*1000)) // Set the start time a little bit before to make sure > works
-          .where(TRANS_DATE, "<=", new Date((end)*1000))
-          .where(TRANS_STATUS, "==", true)
-          .orderBy(TRANS_DATE, 'desc');
-          // .startAfter(latestInvoiceDoc || today)
-          // .limit(20);
-
-      docRef
-      .get()
-      .then((querySnapshot) => {
-
-
-        if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0)){
-          document.getElementById("noDataPlaceholder").style.display = 'initial';
-        }else{
-          document.getElementById("noDataPlaceholder").style.display = 'none';
-        }
-
-        // Session Storage data
-        let docsObj = [];
-
-        querySnapshot.forEach((doc) => {
-
-          docsObj.push(doc.data());
-          // console.log(doc.data())
-          renderTransDoc(doc);
-
-        });
-
-      });
-
-    }
-
-    
     // Invoice Load More Button - Init
     const loadmore = document.querySelector('#btnInvoiceLoadMore');
     loadmore.style.visibility='hidden';
     const loadmoreHandleClick = () =>{
-      loadAllPayslip();
+      loadAllTransDoc();
     }
     loadmore.addEventListener('click', loadmoreHandleClick );
     
     // Tutor Specific
-    function loadAllPayslip(){
+    function loadAllTransDoc(){
       let today = new Date(2100, 12, 31);// Set a big date
 
       let docRef = db.collection("Financial")
@@ -1220,6 +912,7 @@
           .collection("Transaction")
           .where(TRANS_VIEWER_ARR, "array-contains", tutorId)
           .where(TRANS_TYPE, "==", TRANS_TYPE_PAY)
+          .where(TRANS_RECEIVER_ID, "==", tutorId)
           .where(TRANS_STATUS, "==", true)
           .orderBy(TRANS_DATE, 'desc')
           .startAfter(latestInvoiceDoc || today)
@@ -1249,17 +942,17 @@
         // Store all docs to sessionStorage. If loadmore is clicked, we concat the newly loaded and previous docs.
         let allObjList = null;
         // Set the fields
-        allObjList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_PAYSLIP_ALL_DOCS_KEY));
+        allObjList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_SALARY_ALL_DOCS_KEY));
         if (allObjList == null ){
           // console.log("First time loading the data");
-          sessionStorage.setItem(SESSION_STORAGE_PAYSLIP_ALL_DOCS_KEY, JSON.stringify(docsObj));
-          sessionStorage.setItem(SESSION_STORAGE_PAYSLIP_CURRENT_DOC_KEY, null);
+          sessionStorage.setItem(SESSION_STORAGE_SALARY_ALL_DOCS_KEY, JSON.stringify(docsObj));
+          sessionStorage.setItem(SESSION_STORAGE_SALARY_CURRENT_DOC_KEY, null);
         }
         else{
           // console.log("Nth time loading the data");
           allObjList = allObjList.concat(docsObj);
-          sessionStorage.setItem(SESSION_STORAGE_PAYSLIP_ALL_DOCS_KEY, JSON.stringify(allObjList));
-          sessionStorage.setItem(SESSION_STORAGE_PAYSLIP_CURRENT_DOC_KEY, null);
+          sessionStorage.setItem(SESSION_STORAGE_SALARY_ALL_DOCS_KEY, JSON.stringify(allObjList));
+          sessionStorage.setItem(SESSION_STORAGE_SALARY_CURRENT_DOC_KEY, null);
         }
  
         latestInvoiceDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
@@ -1278,7 +971,6 @@
 
     };
 
-    // Render transaction documents
     function renderTransDoc(doc){
     // <div class="col-md-12 card-student-item">
     //   <div class="row">
@@ -1332,13 +1024,8 @@
       desc_div.className = "col-md-3";
       desc_div.appendChild(desc_p);
 
-      // Client
-      let clientName = '';
-      if (tutorId === doc.data()[TRANS_SENDER_ID]){
-        clientName = doc.data()[TRANS_RECEIVER_NAME];
-      }else{
-        clientName = doc.data()[TRANS_SENDER_NAME];
-      }
+      // Employer
+      let clientName = doc.data()[TRANS_SENDER_NAME];
       let clientName_p = document.createElement('p');
       clientName_p.textContent = clientName;
       let clientName_div = document.createElement('div');
@@ -1348,6 +1035,8 @@
       // Amount
       let total_p = document.createElement('p');
       total_p.textContent = 'RM'+ parseFloat(doc.data()[TRANS_TOTAL]).toFixed(2);
+      total_p.setAttribute('style', 'color: green;');
+
       let total_div = document.createElement('div');
       total_div.className = "col-md-2";
       total_div.appendChild(total_p);
@@ -1410,19 +1099,8 @@
       detail_top_div.appendChild(detail_div);
 
       //Edit btn
-      // <span class="fa-stack"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-flag fa-stack-1x"></i></span>
-
-      // <span class="fa-stack" style="vertical-align: top; font-size: 73%; color: #2e74b6; cursor: pointer; margin-right: 0.5rem;" data-target="#recordPaymentModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas">
-      //   <i class="fas fa-circle fa-stack-2x"></i>
-      //   <i class="fas fa-pen fa-stack-1x fa-inverse"></i>
-      // </span>
-
-      // recordPaymentBtn_html = "<span class='fa-stack' style='vertical-align: top; font-size: 73%; color: #2e74b6; cursor: pointer; margin-right: 0.5rem;' data-target='#recordPaymentModal' data-toggle='modal' data-employeecardid='"+payslipData.tutorId+"' data-employeecardname='"+payslipData.name+"'><i class='fas fa-circle fa-stack-2x'></i><i class='fas fa-pen fa-stack-1x fa-inverse'></i></span>";
-
       let blogsHtml_editbtn = '';
-      // blogsHtml_editbtn += "<span class='fa-stack'><i class='fas fa-pen-square fa-lg'></i></span>";
       blogsHtml_editbtn += "<span class='fa-stack' style='vertical-align: middle; font-size: 73%; color: #2e74b6; cursor: pointer; margin-right: 0.5rem;'><i class='fas fa-circle fa-stack-2x'></i><i class='fas fa-pen fa-stack-1x fa-inverse'></i></span>";
-
 
       let btn_edit = document.createElement('a');
       btn_edit.innerHTML = blogsHtml_editbtn;
@@ -1453,7 +1131,7 @@
       // btn_a.setAttribute("data-studentname",  doc.data().childName);
       let btn_div = document.createElement('div');
       btn_div.className = "col-md-1 align-self-center";
-      btn_div.appendChild(btn_edit);
+      // btn_div.appendChild(btn_edit);
       // btn_div.appendChild(btn_a);
  
       // Student Top
@@ -1472,8 +1150,8 @@
 
     }
 
-    // Render payslip preview
-    function loadPayslipPreview(pay_id){
+     // Render payslip preview
+     function loadPayslipPreview(pay_id){
       let payslipDocRef = db.collection("Financial")
         .doc("v1")
         .collection("Payslip")
@@ -1566,169 +1244,6 @@
           console.log("Error getting document:", error);
       });
 
-    }
-
- 
-	  function viewTutorFunction(elem){
-      // Get attribute and 
-      if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY)) == null ){
-        console.log("Error: Impossible to reach this state");
-        // Because this func only trigger when there's active class loaded
-        return;
-      }else{
-
-        let allClassList = null;
-
-        // Set the fields
-        allClassList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY));
-        allClassList.forEach((item) => {
-          if (item.id === elem.getAttribute('data-id')){
-            // Assign the data to viewTutorModal
-            document.getElementById("viewTutorName").value = item[TUTOR_TUTOR_NAME];
-            document.getElementById("viewTutorPhone").value = item[TUTOR_TUTOR_PHONE];
-            document.getElementById("viewTutorEmail").value = item[TUTOR_TUTOR_EMAIL];
-            document.getElementById("viewTutorGenderRadioMale").checked = item[TUTOR_TUTOR_GENDER] == 0 ? true: false;
-            document.getElementById("viewTutorGenderRadioFemale").checked = item[TUTOR_TUTOR_GENDER] == 1 ? true: false;
-            document.getElementById("viewTutorAge").value = item[TUTOR_TUTOR_AGE];
-            document.getElementById("viewTutorImgUrl").src = item[TUTOR_TUTOR_IMG_URL];
-            console.log(item[TUTOR_TUTOR_WEB_URL])
-            if (item[TUTOR_TUTOR_WEB_URL] == null || item[TUTOR_TUTOR_WEB_URL] == ''){
-              document.getElementById("btnViewTutorModalFullProfile").disabled = true;  
-              document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','#'); 
-              document.getElementById("btnViewTutorModalFullProfile").setAttribute('target',''); 
-            }
-            else{
-              document.getElementById("btnViewTutorModalFullProfile").disabled = false;      
-              document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','https://golearn.com.my/tutor/'+item[TUTOR_TUTOR_WEB_URL]); 
-              document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','_blank'); 
-            }
-
-            // sessionStorage.setItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY, JSON.stringify(item));
-            // sessionStorage.setItem(SESSION_STORAGE_CLASS_LOAD_KEY, true);
-          }
-          // window.location = './edit-class.html?id=';
-
-          // console.log(item);
-        });
-        
-      }
-		}
-    
-    // Load record payment details when recordpayment modal launch
-    function loadRecordPaymentDetail(PAY_ID){
-
-      let payslipDocRef = db.collection("Financial")
-        .doc("v1")
-        .collection("Payslip")
-        .doc(PAY_ID);
-
-      payslipDocRef
-        .get()
-        
-        .then((doc) => {
-
-          if (doc.exists) {
-            // console.log("Payslip found, update exisiting payslip.");
-            let date = doc.data()[PAY_PAYMENT_DATE];
-
-            document.getElementById("inPaymentDate").value = (date == null || date == '') ? '' : date.toDate().toLocaleDateString("en-GB");
-            document.getElementById("inPaymentAmount").value = doc.data()[PAY_PAYMENT_AMOUNT];
-            document.getElementById("inPaymentNotes").value = doc.data()[PAY_PAYMENT_NOTE];
-
-          } 
-          else {
-            func.showNotification('top','center', 'danger', 'error_outline', "Cannot record payment for unsaved payslip." );
-
-            document.getElementById("inPaymentDate").value = '';
-            document.getElementById("inPaymentAmount").value = '';
-            document.getElementById("inPaymentNotes").value = '';
-          }
-
-          // Load the fields and check 
-          checkRecordPaymentModalFields();
-  
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
-
-    }
-
-    // Copy a text based on element ID
-    function copyText(targetElemId){
-      /* Get the text field */
-      let copyText = document.getElementById(targetElemId);
-      console.log(copyText)
-      console.log(copyText.select())
-      /* Select the text field */
-      copyText.focus();
-      copyText.select();
-      copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-      /* Copy the text inside the text field */
-      navigator.clipboard.writeText(copyText.value);
-
-    }
-
-    // Check record payment modal fields
-    function checkRecordPaymentModalFields(){
-
-      let recordPaymentDate = document.getElementById('inPaymentDate').value;
-      let recordPaymentAmount = document.getElementById('inPaymentAmount').value;
-
-      if (recordPaymentDate == null || recordPaymentDate == '' || recordPaymentAmount == null || recordPaymentAmount == ''){
-        document.getElementById('btnRecordPaymentModalUpdate').setAttribute('disabled', true);
-      }
-      else{
-        document.getElementById('btnRecordPaymentModalUpdate').removeAttribute('disabled');
-      }
-
-    }
-
-    // Convert imgUrl to data
-    function toDataURL(src, callback, outputFormat) {
-      var img = new Image();
-      // var img = document.getElementById("tutorImgUrl");
-      var dataURL;
-      img.crossOrigin = 'Anonymous';
-      img.src = src;
-      img.onload = function() {
-        var canvas = document.createElement('CANVAS');
-        var ctx = canvas.getContext('2d');
-        
-        canvas.height = this.naturalHeight;
-        canvas.width = this.naturalWidth;
-        ctx.drawImage(this, 0, 0);
-        dataURL = canvas.toDataURL(outputFormat);
-        // img.src = dataURL;
-        // console.log(dataURL)
-        var imgTarget = document.getElementById("previewTutorImgUrl");
-        imgTarget.src = dataURL;
-        callback(dataURL);
-      };
-      // img.src = src;
-      // img.src = dataURL;
-      if (img.complete || img.complete === undefined) {
-        img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-        img.src = src;
-      }
-    }
-
-    // Generate PDF
-    // https://ekoopmans.github.io/html2pdf.js/
-    function generatePDFeKoopmans(id){
-
-      element = document.getElementById(id);
-
-      var opt = {
-        margin:       [0, 0, 0, 0],
-        filename:     'myfile.pdf',
-        pagebreak:    { before: '.beforeClass', after: ['#after1', '#after2'], avoid: 'img' },
-        image:        { type: 'jpeg', quality: 0.95 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-      };
-
-      html2pdf().set(opt).from(element).save();
     }
 
     // Preview payslip data.
@@ -2559,6 +2074,113 @@
 
     }
 
+        // Convert imgUrl to data
+        function toDataURL(src, callback, outputFormat) {
+      var img = new Image();
+      // var img = document.getElementById("tutorImgUrl");
+      var dataURL;
+      img.crossOrigin = 'Anonymous';
+      img.src = src;
+      img.onload = function() {
+        var canvas = document.createElement('CANVAS');
+        var ctx = canvas.getContext('2d');
+        
+        canvas.height = this.naturalHeight;
+        canvas.width = this.naturalWidth;
+        ctx.drawImage(this, 0, 0);
+        dataURL = canvas.toDataURL(outputFormat);
+        // img.src = dataURL;
+        // console.log(dataURL)
+        var imgTarget = document.getElementById("previewTutorImgUrl");
+        imgTarget.src = dataURL;
+        callback(dataURL);
+      };
+      // img.src = src;
+      // img.src = dataURL;
+      if (img.complete || img.complete === undefined) {
+        img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+        img.src = src;
+      }
+    }
+
+    // Generate PDF
+    // https://ekoopmans.github.io/html2pdf.js/
+    function generatePDFeKoopmans(id){
+
+      element = document.getElementById(id);
+
+      var opt = {
+        margin:       [0, 0, 0, 0],
+        filename:     'myfile.pdf',
+        pagebreak:    { before: '.beforeClass', after: ['#after1', '#after2'], avoid: 'img' },
+        image:        { type: 'jpeg', quality: 0.95 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save();
+    }
+
+
+	  function viewTutorFunction(elem){
+      // Get attribute and 
+      if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY)) == null ){
+        console.log("Error: Impossible to reach this state");
+        // Because this func only trigger when there's active class loaded
+        return;
+      }else{
+
+        let allClassList = null;
+
+        // Set the fields
+        allClassList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY));
+        allClassList.forEach((item) => {
+          if (item.id === elem.getAttribute('data-id')){
+            // Assign the data to viewTutorModal
+            document.getElementById("viewTutorName").value = item[TUTOR_TUTOR_NAME];
+            document.getElementById("viewTutorPhone").value = item[TUTOR_TUTOR_PHONE];
+            document.getElementById("viewTutorEmail").value = item[TUTOR_TUTOR_EMAIL];
+            document.getElementById("viewTutorGenderRadioMale").checked = item[TUTOR_TUTOR_GENDER] == 0 ? true: false;
+            document.getElementById("viewTutorGenderRadioFemale").checked = item[TUTOR_TUTOR_GENDER] == 1 ? true: false;
+            document.getElementById("viewTutorAge").value = item[TUTOR_TUTOR_AGE];
+            document.getElementById("viewTutorImgUrl").src = item[TUTOR_TUTOR_IMG_URL];
+            console.log(item[TUTOR_TUTOR_WEB_URL])
+            if (item[TUTOR_TUTOR_WEB_URL] == null || item[TUTOR_TUTOR_WEB_URL] == ''){
+              document.getElementById("btnViewTutorModalFullProfile").disabled = true;  
+              document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','#'); 
+              document.getElementById("btnViewTutorModalFullProfile").setAttribute('target',''); 
+            }
+            else{
+              document.getElementById("btnViewTutorModalFullProfile").disabled = false;      
+              document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','https://golearn.com.my/tutor/'+item[TUTOR_TUTOR_WEB_URL]); 
+              document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','_blank'); 
+            }
+
+            // sessionStorage.setItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY, JSON.stringify(item));
+            // sessionStorage.setItem(SESSION_STORAGE_CLASS_LOAD_KEY, true);
+          }
+          // window.location = './edit-class.html?id=';
+
+          // console.log(item);
+        });
+        
+      }
+		}
+    // Copy a text based on element ID
+    function copyText(targetElemId){
+      /* Get the text field */
+      let copyText = document.getElementById(targetElemId);
+      console.log(copyText)
+      console.log(copyText.select())
+      /* Select the text field */
+      copyText.focus();
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the text field */
+      navigator.clipboard.writeText(copyText.value);
+
+    }
 
     // Sign out
     function signOutFunction(){
@@ -2571,12 +2193,8 @@
   <script>
 		$( document ).ready(function() {
 
-      var EMPLOYEE_NAME = ""; // Extract info from data-* attributes
-      var TRANS_ID = ""; 
-      var PAY_ID = ""; 
-      var PAY_STATUS = '';
-
       var PAYSLIP_ID = ''
+
       // Preview Modal Show
       $('#previewModal').on('show.bs.modal', function (e) {
         let button = $(e.relatedTarget) // Button/Components that triggered the modal
@@ -2588,155 +2206,6 @@
 
       $('#previewModal').on('hide.bs.modal', function (e) {
         PAYSLIP_ID = '';
-      });
-
-      // Populate record payment modal
-      $('#recordPaymentModal').on('show.bs.modal', function (e) {
-        let button = $(e.relatedTarget);
-        EMPLOYEE_NAME = button.data('name');
-        TRANS_ID = button.data('transid');
-        PAY_ID = button.data('payid');
-        PAY_STATUS = button.data('status');
-        // document.getElementById("confirmEmployeeCardId").setAttribute('value', EMPLOYEE_CARD_ID);
-        document.getElementById("recordPaymentModalTitle").textContent = 'Record payment for '+ EMPLOYEE_NAME;
-
-        if (PAY_STATUS === TRANS_PAY_STATUS_PAID){
-          document.getElementById("statusNew").checked = false;
-          document.getElementById("statusPaid").checked = true;
-        }else{
-          document.getElementById("statusNew").checked = true;
-          document.getElementById("statusPaid").checked = false;
-        }
-
-        
-
-        loadRecordPaymentDetail(PAY_ID);
-
-        // document.getElementById("inPaymentDate").value = '';
-        // document.getElementById("inPaymentAmount").value = '';
-        // document.getElementById("inPaymentNotes").value = '';
-
-
-      });
-
-      $('#recordPaymentModal').on('hide.bs.modal', function (event) {
-        document.getElementById("statusNew").checked = true;
-        document.getElementById("statusPaid").checked = false;
-        document.getElementById("inPaymentDate").value = '';
-        document.getElementById("inPaymentAmount").value = '';
-        document.getElementById("inPaymentNotes").value = '';
-        
-      });
-
-      // Record Payment
-      $('#btnRecordPaymentModalUpdate').on('click', function (event) {
-
-        let statusNew = document.getElementById("statusNew").checked ;
-        let statusPaid = document.getElementById("statusPaid").checked ;
-
-        let inPaymentDate = document.getElementById("inPaymentDate").value ;
-        let inPaymentAmount = document.getElementById("inPaymentAmount").value;
-        let inPaymentNotes = document.getElementById("inPaymentNotes").value ;
-
-        let payslipDocRef = db.collection("Financial")
-          .doc("v1")
-          .collection("Payslip")
-          .doc(PAY_ID);
-
-
-        payslipDocRef
-        .get()
-        
-        .then((doc) => {
-
-          if (doc.exists) {
-            // console.log("Payslip found, update exisiting payslip.");
-            
-            let payslipDocRef1 = db.collection("Financial")
-              .doc("v1")
-              .collection("Payslip")
-              .doc(PAY_ID);
-
-            let transDocRef = db.collection("Financial")
-              .doc("v1")
-              .collection("Transaction")
-              .doc(TRANS_ID);
-
-            // Payment date
-            let paymentDate = $('#inPaymentDate').data('daterangepicker').startDate.format('DD/MM/YYYY');
-            // console.log('paymentDate');
-            // console.log(paymentDate);
-            paymentDate = paymentDate.split("/");
-            let newPaymentDate = new Date( paymentDate[2], paymentDate[1] - 1, paymentDate[0]);
-            let paymentDateFinal = firebase.firestore.Timestamp.fromDate(newPaymentDate);
-
-            var data = {
-              [PAY_PAY_STATUS]: statusPaid ? PAY_STATUS_PAID : PAY_STATUS_NEW,
-              [PAY_PAYMENT_DATE]: paymentDateFinal,
-              [PAY_PAYMENT_AMOUNT]: inPaymentAmount,
-              [PAY_PAYMENT_NOTE]: inPaymentNotes,
-              [PAY_DATE_EDIT]: new Date(),
-            }
-
-            // console.log("*Payslip Data...")
-            // console.log(data)
-
-
-            var transData = {
-              [TRANS_DOC_STATUS] : statusPaid ? TRANS_PAY_STATUS_PAID : TRANS_PAY_STATUS_NEW,
-              [TRANS_DATE_EDIT]: new Date(),
-            }
-
-            // console.log("Transaction Data...")
-            // console.log(transData)
-
-            // Update Payslip
-            payslipDocRef1.set(data, { merge: true })
-            .then(() => {
-              
-              // Create Transaction
-              transDocRef.set(transData, { merge: true })
-              .then(() => {
-
-                func.showNotification('top','center', 'success', 'check_circle', "Payment recorded." );
-
-                // Reload the payslip views
-                let studentItemList = document.getElementById('card-main').querySelectorAll('div.card-student-item');
-                // console.log(studentItemList);
-                studentItemList.forEach((row, index)=> {
-                  row.remove();
-                })
-                
-                latestInvoiceDoc = null;
-                loadAllPayslip();  
-
-              });
-
-              
-            });
-
-            EMPLOYEE_NAME = "";
-            TRANS_ID = ""; 
-            PAY_ID = ""; 
-
-          } else {
-            func.showNotification('top','center', 'danger', 'error_outline', "Cannot record payment for unsaved payslip." );
-
-            EMPLOYEE_NAME = "";
-            TRANS_ID = ""; 
-            PAY_ID = ""; 
-
-          }
-
-  
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-            EMPLOYEE_NAME = "";
-            TRANS_ID = ""; 
-            PAY_ID = ""; 
-        });
-
-
       });
 
 
@@ -2760,51 +2229,57 @@
         $('#signOutModal').modal('hide');
       });
 
+			// Add New Course
+			$("#btnAddClass").click(function(){
+        window.location = "./add-class.html"
 
+        // if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+        //   func.showNotification('top','center', 'danger', 'error_outline', "Activate your account to add new courses." );
+        // }else if  (allCourseSize >= current_aTotalSubjectLimit){
+        //   func.showNotification('top','center', 'danger', 'error_outline', "You have reach maximum ("+current_aTotalSubjectLimit+") subjects. Upgrade to Pro now!" );
+        // }else if (current_preferedAreaList == null || current_preferedAreaList.length == 0){
+        //   func.showNotification('top','center', 'danger', 'error_outline', "Please fill in Update Information > Preferred Area");
+        // }
+        // else{
+        //   window.location = "./add-class.html"
+        // }
+			});
+    
 		});
 
   </script>
   
-  <!-- Date range picker -->
+  <!-- More functions -->
   <script>
-    $(function() {
-      $('#daterange').daterangepicker({
-        // opens: 'left',
-        // timePicker: true,
-        // autoUpdateInput: false,
-      }, function(start, end, label) {
-        // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+	  function editClassFunction(elem){
+      // Get attribute and 
+      if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_ALL_DOCS_KEY)) == null ){
+        console.log("Error: Impossible to reach this state");
+        // Because this func only trigger when there's active class loaded
+        return;
+      }else{
 
-        $('#daterange span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+        let classObj = null;
+        let allClassList = null;
 
-        // Convert milisecondsto seconds
-        let startDate =moment(start).valueOf() / 1000;
-        let endDate = moment(end).valueOf() / 1000;
+        // Set the fields
+        allClassList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_ALL_DOCS_KEY));
+        // allClassList = classObj[SESSION_STORAGE_ALL_DOCS_KEY];
+        allClassList.forEach((item) => {
+          if (item.id === elem.getAttribute('data-id')){
+            sessionStorage.setItem(SESSION_STORAGE_CLASS_CURRENT_DOC_KEY, JSON.stringify(item));
+            sessionStorage.setItem(SESSION_STORAGE_CLASS_LOAD_KEY, true);
+          }
+          // window.location = './edit-class.html?id='+elem.getAttribute('data-id');
+          window.location = './edit-class.html?id=';
 
-        // console.log(startDate, endDate)
-
-        loadPayslipFixed(startDate, endDate)
-
-      });
-    });
-    
-    // Record Payment Single Date Picker
-    $('#inPaymentDate').daterangepicker({
-      singleDatePicker: true,
-      showDropdowns: true,
-      
-      locale: {
-          format: 'DD/MM/YYYY'
-      },
-    }, function(start, end, label) {
-
-      // Check if the fields are filled.
-      checkRecordPaymentModalFields();
-
-    });
+          // console.log(item);
+        });
+        
+      }
+		}
 
   </script>
-
  
 </body>
 

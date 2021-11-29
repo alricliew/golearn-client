@@ -22,7 +22,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
   <script src="../js/firebase.js"></script>
   <!-- Tutor Portal specific CSS -->
-  <link href="../css/tutor-portal.css" rel="stylesheet" />
+  <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
   <!-- Date Picker -->
   <link href="../../assets/css/mc-calendar.min.css" rel="stylesheet"/>
   <link href="../../assets/css/intlTelInput.css" rel="stylesheet" >
@@ -850,7 +850,7 @@
                 <div class="col-5">
                   <div class="row">
                     <div class="col-6 text-right" style="padding-right: 0;">
-                      <h6>Invoice Number</h6>
+                      <h6>Invoice No</h6>
                       <h6>Invoice Date</h6>
                       <h6 style="color: red;">Payment Due</h6>
                       <h6>Status</h6>
@@ -1325,7 +1325,7 @@
       }
 
       document.getElementById("invClientName").textContent = invObj[INV_RECEIVER_NAME];
-      document.getElementById("invAmount").textContent = invObj[INV_TOTAL];
+      document.getElementById("invAmount").textContent = 'RM'+parseFloat(invObj[INV_TOTAL]).toFixed(2);
       document.getElementById("invPaymentDue").textContent = new Date(invObj[INV_DUE_DATE].seconds*1000).toLocaleDateString("en-GB");
       
       // Step 1

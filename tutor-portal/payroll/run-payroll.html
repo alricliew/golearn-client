@@ -20,12 +20,14 @@
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
   <script src="../js/firebase.js"></script>
   <!-- Tutor Portal specific CSS -->
-  <link href="../css/tutor-portal.css" rel="stylesheet" />
+  <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
   <!-- Date rage picker -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <!-- International Telephone Input -->
   <link href="../../assets/css/intlTelInput.css" rel="stylesheet" >
+
   <style>
+
     .table {
         border: 1px solid #ccc;
         border-collapse: collapse;
@@ -80,7 +82,7 @@
       display: block;
       margin: 0 auto;
       /* margin-bottom: 0.5cm; */
-      box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+      /* box-shadow: 0 0 0.5cm rgba(0,0,0,0.5); */
     }
     page[size="A4"] {  
       width: 21cm;
@@ -92,6 +94,19 @@
     page[size="A4"][layout="landscape"] {
       width: 29.7cm;
       height: 21cm;  
+    }
+
+    .icon {
+      background: url('../../assets/img/salary.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: 32px;
+      /* font-size: x-large; */
+      /* max-height: 100%; */
+      width: 32px;
+      /* max-width: 100%; */
+      display: block;
+      /* Other styles here */
     }
   </style>
 </head>
@@ -136,15 +151,15 @@
             <h4 class="nav-link" style="margin-left: 1rem;">Financial</h4>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../transaction/">
-              <i class="fas fa-wallet fa-fw nav-icon"></i>
-              <p>Transactions</p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="../invoice/">
               <i class="fas fa-file-invoice-dollar fa-fw nav-icon"></i>
               <p>Invoices</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../salary/">
+              <i class="fas fa-money-bill-wave fa-fw nav-icon"></i>
+              <p>Salaries</p>
             </a>
           </li>
           <li class="nav-item active">
@@ -153,12 +168,12 @@
               <p>Payroll <span style="visibility: hidden;">PRO</span></p>
             </a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="../transaction/settings.html">
-              <i class="fab fa-expeditedssl fa-fw nav-icon"></i>
-              <p>Settings</p>
+          <li class="nav-item">
+            <a class="nav-link" href="../transaction/">
+              <i class="fas fa-exchange-alt fa-fw nav-icon"></i>
+              <p>Transactions</p>
             </a>
-          </li> -->
+          </li>
           <li class="nav-item">
             <h4 class="nav-link" style="margin-left: 1rem;">Public</h4>
           </li>
@@ -259,152 +274,173 @@
 			<!-- Modal Start -->
       
       <!-- Preview modal -->
-      <div class="row">
-        <div class="modal fade" tabindex="-1" role="dialog" id="previewModal" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="container">
-                <!-- Preview -->
-              <page size="A4" id="invTemplate" style="position: relative;">
+      <div class="row" >
+        <div class="modal fade" tabindex="-1" role="dialog" id="previewModal" aria-labelledby="staticBackdropLabel" aria-hidden="true"  >
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content" style="background-color: transparent;  box-shadow: none; border: none;">
+              <div class="modal-body" style="background-color: transparent; box-shadow: none;  border: none;">
+               <!-- Preview -->
+               <div class="row" style="overflow-y:auto;">
+                <div class="col-12" style="overflow-x:auto;  padding: 1rem;">
+                  <a href="javascript:;" class="btn btn-primary btn-round" style="text-transform: none; background-color: white; color: #2e74b6;" onclick="generatePDFeKoopmans('invTemplate')">Download As PDF</a>
 
-                <div class="card-body" >
-                  <div class="row">
-                    <div class="col-4 text-center">
+                  <span id="netpayview_preview" style="color: white;"></span>
 
-                      <div class="form-group">
-                        <!-- <canvas id="myCanvas" style="height: 150px;width: 225px; object-fit: cover;" ></canvas> -->
-                        <div style="height: 115px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
-                          <img id="previewTutorImgUrl" style="height: 100%; width: auto; " src="../../assets/img/empty-photo.png" crossorigin="anonymous" alt = ""/>
-                          <!-- <canvas id="myCanvas" ></canvas> -->
-                        </div>
-                      </div>
-                    </div>
+                  <page size="A4" id="invTemplate" style="position: relative;">
 
-                    <div class="col-2">
-                      <!--  Do nothing -->
-                    </div>
-
-                    <div class="col-6 text-right">
-                      <h4 style="font-size: xx-large;margin-top: 1rem;">INVOICE</h4> 
-                      <h5 id="previewInvTitle"  style="font-weight: 500;"></h5>
-                      <h4 id="previewInvBizName" style="font-weight: 500;">Your Name</h4>
-                      <h6 id="previewInvBizDetails" style="text-transform: none; font-weight: 300;"></p>
-                    </div>
-
-                  </div>
-                
-                </div>
-
-                <hr style="margin: 0rem">
-                <!-- style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;" -->
-                <div class="card-body" style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;"> 
-                  <div class="row">
-                    <div class="col-4">
-                      <h6>Billed To:</h6>
-                      <h4 id="previewInvClientName" style="font-weight: 500;"></h4>
-                      <h6 id="previewInvClientDetails"  style="text-transform: none; font-weight: 300;"></h6>
-                    </div>
-
-                    <div class="col-3"></div>
-                    <div class="col-5">
+                    <div class="card-body" >
                       <div class="row">
-                        <div class="col-6 text-right" style="padding-right: 0;">
-                          <h6>Invoice Number</h6>
-                          <h6>Invoice Date</h6>
-                          <h6 style="color: red;">Payment Due</h6>
-                          <h6>Status</h6>
-                          
-                          <!-- <p style="margin: 0.3rem; font-weight: bold;">Invoice Number</p>                            
-                          <p style="margin: 0.3rem; font-weight: bold;">Invoice Date</p>                           
-                          <p style="margin: 0.3rem; font-weight: bold;">Payment Due</p>                            
-                          <p style="margin: 0.3rem; font-weight: bold;">Status</p> -->
+                        <div class="col-4 text-center">
+    
+                          <div class="form-group">
+                            <!-- <canvas id="myCanvas" style="height: 150px;width: 225px; object-fit: cover;" ></canvas> -->
+                            <div style="height: 115px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
+                              <img id="previewTutorImgUrl" style="height: 100%; width: auto; " src="../../assets/img/empty-photo.png" crossorigin="anonymous" alt = ""/>
+                              <!-- <canvas id="myCanvas" ></canvas> -->
+                            </div>
+                          </div>
                         </div>
-                        <div class="col-6 text-left">
-                          <h6 id="previewInvNum" style="font-weight: normal;"> - </h6>
-                          <h6 id="previewInvIssueDate"> - </h6>
-                          <h6 id="previewInvPaymentDue" style="color: red;"> - </h6>
-                          <h6 id="previewInvStatus"> - </h6>
-                          <!-- <p style="margin: 0.3rem;">0100010101</p>  
-                          <p style="margin: 0.3rem;">Status</p>  
-                          <p style="margin: 0.3rem;">Status</p>  
-                          <p style="margin: 0.3rem;">Status</p>   -->
+    
+                        <div class="col-2">
+                          <!--  Do nothing -->
+                        </div>
+    
+                        <div class="col-6 text-right">
+                          <h4 style="font-size: xx-large;margin-top: 1rem;">PAYSLIP</h4> 
+                          <h5 id="previewTitle"  style="font-weight: 500;">Payslip of November 2021</h5>
+                          <h4 id="previewBizName" style="font-weight: 500;">Your Name</h4>
+                          <h6 id="previewBizDetails" style="text-transform: none; font-weight: 300;">Your Biz Details</p>
                         </div>
                       </div>
                     </div>
-                  </div>
+    
+                    <hr style="margin: 0rem">
+                    <div class="card-body" style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;"> 
+                      <div class="row">
+                        <div class="col-4">
+                          <h6>Paid To:</h6>
+                          <h4 id="previewClientName" style="font-weight: 500;">Tutor's Name</h4>
+                          <h6 id="previewClientPosition"  style="text-transform: none; font-weight: 300;"> Tutor </h6>
+                        </div>
+    
+                        <div class="col-3"></div>
+                        <div class="col-5">
+                          <div class="row">
+                            <div class="col-6 text-right" style="padding-right: 0;">
+                              <h6>Ref No</h6>
+                              <h6>Date</h6>
+                              <h6>Status</h6>
+                            </div>
+                            <div class="col-6 text-left">
+                              <h6 id="previewRefNo" style="font-weight: normal;"> - </h6>
+                              <h6 id="previewDate"> - </h6>
+                              <h6 id="previewStatus"> - </h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+    
+                      <div style="margin-top: 1rem;"></div>
+                      
+                      <div class="row">
+                        <div class="col-12"  style="overflow-x:auto;">
+                          <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
+                          <table id="tablePreview" class="table-light table-sm" cellspacing="0" width="100%" >
+                            <thead id='thead_item_preview' style="background-color: grey; color: white;">
+                              <tr>
+                                <th style="min-width: 200px; font-size: small;">Items</th>
+                                <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity</th>
+                                <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Price</th>
+                                <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
+                              </tr>
+                            </thead>
+                            <tbody id="tbody_item_preview">
+                              <tr class="subtotal" id='previewItemSubtotal'>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: right; font-weight: 500; font-size: small;">Subtotal</td>
+                                <td style="text-align: right; font-weight: 500; font-size: small;" id="grosspay_preview"></td>
+                              </tr>
+                            </tbody>
+                          </table>
+    
+                          <table id="table_additem_preview" class="table-light table-sm" cellspacing="0" width="100%">
+                            <thead id='thead_additem_preview' style="visibility: collapse;">
+                              <tr>
+                                <th style="min-width: 200px;">Items</th>
+                                <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
+                                <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
+                                <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
+                              </tr>
+                            </thead>
+                            <tbody id="tbody_additem_preview">
+                              <tr class="additional">
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: right; font-size: small;"></td>
+                                <td style="text-align: right; font-size: small;"></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+    
+                        <div class="col-12">
+                          <h4 style="text-align: right; font-weight: 500;">Net Pay <span style="margin-left: 2rem;" id="netpay_preview">RM0.00</span></h4>
+                        </div>
+    
+                        <!-- <div class="col-12">
+                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Notes</span>
+                          <span id="previewInvNotes"></span>
+                        </div> -->
+                      </div>
+                    </div>
 
-                  <div style="margin-top: 1rem;"></div>
+                    <hr style="margin: 0rem">
+                    <div class="card-body" >
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="row">
+                            <div class="col-6 text-right" style="padding-right: 0;">
+                              <h6>Bank Name</h6>
+                              <h6>AC No</h6>
+                            </div>
+                            <div class="col-6 text-left">
+                              <h6 id="previewBankName" style="font-weight: normal;"> - </h6>
+                              <h6 id="previewAcNo"> - </h6>
+                            </div>
+                          </div>
+                        </div>
+
+    
+                        <!-- <div class="col-4"></div> -->
+                        <div class="col-6">
+                          <div class="row">
+                            <div class="col-6 text-right" style="padding-right: 0;">
+                              <h6 id='previewEpfTitle' style="display: none;">EPF No</h6>
+                              <h6 id='previewSocsoTitle' style="display: none;">Socso</h6>
+                            </div>
+                            <div class="col-6 text-left">
+                              <h6 id="previewEpf" style="display: none;"> - </h6>
+                              <h6 id="previewSocso" style="display: none;"> - </h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- <div class="card-body" id="preview-footer" style="padding-top: 0; margin-top: 0; position: absolute; bottom: 0; width: 100%;">
+                      <p id="previewInvFooterNotes"></p>
+                    </div> -->
+    
+                  </page>
+
                   
-                  <div class="row">
-                    <div class="col-12"  style="overflow-x:auto;">
-                      <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
-                      <table id="tablePreview" class="table-light table-sm" cellspacing="0" width="100%" >
-                        <thead style="background-color: grey; color: white;">
-                          <tr>
-                            <th style="min-width: 200px; font-size: small;">Items</th>
-                            <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity</th>
-                            <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Price</th>
-                            <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
-                          </tr>
-                        </thead>
-                        <tbody id="previewItemBody">
-                          <!-- <tr class="item">
-                            <td style="font-size: small;"></td>
-                            <td style="text-align: right; font-size: small;"></td>
-                            <td style="text-align: right; font-size: small;"></td>
-                            <td style="text-align: right; font-size: small;"></td>
-                          </tr> -->
-                          <tr class="subtotal" id='previewItemSubtotal'>
-                            <td></td>
-                            <td></td>
-                            <td style="text-align: right; font-weight: 500; font-size: small;">Subtotal</td>
-                            <td style="text-align: right; font-weight: 500; font-size: small;" id="previewSubtotalItem"></td>
-                          </tr>
-                        </tbody>
-                      </table>
-
-                      <table id="tableAdditionalItemPreview" class="table-light table-sm" cellspacing="0" width="100%">
-                        <thead style="visibility: collapse;">
-                          <tr>
-                            <th style="min-width: 200px;">Items</th>
-                            <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
-                            <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
-                            <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
-                          </tr>
-                        </thead>
-                        <tbody id="previewAdditionalItemBody">
-                          <tr class="additional">
-                            <td></td>
-                            <td></td>
-                            <td style="text-align: right; font-size: small;"></td>
-                            <td style="text-align: right; font-size: small;"></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                    <div class="col-12">
-                      <h4 style="text-align: right; font-weight: 500;">Total <span style="margin-left: 2rem;" id="previewGrandTotal">RM0.00</span></h4>
-                    </div>
-
-                    <div class="col-12">
-                      <!-- <p><strong>Solution with JS (only deals with line breaks): </strong> <textarea class="textarea resize-ta"></textarea></p> -->
-
-                      <!-- <div class="form-group"> -->
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Notes</span>
-                        <span  id="previewInvNotes"></span>
-                        <!-- <textarea class="form-control" maxlength="250" rows='3' oninput="console.log(this.scrollHeight); this.style.height = (this.scrollHeight) + 'px';// this.setAttribute('rows', 12)" style="height: 4300px; max-height: max-content; overflow: hidden;" id="previewInvNotes" data-compulsory="false" placeholder="Enter notes that are visible to your client. (e.g payment guidelines) " ></textarea> -->
-
-                      <!-- </div> -->
-                    </div>
-                  </div>
                 </div>
-                
-                <div class="card-body" id="preview-footer" style="padding-top: 0; margin-top: 0; position: absolute; bottom: 0; width: 100%;">
-                  <p id="previewInvFooterNotes"></p>
-                </div>
-
-              </page>
+              </div>
+              </div>
             </div>
+
+
           </div>
         </div>
       </div>
@@ -512,7 +548,7 @@
           <div class="modal-dialog  modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Add New Employee</h5>
+                <h5 class="modal-title">Add Unregistered Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -526,7 +562,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Name*</span> 
-                      <input type="text" class="form-control" id="inCustomEmployeeName" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
+                      <input type="text" class="form-control" id="inCustomEmployeeName" data-compulsory="true" oninput="checkNewEmployeeValidity()"  maxlength="40">
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -544,25 +580,14 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Email (Optional)</span> 
-                      <input type="text" class="form-control" id="inCustomEmployeeEmail" data-compulsory="false" maxlength="40">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Position</span> 
+                      <input type="text" class="form-control" id="inCustomEmployeePosition" data-compulsory="false" maxlength="40">
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    
-                  </div>
+                  <div class="col-md-6"></div>
                 </div>
 
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Address (Optional) </span> 
-                      <textarea class="form-control" maxlength="250" rows="4"  id="inCustomEmployeeAddr" data-compulsory="false"></textarea>
-                    </div>
-                  </div>
-                </div>
-
-                <h5 class="">Banking Information</h5>
+                <h5 class="">Employment Details</h5>
 
                 <div class="row">
                   <div class="col-md-6">
@@ -574,7 +599,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Account Number</span> 
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Account No</span> 
                       <input type="text" class="form-control" id="inCustomBankAccNum" data-compulsory="false" maxlength="40">
                     </div>
                   </div>
@@ -583,21 +608,24 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Account Holder Name</span> 
-                      <input type="text" class="form-control" id="inCustomBankAccName" data-compulsory="false">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">EPF No</span> 
+                      <input type="text" class="form-control" id="inCustomEPF" data-compulsory="false" maxlength="40">
                     </div>
                   </div>
 
                   <div class="col-md-6">
-
+                    <div class="form-group">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Socso No</span> 
+                      <input type="text" class="form-control" id="inCustomSocso" data-compulsory="false" maxlength="40">
+                    </div>
                   </div>
                 </div>
-                
+
               </div>
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Not Now</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddCustomEmployeeModalUpdate">Confirm</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddCustomEmployeeModalUpdate" disabled>Confirm</button>
               </div>
             </div>
           </div>
@@ -926,7 +954,41 @@
         </div>
       </div>
 
+      <!-- Record Payment modal -->
+      <div class="row">
+        <div class="modal fade" id="recordPaymentModal" tabindex="-1" role="dialog" aria-labelledby="recordPaymentModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="recordPaymentModalTitle">Record Payment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payment Date*</span> 
+                  <input type="text" class="form-control" id="inPaymentDate" style="cursor: pointer; cursor: pointer;">
 
+                </div>
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payment Amount (RM)</span> 
+                  <input type="number" class="form-control" id="inPaymentAmount" oninput="checkRecordPaymentModalFields();"  maxlength="40">
+                </div>
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Notes / Memo</span> 
+                  <textarea class="form-control" maxlength="200" rows="4"  id="inPaymentNotes" data-compulsory="false"></textarea>
+                </div>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnRecordPaymentModalUpdate" disabled>Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Confirm Employee modal -->
       <div class="row">
@@ -993,6 +1055,42 @@
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Not Now</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnCreatePayrollModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Load Previous Payroll modal -->
+      <div class="row">
+        <div class="modal fade" id="loadPayrollModal" tabindex="-1" role="dialog" aria-labelledby="loadPayrollModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="loadPayrollModalTitle">Create A Payroll</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="loadPayrollModalBody">
+                <div class="row">
+                  <div class="col-md-12" id="payrollFullList">
+                    <!-- <a href="javascript:;" style="margin-right: 0.5rem;">1/10/2021 - 31/10/2021(12)</a>
+                    <a href="javascript:;" style="margin-right: 0.5rem;">1/11/2021 - 30/11/2021(5)</a>
+                    <a href="javascript:;" style="margin-right: 0.5rem;">1/12/2021 - 31/12/2021(23)</a> -->
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-12" >
+                    <a class="btn btn-sm btn-outline-primary btn-round" id="btnLoadPayrollModalLoadMore">Load More <i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">expand_more</i></a> 
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnLoadPayrollModalUpdate">Confirm</button>
               </div>
             </div>
           </div>
@@ -1154,7 +1252,7 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-md-8">
+                      <div class="col-md-6">
                         <div class="social">
                           <h4 style="font-size: x-large;"><span> <button  id="btnStep1" class="btn btn-primary btn-just-icon btn-round" style="margin-right: 1rem;">
                             <p>1</p>
@@ -1167,26 +1265,46 @@
                           <!-- <p>Create payslip for each teacher.</p> -->
                         </div>
 
-
-                      </div>
-  
-                      <div class="col-md-4 text-right">
-                        <!-- <div class="dropdown">
-                          <button class="btn btn-secondary btn-block dropdown-toggle text-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-bottom: medium solid #2e74b6; text-transform: initial;">
-                            Nov 2021
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="payrollDateRangeList">
-                            <a class="dropdown-item btn-block" href="#" onclick="$('#daterange').css('visibility', 'visible'); $('#dropdownMenuButton').text($(this).text())">Nov 2021</a>
-                            <a class="dropdown-item btn-block" href="#" onclick="$('#daterange').css('visibility', 'visible'); $('#dropdownMenuButton').text($(this).text())">Dec 2021</a>
-                            <a class="dropdown-item btn-block" href="#" onclick="$('#daterange').css('visibility', 'visible'); $('#dropdownMenuButton').text($(this).text()); //$('#dropdownMenuButton').text($('#daterange').val())">Custom period</a>
+                        <div class="row">
+                          <div class="col-md-12" id="payrollList">
+                            <!-- <a href="javascript:;" style="margin-right: 0.5rem;">1/10/2021 - 31/10/2021</a>
+                            <a href="javascript:;" style="margin-right: 0.5rem;">1/11/2021 - 30/11/2021</a>
+                            <a href="javascript:;" style="margin-right: 0.5rem;">1/12/2021 - 31/12/2021</a> -->
+                            <!-- <a href="javascript:;" style="margin-right: 0.5rem;" data-target="#loadPayrollModal" data-toggle="modal">All payrolls</a> -->
+                            <a href="javascript:;" style="margin-right: 0.5rem;" onclick="enableStep1();">New</a>
                           </div>
-                        </div> -->
-                        <div class="form-group">
-                          <input class="form-control" type="text" name="daterange" id='daterange' value="Select date range" style="visibility: visible;" />
                         </div>
 
 
-                        <a href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#createPayrollModal" style="background-color: #2e74b6;">Create Payroll <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
+
+                      </div>
+  
+                      <div class="col-md-6">
+         
+                        <div class="row">
+
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payroll period</span> 
+
+                              <input class="form-control" type="text" name="daterange" id='daterange' value="Select date range"/>
+                            </div>
+                          </div>
+
+                          <!-- <div class="col-md-6">
+                            <div class="form-group">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payroll Title</span> 
+                              <input class="form-control" type="text" id='payrollTitle'/>
+                            </div>
+                          </div> -->
+
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-12 text-right">
+                            <a id="btnCreatePayroll" href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#createPayrollModal">Create Payroll <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
+                          </div>
+                        </div>
 
                       </div>
                     </div>
@@ -1201,7 +1319,7 @@
                     <div class="row">
                       <div class="col-md-8">
                         <div class="social">
-                          <h4 style="font-size: x-large;"><span> <button  id="btnStep1" class="btn btn-primary btn-just-icon btn-round" style="margin-right: 1rem;">
+                          <h4 style="font-size: x-large;"><span> <button  id="btnStep2" class="btn btn-default btn-just-icon btn-round" style="margin-right: 1rem;">
                             <p>2</p>
                             <!-- <i class="fas fa-check-circle"></i> -->
                             </button></span> 
@@ -1210,15 +1328,13 @@
                           <!-- <h4 style="font-size: x-large;">Create single payslip</h4> -->
                           <p>Update your employees' hours and additional earnings.</p>
                         </div>
-
-
                       </div>
   
                       <div class="col-md-4 align-self-center text-right">
 
-                        <a href="javascript:;" class="btn btn-outline-primary btn-round" style="background-color: #2e74b6; color: white;" data-toggle="modal" data-target="#myTeacherModal">Add Employee </a>
+                        <a id='btnAddEmployee' href="javascript:;" class="btn btn-outline-default btn-round" style="background-color: #999999; color: white; pointer-events: none;" data-toggle="modal" data-target="#myTeacherModal">Add Employee </a>
 
-                        <a href="javascript:;" class="btn btn-outline-primary btn-round" data-toggle="modal" data-target="#addAllEmployeeModal">Add All Employees</a>
+                        <!-- <a id='btnAddAllEmployee' href="javascript:;" class="btn btn-outline-default btn-round" style="pointer-events: none;" data-toggle="modal" data-target="#addAllEmployeeModal">Add All Employees</a> -->
 
                       </div>
                     </div>
@@ -1239,17 +1355,22 @@
                         <div class="accordion" id="accordionTutor">
 
                           <!-- card 1 -->
-                          <div class="card" id='wwwwww'>
+                          <!-- <div class="card" id='wwwwww'>
                             <div class="card-header" id="headingOne" style="padding: 0; margin: 0; ">
                               <div class="row" >
                                 <div class="col-md-10">
                                   <a class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapseOne" style="text-transform: none; white-space: normal; font-size: medium;">
-                                    Aishah Aishah Aishah Aishah <span>(RM 1028.70)</span>
+                                    Aishah Aishah Aishah Aishah &middot; <span id="netpayview_wwwwwww">RM1028.70</span> <span class="card-student-status-label active" id="paymentstatus_wwwwww" style="font-size: small;">New</span>
                                   </a>
                                 </div>
                                 <div class="col-md-2  align-self-center text-center">
-                                  <i class="far fa-check-circle fa-lg" style="color: #42ba96; cursor: pointer; margin-right: 0.5rem;" data-target="#confirmEmployeeModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas"></i>
-                                  <i class="fas fa-minus-circle fa-lg" style="color: red; cursor: pointer;" data-target="#removeEmployeeModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas"></i>
+
+                                  <span class="fa-stack" style="vertical-align: top; font-size: 73%; color: #2e74b6; cursor: pointer; margin-right: 0.5rem;" data-target="#recordPaymentModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fas fa-pen fa-stack-1x fa-inverse"></i>
+                                  </span>
+                                  <i class="fas fa-check-circle fa-lg" name='update' style="color: #42ba96; cursor: pointer; margin-right: 0.5rem;" data-target="#confirmEmployeeModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas"></i>
+                                  <i class="fas fa-minus-circle fa-lg" name='remove' style="color: red; cursor: pointer;" data-target="#removeEmployeeModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas"></i>
                                 </div>
                               </div>
                             </div>
@@ -1263,7 +1384,6 @@
                                     <button href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#editPayslipModal" data-cardid='wwwwww'> <i class="fas fa-pen-square" style="margin-right: 0.5rem;"></i> Edit</button>
                                   </div>
                                 </div>
-
                                 <div class="row">
                                   <div class="col-12"  style="overflow-x:auto;">
                                     <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
@@ -1294,7 +1414,6 @@
                                         </tr>
                                       </tbody>
                                     </table>
-                  
                                     <table id="table_additem_wwwwww" class="table-light table-sm" cellspacing="0" width="100%">
                                       <thead id="thead_additem_wwwwww" style="visibility: collapse;">
                                         <tr>
@@ -1316,13 +1435,10 @@
                                       </tbody>
                                     </table>
                                   </div>
-                  
                                   <div class="col-12">
-                                    <h4 id="netpay_wwwwww" style="text-align: right; font-weight: 500;">Net Pay <span style="margin-left: 2rem;" id="previewGrandTotal">RM100.00</span></h4>
+                                    <h4 style="text-align: right; font-weight: 500;">Net Pay <span style="margin-left: 2rem;" id="netpay_wwwwww">RM100.00</span></h4>
                                   </div>
-
                                 </div>
-
 
                                 <div class="row"  style="margin-top: 1rem">
                                   <div class="col-md-12 text-right">
@@ -1330,65 +1446,51 @@
                                   </div>
                                 </div>
 
+
                                 <div class="row">
                                   <div class="col-md-4">
                                     <h5>General</h5>
-                                    <!-- Payslip Title -->
                                     <div class="row">
                                       <div class="col-md-12">
                                         <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payslip Title</span> 
                                         <p name="title">Payslip of November</p>
                                       </div>
                                     </div>
-
-                                    <!-- Payslip Number -->
                                     <div class="row">
                                       <div class="col-md-12">
                                         <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payslip No</span> 
                                         <p name="refNo">PV9128391890</p>
                                       </div>
-                             
                                     </div>
-                                    <!-- Issue Date -->
                                     <div class="row">
                                       <div class="col-md-12">
                                         <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Date</span> 
                                         <p name="date">12/2/2021</p>
                                       </div>
-          
                                     </div>
-          
                                   </div>
-
 
                                   <div class="col-md-4">
                                     <h5>Employee Details</h5>
-                                    <!-- Name -->
                                     <div id='employeeid' value=''></div>
                                     <div class="row">
                                       <div class="col-md-12">
                                         <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Name</span> 
                                         <p name="name">Alric Liew</p>
                                       </div>
-                             
                                     </div>
-                                    <!-- Position -->
                                     <div class="row">
                                       <div class="col-md-12">
                                         <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Position</span> 
                                         <p name="position">Tutor</p>
                                       </div>
                                     </div>
-
-                                    <!-- EPF No  -->
                                     <div class="row">
                                       <div class="col-md-12">
                                         <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">EPF No</span> 
                                         <p name="epf">8946146465</p>
                                       </div>
                                     </div>
-
-                                    <!-- SOCSO No -->
                                     <div class="row">
                                       <div class="col-md-12">
                                         <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Socso No</span> 
@@ -1396,40 +1498,25 @@
                                       </div>
                                     </div>
                                   </div>
-
                                   <div class="col-md-4">
                                     <h5>Banking Information</h5>
-                                    <!-- Bank Name -->
                                     <div class="row">
                                       <div class="col-md-12">
                                         <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Name</span> 
                                         <p name="bankName">CIMB Bank</p>
                                       </div>
                                     </div>
-                                    
-                                    <!-- Bank Account Number -->
                                     <div class="row">
                                       <div class="col-md-12">
                                         <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Account Number</span> 
                                         <p name="acNo">98s5ew5xdfle</p>
                                       </div>
-
                                     </div>
-                                    <!-- Bank Account Holder Name -->
-                                    <!-- <div class="row">
-                                      <div class="col-md-12">
-                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Account Holder Name</span> 
-                                        <p id="employee_details_[id]">LIEW TIAM CHIN</p>
-                                      </div>
-                                    </div> -->
-
                                   </div>
-
                                 </div>
-
                               </div>
                             </div>
-                          </div>
+                          </div> -->
   
                           <!-- card 2 -->
                           <!-- <div class="card" id='wwwwwv'>
@@ -1511,7 +1598,6 @@
 
                           </div> -->
 
-
                         </div>
                       </div>
 
@@ -1522,36 +1608,26 @@
   
                 </div>
 
-                <div class="card">
+                <!-- <div class="card">
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-8">
                         <div class="social">
                           <h4 style="font-size: x-large;"><span> <button  id="btnStep1" class="btn btn-primary btn-just-icon btn-round" style="margin-right: 1rem;">
                             <p>3</p>
-                            <!-- <i class="fas fa-check-circle"></i> -->
                             </button></span> 
                             Confirmation
                           </h4>
-                          <!-- <h4 style="font-size: x-large;">Create single payslip</h4> -->
-
                           <p>Everything looks good!</p>
                         </div>
-
-
                       </div>
-  
                       <div class="col-md-4 align-self-center text-right">
-
                         <a href="javascript:;" class="btn btn-primary btn-round" style="background-color: #2e74b6;">Submit Payroll <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
-
                       </div>
                     </div>
                   </div>
-  
-                </div>
+                </div> -->
               </div>
-
             </div>
           </div>
 
@@ -1660,6 +1736,10 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
   <!-- International Telephone Input -->
   <script src="../../assets/js/plugins/intlTelInput/intlTelInput.js"></script>
+  <!-- Html 2 PDF -->
+  <!-- <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>  -->
+  <script src="../../assets/js/html2pdf.js" type="text/javascript"></script>
+
 
 	<script>
     // Global Variables
@@ -1684,9 +1764,34 @@
       current_sun_8am, current_sun_12pm, current_sun_3pm, current_sun_6pm;
     var current_aweburl, current_aPremiumSubjectLimit, current_aPremiumConnectLimit, current_aTotalSubjectLimit, 
      current_aTotalConnectLimit, current_aPreferredSubjectLimit, current_aPreferredAreaLimit;
-     
+
+    //  Tutor Settings
+    var bizName, bizPhone, bizEmail, bizAddr, bizImgUrl;
+
+    // Payroll Data
+    var payrollId,payrollTotal; 
+    var payrollDocIdArr = [];
+    var payrollDocTotalArr = [];
     // Course-specific var
     var allCourseSize;
+
+    var recordPaymentDate, recordPaymentAmount, recordPaymentNote;
+
+    // Start and end of payroll period
+    var payrollStart = moment().startOf('month').format('DD/MM/YYYY');
+    var payrollEnd = moment().endOf('month').format('DD/MM/YYYY');
+    var payrollName = moment().startOf('month').format('DD/MM/YYYY') + ' - ' + moment().endOf('month').format('DD/MM/YYYY');
+
+    // document.getElementById('payrollTitle').value = payrollName;
+
+    // Start and end of curent month
+    var start = moment().startOf('month');
+    var end = moment().endOf('month');
+
+    var payrollDate = moment().startOf('month').format('DD/MM/YYYY'); // Date on payslip
+    var payrollDateMonth = moment().startOf('month').format('MMMM YYYY'); // Date on payslip
+
+
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
@@ -1740,16 +1845,306 @@
 			}else{
         // if the displayName is null, it means user register using Phone
         if (firebase.auth().currentUser.displayName == null ){
-            tutorId = firebase.auth().currentUser.phoneNumber;
+          tutorId = firebase.auth().currentUser.phoneNumber;
         }else{
           tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
         }
         loadUserInfo(tutorId);
+
+        loadUserSettings(tutorId);
+
+
+        // Load the most recent payrolls
+        loadRecentPayroll();
+
         // loadAllTutorInfo();
 
         // test_loadLessonDateRange();
 			}
 		});
+
+    // Load recent payrolls
+    function loadRecentPayroll(){
+      let docRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Payroll")
+          .where(PAYROLL_ADMIN_ID, '==', tutorId)
+          .where(PAYROLL_STATUS, '==', true)
+          .orderBy(PAYROLL_DATE_START, 'desc')
+          .limit(2)
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        if(querySnapshot.empty) {
+
+          // console.log("Empty, Create a new payroll");
+
+        } 
+        else {
+          querySnapshot.forEach((doc) => {
+            console.log("Payroll found");
+            console.log(doc.data());
+
+            renderRecentPayroll(doc);
+            
+          });
+
+          if (querySnapshot.docs.length > 1)
+            renderLoadAllPayroll();
+        }
+
+ 
+      }).catch((error) => {
+          console.log("Error getting document:", error);
+      });
+
+    }
+
+    // Render payroll
+    function renderRecentPayroll(doc){
+      // <div class="col-md-12" id="payrollList">
+      //   <a href="javascript:;" style="margin-right:0.5rem">1/10/2021 - 31/10/2021 </a>
+      //   <a href="javascript:;" style="margin-right:0.5rem">1/11/2021 - 30/11/2021 </a>
+      //   <a href="javascript:;" style="margin-right:0.5rem">1/12/2021 - 31/12/2021 </a>
+      //   <a href="javascript:;" style="margin-right:0.5rem">Other payrolls </a>
+      // </div>
+      // Card top
+      let payroll_a = document.createElement('a');
+      payroll_a.setAttribute('href', 'javascript:;');
+      payroll_a.setAttribute('style', 'margin-right:1rem');
+      payroll_a.setAttribute('onclick', 'loadPayrollSingle("'+doc.data()[PAYROLL_ID]+'");');
+      payroll_a.textContent = doc.data()[PAYROLL_NAME]+" ("+doc.data()[PAYROLL_DOC_ID_ARR].length+")";;
+
+      const payrollList = document.getElementById("payrollList");
+      payrollList.insertBefore( payroll_a, payrollList.children[0]);
+      // payrollList.appendChild(payroll_a);
+
+    }
+
+    function renderLoadAllPayroll(){
+      // <a href="javascript:;" style="margin-right: 0.5rem;" data-target="#loadPayrollModal" data-toggle="modal">All payrolls</a>
+
+      let payroll_a = document.createElement('a');
+      payroll_a.setAttribute('href', 'javascript:;');
+      payroll_a.setAttribute('style', 'margin-right:1rem');
+      payroll_a.setAttribute('data-target', '#loadPayrollModal');
+      payroll_a.setAttribute('data-toggle', 'modal');
+      payroll_a.textContent = 'All payrolls';
+
+      const payrollList = document.getElementById("payrollList");
+      // payrollList.appendChild(payroll_a);
+      payrollList.insertBefore( payroll_a, payrollList.children[-2]);
+
+    }
+
+  
+    // Load recent payrolls
+    var latestPayrollDoc = null;
+    function loadAllPayroll(){
+
+      let today = new Date(2100, 12, 31);// Set a big date
+
+
+      let docRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Payroll")
+          .where(PAYROLL_ADMIN_ID, '==', tutorId)
+          .where(PAYROLL_STATUS, '==', true)
+          .orderBy(PAYROLL_DATE_START, 'desc')
+          .startAfter(latestPayrollDoc || today)
+          .limit(20);
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        
+        // if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0) && latestInvoiceDoc == null){
+        //   document.getElementById("noDataPlaceholder").style.display = 'initial';
+        // }else{
+        //   document.getElementById("noDataPlaceholder").style.display = 'none';
+        // }
+
+        if(querySnapshot.empty) {
+
+          // console.log("Empty, Create a new payroll");
+
+        } 
+        else {
+          querySnapshot.forEach((doc) => {
+            console.log("Payroll found");
+            console.log(doc.data());
+
+            renderAllPayroll(doc);
+            
+          });
+
+        }
+
+        latestPayrollDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+        // Handle Lesson Load more btn
+        if (querySnapshot.empty){
+          payrollLoadmore.removeEventListener('click', payrollLoadmoreHandleClick );
+        }
+        if (querySnapshot.docs.length == 20){
+          payrollLoadmore.style.visibility='visible';
+        }else{
+          payrollLoadmore.style.visibility='hidden';
+        }
+ 
+      }).catch((error) => {
+          console.log("Error getting document:", error);
+      });
+
+    }
+
+    // Render payroll
+    function renderAllPayroll(doc){
+      // <div class="col-md-12" id="payrollList">
+      //   <a href="javascript:;" style="margin-right:0.5rem">1/10/2021 - 31/10/2021 </a>
+      //   <a href="javascript:;" style="margin-right:0.5rem">1/11/2021 - 30/11/2021 </a>
+      //   <a href="javascript:;" style="margin-right:0.5rem">1/12/2021 - 31/12/2021 </a>
+      //   <a href="javascript:;" style="margin-right:0.5rem">Other payrolls </a>
+      // </div>
+      // Card top
+      let payroll_a = document.createElement('a');
+      payroll_a.setAttribute('href', 'javascript:;');
+      payroll_a.setAttribute('style', 'margin-right:1rem');
+      payroll_a.setAttribute('data-dismiss', 'modal');
+      payroll_a.setAttribute('onclick', 'loadPayrollSingle("'+doc.data()[PAYROLL_ID]+'");');
+      payroll_a.textContent = doc.data()[PAYROLL_NAME]+" ("+doc.data()[PAYROLL_DOC_ID_ARR].length+")";
+
+      const payrollFullList = document.getElementById("payrollFullList");
+      payrollFullList.insertBefore( payroll_a, payrollFullList.children[0]);
+      // payrollList.appendChild(payroll_a);
+
+    }
+
+    // Payrolls Load More Button - Init
+    const payrollLoadmore = document.querySelector('#btnLoadPayrollModalLoadMore');
+    payrollLoadmore.style.visibility='hidden';
+
+    const payrollLoadmoreHandleClick = () =>{
+      loadAllPayroll();
+    }
+    payrollLoadmore.addEventListener('click', payrollLoadmoreHandleClick );
+
+
+    // Load payroll based on payrollId
+    function loadPayrollSingle(payroll_id){
+
+
+      // Clear existing payslip item
+      let existingCardList = document.getElementById('accordionTutor').querySelectorAll('div.card');
+      // let existingCardIdList = [];
+
+      existingCardList.forEach((row, index) => {
+        row.remove();
+      })
+
+
+      var docRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Payroll")
+          .doc(payroll_id);
+
+      docRef
+      .get()
+      .then((doc) => {
+
+        if(doc.empty) {
+
+          console.log("Empty, Create a new payroll");
+          func.showNotification('top','center', 'error', 'error_outline', "Payroll does not exist." );
+          // var payrollDocRef = db.collection("Financial")
+          //   .doc("v1")
+          //   .collection("Payroll")
+          //   .doc();
+
+          // payrollId = payrollDocRef.id;
+
+          // var data = {
+          //   [PAYROLL_ID]: payrollId,
+          //   [PAYROLL_ADMIN_ID]: tutorId,
+          //   [PAYROLL_NAME]: payrollName,
+          //   [PAYROLL_DATE_START]: payrollStart,
+          //   [PAYROLL_DATE_END]: payrollEnd,
+          //   [PAYROLL_DOC_ID_ARR]: [],
+          //   [PAYROLL_DOC_TOTAL_ARR]: [],
+          //   [PAYROLL_TOTAL]: 0,
+          //   [PAYROLL_STATUS]: true,
+          // }
+
+          // payrollDocRef.set(data, { merge: true })
+          //   .then(() => {
+
+          //     // Load all active tutor
+          //     loadAllTutorInfo();
+
+          //     // Enable Step 2
+          //     enableStep2();
+
+          //     func.showNotification('top','center', 'success', 'check_circle', "Created new payroll." );
+
+          // });
+
+        } 
+        else {
+
+          console.log("Payroll found");
+          console.log(doc.data());
+          
+          // Get data from payroll
+          payrollId = doc.data()[PAYROLL_ID];
+          payrollName = doc.data()[PAYROLL_NAME];
+          payrollStart = doc.data()[PAYROLL_DATE_START];
+          payrollEnd = doc.data()[PAYROLL_DATE_END];
+          payrollDocIdArr = doc.data()[PAYROLL_DOC_ID_ARR];
+          payrollDocTotalArr = doc.data()[PAYROLL_DOC_TOTAL_ARR];
+          payrollTotal = doc.data()[PAYROLL_TOTAL];
+
+          // Load the payslip of each tutor. 
+          loadPayroll(payrollId);
+
+          let startDate = moment(payrollStart.toDate());
+          let endDate = moment(payrollEnd.toDate());
+
+          $('input[name="daterange"]').daterangepicker({
+            startDate: startDate,
+            endDate: endDate,
+            locale: {
+              format: 'DD/MM/YYYY'
+            },
+            ranges: {
+              //  'Today': [moment(), moment()],
+              //  'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+              //  'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+              //  'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+              'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+              'This Month': [moment().startOf('month'), moment().endOf('month')],
+              'Next Month': [moment().add(1, 'month').startOf('month'), moment().add(1, 'month').endOf('month')]
+            }
+          }, cb);
+
+          cb(start, end);
+
+
+          // Enable Step 2
+          enableStep2();
+
+          // func.showNotification('top','center', 'warning', 'error_outline', "Payroll already existed." );
+        }
+ 
+      }).catch((error) => {
+          console.log("Error getting document:", error);
+      });
+
+    }
+
+
+
 
     // Lesson Load More Button - Init
     const tutorAdminLoadmore = document.querySelector('#btnAddTeacherModalLoadMore');
@@ -1763,6 +2158,15 @@
     // Load All Teachers that owned by class admin. 
     var allTutorModuleDoc = []; // Reset all Tutors doc
     function loadAllAdminTeachers(){
+
+      // Get the existing list of cardId. 
+      // If similar phoneId used, ban the number.
+      let existingCardList = document.getElementById('accordionTutor').querySelectorAll('div.card');
+      let existingCardIdList = [];
+
+      existingCardList.forEach((row, index) => {
+        existingCardIdList.push(row.getAttribute('id'));
+      });
 
       allTutorModuleDoc = []; // Init All Tutors Doc array
       // STUDENT Module
@@ -1780,8 +2184,15 @@
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           // console.log(doc.data().id);
+
+
           allTutorModuleDoc.push(doc.data());
-          renderAllAdminTeachers(doc, 0);
+          
+          if (existingCardIdList.includes(doc.data()[TUTOR_TUTOR_ID]))
+            renderAllAdminTeachers(doc, true);
+          else 
+            renderAllAdminTeachers(doc, false);
+
         });
 
         latestAdminTutorDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
@@ -1806,7 +2217,7 @@
     }
 
     // Render all teachers view in Add Teachers Modal
-    function renderAllAdminTeachers(doc, tutorBtnNum){
+    function renderAllAdminTeachers(doc, disableSelect){
       //  <div class="row tutor-wrapper text-center">
       //   <div class="col-md-2">
       //     <div style="height: 50px; width: 50px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
@@ -1865,7 +2276,14 @@
       sel_btn.textContent = 'Select';
       sel_btn.setAttribute('data-dismiss','modal');
       sel_btn.setAttribute('type','button')
-      sel_btn.setAttribute('onclick',"AddNewTutorToDB('"+ doc.data()[TUTOR_TUTOR_ID]+"', '"+doc.data()[TUTOR_TUTOR_NAME]+"', '"+doc.data()[TUTOR_TUTOR_PHONE]+"', '"+doc.data()[TUTOR_TUTOR_IMG_URL]+"')");
+      // AddNewEmployee(tutorId, name, position, bankName, acNo, epf, socso)
+
+      sel_btn.setAttribute('onclick',"AddNewEmployee('"+ doc.data()[TUTOR_TUTOR_ID]+"', '"+
+        doc.data()[TUTOR_TUTOR_NAME]+"', 'Tutor', '"+doc.data()[TUTOR_BANK_NAME]+"', '"+
+        doc.data()[TUTOR_AC_NO]+"', '"+doc.data()[TUTOR_EPF]+"', '"+doc.data()[TUTOR_SOCSO]+"')");
+      if (disableSelect)
+        sel_btn.setAttribute('disabled', true);
+
       let sel_div = document.createElement('div');
       sel_div.className = "col-md-2";
       sel_div.appendChild(sel_btn);
@@ -1884,13 +2302,44 @@
       // add_tutor_modal_container.insertBefore(tutorDetail_div, add_tutor_modal_container.children[1])
     }
 
-    function AddNewTutorToDB(){
+    // Load Tutor Settings
+    function loadUserSettings(tutorId){
+      
+      // Tutor Id must be a phone with +60, no spacing or other chars
+      var docRef = db.collection("Settings").doc(tutorId);
+      
+      docRef.get().then((doc) => {
+ 
+        bizName = doc.data()[SET_BIZ_NAME];
+        bizPhone = doc.data()[SET_BIZ_PHONE];
+        bizEmail = doc.data()[SET_BIZ_EMAIL];
+        bizAddr = doc.data()[SET_BIZ_ADDR];
+        bizImgUrl = doc.data()[SET_BIZ_IMG_URL];
+
+      })
+    }
+
+    function AddNewEmployee(tutorId, name, position, bankName, acNo, epf, socso){
+
+        // Create data modal for Tutor Module
+        let payslipData = {
+          tutorId: tutorId,
+          name: name,
+          position: position,
+          bankName: bankName,
+          acNo: acNo,
+          epf: epf,
+          socso: socso,
+          payStatus: PAY_STATUS_NEW,
+        }
+
+        // Generate placeholder new employee
+        renderActiveTutorPlaceholder(payslipData);
+        // Generate simple empty payslip
+        renderTableTemplate(tutorId);
 
     }
     
-
-
-
 
     function test_loadLessonDateRange(){
       new Date();
@@ -2108,17 +2557,304 @@
     };
 
 
+    function CreatePayroll(){
+      var docRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Payroll")
+          .where(PAYROLL_ADMIN_ID, '==', tutorId)
+          .where(PAYROLL_STATUS, '==', true)
+          .where(PAYROLL_DATE_START, '==', payrollStart)
+          .where(PAYROLL_DATE_END, '==', payrollEnd);
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        if(querySnapshot.empty) {
+
+          console.log("Empty, Create a new payroll");
+
+          var payrollDocRef = db.collection("Financial")
+            .doc("v1")
+            .collection("Payroll")
+            .doc();
+
+          payrollId = payrollDocRef.id;
+
+          var data = {
+            [PAYROLL_ID]: payrollId,
+            [PAYROLL_ADMIN_ID]: tutorId,
+            [PAYROLL_NAME]: payrollName,
+            [PAYROLL_DATE_START]: payrollStart,
+            [PAYROLL_DATE_END]: payrollEnd,
+            [PAYROLL_DOC_ID_ARR]: [],
+            [PAYROLL_DOC_TOTAL_ARR]: [],
+            [PAYROLL_TOTAL]: 0,
+            [PAYROLL_STATUS]: true,
+          }
+
+          payrollDocRef.set(data, { merge: true })
+            .then(() => {
+
+              // Load all active tutor
+              loadAllTutorInfo();
+
+              // Enable Step 2
+              enableStep2();
+
+              func.showNotification('top','center', 'success', 'check_circle', "Created new payroll." );
+
+          });
+
+        } 
+        else {
+          querySnapshot.forEach((doc) => {
+            console.log("Payroll found");
+            console.log(doc.data());
+            
+            // Get data from payroll
+            payrollId = doc.data()[PAYROLL_ID];
+            payrollName = doc.data()[PAYROLL_NAME];
+            payrollStart = doc.data()[PAYROLL_DATE_START];
+            payrollEnd = doc.data()[PAYROLL_DATE_END];
+            payrollDocIdArr = doc.data()[PAYROLL_DOC_ID_ARR];
+            payrollDocTotalArr = doc.data()[PAYROLL_DOC_TOTAL_ARR];
+            payrollTotal = doc.data()[PAYROLL_TOTAL];
+
+            // Load the payslip of each tutor. 
+            loadPayroll(payrollId);
+
+            // Enable Step 2
+            enableStep2();
+
+            func.showNotification('top','center', 'warning', 'error_outline', "Payroll already existed." );
+          });
+        }
+ 
+      }).catch((error) => {
+          console.log("Error getting document:", error);
+      });
+
+    }
+
+    // Payroll found. Load payroll details
+    function loadPayroll(payrollId){
+
+      var docRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Payslip")
+          .where(PAY_STATUS, '==', true)
+          .where(PAY_PAYROLL_ID, '==', payrollId)
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        querySnapshot.forEach((doc) => {
+          console.log("Payslip: ");
+          console.log(doc.data());
+
+          // Step 1: Create data modal for Tutor Module
+          let payslipData = {
+            tutorId: doc.data()[PAY_RECEIVER_ID],
+            name: doc.data()[PAY_RECEIVER_NAME],
+            position: 'Tutor',
+            bankName: doc.data()[PAY_RECEIVER_BANK_NAME],
+            acNo: doc.data()[PAY_RECEIVER_AC_NO],
+            epf: doc.data()[PAY_RECEIVER_EPF],
+            socso: doc.data()[PAY_RECEIVER_SOCSO],
+            payStatus: doc.data()[PAY_PAY_STATUS]
+          }
+
+          // Generate placeholder for each active tutor. If exist, ignore.
+          renderActiveTutorPlaceholder(payslipData);
+
+
+          // Step 2: Print Items & Additional Items
+          let payslipDataArr = doc.data()[PAY_ITEMS_ARR];
+          let itemStartIndex= payslipDataArr.indexOf('ITEM');
+          let subtotalStartIndex= payslipDataArr.indexOf('GROSS');
+          let additionalItemStartIndex= payslipDataArr.indexOf('ADDITIONAL_ITEM');
+          let totalStartIndex= payslipDataArr.indexOf('NET');
+
+          // console.log(itemStartIndex, additionalItemStartIndex, subtotalStartIndex, totalStartIndex)
+
+          let type = payslipDataArr[0];
+          let item = payslipDataArr.slice(itemStartIndex+1, subtotalStartIndex); //+1 to ignore the first indentifier
+          let subTotal = payslipDataArr[subtotalStartIndex+1];
+          let additionalItem = payslipDataArr.slice(additionalItemStartIndex+1, totalStartIndex); //+1 to ignore the first indentifier
+          let total = payslipDataArr[totalStartIndex+1];
+
+          let advanced = doc.data()[PAY_ITEMS_ARR][0] === 'ADVANCED';
+          let grossPay = 0;
+
+          if (advanced){
+            // Generate Advanced empty payslip
+            renderTableAdvTemplate(doc.data()[PAY_RECEIVER_ID]);
+
+            // Print Items
+            // Advanced Template
+            item.reverse().forEach((document) => {
+              let component = document.split(";; ");
+
+              let payslipItemData={
+                tutorId: doc.data()[PAY_RECEIVER_ID],
+                item: component[0],
+                quantity: component[1],
+                price: component[2],
+                payout: component[3],
+              }
+              
+              renderAllPayslipItemsAdv(payslipItemData);
+
+            });
+
+            // Print Additional Items
+            //.reverse() to make sure we print from the last -> first
+            additionalItem.reverse().forEach((document) => {
+
+              let component = document.split(";; ");
+              // Generate the additional item
+              let payslipItemData={
+                tutorId: doc.data()[PAY_RECEIVER_ID],
+                item: component[1],
+                quantity: 0,
+                price: component[2],
+                payout: 0,
+                selector: component[0],
+              }
+              renderAllPayslipAdditionalItemsAdv(payslipItemData);
+
+            });
+
+            // Calculate Gross & Net Pay
+            grossPay = calculateGrossPayDuringInit(doc.data()[PAY_RECEIVER_ID]);
+            calculateNetPayDuringInit(doc.data()[PAY_RECEIVER_ID], grossPay);
+
+          }
+          else{
+            // Generate simple empty payslip
+            renderTableTemplate(doc.data()[PAY_RECEIVER_ID]);
+
+            // Print Items
+            // Simple Template
+            item.reverse().forEach((document) => {
+              let component = document.split(";; ");
+
+              let payslipItemData={
+                tutorId: doc.data()[PAY_RECEIVER_ID],
+                item: component[0],
+                quantity: component[1],
+                price: component[2],
+                payout: component[3],
+              }
+
+              console.log(payslipItemData);
+
+              renderAllPayslipItems(payslipItemData);
+              
+            });
+
+            // Print Additional Items
+            //.reverse() to make sure we print from the last -> first
+            additionalItem.reverse().forEach((document) => {
+
+            let component = document.split(";; ");
+            // Generate the additional item
+            let payslipItemData={
+              tutorId: doc.data()[PAY_RECEIVER_ID],
+              item: component[1],
+              quantity: 0,
+              price: component[2],
+              payout: 0,
+              selector: component[0],
+            }
+            renderAllPayslipAdditionalItems(payslipItemData);
+
+            });
+
+            // Calculate Gross & Net Pay
+            grossPay = calculateGrossPayDuringInit(doc.data()[PAY_RECEIVER_ID]);
+            calculateNetPayDuringInit(doc.data()[PAY_RECEIVER_ID], grossPay);
+          }
+
+
+          // Set the payslip status to true by default
+          SetPayslipUpdateStatus(true, doc.data()[PAY_RECEIVER_ID]);
+
+
+        });
+
+      });
+
+    }
+
+    // Enable Step 1, Disable Step 2
+    function enableStep1(){
+      // Disabled Step 1
+      document.getElementById('btnStep1').className = 'btn btn-primary btn-just-icon btn-round';
+
+      document.getElementById('daterange').removeAttribute('readonly');
+      document.getElementById('daterange').style.pointerEvents = 'auto';
+
+
+      document.getElementById('btnCreatePayroll').className = 'btn btn-primary btn-round';
+      document.getElementById('btnCreatePayroll').style.pointerEvents = 'auto';
+
+      // Enable Step 2
+      document.getElementById('btnStep2').className = 'btn btn-default btn-just-icon btn-round';
+
+      document.getElementById('btnAddEmployee').setAttribute('style', 'color: white;');
+      document.getElementById('btnAddEmployee').className = 'btn btn-outline-default btn-round';
+      document.getElementById('btnAddEmployee').style.pointerEvents = 'none';
+
+      // Clear existing payslip item
+      let existingCardList = document.getElementById('accordionTutor').querySelectorAll('div.card');
+      existingCardList.forEach((row, index) => {
+        row.remove();
+      })
+
+    }
+
+    // Enable Step 2, Disable Step 1
+    function enableStep2(){
+      // Disabled Step 1
+      document.getElementById('btnStep1').className = 'btn btn-default btn-just-icon btn-round';
+
+      document.getElementById('daterange').setAttribute('readonly', 'true');
+      document.getElementById('daterange').style.pointerEvents = 'none';
+
+      // document.getElementById('payrollTitle').setAttribute('readonly', 'true');
+      // document.getElementById('payrollTitle').style.pointerEvents = 'none';
+
+      document.getElementById('btnCreatePayroll').className = 'btn btn-default btn-round';
+      document.getElementById('btnCreatePayroll').style.pointerEvents = 'none';
+
+      // Enable Step 2
+      document.getElementById('btnStep2').className = 'btn btn-primary btn-just-icon btn-round';
+
+      document.getElementById('btnAddEmployee').setAttribute('style', 'background-color: #2e74b6; color: white;');
+      document.getElementById('btnAddEmployee').className = 'btn btn-outline-primary btn-round';
+      document.getElementById('btnAddEmployee').style.pointerEvents = 'auto';
+
+      // document.getElementById('btnAddAllEmployee').className = 'btn btn-outline-primary btn-round';
+      // document.getElementById('btnAddAllEmployee').style.pointerEvents = 'auto';
+
+    }
+
+
     var activeTutorList = [];
     var activeClassList = [];
     var activeLessonList = [];
-    // Tutor Specific
+    // Load all active tutor
     function loadAllTutorInfo(){
       activeTutorList = []; // Init list
       let docRef = db.collection("Class")
           .doc("v1")
           .collection("Tutor")
           .where(TUTOR_ADMIN_ID, "==", tutorId)
-          .where(TUTOR_STATUS_ADMIN, "==", TUTOR_STATUS_TYPE_ACTIVE);
+          .where(TUTOR_STATUS_ADMIN, "==", TUTOR_STATUS_TYPE_ACTIVE)
+          .orderBy(TUTOR_TUTOR_NAME, 'desc');
 
       docRef
       .get()
@@ -2126,8 +2862,20 @@
 
         querySnapshot.forEach((doc) => {
 
+          // Create data modal for Tutor Module
+          let payslipData = {
+            tutorId: doc.data()[TUTOR_TUTOR_ID],
+            name: doc.data()[TUTOR_TUTOR_NAME],
+            position: 'Tutor',
+            bankName: doc.data()[TUTOR_BANK_NAME],
+            acNo: doc.data()[TUTOR_AC_NO],
+            epf: doc.data()[TUTOR_EPF],
+            socso: doc.data()[TUTOR_SOCSO],
+            payStatus: PAY_STATUS_NEW,
+          }
+
           // Generate placeholder for each active tutor. If exist, ignore.
-          renderActiveTutorPlaceholder(doc);
+          renderActiveTutorPlaceholder(payslipData);
 
 
           // Load all active class.
@@ -2137,7 +2885,7 @@
 
         });
 
-        console.log(activeTutorList);
+        // console.log(activeTutorList);
 
       });
 
@@ -2170,7 +2918,7 @@
               // Per Hour
             }
           });
-          console.log('Advanced: '+advanced)
+          // console.log('Advanced: '+advanced)
 
           if (advanced){
             // Render Advanced Teamplate for header, gross earnings and headers for additional items 
@@ -2180,7 +2928,7 @@
             querySnapshot.forEach((doc) => {
 
               if (doc.data()[CLASS_FEES_TYPE_KEY] === FEES_TYPE_PER_MONTH_KEY){
-                console.log('Tutor, Class Name  (Per Month) : '+tutorDoc.data()[TUTOR_TUTOR_NAME]+doc.data()[CLASS_NAME]);
+                // console.log('Tutor, Class Name  (Per Month) : '+tutorDoc.data()[TUTOR_TUTOR_NAME]+doc.data()[CLASS_NAME]);
 
                 // Per month
                 
@@ -2195,7 +2943,7 @@
                 renderAllPayslipItemsAdv(payslipItemData);
               }else{
                 // Per Hour
-                console.log('Tutor, Class Name  (Per Month) : '+tutorDoc.data()[TUTOR_TUTOR_NAME]+doc.data()[CLASS_NAME]);
+                // console.log('Tutor, Class Name  (Per Month) : '+tutorDoc.data()[TUTOR_TUTOR_NAME]+doc.data()[CLASS_NAME]);
 
                 LoadLessonInfo(tutorDoc, doc);
                 
@@ -2209,7 +2957,7 @@
 
             // Simple Template
             querySnapshot.forEach((doc) => {
-              console.log('Tutor, Class Name  (Per Month) : '+tutorDoc.data()[TUTOR_TUTOR_NAME]+doc.data()[CLASS_NAME]);
+              // console.log('Tutor, Class Name  (Per Month) : '+tutorDoc.data()[TUTOR_TUTOR_NAME]+doc.data()[CLASS_NAME]);
               // console.log(doc.data());
 
               let payslipItemData={
@@ -2769,13 +3517,26 @@
     }
 
     // Render placeholder for active tutor
-    function renderActiveTutorPlaceholder(tutorDoc){
+    function renderActiveTutorPlaceholder(payslipData){
+
+      // Date model for payslip (Tutor Module)
+      // payslipData = {
+      //   tutorId: tutorId,
+      //   name: tutorName,
+      //   position: position,
+      //   bankName: bankName,
+      //   acNo: acNo,
+      //   epf: epf,
+      //   socso: socso,
+      //   payStatus: new / paid,
+      // }
+
       // <div class="card" id='wwwwww'>
       //   <div class="card-header" id="headingOne" style="padding: 0; margin: 0; ">
       //     <div class="row" >
       //       <div class="col-md-11">
-      //         <a class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" style="text-transform: none; white-space: normal; font-size: medium;">
-      //           Aishah Aishah Aishah Aishah <span id="<id>_netpayview">(RM1028.70)</span>
+      //         <a class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapseOne" style="text-transform: none; white-space: normal; font-size: medium;">
+      //           Aishah Aishah Aishah Aishah &middot; <span id="netpayview_wwwwwww">RM1028.70</span> 
       //         </a>
       //       </div>
       //       <div class="col-md-1 align-self-center text-center">
@@ -2925,22 +3686,28 @@
       //   </div>
       // </div>
       
-      let collapseBtn_html = tutorDoc.data()[TUTOR_TUTOR_NAME] + " <span id='netpayview_"+tutorDoc.data()[TUTOR_TUTOR_ID]+"'></span>"
+      let collapseBtn_html = '';
+      if (payslipData.payStatus === PAY_STATUS_PAID)
+        collapseBtn_html = payslipData.name + " &middot; <span id='netpayview_"+payslipData.tutorId+"'></span> <span class='card-student-status-label active' id='paystatus_"+payslipData.tutorId+"' style='font-size: small; visibility: visible'>Paid</span>";
+      else
+        collapseBtn_html = payslipData.name + " &middot; <span id='netpayview_"+payslipData.tutorId+"'></span> <span class='card-student-status-label passive' id='paystatus_"+payslipData.tutorId+"' style='font-size: small; visibility: hidden'>New</span>";
+
       let collapseBtn = document.createElement('a');
       collapseBtn.innerHTML = collapseBtn_html;
       collapseBtn.className = 'btn btn-link btn-block text-left';
       collapseBtn.type = 'button';
       collapseBtn.setAttribute('style', 'text-transform: none; white-space: normal; font-size: medium;');
       collapseBtn.setAttribute('data-toggle','collapse');
-      collapseBtn.setAttribute('data-target','#collapse_'+tutorDoc.data()[TUTOR_TUTOR_ID]);
+      collapseBtn.setAttribute('data-target','#collapse_'+payslipData.tutorId);
       collapseBtn.setAttribute('aria-expanded','false');
-      collapseBtn.setAttribute('aria-controls','collapse_'+tutorDoc.data()[TUTOR_TUTOR_ID]);
+      collapseBtn.setAttribute('aria-controls','collapse_'+payslipData.tutorId);
       let collapseBtnDiv = document.createElement('div');
       collapseBtnDiv.className = 'col-md-10';
       collapseBtnDiv.appendChild(collapseBtn);
 
-      confirmBtn_html = "<i class='far fa-check-circle fa-lg' style='color: #42ba96; cursor: pointer; margin-right: 0.5rem; ' data-target='#confirmEmployeeModal' data-toggle='modal' data-employeecardid='"+tutorDoc.data()[TUTOR_TUTOR_ID]+"' data-employeecardname='"+tutorDoc.data()[TUTOR_TUTOR_NAME]+"'></i>";
-      deleteBtn_html = "<i class='fas fa-minus-circle fa-lg' style='color: red; cursor: pointer;'' data-target='#removeEmployeeModal' data-toggle='modal' data-employeecardid='"+tutorDoc.data()[TUTOR_TUTOR_ID]+"' data-employeecardname='"+tutorDoc.data()[TUTOR_TUTOR_NAME]+"'></i>";
+      recordPaymentBtn_html = "<span class='fa-stack' style='vertical-align: top; font-size: 73%; color: #2e74b6; cursor: pointer; margin-right: 0.5rem;' data-target='#recordPaymentModal' data-toggle='modal' data-employeecardid='"+payslipData.tutorId+"' data-employeecardname='"+payslipData.name+"'><i class='fas fa-circle fa-stack-2x'></i><i class='fas fa-pen fa-stack-1x fa-inverse'></i></span>";
+      confirmBtn_html = "<i class='far fa-check-circle fa-lg' name='update' style='color: #42ba96; cursor: pointer; margin-right: 0.5rem; ' data-target='#confirmEmployeeModal' data-toggle='modal' data-employeecardid='"+payslipData.tutorId+"' data-employeecardname='"+payslipData.name+"'></i>";
+      deleteBtn_html = "<i class='fas fa-minus-circle fa-lg' name='remove' style='color: red; cursor: pointer;'' data-target='#removeEmployeeModal' data-toggle='modal' data-employeecardid='"+payslipData.tutorId+"' data-employeecardname='"+payslipData.name+"'></i>";
       deleteBtnDiv = document.createElement('div');
       deleteBtnDiv.className = 'col-md-2 align-self-center text-center';
       deleteBtnDiv.innerHTML = confirmBtn_html + deleteBtn_html;
@@ -2953,7 +3720,7 @@
 
       cardHeaderDiv = document.createElement('div');
       cardHeaderDiv.className = 'card-header';
-      cardHeaderDiv.id = 'heading_'+tutorDoc.data()[TUTOR_TUTOR_ID];
+      cardHeaderDiv.id = 'heading_'+payslipData.tutorId;
       cardHeaderDiv.setAttribute('style', 'padding: 0; margin: 0;')
       cardHeaderDiv.appendChild(collapseDiv);
 
@@ -2966,6 +3733,7 @@
       previewBtn.setAttribute('href', 'javascript:;');
       previewBtn.setAttribute('data-toggle', 'modal');
       previewBtn.setAttribute('data-target', '#previewModal');
+      previewBtn.setAttribute('data-cardid', payslipData.tutorId);
       previewBtnDiv = document.createElement('div');
       previewBtnDiv.className = 'ml-auto p-2';
       previewBtnDiv.appendChild(previewBtn);
@@ -2977,7 +3745,7 @@
       editBtn.setAttribute('href', 'javascript:;');
       editBtn.setAttribute('data-toggle', 'modal');
       editBtn.setAttribute('data-target', '#editPayslipModal');
-      editBtn.setAttribute('data-cardid', tutorDoc.data()[TUTOR_TUTOR_ID]);
+      editBtn.setAttribute('data-cardid', payslipData.tutorId);
       editBtnDiv = document.createElement('div');
       editBtnDiv.className = 'p-2'
       editBtnDiv.appendChild(editBtn);
@@ -2989,16 +3757,16 @@
 
       // Table Items
       theadItem = document.createElement('thead');
-      theadItem.id = 'thead_item_'+tutorDoc.data()[TUTOR_TUTOR_ID];
+      theadItem.id = 'thead_item_'+payslipData.tutorId;
       theadItem.setAttribute('style', 'background-color: grey; color: white;');
       // Append header based on criteria
 
       tbodyItem = document.createElement('tbody');
-      tbodyItem.id = 'tbody_item_'+tutorDoc.data()[TUTOR_TUTOR_ID];
+      tbodyItem.id = 'tbody_item_'+payslipData.tutorId;
       // Append body based on criteria
 
       tableItem = document.createElement('table');
-      tableItem.id = 'table_item_'+tutorDoc.data()[TUTOR_TUTOR_ID];
+      tableItem.id = 'table_item_'+payslipData.tutorId;
       tableItem.className = 'table-light table-sm';
       tableItem.setAttribute('cellspacing', '0');
       tableItem.setAttribute('width', '100%');
@@ -3007,16 +3775,16 @@
 
       // Table Additional Items
       theadAddItem = document.createElement('thead');
-      theadAddItem.id = 'thead_additem_'+tutorDoc.data()[TUTOR_TUTOR_ID];
+      theadAddItem.id = 'thead_additem_'+payslipData.tutorId;
       theadAddItem.setAttribute('style', 'visibility: collapse;');
       // Append header based on criteria
 
       tbodyAddItem = document.createElement('tbody');
-      tbodyAddItem.id = 'tbody_additem_'+tutorDoc.data()[TUTOR_TUTOR_ID];
+      tbodyAddItem.id = 'tbody_additem_'+payslipData.tutorId;
       // Append body based on criteria
 
       tableAddItem = document.createElement('table');
-      tableAddItem.id = 'table_additem_'+tutorDoc.data()[TUTOR_TUTOR_ID];
+      tableAddItem.id = 'table_additem_'+payslipData.tutorId;
       tableAddItem.className = 'table-light table-sm';
       tableAddItem.setAttribute('cellspacing', '0');
       tableAddItem.setAttribute('width', '100%');
@@ -3035,7 +3803,7 @@
       tableOverflow.appendChild(tableItem);
       tableOverflow.appendChild(tableAddItem);
 
-      NetPay_html = "Net Pay <span style='margin-left: 2rem;'' id='netpay_"+tutorDoc.data()[TUTOR_TUTOR_ID]+"'>RM0.00</span>";
+      NetPay_html = "Net Pay <span style='margin-left: 2rem;'' id='netpay_"+payslipData.tutorId+"'>RM0.00</span>";
       NetPayH4 = document.createElement('h4');
       NetPayH4.innerHTML = NetPay_html;
       NetPayH4.setAttribute('style', 'text-align: right; font-weight: 500;');
@@ -3063,7 +3831,7 @@
       editDetailsBtn.setAttribute('href', 'javascript:;');
       editDetailsBtn.setAttribute('data-toggle', 'modal');
       editDetailsBtn.setAttribute('data-target', '#editPayslipEmployeeModal');
-      editDetailsBtn.setAttribute('data-cardid', tutorDoc.data()[TUTOR_TUTOR_ID]);
+      editDetailsBtn.setAttribute('data-cardid', payslipData.tutorId);
       editDetailsBtnDiv = document.createElement('div');
       editDetailsBtnDiv.className = 'col-md-12 text-right';
       editDetailsBtnDiv.appendChild(editDetailsBtn);
@@ -3201,7 +3969,7 @@
       nameSpan.textContent = 'Name';
       nameSpan.setAttribute('style', 'font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;');
       let nameP = document.createElement('p');
-      nameP.textContent = tutorDoc.data()[TUTOR_TUTOR_NAME];
+      nameP.textContent = payslipData.name;
       nameP.setAttribute('name', 'name')
       let nameDiv = document.createElement('div');
       nameDiv.className = 'col-md-12';
@@ -3215,7 +3983,7 @@
       positionSpan.textContent = 'Position';
       positionSpan.setAttribute('style', 'font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;');
       let positionP = document.createElement('p');
-      positionP.textContent = 'Tutor';
+      positionP.textContent =  payslipData.position;
       positionP.setAttribute('name', 'position')
       let positionDiv = document.createElement('div');
       positionDiv.className = 'col-md-12';
@@ -3229,7 +3997,7 @@
       epfSpan.textContent = 'EPF No';
       epfSpan.setAttribute('style', 'font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;');
       let epfP = document.createElement('p');
-      epfP.textContent = tutorDoc.data()[TUTOR_EPF];
+      epfP.textContent = payslipData.epf;
       epfP.setAttribute('name', 'epf')
       let epfDiv = document.createElement('div');
       epfDiv.className = 'col-md-12';
@@ -3238,14 +4006,14 @@
       let epfDivTop = document.createElement('div');
       epfDivTop.className = 'row';
       epfDivTop.appendChild(epfDiv);
-      if (tutorDoc.data()[TUTOR_EPF] === null || tutorDoc.data()[TUTOR_EPF] ==='')
+      if (payslipData.epf === null || payslipData.epf ==='')
         epfDivTop.setAttribute('style', 'display: none');
  
       let socsoSpan = document.createElement('span');
       socsoSpan.textContent = 'Socso No';
       socsoSpan.setAttribute('style', 'font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;');
       let socsoP = document.createElement('p');
-      socsoP.textContent = tutorDoc.data()[TUTOR_SOCSO];
+      socsoP.textContent = payslipData.socso;
       socsoP.setAttribute('name', 'socso')
       let socsoDiv = document.createElement('div');
       socsoDiv.className = 'col-md-12';
@@ -3254,7 +4022,7 @@
       let socsoDivTop = document.createElement('div');
       socsoDivTop.className = 'row';
       socsoDivTop.appendChild(socsoDiv);
-      if (tutorDoc.data()[TUTOR_SOCSO] === null || tutorDoc.data()[TUTOR_SOCSO] ==='')
+      if (payslipData.socso === null || payslipData.socso ==='')
         socsoDivTop.setAttribute('style', 'display: none');
 
       let employmentDiv = document.createElement('div');
@@ -3273,7 +4041,7 @@
       bankNameSpan.textContent = 'Bank Name';
       bankNameSpan.setAttribute('style', 'font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;');
       let bankNameP = document.createElement('p');
-      bankNameP.textContent = tutorDoc.data()[TUTOR_BANK_NAME];
+      bankNameP.textContent = payslipData.bankName;
       bankNameP.setAttribute('name', 'bankName')
       let bankNameDiv = document.createElement('div');
       bankNameDiv.className = 'col-md-12';
@@ -3287,7 +4055,7 @@
       acNoSpan.textContent = 'Bank Account No';
       acNoSpan.setAttribute('style', 'font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;');
       let acNoP = document.createElement('p');
-      acNoP.textContent = tutorDoc.data()[TUTOR_AC_NO];
+      acNoP.textContent = payslipData.acNo;
       acNoP.setAttribute('name', 'acNo')
       let acNoDiv = document.createElement('div');
       acNoDiv.className = 'col-md-12';
@@ -3321,23 +4089,23 @@
   
       cardBodyTopDiv = document.createElement('div');
       cardBodyTopDiv.className = 'collapse';
-      cardBodyTopDiv.id = 'collapse_'+tutorDoc.data()[TUTOR_TUTOR_ID];
+      cardBodyTopDiv.id = 'collapse_'+payslipData.tutorId;
       cardBodyTopDiv.setAttribute('style', 'padding: 0; margin: 0;')
-      cardBodyTopDiv.setAttribute('aria-labelledby', 'heading_'+tutorDoc.data()[TUTOR_TUTOR_ID])
+      cardBodyTopDiv.setAttribute('aria-labelledby', 'heading_'+payslipData.tutorId)
       cardBodyTopDiv.setAttribute('data-parent', '#accordionTutor')
       cardBodyTopDiv.appendChild(cardBodyDiv);
 
       // Tutor Card Top
       cardDiv = document.createElement('div');
       cardDiv.className = 'card';
-      cardDiv.id = tutorDoc.data()[TUTOR_TUTOR_ID];
+      cardDiv.id = payslipData.tutorId;
       cardDiv.appendChild(cardHeaderDiv);
       cardDiv.appendChild(cardBodyTopDiv);
 
 
       const accordionTutor = document.getElementById("accordionTutor");
-      accordionTutor.appendChild(cardDiv);
-
+      // accordionTutor.appendChild(cardDiv);
+      accordionTutor.insertBefore(cardDiv, accordionTutor.children[0])
     }
 
 
@@ -3380,7 +4148,10 @@
 
       // If no item, return
       if (itemTrEleArr.length === 0){
-        return;
+        document.getElementById("grosspay_"+cardId).textContent = 'RM0.00';
+        document.getElementById("netpay_"+cardId).textContent = 'RM0.00';
+        document.getElementById("netpayview_"+cardId).textContent = 'RM0.00';
+        return 0;
       }
 
       // Get the length of the item 0 to determine if simple or advanced template used.
@@ -3422,12 +4193,14 @@
           grossEarningTextAdv = 'INVALID';
           document.getElementById("grosspay_"+cardId).textContent = grossEarningTextAdv;
           document.getElementById("netpay_"+cardId).textContent = grossEarningTextAdv;
+          document.getElementById("netpayview_"+cardId).textContent = grossEarningTextAdv;
           return 0;
         }
         else {
           grossEarningTextAdv = (grossEarningAdv >= 0) ? 'RM'+grossEarningAdv.toFixed(2) : '- RM'+ Math.abs(grossEarningAdv).toFixed(2);
           document.getElementById("grosspay_"+cardId).textContent = grossEarningTextAdv;
           document.getElementById("netpay_"+cardId).textContent = grossEarningTextAdv;
+          document.getElementById("netpayview_"+cardId).textContent = grossEarningTextAdv;
           return grossEarningAdv;
         }
       }
@@ -3455,12 +4228,14 @@
           grossEarningText = 'INVALID';
           document.getElementById("grosspay_"+cardId).textContent = grossEarningText;
           document.getElementById("netpay_"+cardId).textContent = grossEarningText;
+          document.getElementById("netpayview_"+cardId).textContent = grossEarningText;
           return 0;
         }
         else {
           grossEarningText = (grossEarning >= 0) ? 'RM'+grossEarning.toFixed(2) : '- RM'+ Math.abs(grossEarning).toFixed(2);
           document.getElementById("grosspay_"+cardId).textContent = grossEarningText;
           document.getElementById("netpay_"+cardId).textContent = grossEarningText;
+          document.getElementById("netpayview_"+cardId).textContent = grossEarningText;
 
           return grossEarning;
         }
@@ -3481,9 +4256,9 @@
 
       // console.log(itemTrEleArr);
 
-      // If no additional item, return
+      // If no additional item, return with gross pay only.
       if (itemTrEleArr.length === 0){
-        return;
+        return grossPay;
       }
 
       // Var used for gross and net pay
@@ -3493,7 +4268,6 @@
       let netPayTextAdv = '';
 
       let temp_amount = 0;
-
       if (addItemHeaderTrEleArrLength === 5 ){
         // Advanced
         itemTrEleArr.forEach(function (row, index) {
@@ -3507,8 +4281,8 @@
           let action = row.getElementsByTagName("td")[3].getAttribute('data-selector');
           let item = parseFloat(row.getElementsByTagName("td")[3].getAttribute('data-item'));
           let amount = parseFloat(row.getElementsByTagName("td")[3].getAttribute('data-value'));
-          
-
+          console.log('addItemHeaderTrEleArrLength: '+addItemHeaderTrEleArrLength)
+          // console.log(action, item, amount)
           if (action === 'Discount ( - )'){
             temp_amount = -amount;
             netPayAdv = netPayAdv - amount;
@@ -3538,10 +4312,16 @@
         if (isNaN(netPayAdv)){
           netPayTextAdv = 'INVALID';
           document.getElementById("netpay_"+cardId).textContent = netPayTextAdv;
+          document.getElementById("netpayview_"+cardId).textContent = netPayTextAdv;
+
+          return 0;
         }
         else {
           netPayTextAdv = (netPayAdv >= 0) ? 'RM'+netPayAdv.toFixed(2) : '- RM'+ Math.abs(netPayAdv).toFixed(2);
           document.getElementById("netpay_"+cardId).textContent = netPayTextAdv;
+          document.getElementById("netpayview_"+cardId).textContent = netPayTextAdv;
+
+          return netPayAdv;
         }
       }
 
@@ -3554,8 +4334,9 @@
           let action = row.getElementsByTagName("td")[1].getAttribute('data-selector');
           let item = parseFloat(row.getElementsByTagName("td")[1].getAttribute('data-item'));
           let amount = parseFloat(row.getElementsByTagName("td")[1].getAttribute('data-value'));
-          
+          console.log('addItemHeaderTrEleArrLength: '+addItemHeaderTrEleArrLength)
 
+          // console.log(action, item, amount)
           if (action === 'Discount ( - )'){
             temp_amount = -amount;
             netPay = netPay - amount;
@@ -3582,13 +4363,20 @@
         });
 
 
+        
         if (isNaN(netPay)){
           netPayText = 'INVALID';
           document.getElementById("netpay_"+cardId).textContent = netPayText;
+          document.getElementById("netpayview_"+cardId).textContent = netPayText;
+
+          return 0;
         }
         else {
           netPayText = (netPay >= 0) ? 'RM'+netPay.toFixed(2) : '- RM'+ Math.abs(netPay).toFixed(2);
           document.getElementById("netpay_"+cardId).textContent = netPayText;
+          document.getElementById("netpayview_"+cardId).textContent = netPayText;
+
+          return netPay;
         }
 
       }
@@ -4926,7 +5714,7 @@
       // Get the length of the item header to determine if simple or advanced template used.
       let itemHeaderTrEleArr = document.getElementById('thead_item_'+cardId).querySelectorAll('tr');
       let itemHeaderTdEleLength = itemHeaderTrEleArr[0].querySelectorAll('th').length;
-      console.log(itemHeaderTdEleLength);
+      // console.log(itemHeaderTdEleLength);
 
       // Get the item nodelist
       let itemTrEleArr = document.getElementById('tbody_item_'+cardId).querySelectorAll('tr.item');
@@ -5087,7 +5875,7 @@
 
     }
 
-    // Render class components with manual input
+    // Edit Payslip modal: Render class components with manual input
     function renderAllPayslipItemsManual(desc, quantity, amount, payout){
       // <tr class="item">
       //   <td><i class="fas fa-grip-vertical"></i></td>
@@ -5288,7 +6076,7 @@
 
     }
 
-    // Clear & Reset the items in 
+    // Clear & Reset the items in Payslip modal
     function clearItems(){
       let itemBody = document.getElementById('itemBody');
       itemBody.querySelectorAll('tr[class=item]').forEach(function (row, index) {
@@ -5588,6 +6376,684 @@
     }
 
 
+    // Preview payslip data.
+    function previewPayslip(cardId, payslipDataArr){
+     // Clear unnecessary items first.
+      // Remove item table header TR.
+      document.getElementById("thead_item_"+cardId).querySelectorAll('tr').forEach(function (row, index){
+        row.remove();
+      });
+
+      // Remove all item and gross pay.
+      document.getElementById("tbody_item_"+cardId).querySelectorAll('tr').forEach(function (row, index){
+        row.remove();
+      });
+
+      // Remove additonal item table header TR.
+      document.getElementById("thead_additem_"+cardId).querySelectorAll('tr').forEach(function (row, index){
+        row.remove();
+      });
+
+      // Remove all additional items in add table
+      document.getElementById("tbody_additem_"+cardId).querySelectorAll('tr[class=additional]').forEach(function (row, index){
+        row.remove();
+      });
+
+ 
+      // Print Items & Additional Items
+      let itemStartIndex= payslipDataArr.indexOf('ITEM');
+      let subtotalStartIndex= payslipDataArr.indexOf('GROSS');
+      let additionalItemStartIndex= payslipDataArr.indexOf('ADDITIONAL_ITEM');
+      let totalStartIndex= payslipDataArr.indexOf('NET');
+
+      console.log(itemStartIndex, additionalItemStartIndex, subtotalStartIndex, totalStartIndex)
+
+      let type = payslipDataArr[0];
+      let item = payslipDataArr.slice(itemStartIndex+1, subtotalStartIndex); //+1 to ignore the first indentifier
+      let subTotal = payslipDataArr[subtotalStartIndex+1];
+      let additionalItem = payslipDataArr.slice(additionalItemStartIndex+1, totalStartIndex); //+1 to ignore the first indentifier
+      let total = payslipDataArr[totalStartIndex+1];
+
+      let advanced = type === 'ADVANCED';
+      let grossPay = 0;
+
+      if (advanced){
+        // Render the adv table template (table header, gross pay, and table additional header)
+        renderTableAdvTemplate('preview')
+
+        // Advanced Template
+        item.reverse().forEach((document) => {
+          let component = document.split(";; ");
+
+          let payslipItemData={
+            tutorId: 'preview',
+            item: component[0],
+            quantity: component[1],
+            price: component[2],
+            payout: component[3],
+          }
+          
+          renderAllPayslipItemsAdv(payslipItemData);
+
+        });
+
+        // Print Additional Items
+        //.reverse() to make sure we print from the last -> first
+        additionalItem.reverse().forEach((document) => {
+
+          let component = document.split(";; ");
+          // Generate the additional item
+          let payslipItemData={
+            tutorId: 'preview',
+            item: component[1],
+            quantity: 0,
+            price: component[2],
+            payout: 0,
+            selector: component[0],
+          }
+          renderAllPayslipAdditionalItemsAdv(payslipItemData);
+
+        });
+
+        // Calculate Gross & Net Pay
+        grossPay = calculateGrossPayDuringInit('preview');
+        calculateNetPayDuringInit('preview', grossPay);
+
+      }
+      else{
+        // Generate simple empty payslip
+        renderTableTemplate('preview');
+
+        // Print Items
+        // Simple Template
+        item.reverse().forEach((document) => {
+          let component = document.split(";; ");
+
+          let payslipItemData={
+            tutorId: 'preview',
+            item: component[0],
+            quantity: component[1],
+            price: component[2],
+            payout: component[3],
+          }
+
+          console.log(payslipItemData);
+
+          renderAllPayslipItems(payslipItemData);
+          
+        });
+
+        // Print Additional Items
+        //.reverse() to make sure we print from the last -> first
+        additionalItem.reverse().forEach((document) => {
+
+        let component = document.split(";; ");
+        // Generate the additional item
+        let payslipItemData={
+          tutorId: 'preview',
+          item: component[1],
+          quantity: 0,
+          price: component[2],
+          payout: 0,
+          selector: component[0],
+        }
+        renderAllPayslipAdditionalItems(payslipItemData);
+
+        });
+
+        // Calculate Gross & Net Pay
+        grossPay = calculateGrossPayDuringInit('preview');
+        calculateNetPayDuringInit('preview', grossPay);
+
+      }
+   
+    }
+
+
+    // Create / Update payslip, transaction and payroll
+    function CreatePayslip(cardId){
+     
+      let title = document.getElementById(cardId).querySelectorAll('p[name=title]')[0].textContent;
+      let refNo = document.getElementById(cardId).querySelectorAll('p[name=refNo]')[0].textContent;
+      let date = document.getElementById(cardId).querySelectorAll('p[name=date]')[0].textContent;
+      let receiver_name = document.getElementById(cardId).querySelectorAll('p[name=name]')[0].textContent;
+      let receiver_position = document.getElementById(cardId).querySelectorAll('p[name=position]')[0].textContent;
+      let receiver_epf = document.getElementById(cardId).querySelectorAll('p[name=epf]')[0].textContent;
+      let receiver_socso = document.getElementById(cardId).querySelectorAll('p[name=socso]')[0].textContent;
+      let receiver_bankName = document.getElementById(cardId).querySelectorAll('p[name=bankName]')[0].textContent;
+      let receiver_acNo = document.getElementById(cardId).querySelectorAll('p[name=acNo]')[0].textContent;
+
+      let payslipData =  getPayslipData(cardId)
+      let grossPay = calculateGrossPayDuringInit(cardId);
+      
+      let netPay =  calculateNetPayDuringInit(cardId, grossPay);
+
+      // console.log(grossPay, netPay)
+
+      // Payslip Date
+      date = date.split("/");
+      let newDate = new Date( date[2], date[1] - 1, date[0]);
+      let finalDate = firebase.firestore.Timestamp.fromDate(newDate);
+      // Payslip Sender Detail
+      let bizDetail = '';
+      bizDetail += (bizPhone == null || bizPhone == '') ? '' : bizPhone;
+      bizDetail += (bizEmail == null || bizEmail == '') ? '' : ', ' + bizEmail;
+      bizDetail += (bizAddr == null || bizAddr == '') ? '' : ', ' + bizAddr;
+
+      // Check if the payslip existed 
+
+      let payDocId = '';
+      let transDocId = '';
+
+      let payslipDocRef = db.collection("Financial")
+        .doc("v1")
+        .collection("Payslip")
+        .where(PAY_PAYROLL_ID, "==", payrollId)
+        .where(PAY_RECEIVER_ID, "==", cardId);
+
+
+      payslipDocRef
+      .get()
+      .then((querySnapshot) => {
+
+        let payrollDocRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Payroll")
+          .doc(payrollId);
+
+        if(querySnapshot.empty) {
+
+          let payslipDocRef1 = db.collection("Financial")
+            .doc("v1")
+            .collection("Payslip")
+            .doc();
+
+          let transDocRef = db.collection("Financial")
+            .doc("v1")
+            .collection("Transaction")
+            .doc();
+
+          console.log("Empty, Create a new Payslip");
+
+          payDocId = payslipDocRef1.id;
+
+          transDocId = transDocRef.id;
+
+
+          var data = {
+            [PAY_ID]: payDocId,
+            [PAY_SENDER_ID]: tutorId,
+            [PAY_SENDER_NAME]: bizName,
+            [PAY_SENDER_DETAILS]: bizDetail,
+            [PAY_SENDER_IMG_URL]: bizImgUrl,
+          
+            [PAY_RECEIVER_ID]: cardId,
+            [PAY_RECEIVER_NAME]: receiver_name,
+            [PAY_RECEIVER_POSITION]: receiver_position,
+            [PAY_RECEIVER_EPF]: receiver_epf,
+            [PAY_RECEIVER_SOCSO]: receiver_socso,
+            [PAY_RECEIVER_BANK_NAME]: receiver_bankName,
+            [PAY_RECEIVER_AC_NO]: receiver_acNo,
+
+            [PAY_TITLE]: title,
+            [PAY_NUMBER]: refNo,
+            [PAY_DATE]: finalDate,
+            [PAY_PAY_STATUS]: PAY_STATUS_NEW,
+
+            // Payslip Contents
+            [PAY_ITEMS_ARR]: payslipData,
+            [PAY_TOTAL]: netPay,
+
+            [PAY_PAYMENT_DATE]: '',
+            [PAY_PAYMENT_AMOUNT]: 0,
+            [PAY_PAYMENT_NOTE]: '',
+
+            [PAY_DATE_ADD]: new Date(),
+            [PAY_DATE_EDIT]: '',
+            [PAY_DATE_DEL]: '',
+            [PAY_STATUS]: true,
+            // Payroll Info
+            [PAY_PAYROLL_ID]: payrollId,
+            [PAY_PAYROLL_NAME]: payrollName,
+            [PAY_TRANS_ID]:transDocId,
+          }
+
+          console.log("*Payslip Data...")
+          console.log(data)
+
+
+          var transData = {
+            [TRANS_ID]: transDocId,
+            [TRANS_DOC_ID]: payDocId,
+            [TRANS_DOC_NUM]: refNo,
+            [TRANS_SENDER_ID]: tutorId,
+            [TRANS_RECEIVER_ID]: cardId,
+            [TRANS_SENDER_NAME]: bizName,
+            [TRANS_RECEIVER_NAME]: receiver_name,
+            [TRANS_VIEWER_ARR]: [cardId, tutorId],
+            [TRANS_DATE]: finalDate,
+            [TRANS_TYPE]: TRANS_TYPE_PAY,
+            [TRANS_DOC_STATUS] : TRANS_PAY_STATUS_NEW,
+            [TRANS_TITLE]: title,
+            [TRANS_TOTAL]: netPay,
+            [TRANS_DATE_EDIT]: new Date(),
+            [TRANS_STATUS]: true,
+          }
+
+          console.log("Transaction Data...")
+          console.log(transData)
+
+          payrollDocIdArr.push(payDocId);
+          payrollDocTotalArr.push(netPay);
+
+          // https://stackoverflow.com/questions/1230233/how-to-find-the-sum-of-an-array-of-numbers
+          payrollTotal = payrollDocTotalArr.reduce((a, b) => a + b, 0)
+
+          var payrollData = {
+            [PAYROLL_ID]: payrollId,
+            [PAYROLL_ADMIN_ID]: tutorId,
+            [PAYROLL_NAME]: payrollName,
+            [PAYROLL_DATE_START]: payrollStart,
+            [PAYROLL_DATE_END]: payrollEnd,
+            [PAYROLL_DOC_ID_ARR]: payrollDocIdArr,
+            [PAYROLL_DOC_TOTAL_ARR]: payrollDocTotalArr,
+            [PAYROLL_TOTAL]: payrollTotal,
+            [PAYROLL_STATUS]: true,
+          }
+          console.log("Payroll Data...")
+          console.log(payrollData);
+
+          // Create Payslip
+          payslipDocRef1.set(data, { merge: true })
+          .then(() => {
+            
+            // Create Transaction
+            transDocRef.set(transData, { merge: true })
+            .then(() => {
+
+              // Update Payroll
+              payrollDocRef.set(payrollData, { merge: true })
+              .then(() => {
+                func.showNotification('top','center', 'success', 'check_circle', "Created new payslip." );
+                SetPayslipUpdateStatus(true, cardId);
+              });
+              
+            });
+
+            
+          });
+          
+
+        } 
+        else 
+        {
+          querySnapshot.forEach((doc) => {
+
+            console.log("Payslip found, update exisiting payslip.");
+           
+            payDocId = doc.data()[PAY_ID];
+            transDocId = doc.data()[PAY_TRANS_ID];
+
+            let payslipDocRef1 = db.collection("Financial")
+              .doc("v1")
+              .collection("Payslip")
+              .doc(payDocId);
+
+            let transDocRef = db.collection("Financial")
+              .doc("v1")
+              .collection("Transaction")
+              .doc(transDocId);
+
+
+            var data = {
+              // [PAY_ID]: payDocId,
+              [PAY_SENDER_ID]: tutorId,
+              [PAY_SENDER_NAME]: bizName,
+              [PAY_SENDER_DETAILS]: bizDetail,
+              [PAY_SENDER_IMG_URL]: bizImgUrl,
+            
+              [PAY_RECEIVER_ID]: cardId,
+              [PAY_RECEIVER_NAME]: receiver_name,
+              [PAY_RECEIVER_POSITION]: receiver_position,
+              [PAY_RECEIVER_EPF]: receiver_epf,
+              [PAY_RECEIVER_SOCSO]: receiver_socso,
+              [PAY_RECEIVER_BANK_NAME]: receiver_bankName,
+              [PAY_RECEIVER_AC_NO]: receiver_acNo,
+
+              [PAY_TITLE]: title,
+              [PAY_NUMBER]: refNo,
+              [PAY_DATE]: finalDate,
+              // [PAY_PAY_STATUS]: PAY_STATUS_NEW,
+
+              // Payslip Contents
+              [PAY_ITEMS_ARR]: payslipData,
+              [PAY_TOTAL]: netPay,
+
+              // [PAY_PAYMENT_DATE]: '',
+              // [PAY_PAYMENT_AMOUNT]: 0,
+              // [PAY_PAYMENT_NOTE]: '',
+
+              // [PAY_DATE_ADD]: new Date(),
+              [PAY_DATE_EDIT]: new Date(),
+              // [PAY_DATE_DEL]: '',
+              // [PAY_STATUS]: true,
+
+              // Payroll Info
+              // [PAY_PAYROLL_ID]: payrollId,
+              // [PAY_PAYROLL_NAME]: payrollName,
+              // [PAY_TRANS_ID]:transDocId,
+            }
+
+            console.log("*Payslip Data...")
+            console.log(data)
+
+
+            var transData = {
+              // [TRANS_ID]: transDocId,
+              // [TRANS_DOC_ID]: payDocId,
+              [TRANS_DOC_NUM]: refNo,
+              [TRANS_SENDER_ID]: tutorId,
+              [TRANS_RECEIVER_ID]: cardId,
+              [TRANS_SENDER_NAME]: bizName,
+              [TRANS_RECEIVER_NAME]: receiver_name,
+              [TRANS_VIEWER_ARR]: [cardId, tutorId],
+              [TRANS_DATE]: finalDate,
+              // [TRANS_TYPE]: TRANS_TYPE_PAY,
+              // [TRANS_DOC_STATUS] : TRANS_PAY_STATUS_NEW,
+              [TRANS_TITLE]: title,
+              [TRANS_TOTAL]: netPay,
+              [TRANS_DATE_EDIT]: new Date(),
+              // [TRANS_STATUS]: true,
+            }
+
+            console.log("Transaction Data...")
+            console.log(transData)
+
+            // Get the index of the payslip doc no.
+            let payslipDocIndex = payrollDocIdArr.indexOf(payDocId);
+
+            // Remove the item and it's total in arrays
+            if (payslipDocIndex > -1) {
+              payrollDocIdArr.splice(payslipDocIndex, 1);
+              payrollDocTotalArr.splice(payslipDocIndex, 1);
+            }
+
+            // push a new item and total into the arrays
+            payrollDocIdArr.push(payDocId);
+            payrollDocTotalArr.push(netPay);
+
+            // Change the amount at the index
+            // payrollDocTotalArr[payslipDocIndex] = netPay;
+
+            // https://stackoverflow.com/questions/1230233/how-to-find-the-sum-of-an-array-of-numbers
+            payrollTotal = payrollDocTotalArr.reduce((a, b) => a + b, 0)
+
+            var payrollData = {
+              // [PAYROLL_ID]: payrollId,
+              // [PAYROLL_ADMIN_ID]: tutorId,
+              // [PAYROLL_NAME]: payrollName,
+              // [PAYROLL_DATE_START]: payrollStart,
+              // [PAYROLL_DATE_END]: payrollEnd,
+              [PAYROLL_DOC_ID_ARR]: payrollDocIdArr,
+              [PAYROLL_DOC_TOTAL_ARR]: payrollDocTotalArr,
+              [PAYROLL_TOTAL]: payrollTotal,
+              // [PAYROLL_STATUS]: true,
+            }
+            console.log("Payroll Data...")
+            console.log(payrollData);
+
+            // Update Payslip
+            payslipDocRef1.set(data, { merge: true })
+            .then(() => {
+              
+              // Create Transaction
+              transDocRef.set(transData, { merge: true })
+              .then(() => {
+
+                // Update Payroll
+                payrollDocRef.set(payrollData, { merge: true })
+                .then(() => {
+                  func.showNotification('top','center', 'success', 'check_circle', "Updated payslip." );
+                  SetPayslipUpdateStatus(true, cardId);
+                });
+                
+              });
+
+              
+            });
+
+
+            
+          });
+        }
+ 
+      }).catch((error) => {
+          console.log("Error getting document:", error);
+      });
+      
+
+
+      
+
+
+    }
+
+    // Remove tutor's payslip, transaction and payroll
+    function RemovePlayslip(cardId){
+
+      let payDocId = '';
+      let transDocId = '';
+
+      let payslipDocRef = db.collection("Financial")
+        .doc("v1")
+        .collection("Payslip")
+        .where(PAY_PAYROLL_ID, "==", payrollId)
+        .where(PAY_RECEIVER_ID, "==", cardId);
+
+
+      payslipDocRef
+      .get()
+      .then((querySnapshot) => {
+
+        let payrollDocRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Payroll")
+          .doc(payrollId);
+
+        if(querySnapshot.empty) {
+          console.log("Empty payslip, Skipped");
+          removeElementBasedOnId(cardId);
+        } 
+        else 
+        {
+          querySnapshot.forEach((doc) => {
+
+            console.log("Payslip found, update exisiting payslip.");
+           
+            payDocId = doc.data()[PAY_ID];
+            transDocId = doc.data()[PAY_TRANS_ID];
+
+            let payslipDocRef1 = db.collection("Financial")
+              .doc("v1")
+              .collection("Payslip")
+              .doc(payDocId);
+
+            let transDocRef = db.collection("Financial")
+              .doc("v1")
+              .collection("Transaction")
+              .doc(transDocId);
+
+
+            var data = {
+              [PAY_DATE_DEL]:  new Date(),
+              [PAY_STATUS]: false,
+            }
+
+            var transData = {
+              [TRANS_DATE_EDIT]: new Date(),
+              [TRANS_STATUS]: false,
+            }
+
+            console.log("Transaction Data...")
+            console.log(transData)
+
+            // Get the index of the payslip doc no.
+            let payslipDocIndex = payrollDocIdArr.indexOf(payDocId);
+
+            // Remove the item and it's total in arrays
+            if (payslipDocIndex > -1) {
+              payrollDocIdArr.splice(payslipDocIndex, 1);
+              payrollDocTotalArr.splice(payslipDocIndex, 1);
+            }
+
+            // https://stackoverflow.com/questions/1230233/how-to-find-the-sum-of-an-array-of-numbers
+            payrollTotal = payrollDocTotalArr.reduce((a, b) => a + b, 0)
+
+            var payrollData = {
+              // [PAYROLL_ID]: payrollId,
+              // [PAYROLL_ADMIN_ID]: tutorId,
+              // [PAYROLL_NAME]: payrollName,
+              // [PAYROLL_DATE_START]: payrollStart,
+              // [PAYROLL_DATE_END]: payrollEnd,
+              [PAYROLL_DOC_ID_ARR]: payrollDocIdArr,
+              [PAYROLL_DOC_TOTAL_ARR]: payrollDocTotalArr,
+              [PAYROLL_TOTAL]: payrollTotal,
+              // [PAYROLL_STATUS]: true,
+            }
+            console.log("Payroll Data...")
+            console.log(payrollData);
+
+            // Update Payslip
+            payslipDocRef1.set(data, { merge: true })
+            .then(() => {
+              
+              // Create Transaction
+              transDocRef.set(transData, { merge: true })
+              .then(() => {
+
+                // Update Payroll
+                payrollDocRef.set(payrollData, { merge: true })
+                .then(() => {
+                  func.showNotification('top','center', 'success', 'check_circle', "Removed payslip." );
+                  // SetPayslipUpdateStatus(true, cardId);
+                  removeElementBasedOnId(cardId);
+                });
+                
+              });
+
+              
+            });
+
+
+            
+          });
+        }
+ 
+      }).catch((error) => {
+          console.log("Error getting document:", error);
+      });
+
+    }
+
+    function checkNewEmployeeValidity(){
+      // Get the existing list of cardId. 
+      // If similar phoneId used, ban the number.
+      let existingCardList = document.getElementById('accordionTutor').querySelectorAll('div.card');
+      let existingCardIdList = [];
+
+      existingCardList.forEach((row, index) => {
+        existingCardIdList.push(row.getAttribute('id'));
+      });
+
+
+      let inCustomEmployeeName = document.getElementById('inCustomEmployeeName').value;
+      let inClientContactExist = existingCardIdList.includes(itiPhone.getNumber());
+      let inClientContactValid = itiPhone.isValidNumber() && itiPhone.getNumber().length > 5;
+
+      if (inCustomEmployeeName == null || inCustomEmployeeName =='' || inClientContactExist){
+        document.getElementById('btnAddCustomEmployeeModalUpdate').setAttribute('disabled', true);
+      }else if(!inClientContactValid) {
+        document.getElementById('btnAddCustomEmployeeModalUpdate').setAttribute('disabled', true);
+      }else{
+        document.getElementById('btnAddCustomEmployeeModalUpdate').removeAttribute('disabled');
+      }
+
+
+    }
+
+    function checkRecordPaymentModalFields(){
+
+      let recordPaymentDate = document.getElementById('inPaymentDate').value;
+      let recordPaymentAmount = document.getElementById('inPaymentAmount').value;
+
+      if (recordPaymentDate == null || recordPaymentDate == '' || recordPaymentAmount == null || recordPaymentAmount == ''){
+        document.getElementById('btnRecordPaymentModalUpdate').setAttribute('disabled', true);
+      }
+      else{
+        document.getElementById('btnRecordPaymentModalUpdate').removeAttribute('disabled');
+      }
+
+    }
+
+
+    function SetPayslipUpdateStatus(status, cardId){
+      if (status){
+        document.getElementById(cardId).querySelectorAll('i[name=update]')[0].className = 'fas fa-check-circle fa-lg';
+      }
+      else{
+        document.getElementById(cardId).querySelectorAll('i[name=update]')[0].className = 'far fa-check-circle fa-lg';
+
+      }
+
+    }
+
+    // Convert imgUrl to data
+    function toDataURL(src, callback, outputFormat) {
+      var img = new Image();
+      // var img = document.getElementById("tutorImgUrl");
+      var dataURL;
+      img.crossOrigin = 'Anonymous';
+      img.src = src;
+      img.onload = function() {
+        var canvas = document.createElement('CANVAS');
+        var ctx = canvas.getContext('2d');
+        
+        canvas.height = this.naturalHeight;
+        canvas.width = this.naturalWidth;
+        ctx.drawImage(this, 0, 0);
+        dataURL = canvas.toDataURL(outputFormat);
+        // img.src = dataURL;
+        // console.log(dataURL)
+        var imgTarget = document.getElementById("previewTutorImgUrl");
+        imgTarget.src = dataURL;
+        callback(dataURL);
+      };
+      // img.src = src;
+      // img.src = dataURL;
+      if (img.complete || img.complete === undefined) {
+        img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+        img.src = src;
+      }
+    }
+
+    // Generate PDF
+    // https://ekoopmans.github.io/html2pdf.js/
+    function generatePDFeKoopmans(id){
+
+      element = document.getElementById(id);
+
+      var opt = {
+        margin:       [0, 0, 0, 0],
+        filename:     'myfile.pdf',
+        pagebreak:    { before: '.beforeClass', after: ['#after1', '#after2'], avoid: 'img' },
+        image:        { type: 'jpeg', quality: 0.95 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save();
+      }
+
 
     // Sign out
     function signOutFunction(){
@@ -5613,7 +7079,9 @@
       });
 
       $('#btnCreatePayrollModalUpdate').on( 'click', function () {
-        loadAllTutorInfo();
+      
+        CreatePayroll();
+
       });
       
       
@@ -5667,6 +7135,57 @@
       });
 
 
+      // Add a custome employee
+      $('#btnAddCustomEmployeeModalUpdate').on('click', function (e) {
+
+        let inCustomEmployeeId = itiPhone.getNumber();
+        let inCustomEmployeeName = document.getElementById('inCustomEmployeeName').value;
+        let inClientContact = itiPhone.getNumber();
+        let inCustomEmployeePosition = document.getElementById('inCustomEmployeePosition').value;
+        let inCustomBankName = document.getElementById('inCustomBankName').value;
+        let inCustomBankAccNum = document.getElementById('inCustomBankAccNum').value;
+        let inCustomEPF = document.getElementById('inCustomEPF').value;
+        let inCustomSocso = document.getElementById('inCustomSocso').value;
+
+        // console.log(inCustomEmployeeId, inCustomEmployeeName, inClientContact, inCustomEmployeePosition, inCustomBankName, inCustomBankAccNum,inCustomEPF, inCustomSocso)
+
+        // Create data modal for Tutor Module
+        let payslipData = {
+          tutorId: inCustomEmployeeId,
+          name: inCustomEmployeeName,
+          position: inCustomEmployeePosition,
+          bankName: inCustomBankName,
+          acNo: inCustomBankAccNum,
+          epf: inCustomEPF,
+          socso: inCustomSocso,
+          payStatus: PAY_STATUS_NEW,
+        }
+
+        // Generate placeholder new employee
+        renderActiveTutorPlaceholder(payslipData);
+        // Generate simple empty payslip
+        renderTableTemplate(inCustomEmployeeId);
+
+        let grossPay = calculateGrossPayDuringInit(inCustomEmployeeId);
+        // document.getElementById("netpayview_"+cardId).value = netPayTextAdv;
+        console.log('grossPay '+grossPay);
+        calculateNetPayDuringInit(inCustomEmployeeId, grossPay);
+        
+      });
+
+      // Add Employee modal clear fields
+      $('#addCustomEmployeeModal').on('hide.bs.modal', function (e) {
+        document.getElementById('inCustomEmployeeName').value = '';
+        document.getElementById('inClientContact').value = '';
+        document.getElementById('inCustomEmployeePosition').value = '';
+        document.getElementById('inCustomBankName').value = '';
+        document.getElementById('inCustomBankAccNum').value = '';
+        document.getElementById('inCustomEPF').value = '';
+        document.getElementById('inCustomSocso').value = '';
+      });
+      
+
+
       // Edit Payslip Modal View
       $('#editPayslipModal').on('show.bs.modal', function (e) {
         let button = $(e.relatedTarget) // Button/Components that triggered the modal
@@ -5691,6 +7210,7 @@
         savePayslipModal(PAYSLIP_CARD_ID);
 
 
+        SetPayslipUpdateStatus(false, PAYSLIP_CARD_ID);
       });
 
       // Edit Payslip Modal Clear values
@@ -5727,7 +7247,8 @@
         // loadPayslipDetailsModal(payslipData);
       });
 
-      // Confirm Button Edit Payslip Details  clicked
+
+      // Confirm Button Edit Payslip Details clicked
       $('#btnEditPayslipEmployeeModalUpdate').on('click', function (e) {
         document.getElementById(PAYSLIP_CARD_ID).querySelectorAll('p[name=title]')[0].textContent = document.getElementById("editPayslipEmployeeTitle").value;
         document.getElementById(PAYSLIP_CARD_ID).querySelectorAll('p[name=refNo]')[0].textContent = document.getElementById("editPayslipEmployeeRefNo").value;
@@ -5739,6 +7260,7 @@
         // document.getElementById(PAYSLIP_CARD_ID).querySelectorAll('p[name=bankName]')[0].textContent = document.getElementById("editPayslipEmployeeBankName").value;
         // document.getElementById(PAYSLIP_CARD_ID).querySelectorAll('p[name=acno]')[0].textContent = document.getElementById("editPayslipEmployeeAcNo").value;
       
+        SetPayslipUpdateStatus(false, PAYSLIP_CARD_ID);
       });
 
       // Edit Payslip Modal Clear values
@@ -5756,18 +7278,100 @@
       });
 
 
+      // Preview Modal Show
+      $('#previewModal').on('show.bs.modal', function (e) {
+        let button = $(e.relatedTarget) // Button/Components that triggered the modal
+        PAYSLIP_CARD_ID = button.data('cardid') // Extract info from data-* attributes
 
+        let payslipData = getPayslipData(PAYSLIP_CARD_ID);
+        console.log('payslipData: ');
+        console.log(payslipData);
+
+        // Render Tables 
+        previewPayslip('preview', payslipData)
+
+        // Render Fixed Params
+        let title = document.getElementById(PAYSLIP_CARD_ID).querySelectorAll('p[name=title]')[0].textContent;
+        let refNo = document.getElementById(PAYSLIP_CARD_ID).querySelectorAll('p[name=refNo]')[0].textContent;
+        let date = document.getElementById(PAYSLIP_CARD_ID).querySelectorAll('p[name=date]')[0].textContent;
+        let name = document.getElementById(PAYSLIP_CARD_ID).querySelectorAll('p[name=name]')[0].textContent;
+        let position = document.getElementById(PAYSLIP_CARD_ID).querySelectorAll('p[name=position]')[0].textContent;
+        let epf = document.getElementById(PAYSLIP_CARD_ID).querySelectorAll('p[name=epf]')[0].textContent;
+        let socso = document.getElementById(PAYSLIP_CARD_ID).querySelectorAll('p[name=socso]')[0].textContent;
+        let bankName = document.getElementById(PAYSLIP_CARD_ID).querySelectorAll('p[name=bankName]')[0].textContent;
+        let acNo = document.getElementById(PAYSLIP_CARD_ID).querySelectorAll('p[name=acNo]')[0].textContent;
+        
+        document.getElementById("previewTitle").textContent = title;
+        document.getElementById("previewRefNo").textContent = refNo;
+        document.getElementById("previewDate").textContent = date;
+
+        let bizDetail = '';
+        bizDetail += (bizPhone == null || bizPhone == '') ? '' : bizPhone;
+        bizDetail += (bizEmail == null || bizEmail == '') ? '' : ', ' + bizEmail;
+        bizDetail += (bizAddr == null || bizAddr == '') ? '' : ', ' + bizAddr;
+
+        document.getElementById("previewBizName").textContent = bizName;
+        document.getElementById("previewBizDetails").textContent = bizDetail;
+
+        if (bizImgUrl == null || bizImgUrl == ''){
+          document.getElementById("previewTutorImgUrl").style.display = 'none';
+        }
+        else {
+          toDataURL(
+            bizImgUrl == null || bizImgUrl == '' ?  '../../assets/img/empty-photo.png' : 'https://murmuring-headland-66106.herokuapp.com/'+bizImgUrl,
+            function(dataUrl) {
+              // console.log('RESULT:', dataUrl)
+            },
+          );
+        }
+
+        document.getElementById("previewClientName").textContent = name;
+        document.getElementById("previewClientPosition").textContent = position;
+
+        if (epf == null || epf == ''){
+          document.getElementById("previewEpf").style.display = 'none';
+          document.getElementById("previewEpfTitle").style.display = 'none';
+
+        }else{
+          document.getElementById("previewEpf").style.display = '';
+          document.getElementById("previewEpfTitle").style.display = '';
+
+        }
+
+        if (socso == null || socso == ''){
+          document.getElementById("previewSocso").style.display = 'none';
+          document.getElementById("previewSocsoTitle").style.display = 'none';
+
+        }else{
+          document.getElementById("previewSocso").style.display = '';
+          document.getElementById("previewSocsoTitle").style.display = '';
+
+        }
+        document.getElementById("previewEpf").textContent = epf;
+        document.getElementById("previewSocso").textContent = socso;
+
+        document.getElementById("previewBankName").textContent = bankName;
+        document.getElementById("previewAcNo").textContent = acNo;
+      });
+
+      // Preview Modal Hide
+      $('#previewModal').on('hide.bs.modal', function (e) {
+        // TODO: Clear preview
+
+        
+      });
+
+      
 
       // Load All Admin's Teachers
       $('#myTeacherModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
-        // tutorBtnNum = parseInt(button.data('num')); // Extract info from data-* attributes
         latestAdminTutorDoc = null;
         loadAllAdminTeachers();
 
         // Specific to myself
-        const btnSelectMyself = document.getElementById('btnSelectMyself');
-        btnSelectMyself.setAttribute('onclick', "AddNewTutorToDB('"+ tutorId+"', '"+current_name+"', '"+current_phone+"', '"+current_imgUri+"')");
+        // const btnSelectMyself = document.getElementById('btnSelectMyself');
+        // btnSelectMyself.setAttribute('onclick', "AddNewEmployee('"+ tutorId+"', '"+current_name+"', '"+current_phone+"', '"+current_imgUri+"')");
 
       });
       
@@ -5776,9 +7380,172 @@
         // NOTE: div:gt(5) - get the 6th div child in the parent node.
         // NOTE: div:gt(7) - get the 7th div child in the parent node. (myself)
         $('#add-tutor-modal-container div:gt(12)').remove();
-        tutorBtnNum = 0; 
       });
 
+
+      // Populate record payment modal
+      $('#loadPayrollModal').on('show.bs.modal', function (e) {
+        // Load all payrolls
+        latestPayrollDoc = null;
+        loadAllPayroll();
+
+      });
+
+      $('#loadPayrollModal').on('hide.bs.modal', function (event) {
+
+        let payrollFullList = document.getElementById('payrollFullList').querySelectorAll('a');
+        payrollFullList.forEach((row, index) => {
+          row.remove();
+        });
+        
+      });
+
+      // Record Payment
+      $('#btnLoadPayrollModalLoadMore').on('click', function (event) {
+
+
+
+      });
+
+
+
+
+      // Populate record payment modal
+      $('#recordPaymentModal').on('show.bs.modal', function (e) {
+        let button = $(e.relatedTarget);
+        EMPLOYEE_CARD_ID = button.data('employeecardid');
+        EMPLOYEE_CARD_NAME = button.data('employeecardname');
+        // document.getElementById("confirmEmployeeCardId").setAttribute('value', EMPLOYEE_CARD_ID);
+        document.getElementById("recordPaymentModalTitle").textContent = 'Record payment for '+ EMPLOYEE_CARD_NAME;
+
+
+        // let invPaymentDate = ''
+        // if (currentInvoiceObj[INV_PAYMENT_DATE] == null || currentInvoiceObj[INV_PAYMENT_DATE] == ''){
+        //   invPaymentDate = ' - ';
+        // }else {
+        //   invPaymentDate = new Date(currentInvoiceObj[INV_PAYMENT_DATE].seconds*1000).toLocaleDateString("en-GB");
+        // }
+
+        // document.getElementById("inPaymentDate").value = invPaymentDate;
+        // document.getElementById("inPaymentAmount").value = currentInvoiceObj[INV_PAYMENT_AMOUNT];
+        // document.getElementById("inPaymentNotes").value = currentInvoiceObj[INV_PAYMENT_NOTE];
+
+      });
+
+      $('#recordPaymentModal').on('hide.bs.modal', function (event) {
+        EMPLOYEE_CARD_ID = '';
+        EMPLOYEE_CARD_NAME = '';
+        document.getElementById("inPaymentDate").value = '';
+        document.getElementById("inPaymentAmount").value = '';
+        document.getElementById("inPaymentNotes").value = '';
+        
+      });
+
+      // Record Payment
+      $('#btnRecordPaymentModalUpdate').on('click', function (event) {
+
+
+        let inPaymentDate = document.getElementById("inPaymentDate").value ;
+        let inPaymentAmount = document.getElementById("inPaymentAmount").value;
+        let inPaymentNotes = document.getElementById("inPaymentNotes").value ;
+
+        let payslipDocRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Payslip")
+          .where(PAY_PAYROLL_ID, "==", payrollId)
+          .where(PAY_RECEIVER_ID, "==", EMPLOYEE_CARD_ID);
+
+
+        payslipDocRef
+        .get()
+        .then((querySnapshot) => {
+
+          // let payrollDocRef = db.collection("Financial")
+          //   .doc("v1")
+          //   .collection("Payroll")
+          //   .doc(payrollId);
+
+          if(querySnapshot.empty) {
+
+            func.showNotification('top','center', 'danger', 'error_outline', "Cannot record payment for unsaved payslip." );
+
+          } 
+          else 
+          {
+            querySnapshot.forEach((doc) => {
+
+              console.log("Payslip found, update exisiting payslip.");
+            
+              payDocId = doc.data()[PAY_ID];
+              transDocId = doc.data()[PAY_TRANS_ID];
+              console.log(payDocId, transDocId);
+              let payslipDocRef1 = db.collection("Financial")
+                .doc("v1")
+                .collection("Payslip")
+                .doc(payDocId);
+
+              let transDocRef = db.collection("Financial")
+                .doc("v1")
+                .collection("Transaction")
+                .doc(transDocId);
+
+              // Payment date
+              
+              // let paymentDate = document.getElementById("inPaymentDate").value;
+              let paymentDate = $('#inPaymentDate').data('daterangepicker').startDate.format('DD/MM/YYYY');
+
+              console.log('paymentDate');
+              console.log(paymentDate);
+              paymentDate = paymentDate.split("/");
+              let newPaymentDate = new Date( paymentDate[2], paymentDate[1] - 1, paymentDate[0]);
+              let paymentDateFinal = firebase.firestore.Timestamp.fromDate(newPaymentDate);
+
+              var data = {
+                [PAY_PAYMENT_DATE]: paymentDateFinal,
+                [PAY_PAYMENT_AMOUNT]: inPaymentAmount,
+                [PAY_PAYMENT_NOTE]: inPaymentNotes,
+                [PAY_DATE_EDIT]: new Date(),
+              }
+
+              console.log("*Payslip Data...")
+              console.log(data)
+
+
+              var transData = {
+                [TRANS_DOC_STATUS] : TRANS_PAY_STATUS_PAID,
+                [TRANS_DATE_EDIT]: new Date(),
+              }
+
+              console.log("Transaction Data...")
+              console.log(transData)
+
+              // Update Payslip
+
+              payslipDocRef1.set(data, { merge: true })
+              .then(() => {
+                
+                // Create Transaction
+                transDocRef.set(transData, { merge: true })
+                .then(() => {
+
+                  func.showNotification('top','center', 'success', 'check_circle', "Payment recorded." );
+
+                });
+
+                
+              });
+
+
+              
+            });
+          }
+  
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+
+
+      });
 
 
       // Confirm employee view
@@ -5786,9 +7553,9 @@
         let button = $(e.relatedTarget) // Button/Components that triggered the modal
         EMPLOYEE_CARD_ID = button.data('employeecardid') // Extract info from data-* attributes
         EMPLOYEE_CARD_NAME = button.data('employeecardname')
-        console.log(EMPLOYEE_CARD_ID)
+        // console.log(EMPLOYEE_CARD_ID)
         document.getElementById("confirmEmployeeCardId").setAttribute('value', EMPLOYEE_CARD_ID);
-        document.getElementById("confirmEmployeeModalTitle").textContent = 'Create payslip for '+ EMPLOYEE_CARD_NAME;
+        document.getElementById("confirmEmployeeModalTitle").textContent = 'Create or update payslip for '+ EMPLOYEE_CARD_NAME;
 
       });
       // Clear values
@@ -5802,7 +7569,10 @@
       
       $('#btnConfirmEmployeeModalUpdate').on('click', function (e) {
         // removeElementBasedOnId(EMPLOYEE_CARD_ID);
-        alert('Created Payslip for this Teacher')
+        // alert('Created Payslip for this Teacher')
+
+        CreatePayslip(EMPLOYEE_CARD_ID);
+
       });
 
 
@@ -5811,7 +7581,7 @@
         let button = $(e.relatedTarget) // Button/Components that triggered the modal
         EMPLOYEE_CARD_ID = button.data('employeecardid') // Extract info from data-* attributes
         EMPLOYEE_CARD_NAME = button.data('employeecardname')
-        console.log(EMPLOYEE_CARD_ID)
+        // console.log(EMPLOYEE_CARD_ID)
         document.getElementById("employeeCardId").setAttribute('value', EMPLOYEE_CARD_ID);
         document.getElementById("removeEmployeeModalTitle").textContent = 'Remove '+ EMPLOYEE_CARD_NAME;
 
@@ -5826,7 +7596,10 @@
       });
       
       $('#btnRemoveEmployeeModalUpdate').on('click', function (e) {
-        removeElementBasedOnId(EMPLOYEE_CARD_ID);
+
+        RemovePlayslip(EMPLOYEE_CARD_ID);
+
+        
       });
 
 
@@ -5912,14 +7685,7 @@
     //     console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
     //   });
     // });
-    var payrollStart = moment().startOf('month').format('DD/MM/YYYY');
-    var payrollEnd = moment().endOf('month').format('DD/MM/YYYY');
 
-    var start = moment().startOf('month');
-    var end = moment().endOf('month');
-
-    var payrollDate = moment().startOf('month').format('DD/MM/YYYY'); // Date on payslip
-    var payrollDateMonth = moment().startOf('month').format('MMMM YYYY'); // Date on payslip
 
 
     function cb(start, end, label) {
@@ -5928,9 +7694,13 @@
         // console.log(new Date(start), new Date(end), label);
         payrollStart = new Date(start);
         payrollEnd = new Date(end);
+        payrollName = start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY');
 
         payrollDate = start.format('DD/MM/YYYY');
         payrollDateMonth = start.format('MMMM YYYY');
+
+        
+
     }
 
     $('input[name="daterange"]').daterangepicker({
@@ -5965,6 +7735,23 @@
       payrollDateMonth = start.format('MMMM YYYY');
       // var years = moment().diff(start, 'years');
       // alert("You are " + years + " years old!");
+    });
+
+
+    // Record Payment Single Date Picker
+    $('#inPaymentDate').daterangepicker({
+      singleDatePicker: true,
+      showDropdowns: true,
+      locale: {
+          format: 'DD/MM/YYYY'
+      },
+    }, function(start, end, label) {
+
+      recordPaymentDate = start;
+
+      // Check if the fields are filled.
+      checkRecordPaymentModalFields();
+
     });
 
 
@@ -6012,16 +7799,44 @@
     inputPhone.addEventListener('blur', function() {
       reset();
       
+      // Get the existing list of cardId. 
+      // If similar phoneId used, ban the number.
+      let existingCardList = document.getElementById('accordionTutor').querySelectorAll('div.card');
+      let existingCardIdList = [];
+
+      existingCardList.forEach((row, index) => {
+        existingCardIdList.push(row.getAttribute('id'));
+      });
+
+      // Check validity of the fields in Add Employee Modal.
+      checkNewEmployeeValidity();
+
       if (inputPhone.value.trim()) {
-        if (itiPhone.isValidNumber()) {
+        if(existingCardIdList.includes(itiPhone.getNumber())){
+          inputPhone.classList.add("error");
+          // validMsg.classList.remove("hide");
+          errorMsg.innerHTML = 'Phone number already used. Please use a different number.';
+          errorMsg.classList.remove("hide");
+          
+          document.getElementById('btnAddCustomEmployeeModalUpdate').setAttribute('disabled', true);
+        }
+        
+        else if (itiPhone.isValidNumber()) {
           validMsg.classList.remove("hide");
-        } else {
+          document.getElementById('btnAddCustomEmployeeModalUpdate').removeAttribute('disabled');
+
+        } 
+
+        else {
           inputPhone.classList.add("error");
           var errorCode = itiPhone.getValidationError();
           errorMsg.innerHTML = errorMap[errorCode];
           errorMsg.classList.remove("hide");
+          document.getElementById('btnAddCustomEmployeeModalUpdate').setAttribute('disabled', true);
         }
       }
+
+      
     });
 
     // on keyup / change flag: reset
