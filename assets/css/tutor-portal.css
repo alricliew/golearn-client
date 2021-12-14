@@ -275,7 +275,7 @@
 
 .card-student-item:hover {
   /* transform: scale(1.05); */
-  background: #cacaca;
+  background: #dddddd;
   transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
     0.3s box-shadow,
     0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
@@ -546,6 +546,7 @@
 .tooltiptext-trigger:hover .tooltiptext-general {
   /* Makes tooltip text visible when text is hovered on */
   visibility: visible;
+  z-index: 1000;
 }
 
 .tooltiptext-general {
@@ -600,4 +601,87 @@
 }
 .mc-calendar {
   z-index: 10000 !important;
+}
+
+/* Table General */
+td input[type="text"] {
+  border: solid #dddddd thin;
+  background-color: #fff;
+}
+td input[type="number"] {
+  border: solid #dddddd thin;
+  background-color: #fff;
+  text-align: right;
+}
+
+/* Invoice Table */
+.table-item-top {
+  margin: 0.5rem 0 auto 0;
+}
+
+.table-item {
+  /* border: solid thin #dddddd; */
+  border-radius: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.table-title {
+  font-size: small;
+  font-weight: 300;
+  color: gray;
+  margin-bottom: 0;
+}
+
+.table-tag {
+  font-size: small;
+  font-weight: 300;
+  color: white;
+  margin: 0 0 0 2px;
+  background-color: #2e74b6;
+  border-radius: 6px;
+  padding: 2px 6px 2px 6px;
+}
+
+.th-item {
+  min-width: 200px;
+}
+.th-quantity {
+  width: 100px;
+  min-width: 100px;
+  text-align: right;
+}
+.th-price {
+  width: 100px;
+  min-width: 100px;
+  text-align: right;
+}
+.th-amount {
+  width: 100px;
+  min-width: 100px;
+  text-align: right;
+}
+.th-action {
+  width: 30px;
+  min-width: 30px;
+}
+
+.td-amount {
+  text-align: right;
+}
+
+.td-subtotal {
+  text-align: right;
+  font-weight: 500;
+}
+
+.th-hidden {
+  display: none;
+}
+.td-hidden {
+  display: none;
+}
+
+.addrow {
+  text-transform: none;
+  font-weight: bold;
 }
