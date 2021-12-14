@@ -30,7 +30,7 @@ const AGENT_KEY = "agent";
 const ACCOUNT_STATUS_KEY = "accountStatus";
     // Value of ACCOUNT_STATUS_KEY
     const DEACTIVATED_ACCOUNT_STATUS_KEY = "deactivated";
-    const ACTIVE_ACCOUNT_STATUS_KEY = "active";
+    const ACTIVE_ACCOUNT_STATUS_KEY = "activate"; //"active";
     const SUSPENDED_ACCOUNT_STATUS_KEY = "suspended";
     const PREMIUM_ACCOUNT_1_STATUS_KEY = "premium1"; // VIP Equivalent
     const PREMIUM_ACCOUNT_2_STATUS_KEY = "premium2"; // VVIP Equivalent
@@ -377,6 +377,7 @@ const CLASS_FEES_TYPE_KEY = "feesType";
 const CLASS_TYPE = "classType";
     const CLASS_TYPE_PRIVATE = "private";
     const CLASS_TYPE_PUBLIC = "public";
+const CLASS_TAG = "classTag";
 const CLASS_STATUS = "classStatus";
     const CLASS_STATUS_ACTIVE = "active";
     const CLASS_STATUS_INACTIVE = "inactive";
@@ -687,9 +688,37 @@ const PAY_DATE_EDIT = "dateEdit";
 const PAY_DATE_DEL = "dateDel";
 const PAY_STATUS = "status";
 
+//  Report (Revenue)
+const REV_ID = "id";
+const REV_ADMIN_ID = "adminId"; // PK
+const REV_NAME = "name";
+const REV_REF_ID = "refId";
+const REV_TYPE = "type";
+    const REV_TYPE_CAT = "cat";
+    const REV_TYPE_TAG = "tag";
+    const REV_TYPE_ORG = "org";
+const REV_MONTH = "month"; // YYYYMM, YYYY21-32, YYYY99)
+const REV_TOTAL = "total";
+const REV_DOC_ID_ARR = "docIdArr";
+const REV_DOC_TOTAL_ARR = "docTotalArr";
+const REV_DATE_EDIT = "dateEdit";
+const REV_STATUS = "status";
 
+//  Report (Student / Class / Teacher / Profile View / Public Course)
+const NUM_ID = "id";
+const NUM_ADMIN_ID = "adminId"; // PK
+const NUM_TYPE = "type";
+    const NUM_TYPE_STUDENT = "student";
+    const NUM_TYPE_TEACHER = "teacher";
+    const NUM_TYPE_CLASS = "class";
+    const NUM_TYPE_PUBLIC_COURSE = "public_course";
+    const NUM_TYPE_PROFILE_VIEW = "profile_view";
+const NUM_VALUE = "value";
+const NUM_DATE_EDIT = "dateEdit";
 
 // -------------- Session Storage Key Start -------------- //
+// TUTOR: Profile Obj
+const PROFILE_TUTOR_INFO = "tutorInfoObj";
 // TUTOR: Class Module 
 const SESSION_STORAGE_CLASS_ALL_DOCS_KEY = "allDocs";
 const SESSION_STORAGE_CLASS_CURRENT_DOC_KEY = "currentDoc";

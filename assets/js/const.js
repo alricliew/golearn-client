@@ -6,7 +6,7 @@ const MYAllState = ["Kuala Lumpur","Selangor","Penang","Johor","Melaka",
 //     "negeri sembilan", "pahang","perak", "terengganu","kelantan","kedah","sabah","sarawak",
 //     "perlis", "putrajaya", "labuan"];
 const MYAllStateId = ["kl","sg","pn","jh","mk",
-    "n9", "ph","pk", "tr","kt","kd","sh","sw",
+    "ns", "ph","pk", "tr","kt","kd","sb","sw",
     "pl", "pj", "lb"];
 
 // Total place: 164
@@ -240,7 +240,7 @@ function selectCityListBasedOnStateId(selectedStateId) {
             city = cityMelaka;
             cityId = cityMelakaId;
             return [city, cityId];
-        case "n9":
+        case "ns":
             city = cityNegeriSembilan;
             cityId = cityNegeriSembilanId;
             return [city, cityId];
@@ -264,7 +264,7 @@ function selectCityListBasedOnStateId(selectedStateId) {
             city = cityKedah;
             cityId = cityKedahId;
             return [city, cityId];
-        case "sh":
+        case "sb":
             city = citySabah;
             cityId = citySabahId;
             return [city, cityId];
@@ -331,6 +331,47 @@ function getCityNameBasedOnCityIdAndStateId(stateId, cityId ){
     }
 }
 
+// This function select City Id based on City Name and State Name
+function getCityIdBasedOnCityNameAndStateName(stateName, cityName ){
+    switch (stateName){
+        case "Kuala Lumpur":
+            return cityKLId[cityKL.indexOf(cityName)];
+        case "Selangor":
+            return citySelangorId[citySelangor.indexOf(cityName)];
+        case "Penang":
+            return cityPenangId[cityPenang.indexOf(cityName)];
+        case "Johor":
+            return cityJohorId[cityJohor.indexOf(cityName)];
+        case "Melaka":
+            return cityMelakaId[cityMelaka.indexOf(cityName)];
+        case "Negeri Sembilan":
+            return cityNegeriSembilanId[cityNegeriSembilan.indexOf(cityName)];
+        case "Pahang":
+            return cityPahangId[cityPahang.indexOf(cityName)];
+        case "Perak":
+            return cityPerakId[cityPerak.indexOf(cityName)];
+        case "Terengganu":
+            return cityTerengganuId[cityTerengganu.indexOf(cityName)];
+        case "Kelantan":
+            return cityKelantanId[cityKelantan.indexOf(cityName)];
+        case "Kedah":
+            return cityKedahId[cityKedah.indexOf(cityName)];
+        case "Sabah":
+            return citySabahId[citySabah.indexOf(cityName)];
+        case "Sarawak":
+            return citySarawakId[citySarawak.indexOf(cityName)];
+        case "Perlis":
+            return cityPerlisId[cityPerlis.indexOf(cityName)];
+        case "Putrajaya":
+            return cityPutraJayaId[cityPutraJaya.indexOf(cityName)];
+        case "Labuan":
+            return cityLabuanId[cityLabuan.indexOf(cityName)];
+        default:
+            return null;
+    }
+}
+
+
 
 // Education Level and subjects
 // const Category = ["UPSR (Awaiting New Curriculum)", "PT3", "SPM", "PreU", "IGCSE", "A Level"];
@@ -367,7 +408,7 @@ function getCityNameBasedOnCityIdAndStateId(stateId, cityId ){
 const Category = ["Kindergarten", "Primary", "PT3", "SPM", "STPM", "Reception/Nursery", "Cambridge Primary", 
         "Cambridge Lower Secondary", "IGCSE", "A Level",
         "IB Early Years","IB Primary (PYP)","IB Middle (MYP)", "IB Diploma", "UEC Junior", 
-        "UEC Senior", "AUSMAT", "South Australian Matriculation (SAM)", "English Exam", 
+        "UEC Senior", "AUSMAT", "South Australian Certificate of Education (SACE)", "English Exam", 
         "Adult Language", "Music", "Computer Programming"];
 
 const CategoryId = ["kindergarten", "upsr", "pt3", "spm", "stpm", "recep", "camPri", "camLowerSec", "igcse", "alevel",
@@ -613,7 +654,7 @@ const SubjectRestrictedIdUecSenior = ["uecSenAdvMath", "uecSenAdvMathI", "uecSen
 
 //    Source: https://home.scotch.wa.edu.au/courses/pathway/atar/
 const SubjectAusmat = ["Accounting and Finance","Applied Information Technology","Biology","Business Management & Enterprise",
-    "Chemistry","Chinese","Design (Dimensional/Graphics/Photography)","Drama","Economics","English",
+    "Chemistry","Chinese","Design (Dimensional / Graphics / Photography)","Drama","Economics","English",
     "English Additional Language or Dialect","Food Studies","French","Geography","Human Biology",
     "Indonesian","Literature","Marine and Maritime Studies","Materials Design Technology (Metal)",
     "Mathematics Applications","Mathematics Essential","Mathematics Methods","Mathematics Specialist",
@@ -1171,10 +1212,63 @@ const MyDayOfWeek = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
 const MyDayOfWeekAbr = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 const MyDayOfWeekId = ["mon","tue","wed","thu","fri","sat","sun"];
 
+const MyMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const MyMonthAbr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const MyMonthId = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
 
+// Typeahead
+const ClassTag = [
+  // state
+  'kl', 'selangor', 'penang', 'johor', 'perak', "melaka",
+  "negerisembilan", "pahang", "terengganu","kelantan","kedah","sabah","sarawak",
+  "perlis", "putrajaya", "labuan",
+  // area
+  'ipoh', 'seremban', 'johorbahru', 'pudu', 'lintas', 'johorjaya', 'kempas', 'kerinchi',
+  'klang', 'puchong', 'petalingjaya', 'cheras', 'nusajaya', 'serikembangan',
+  'oldklangroad', 'seremban2', 'mantin', 'batukawa', 'bayanlepas', 'butterworth', 'cyberjaya',
+  'kotakinabalu', 'ampang', 'kotakemuning', 'shahalam', 'setiaalam', 'sungaipetani',
+  'kulai', 'seberangperai', 'bangi', 'rawang', 'setiaindah', 'tanjongtokong',
+  'semenyih', 'montkiara', 'setiawangsa', 'sentul', 'setapak',
+  'desapandan', 'subangjaya', 'alamimpian', 'bukitjalil', 'balakong', 'ulukinta',
+  'nibongtebal', 'kepong', 'sendayan', 'bukitmertajam', 'batucave', 'kajang',
+  'skudai', 'sungailong', 'georgetown', 'taiping', 'jelutong', 'menglembu', 'brickfield',
+  'serialam', 'alorsetar', 'jelapang', 'gelugor', 'titiwangsa', 'melawati',
+  'bangsar', 'centralmelacca', 'meru', 'kotabahru', 'molek', 'kinrara', 'pasirgudang',
+  'usj', 'bentong', 'wangsamaju', 'bukitraja', 'kluang', 'batuferringhi', 'miri',
+  'perai', 'bayanbaru', 'desapark', 'srihartamas', 'segambut', 'connaught', 'temerloh',
+  'bukitindah', 'tropicana', 'selayang', 'tampoi', 'airitam', 'sandakan', 'banting',
+  'kulim', 'tawau', 'bukitantarabangsa', 'nilai', 'simpangampat', 'kuchailama', 'tanjongtokong',
+  'danaukota', 'tambun', 'alamdamai', 'permas', 'sungaibuloh', 'kuantan', 'kualaterengganu',
+  'tamanmaluri', 'bandartunrazak', 'bukitbintang', 'ttdi', 'dengkil', 'putraheights', 'sabakbernam',
+   // grade
+  'standard1', 'standard2', 'standard3', 'standard4', 'standard5', 'standard6',
+  'year1', 'year2', 'year3', 'year4', 'year5', 'year6', 'year7', 'year8', 'year10',
+  'year11', 'grade1', 'grade2', 'grade3', 'grade4', 'grade5', 'grade6', 'grade7', 'grade8', 'grade10',
+  'grade11', 'form1', 'form2', 'form3', 'form4', 'form5', 'form6', 
+  // level
+  "kindergarten", "preschool", "tadika", "primary", "secondary", "upsr", "pt3", "spm", "stpm", 
+  "reception", "nursery", "cambridge", "cambridgeprimary", "cambridgesecondary", "igcse", "alevel", "olevel", "university",
+  "internationalbaccalaureate", "ib", "diploma", "uec","ausmat", "sam",
+  "engExam", "adultlanguage", "music", "computer",
+  // subject
+  "bahasamelayu", "english", "math", "science", "history", "pendidikanislam", "moral",
+  "addmath", "chemistry", "biology", "physics","mandarin", "tamil", "combinedscience",
+  "accounting", "art", "businessstudies", "computerscience", "drama",
+  "economics", "englishliterature", "geography", "ict", "music",
+  // type
+  'hometuition', 'tuitioncenter', 'onlinetuition', 'grouptutoring'
+
+];
 
 
+// Temporary Hard-coded settings
+// TODO: To be move to Settings > v1 > Profile > ...
+const ProfileSettings = ['aClassNum', 'aStudentNum', 'aTeacherNum', 'aPublicCourseNum'];
+const ProfileSettingsValue_Deactivated = [5, 50, 1, 0];
+const ProfileSettingsValue_Active = [5, 50, 1, 50];
+const ProfileSettingsValue_Premium = [50, 500, 1, 50];
+const ProfileSettingsValue_Org = [50, 500, 50, 50];
 
 
 
