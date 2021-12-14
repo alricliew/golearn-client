@@ -1,0 +1,1298 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>GoLearn School</title>
+  <meta name=description content="GoLearn School&trade; is Malaysia #1 teaching platform to run your tuition business and manage your lessons. Start now for Free!">
+  <meta property=og:title content="GoLearn School">
+  <meta property=og:site_name content="GoLearn School">
+  <meta property=og:type content=website>
+  <meta property=og:url content=https://app.golearn.com.my/school/job >
+  <meta property=og:image content=https://app.golearn.com.my/assets/img/icon-apple-touch-180x180.png>
+  <meta property=og:description content="GoLearn School&trade; is Malaysia #1 teaching platform to run your tuition business and manage your lessons. Start now for Free!">
+  <link rel=apple-touch-icon sizes=180x180 href=https://app.golearn.com.my/assets/img/icon-apple-touch-180x180.png>
+  <link rel=icon type=image/png sizes=32x32 href=https://app.golearn.com.my/assets/img/icon-32x32.png>
+  <link rel=icon type=image/png sizes=16x16 href=https://app.golearn.com.my/assets/img/icon-16x16.png>
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" rel="stylesheet" type="text/css" />
+  <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
+  <!-- Material Kit CSS -->
+  <link href="../../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <!-- Firebase Init -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+  <script src="../../assets/js/firebase.js"></script>
+  <!-- Tutor Portal specific CSS -->
+  <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../../assets/img/sidebar-3.jpg">
+      <div class="logo">
+        <a href="../" class="simple-text logo-mini" style="padding: 0.5rem">
+			    <img src="../../assets/img/golearn-school-logo.svg" style="width: 200px; height: auto;" alt=""></img>
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav" style="margin-bottom: 50px;">
+          <li class="nav-item">
+            <a class="nav-link" href="../">
+              <i class="far fa-chart-bar fa-fw nav-icon"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../report/">
+              <i class="far fa-lightbulb fa-fw nav-icon"></i>
+              <p>Insight</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Teaching</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../class/">
+              <i class="fas fa-chalkboard fa-fw nav-icon"></i>
+              <p>Classes</p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="../student/">
+              <i class="fas fa-user-graduate fa-fw nav-icon"></i>
+              <p>Students</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="../teacher/">
+              <i class="fas fa-chalkboard-teacher fa-fw nav-icon"></i>
+              <p>Teachers</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Financial</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../invoice/">
+              <i class="fas fa-file-invoice-dollar fa-fw nav-icon"></i>
+              <p>Invoices</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../salary/">
+              <i class="fas fa-money-bill-wave fa-fw nav-icon"></i>
+              <p>Salaries</p>
+            </a>
+          </li>
+          <li class="nav-item" id="navPayroll" style="display: none;">
+            <a class="nav-link" href="../payroll/">
+              <i class="fas fa-hand-holding-usd fa-fw nav-icon"></i>
+              <p>Payroll <span style="visibility: hidden;">PRO</span></p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../transaction/">
+              <i class="fas fa-exchange-alt fa-fw nav-icon"></i>
+              <p>Transactions</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Public</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../course/">
+              <i class="fas fa-book-open fa-fw nav-icon"></i>
+              <p>My Public Courses 
+                <span style="background-color: #2e74b6;padding: 0.2em 0.5em 0.2em 0.5em;color: white;border-radius: 3px;font-size: x-small;">New</span>
+              </p>
+            </a>
+          </li>
+		  		<li class="nav-item active">
+            <a class="nav-link" href="./">
+              <i class="fas fa-briefcase fa-fw nav-icon"></i>
+              <p>Tuition Jobs</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../settings/">
+              <i class="fas fa-user-cog fa-fw nav-icon"></i>
+              <p>Update Information</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">Tuition Jobs</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <form class="navbar-form">
+              <!-- Put empty placeholder here -->
+            </form>
+
+            <ul class="navbar-nav">
+              <li class="nav-item" id="activationNavItem">
+                <a href="#" class="btn btn-primary btn-round btn-sm" style="visibility: hidden;" id="btnActivateAccount"></a>
+              </li>
+              <li class="nav-item">
+                <a class="navbar-brand" href="javascript:;">
+                   Hi <span id="user"></span> !
+                </a> 
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i> Notifications
+                </a>
+                <!-- <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i>
+                  <span class="notification">5</span>
+                  <p class="d-lg-none d-md-block">
+                    Some Actions
+                  </p>
+                </a> -->
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+									<p style="padding: 1em;" >No notification</p>
+                  <!-- <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                  <a class="dropdown-item" href="#">Another Notification</a>
+                  <a class="dropdown-item" href="#">Another One</a> -->
+                </div>
+              </li>
+              <!-- your navbar here -->
+			  
+			  			<li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">person</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                  <a class="dropdown-item" href="../edit-profile.html">Edit Profile</a>
+                  <a id="navPublicProfile" class="dropdown-item" href="#">My Public Profile</a>
+									<a class="display:block; dropdown-item" href="../about.html">About</a>
+									<div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#signOutModal" id="btn-logout">Log out</a>
+									<div class="dropdown-divider"></div>
+									<a style="font-weight: 500 ;padding: 0.5em ;text-align: center; width: 200px; background-color: #428dd4 ;display: block; color: #fff;" href="https://golearn.com.my/pricing/" target="_blank" id="btnUpgradeToPro">Upgrade to Pro</a>
+
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+
+			<!-- Modal Start -->
+
+      <!-- Sign-out modal -->
+      <div class="row">
+        <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="signOutModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="signOutLabel">Logging Out</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="signOutModalBody">
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSignOutModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="container-fluid">
+          <!-- All Job Requests -->
+
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 ">
+              <a class="d-flex justify-content-start" href="https://golearn.com.my/job/" target="_blank" id="btnUpdate" style="margin-top: 1rem;" >View Latest Jobs</a>
+            </div>
+          </div>
+
+          
+          <div class="row" id="card-all-job-requests">
+            <!-- <div class="col-md-4">
+              
+              <div class="card-course card-1 ">
+                
+                <h6 ><span style="margin-right: 0.3rem">PV01001A</span> &middot; <span style="margin-left: 0.3rem; " >June 21, 2021</span></h6>
+                <h6><span class="card-course-status-label" style="background-color: #ffd000;">ACTIVE</span></h6> 
+                <h3>SPM Bahasa Malaysia <span class="card-course-online-label">ONLINE</span> </h3>
+                <h5>Bandar Tun Razak, Kuala Lumpur</h5>
+                
+                <a class="card-course-item-wrapper">			
+                  <p class="card-course-item" ><i class="material-icons" style="color: #ff7300; margin-right: 0.5em;" >paid</i> <span id="main_fees_sentence"> RM 20/hour</span></p>
+                </a>
+
+                <a class="card-course-item-wrapper">			
+                  <p class="card-course-item" ><i class="material-icons" style="color: #ff7300; margin-right: 0.5em;" >schedule</i><span id="main_duration"> 2 hours / class</span> </p>
+                </a>
+                <a class="card-course-item-wrapper">			
+                  <p class="card-course-item" ><i class="material-icons" style="color: #ff7300; margin-right: 0.5em;" >date_range</i><span id="main_classPerWeek"> 1 class</span></p>
+                </a>
+                <a class="card-course-item-wrapper">			
+                  <p class="card-course-item" ><i class="material-icons" style="color: #ff7300; margin-right: 0.5em;" >description</i> Description</p>
+                </a>
+                <p>Tutoring Type: Home Tuition, Parents want exam focused tuition with pearson text book</p>
+              </div>
+            </div> -->
+            <!-- <div class="col-md-4">
+              <div class="card-course card-1 "id="spm-bm" data-toggle="modal" data-target="#editCourseModal" data-key="tMon8am">
+                <h6><span style="margin-right: 0.3rem;">PV01001A</span> &middot; <span style="margin-left: 0.3rem;" >June 21, 2021</span></h6>
+                <h3>SPM Bahasa Malaysia</h3>
+                <h5>Bandar Tun Razak, Kuala Lumpur</h5>
+                <h4>Job Code: PV01001</h4>
+                
+                <a class="card-course-item-wrapper">			
+                  <p class="card-course-item" ><i class="material-icons" style="color: #ff7300; margin-right: 0.5em;" >paid</i> <span id="main_fees_sentence"> RM 20/hour</span></p>
+                </a>
+
+                <a class="card-course-item-wrapper">			
+                  <p class="card-course-item" ><i class="material-icons" style="color: #ff7300; margin-right: 0.5em;" >schedule</i><span id="main_duration"> 2 hours / class</span> </p>
+                </a>
+                <a class="card-course-item-wrapper">			
+                  <p class="card-course-item" ><i class="material-icons" style="color: #ff7300; margin-right: 0.5em;" >date_range</i><span id="main_classPerWeek"> 1 class</span></p>
+                </a>
+                <a class="card-course-item-wrapper">			
+                  <p class="card-course-item" ><i class="material-icons" style="color: #ff7300; margin-right: 0.5em;" >description</i> Description</p>
+                </a>
+                <p>Tutoring Type: Home Tuition, Parents want exam focused tuition with pearson text book</p>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card-course card-1 "id="spm-bm" data-toggle="modal" data-target="#editCourseModal" data-key="tMon8am">
+                <h6><span style="margin-right: 0.3rem;">PV01001A</span> &middot; <span style="margin-left: 0.3rem;" >June 21, 2021</span></h6>
+                <h3>SPM Bahasa Malaysia</h3>
+                <h5>Bandar Tun Razak, Kuala Lumpur</h5>
+                <h4>Job Code: PV01001</h4>
+                
+                <a class="card-course-item-wrapper">			
+                  <p class="card-course-item" ><i class="material-icons" style="color: #ff7300; margin-right: 0.5em;" >paid</i> <span id="main_fees_sentence"> RM 20/hour</span></p>
+                </a>
+
+                <a class="card-course-item-wrapper">			
+                  <p class="card-course-item" ><i class="material-icons" style="color: #ff7300; margin-right: 0.5em;" >schedule</i><span id="main_duration"> 2 hours / class</span> </p>
+                </a>
+                <a class="card-course-item-wrapper">			
+                  <p class="card-course-item" ><i class="material-icons" style="color: #ff7300; margin-right: 0.5em;" >date_range</i><span id="main_classPerWeek"> 1 class</span></p>
+                </a>
+                <a class="card-course-item-wrapper">			
+                  <p class="card-course-item" ><i class="material-icons" style="color: #ff7300; margin-right: 0.5em;" >description</i> Description</p>
+                </a>
+                <p>Tutoring Type: Home Tuition, Parents want exam focused tuition with pearson text book</p>
+              </div>
+            </div> -->
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4 ">
+              <div >
+                <br><button type="button" class="btn btn-primary btn-lg btn-round btn-block" id="loadmore">Load More</button>
+              </div>
+            </div>
+            <div class="col-md-4">
+            </div>
+          </div>
+		  	</div>
+      </div>
+
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav class="float-left">
+          <ul>
+            <li>
+            <a href="https://golearn.com.my/join-us" target="_blank">
+              Visit GoLearn Tutor
+            </a>
+            </li>
+          </ul>
+          </nav>
+          <!-- <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script> 
+            , made with <i class="material-icons">favorite</i> by <a href="#" >GoLearn Team</a>
+          </div> -->
+          <!-- your footer here -->
+        </div>
+      </footer>
+    </div>
+	  
+  </div>
+
+
+  <script src="../../assets/js/core/jquery.min.js"></script>
+  <script src="../../assets/js/core/popper.min.js"></script>
+  <script src="../../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src="../../assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="../../assets/js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <script src="../../assets/js/plugins/jquery.validate.min.js"></script>
+  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+  <!-- <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script> -->
+  <!-- 	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <!-- <script src="assets/js/plugins/bootstrap-selectpicker.js"></script> -->
+  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+  <!-- <script src="assets/js/plugins/bootstrap-datetimepicker.min.js"></script> -->
+  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+  <!-- <script src="assets/js/plugins/jquery.dataTables.min.js"></script> -->
+  <!-- 	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+  <!-- <script src="assets/js/plugins/bootstrap-tagsinput.js"></script> -->
+  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+  <!-- <script src="assets/js/plugins/jasny-bootstrap.min.js"></script> -->
+  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+  <!-- <script src="assets/js/plugins/fullcalendar.min.js"></script> -->
+  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+  <!-- <script src="assets/js/plugins/jquery-jvectormap.js"></script> -->
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <!-- <script src="assets/js/plugins/nouislider.min.js"></script> -->
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> -->
+  <!-- Library for adding dinamically elements -->
+  <!-- <script src="assets/js/plugins/arrive.min.js"></script> -->
+  <!--  Google Maps Plugin    -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+  <!-- Chartist JS -->
+  <!-- <script src="assets/js/plugins/chartist.min.js"></script> -->
+  <!--  Notifications Plugin    -->
+  <script src="../../assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+  <!-- Common constants -->
+  <script src="../../assets/js/common.js" type="text/javascript"></script>
+  <!-- General Info -->
+  <script src="../../assets/js/const.js" type="text/javascript"></script>
+  <!-- Global Var -->
+  <script src="../../assets/js/globalvar.js" type="text/javascript"></script>
+  <!-- Core Tutor Js -->
+  <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
+	
+  <script>
+ 
+    // Store last document - Used for Load More btn
+    var latestDoc = null;
+
+		// var db = firebase.firestore();
+		// db.settings({ timestampsInSnapshots: true });
+
+    // // Set the nav name and global var, if user already login and have session Storage 
+    // var tutorInfoObj = null;
+    // if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
+    //   // Do nothing
+    // }else{
+    //   // Set the nav user name
+    //   tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
+    //   document.getElementById("user").textContent = tutorInfoObj.name;
+
+    //   current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
+    //   // current_email, 
+    //   // current_phone, 
+    //   current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
+    //   current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
+    //   current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
+    //   current_accountStatus = tutorInfoObj.accountStatus; // bool
+    //   currentYearsExperience = tutorInfoObj.yearsExperience; // number
+    //   currentTutoringExperience = tutorInfoObj.tutoringExperience;
+    //   currentTutoringApproach = tutorInfoObj.tutoringApproach;
+    //   currentQualification= tutorInfoObj.qualification;
+    //   current_mon_8am = tutorInfoObj.tMon8am;
+    //   current_mon_12pm= tutorInfoObj.tMon12pm; 
+    //   current_mon_3pm = tutorInfoObj.tMon3pm;  
+    //   current_mon_6pm = tutorInfoObj.tMon6pm;  
+    //   current_tue_8am = tutorInfoObj.tTue8am;  
+    //   current_tue_12pm= tutorInfoObj.tTue12pm;  
+    //   current_tue_3pm = tutorInfoObj.tTue3pm;  
+    //   current_tue_6pm = tutorInfoObj.tTue6pm;  
+    //   current_wed_8am = tutorInfoObj.tWed8am;  
+    //   current_wed_12pm= tutorInfoObj.tWed12pm;  
+    //   current_wed_3pm = tutorInfoObj.tWed3pm;  
+    //   current_wed_6pm = tutorInfoObj.tWed6pm;  
+    //   current_thu_8am = tutorInfoObj.tThu8am;  
+    //   current_thu_12pm= tutorInfoObj.tThu12pm;  
+    //   current_thu_3pm = tutorInfoObj.tThu3pm;  
+    //   current_thu_6pm = tutorInfoObj.tThu6pm;  
+    //   current_fri_8am = tutorInfoObj.tFri8am;  
+    //   current_fri_12pm= tutorInfoObj.tFri12pm;  
+    //   current_fri_3pm = tutorInfoObj.tFri3pm;  
+    //   current_fri_6pm = tutorInfoObj.tFri6pm; 
+    //   current_sat_8am = tutorInfoObj.tSat8am;  
+    //   current_sat_12pm= tutorInfoObj.tSat12pm;  
+    //   current_sat_3pm = tutorInfoObj.tSat3pm;  
+    //   current_sat_6pm = tutorInfoObj.tSat6pm;  
+    //   current_sun_8am = tutorInfoObj.tSun8am;  
+    //   current_sun_12pm= tutorInfoObj.tSun12pm;  
+    //   current_sun_3pm = tutorInfoObj.tSun3pm;  
+    //   current_sun_6pm = tutorInfoObj.tSun6pm;
+    //   current_aweburl = tutorInfoObj.aWebUrl
+
+    //   // updatePageView(current_accountStatus);
+    // }
+
+		// firebase.auth().onAuthStateChanged(function(user){
+      
+		// 	if(!user){
+    //     // Return to login if user does not exist.
+		// 		window.location.href = "login.html"
+		// 	}else{
+    //     // if the displayName is null, it means user register using Phone
+    //     if (firebase.auth().currentUser.displayName == null ){
+    //         tutorId = firebase.auth().currentUser.phoneNumber;
+    //     }else
+    //         tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+
+    //     loadUserInfo(tutorId);
+    //     // updateInfoInAllActiveJob();
+
+    //     updateInfoAllActiveJob2();
+
+		// 	}
+		// });
+
+    // Initialization
+    AuthCheck();
+
+    // Page Specific Initialization
+    function loadPageInitFunc(){
+
+      updateInfoAllActiveJob2()
+    }
+
+    function updateInfoAllActiveJob2(){
+
+      // Suppose to put a future date, i.e 2099, but it's work to just put current date.
+      var today = new Date();
+
+      //Firebase model: /country/malaysia/state/kuala lumpur/area/Bandar Tun Razak/category/preu/subject/eko/tutor
+      var colRef = db.collection("JobRequests")
+        // .where(key, ">=", 0)
+        .where("status", "==", true)
+        .orderBy('dateCreated', 'desc')
+        // .orderBy('fees', 'desc')
+        .startAfter(latestDoc || today )
+        .limit(9);
+      
+      colRef
+      .get()
+      .then((querySnapshot) => {
+        // dropdownMenuButton.style.visibility='visible'; 
+        // const documents = querySnapshot.docs.map(doc => doc.data());
+
+        for (let i = 0; i < querySnapshot.docs.length; i++) {
+            let doc = querySnapshot.docs[i];
+            // renderTutor(doc, i, gSubject, gLevel, gArea, gState);
+        }
+
+
+        querySnapshot.forEach((doc) => {
+          courseId = doc.id;
+          renderAllActiveJobs(doc, courseId, false);
+        });
+
+
+
+        // Update latest doc.
+        latestDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+        
+
+        if (querySnapshot.empty){
+            loadmore.removeEventListener('click', handleClick );
+        }
+
+        if (querySnapshot.docs.length < 9){
+            loadmore.style.visibility='hidden';
+        }else{
+            loadmore.style.visibility='visible';
+        }
+      })
+      .catch((error) => {
+          
+          // dropdownMenuButton.style.visibility='hidden'; 
+
+          console.log("Error getting documents: ", error);
+      });
+      
+    }
+
+    // Load More Button
+    const loadmore = document.querySelector('#loadmore');
+    loadmore.style.visibility='hidden';
+
+    const handleClick = () =>{
+        // alert('Load more');
+      updateInfoAllActiveJob2();
+    }
+
+    loadmore.addEventListener('click', handleClick );
+
+
+
+    // Update all active Jobs
+    function updateInfoInAllActiveJob() {
+
+      var allJobCol = db.collection("JobRequests")
+      .where("status", "==", true);
+
+      allJobCol
+      .get()
+      .then((querySnapshot) => {
+        // var jobId;
+
+        allCourseSize = querySnapshot.docs.length;
+
+        // Render empty placeholder card to it appear normal for less than 3 courses
+        if (querySnapshot.docs.length == 1 ){
+
+          renderAllActiveJobs(querySnapshot, courseId, false);
+          // Use any snapshot so it dont break.
+          renderAllActiveJobs(querySnapshot.docs[0], courseId, true);
+          renderAllActiveJobs(querySnapshot.docs[0], courseId, true);
+
+        } else if(querySnapshot.docs.length == 2){
+          renderAllActiveJobs(querySnapshot.docs[0], courseId, false);
+          renderAllActiveJobs(querySnapshot.docs[1], courseId, false);
+          // Use any snapshot so it dont break.
+          renderAllActiveJobs(querySnapshot.docs[0], courseId, true);
+        }
+        else{
+          querySnapshot.forEach((doc) => {
+          courseId = doc.id;
+
+          renderAllActiveJobs(doc, courseId, false);
+
+          });
+        }
+        
+
+      }).catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+
+      }
+
+    function renderAllActiveJobs(doc, courseId, renderNull){
+  
+      // Reference: https://codepen.io/Corsurath/pen/abbxNpj
+      // Code + Date
+      let blogsHtml_code = '';
+      blogsHtml_code += "<span style='margin-right: 0.3rem;'>"+doc.data().id.toUpperCase()+"</span> &middot; <span style='margin-left: 0.3rem;'>"+doc.data().dateCreated.toDate().toDateString().slice(-12)+"</span>";
+      let code_h6 = document.createElement('h6');
+      code_h6.innerHTML = blogsHtml_code;
+
+      // Status
+      let blogsHtml_status = '';
+      if (doc.data().jobStatus == JOB_STATUS_OPEN_KEY)
+      blogsHtml_status += "<span class='card-course-status-label' style='background-color: green;''>OPEN</span>";
+      else if (doc.data().jobStatus == JOB_STATUS_CLOSED_KEY || doc.data().jobStatus == JOB_STATUS_SUCCESS_KEY)
+      blogsHtml_status += "<span class='card-course-status-label' style='background-color: red;''>CLOSED</span>";
+      else if (doc.data().jobStatus == JOB_STATUS_FULL_KEY)
+      blogsHtml_status += "<span class='card-course-status-label' style='background-color: #ffd000;''>FULL</span>";
+      else
+      blogsHtml_status += "<span class='card-course-status-label' style='background-color: red;''>CLOSED</span>";
+      let status_h6 = document.createElement('h6');
+      status_h6.innerHTML = blogsHtml_status;
+
+      // subject
+      let blogsHtml_subject = '';
+      if (doc.data().online){
+        blogsHtml_subject += doc.data().category+"  "+doc.data().subject+"<span class='card-course-online-label'>ONLINE</span>";
+      }else{
+        blogsHtml_subject += doc.data().category+"  "+doc.data().subject;
+      }
+      let subject_h3 = document.createElement('h3');
+      subject_h3.innerHTML = blogsHtml_subject;
+
+      // Area
+      let area_h5 = document.createElement('h5');
+      if (doc.data().online){
+        // Do nothing
+      }else{
+        area_h5.textContent = doc.data().area +", "+MYAllState[MYAllStateId.indexOf(doc.data().state)];
+      }
+      
+      // fee
+      let blogsHtml_fee = '';
+      if (doc.data().feeType == "Per Hour"){
+        blogsHtml_fee += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >paid</i> RM"+doc.data().fees+" / hour";
+      }else{
+        blogsHtml_fee += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >paid</i> RM "+ doc.data().fees +" / month";
+      }
+      let fee_p = document.createElement('p');
+      fee_p.className = "card-course-item";
+      fee_p.innerHTML = blogsHtml_fee;
+      let fee_a = document.createElement('a');
+      fee_a.className = "card-course-item-wrapper"
+      fee_a.appendChild(fee_p);
+
+      // duration
+      let blogsHtml_duration = '';
+      if (doc.data().duration > 1)
+      blogsHtml_duration += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >schedule</i>"+doc.data().duration+" hours / week";
+      else
+      blogsHtml_duration += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >schedule</i>"+doc.data().duration+" hour / week";
+
+      // blogsHtml_duration += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >schedule</i>"+doc.data().duration+" hours / lesson";
+      let duration_p = document.createElement('p');
+      duration_p.className = "card-course-item";
+      duration_p.innerHTML = blogsHtml_duration;
+      let duration_a = document.createElement('a');
+      duration_a.className = "card-course-item-wrapper"
+      duration_a.appendChild(duration_p);
+
+      // Class / week
+      let blogsHtml_classPerWeek = '';
+      if (doc.data().classPerWeek > 1)
+        blogsHtml_classPerWeek += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >date_range</i>"+doc.data().classPerWeek+" classes / week";
+      else
+        blogsHtml_classPerWeek += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >date_range</i>"+doc.data().classPerWeek+" class / week";
+
+      let classPerWeek_p = document.createElement('p');
+      classPerWeek_p.className = "card-course-item";
+      classPerWeek_p.innerHTML = blogsHtml_classPerWeek;
+      let classPerWeek_a = document.createElement('a');
+      classPerWeek_a.className = "card-course-item-wrapper"
+      classPerWeek_a.appendChild(classPerWeek_p);
+
+      // Description
+      let blogsHtml_description = '';
+      blogsHtml_description += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >description</i> Description";
+      let description_p = document.createElement('p');
+      description_p.className = "card-course-item";
+      description_p.innerHTML = blogsHtml_description;
+      let description_a = document.createElement('a');
+      description_a.className = "card-course-item-wrapper"
+      description_a.appendChild(description_p);
+
+      let description_content_p = document.createElement('p');
+      if (doc.data().jobDetail == null || doc.data().jobDetail == ""){
+        description_content_p.textContent = "No description.";
+
+      }else{
+        description_content_p.textContent = doc.data().jobDetail;
+      }
+
+      // Card top
+      let card_div = document.createElement('div');
+      if (doc.data().categoryId == "recep" || doc.data().categoryId == "camPri" ||
+      doc.data().categoryId == "camLowerSec" || doc.data().categoryId == "igcse" ||
+      doc.data().categoryId == "alevel"){
+        card_div.className = "card-course card-cambridge";
+      }else if(doc.data().categoryId == "ibEyp" || doc.data().categoryId == "ibPyp" ||
+      doc.data().categoryId == "ibMyp" || doc.data().categoryId == "ibDiploma"){
+        card_div.className = "card-course card-ib";
+      }else if(doc.data().categoryId == "kindergarten" || doc.data().categoryId == "upsr" ||
+      doc.data().categoryId == "pt3" || doc.data().categoryId == "spm" || 
+      doc.data().categoryId == "stpm"){
+        card_div.className = "card-course card-kpm";
+      }else if(doc.data().categoryId == "uecJun" || doc.data().categoryId == "uecSen"){
+        card_div.className = "card-course card-uec";
+      }else if(doc.data().categoryId == "engExam" || doc.data().categoryId == "adultLanguage"){
+        card_div.className = "card-course card-language-and-english-exam";
+      }else if(doc.data().categoryId == "music"){
+        card_div.className = "card-course card-music";
+      }else if(doc.data().categoryId == "computer"){
+        card_div.className = "card-course card-computer-programming";
+      }else{
+        card_div.className = "card-course card-language-and-english-exam";
+      }
+
+      card_div.setAttribute("data-category",doc.data().category);
+      card_div.setAttribute("data-category-id",doc.data().categoryId);
+      card_div.setAttribute("data-subject", doc.data().subject);
+      card_div.setAttribute("data-subject-id", doc.data().subjectId);
+      card_div.setAttribute("data-online", doc.data().online);
+      card_div.setAttribute("data-course-id",courseId);
+      // card_div.setAttribute("onclick","editCourseFunction(this)");
+      card_div.appendChild(code_h6);
+      card_div.appendChild(status_h6);
+      card_div.appendChild(subject_h3);
+      if (doc.data().online){
+        // Do nothing
+      }else{
+        // Append area
+        card_div.appendChild(area_h5);
+      }
+      card_div.appendChild(fee_a);
+      card_div.appendChild(duration_a);
+      card_div.appendChild(classPerWeek_a);
+      card_div.appendChild(description_a);
+      card_div.appendChild(description_content_p);
+
+
+      let card_top = document.createElement('div');
+      card_top.className = "col-md-4 col-lg-4 col-sm-4";
+
+      // If the course size is less than 2, we need to render empty placeholder so bootstrap looks good.
+      if (renderNull){
+        // render nothing
+      }else{
+        card_top.appendChild(card_div);
+      }
+      const card_all_job_requests = document.getElementById("card-all-job-requests");
+      card_all_job_requests.appendChild(card_top);
+
+      }
+
+
+    // // Tutor Specific
+    // function loadUserInfo(tutorId){
+    //   // Tutor Id must be a phone with +60, no spacing or other chars
+    //   var docRef = db.collection("Tutor").doc(tutorId);
+      
+
+    //   // docRef.get().then((doc) => {
+    //   docRef.onSnapshot((doc) => {
+
+    //     if (doc.exists) {
+    //       // console.log("Document data:", doc.data());
+
+    //       current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
+    //       // current_email, 
+    //       // current_phone, 
+    //       current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
+    //       current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
+    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
+    //       current_accountStatus = doc.data().accountStatus; 
+    //       currentYearsExperience = doc.data().yearsExperience; // number
+    //       currentTutoringExperience = doc.data().tutoringExperience;
+    //       currentTutoringApproach = doc.data().tutoringApproach;
+    //       currentQualification= doc.data().qualification;
+    //       current_mon_8am = doc.data().tMon8am;
+    //       current_mon_12pm= doc.data().tMon12pm; 
+    //       current_mon_3pm = doc.data().tMon3pm;  
+    //       current_mon_6pm = doc.data().tMon6pm;  
+    //       current_tue_8am = doc.data().tTue8am;  
+    //       current_tue_12pm= doc.data().tTue12pm;  
+    //       current_tue_3pm = doc.data().tTue3pm;  
+    //       current_tue_6pm = doc.data().tTue6pm;  
+    //       current_wed_8am = doc.data().tWed8am;  
+    //       current_wed_12pm= doc.data().tWed12pm;  
+    //       current_wed_3pm = doc.data().tWed3pm;  
+    //       current_wed_6pm = doc.data().tWed6pm;  
+    //       current_thu_8am = doc.data().tThu8am;  
+    //       current_thu_12pm= doc.data().tThu12pm;  
+    //       current_thu_3pm = doc.data().tThu3pm;  
+    //       current_thu_6pm = doc.data().tThu6pm;  
+    //       current_fri_8am = doc.data().tFri8am;  
+    //       current_fri_12pm= doc.data().tFri12pm;  
+    //       current_fri_3pm = doc.data().tFri3pm;  
+    //       current_fri_6pm = doc.data().tFri6pm; 
+    //       current_sat_8am = doc.data().tSat8am;  
+    //       current_sat_12pm= doc.data().tSat12pm;  
+    //       current_sat_3pm = doc.data().tSat3pm;  
+    //       current_sat_6pm = doc.data().tSat6pm;  
+    //       current_sun_8am = doc.data().tSun8am;  
+    //       current_sun_12pm= doc.data().tSun12pm;  
+    //       current_sun_3pm = doc.data().tSun3pm;  
+    //       current_sun_6pm = doc.data().tSun6pm; 
+
+    //       // Store data to sessionStorage
+    //       var tutorDataObj = {
+    //         [NAME_KEY] : doc.data().name,
+    //         [EMAIL_KEY] : doc.data().email,
+    //         [PHONE_KEY] : doc.data().phone,
+    //         [AGE_KEY] : doc.data().age,
+    //         [GENDER_KEY] : doc.data().gender,
+    //         [ADDRESS_1_KEY] :doc.data().address1,
+    //         [ADDRESS_2_KEY] :doc.data().address2,
+    //         [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
+    //         [ADDRESS_STATE_KEY] :doc.data().addressState,
+    //         [IMAGE_KEY] : doc.data().imgUrl,
+    //         // [NRIC_KEY] : doc.data().name,
+    //         [RATING_KEY] : doc.data().rating,
+    //         [RATING_TIMES_KEY] : doc.data().ratingTimes,
+    //         [RATING_FINAL_KEY] : doc.data().ratingFinal,
+    //         [PROFILE_STATUS_KEY] : doc.data().profileStatus,
+    //         // [CHECK_HOMETUTOR_KEY] : doc.data().name,
+    //         // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
+    //         // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
+    //         // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
+    //         [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
+    //         [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
+    //         [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
+    //         [QUALIFICATION_KEY] : doc.data().qualification,
+    //         [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
+    //         [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
+    //         [AGENT_KEY] : doc.data().agent,
+    //         [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
+            
+    //         [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
+    //         [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
+    //         [CHECK_GROUP_KEY] : doc.data().modeGroup,
+    //         [CHECK_ONLINE_KEY] : doc.data().modeOnline,
+    //         [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
+    //         [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
+    //         [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
+    //         [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
+    //         [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
+    //         [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
+
+    //         [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
+    //         [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
+    //         [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
+    //         [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
+    //         [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
+    //         [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
+    //         [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
+    //         [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
+    //         [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
+    //         [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
+    //         [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
+    //         [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
+    //         [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
+    //         [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
+    //         [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
+    //         [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
+    //         [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
+    //         [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
+    //         [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
+    //         [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
+    //         [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
+    //         [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
+    //         [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
+    //         [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
+    //         [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
+    //         [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
+    //         [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
+    //         [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
+    //         // Create a placeholder for aWebUrl. This param can only initiated by admin
+    //         // manually through https://golearn.com.my/admin/admin-portal.html
+    //         [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
+    //         [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
+    //         [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
+    //         [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
+    //         [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
+    //         [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
+    //         [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
+    //       }
+
+    //       // Set tutorInfoObj as sessionStorage
+    //       sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
+
+    //       // Set the nav user name and public profile link
+    //       document.getElementById("user").textContent = doc.data().name;
+
+    //       if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
+    //         document.getElementById("navPublicProfile").href = "#"  ;
+    //         document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
+    //       } else{
+    //         document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
+    //         document.getElementById("navPublicProfile").target = "_blank";
+    //       }
+          
+    //       if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
+    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
+    //         document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
+    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
+    //         document.getElementById("btnActivateAccount").target = "_blank";
+    //       }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
+    //         document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
+    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
+    //         document.getElementById("btnActivateAccount").target = "_blank";
+    //       }else {
+    //         let activationNavItem = document.querySelector('#activationNavItem');
+    //         let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
+    //         console.log(activationNavItemIsExist)
+    //         // Remove NavItem if exist
+    //         if (activationNavItemIsExist){
+    //           activationNavItem.parentNode.removeChild(activationNavItem);
+    //         }else{
+    //           // Do nothing
+    //         }
+    //       }
+
+    //     } else {
+    //         // document.getElementById("tutorImgUrl").src = "../assets/img/hello.gif";
+    //         // document.getElementById("tutorName").textContent = "Boo Boo";
+    //         // document.getElementById("tutorTutoringApproach").textContent = "I am passionate about teaching and love little teddies.";
+    //         // document.getElementById("tutorTutoringExperience").textContent = " I have 9 months of teaching experience. Hire me starting from 2 cans of honey 🍯🍯.";
+    //         // document.getElementById("tutorEducation").textContent = "University of Bear";
+    //         // document.getElementById("tutorGenderAgeYearsExperience").textContent = "Male | 2 years old";
+    //     }
+    //   });
+
+    // };
+
+  </script>
+  <script>
+		$( document ).ready(function() {
+
+			$('#btnTest').on('click', function (e) {
+					console.log(JSON.parse(sessionStorage.getItem("tutorInfoObj")));
+				});
+				
+			var tutor_name, tutor_age, tutor_yearOfExperience, tutor_gender, tutor_imgUrl = "";
+			
+			// Search Tutor Profile
+			$('#searchtutor').on('click', function(){
+
+				let inputVal = document.getElementById("searchinput").value;
+				if (inputVal == null || inputVal==""){
+					alert("Enter a phone number (with +60) or a valid email.");
+
+				}else if(validateEmail(inputVal)){
+					tutor_id = inputVal.replace(/\W/g,"_").toLowerCase();
+					// <!-- tutor_id = inputVal.replaceAll("[^a-zA-Z0-9]", "_").toLowerCase(); -->
+				}
+				else if (validatePhone(inputVal)){
+					tutor_id = inputVal;
+					
+				}else{
+					alert("Enter a valid phone number or email.");
+				}
+				
+				// Load Tutor
+				db.collection("Tutor").doc(tutor_id)
+				.onSnapshot((doc) => {
+					if (!doc.exists || doc.empty ){
+						alert("Tutor not found.");
+						document.getElementById("updatetutoraccount").disabled = true;
+					}
+					else{
+						// Assign to global variables
+						tutor_name = doc.data().name;
+						tutor_age = doc.data().age;
+						tutor_gender = (doc.data().gender == 0)? "Male" : "Female";
+						tutor_yearOfExperience = doc.data().yearsExperience;
+						tutor_imgUrl = doc.data().imgUrl;
+						console.log("tutor_imgUrl: " +tutor_imgUrl );
+						
+						document.getElementById("tutor_url").textContent = doc.data().aWebUrl;
+						
+						document.getElementById("updatetutoraccount").disabled = false;
+						document.getElementById("name").value = doc.data().name;
+						document.getElementById("nric").value = doc.data().nric;
+						document.getElementById("email").value = doc.data().email;
+						document.getElementById("phone").value = doc.data().phone;
+						document.getElementById("age").value = doc.data().age;
+						document.getElementById("tutor-profile-img").src = doc.data().imgUrl;
+						document.getElementById("check-profile").checked = doc.data().profileStatus[0];
+						document.getElementById("check-phone").checked = doc.data().profileStatus[1];
+						document.getElementById("check-qualification").checked = doc.data().profileStatus[2];
+						document.getElementById("check-location").checked = doc.data().profileStatus[3];
+						
+						if (doc.data().accountStatus == "activate"){
+							document.getElementById("radio-activate").checked = true;
+						} else if (doc.data().accountStatus == "deactivated"){
+							document.getElementById("radio-deactivated").checked = true;
+						} else if (doc.data().accountStatus == "suspended"){
+							document.getElementById("radio-suspended").checked = true;
+						} else if (doc.data().accountStatus == "premium1"){
+							document.getElementById("radio-premium-vip-1").checked = true;
+						} else if (doc.data().accountStatus == "premium2"){
+							document.getElementById("radio-premium-vip-2").checked = true;
+						} else if (doc.data().accountStatus == "premium3"){
+							document.getElementById("radio-premium-vip-3").checked = true;
+						} else{
+							document.getElementById("radio-deactivated").checked = true;
+						}
+						
+						if (doc.data().aFullNameAsNric =="" || doc.data().aFullNameAsNric ==null ){
+							document.getElementById("full-name-as-nric").disabled = false;
+							document.getElementById("full-name-as-nric").value = "";
+						}else{
+							// IMPORTANT! if exist, disable the full name as nric field. We do not want to modify it anymore.
+							// To update, superadmin must go to db to delete the aWebUrl. Highly not recommended.
+							document.getElementById("full-name-as-nric").disabled = true;
+							document.getElementById("full-name-as-nric").value = doc.data().aFullNameAsNric;
+						}
+						// <!-- if (doc.data().aWebUrl != "" || doc.data().aWebUrl != null){ -->
+
+						// <!-- }else{ -->
+
+						// <!-- } -->
+
+						document.getElementById("aPremiumSubjectLimit").value = doc.data().aPremiumSubjectLimit;
+						document.getElementById("aTotalSubjectLimit").value = doc.data().aTotalSubjectLimit;
+						document.getElementById("aPremiumConnectLimit").value = doc.data().aPremiumConnectLimit;
+						document.getElementById("aTotalConnectLimit").value = doc.data().aTotalConnectLimit;
+						document.getElementById("aPreferredAreaLimit").value = doc.data().aPreferredAreaLimit;
+						document.getElementById("aPreferredSubjectLimit").value = doc.data().aPreferredSubjectLimit;
+					}
+
+				});
+			});
+			
+			$("#full-name-as-nric").on("input", function(){
+				// Print entered value in a div box
+				let str = $(this).val();
+				str = str.replace(/\W+(?!$)/g, '-').toLowerCase();
+				str = str.replace(/\W$/, '').toLowerCase();
+				$("#tutor_url").text(str);
+			});
+			
+			// Show modal
+			$('#updatetutoraccount').on('click', function(){
+				$('#exampleModalCenter').modal('show');
+				// <!-- $('#TutorAutoMessageModalCenter').modal('show'); -->
+			});
+			
+			// Disable update when someone type in the search bar
+			$("#searchinput").on("change keyup paste", function(){
+				document.getElementById("updatetutoraccount").disabled = true;
+			})
+			
+			// popup model comfirmation
+			// TODO: Update the related field in all classes. 
+			// TODO: Disable classes when deactivated or suspended
+			$('#btn-modelsave').on('click', function (e) {
+				
+				let inputVal = document.getElementById("searchinput").value;
+				if (inputVal == null || inputVal==""){
+					alert("Enter a phone number (with +60) or a valid email.");
+				}else if(validateEmail(inputVal)){
+					tutor_id = inputVal.replace(/\W/g,"_").toLowerCase();
+				}
+				else if (validatePhone(inputVal)){
+					tutor_id = inputVal;
+					
+				}else{
+					alert("Enter a valid phone number or email.");
+				}
+				
+				
+				let nric = document.getElementById("nric").value;
+				let aFullNameAsNric = document.getElementById("full-name-as-nric").value;
+				// Convert full name to lower case and substitue space with dash.
+				// i.e Alric Liew -> alric-liew
+				// <!-- let aWebUrl = aFullNameAsNric.replace(/\s+/g, '-').toLowerCase(); -->
+				let aWebUrl = aFullNameAsNric.replace(/\W+(?!$)/g, '-').toLowerCase();
+				aWebUrl = aWebUrl.replace(/\W$/, '').toLowerCase();
+				
+				
+				let accountStatus = ""
+				if (document.getElementById("radio-activate").checked){
+					accountStatus = "activate"
+				}else if (document.getElementById("radio-deactivated").checked){
+					accountStatus = "deactivated"
+				} else if (document.getElementById("radio-suspended").checked){
+					accountStatus = "suspended"
+				} else if (document.getElementById("radio-premium-vip-1").checked){
+					accountStatus = "premium1"
+				} else if (document.getElementById("radio-premium-vip-2").checked){
+					accountStatus = "premium2"
+				}else if (document.getElementById("radio-premium-vip-3").checked){
+					accountStatus = "premium3"
+				}else {
+					accountStatus = "deactivated"
+				}
+				
+				let profileStatus = [false, false, false, false];
+				profileStatus[0] = document.getElementById("check-profile").checked? true : false;
+				profileStatus[1] = document.getElementById("check-phone").checked? true : false;
+				profileStatus[2] = document.getElementById("check-qualification").checked? true : false;
+				profileStatus[3] = document.getElementById("check-location").checked? true : false;
+
+
+				let aPremiumSubjectLimit = +document.getElementById("aPremiumSubjectLimit").value;
+				let aTotalSubjectLimit = +document.getElementById("aTotalSubjectLimit").value;
+				let aPreferredAreaLimit = +document.getElementById("aPreferredAreaLimit").value;
+				let aPreferredSubjectLimit = +document.getElementById("aPreferredSubjectLimit").value;
+
+				// profileStatus[1] = document.getElementById("check-phone").checked? true : false;
+				// profileStatus[2] = document.getElementById("check-qualification").checked? true : false;
+				// profileStatus[3] = document.getElementById("check-location").checked? true : false;
+
+				var tutorRef = db.collection('Tutor').doc(tutor_id);
+
+				// This is not a good practise. But what it does is we do not want to update the aWebUrl and aFullNameAsNric if they already exists.
+				var setAccountWithMerge = tutorRef.set({
+					accountStatus: accountStatus,
+					profileStatus: profileStatus,
+					nric: nric,
+					aPremiumSubjectLimit: aPremiumSubjectLimit,
+					aTotalSubjectLimit: aTotalSubjectLimit,
+					aPreferredAreaLimit: aPreferredAreaLimit,
+					aPreferredSubjectLimit: aPreferredSubjectLimit,
+				}, { merge: true });
+				var setAccountAndAweburlWithMerge = tutorRef.set({
+					accountStatus: accountStatus,
+					profileStatus: profileStatus,
+					nric: nric,
+					aPremiumSubjectLimit: aPremiumSubjectLimit,
+					aTotalSubjectLimit: aTotalSubjectLimit,
+					aPreferredAreaLimit: aPreferredAreaLimit,
+					aPreferredSubjectLimit: aPreferredSubjectLimit,
+					aFullNameAsNric: aFullNameAsNric,
+					aWebUrl: aWebUrl
+				}, { merge: true });
+				
+				if (document.getElementById("full-name-as-nric").disabled){
+				// The full-name-as-nric already populated
+					setAccountWithMerge
+					.then(() => {
+						console.log("Document successfully written!");
+						// Dismiss the modal
+						$('#exampleModalCenter').modal('hide')
+					});
+				}else if (document.getElementById("full-name-as-nric").value == "" || document.getElementById("full-name-as-nric").value == null) {
+				// If the profile is new and admin do not enter anything to the Full Name (as nric) field
+					setAccountWithMerge
+					.then(() => {
+						console.log("Document successfully written!");
+						// Dismiss the modal
+						$('#exampleModalCenter').modal('hide')
+					});
+				}else{
+				// If the profile is new and admin ENTERED the Full Name (as nric) field
+					setAccountAndAweburlWithMerge
+					.then(() => {
+						console.log("Document successfully written!");
+						// Dismiss the modal
+						$('#exampleModalCenter').modal('hide')
+					});
+					
+					// Create Tutor Public profile
+					let detail =""
+						if (tutor_yearOfExperience == 0 || tutor_yearOfExperience == null)
+						detail = tutor_gender + " | " + tutor_age;
+					else if (tutor_yearOfExperience == 1)
+						detail = tutor_gender + " | " + tutor_age + " |  1 year of experience";
+					else
+						detail = tutor_gender + " | " + tutor_age + " | "+ tutor_yearOfExperience + " years of experience";
+					
+					let tutor_imgUrl_final = ""
+					if (tutor_imgUrl =="" || tutor_imgUrl == null || !tutor_imgUrl.exists){
+						if (tutor_gender == 0)
+							tutor_imgUrl_final = "https://golearn.com.my/tutor/a-source/source/man.png";
+						else
+							tutor_imgUrl_final = "https://golearn.com.my/tutor/a-source/source/woman.png";
+					}else
+						tutor_imgUrl_final = tutor_imgUrl;
+					console.log("tutor_imgUrl_final: " +tutor_imgUrl_final );	
+					create_tutor(aWebUrl, tutor_name, detail, tutor_imgUrl_final);
+					$('#exampleModalCenter').modal('hide');
+					
+					// This is used in modal popup after creating tutor profile
+					document.getElementById("aweburl").textContent = aWebUrl; 
+					document.getElementById("tutor_name").textContent = tutor_name; 
+					$('#TutorAutoMessageModalCenter').modal('show');
+				}
+			});
+			
+			$('#btn-modelclose').on('click', function (e) {
+				$('#exampleModalCenter').modal('hide')
+			});
+			$('#btn-modelclose2').on('click', function (e) {
+				$('#exampleModalCenter').modal('hide')
+			});
+			$('#btn-automessagemodelclose').on('click', function (e) {
+				$('#TutorAutoMessageModalCenter').modal('hide')
+			});
+			$('#btn-automessagemodelclose2').on('click', function (e) {
+				$('#TutorAutoMessageModalCenter').modal('hide')
+			});
+
+			function validateEmail(email) {
+				const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				return re.test(String(email).toLowerCase());
+			}
+			
+			function validatePhone(phone){
+				// <!-- const re = new RegExp('+6*'); -->
+				// <!-- const regex = new RegExp('^[\+]'); -->
+				const re = /^[\+]/im;
+				return re.test(phone);
+			}
+			
+			function create_tutor(aWebUrl, name, detail, imgUrl){
+				// This function create-tutor publich profile based on aweburl param.
+				// All the data fields are required to contruct the static meta data of the profile
+				var temp_name = encodeURIComponent(name);
+				var temp_detail = encodeURIComponent(detail);
+				var temp_imgUrl = encodeURIComponent(imgUrl);
+
+				let param = "https://golearn.com.my/tutor/a-source/create-tutor.php?aweburl="+aWebUrl+"&name="+temp_name+"&detail="+temp_detail+"&imgUrl="+temp_imgUrl;
+				console.log("param: " +param );
+				$.ajax({
+					type: "GET",
+					url: param,
+					data: $(this).serialize(),
+					success: function(response)
+					{
+						var jsonData = JSON.parse(response);
+			
+						// user is logged in successfully in the back-end
+						// let's redirect
+						if (jsonData.success == "1")
+						{
+							//  location.href = 'my_profile.php';
+							alert('Tutor Created!');
+						}
+						else
+						{
+							alert('Invalid Credentials!');
+						}
+					}
+				});
+				
+				// Add the url to sitemap
+				let sitemapParam = "https://golearn.com.my/update-sitemap.php?action=add&path=tutor/"+aWebUrl+"&lastmod=";
+				$.ajax({
+					type: "GET",
+					url: sitemapParam,
+					data: $(this).serialize(),
+					success: function(response)
+					{
+						var jsonData = JSON.parse(response);
+			
+						// user is logged in successfully in the back-end
+						// let's redirect
+						if (jsonData.success == "1")
+						{
+							// <!-- location.href = 'my_profile.php'; -->
+							alert('Tutor Created!');
+						}
+						else
+						{
+							alert('Invalid Credentials!');
+						}
+					}
+				});
+			}
+
+		});
+
+  </script>
+
+</body>
+
+</html>

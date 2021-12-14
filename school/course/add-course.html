@@ -1,0 +1,1973 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>GoLearn Tutor</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!-- Fonts and icons  -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
+  <!-- Material Kit CSS -->
+  <link href="../../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <!-- Firebase Init -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+  <script src="../../assets/js/firebase.js"></script>
+  <!-- Tutor Portal specific CSS -->
+  <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../../assets/img/sidebar-3.jpg">
+      <div class="logo">
+        <a href="../" class="simple-text logo-mini" style="padding: 0.5rem">
+			    <img src="../../assets/img/golearn-school-logo.svg" style="width: 200px; height: auto;" alt=""></img>
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav" style="margin-bottom: 50px;">
+          <li class="nav-item">
+            <a class="nav-link" href="../">
+              <i class="far fa-chart-bar fa-fw nav-icon"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../report/">
+              <i class="far fa-lightbulb fa-fw nav-icon"></i>
+              <p>Insight</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Teaching</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../class/">
+              <i class="fas fa-chalkboard fa-fw nav-icon"></i>
+              <p>Classes</p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="../student/">
+              <i class="fas fa-user-graduate fa-fw nav-icon"></i>
+              <p>Students</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="../teacher/">
+              <i class="fas fa-chalkboard-teacher fa-fw nav-icon"></i>
+              <p>Teachers</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Financial</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../invoice/">
+              <i class="fas fa-file-invoice-dollar fa-fw nav-icon"></i>
+              <p>Invoices</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../salary/">
+              <i class="fas fa-money-bill-wave fa-fw nav-icon"></i>
+              <p>Salaries</p>
+            </a>
+          </li>
+          <li class="nav-item" id="navPayroll" style="display: none;">
+            <a class="nav-link" href="../payroll/">
+              <i class="fas fa-hand-holding-usd fa-fw nav-icon"></i>
+              <p>Payroll <span style="visibility: hidden;">PRO</span></p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="../transaction/">
+              <i class="fas fa-exchange-alt fa-fw nav-icon"></i>
+              <p>Transactions</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Public</h4>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="./">
+              <i class="fas fa-book-open fa-fw nav-icon"></i>
+              <p>My Public Courses 
+                <span style="background-color: #2e74b6;padding: 0.2em 0.5em 0.2em 0.5em;color: white;border-radius: 3px;font-size: x-small;">New</span>
+              </p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="../job/">
+              <i class="fas fa-briefcase fa-fw nav-icon"></i>
+              <p>Tuition Jobs</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="../settings/">
+              <i class="fas fa-user-cog fa-fw nav-icon"></i>
+              <p>Update Information</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">My Courses <span><i class="material-icons" style="color: gray;">chevron_right</i></span> Add Course</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <form class="navbar-form">
+              <!-- Put empty placeholder here -->
+            </form>
+
+            <ul class="navbar-nav">
+              <li class="nav-item" id="activationNavItem">
+                <a href="#" class="btn btn-primary btn-round btn-sm" style="visibility: hidden;" id="btnActivateAccount"></a>
+              </li>
+              <li class="nav-item">
+                <a class="navbar-brand" href="javascript:;">
+                   Hi <span id="user"></span> !
+                </a> 
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i> Notifications
+                </a>
+                <!-- <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i>
+                  <span class="notification">5</span>
+                  <p class="d-lg-none d-md-block">
+                    Some Actions
+                  </p>
+                </a> -->
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+									<p style="padding: 1em;" >No notification</p>
+                  <!-- <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                  <a class="dropdown-item" href="#">Another Notification</a>
+                  <a class="dropdown-item" href="#">Another One</a> -->
+                </div>
+              </li>
+              <!-- your navbar here -->
+			  
+			  			<li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">person</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                  <a class="dropdown-item" href="../edit-profile.html">Edit Profile</a>
+                  <a id="navPublicProfile" class="dropdown-item" href="#">My Public Profile</a>
+									<a class="display:block; dropdown-item" href="../about.html">About</a>
+									<div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#signOutModal" id="btn-logout">Log out</a>
+									<div class="dropdown-divider"></div>
+									<a style="font-weight: 500 ;padding: 0.5em ;text-align: center; width: 200px; background-color: #428dd4 ;display: block; color: #fff;" href="https://golearn.com.my/pricing/" target="_blank" id="btnUpgradeToPro">Upgrade to Pro</a>
+
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+
+			<!-- Modal Start -->
+			
+      <!-- Sign-out modal -->
+      <div class="row">
+        <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="signOutModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="signOutLabel">Logging Out</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="signOutModalBody">
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSignOutModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earning Full Report modal -->
+      <!-- Added style="overflow-y:scroll;" to make it scrollable -->
+      <div class="row">
+        <div class="modal fade" style="overflow-y:scroll;" id="earningFullReportModal" tabindex="-1" role="dialog" aria-labelledby="earningFullReportModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="earningFullReportLabel">Full Earning Estimation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnEarningFullReportModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="earningFullReportModalBody">
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>General Notes</h4>
+                    <p>1. The estimation is based on your current settings. In real case, your clients/parents may have their own request.</p>
+                    <p>2. If "<strong>Per Hour</strong>" fee type is chosen, the monthly tuition fee displayed on your public profile will have default calculation based on 2 hours per class, 1 class per week and 4 weeks in a month</p>
+
+                  </div>
+                  <div class="col-md-8">
+                    <h4>Earning Estimation</h4>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p>Number of Month</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p>% You Earn</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p >You Earn</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p>1st Month</p>
+                        </div>                      
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_comm1">0.0%</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_fee1">RM0.00</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p>2nd Month</p>
+                        </div>                      
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_comm2">0.0%</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_fee2">RM0.00</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p>3rd Month</p>
+                        </div>                      
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_comm3">0.0%</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_fee3">RM0.00</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p>4th Month</p>
+                        </div>                      
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_comm4">0.0%</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_fee4">RM0.00</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p>5th Month</p>
+                        </div>                      
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_comm5">0.0%</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_fee5">RM0.00</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p>6th Month</p>
+                        </div>                      
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_comm6">0.0%</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_fee6">RM0.00</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p>7th Month</p>
+                        </div>                      
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_comm7">0.0%</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_fee7">RM0.00</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p>8th Month</p>
+                        </div>                      
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_comm8">0.0%</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_fee8">RM0.00</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p>9th Month</p>
+                        </div>                      
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_comm9">0.0%</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_fee9">RM0.00</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p>10th Month Onward</p>
+                        </div>                      
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_comm10">0.0%</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                          <p style="color: green;" id="modal_fee10">RM0.00</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnEarningFullReportModalClose2">Okay</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Online Only Info modal -->
+      <div class="row">
+        <div class="modal fade" id="onlineOnlyInfoModal" tabindex="-1" role="dialog" aria-labelledby="onlineOnlyInfoModalLabel" aria-hidden="true">
+          <div class="modal-dialog   modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="onlineOnlyInfoLabel">What does "Online Only" mean?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnOnlineOnlyInfoModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="onlineOnlyInfoModalBody">
+                Checking this option means this course will appear if someone is searching for <strong>Online Only</strong> classes. To ensure it appears at your "Update Information -> <strong>Preferred Area</strong>", create another course with this option <strong>unchecked</strong>.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnOnlineOnlyInfoModalClose2">Edit Preferred Area</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnOnlineOnlyInfoModalClose2">Okay</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Create Course modal -->
+      <div class="row">
+        <div class="modal fade" id="createCourseModal" tabindex="-1" role="dialog" aria-labelledby="createCourseModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="createCourseLabel">Creating a new course ...</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnCreateCourseModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="createCourseModalBody">
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCreateCourseModalClose2">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnCreateCourseModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+			
+      <!-- Sign-out modal -->
+      <div class="row">
+        <div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="warningModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="signOutLabel">Error ...</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnWarningModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="warningModalBody">
+                Have you fill up the subject, duration, class per week and tuition fee? 
+              </div>
+              <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnWarningModalClose2">Cancel</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnWarningModalUpdate">Okay</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Uploading Progress modal -->
+      <div class="row">
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="uploadModalLabel">Uploading...</h5>
+              </div>
+              <div class="modal-body" id="uploadModalBody">
+                <div id="myProgress" style="width: 100%; background-color: grey;">
+                  <div id="myBar" style="width: 1%; height: 30px; background-color: green;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="content">
+        <div class="container-fluid">
+          <!-- your content here -->
+
+          <!-- Main content -->
+          <div class="row" id="desciption-row" >
+
+            <!-- Update button -->
+            <div class="col-lg-4 col-md-4 col-sm-4">
+              <a href="javascript:;" class="btn btn-lg btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
+            </div>
+
+            <div class="col-lg-8 col-md-8 col-sm-8 ">
+              <!-- <a class="d-flex justify-content-end" href="javascript:;" id="btnUpdate" >About Premium Subjects</a> -->
+            </div>
+	
+            <!-- Left pane: Main Information -->
+            <!-- <div class="row"> -->
+              <div class="col-md-8">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">Create A New Course</h4>
+                    <!-- <p class="card-category">This is client detail, subject information, our offering and tutor proposal.</p> -->
+                  </div>
+                  <div class="card-body">
+                    <form>
+                      <h4 style="font-weight: 600; color: #2e74b6;" data-toggle="tooltip" title="No info">Add Subject <a href="https://golearn.com.my/subject/" target="_blank" style="font-size: 0.9rem; font-weight: 400; margin-left: 0.5rem;">  About premium subjects</a></h4>
+                      <div class="row">
+                        
+                        <div class="col-md-6">
+                          <!-- Education Level -->
+                          <div class="form-group">
+                            <label  >Education Level</label>
+                            <select class="form-control" name="tutor_course[]" id="level_drop">
+                              <option value="">Select education level</option>
+                            </select>
+                          </div>
+                        </div>
+                        <!-- <div class="col-md-2"><span class="org-txt"><strong>Subjects :</strong></span></div> -->
+                        <div class="col-md-6">
+                          <!-- Subjects -->
+                          <div class="form-group">
+                            <label  >Subject</label>
+                            <select class="form-control" name="tutor_course[]" id="subject_drop">
+                              <option value="">Select subject</option>
+                            </select>
+                          </div>
+                        </div>
+          
+                        <!-- online only -->
+                        <div class="col-md-12">
+                          <div class="form-check">
+                            <label class="form-check-label"> Online Only <a href="javascript:;" style="font-size: 0.9rem; font-weight: 400; margin-left: 0.5rem;" data-toggle="modal" data-target="#onlineOnlyInfoModal">  What is this?</a>
+                              <input class="form-check-input" type="checkbox" value="" id="main_online" >
+                              <span class="form-check-sign">
+                              <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <h4 style="font-weight: 600; color: #2e74b6; margin-top: 1em;" data-toggle="tooltip" title="No info">Details <a href="https://golearn.com.my/tuition-rates/" target="_blank" style="font-size: 0.9rem; font-weight: 400;margin-left: 0.5rem;">  Check Tuition Rate</a></h4>
+                        </div>
+                        <div class="col-md-6">
+                          <!-- <a class="d-flex justify-content-end" href="javascript:;" id="btnUpdate" >Tuition rates <span>Link</span></a> -->
+
+                        </div>
+                      </div>
+          
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="form-group" >
+                            <label >Duration (Hours)</label>
+                            <input type="number" step=".5" min="0.5" max="5" class="form-control"  placeholder="" id="main_duration" value="1.5"onchange="updateEarningEstimation()" >
+                          </div>
+                        </div>
+                        
+                        <div class="col-md-3">
+                          <div class="form-group" >
+                            <label >Class (Per Week)</label>
+                            <input type="number" step="1" class="form-control"  placeholder="" id="main_classPerWeek" value="1" onchange="updateEarningEstimation()"> 
+                          </div>
+                        </div>
+            
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label  >Fee (RM)</label>
+                            <input type="number" class="form-control" id="main_fees" onchange="updateEarningEstimation()">
+                          </div>
+                        </div>
+          
+                        <div class="col-md-3">
+                          <label  >Fee Type</label>
+          
+                          <div class="form-check form-check-radio">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="radio" name="feeTypeRadios" id="radio-feeType_Per_Month" value="option1" onchange="updateEarningEstimation()" >
+                              Per Month
+                              <span class="circle">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                          <div class="form-check form-check-radio">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="radio" name="feeTypeRadios" id="radio-feeType_Per_Hour" value="option2" checked onchange="updateEarningEstimation()">
+                              Per Hour
+                              <span class="circle">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+        
+                        <div class="col-md-12">
+                          <p>Recommend 2 hours for home tuition and 1.5 hours for online tuition.</p>
+
+                          <p>Note: Monthly fee = Fees (Per Hour)  X  Duration (Hours)  X  Class (Per Week)  X  4 weeks in a month</p>
+
+                        </div>
+
+
+                      </div>
+          
+                      <h4 style="font-weight: 600; color: #2e74b6; margin-top: 1em;" data-toggle="tooltip" title="No info">Course Description</h4>
+                        
+                      <div class="row">
+                        
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <div class="form-group">
+                              <textarea class="form-control" rows="8" id="main_subjectDescription" placeholder="Write something..."></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <h4 style="font-weight: 600; color: #2e74b6; margin-top: 1em;" data-toggle="tooltip" title="No info">Add Testimonial (if any)</h4>
+                        
+                      <div class="row">
+                        <div class="col-md-4" style="height: 300px; width: fit-content;">
+                          <a href="javascript:;" >
+                            <img class="img" id="tutorImgUrl1" style="height: 100%; width:100%; object-fit: cover; border-style: dotted; border-color: rgb(49, 49, 49); pointer-events: none;" src="../assets/img/upload-photo.png"/>
+                          </a>
+                          <input type="file" id="select_image1" name="image" onchange="putImage('select_image1','tutorImgUrl1', 1);" style="display:none" accept="image/x-png,image/jpeg"> </input>
+
+                        </div>
+                        <div class="col-md-4" style="height: 300px; width: fit-content;">
+                          <a href="javascript:;" >
+                            <img class="img" id="tutorImgUrl2" style="height: 100%; width:100%; object-fit: cover; border-style: dotted; border-color: rgb(49, 49, 49); pointer-events: none; " src="../assets/img/upload-photo.png"/>
+                          </a>
+                          <input type="file" id="select_image2" name="image" onchange="putImage('select_image2','tutorImgUrl2', 2);" style="display:none" accept="image/x-png,image/jpeg"> </input>
+
+                        </div>
+                        <div class="col-md-4" style="height: 300px; width: fit-content;">
+                          <a href="javascript:;" >
+                            <img class="img" id="tutorImgUrl3" style="height: 100%; width:100%; object-fit: cover; border-style: dotted; border-color: rgb(49, 49, 49); pointer-events: none; " src="../assets/img/upload-photo.png"/>
+                          </a>
+                          <input type="file" id="select_image3" name="image" onchange="putImage('select_image3','tutorImgUrl3', 3);" style="display: none;" accept="image/x-png,image/jpeg"> </input>
+
+                        </div>
+                      </div>
+
+                    </form>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 2rem;">
+                      <a href="javascript:;" class="btn btn-lg btn-primary btn-round" id="btnCreateCourse" style="background-color: grey; pointer-events: none;" > Create Course</a>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            <!-- </div> -->
+  
+
+            <!-- Right pane: Earning Information -->
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                <h4 class="card-title">Earning Estimation</h4>
+                <!-- <p class="card-category">Complete your profile</p> -->
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 >1st Month </h5>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex justify-content-end">
+                        <p style="color: green;" id="inputFeeMonth1">RM0.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5>2nd Month </h5>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex justify-content-end">
+                        <p style="color: green;" id="inputFeeMonth2">RM0.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 >3rd Month </h5>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex justify-content-end">
+                        <p style="color: green;"id="inputFeeMonth3">RM0.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 >4th Month </h5>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex justify-content-end">
+                        <p style="color: green;" id="inputFeeMonth4">RM0.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 >5th Month </h5>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex justify-content-end">
+                        <p style="color: green;" id="inputFeeMonth5">RM0.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5 style="font-weight: 500;" >5 Months' Earning </h5>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex justify-content-end">
+                        <p style="font-weight: 600; font-size: 1.1rem;" id="five_month_earning_total">RM0.00</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12 ">
+                    <a class="d-flex justify-content-center" href="javascript:;" id="btnEarningFullReport" data-toggle="modal" data-target="#earningFullReportModal">View full report</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+
+
+          
+		  </div>
+      </div>
+
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav class="float-left">
+          <ul>
+            <li>
+            <!-- <a href="https://golearn.com.my/join-us" target="_blank">
+              Visit GoLearn Tutor
+            </a> -->
+            </li>
+          </ul>
+          </nav>
+          <!-- <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script> 
+            , made with <i class="material-icons">favorite</i> by <a href="#" >GoLearn Team</a>
+          </div> -->
+          <!-- your footer here -->
+        </div>
+      </footer>
+    </div>
+	  
+  </div>
+
+  <script src="assets/js/core/jquery.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src="assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="assets/js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <script src="assets/js/plugins/jquery.validate.min.js"></script>
+  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+  <!-- <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script> -->
+  <!-- 	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <!-- <script src="assets/js/plugins/bootstrap-selectpicker.js"></script> -->
+  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+  <!-- <script src="assets/js/plugins/bootstrap-datetimepicker.min.js"></script> -->
+  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+  <!-- <script src="assets/js/plugins/jquery.dataTables.min.js"></script> -->
+  <!-- 	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+  <!-- <script src="assets/js/plugins/bootstrap-tagsinput.js"></script> -->
+  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+  <!-- <script src="assets/js/plugins/jasny-bootstrap.min.js"></script> -->
+  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+  <!-- <script src="assets/js/plugins/fullcalendar.min.js"></script> -->
+  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+  <!-- <script src="assets/js/plugins/jquery-jvectormap.js"></script> -->
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <!-- <script src="assets/js/plugins/nouislider.min.js"></script> -->
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> -->
+  <!-- Library for adding dinamically elements -->
+  <!-- <script src="assets/js/plugins/arrive.min.js"></script> -->
+  <!--  Google Maps Plugin    -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+  <!-- Chartist JS -->
+  <!-- <script src="assets/js/plugins/chartist.min.js"></script> -->
+  <!--  Notifications Plugin    -->
+  <script src="assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
+  <!-- Common constants -->
+  <script src="../assets/js/common.js" type="text/javascript"></script>
+  <!-- General Info -->
+  <script src="../assets/js/const.js" type="text/javascript"></script>
+  <!-- Global Var -->
+  <script src="../../assets/js/globalvar.js" type="text/javascript"></script>
+  <!-- Core Tutor Js -->
+  <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
+  
+  <script>
+     
+    // This variable are add-course.html specific
+    var current_gender_raw;
+    var categoryIdList =[];
+    var subjectIdList=[];
+    var isOnlineList=[];
+
+		var db = firebase.firestore();
+		db.settings({ timestampsInSnapshots: true });
+
+    // Set the nav name and global var, if user already login and have session Storage 
+    var tutorInfoObj = null;
+    if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
+      // Do nothing
+    }else{
+      // Set the nav user name
+      tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
+      document.getElementById("user").textContent = tutorInfoObj.name;
+
+      current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
+      // current_email, 
+      // current_phone, 
+      current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
+      current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
+      current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
+      current_accountStatus = tutorInfoObj.accountStatus; // bool
+      currentYearsExperience = tutorInfoObj.yearsExperience; // number
+      currentTutoringExperience = tutorInfoObj.tutoringExperience;
+      currentTutoringApproach = tutorInfoObj.tutoringApproach;
+      currentQualification= tutorInfoObj.qualification;
+      current_mon_8am = tutorInfoObj.tMon8am;
+      current_mon_12pm= tutorInfoObj.tMon12pm; 
+      current_mon_3pm = tutorInfoObj.tMon3pm;  
+      current_mon_6pm = tutorInfoObj.tMon6pm;  
+      current_tue_8am = tutorInfoObj.tTue8am;  
+      current_tue_12pm= tutorInfoObj.tTue12pm;  
+      current_tue_3pm = tutorInfoObj.tTue3pm;  
+      current_tue_6pm = tutorInfoObj.tTue6pm;  
+      current_wed_8am = tutorInfoObj.tWed8am;  
+      current_wed_12pm= tutorInfoObj.tWed12pm;  
+      current_wed_3pm = tutorInfoObj.tWed3pm;  
+      current_wed_6pm = tutorInfoObj.tWed6pm;  
+      current_thu_8am = tutorInfoObj.tThu8am;  
+      current_thu_12pm= tutorInfoObj.tThu12pm;  
+      current_thu_3pm = tutorInfoObj.tThu3pm;  
+      current_thu_6pm = tutorInfoObj.tThu6pm;  
+      current_fri_8am = tutorInfoObj.tFri8am;  
+      current_fri_12pm= tutorInfoObj.tFri12pm;  
+      current_fri_3pm = tutorInfoObj.tFri3pm;  
+      current_fri_6pm = tutorInfoObj.tFri6pm; 
+      current_sat_8am = tutorInfoObj.tSat8am;  
+      current_sat_12pm= tutorInfoObj.tSat12pm;  
+      current_sat_3pm = tutorInfoObj.tSat3pm;  
+      current_sat_6pm = tutorInfoObj.tSat6pm;  
+      current_sun_8am = tutorInfoObj.tSun8am;  
+      current_sun_12pm= tutorInfoObj.tSun12pm;  
+      current_sun_3pm = tutorInfoObj.tSun3pm;  
+      current_sun_6pm = tutorInfoObj.tSun6pm;
+      current_aweburl = tutorInfoObj.aWebUrl
+
+      // updatePageView(current_accountStatus);
+    }
+
+		firebase.auth().onAuthStateChanged(function(user){
+      
+			if(!user){
+        // Return to login if user does not exist.
+				window.location.href = "../login.html"
+			}else{
+        // if the displayName is null, it means user register using Phone
+        if (firebase.auth().currentUser.displayName == null ){
+            tutorId = firebase.auth().currentUser.phoneNumber;
+        }else
+            tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+
+
+        
+        loadAllActiveCourse(tutorId);
+
+
+        loadCommissionPolicy();
+
+
+        loadUserInfo(tutorId);
+        
+        // updateEarningEstimation();
+			}
+		});
+
+    // Tutor Specific
+    function loadUserInfo(tutorId){
+      // Tutor Id must be a phone with +60, no spacing or other chars
+      var docRef = db.collection("Tutor").doc(tutorId);
+      
+
+      // docRef.get().then((doc) => {
+      docRef.onSnapshot((doc) => {
+
+        if (doc.exists) {
+          // console.log("Document data:", doc.data());
+
+          current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
+          current_email = doc.data().email;  
+          current_phone = doc.data().phone;   
+          current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
+          current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
+          current_gender_raw= doc.data().gender;
+          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
+          current_accountStatus = doc.data().accountStatus; 
+          current_address1 = doc.data().address1;
+          current_address2 = doc.data().address2;
+          current_addressPostCode = doc.data().addressPostCode
+          current_addressState = doc.data().addressState;
+          currentYearsExperience = doc.data().yearsExperience; // number
+          currentTutoringExperience = doc.data().tutoringExperience;
+          currentTutoringApproach = doc.data().tutoringApproach;
+          currentQualification= doc.data().qualification;
+          current_mon_8am = doc.data().tMon8am;
+          current_mon_12pm= doc.data().tMon12pm; 
+          current_mon_3pm = doc.data().tMon3pm;  
+          current_mon_6pm = doc.data().tMon6pm;  
+          current_tue_8am = doc.data().tTue8am;  
+          current_tue_12pm= doc.data().tTue12pm;  
+          current_tue_3pm = doc.data().tTue3pm;  
+          current_tue_6pm = doc.data().tTue6pm;  
+          current_wed_8am = doc.data().tWed8am;  
+          current_wed_12pm= doc.data().tWed12pm;  
+          current_wed_3pm = doc.data().tWed3pm;  
+          current_wed_6pm = doc.data().tWed6pm;  
+          current_thu_8am = doc.data().tThu8am;  
+          current_thu_12pm= doc.data().tThu12pm;  
+          current_thu_3pm = doc.data().tThu3pm;  
+          current_thu_6pm = doc.data().tThu6pm;  
+          current_fri_8am = doc.data().tFri8am;  
+          current_fri_12pm= doc.data().tFri12pm;  
+          current_fri_3pm = doc.data().tFri3pm;  
+          current_fri_6pm = doc.data().tFri6pm; 
+          current_sat_8am = doc.data().tSat8am;  
+          current_sat_12pm= doc.data().tSat12pm;  
+          current_sat_3pm = doc.data().tSat3pm;  
+          current_sat_6pm = doc.data().tSat6pm;  
+          current_sun_8am = doc.data().tSun8am;  
+          current_sun_12pm= doc.data().tSun12pm;  
+          current_sun_3pm = doc.data().tSun3pm;  
+          current_sun_6pm = doc.data().tSun6pm;
+          current_chk_homeStudentToTutor = doc.data().modeHomeTutorToStudent; 
+          current_chk_homeTutorToStudent = doc.data().modeHomeStudentToTutor; 
+          current_chk_group = doc.data().modeGroup;
+          current_chk_online = doc.data().modeOnline;
+          current_chk_onlineGroup = doc.data().modeOnlineGroup;
+          isLanEng = doc.data().lanEng;
+          isLanBm = doc.data().lanBm; 
+          isLanBc = doc.data().lanBc; 
+          isLanBt = doc.data().lanBt; 
+          isLanOther = doc.data().lanOther;
+          current_preferedSubjectList = doc.data().preferedSubjectList;
+          current_preferedAreaList = doc.data().preferedAreaList;
+          current_aPreferredSubjectLimit = doc.data().aPreferredSubjectLimit;
+          current_aPreferredAreaLimit = doc.data().aPreferredAreaLimit;
+          current_rating = doc.data().rating;
+          current_ratingTimes = doc.data().ratingTimes; 
+          current_ratingFinal = doc.data().ratingFinal;
+          current_profileStatus = doc.data().profileStatus;
+          current_aweburl = doc.data().aWebUrl;
+          current_aPremiumSubjectLimit  = doc.data().aPremiumSubjectLimit; 
+          // current_aPremiumConnectLimit = doc.data().profileStatus; 
+          current_aTotalSubjectLimit = doc.data().aTotalSubjectLimit; 
+          // current_aTotalConnectLimit = doc.data().profileStatus; 
+
+
+          // Store data to sessionStorage
+          var tutorDataObj = {
+            [NAME_KEY] : doc.data().name,
+            [EMAIL_KEY] : doc.data().email,
+            [PHONE_KEY] : doc.data().phone,
+            [AGE_KEY] : doc.data().age,
+            [GENDER_KEY] : doc.data().gender,
+            [ADDRESS_1_KEY] :doc.data().address1,
+            [ADDRESS_2_KEY] :doc.data().address2,
+            [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
+            [ADDRESS_STATE_KEY] :doc.data().addressState,
+            [IMAGE_KEY] : doc.data().imgUrl,
+            // [NRIC_KEY] : doc.data().name,
+            [RATING_KEY] : doc.data().rating,
+            [RATING_TIMES_KEY] : doc.data().ratingTimes,
+            [RATING_FINAL_KEY] : doc.data().ratingFinal,
+            [PROFILE_STATUS_KEY] : doc.data().profileStatus,
+            // [CHECK_HOMETUTOR_KEY] : doc.data().name,
+            // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
+            // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
+            // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
+            [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
+            [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
+            [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
+            [QUALIFICATION_KEY] : doc.data().qualification,
+            [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
+            [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
+            [AGENT_KEY] : doc.data().agent,
+            [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
+            
+            [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
+            [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
+            [CHECK_GROUP_KEY] : doc.data().modeGroup,
+            [CHECK_ONLINE_KEY] : doc.data().modeOnline,
+            [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
+            [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
+            [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
+            [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
+            [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
+            [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
+
+            [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
+            [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
+            [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
+            [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
+            [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
+            [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
+            [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
+            [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
+            [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
+            [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
+            [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
+            [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
+            [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
+            [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
+            [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
+            [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
+            [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
+            [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
+            [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
+            [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
+            [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
+            [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
+            [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
+            [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
+            [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
+            [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
+            [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
+            [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
+            // Create a placeholder for aWebUrl. This param can only initiated by admin
+            // manually through https://golearn.com.my/admin/admin-portal.html
+            [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
+            [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
+            [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
+            [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
+            [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
+            [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
+            [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
+          }
+
+          // Set tutorInfoObj as sessionStorage
+          sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
+
+          // Set the nav user name and public profile link
+          document.getElementById("user").textContent = doc.data().name;
+
+          if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
+            document.getElementById("navPublicProfile").href = "#"  ;
+            document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
+          } else{
+            document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
+            document.getElementById("navPublicProfile").target = "_blank";
+          }
+          
+          if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
+            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
+            document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
+            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
+            document.getElementById("btnActivateAccount").target = "_blank";
+            // Redirect back to course
+            window.location.href = "./course.html";
+
+          }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
+            document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
+            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
+            document.getElementById("btnActivateAccount").target = "_blank";
+            // Redirect back to course
+            window.location.href = "./course.html";
+
+          }else {
+            let activationNavItem = document.querySelector('#activationNavItem');
+            let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
+            console.log(activationNavItemIsExist)
+            // Remove NavItem if exist
+            if (activationNavItemIsExist){
+              activationNavItem.parentNode.removeChild(activationNavItem);
+            }else{
+              // Do nothing
+            }
+          }
+
+          // add-course.html Specific
+          // Re-Enable img upload and save button
+          document.getElementById("tutorImgUrl1").setAttribute("style", "height: 100%; width:100%; object-fit: cover; border-style: dotted; border-color: rgb(49, 49, 49); pointer-events: auto;");
+          document.getElementById("tutorImgUrl2").setAttribute("style", "height: 100%; width:100%; object-fit: cover; border-style: dotted; border-color: rgb(49, 49, 49); pointer-events: auto;");
+          document.getElementById("tutorImgUrl3").setAttribute("style", "height: 100%; width:100%; object-fit: cover; border-style: dotted; border-color: rgb(49, 49, 49); border-color: rgb(49, 49, 49); pointer-events: auto;");
+          document.getElementById('btnCreateCourse').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
+
+
+        } else {
+          // Do nothing 
+        }
+      });
+
+    };
+
+
+     // load all existing active subject info
+     function loadAllActiveCourse(tutorId) {
+
+        var allActiveCourseCol = db.collection("Tutor").doc(tutorId).collection("Courses")
+        .where("status", "==", true);
+
+        allActiveCourseCol
+        .get()
+        .then((querySnapshot) => {
+          var courseId;
+          querySnapshot.forEach((doc) => {
+            categoryIdList.push(doc.data().categoryId);
+            subjectIdList.push(doc.data().subjectId);
+            isOnlineList.push(doc.data().online);
+            console.log("Restricted?: "+getRestrictedSubjectForEachCategoryBasedOnId(doc.data().categoryId, doc.data().subjectId));
+
+          });
+
+          console.log("categoryIdList: "+ categoryIdList);
+          console.log("subjectIdList: "+subjectIdList);
+          // console.log(isOnlineList);
+
+          checkIfSubjectLimitReached();
+
+        }).catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
+
+
+    }
+
+   
+
+    // Load all commission policy
+    function loadCommissionPolicy(){
+      var allCommissionPolicyRef = db.collection("admin").doc("Commission");
+
+      
+      allCommissionPolicyRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          inputCommissionMonth1 = doc.data().aMonth1;
+          inputCommissionMonth2 = doc.data().aMonth2;
+          inputCommissionMonth3 = doc.data().aMonth3;
+          inputCommissionMonth4 = doc.data().aMonth4;
+          inputCommissionMonth5 = doc.data().aMonth5;
+          inputCommissionMonth6 = doc.data().aMonth6;
+          inputCommissionMonth7 = doc.data().aMonth7;
+          inputCommissionMonth8 = doc.data().aMonth8;
+          inputCommissionMonth9 = doc.data().aMonth9;
+          inputCommissionMonth10 = doc.data().aMonth10;
+          inputCommissionMonth11 = doc.data().aMonth11;
+          inputCommissionMonth12 = doc.data().aMonth12;
+          console.log("Commission Loaded: "+ inputCommissionMonth1);
+
+          updateEarningEstimation();
+        } else {
+          console.log("Commission Loaded Failed:  Doc does not exist");
+        }
+      });
+
+    }
+
+
+  </script>
+
+  <script>
+
+    // Temporary Variable
+    var inputFeeMonth1, inputFeeMonth2, inputFeeMonth3, inputFeeMonth4, inputFeeMonth5,
+      inputFeeMonth6, inputFeeMonth7, inputFeeMonth8, inputFeeMonth9, inputFeeMonth10,
+      inputFeeMonth11, inputFeeMonth12;
+    var inputCommissionMonth1, inputCommissionMonth2, inputCommissionMonth3, inputCommissionMonth4, inputCommissionMonth5,
+      inputCommissionMonth6, inputCommissionMonth7, inputCommissionMonth8, inputCommissionMonth9, inputCommissionMonth10,
+      inputCommissionMonth11, inputCommissionMonth12;
+
+    var inputDuration = 0.0, inputPrice=0.0, inputFinalPrice=0.0;
+    var inputFeePerMonth = 0.0;
+
+    var main_fees_temp, main_duration_temp, main_classPerWeek_temp, main_feesType_temp = FEES_TYPE_PER_HOUR_KEY; 
+    var categoryId, category, subjectId, subject,  online = false;
+
+    var restrictedCourseCounter = 0;
+
+    var imgUrl_temp,imgUrl1_temp = '',imgUrl2_temp = '',imgUrl3_temp = '';
+    // Img specific param
+    var imgFile, type, size, width, height;// name, imgFile is a jSON obj
+
+    $( document ).ready(function() {
+
+      // ------Education Level Dropdown End------- //
+      // Populate Education Level
+      var level_select = document.getElementById("level_drop"); 
+      var level = Category; 
+      var catId = CategoryId; 
+      for (var i = 0; i < level.length; i++) {
+        var opt = level[i];
+        var el = document.createElement("option");
+        el.setAttribute("value", catId[i]);
+        el.textContent = opt;
+        el.value = catId[i];
+        level_select.appendChild(el);
+      }
+
+      // Populate Subject based on selected education level
+      $('#level_drop').on('change', function(){
+
+        // Initialization
+        // Disable the search button because the when we change edu level, the subject resetted
+        // document.getElementById("searchtutor").disabled=true;
+
+        // Reasign subject after the level change. It suppose to be defaulted to "Select subject"
+        subjectId = ''; 
+
+        // Get the text of the selected item
+        var select_level = document.getElementById("level_drop"); 
+        var LevelTxt = select_level.options[select_level.selectedIndex].text; // Get the text component of selection
+        console.log(LevelTxt) 
+        category = LevelTxt;
+
+        let LevelId_selected = $(this).val(); // Value of the selected item
+        categoryId = LevelId_selected;
+
+        // Clear the area option first, except the first one. 50 is a just a huge number
+        var subject_drop = document.getElementById("subject_drop"); 
+        for(i=1; i <= 50; i++){
+          subject_drop.remove(1);
+        }   
+
+        var subjectInfo = selectSubjectListBasedOnLevelId(LevelId_selected);// Get the subject info
+        var options = subjectInfo[0];
+        var optionIds = subjectInfo[1];
+        // console.log("Subjects: "+ options); 
+
+        for (var i = 0; i < options.length; i++) {
+          var opt = options[i];
+          var optId = optionIds[i];
+          var el = document.createElement("option");
+          // el.setAttribute("value", "volvocar");
+          el.textContent = opt;
+          el.value = optId;
+          subject_drop.appendChild(el);
+        }
+        console.log(" Level:"+categoryId+" Subject:"+subjectId+" Online?"+online);
+
+      });
+      // ------Education Level Dropdown End------- //
+
+
+      // ------Subject Dropdown Start------- //
+      $('#subject_drop').on('change', function(){
+        var select_subject = $(this).val() 
+        subjectId = select_subject;
+
+        // Get the text of the selected item
+        var select_subjectTxt = document.getElementById("subject_drop"); 
+        var subjectTxt = select_subjectTxt.options[select_subjectTxt.selectedIndex].text; // Get the text component of selection
+        console.log(subjectTxt) 
+        subject = subjectTxt;
+
+        console.log("Level:"+categoryId+" Subject:"+subjectId+" Online?"+online);
+
+        checkRedundantSubject(categoryId, subjectId, online);
+
+
+      });
+      // ------Subject Dropdown End------- //
+
+      $('#main_online').on('change', function(){
+        // Get the checkbox
+        online = document.getElementById("main_online").checked;
+      
+        console.log("Level:"+categoryId+" Subject:"+subjectId+" Online?"+online);
+
+        checkRedundantSubject(categoryId, subjectId, online);
+      });
+
+
+      // Script to trigger the select image
+      $('#tutorImgUrl1').click(function(){
+        $('#select_image1').trigger('click'); 
+      });
+      $('#tutorImgUrl2').click(function(){
+        $('#select_image2').trigger('click'); 
+      });
+      $('#tutorImgUrl3').click(function(){
+        $('#select_image3').trigger('click'); 
+      });
+
+      // Back button
+			$("#btnBack").click(function(){
+        window.location.href = "./course.html"
+			});
+
+			// Create Course
+			$("#btnCreateCourse").click(function(){
+        $('#createCourseModal').modal('show');
+			});
+      $('#btnCreateCourseModalUpdate').on('click', function (e) {
+      
+        if (document.getElementById("main_fees").value == null || document.getElementById("main_fees").value <= 0 ||
+        document.getElementById("main_duration").value  == null|| document.getElementById("main_fees").value <= 0 ||
+        document.getElementById("main_classPerWeek").value  == null|| document.getElementById("main_classPerWeek").value <= 0 ||
+        subject ==null || subject == "Select subject" || category == null || category == "Select education level" ){
+          // $('#warningModal').modal('show');
+          // alert("Have you fill up the subject, duration, class per week and tuition fee?");
+          func.showNotification('top','center', 'danger', 'error_outline', "Have you filled up the subject, duration, class per week and tuition fee?" );
+
+          $('#createCourseModal').modal('hide');
+        }else{
+            
+          // Creating New Course
+          let timestamp = new Date();
+          let subjectDocId = categoryId +"_"+ subjectId +"_"+timestamp; 
+          var docRef = db.collection("Tutor")
+            .doc(tutorId)
+            .collection("Courses")
+            .doc(subjectDocId);
+                
+            
+          if (document.getElementById('radio-feeType_Per_Month').checked){
+            main_feesType_temp = FEES_TYPE_PER_MONTH_KEY;
+          }else{
+            main_feesType_temp = FEES_TYPE_PER_HOUR_KEY;
+          }
+
+          console.log("fee Type: "+ main_feesType_temp);
+          let final_address = current_address1 + ", " + current_address2 + ", " +
+                    current_addressPostCode + ", " + current_addressState;
+
+          var courseData = {
+            //Details
+            [CATEGORY_KEY]: category,
+            [CATEGORY_ID_KEY]: categoryId,
+            [SUBJECT_KEY]: subject,
+            [SUBJECT_ID_KEY]: subjectId,
+            [DATE_CREATED_KEY]: timestamp,
+            [DURATION_KEY]: parseFloat(document.getElementById("main_duration").value),
+            [CLASSPERWEEK_KEY]: parseInt(document.getElementById("main_classPerWeek").value),
+            [AVAILABLE_KEY]: [false, false, false, false, false, false, false], //depreciated
+            [PREFERED_START_TIMESLOT_KEY]: "", //depreciated
+            [PREFERED_END_TIMESLOT_KEY]: "", //depreciated
+            [ONLINE_KEY]: online,
+            [NEGOTIABLE_KEY]: false, //depreciated
+            [SUBJECT_DESCRIPTION_KEY]:  document.getElementById("main_subjectDescription").value,
+            [PHOTO_LINK1_KEY]: imgUrl1_temp,
+            [PHOTO_LINK2_KEY]: imgUrl2_temp,
+            [PHOTO_LINK3_KEY]: imgUrl3_temp,
+
+            // Fees Structure
+            [FEES_KEY]:  parseFloat(document.getElementById("main_fees").value),
+            [FEES_PER_MONTH_KEY]: parseFloat(inputFeePerMonth),
+            [FEES_TYPE_KEY]: main_feesType_temp,
+
+            [COMMISSION_PERCENT_KEY]: 0, //depreciated
+            [COMMISSION_KEY]: 0, //depreciated
+            [REBARE_PERCENT_KEY]: 0, //depreciated
+            [REBATE_KEY]: 0, //depreciated
+            [EARNING_KEY]: 0, //depreciated
+
+            // Tutor details (11)
+            [NAME_KEY]: current_name,
+            [EMAIL_KEY]: current_email,
+            [PHONE_KEY]: current_phone,
+            [AGE_KEY]: parseInt(current_age),
+            [GENDER_KEY]: current_gender_raw,
+            [ADDRESS_KEY]: final_address,
+            [IMAGE_KEY]: current_imgUri,
+            [RATING_KEY]: parseFloat(current_rating),
+            [RATING_TIMES_KEY]: parseInt(current_ratingTimes),
+            [RATING_FINAL_KEY]: parseFloat(current_ratingFinal),
+            [PROFILE_STATUS_KEY]: current_profileStatus,
+
+            // General Info
+            [CHECK_HOMETUTOR_KEY]: false,  //depreciated
+            [CHECK_PRIVATETUTOR_KEY]: false, //depreciated
+            [CHECK_GROUPTUTOR_KEY]: false, //depreciated
+            [CHECK_ONLINETUTOR_KEY]: false, //depreciated
+            [YEARS_EXPERIENCE_KEY]: currentYearsExperience,
+            [TUTORING_EXPERIENCE_KEY]: currentTutoringExperience,
+            [TUTORING_APPROACH_KEY]: currentTutoringApproach,
+            [QUALIFICATION_KEY]: currentQualification,
+            [PREFERED_AREA_LIST_KEY]: current_preferedAreaList,
+            [PREFERED_SUBJECT_LIST_KEY]: current_preferedSubjectList,
+            [STATUS_KEY]: true,
+
+            // New Feature 2.0
+            [ADMIN_WEB_URL_KEY]: current_aweburl,
+            [CHECK_HOME_TUTOR_TO_STUDENT_KEY]: current_chk_homeTutorToStudent,
+            [CHECK_HOME_STUDENT_TO_TUTOR_KEY]: current_chk_homeStudentToTutor,
+            [CHECK_GROUP_KEY]: current_chk_group,
+            [CHECK_ONLINE_KEY]: current_chk_online,
+            [CHECK_ONLINE_GROUP_KEY]: current_chk_onlineGroup,
+            [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY]: isLanEng,
+            [CHECK_TEACHING_LANGUAGE_BM_KEY]: isLanBm,
+            [CHECK_TEACHING_LANGUAGE_BC_KEY]: isLanBc,
+            [CHECK_TEACHING_LANGUAGE_BT_KEY]: isLanBt,
+            [CHECK_TEACHING_LANGUAGE_OTHER_KEY]: isLanOther
+          }
+
+          // Update to all Area / Online
+          if (online){
+            // Online class
+
+            var allSubjectColRef = 
+              db.collection("country")
+              .doc("malaysia")
+              .collection("state")
+              .doc("online")
+              .collection("category")
+              .doc(categoryId)
+              .collection("subject")
+              .doc(subjectId)
+              .collection("tutor")
+              .doc(tutorId);
+
+              // Create the course
+              allSubjectColRef.set(courseData, { merge: true });
+              
+              // Create the history as well
+              allSubjectColRef.collection("AllCourses").doc(subjectDocId)
+              .set(courseData, { merge: true });
+
+          }else{
+            // Offline class
+            for ( let i = 0; i <  current_preferedAreaList.length; i++){
+              let State_Area = current_preferedAreaList[i].split("-");
+
+              var allSubjectColRef = 
+                db.collection("country")
+                .doc("malaysia")
+                .collection("state")
+                .doc(State_Area[0].toLowerCase())
+                .collection("area")
+                .doc(State_Area[1])
+                .collection("category")
+                .doc(categoryId)
+                .collection("subject")
+                .doc(subjectId)
+                .collection("tutor")
+                .doc(tutorId);
+
+                // Create the course
+                allSubjectColRef.set(courseData, { merge: true });
+
+                // Create the history as well
+                allSubjectColRef.collection("AllCourses").doc(subjectDocId)
+                .set(courseData, { merge: true });
+            }
+          }
+
+
+          
+          var docRefWithMerge = docRef
+          .set(courseData, { merge: true })
+          .then(() => {
+            // window.location= './course.html';
+            func.showNotification('top','center', 'success', 'check_circle', "New Course Created." );
+            window.location.href= './course.html';
+            // console.log("Document successfully written!");
+          })
+          .catch((error) => {
+            // window.location= './course.html';
+            // alert("Error writing document: ", error);
+            func.showNotification('top','center', 'danger', 'error_outline', "Creating course failed. Please try again." );
+
+          });
+
+
+          // Do something
+          $('#createCourseModal').modal('hide');
+        }
+
+      });
+
+      $('#btnCreateCourseModalClose1').on('click', function (e) {
+        $('#createCourseModal').modal('hide');
+      });
+      $('#btnCreateCourseModalClose2').on('click', function (e) {
+        $('#createCourseModal').modal('hide');
+      });
+
+      $('#btnOnlineOnlyInfoModalClose2').on('click', function (e) {
+        window.location.href = "./preferred-area.html"
+        // $('#updateBasicDetailsModal').modal('hide');
+      });
+      
+
+		});
+
+
+  </script>
+  <script>
+    // Checkers
+    function updateEarningEstimation() {
+      main_fees_temp = document.getElementById('main_fees').value;
+      // console.log(main_fees_temp)
+      main_duration_temp = document.getElementById('main_duration').value;
+      main_classPerWeek_temp = document.getElementById('main_classPerWeek').value; 
+
+      if (document.getElementById('radio-feeType_Per_Month').checked){
+        main_feesType_temp = FEES_TYPE_PER_MONTH_KEY;
+      }else{
+        main_feesType_temp = FEES_TYPE_PER_HOUR_KEY;
+      }
+
+      if (main_feesType_temp == FEES_TYPE_PER_MONTH_KEY){ // Per month
+          inputFinalPrice = main_fees_temp
+          inputFeePerMonth = main_fees_temp;
+      } else { // Per hours
+          inputFinalPrice = main_fees_temp * main_duration_temp * (main_classPerWeek_temp * 4);// 4 weeks in a month
+          // NEW FEATURE 2.0 - Assuming 2 hours/class, 1 class/week & 4 weeks in a month.
+          // Used for sorting in web
+          inputFeePerMonth = main_fees_temp * 2 * 4;
+      }
+
+      inputFeeMonth1  = inputFinalPrice * (100 - inputCommissionMonth1)  / 100;
+      inputFeeMonth2  = inputFinalPrice * (100 - inputCommissionMonth2)  / 100;
+      inputFeeMonth3  = inputFinalPrice * (100 - inputCommissionMonth3)  / 100;
+      inputFeeMonth4  = inputFinalPrice * (100 - inputCommissionMonth4)  / 100;
+      inputFeeMonth5  = inputFinalPrice * (100 - inputCommissionMonth5)  / 100;
+      inputFeeMonth6  = inputFinalPrice * (100 - inputCommissionMonth6)  / 100;
+      inputFeeMonth7  = inputFinalPrice * (100 - inputCommissionMonth7)  / 100;
+      inputFeeMonth8  = inputFinalPrice * (100 - inputCommissionMonth8)  / 100;
+      inputFeeMonth9  = inputFinalPrice * (100 - inputCommissionMonth9)  / 100;
+      inputFeeMonth10 = inputFinalPrice * (100 - inputCommissionMonth10) / 100;
+      inputFeeMonth11 = inputFinalPrice * (100 - inputCommissionMonth11) / 100;
+      inputFeeMonth11 = inputFinalPrice * (100 - inputCommissionMonth12) / 100;
+      
+
+      document.getElementById('inputFeeMonth1').textContent = "("+(100 - inputCommissionMonth1).toFixed(1)+"%) RM "+ inputFeeMonth1.toFixed(2);
+      document.getElementById('inputFeeMonth2').textContent = "("+(100 - inputCommissionMonth2).toFixed(1)+"%) RM "+  inputFeeMonth2.toFixed(2);
+      document.getElementById('inputFeeMonth3').textContent = "("+(100 - inputCommissionMonth3).toFixed(1)+"%) RM "+  inputFeeMonth3.toFixed(2);
+      document.getElementById('inputFeeMonth4').textContent = "("+(100 - inputCommissionMonth4).toFixed(1)+"%) RM "+  inputFeeMonth4.toFixed(2);
+      document.getElementById('inputFeeMonth5').textContent = "("+(100 - inputCommissionMonth5).toFixed(1)+"%) RM "+  inputFeeMonth5.toFixed(2);
+
+      document.getElementById('modal_fee1').textContent = "RM " + inputFeeMonth1.toFixed(2);
+      document.getElementById('modal_fee2').textContent = "RM " + inputFeeMonth2.toFixed(2);
+      document.getElementById('modal_fee3').textContent = "RM " + inputFeeMonth3.toFixed(2);
+      document.getElementById('modal_fee4').textContent = "RM " + inputFeeMonth4.toFixed(2);
+      document.getElementById('modal_fee5').textContent = "RM " + inputFeeMonth5.toFixed(2);
+      document.getElementById('modal_fee6').textContent = "RM " + inputFeeMonth6.toFixed(2);
+      document.getElementById('modal_fee7').textContent = "RM " + inputFeeMonth7.toFixed(2);
+      document.getElementById('modal_fee8').textContent = "RM " + inputFeeMonth8.toFixed(2);
+      document.getElementById('modal_fee9').textContent = "RM " + inputFeeMonth9.toFixed(2);
+      document.getElementById('modal_fee10').textContent = "RM " + inputFeeMonth10.toFixed(2);
+
+      document.getElementById('modal_comm1').textContent = (100 - inputCommissionMonth1).toFixed(1)+"%";
+      document.getElementById('modal_comm2').textContent = (100 - inputCommissionMonth2).toFixed(1)+"%";
+      document.getElementById('modal_comm3').textContent = (100 - inputCommissionMonth3).toFixed(1)+"%";
+      document.getElementById('modal_comm4').textContent = (100 - inputCommissionMonth4).toFixed(1)+"%";
+      document.getElementById('modal_comm5').textContent = (100 - inputCommissionMonth5).toFixed(1)+"%";
+      document.getElementById('modal_comm6').textContent = (100 - inputCommissionMonth6).toFixed(1)+"%";
+      document.getElementById('modal_comm7').textContent = (100 - inputCommissionMonth7).toFixed(1)+"%";
+      document.getElementById('modal_comm8').textContent = (100 - inputCommissionMonth8).toFixed(1)+"%";
+      document.getElementById('modal_comm9').textContent = (100 - inputCommissionMonth9).toFixed(1)+"%";
+      document.getElementById('modal_comm10').textContent = (100 - inputCommissionMonth10).toFixed(1)+"%";
+      
+
+      let five_month_earning_total_temp = inputFeeMonth1 + inputFeeMonth2 + inputFeeMonth3 +
+              inputFeeMonth4 + inputFeeMonth5;
+      document.getElementById('five_month_earning_total').textContent = "RM "+ five_month_earning_total_temp.toFixed(2);
+
+    }
+
+
+    function checkRedundantSubject(currentCategoryId,  currentSubjectId, isOnline){
+
+      console.log("Restricted Counter: "+restrictedCourseCounter)
+      // Check if the subject is restricted.
+      if (getRestrictedSubjectForEachCategoryBasedOnId(currentCategoryId, currentSubjectId ) &&
+          restrictedCourseCounter >= current_aPremiumSubjectLimit){
+          disableSubject(true, true);
+          // alert("You have reached the maximum ("+current_aPremiumSubjectLimit+") premium subjects.")
+          func.showNotification('top','center', 'danger', 'error_outline', "You have reached the maximum ("+current_aPremiumSubjectLimit+") premium subjects. Upgrade to Pro now!" );
+
+      }
+      // Check if the subject already created.
+      else if (checkIfSubjectAlreadyCreated(currentCategoryId, currentSubjectId, isOnline)){
+          disableSubject(true, true);
+          // alert("This subject already created");
+          func.showNotification('top','center', 'danger', 'error_outline', "This subject is already created." );
+
+      }
+      else {
+          disableSubject(false, false);
+      }
+    }
+
+    function checkIfSubjectAlreadyCreated( categoryId,  subjectId, isOnline){
+
+        for (let i = 0; i< categoryIdList.length; i++){
+            if (categoryIdList[i] == categoryId && subjectIdList[i] == subjectId && isOnlineList[i]==isOnline){
+                return true;
+            }
+        }
+        return false;
+    }
+    function checkIfSubjectLimitReached(){
+      // Count the number premium subject in all active courses
+      
+      for (let i = 0; i < categoryIdList.length; i++ ){
+        console.log(categoryIdList[i] + subjectIdList[i])
+        if (getRestrictedSubjectForEachCategoryBasedOnId(categoryIdList[i], subjectIdList[i])){
+          restrictedCourseCounter = restrictedCourseCounter + 1;
+        }
+        console.log(restrictedCourseCounter);
+      }
+      
+      
+      if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+        // alert("Account Deactivated or Suspended");
+        disableSubject (true, false);
+        func.showNotification('top','center', 'danger', 'error_outline', "Activate your account to add new courses." );
+        // Redirect back to course
+        window.location.href = "./course.html";
+
+      } 
+      else if  (categoryIdList.length >= current_aTotalSubjectLimit) {
+        // alert("Total Subject Limit (40) reached");
+        disableSubject (true, false);
+        func.showNotification('top','center', 'danger', 'error_outline', "You have reach maximum ("+current_aTotalSubjectLimit+") subjects. Upgrade to Pro now!" );
+        // Redirect back to course
+        window.location.href = "./course.html";
+      }
+      // Default limit is 10 premium subjects
+      // else if (restrictedCourseCounter >= current_aPremiumSubjectLimit){
+      //   alert("Premium Subject Limit (10) reached");
+      // }
+      else {
+        disableSubject (false, false);
+      }
+
+    }
+    
+    // Disable fields
+    function disableSubject (disableAll, excludeSubject){
+      // excludeSubject only usefull if disableAll is true
+        if (disableAll){
+          if (excludeSubject){
+            // document.getElementById('level_drop').setAttribute("disable", 'disable');
+            // document.getElementById('level_drop').style.pointerEvents = 'none';
+            // document.getElementById('level_drop').style.backgroundColor = '#d3d3d3';
+            // document.getElementById('subject_drop').setAttribute("disable", 'disable');
+            // document.getElementById('subject_drop').style.pointerEvents = 'none';
+            // document.getElementById('subject_drop').style.backgroundColor = '#d3d3d3';
+          }else{
+            document.getElementById('level_drop').setAttribute("disable", 'disable');
+            document.getElementById('level_drop').style.pointerEvents = 'none';
+            document.getElementById('level_drop').style.backgroundColor = '#d3d3d3';
+            document.getElementById('subject_drop').setAttribute("disable", 'disable');
+            document.getElementById('subject_drop').style.pointerEvents = 'none';
+            document.getElementById('subject_drop').style.backgroundColor = '#d3d3d3';
+          }
+          document.getElementById('main_fees').setAttribute("disable", 'disable');
+          document.getElementById('main_fees').style.pointerEvents = 'none';
+          document.getElementById('main_fees').style.backgroundColor = '#d3d3d3';
+          document.getElementById('main_duration').setAttribute("disable", 'disable');
+          document.getElementById('main_duration').style.pointerEvents = 'none';
+          document.getElementById('main_duration').style.backgroundColor = '#d3d3d3';
+          document.getElementById('main_classPerWeek').setAttribute("disable", 'disable');
+          document.getElementById('main_classPerWeek').style.pointerEvents = 'none';
+          document.getElementById('main_classPerWeek').style.backgroundColor = '#d3d3d3';
+          document.getElementById('radio-feeType_Per_Month').disabled=true;
+          document.getElementById('radio-feeType_Per_Month').style.pointerEvents = 'none';
+          document.getElementById('radio-feeType_Per_Month').style.backgroundColor = '#d3d3d3';
+          document.getElementById('radio-feeType_Per_Hour').disabled=true;
+          document.getElementById('radio-feeType_Per_Hour').style.pointerEvents = 'none';
+          document.getElementById('radio-feeType_Per_Hour').style.backgroundColor = '#d3d3d3';
+          document.getElementById('btnCreateCourse').setAttribute("disable", 'disable');
+          document.getElementById('btnCreateCourse').style.pointerEvents = 'none';
+          document.getElementById('btnCreateCourse').style.backgroundColor = '#d3d3d3';
+
+        }else {
+          
+          document.getElementById('level_drop').removeAttribute("disable");
+          document.getElementById('level_drop').style.pointerEvents = 'auto';
+          document.getElementById('level_drop').style.backgroundColor = '#fff';
+          document.getElementById('subject_drop').removeAttribute("disable");
+          document.getElementById('subject_drop').style.pointerEvents = 'auto';
+          document.getElementById('subject_drop').style.backgroundColor = '#fff';
+          document.getElementById('main_fees').removeAttribute("disable");
+          document.getElementById('main_fees').style.pointerEvents = 'auto';
+          document.getElementById('main_fees').style.backgroundColor = '#fff';
+          document.getElementById('main_duration').removeAttribute("disable");
+          document.getElementById('main_duration').style.pointerEvents = 'auto';
+          document.getElementById('main_duration').style.backgroundColor = '#fff';
+          document.getElementById('main_classPerWeek').removeAttribute("disable");
+          document.getElementById('main_classPerWeek').style.pointerEvents = 'auto';
+          document.getElementById('main_classPerWeek').style.backgroundColor = '#fff';
+          document.getElementById('radio-feeType_Per_Month').disabled=false;
+          document.getElementById('radio-feeType_Per_Month').style.pointerEvents = 'auto';
+          document.getElementById('radio-feeType_Per_Month').style.backgroundColor = '#fff';
+          document.getElementById('radio-feeType_Per_Hour').disabled=false;
+          document.getElementById('radio-feeType_Per_Hour').style.pointerEvents = 'auto';
+          document.getElementById('radio-feeType_Per_Hour').style.backgroundColor = '#fff';
+          document.getElementById('btnCreateCourse').removeAttribute("disable");
+          document.getElementById('btnCreateCourse').style.pointerEvents = 'auto';
+          document.getElementById('btnCreateCourse').style.backgroundColor = '#2e74b6';
+
+        }
+
+    }
+
+
+  </script>
+
+
+  <script>
+    
+    // Image Specific Function.
+    function showImage(src, target, imgNum) {
+      
+
+      var fr = new FileReader();
+      fr.onload = function(){
+
+        if (src.files[0].size >3000000){
+          func.showNotification('top','center', 'danger', 'error_outline', "Image selected must be less than 3MB." );
+
+          // alert("Image selected must be less than 3MB");
+        }else{
+          target.src = fr.result;
+
+          target.onload = function() {
+            // access image size newly loaded
+            // console.log(getOriginalSize().width);
+            width = getOriginalSize(target).width;
+            // console.log(getOriginalSize().height);
+            height = getOriginalSize(target).height;
+            // type = getExtension(src.files[0].name)
+            // name = src.files[0].name;
+            type = src.files[0].type;
+            size = src.files[0].size;
+            imgFile = src.files[0]
+
+            // uploadImage(src.files[0], type, size, width, height, imgNum);
+          };
+
+        }
+      }
+      fr.readAsDataURL(src.files[0]);
+
+
+      
+      return {
+
+      };
+      // console.log(src.files[0]);
+      // console.log(getExtension(src.files[0].name));
+  
+    }
+
+    function uploadImage( file, type, size, width, height, imgNum ){
+      //imgNum - Indicate which img is uploaded
+      if(file != null) {
+        $('#uploadModal').modal('show');
+
+        // Create a root reference
+        var storageRef = firebase.storage().ref("uploads");
+        // Create a reference to 'tutorId.<imgType>'
+        // var metadata = {
+        //   contentType: type, 
+        //   id: tutorId,
+        //   size: size,
+        //   width: width,
+        //   height: height
+        // };
+        var metadata = {
+          contentType: type, // Predefined by firestore
+          customMetadata: {
+            'id': tutorId,
+            'size': size,
+            'width': width,
+            'height': height
+          }
+        };
+
+        // Upload file and metadata to the object 'images/mountains.jpg'
+        // String courseId = currentCategoryId+"_"+currentSubjectId;
+        //     String path = "subjects/" + Common.current_userId + "/photo"+imgNum+courseId;
+        //     StorageReference fileRef = userStoRef.child(path);
+        let courseId = categoryId+"_"+subjectId;
+        var uploadTask = storageRef.child('subjects/' + tutorId+"/photo"+imgNum+courseId).put(file, metadata);
+        var elem = document.getElementById("myBar");
+        // Listen for state changes, errors, and completion of the upload.
+        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+          (snapshot) => {
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            elem.style.width = progress + "%";
+
+            // if (progress == 100){
+            //   $('#uploadModal').modal('hide');
+            // }
+            switch (snapshot.state) {
+              case firebase.storage.TaskState.PAUSED: // or 'paused'
+                console.log('Upload is paused');
+                // alert("Upload is paused. Please try again.")
+                func.showNotification('top','center', 'danger', 'error_outline', "Upload is paused. Please try again." );
+
+                // $('#uploadModal').modal('hide');
+                break;
+              case firebase.storage.TaskState.RUNNING: // or 'running'
+                console.log('Upload is running');
+                break;
+            }
+            
+          }, 
+          (error) => {
+            // A full list of error codes is available at
+            // https://firebase.google.com/docs/storage/web/handle-errors
+            switch (error.code) {
+              case 'storage/unauthorized':
+                // User doesn't have permission to access the object
+                // alert("Upload failed. Please try again.")
+                func.showNotification('top','center', 'danger', 'error_outline', "You do not have permission to upload. Please contact us." );
+
+                $('#uploadModal').modal('hide');
+                break;
+              case 'storage/canceled':
+                // User canceled the upload
+                // alert("Upload canceled.")
+                func.showNotification('top','center', 'danger', 'error_outline', "Upload canceled." );
+
+                $('#uploadModal').modal('hide');
+                break;
+
+              // ...
+
+              case 'storage/unknown':
+                // alert("Upload failed. Please try again.")
+                func.showNotification('top','center', 'danger', 'error_outline', "Upload failed. Please try again." );
+
+                $('#uploadModal').modal('hide');
+                // Unknown error occurred, inspect error.serverResponse
+                break;
+            }
+          }, 
+          () => {
+            // Upload completed successfully, now we can get the download URL
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              
+              if (imgNum == 1){
+                imgUrl1_temp = downloadURL;
+              }else if (imgNum == 2){
+                imgUrl2_temp = downloadURL;
+              }else if (imgNum == 3){
+                imgUrl3_temp = downloadURL;
+              }
+
+              $('#uploadModal').modal('hide');
+
+            });
+          }
+        );
+ 
+      }
+    }
+
+
+    function putImage(srcString, targetString, imgNum) {
+
+      var src = document.getElementById([srcString]);
+      var target = document.getElementById([targetString]);
+      showImage(src, target, imgNum);
+
+
+      uploadImage(src.files[0], type, size, width, height, imgNum);
+
+      
+      // console.log(getOriginalSize().width);
+      // console.log(getOriginalSize().height);
+    }
+
+
+    function getExtension(filename) {
+      var parts = filename.split('.');
+      return parts[parts.length - 1];
+    }
+
+    function getOriginalSize(target){  
+      // Ref: https://www.codexworld.com/how-to/get-image-original-dimensions-width-height-using-javascript/
+      var image = target;
+      var width = image.naturalWidth; 
+      var height = image.naturalHeight;
+      return {
+        width,
+        height
+      };
+    }
+
+  </script>
+ 
+</body>
+
+</html>
