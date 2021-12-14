@@ -1,0 +1,2573 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>GoLearn School</title>
+  <meta name=description content="GoLearn School&trade; is Malaysia #1 teaching platform to run your tuition business and manage your lessons. Start now for Free!">
+  <meta property=og:title content="GoLearn School">
+  <meta property=og:site_name content="GoLearn School">
+  <meta property=og:type content=website>
+  <meta property=og:url content=https://app.golearn.com.my/s/f/view.html>
+  <meta property=og:image content=https://app.golearn.com.my/assets/img/icon-apple-touch-180x180.png>
+  <meta property=og:description content="GoLearn School&trade; is Malaysia #1 teaching platform to run your tuition business and manage your lessons. Start now for Free!">
+  <link rel=apple-touch-icon sizes=180x180 href=https://app.golearn.com.my/assets/img/icon-apple-touch-180x180.png>
+  <link rel=icon type=image/png sizes=32x32 href=https://app.golearn.com.my/assets/img/icon-32x32.png>
+  <link rel=icon type=image/png sizes=16x16 href=https://app.golearn.com.my/assets/img/icon-16x16.png>
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" rel="stylesheet" type="text/css" />
+  <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
+  <!-- Material Kit CSS -->
+  <link href="../../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <!-- Firebase Init -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+  <script src="../../assets/js/firebase.js"></script>
+  <!-- Tutor Portal specific CSS -->
+  <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
+  <!-- Date Picker -->
+  <link href="../../assets/css/mc-calendar.min.css" rel="stylesheet"/>
+  <link href="../../assets/css/intlTelInput.css" rel="stylesheet" >
+  <!-- Rich Text Editor Init -->
+  <script src="https://cdn.tiny.cloud/1/5dm77axvxwkliu22hg2ejlaqh4s246uo83bz98ogo4c3yeev/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+ 
+  <style>
+    .table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+    }
+    .table th,
+    .table td {
+        border: 1px solid #ccc;
+    }
+    .table th,
+    .table td {
+        padding: 0.5rem;
+    }
+    .draggable {
+        cursor: move;
+        user-select: none;
+    }
+    .placeholder {
+        background-color: #edf2f7;
+        border: 2px dashed #cbd5e0;
+    }
+    .clone-list {
+        border-top: 1px solid #ccc;
+    }
+    .clone-table {
+        border-collapse: collapse;
+        border: none;
+    }
+    .clone-table th{
+        border: 1px solid #ccc;
+        border-top: none;
+        padding: 0.5rem;
+        font-size: 1.2em;
+        font-weight: 300;
+    }
+
+    .clone-table td {
+        border: 1px solid #ccc;
+        border-top: none;
+        padding: 0.5rem;
+
+        font-weight: 300;
+    }
+    .dragging {
+        background: #fff;
+        border-top: 1px solid #ccc;
+        z-index: 999;
+    }
+
+    /* page view for A4  */
+    page {
+      background: white;
+      display: block;
+      margin: 0 auto;
+      /* margin-bottom: 0.5cm; */
+      box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+    }
+    page[size="A4"] {  
+      width: 21cm;
+      height: auto; 
+      min-height: 29.65cm; 
+      /* Use a  height value slightly lower than 29.7 to avoid page break  */
+      /* height: 29.7cm;  */
+    }
+    page[size="A4"][layout="landscape"] {
+      width: 29.7cm;
+      height: 21cm;  
+    }
+
+    
+    /* .card-body footer1 {
+        position: fixed;
+    }
+    
+    .card-body footer1 {
+        bottom: 0;
+    } */
+    .textarea1 {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      resize: both;
+      min-height: 40px;
+      line-height: 20px;
+    }
+
+    .textarea[contenteditable]:empty::before {
+      content: "Placeholder still possible";
+      color: gray;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <!-- <a class="navbar-brand" href="javascript:;">Login  |  Create Account</a> -->
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          
+        </div>
+      </nav>
+      <!-- End Navbar -->
+
+			<!-- Modal Start -->
+
+      <!-- Save Invoice modal -->
+      <div class="row">
+        <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="saveLabel">Save Draft and Proceed</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnSaveModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="saveModalBody">
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSaveModalClose2">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSaveModalUpdate">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Record Payment modal -->
+      <div class="row">
+        <div class="modal fade" id="recordPaymentModal" tabindex="-1" role="dialog" aria-labelledby="recordPaymentModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Record Payment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payment Date*</span> 
+                  <input type="text" class="form-control" id="inPaymentDate" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" style="cursor: pointer; cursor: pointer;" >                
+                </div>
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payment Amount (RM)</span> 
+                  <input type="number" class="form-control" id="inPaymentAmount" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
+                </div>
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Notes / Memo</span> 
+                  <textarea class="form-control" maxlength="200" rows="4"  id="inPaymentNotes" data-compulsory="false"></textarea>
+                </div>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnRecordPaymentModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Send Invoice modal -->
+      <div class="row">
+        <div class="modal fade" id="sendInvoiceModal" tabindex="-1" role="dialog" aria-labelledby="sendInvoiceModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="saveLabel">Send Invoice</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <div class="form-group"  style="padding: 0.5rem;">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Copy View Invoice Message:</span> 
+                  <div class="input-group">
+                    <span class="d-flex align-items-center input-group-addon" id="btnCopyMessage" style="margin-right: 0.5em; cursor: pointer;" onclick="copyText('inPredefinedMessage')">
+                      <span class="material-icons">
+                        content_copy
+                      </span>
+                    </span>
+                    <textarea class="form-control" rows="5"  style="background-color: #e9ecef; pointer-events: none;"  id="inPredefinedMessage"></textarea>
+
+                  </div>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSendInvoiceModalUpdate">Use Own Mail</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Approve Draft modal -->
+      <div class="row">
+        <div class="modal fade" id="approveDraftModal" tabindex="-1" role="dialog" aria-labelledby="approveDraftModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="saveLabel">Approve Invoice</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnApproveDraftModalUpdate">Approve</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Selected Client modal -->
+      <div class="row">
+        <div class="modal fade" id="editClientModal" tabindex="-1" role="dialog" aria-labelledby="editClientModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editClientModalLabel">Edit Client Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btEeditClientModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="editClientModalBody">
+                <div id="inClientId" value =''></div>
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Name*</span> 
+                  <input type="text" class="form-control" id="inClientName" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" readonly>
+                </div>
+
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Contact*</span> 
+                  <div class="input-group">
+                    <input id="inClientContact" name="phone" type="tel"  class="form-control" data-compulsory="true" oninput="this.className = 'form-control'" >
+                    <span id="valid-msg" class="hide" style="color: #42ba96;">✓ Valid</span>
+                    <span id="error-msg" class="hide" style="color: #F32013;"></span>
+                  </div>
+                  <!-- <input type="text" class="form-control" id="inClientContact" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" readonly> -->
+                </div>
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Email (Optional)</span> 
+                  <input type="text" class="form-control" id="inClientEmail" data-compulsory="false" maxlength="40">
+                </div>
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Address (Optional) </span> 
+                  <textarea class="form-control" maxlength="250" rows="4"  id="inClientAddr" data-compulsory="false"></textarea>
+                </div>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnEditClientModalClose2">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnEditClientModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- List / Load Admin's Students Modal -->
+      <div class="row">
+        <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addStudentModalLabel">Select A Client (Parents / Guardian)</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-12" id="loadAdminStudentTop">
+
+                    <div class="container" id="add-student-modal-container">
+                      <!-- Student header -->
+                      <div class="row lesson-header">
+                        <div class="col-md-3">
+                          <p>Guardian Phone</p>
+                        </div>
+                        <div class="col-md-3">
+                          <p>Guardian Name</p>
+                        </div>
+                        <div class="col-md-3">
+                          <p>Student Name</p>
+                        </div>
+                        <div class="col-md-3">
+                          <p>Action</p> 
+                        </div>
+                      </div>
+
+                
+                      <!-- <div class="row student-wrapper">
+                        <div class="col-md-6">
+                          <p class="student-item">+60138252818</p>
+                        </div>
+                        <div class="col-md-3">
+                          <p class="student-item">Join as Student Parent</p>
+                        </div>
+                        <div class="col-md-3">
+                          <p class="student-item">Join as Student</p>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                      </div> -->
+
+                      <!-- Student List Start -->
+                      
+                    </div>
+        
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-md-12 align-content-center">
+                    <button type="button" class="btn btn-outline-primary btn-sm btn-round" id="btnAddAdminStudentModalLoadMore" >Load More</button>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#editClientModal" type="button" data-gurid="" data-gurname="" data-gurphone="" data-guremail="" data-guraddr="">Add Unregistered Client</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddStudentModalUpdate" >Add</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit business address and contact details modal -->
+      <div class="row">
+        <div class="modal fade" id="addBusinessDetailModal" tabindex="-1" role="dialog" aria-labelledby="addBusinessDetailModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addBusinessDetailModalLabel">Edit Business Address and Contact</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnAddBusinessDetailModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="addBusinessDetailModalBody">
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Personal / Business Name* <span id="countName" style="color: grey; margin-left: 1rem;">0/40</span></span> 
+                  <input type="text" class="form-control" id="inName" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
+                </div>
+
+                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0; margin-top: 1rem;">Current Business Details</span> 
+                <p id="inDetails" style="padding : 1rem; border: solid thin #2e74b6;"></p>
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">New Business Contact </span> 
+                  <input type="text" class="form-control" id="inContact" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
+                </div>
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">New Business Email </span> 
+                  <input type="text" class="form-control" id="inEmail" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
+                </div>
+                <div class="form-group">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">New Business Address </span> 
+                  <textarea class="form-control" maxlength="250" rows="4"  id="inAddr" data-compulsory="false"></textarea>
+                </div>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnAddBusinessDetailModalClose2">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddBusinessDetailModalUpdate" disabled>Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading Modal -->
+      <div class="row">
+        <div class="modal fade" tabindex="-1" role="dialog" id="loadingModal" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="container-fluid">
+              <div class="row d-flex">
+                <span class="fa fa-spinner fa-spin fa-5x w-100" style="color: #fff ;"></span>
+                <div class="col align-self-center">
+                  <!-- <h5 class="modal-title" style="color: white;">Generating invoice in progress. </h5> -->
+                  <!-- <h5 class="modal-title" style="color: white;"> Please do not close this window.</h5> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sign-out modal -->
+      <div class="row">
+        <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="signOutModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="signOutLabel">Logging Out</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="signOutModalBody">
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSignOutModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div class="content">
+        <div class="container-fluid">
+          <!-- Main panel -->
+          
+          <div class="row">
+            <div class="col-md-9 text-center" id="noDocFound" style="display: none; margin: 1rem auto 2rem 0;">
+              <h3>Payslip Not Found</h3>
+              <h4>Please check again with your organization or person in charge. </h4>
+            </div>
+            <div class="col-md-9 text-center">
+              <a href="javascript:;" class="btn btn-outline-primary btn-round" onclick="generatePDFeKoopmans('invTemplate')" id="btnDownloadAsPDF" style="color: #fff; background-color: #2e74b6; text-transform: none; display: none; "> Download as PDF <i class="material-icons" style="color: #fff; margin-left: 0.5em; padding-bottom: 0.2em;">download</i></a>
+              <a href="https://app.golearn.com.my/school/" class="btn btn-outline-primary btn-round" id="btnGoToProfile" style=" text-transform: none;"> Go to my profile <i class="material-icons" style="color: #2e74b6; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
+            </div>
+          </div>
+          <!-- Preview -->
+          <div class="row">
+            <div class="col-md-9" style="overflow-x:auto; padding: 1rem;" >
+              <page size="A4" id="invTemplate" style="position: relative;">
+                <div class="card-body" >
+                  <div class="row">
+                    <div class="col-4 text-center">
+
+                      <div class="form-group">
+                        <!-- <canvas id="myCanvas" style="height: 150px;width: 225px; object-fit: cover;" ></canvas> -->
+                        <div style="height: 115px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
+                          <img id="previewTutorImgUrl" style="height: 100%; width: auto; " src="../../assets/img/empty-photo.png" crossorigin="anonymous" alt = ""/>
+                          <!-- <canvas id="myCanvas" ></canvas> -->
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-2">
+                      <!--  Do nothing -->
+                    </div>
+
+                    <div class="col-6 text-right">
+                      <h4 style="font-size: xx-large;margin-top: 1rem;">PAYSLIP</h4> 
+                      <h5 id="previewTitle"  style="font-weight: 500;">Payslip of November 2021</h5>
+                      <h4 id="previewBizName" style="font-weight: 500;">Your Name</h4>
+                      <h6 id="previewBizDetails" style="text-transform: none; font-weight: 300;">Your Biz Details</p>
+                    </div>
+                  </div>
+                </div>
+
+                <hr style="margin: 0rem">
+                <div class="card-body" style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;"> 
+                  <div class="row">
+                    <div class="col-4">
+                      <h6>Paid To:</h6>
+                      <h4 id="previewClientName" style="font-weight: 500;">Tutor's Name</h4>
+                      <h6 id="previewClientPosition"  style="text-transform: none; font-weight: 300;"> Tutor </h6>
+                    </div>
+
+                    <div class="col-3"></div>
+                    <div class="col-5">
+                      <div class="row">
+                        <div class="col-6 text-right" style="padding-right: 0;">
+                          <h6>Ref No</h6>
+                          <h6>Date</h6>
+                          <h6>Status</h6>
+                        </div>
+                        <div class="col-6 text-left">
+                          <h6 id="previewRefNo" style="font-weight: normal; text-transform: none;"> - </h6>
+                          <h6 id="previewDate" style="font-weight: normal; text-transform: none;"> - </h6>
+                          <h6 id="previewStatus" style="font-weight: normal; text-transform: none;"> - </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 1rem;"></div>
+                  
+                  <div class="row">
+                    <div class="col-12"  style="overflow-x:auto;">
+                      <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
+                      <table id="tablePreview" class="table-light table-sm" cellspacing="0" width="100%" >
+                        <thead id='thead_item_preview' style="background-color: grey; color: white;">
+                          <tr>
+                            <th style="min-width: 200px; font-size: small;">Items</th>
+                            <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity</th>
+                            <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Price</th>
+                            <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tbody_item_preview">
+                          <tr class="subtotal" id='previewItemSubtotal'>
+                            <td></td>
+                            <td></td>
+                            <td style="text-align: right; font-weight: 500; font-size: small;">Subtotal</td>
+                            <td style="text-align: right; font-weight: 500; font-size: small;" id="grosspay_preview"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <table id="table_additem_preview" class="table-light table-sm" cellspacing="0" width="100%">
+                        <thead id='thead_additem_preview' style="visibility: collapse;">
+                          <tr>
+                            <th style="min-width: 200px;">Items</th>
+                            <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
+                            <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
+                            <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tbody_additem_preview">
+                          <tr class="additional">
+                            <td></td>
+                            <td></td>
+                            <td style="text-align: right; font-size: small;"></td>
+                            <td style="text-align: right; font-size: small;"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div class="col-12">
+                      <h4 style="text-align: right; font-weight: 500;">Net Pay <span style="margin-left: 2rem;" id="netpay_preview">RM0.00</span></h4>
+                    </div>
+
+                    <!-- <div class="col-12">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Notes</span>
+                      <span id="previewInvNotes"></span>
+                    </div> -->
+                  </div>
+                </div>
+
+                <hr style="margin: 0rem">
+                <div class="card-body" >
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="row">
+                        <div class="col-6 text-right" style="padding-right: 0;">
+                          <h6>Bank Name</h6>
+                          <h6>AC No</h6>
+                        </div>
+                        <div class="col-6 text-left">
+                          <h6 id="previewBankName" style="font-weight: normal;"> - </h6>
+                          <h6 id="previewAcNo"> - </h6>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <!-- <div class="col-4"></div> -->
+                    <div class="col-6">
+                      <div class="row">
+                        <div class="col-6 text-right" style="padding-right: 0;">
+                          <h6 id='previewEpfTitle' style="display: none;">EPF No</h6>
+                          <h6 id='previewSocsoTitle' style="display: none;">Socso</h6>
+                        </div>
+                        <div class="col-6 text-left">
+                          <h6 id="previewEpf" style="display: none;"> - </h6>
+                          <h6 id="previewSocso" style="display: none;"> - </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- <div class="card-body" id="preview-footer" style="padding-top: 0; margin-top: 0; position: absolute; bottom: 0; width: 100%;">
+                  <p id="previewInvFooterNotes"></p>
+                </div> -->
+
+              </page>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9 text-center">
+            <p>Powered by 
+              <span>
+                <a href="https://golearn.com.my/" class="simple-text logo-mini">
+                  <img src="../../assets/img/golearn-plain.svg" style="width: 108px; height: auto; " alt=""></img>
+                </a>
+              </span>
+            </p>
+
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="container-fluid">
+            <nav class="float-left">
+            <ul>
+              <!-- <li>
+              <a href="https://golearn.com.my/join-us" target="_blank">
+                Visit GoLearn Tutor
+              </a>
+              </li> -->
+            </ul>
+            </nav>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+  </div>
+  
+  <script src="../../assets/js/core/jquery.min.js"></script>
+  <script src="../../assets/js/core/popper.min.js"></script>
+  <script src="../../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src="../../assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="../../assets/js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <script src="../../assets/js/plugins/jquery.validate.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="../../assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"  crossorigin="anonymous"></script>   
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+  
+  <!-- Common constants -->
+  <script src="../../assets/js/common.js" type="text/javascript"></script>
+  <!-- Global Var -->
+  <script src="../../assets/js/globalvar.js" type="text/javascript"></script>
+  <!-- Core Tutor Js -->
+  <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
+  <!-- Datepicker -->
+  <script src="../../assets/js/mc-calendar.min.js" type="text/javascript"></script>
+  <!-- International Telephone Input -->
+  <script src="../../assets/js/plugins/intlTelInput/intlTelInput.js"></script>
+
+  <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script> 
+  
+  <!-- <script src="../../assets/js/html2canvas.min.js" type="text/javascript"></script> -->
+  <!-- Tinymce init -->
+  <script>
+    tinymce.init({
+      mode : "exact",
+      selector:'#invNotes',
+      plugins: "link",
+      max_chars: 400,
+      setup: function (ed) {
+        var allowedKeys = [8, 13, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40, 46];
+        ed.on('keydown', function (e) {
+          console.log(tinymce_getContentLength());
+          invNotesOnChangeHandler();
+          if (allowedKeys.indexOf(e.keyCode) != -1){
+            return true;
+          }
+          if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
+            func.showNotification('top','center', 'warning', 'error_outline', 'You have reach maximum allowed number of ' + ed.settings.max_chars + ' characters.' );
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+          return true;
+        });
+      },
+           
+      init_instance_callback: function () { // initialize counter div
+        $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
+        tinymce_updateCharCounter(this, tinymce_getContentLength());
+      },
+      paste_preprocess: function (plugin, args) {
+        var editor = tinymce.get(tinymce.activeEditor.id);
+        var len = editor.contentDocument.body.innerText.length;
+        var text = $(args.content).text();
+        if (len + text.length > editor.settings.max_chars) {
+            func.showNotification('top','center', 'warning', 'error_outline', 'Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.' );
+            args.content = '';
+        } else {
+            tinymce_updateCharCounter(editor, len + text.length);
+        }
+      }
+
+    });
+    tinymce.init({
+      mode : "exact",
+      selector:'#invFooterNotes',
+      plugins: "link",
+      max_chars: 200,
+      setup: function (ed) {
+        var allowedKeys = [8, 13, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40, 46];
+
+        ed.on('keydown', function (e) {
+          console.log(tinymce_getContentLength());
+          invFooterNotesOnChangeHandler();
+          if (allowedKeys.indexOf(e.keyCode) != -1){
+            return true;
+          }
+          if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
+            func.showNotification('top','center', 'warning', 'error_outline', 'You have reach maximum allowed number of ' + ed.settings.max_chars + ' characters.' );
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+          return true;
+        });
+
+      },
+      
+      init_instance_callback: function () { // initialize counter div
+        $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
+        tinymce_updateCharCounter(this, tinymce_getContentLength());
+      },
+      paste_preprocess: function (plugin, args) {
+        var editor = tinymce.get(tinymce.activeEditor.id);
+        var len = editor.contentDocument.body.innerText.length;
+        var text = $(args.content).text();
+        if (len + text.length > editor.settings.max_chars) {
+            func.showNotification('top','center', 'warning', 'error_outline', 'Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.' );
+            args.content = '';
+        } else {
+            tinymce_updateCharCounter(editor, len + text.length);
+        }
+      },
+    });
+
+    function tinymce_updateCharCounter(el, len) {
+      $('#' + el.id).prev().find('.char_count').text(len + '/' + el.settings.max_chars);
+    }
+
+    function tinymce_getContentLength() {
+      return tinymce.get(tinymce.activeEditor.id).contentDocument.body.innerText.length;
+    }
+  </script>
+
+
+	<script>
+    // Check URL
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var pid = '';
+    pid = url.searchParams.get("pid");
+
+
+    // Check validity of URL params
+    if (pid === "" || pid == null){
+      console.log("Invalid Payslip")
+      invalidatePage();
+    }
+    else{
+      loadPayslip(pid);
+    }
+    var allItemsArr = [];
+
+    var invId, transId; // Global variable for selected invoice and transaction id
+
+    // DOM const
+    const card1 = document.getElementById("card1");
+    const card2 = document.getElementById("card2");
+    const card3 = document.getElementById("card3");
+    const btnStep1 = document.getElementById("btnStep1");
+    const btnStep2 = document.getElementById("btnStep2");
+    const btnStep3 = document.getElementById("btnStep3");
+    const btnApproveDraft = document.getElementById("btnApproveDraft");
+    const btnEditInvoice = document.getElementById("btnEditInvoice");
+    const btnSendInvoice = document.getElementById("btnSendInvoice");
+    const btnDownloadAsPDF = document.getElementById("btnDownloadAsPDF");
+    const btnRecordPayment = document.getElementById("btnRecordPayment");
+    
+    const tablePreview = document.getElementById('tablePreview');
+    const tableAdditionalItemPreview = document.getElementById('tableAdditionalItemPreview');
+
+		// var db = firebase.firestore();
+		// db.settings({ timestampsInSnapshots: true });
+
+    var batch = db.batch();
+    var batchUpdate = db.batch();
+    var batchUpdateNew = db.batch();
+    // Check the current Invoice in session Storage - Valid only if user come from class.html
+    var currentInvoiceObj = null;
+    // getInvoiceObject()
+
+    // Initialization
+    // AuthCheck();
+
+    // // Page Specific Initialization
+    // function loadPageInitFunc(){
+    //   // Do nothing
+    // }
+
+
+    // Load invoice
+    function loadPayslip(pid){
+      let docRef = db.collection("Financial")
+        .doc("v1")
+        .collection("Payslip")
+        .doc(pid);
+
+      docRef
+      .get()
+      .then((doc) => {
+
+        if (doc.exists){
+          console.log("Doc found")
+          console.log(doc.data())
+          // document.getElementById("noDataPlaceholder").style.display = 'initial';
+          // currentInvoiceObj = doc.data();
+
+          $("#btnDownloadAsPDF").css("display", "");
+
+          updatePageContent(doc);
+
+          // getInvoiceObject(doc)
+
+        }else{
+          console.log("Doc not found")
+          invalidatePage();
+        }
+
+      });
+
+    }
+
+    // function getInvoiceObject(doc){
+    //   // Check if there are valid class data in session storage.
+    //   if (invData == null || invData == '' ){
+    //     // Return to class.html if invalid class obj
+    //     func.showNotification('top','center', 'danger', 'error_outline', "Error: No invoice selected." );
+    //     // window.location.href='./';
+
+    //   }else{
+    //     // Set the fields
+    //     // currentInvoiceObj = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY));
+    //     currentInvoiceObj = invData;
+
+    //     // console.log(currentInvoiceObj);
+    //     invId = currentInvoiceObj[INV_ID]
+        
+    //     console.log(currentInvoiceObj)
+    //     updatePageContent(currentInvoiceObj);
+
+    //   }
+
+    // }
+    
+    
+    function updatePageContent(doc){
+      // console.log("Payslip found, update exisiting payslip.");
+      console.log("Payslip found, update exisiting payslip.");
+      console.log(doc.data());
+
+      let payslipData = doc.data()[PAY_ITEMS_ARR]
+      // Render Tables 
+      previewPayslip('preview', payslipData)
+
+      // Render Fixed Params
+      let bizName = doc.data()[PAY_SENDER_NAME];
+      let bizDetail = doc.data()[PAY_SENDER_DETAILS];
+      let bizImgUrl = doc.data()[PAY_SENDER_IMG_URL];
+
+      let title = doc.data()[PAY_TITLE];
+      let refNo = doc.data()[PAY_NUMBER];
+      let date = doc.data()[PAY_DATE].toDate().toLocaleDateString("en-GB");
+      let status = doc.data()[PAY_PAY_STATUS];
+
+      let name = doc.data()[PAY_RECEIVER_NAME];
+      let position = doc.data()[PAY_RECEIVER_POSITION];
+      let epf = doc.data()[PAY_RECEIVER_EPF];
+      let socso = doc.data()[PAY_RECEIVER_SOCSO];
+      let bankName = doc.data()[PAY_RECEIVER_BANK_NAME];
+      let acNo = doc.data()[PAY_RECEIVER_AC_NO];
+
+      document.getElementById("previewBizName").textContent = bizName;
+      document.getElementById("previewBizDetails").textContent = bizDetail;
+      if (bizImgUrl == null || bizImgUrl == ''){
+        document.getElementById("previewTutorImgUrl").style.display = 'none';
+      }
+      else {
+        toDataURL(
+          bizImgUrl == null || bizImgUrl == '' ?  '../../assets/img/empty-photo.png' : 'https://murmuring-headland-66106.herokuapp.com/'+bizImgUrl,
+          function(dataUrl) {
+            // console.log('RESULT:', dataUrl)
+          },
+        );
+      }
+
+      document.getElementById("previewTitle").textContent = title;
+      document.getElementById("previewRefNo").textContent = refNo;
+      document.getElementById("previewDate").textContent = date;
+      document.getElementById("previewStatus").textContent = (status === PAY_STATUS_PAID) ? 'Paid' : 'New';
+      
+      document.getElementById("previewClientName").textContent = name;
+      document.getElementById("previewClientPosition").textContent = position;
+
+      if (epf == null || epf == ''){
+        document.getElementById("previewEpf").style.display = 'none';
+        document.getElementById("previewEpfTitle").style.display = 'none';
+
+      }else{
+        document.getElementById("previewEpf").style.display = '';
+        document.getElementById("previewEpfTitle").style.display = '';
+
+      }
+
+      if (socso == null || socso == ''){
+        document.getElementById("previewSocso").style.display = 'none';
+        document.getElementById("previewSocsoTitle").style.display = 'none';
+
+      }else{
+        document.getElementById("previewSocso").style.display = '';
+        document.getElementById("previewSocsoTitle").style.display = '';
+
+      }
+      document.getElementById("previewEpf").textContent = epf;
+      document.getElementById("previewSocso").textContent = socso;
+
+      document.getElementById("previewBankName").textContent = bankName;
+      document.getElementById("previewAcNo").textContent = acNo;
+
+      // Send payslip modal
+      // Generate Predefined message
+      let line1 = "Hi, "+ doc.data()[PAY_RECEIVER_NAME] ; //invObj[INV_RECEIVER_NAME]+ " ";
+      let line2 = "\nHere's the payslip for this month. Click on the link below to view. ";
+      let line3 = "\nhttps://app.golearn.com.my/s/f/view.html?iid="+ doc.data()[PAY_ID]+ " ";
+      let line4 = "\nAmount: " + "RM"+parseFloat(doc.data()[PAY_TOTAL]).toFixed(2);
+      let line5 = "\nThank you! ";
+      let finalline= line1 + line2 + line3  + line4 + line5;
+
+      document.getElementById("inPredefinedMessage").innerHTML = finalline ;
+
+    }
+
+
+    // Get Data Url using proxy server
+    function toDataURL(src, callback, outputFormat) {
+      var img = new Image();
+      // var img = document.getElementById("tutorImgUrl");
+      var dataURL;
+      img.crossOrigin = 'Anonymous';
+      img.src = src;
+      img.onload = function() {
+        var canvas = document.createElement('CANVAS');
+        var ctx = canvas.getContext('2d');
+        
+        canvas.height = this.naturalHeight;
+        canvas.width = this.naturalWidth;
+        ctx.drawImage(this, 0, 0);
+        dataURL = canvas.toDataURL(outputFormat);
+        // img.src = dataURL;
+        // console.log(dataURL)
+        var imgTarget = document.getElementById("previewTutorImgUrl");
+        imgTarget.src = dataURL;
+        callback(dataURL);
+      };
+      // img.src = src;
+      // img.src = dataURL;
+      if (img.complete || img.complete === undefined) {
+        img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+        img.src = src;
+      }
+    }
+
+    // Preview payslip data.
+    function previewPayslip(cardId, payslipDataArr){
+     // Clear unnecessary items first.
+      // Remove item table header TR.
+      document.getElementById("thead_item_"+cardId).querySelectorAll('tr').forEach(function (row, index){
+        row.remove();
+      });
+
+      // Remove all item and gross pay.
+      document.getElementById("tbody_item_"+cardId).querySelectorAll('tr').forEach(function (row, index){
+        row.remove();
+      });
+
+      // Remove additonal item table header TR.
+      document.getElementById("thead_additem_"+cardId).querySelectorAll('tr').forEach(function (row, index){
+        row.remove();
+      });
+
+      // Remove all additional items in add table
+      document.getElementById("tbody_additem_"+cardId).querySelectorAll('tr[class=additional]').forEach(function (row, index){
+        row.remove();
+      });
+
+ 
+      // Print Items & Additional Items
+      let itemStartIndex= payslipDataArr.indexOf('ITEM');
+      let subtotalStartIndex= payslipDataArr.indexOf('GROSS');
+      let additionalItemStartIndex= payslipDataArr.indexOf('ADDITIONAL_ITEM');
+      let totalStartIndex= payslipDataArr.indexOf('NET');
+
+      console.log(itemStartIndex, additionalItemStartIndex, subtotalStartIndex, totalStartIndex)
+
+      let type = payslipDataArr[0];
+      let item = payslipDataArr.slice(itemStartIndex+1, subtotalStartIndex); //+1 to ignore the first indentifier
+      let subTotal = payslipDataArr[subtotalStartIndex+1];
+      let additionalItem = payslipDataArr.slice(additionalItemStartIndex+1, totalStartIndex); //+1 to ignore the first indentifier
+      let total = payslipDataArr[totalStartIndex+1];
+
+      let advanced = type === 'ADVANCED';
+      let grossPay = 0;
+
+      if (advanced){
+        // Render the adv table template (table header, gross pay, and table additional header)
+        renderTableAdvTemplate('preview')
+
+        // Advanced Template
+        item.reverse().forEach((document) => {
+          let component = document.split(";; ");
+
+          let payslipItemData={
+            tutorId: 'preview',
+            item: component[0],
+            quantity: component[1],
+            price: component[2],
+            payout: component[3],
+          }
+          
+          renderAllPayslipItemsAdv(payslipItemData);
+
+        });
+
+        // Print Additional Items
+        //.reverse() to make sure we print from the last -> first
+        additionalItem.reverse().forEach((document) => {
+
+          let component = document.split(";; ");
+          // Generate the additional item
+          let payslipItemData={
+            tutorId: 'preview',
+            item: component[1],
+            quantity: 0,
+            price: component[2],
+            payout: 0,
+            selector: component[0],
+          }
+          renderAllPayslipAdditionalItemsAdv(payslipItemData);
+
+        });
+
+        // Calculate Gross & Net Pay
+        grossPay = calculateGrossPayDuringInit('preview');
+        calculateNetPayDuringInit('preview', grossPay);
+
+      }
+      else{
+        // Generate simple empty payslip
+        renderTableTemplate('preview');
+
+        // Print Items
+        // Simple Template
+        item.reverse().forEach((document) => {
+          let component = document.split(";; ");
+
+          let payslipItemData={
+            tutorId: 'preview',
+            item: component[0],
+            quantity: component[1],
+            price: component[2],
+            payout: component[3],
+          }
+
+          console.log(payslipItemData);
+
+          renderAllPayslipItems(payslipItemData);
+          
+        });
+
+        // Print Additional Items
+        //.reverse() to make sure we print from the last -> first
+        additionalItem.reverse().forEach((document) => {
+
+        let component = document.split(";; ");
+        // Generate the additional item
+        let payslipItemData={
+          tutorId: 'preview',
+          item: component[1],
+          quantity: 0,
+          price: component[2],
+          payout: 0,
+          selector: component[0],
+        }
+        renderAllPayslipAdditionalItems(payslipItemData);
+
+        });
+
+        // Calculate Gross & Net Pay
+        grossPay = calculateGrossPayDuringInit('preview');
+        calculateNetPayDuringInit('preview', grossPay);
+
+      }
+   
+    }
+
+    
+    // Render normal table template 
+    function renderTableTemplate(cardId){
+      // <table id="table_item_wwwwww" class="table-light table-sm" cellspacing="0" width="100%" >
+      //   <thead style="background-color: grey; color: white;">
+      //     <tr>
+      //       <th style="min-width: 200px; font-size: small;">Items</th>
+      //       <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
+      //       <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Earning</th>
+      //     </tr>
+      //   </thead>
+      //   <tbody id="previewItemBody">
+      //     <tr class="item">
+      //       <td style="font-size: small;">Food</td>
+      //       <td style="text-align: right; font-size: small;">20</td>
+      //       <td style="text-align: right; font-size: small;">RM20</td>
+      //     </tr>
+      //     <tr class="subtotal" id='gross'>
+      //       <td></td>
+      //       <td style="text-align: right; font-weight: 500; font-size: small;">Gross Earning</td>
+      //       <td style="text-align: right; font-weight: 500; font-size: small;" id="previewSubtotalItem">RM20</td>
+      //     </tr>
+      //   </tbody>
+      // </table>
+      // <table id="table_additem_wwwwww" class="table-light table-sm" cellspacing="0" width="100%">
+      //   <thead style="visibility: collapse;">
+      //     <tr>
+      //       <th style="min-width: 200px;">Items</th>
+      //       <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
+      //       <th style="width: 100px; min-width: 100px;text-align: right;">Earning</th>
+      //     </tr>
+      //   </thead>
+      //   <tbody id="previewAdditionalItemBody">
+      //     <tr class="additional">
+      //       <td></td>
+      //       <td style="text-align: right; font-size: small;">Extra</td>
+      //       <td style="text-align: right; font-size: small;">+ RM10</td>
+      //     </tr>
+      //   </tbody>
+      // </table>
+
+      // Item Header
+      let thItem1 = document.createElement('th');
+      thItem1.setAttribute('style', 'min-width: 200px; font-size: small;');
+      thItem1.textContent = 'Items';
+      let thItem2 = document.createElement('th');
+      thItem2.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;');
+      thItem2.textContent = 'Amount';
+      let thItem3 = document.createElement('th');
+      thItem3.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;');
+      thItem3.textContent = 'Earning';
+
+      let thItemHeader = document.createElement('tr');
+      thItemHeader.appendChild(thItem1);
+      thItemHeader.appendChild(thItem2);
+      thItemHeader.appendChild(thItem3);
+
+      const theadItemHeader = document.getElementById("thead_item_"+cardId);
+      theadItemHeader.appendChild(thItemHeader);
+
+      // Item Gross Earning (subtotal)
+      let grossItem1 = document.createElement('td');
+      let grossItem2 = document.createElement('td');
+      grossItem2.setAttribute('style', 'text-align: right; font-weight: 500; font-size: small;');
+      grossItem2.textContent = 'Gross Pay';
+      let grossItem3 = document.createElement('td');
+      grossItem3.id = 'grosspay_' + cardId;
+      grossItem3.setAttribute('style', 'text-align: right; font-weight: 500; font-size: small;');
+      grossItem3.textContent = 'RM0.00';
+
+      let grossItem = document.createElement('tr');
+      grossItem.className = 'subtotal';
+      grossItem.appendChild(grossItem1);
+      grossItem.appendChild(grossItem2);
+      grossItem.appendChild(grossItem3);
+
+      const tbodyItem = document.getElementById("tbody_item_"+cardId);
+      tbodyItem.appendChild(grossItem);
+
+      // Additional Header
+      let thAddItem1 = document.createElement('th');
+      thAddItem1.setAttribute('style', 'min-width: 200px;');
+      thAddItem1.textContent = 'Items';
+      let thAddItem2 = document.createElement('th');
+      thAddItem2.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right;');
+      thAddItem2.textContent = 'Amount';
+      let thAddItem3 = document.createElement('th');
+      thAddItem3.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right;');
+      thAddItem3.textContent = 'Earning';
+
+      let thAddItemHeader = document.createElement('tr');
+      thAddItemHeader.setAttribute('style', 'visibility: collapse');
+      thAddItemHeader.appendChild(thAddItem1);
+      thAddItemHeader.appendChild(thAddItem2);
+      thAddItemHeader.appendChild(thAddItem3);
+
+      const theadAddItemHeader = document.getElementById("thead_additem_"+cardId);
+      theadAddItemHeader.appendChild(thAddItemHeader);
+
+    }
+
+    // Render advanced table template 
+    function renderTableAdvTemplate(cardId){
+     // <table id="table_item_wwwwww" class="table-light table-sm" cellspacing="0" width="100%" >
+      //   <thead style="background-color: grey; color: white;">
+      //     <tr> (...start)
+      //       <th style="min-width: 200px; font-size: small;">Items</th>
+      //       <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity*</th>
+      //       <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
+      //       <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Payout</th>
+      //       <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Earning</th>
+      //     </tr> (end ...)
+      //   </thead>
+      //   <tbody id="previewItemBody">
+      //     <tr class="item">
+      //       <td style="font-size: small;">Standard 3 English</td>
+      //       <td style="text-align: right; font-size: small;">1</td>
+      //       <td style="text-align: right; font-size: small;">100</td>
+      //       <td style="text-align: right; font-size: small;">100</td>
+      //       <td style="text-align: right; font-size: small;">RM100</td>
+      //     </tr> 
+      //     <tr class="subtotal" id='previewItemSubtotal'> (...start)
+      //       <td></td>
+      //       <td></td>
+      //       <td></td>
+      //       <td style="text-align: right; font-weight: 500; font-size: small;">Gross Earning</td>
+      //       <td style="text-align: right; font-weight: 500; font-size: small;" id="previewSubtotalItem">RM100</td>
+      //     </tr> (end ...)
+      //   </tbody>
+      // </table>
+      // <table id="table_additem_wwwwww" class="table-light table-sm" cellspacing="0" width="100%">
+      //   <thead style="visibility: collapse;">
+      //     <tr> (...start)
+      //       <th style="min-width: 200px;">Items</th>
+      //       <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
+      //       <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
+      //       <th style="width: 100px; min-width: 100px;text-align: right;">Payout</th>
+      //       <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
+      //     </tr> (end ...)
+      //   </thead>
+      //   <tbody id="previewAdditionalItemBody">
+      //     <tr class="additional">
+      //       <td></td>
+      //       <td></td>
+      //       <td></td>
+      //       <td style="text-align: right; font-size: small;">Extra Cash</td>
+      //       <td style="text-align: right; font-size: small;">+ RM10</td>
+      //     </tr>
+      //   </tbody>
+      // </table>
+      // Item Header
+      let thItem1 = document.createElement('th');
+      thItem1.setAttribute('style', 'min-width: 200px; font-size: small;');
+      thItem1.textContent = 'Items';
+      let thItem2 = document.createElement('th');
+      thItem2.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;');
+      thItem2.textContent = 'Quantity';
+      let thItem3 = document.createElement('th');
+      thItem3.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;');
+      thItem3.textContent = 'Amount';
+      let thItem4 = document.createElement('th');
+      thItem4.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;');
+      thItem4.textContent = 'Payout (%)';
+      let thItem5 = document.createElement('th');
+      thItem5.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;');
+      thItem5.textContent = 'Earning';
+
+      let thItemHeader = document.createElement('tr');
+      thItemHeader.appendChild(thItem1);
+      thItemHeader.appendChild(thItem2);
+      thItemHeader.appendChild(thItem3);
+      thItemHeader.appendChild(thItem4);
+      thItemHeader.appendChild(thItem5);
+
+      const theadItemHeader = document.getElementById("thead_item_"+cardId);
+      theadItemHeader.appendChild(thItemHeader);
+
+      // Item Gross Earning (subtotal)
+      let grossItem1 = document.createElement('td');
+      let grossItem2 = document.createElement('td');
+      let grossItem3 = document.createElement('td');
+      let grossItem4 = document.createElement('td');
+      grossItem4.setAttribute('style', 'text-align: right; font-weight: 500; font-size: small;');
+      grossItem4.textContent = 'Gross Pay';
+      let grossItem5 = document.createElement('td');
+      grossItem5.id = 'grosspay_' +cardId;
+      grossItem5.setAttribute('style', 'text-align: right; font-weight: 500; font-size: small;');
+      grossItem5.textContent = 'RM0.00';
+
+      let grossItem = document.createElement('tr');
+      grossItem.className = 'subtotal';
+      grossItem.appendChild(grossItem1);
+      grossItem.appendChild(grossItem2);
+      grossItem.appendChild(grossItem3);
+      grossItem.appendChild(grossItem4);
+      grossItem.appendChild(grossItem5);
+
+      const tbodyItem = document.getElementById("tbody_item_"+cardId);
+      tbodyItem.appendChild(grossItem);
+
+      // Additional Header
+      let thAddItem1 = document.createElement('th');
+      thAddItem1.setAttribute('style', 'min-width: 200px;');
+      thAddItem1.textContent = 'Items';
+      let thAddItem2 = document.createElement('th');
+      thAddItem2.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right;');
+      thAddItem2.textContent = 'Quantity';
+      let thAddItem3 = document.createElement('th');
+      thAddItem3.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right;');
+      thAddItem3.textContent = 'Amount';
+      let thAddItem4 = document.createElement('th');
+      thAddItem4.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right;');
+      thAddItem4.textContent = 'Payout (%)';
+      let thAddItem5 = document.createElement('th');
+      thAddItem5.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right;');
+      thAddItem5.textContent = 'Earning';
+
+      let thAddItemHeader = document.createElement('tr');
+      thAddItemHeader.setAttribute('style', 'visibility: collapse')
+      thAddItemHeader.appendChild(thAddItem1);
+      thAddItemHeader.appendChild(thAddItem2);
+      thAddItemHeader.appendChild(thAddItem3);
+      thAddItemHeader.appendChild(thAddItem4);
+      thAddItemHeader.appendChild(thAddItem5);
+
+      const theadAddItemHeader = document.getElementById("thead_additem_"+cardId);
+      theadAddItemHeader.appendChild(thAddItemHeader);
+
+    }
+
+    
+    function renderAllPayslipItems(data){
+      //   <tbody id="tbody_item_<id>">
+      //     <tr class="item">
+      //       <td style="font-size: small;">Food</td>
+      //       <td style="text-align: right; font-size: small;">20</td>
+      //       <td style="text-align: right; font-size: small;">RM20</td>
+      //     </tr>
+      //     <tr class="subtotal" id='gross'>
+      //       ....
+      //     </tr>
+
+      // Item
+      let item1 = document.createElement('td');
+      item1.setAttribute('style', 'min-width: 200px; font-size: small; font-weight: 300');
+      item1.textContent = data.item;
+      let item2 = document.createElement('td');
+      item2.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
+      item2.textContent = data.price;
+      let item3 = document.createElement('td');
+      item3.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
+      item3.textContent = '';
+
+      let item = document.createElement('tr');
+      item.className = 'item'
+      item.appendChild(item1);
+      item.appendChild(item2);
+      item.appendChild(item3);
+
+      const tritem = document.getElementById("tbody_item_"+data.tutorId);
+      tritem.insertBefore(item, tritem.children[0])
+
+      // tritem.appendChild(item);
+    }
+
+
+    function renderAllPayslipItemsAdv(data){
+      //   <tbody id="previewItemBody">
+      //     <tr class="item">
+      //       <td style="font-size: small;">Standard 3 English</td>
+      //       <td style="text-align: right; font-size: small;">1</td>
+      //       <td style="text-align: right; font-size: small;">100</td>
+      //       <td style="text-align: right; font-size: small;">100</td>
+      //       <td style="text-align: right; font-size: small;">RM100</td>
+      //     </tr>
+      //     ....
+
+      //  data={
+      //   tutorId: tutorId,
+      //   item: item,  // Shared between items and additional items
+      //   quantity: '',
+      //   price: 0, // Shared between items and additional items
+      //   payout: '',
+      //   selector: '', // Used for add items
+      // }
+
+      // Item
+      let item1 = document.createElement('td');
+      item1.setAttribute('style', 'min-width: 200px; font-size: small; font-weight: 300');
+      // let firstClassDate_temp = (data.firstClassDate == null || data.firstClassDate == '') ? '' : '(First lesson: '+data.firstClassDate+')';
+      item1.textContent = data.item; // + ' '+firstClassDate_temp;
+      let item2 = document.createElement('td');
+      item2.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
+      item2.textContent = data.quantity;
+      let item3 = document.createElement('td');
+      item3.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
+      item3.textContent = data.price;
+      let item4 = document.createElement('td');
+      item4.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
+      item4.textContent = data.payout;
+      let item5 = document.createElement('td');
+      item5.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
+      item5.textContent = '';
+
+      let item = document.createElement('tr');
+      item.className = 'item'
+      item.appendChild(item1);
+      item.appendChild(item2);
+      item.appendChild(item3);
+      item.appendChild(item4);
+      item.appendChild(item5);
+
+      const tritem = document.getElementById("tbody_item_"+data.tutorId);
+      tritem.insertBefore(item, tritem.children[0]);
+      // tritem.appendChild(item);
+
+    }
+
+    // Render additional items for adv table
+    function renderAllPayslipAdditionalItems(data){
+      // <tbody id="tbody_additem_wwwwww">
+      //   <tr class="additional">
+      //     <td></td>
+      //     <td style="text-align: right; font-size: small;" data-selector='Earning ( + )' data-item='Extra Cash' data-value='10'>Extra Cash</td>
+      //     <td style="text-align: right; font-size: small;">+ RM10</td>
+      //   </tr>
+      // </tbody>
+
+      //  data={
+      //   tutorId: tutorId,
+      //   item: item,  // Shared between items and additional items
+      //   quantity: '',
+      //   price: 0, // Shared between items and additional items
+      //   payout: '',
+      //   selector: '', // Used for add items
+      // }
+
+      // Item
+      let item1 = document.createElement('td');
+      let item2 = document.createElement('td');
+      let item3 = document.createElement('td');
+      let item4 = document.createElement('td');
+      item4.setAttribute('style', 'text-align: right; font-size: small;');
+      item4.setAttribute('data-selector', data.selector );
+      item4.setAttribute('data-item', data.item);
+      item4.setAttribute('data-value', data.price);
+      item4.textContent = data.item;
+      let item5 = document.createElement('td');
+      item5.setAttribute('style', 'text-align: right; font-size: small;');
+      item5.textContent = '';
+
+      let item = document.createElement('tr');
+      item.className = 'additional'
+      // item.appendChild(item1);
+      // item.appendChild(item2);
+      item.appendChild(item3);
+      item.appendChild(item4);
+      item.appendChild(item5);
+
+      const trAddItem = document.getElementById("tbody_additem_"+data.tutorId);
+      trAddItem.insertBefore(item, trAddItem.children[0])
+
+      // tritem.appendChild(item);
+    }
+
+    // Render additional items for adv table
+    function renderAllPayslipAdditionalItemsAdv(data){
+      // <tbody id="tbody_additem_wwwwww">
+      //   <tr class="additional">
+      //     <td></td>
+      //     <td></td>
+      //     <td></td>
+      //     <td style="text-align: right; font-size: small;" data-selector='Earning ( + )' data-item='Extra Cash' data-value='10'>Extra Cash</td>
+      //     <td style="text-align: right; font-size: small;">+ RM10</td>
+      //   </tr>
+      // </tbody>
+
+      //  data={
+      //   tutorId: tutorId,
+      //   item: item,  // Shared between items and additional items
+      //   quantity: '',
+      //   price: 0, // Shared between items and additional items
+      //   payout: '',
+      //   selector: '', // Used for add items
+      // }
+
+      // Item
+      let item1 = document.createElement('td');
+      // item1.setAttribute('style', 'min-width: 200px; font-size: small; font-weight: 300');
+      // item1.textContent = data.item;
+      let item2 = document.createElement('td');
+      // item2.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
+      // item2.textContent = data.quantity;
+      let item3 = document.createElement('td');
+      // item3.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
+      // item3.textContent = data.price;
+      let item4 = document.createElement('td');
+      item4.setAttribute('style', 'text-align: right; font-size: small;');
+      item4.setAttribute('data-selector', data.selector );
+      item4.setAttribute('data-item', data.item);
+      item4.setAttribute('data-value', data.price);
+      item4.textContent = data.item;
+      let item5 = document.createElement('td');
+      item5.setAttribute('style', 'text-align: right; font-size: small;');
+      item5.textContent = '';
+
+      let item = document.createElement('tr');
+      item.className = 'additional'
+      item.appendChild(item1);
+      item.appendChild(item2);
+      item.appendChild(item3);
+      item.appendChild(item4);
+      item.appendChild(item5);
+
+      const trAddItemAdv = document.getElementById("tbody_additem_"+data.tutorId);
+      trAddItemAdv.insertBefore(item, trAddItemAdv.children[0]);
+      // tritem.appendChild(item);
+
+    }
+
+
+    function calculateGrossPayDuringInit(cardId){
+      // <div class="card" id='wwwwww'>
+      //   <div class="card-header" id="headingOne" style="padding: 0; margin: 0; ">
+      //     .....
+      //   </div>
+      //   <div id="collapse1" class="collapse" aria-labelledby="headingOne" data-parent="#accordionTutor" style="padding: 0; margin: 0; ">
+      //     <div class="card-body">
+      //       <!-- Buttons -->
+      //       <div class="row">
+      //         .....
+      //       </div>
+      //       <div class="row">
+      //         <div class="col-12"  style="overflow-x:auto;">
+      //           <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
+      //           <table id="table_item_wwwwww" class="table-light table-sm" cellspacing="0" width="100%" >
+      //             <thead style="background-color: grey; color: white;">
+      //               <tr>
+      //                 <th style="min-width: 200px; font-size: small;">Items</th>
+      //                 <th style="width: 100px; min-width: 100px; text-align: right; font-size: small;">Quantity*</th>
+      //                 <th style="width: 100px; min-width: 100px; text-align: right; font-size: small;">Amount</th>
+      //                 <th style="width: 100px; min-width: 100px; text-align: right; font-size: small;">Payout</th>
+      //                 <th style="width: 100px; min-width: 100px; text-align: right; font-size: small;">Earning</th>
+      //               </tr>
+      //             </thead>
+      //             <tbody id="previewItemBody">
+      //               <tr class="item">
+      //                 <td style="font-size: small;">Standard 3 English</td>
+      //                 <td style="text-align: right; font-size: small;">1</td>
+      //                 <td style="text-align: right; font-size: small;">100</td>
+      //                 <td style="text-align: right; font-size: small;">100</td>
+      //                 <td style="text-align: right; font-size: small;">RM100</td>
+      //               </tr>
+
+      // Get all the TR elem with class=item in respective table
+      let itemTrEleArr = document.getElementById('tbody_item_'+cardId).querySelectorAll('tr.item');
+      // console.log(itemTrEleArr);
+
+      // If no item, return
+      if (itemTrEleArr.length === 0){
+        document.getElementById("grosspay_"+cardId).textContent = 'RM0.00';
+        document.getElementById("netpay_"+cardId).textContent = 'RM0.00';
+        // document.getElementById("netpayview_"+cardId).textContent = 'RM0.00';
+        return 0;
+      }
+
+      // Get the length of the item 0 to determine if simple or advanced template used.
+      let itemTdEleLength = itemTrEleArr[0].querySelectorAll('td').length;
+
+      // Var used for gross and net pay
+      let grossEarning = 0;
+      let grossEarningText = '';
+      let grossEarningAdv = 0;
+      let grossEarningTextAdv = '';
+
+      if (itemTdEleLength === 5 ){
+        // Advanced
+        itemTrEleArr.forEach(function (row, index) {
+          
+          // Calculate the subtotal amount
+          let item = row.getElementsByTagName("td")[0].value; // Unused: Input
+          let quantity = parseFloat(row.getElementsByTagName("td")[1].textContent);
+          let amount = parseFloat(row.getElementsByTagName("td")[2].textContent);
+          let payout = parseFloat(row.getElementsByTagName("td")[3].textContent);
+
+          // Set the value of Amount at 5th cell
+          if (isNaN(quantity) && isNaN(amount) && isNaN(payout)){
+            // If no input to quantity and value, clear the amount.
+            // row.children[5].textContent = '';
+          }
+          else if (isNaN(quantity) || isNaN(amount) ||isNaN(payout)){
+            // row.children[5].textContent = 'INVALID'; 
+          }
+          else {
+            let earning = quantity * amount * payout / 100;
+            grossEarningAdv += earning;
+            row.getElementsByTagName("td")[4].textContent= (earning >= 0) ? 'RM'+earning.toFixed(2) : '- RM'+ Math.abs(earning).toFixed(2)          
+          }
+        });
+
+
+        if (isNaN(grossEarningAdv)){
+          grossEarningTextAdv = 'INVALID';
+          document.getElementById("grosspay_"+cardId).textContent = grossEarningTextAdv;
+          document.getElementById("netpay_"+cardId).textContent = grossEarningTextAdv;
+          // document.getElementById("netpayview_"+cardId).textContent = grossEarningTextAdv;
+          return 0;
+        }
+        else {
+          grossEarningTextAdv = (grossEarningAdv >= 0) ? 'RM'+grossEarningAdv.toFixed(2) : '- RM'+ Math.abs(grossEarningAdv).toFixed(2);
+          document.getElementById("grosspay_"+cardId).textContent = grossEarningTextAdv;
+          document.getElementById("netpay_"+cardId).textContent = grossEarningTextAdv;
+          // document.getElementById("netpayview_"+cardId).textContent = grossEarningTextAdv;
+          return grossEarningAdv;
+        }
+      }
+
+      else{
+        // simple
+        itemTrEleArr.forEach(function (row, index) {
+          
+          // Calculate the subtotal amount
+          let amount = parseFloat(row.getElementsByTagName("td")[1].textContent);
+
+          // Set the value of Amount at 5th cell
+          if (isNaN(amount)){
+            // If no input to quantity and value, clear the amount.
+            // row.children[5].textContent = '';
+          }
+          else {
+            let earning = amount;
+            grossEarning += earning;
+            row.getElementsByTagName("td")[2].textContent= (earning >= 0) ? 'RM'+earning.toFixed(2) : '- RM'+ Math.abs(earning).toFixed(2)          
+          }
+        });
+
+        if (isNaN(grossEarning)){
+          grossEarningText = 'INVALID';
+          document.getElementById("grosspay_"+cardId).textContent = grossEarningText;
+          document.getElementById("netpay_"+cardId).textContent = grossEarningText;
+          // document.getElementById("netpayview_"+cardId).textContent = grossEarningText;
+          return 0;
+        }
+        else {
+          grossEarningText = (grossEarning >= 0) ? 'RM'+grossEarning.toFixed(2) : '- RM'+ Math.abs(grossEarning).toFixed(2);
+          document.getElementById("grosspay_"+cardId).textContent = grossEarningText;
+          document.getElementById("netpay_"+cardId).textContent = grossEarningText;
+          // document.getElementById("netpayview_"+cardId).textContent = grossEarningText;
+
+          return grossEarning;
+        }
+
+      }
+    
+    }
+
+
+    function calculateNetPayDuringInit(cardId, grossPay){
+
+      // Get the length of the header of additional table to determine if simple or advanced template used.
+      let addItemHeaderTrEleArr = document.getElementById('thead_additem_'+cardId).querySelectorAll('tr');
+      let addItemHeaderTrEleArrLength = addItemHeaderTrEleArr[0].querySelectorAll('th').length;
+
+      // Get all the TR elem with class=additional in respective table
+      let itemTrEleArr = document.getElementById('tbody_additem_'+cardId).querySelectorAll('tr.additional');
+
+      // console.log(itemTrEleArr);
+
+      // If no additional item, return with gross pay only.
+      if (itemTrEleArr.length === 0){
+        return grossPay;
+      }
+
+      // Var used for gross and net pay
+      let netPay = grossPay;
+      let netPayText = '';
+      let netPayAdv = grossPay;
+      let netPayTextAdv = '';
+
+      let temp_amount = 0;
+      if (addItemHeaderTrEleArrLength === 5 ){
+        // Advanced
+        itemTrEleArr.forEach(function (row, index) {
+          
+          // Calculate the net amount
+          // let item = row.getElementsByTagName("td")[0].value; // Unused: Input
+          // let quantity = parseFloat(row.getElementsByTagName("td")[1].textContent);
+          // let amount = parseFloat(row.getElementsByTagName("td")[2].textContent);
+          // let payout = parseFloat(row.getElementsByTagName("td")[3].textContent);
+
+          let action = row.getElementsByTagName("td")[3].getAttribute('data-selector');
+          let item = parseFloat(row.getElementsByTagName("td")[3].getAttribute('data-item'));
+          let amount = parseFloat(row.getElementsByTagName("td")[3].getAttribute('data-value'));
+          console.log('addItemHeaderTrEleArrLength: '+addItemHeaderTrEleArrLength)
+          // console.log(action, item, amount)
+          if (action === 'Discount ( - )'){
+            temp_amount = -amount;
+            netPayAdv = netPayAdv - amount;
+          
+          }else if(action === 'Earning ( + )'){
+            temp_amount = amount
+            netPayAdv = netPayAdv + amount;
+            
+          }else{
+            // No change
+            temp_amount = 0;
+            netPayAdv = netPayAdv;
+            
+          }
+
+          // Set the value of Amount at 5th cell
+          if (isNaN(temp_amount)){
+            row.getElementsByTagName("td")[4].textContent = 'INVALID'; 
+          }
+          else {
+            row.getElementsByTagName("td")[4].textContent = (temp_amount >= 0) ? '+ RM'+temp_amount.toFixed(2) : '- RM'+ Math.abs(temp_amount).toFixed(2)
+          }
+
+        });
+
+
+        if (isNaN(netPayAdv)){
+          netPayTextAdv = 'INVALID';
+          document.getElementById("netpay_"+cardId).textContent = netPayTextAdv;
+          // document.getElementById("netpayview_"+cardId).textContent = netPayTextAdv;
+
+          return 0;
+        }
+        else {
+          netPayTextAdv = (netPayAdv >= 0) ? 'RM'+netPayAdv.toFixed(2) : '- RM'+ Math.abs(netPayAdv).toFixed(2);
+          document.getElementById("netpay_"+cardId).textContent = netPayTextAdv;
+          // document.getElementById("netpayview_"+cardId).textContent = netPayTextAdv;
+
+          return netPayAdv;
+        }
+      }
+
+      else{
+        // Advanced
+        itemTrEleArr.forEach(function (row, index) {
+          
+          // Calculate the net amount
+ 
+          let action = row.getElementsByTagName("td")[1].getAttribute('data-selector');
+          let item = parseFloat(row.getElementsByTagName("td")[1].getAttribute('data-item'));
+          let amount = parseFloat(row.getElementsByTagName("td")[1].getAttribute('data-value'));
+          console.log('addItemHeaderTrEleArrLength: '+addItemHeaderTrEleArrLength)
+
+          // console.log(action, item, amount)
+          if (action === 'Discount ( - )'){
+            temp_amount = -amount;
+            netPay = netPay - amount;
+          
+          }else if(action === 'Earning ( + )'){
+            temp_amount = amount
+            netPay = netPay + amount;
+            
+          }else{
+            // No change
+            temp_amount = 0;
+            netPay = netPay;
+            
+          }
+
+          // Set the value of Amount at 5th cell
+          if (isNaN(temp_amount)){
+            row.getElementsByTagName("td")[2].textContent = 'INVALID'; 
+          }
+          else {
+            row.getElementsByTagName("td")[2].textContent = (temp_amount >= 0) ? '+ RM'+temp_amount.toFixed(2) : '- RM'+ Math.abs(temp_amount).toFixed(2)
+          }
+
+        });
+
+
+        
+        if (isNaN(netPay)){
+          netPayText = 'INVALID';
+          document.getElementById("netpay_"+cardId).textContent = netPayText;
+          // document.getElementById("netpayview_"+cardId).textContent = netPayText;
+
+          return 0;
+        }
+        else {
+          netPayText = (netPay >= 0) ? 'RM'+netPay.toFixed(2) : '- RM'+ Math.abs(netPay).toFixed(2);
+          document.getElementById("netpay_"+cardId).textContent = netPayText;
+          // document.getElementById("netpayview_"+cardId).textContent = netPayText;
+
+          return netPay;
+        }
+
+      }
+
+    }
+
+
+    // Generate PDF
+    // https://ekoopmans.github.io/html2pdf.js/
+    function generatePDFeKoopmans(id){
+
+      element = document.getElementById(id);
+
+      var opt = {
+        margin:       [0, 0, 0, 0],
+        filename:     'payslip.pdf',
+        pagebreak:    { before: '.beforeClass', after: ['#after1', '#after2'], avoid: 'img' },
+        image:        { type: 'jpeg', quality: 0.95 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save();
+    }
+
+    function reload(){
+      var invdocRef = db.collection("Financial")
+        .doc("v1")
+        .collection("Invoice")
+        .doc(invId);
+
+      invdocRef
+      .get()
+      .then((doc) => {
+        // Hide loading modal
+        $('#loadingModal').modal('hide');
+
+        if (doc.exists) {
+          // console.log(doc.data())
+          sessionStorage.setItem(SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY, JSON.stringify(doc.data()));
+          currentInvoiceObj = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY));
+          updatePageContent(currentInvoiceObj)
+
+        } 
+        else {
+          console.log("No such document!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
+
+
+      var transDocRef = db.collection("Financial")
+        .doc("v1")
+        .collection("Transaction")
+        .doc(transId);
+
+      transDocRef
+      .get()
+      .then((doc) => {
+
+        if (doc.exists) {
+          // console.log(doc.data())
+          sessionStorage.setItem(SESSION_STORAGE_TRANSACTION_CURRENT_DOC_KEY, JSON.stringify(doc.data()));
+
+        } 
+        else {
+          console.log("No such document!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
+
+  }
+
+
+    // Get json arrays of report items
+    function getReportList2(allItemsArr){
+
+      // Get the 'Revenue' array of json
+      // [
+      //   { "name": "<className1> / tagname1" , "refId": "<classId1> / uncategorized"   , "type": "cat / tag / org"   , "total": 100 },
+      //   { "name": "Std 6 Math"    , "refId": "pdiejsawafasw"   , "type": "cat"   , "total": 300 },
+      //   { "name": "Uncategorized" , "refId": "uncategorized"   , "type": "cat"   , "total": 300 },
+      //   { "name": "Tax"           , "refId": "tax"             , "type": "cat"   , "total": 20.352s },
+      //   { "name": "Others"        , "refId": "other"           , "type": "cat"   , "total": 100 },
+
+      //   { "name": "selangor"      , "refId": ""                , "type": "tag"   , "total": 300 },
+      //   { "name": "bm"            , "refId": ""                , "type": "tag"   , "total": 320 },
+      //   ...    
+      // ]
+
+      
+      // Items & Additional Items
+      let itemStartIndex= allItemsArr.indexOf('ITEMLIST');
+      // let itemIndex= allItemsArr.indexOf('ITEM');
+      let additionalItemStartIndex= allItemsArr.indexOf('ADDITIONAL_ITEM');
+      let totalStartIndex= allItemsArr.indexOf('TOTAL');
+
+      // console.log(itemStartIndex, additionalItemStartIndex, subtotalStartIndex, totalStartIndex)
+
+      // let type = payslipDataArr[0];
+      let itemList = allItemsArr.slice(itemStartIndex+1, additionalItemStartIndex); //+1 to ignore the first indentifier, ITEMLIST
+      // let subTotal = payslipDataArr[subtotalStartIndex+1];
+      let additionalItem = allItemsArr.slice(additionalItemStartIndex+1, totalStartIndex); //+1 to ignore the first indentifier
+      let total = allItemsArr[totalStartIndex+1];
+
+      var itemIndexArr = [];
+      itemList.filter(function(item, index) {
+      if(item === 'ITEM'){
+        itemIndexArr.push(index)
+      }
+      });
+      // console.log(itemIndexArr)
+      // console.log(itemList)
+      // console.log(itemIndex)
+      // console.log(additionalItem)
+      // console.log(total)
+
+      let ReportList = [];
+
+      // let title = tableItem.querySelectorAll("span[class=table-title]")[0].textContent;
+
+      let subTotal = 0; // Used to get the subtotal. 
+      // Loop through each 'ITEM' index
+      itemIndexArr.forEach((item, index) => 
+      {
+        // Calculate the subtotal of each item.
+        // Get the printable row. Skip the unused rows.
+        // +1 is the header identifier, 'ITEM'
+        // +3 is the refId, cat and tag rows
+        let itemSingleList = itemList.slice(item + 1 + 4, itemIndexArr[index+1]);
+        // console.log(itemSingleList);
+
+        let subtotalItem = 0;
+        let component = [];
+        itemSingleList.forEach((item, index) => {
+
+          component = item.split(";; ")
+          subtotalItem = isNaN(component[1] * component[2]) ? subtotalItem+ 0 : subtotalItem + component[1] * component[2];
+
+        });
+
+        // Get the refId, tag and cat
+        let className = itemList.slice(item + 1, item + 2)[0];
+        let refId = itemList.slice(item + 2, item + 3)[0];
+        let cat = itemList.slice(item + 3, item + 4)[0];
+        let tag_temp = itemList.slice(item + 4, item + 5)[0];
+        console.log(className, refId, cat, tag_temp)
+        // let tag = (tag_temp == null || tag_temp == "") ? "" : tag_temp;
+        let tagArray = (tag_temp == null || tag_temp == "") ? [] : tag_temp.split(",");
+        
+        let itemCatJson = {};
+        if (refId === 'uncategorized') // New item
+        itemCatJson = { 
+            "name": className, //"Uncategorized", 
+            "refId": refId, 
+            "type": "cat", 
+            "total": subtotalItem 
+          };
+        else if (refId != 'tax' && refId != 'other')
+          itemCatJson = { 
+            "name": className, 
+            "refId": refId, 
+            "type": "cat", 
+            "total": subtotalItem 
+          };
+        else{
+          // Not suppose to have tax or other category here. They will be done later
+          // Do nothing
+        }
+
+        ReportList.push(itemCatJson);
+
+        let itemTagJson = {};
+        if (tagArray.length >= 1){
+          tagArray.forEach((item) => {
+            itemTagJson = { 
+              "name": item, 
+              "refId": item, 
+              "type": "tag", 
+              "total": subtotalItem 
+            };
+            ReportList.push(itemTagJson)
+        
+          });
+        }
+        else {
+          // No tag found. 
+        }
+        
+        subTotal = subTotal + subtotalItem;
+        
+      });
+
+      // console.log(ReportList);
+
+      // Get Additional Items
+      let addItemOtherTotal = 0;
+      let addItemTaxTotal = 0;
+      
+      let temp_amount = 0;
+      let totalText = '';
+
+      additionalItem.forEach((item) => {
+        console.log("")
+        console.log(item)
+        console.log("")
+        let component = item.split(";; ")
+
+        let additionalSelector = component[0];
+        let additionalItem = component[1];
+        let additionalItemValue = parseFloat(component[2]);
+        let amount = component[3];
+        
+        if (additionalSelector === 'Select one'){
+          // Do nothing
+          temp_amount = 0;
+          subTotal = subTotal;
+        }
+        else if (additionalSelector === 'Discount ( - )'){
+          // console.log(additionalItem, amount);
+          temp_amount = -additionalItemValue;
+
+          addItemOtherTotal = isNaN(temp_amount) ? addItemOtherTotal + 0 : addItemOtherTotal + temp_amount;
+
+          subTotal = subTotal - additionalItemValue;
+
+        }
+        else if (additionalSelector === 'Tax Rate (%)'){
+          // console.log(additionalItem+' ('+additionalItemValue +'%)', amount);
+          temp_amount = subTotal * (additionalItemValue) / 100;
+          console.log("Tax Rate (%):");
+          console.log("temp_amount: "+ temp_amount);
+          addItemTaxTotal = isNaN(temp_amount) ? addItemTaxTotal + 0 : addItemTaxTotal + temp_amount;
+          console.log("addItemTaxTotal: "+ addItemTaxTotal);
+          subTotal = subTotal * (100 + additionalItemValue) / 100;
+          console.log("subTotal after Tax: "+ subTotal);
+        }
+        else 
+        {
+          // Do nothing
+          temp_amount = 0;
+          subTotal = subTotal;
+        }
+
+        console.log("subTotal: "+ subTotal);
+      });
+
+      let addItemOtherJson = { 
+        "name": 'Others', 
+        "refId": 'other', 
+        "type": "cat", 
+        "total": addItemOtherTotal 
+      };
+      ReportList.push(addItemOtherJson)
+
+      let addItemTaxJson = { 
+        "name": 'Tax', 
+        "refId": 'tax', 
+        "type": "cat", 
+        "total": addItemTaxTotal 
+      };
+      ReportList.push(addItemTaxJson)
+
+
+      console.log(ReportList);
+
+      // Ref: https://www.codegrepper.com/code-examples/javascript/pick+the+duplicate+objects+from+json+array+javascript
+      var ids = [];
+      var clean = [];
+
+      $.each(ReportList, function(index, value) {
+          if($.inArray(value.refId, ids) == -1)
+          {
+            ids.push(value.refId);
+            clean.push(value);
+          }else{
+            let idIndex = ids.indexOf(value.refId);
+            clean[idIndex].total = clean[idIndex].total + value.total;
+
+            // ids.push(value.id);
+            // clean.push(value);
+          }
+      });
+
+      console.log(ids)
+      console.log(clean)
+
+      return clean;
+    }
+
+
+    
+    function updateRevenueDoc(reportList, invDocId){
+  
+      console.log("UpdateRevenueDoc ... ")
+      // Step 1: Get the ID of revDoc based on issuedDate, refId
+      // Step 1: Get all the revDoc based on 'month'
+      let issuedDate = new Date(currentInvoiceObj[INV_ISSUE_DATE].seconds*1000).toLocaleDateString("en-GB");
+      let issuedDateComponent = issuedDate.split('/');
+      let month = parseInt(issuedDateComponent[2]+""+issuedDateComponent[1]);
+      // console.log(issuedDate)
+      console.log("Step 1: Get all the revDoc based on 'month'  ")
+      console.log(month)
+ 
+      let revenueDocList = []
+      let reportDocRef = db.collection("Report")
+        .doc("v1")
+        .collection("Revenue")
+        // .where(REV_REF_ID, "==", item.refId)
+        .where(REV_ADMIN_ID, "==", tutorId)
+        .where(REV_MONTH, "==", month)// YYYYMM
+        // .limit(1); 
+
+      reportDocRef
+        .get()
+        .then((querySnapshot) => {
+
+          // Step 1: Compare the array of refId from revenueDoc in firestore to refId in reportlist in current inv
+          // Get the difference. 
+
+          // Example:
+          // arr1 =["1","2","3","4","5","6"]; // new Array 
+          // arr2 = ["3","4","5" ,"7"]; // Array from db
+          // Ref: https://stackoverflow.com/questions/1187518/how-to-get-the-difference-between-two-arrays-in-javascript
+          // let difference = arr1.filter(x => !arr2.includes(x));
+          // console.log(difference); // => [1, 2, 6]
+          let refIdRevenueDocList = [];
+
+          querySnapshot.forEach((doc) => {
+            refIdRevenueDocList.push(doc.data()[REV_REF_ID]);
+          });
+          console.log(refIdRevenueDocList);
+
+          let refIdReportList = [];
+          reportList.forEach((item) => {
+            refIdReportList.push(item.refId);
+          })
+          console.log(refIdReportList);
+
+          let differenceList = refIdReportList.filter(x => !refIdRevenueDocList.includes(x));
+          console.log(differenceList);
+
+          console.log("Step  2.1 Update the existed reportDoc in batc")
+          // Step 2.1 Update the existed reportDoc in batch 
+          querySnapshot.forEach((doc) => {
+            console.log(doc.data());
+
+            // Check if the ID in local invoice items match with the one in revenueDoc.
+            // If match create a new data and push to new batch for update. 
+            // reportList json format:
+            // { 
+            //   "name": "<className1> / tagname1", 
+            //   "refId": "<classId1> / uncategorized", 
+            //   "type": "cat / tag / org",
+            //   "total": 100 
+            // }
+            reportList.forEach((item) => {
+
+              if (item.refId === doc.data()[REV_REF_ID]){
+
+                let newInvDocIdArr = doc.data()[REV_DOC_ID_ARR];
+                newInvDocIdArr.push(invDocId);
+                let newInvDocTotalArr = doc.data()[REV_DOC_TOTAL_ARR];
+                newInvDocTotalArr.push(item.total);
+                
+                let newTotal = newInvDocTotalArr.reduce((a, b) => a + b, 0);
+
+                // Get all the revDoc based on 'month'
+                let reportDocRef = db.collection("Report")
+                  .doc("v1")
+                  .collection("Revenue")
+                  .doc(doc.data()[REV_ID]);
+
+                // Construct the new data
+                let revData ={
+                  // [REV_ID]: ,
+                  // [REV_ADMIN_ID]: ,
+                  [REV_NAME]: item.name,   // Class name may changed             
+                  // [REV_REF_ID]: item.refId,
+                  // [REV_TYPE]: item.type,
+                  // [REV_MONTH]: ,
+                  [REV_TOTAL]: newTotal,
+                  [REV_DOC_ID_ARR]: newInvDocIdArr,
+                  [REV_DOC_TOTAL_ARR]: newInvDocTotalArr,
+                  [REV_DATE_EDIT]: new Date(),
+                  [REV_STATUS]: true
+                }
+
+                batchUpdate.set(reportDocRef, revData, { merge: true });
+
+              } else{
+                // Do nothing
+              }
+
+            });
+
+          });
+
+          // Commit the batch
+          batchUpdate.commit().then(() => {
+
+          });
+
+          console.log("Step  2.2 Create a new reportDoc for each item in differenceList")
+          // Step 2.2 Create a new reportDoc for each item in differenceList
+          if (differenceList.length>0){
+            differenceList.forEach((diffItem, diffIndex) => {
+              console.log("diffIndex: " + diffIndex )
+              reportList.forEach((item, index) => {
+                
+                if (item.refId === diffItem){
+
+                  console.log("reportindex: " + index);
+                  
+                  let newInvDocIdArr = [];
+                  newInvDocIdArr.push(invDocId);
+                  let newInvDocTotalArr = [];
+                  newInvDocTotalArr.push(item.total);
+                  
+                  let newTotal = newInvDocTotalArr.reduce((a, b) => a + b, 0);
+
+                  // Get all the revDoc based on 'month'
+                  let reportDocRef = db.collection("Report")
+                    .doc("v1")
+                    .collection("Revenue")
+                    .doc();
+
+                  console.log("Updating: " + item.refId + "  - "+ reportDocRef.id);
+                  // Construct the new data
+                  let revData ={
+                    [REV_ID]: reportDocRef.id,
+                    [REV_ADMIN_ID]: tutorId,
+                    [REV_NAME]: item.name,             
+                    [REV_REF_ID]: item.refId,
+                    [REV_TYPE]: item.type,
+                    [REV_MONTH]: month,
+                    [REV_TOTAL]: newTotal,
+                    [REV_DOC_ID_ARR]: newInvDocIdArr,
+                    [REV_DOC_TOTAL_ARR]: newInvDocTotalArr,
+                    [REV_DATE_EDIT]: new Date(),
+                    [REV_STATUS]: true
+                  }
+
+                  batchUpdateNew.set(reportDocRef, revData);
+
+                } 
+                else{
+                  // Do nothing
+                }
+
+
+              });
+
+
+            })
+          }
+          else {
+            // Do nothing
+            console.log("Step  2.2: empthy differenceList ")
+          }
+
+          console.log("Step  2.2: Commit new document ")
+          // Create new document
+          batchUpdateNew.commit().then(() => {
+            reload();
+          });
+
+
+
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+
+    }
+
+
+    // Invalidate Page
+    function invalidatePage(){
+
+      $("#noDocFound").css("display", "");
+      document.getElementById("btnDownloadAsPDF").style.display = "none";
+      document.getElementById("invTemplate").style.display = "none";
+      
+    }
+
+
+
+
+  </script>
+
+  <script>
+      var ID = ""; // Extract info from data-* attributes
+      var NAME = ""; // Extract info from data-* attributes
+      var PHONE = ""; // Extract info from data-* attributes
+      var EMAIL = ""; // Extract info from data-* attributes
+      var ADDRESS = ""; // Extract info from data-* attributes
+		$( document ).ready(function() {
+
+      
+      $('#btnEditInvoice').on('click', function (event) {
+        window.location = './edit-invoice.html';
+
+      });
+
+      // Approve Draft
+      $('#btnApproveDraftModalUpdate').on('click', function (event) {
+        
+        var invDocRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Invoice")
+          .doc(invId);
+
+        var transDocRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Transaction")
+          .doc(transId);
+
+        var invData = {
+          [INV_INV_STATUS]: INV_STATUS_NEW,
+          [INV_DATE_EDIT]: new Date()
+        }
+
+        console.log("*Invoice Data...")
+        console.log(invData)
+
+        // invDocRef.set(invData, { merge: true })
+        // .then(() => {
+        //   // reload views
+        //   reload();
+        // });
+
+        var transData = {
+          [TRANS_DOC_STATUS]: TRANS_INV_STATUS_NEW,
+          [TRANS_DATE_EDIT]: new Date()
+        }
+        console.log("Transaction Data...")
+        console.log(transData)
+
+       // transDocRef.set(transData, { merge: true })
+        // .then(() => {
+        //   // window.location.href='./'
+        //   func.showNotification('top','center', 'success', 'check_circle', "Invoice approved" );
+        // });
+
+        // Set the value of 'Invoice'
+        batch.set(invDocRef, invData, { merge: true });
+
+        // Set the value of 'Transaction'
+        batch.set(transDocRef, transData, { merge: true });
+
+        // batch.commit().then(() => {
+        //   reload();
+        //   // window.location.href='./view.html'
+        //   // $('#loadingModal').modal('hide');
+        // });
+
+        let reportList = getReportList2(currentInvoiceObj[INV_ITEMS_ARR]);
+
+        // Get the documents with the similar invoice id, and 
+        // remove the corresponding id in REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR.
+        // Update the doc with new value
+        let reportDocRef = db.collection("Report")
+          .doc("v1")
+          .collection("Revenue")
+          .where(REV_DOC_ID_ARR, "array-contains", invId)
+          .where(REV_STATUS, "==", true);
+
+        reportDocRef
+          .get()
+          .then((querySnapshot) => {
+            //   { "name": "<className> / tag", "refId":"<classId1>/uncategorized"  , "type": "cat / tag / org"  , "total": 100 },
+
+            // get all the data in json array
+            let docItemJsonList = [];
+            querySnapshot.forEach((doc) => {
+              let docItemJson = {};
+
+              console.log(doc.data());
+
+              // Remove the invId from the REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR
+              let invDocIdIndex = doc.data()[REV_DOC_ID_ARR].indexOf(invId);
+              let invDocIdArr = doc.data()[REV_DOC_ID_ARR];
+              let invDocTotalArr = doc.data()[REV_DOC_TOTAL_ARR];
+
+              invDocIdArr.splice(invDocIdIndex, 1);
+              invDocTotalArr.splice(invDocIdIndex, 1);
+
+              // Construct the new data
+              let revData ={
+                // [REV_ID]: ,
+                // [REV_ADMIN_ID]: ,
+                // [REV_NAME]: document.getElementById("invBizDetails").textContent,                
+                // [REV_REF_ID]: document.getElementById("invClientName").textContent,
+                // [REV_TYPE]: ,
+                // [REV_MONTH]: document.getElementById("invTitle").value,
+                // [REV_TOTAL]: document.getElementById("invNum").value,
+                [REV_DOC_ID_ARR]: invDocIdArr,
+                [REV_DOC_TOTAL_ARR]: invDocTotalArr,
+                [REV_DATE_EDIT]: new Date(),
+                // [REV_STATUS]: true
+              }
+
+              // Update it through batch 
+              let revenueDocRef = db.collection("Report")
+                .doc("v1")
+                .collection("Revenue")
+                .doc(doc.id);
+              batch.set(revenueDocRef, revData, { merge: true });
+
+
+            });
+
+            // Commit the batch
+            batch.commit().then(() => {
+              // window.location.href='./view.html'
+              // $('#loadingModal').modal('hide');
+
+              // TODO:  
+              // Step 1: Get the ID of revDoc based on issuedDate, refId
+              // Step 2: Update the revDoc.
+              func.showNotification('top','center', 'success', 'check_circle', "Invoice approved" );
+              updateRevenueDoc(reportList, invId);
+
+
+            });
+
+          }).catch((error) => {
+              console.log("Error getting document:", error);
+          });
+
+        
+
+      });
+
+      // Populate record payment modal
+      $('#recordPaymentModal').on('show.bs.modal', function (event) {
+        let invPaymentDate = ''
+        if (currentInvoiceObj[INV_PAYMENT_DATE] == null || currentInvoiceObj[INV_PAYMENT_DATE] == ''){
+          invPaymentDate = ' - ';
+        }else {
+          invPaymentDate = new Date(currentInvoiceObj[INV_PAYMENT_DATE].seconds*1000).toLocaleDateString("en-GB");
+        }
+
+        document.getElementById("inPaymentDate").value = invPaymentDate;
+        document.getElementById("inPaymentAmount").value = currentInvoiceObj[INV_PAYMENT_AMOUNT];
+        document.getElementById("inPaymentNotes").value = currentInvoiceObj[INV_PAYMENT_NOTE];
+
+      });
+
+      $('#recordPaymentModal').on('hide.bs.modal', function (event) {
+        document.getElementById("inPaymentDate").value = '';
+        document.getElementById("inPaymentAmount").value = '';
+        document.getElementById("inPaymentNotes").value = '';
+
+      });
+
+      // Record Payment
+      $('#btnRecordPaymentModalUpdate').on('click', function (event) {
+  
+        var invdocRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Invoice")
+          .doc(invId);
+
+        var transDocRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Transaction")
+          .doc(transId);
+
+        // Payment date
+        let paymentDate = document.getElementById("inPaymentDate").value;
+        paymentDate = paymentDate.split("/");
+        let newPaymentDate = new Date( paymentDate[2], paymentDate[1] - 1, paymentDate[0]);
+        let paymentDateFinal = firebase.firestore.Timestamp.fromDate(newPaymentDate);
+
+        var invData = {
+          [INV_INV_STATUS]: INV_STATUS_PAID,
+          [INV_PAYMENT_DATE]: paymentDateFinal,
+          [INV_PAYMENT_AMOUNT]: document.getElementById("inPaymentAmount").value,
+          [INV_PAYMENT_NOTE]: document.getElementById("inPaymentNotes").value,
+          [INV_DATE_EDIT]: new Date(),
+        }
+
+        console.log("*Invoice Data...")
+        console.log(invData)
+
+        invdocRef.set(invData, { merge: true })
+        .then(() => {
+
+          // reload views
+          reload();
+
+        });
+
+        var transData = {
+          [TRANS_DOC_STATUS]: TRANS_INV_STATUS_PAID,
+          [TRANS_DATE_EDIT]: new Date()
+        }
+        console.log("Transaction Data...")
+        console.log(transData)
+        transDocRef.set(transData, { merge: true })
+        .then(() => {
+          // window.location.href='./'
+          func.showNotification('top','center', 'success', 'check_circle', "Payment recorded" );
+        });
+      });
+
+
+      // Active Register Class Modal
+      $('#loadingModal').modal({
+        backdrop:'static',
+        keyboard:false
+      });
+      // $('#loadingModal').modal('show');
+
+
+		});
+
+  </script>
+ 
+
+</body>
+
+</html>
