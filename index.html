@@ -2,23 +2,25 @@
 <html lang="en">
 
 <head>
-  <title>GoLearn App</title>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>GoLearn App</title>
+  <meta name=description content="GoLearn App&trade; is Malaysia #1 education platform for students, parents, private tutor and tuition centers. Start now for Free!">
+  <meta property=og:title content=GoLearn>
+  <meta property=og:site_name content=GoLearn>
+  <meta property=og:type content=website>
+  <meta property=og:url content=https://app.golearn.com.my>
+  <meta property=og:image content=https://app.golearn.com.my/assets/img/icon-apple-touch-180x180.png>
+  <meta property=og:description content="GoLearn App&trade; is Malaysia #1 education platform for students, parents, private tutor and tuition centers. Start now for Free!">
+  <link rel=apple-touch-icon sizes=180x180 href=https://app.golearn.com.my/assets/img/icon-apple-touch-180x180.png>
+  <link rel=icon type=image/png sizes=32x32 href=https://app.golearn.com.my/assets/img/icon-32x32.png>
+  <link rel=icon type=image/png sizes=16x16 href=https://app.golearn.com.my/assets/img/icon-16x16.png>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
   <!-- Material Kit CSS -->
   <link href="./assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-  <!-- Firebase Init -->
-  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
-  <script src="./assets/js/firebase.js"></script>
 
 </head>
 
@@ -48,8 +50,8 @@
         <div class="container-fluid">
           <!-- your content here -->
           <div class="row">
-            <div class="col-md-9 text-center">
-              <a href="#" class="simple-text logo-mini">
+            <div class="col-md-9 text-center"  style="margin: 2rem 0 1rem 0;">
+              <a href="https://golearn.com.my/" class="simple-text logo-mini">
                 <img src="./assets/img/logo.png" style="width: 216px; height: auto;" alt=""></img>
               </a>
             </div>
@@ -92,7 +94,7 @@
                 </div>
                 <div class="description" style="margin-top: 1rem;">
                   <h4 class="info-title">I'm Teacher</h4>
-                  <a href="./tutor-portal/" class="btn btn-outline-primary btn-round" >Go <i class="material-icons" style="color: #2e74b6; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
+                  <a href="./school/login.html" class="btn btn-outline-primary btn-round" >Go <i class="material-icons" style="color: #2e74b6; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
 
                 </div>
               </div>
@@ -125,7 +127,7 @@
 			<ul>
 				<li>
           <a href="https://golearn.com.my/">
-            About GoLearn
+            Visit GoLearn
           </a>
 				</li>
 			</ul>
@@ -152,30 +154,27 @@
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="./assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
   
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-
   <!-- Define db -->
   <script>
-    var db = firebase.firestore();
-    db.settings({ timestampsInSnapshots: true });
+    // var db = firebase.firestore();
+    // db.settings({ timestampsInSnapshots: true });
   </script>
 
   <script>
-    // Auto Login
-    firebase.auth().onAuthStateChanged(function(user){
-      if(user){
-        // window.location.href = "./"
-      }else{
+    // // Auto Login
+    // firebase.auth().onAuthStateChanged(function(user){
+    //   if(user){
+    //     // window.location.href = "./"
+    //   }else{
 
-      }
-    })
+    //   }
+    // })
   </script>
 
   <script>
     $( document ).ready(function() {  
 
     });
-
 
   </script>
 </body>
