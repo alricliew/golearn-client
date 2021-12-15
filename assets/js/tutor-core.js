@@ -1,11 +1,12 @@
-// This is core js
+// This is tutor core js
 
 // Check if user logged on
 function AuthCheck(){
   firebase.auth().onAuthStateChanged(function(user){
     if(!user){
       // Return to login if user does not exist.
-      window.location.href = "https://app.golearn.com.my/"
+      console.log("No user")
+      // window.location.href = "https://app.golearn.com.my/"
     }else{
       // if the displayName is null, it means user register using Phone
       if (firebase.auth().currentUser.displayName == null )
