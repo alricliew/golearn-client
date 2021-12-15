@@ -335,8 +335,15 @@
     // Auto Login
     firebase.auth().onAuthStateChanged(function(user){
       if(user){
-        window.location.href = "./"
+        // This is a hack to prevent auto signin for new user. 
+        // If the phone fill is empty and user exist, auto signin.
+        if (itiPhone.getNumber() == null || itiPhone.getNumber() == "")
+          window.location.href = "./"
+        else {
+          // Do nothing
+        }
       }else{
+        // Do nothing
       }
     });
   </script>

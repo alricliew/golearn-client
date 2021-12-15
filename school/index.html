@@ -1227,7 +1227,7 @@
 
       // Update Dashboard > Profile
       let checker = 0; // max = 7
-      if (current_imgUri != null && current_imgUri != ""){
+      if (current_imgUri != null && current_imgUri != "" && current_imgUri != "../assets/img/hello.gif"){
         document.getElementById("profilePic").style.color = "green";
         document.getElementById("profilePic").className = "fas fa-check-circle fa-fw";
         checker = checker + 1;
@@ -1266,7 +1266,7 @@
 
       // Get the percentage of completion. 7 is just the number of criteria contested
       let percentage = checker / 7 * 100;
-      document.getElementById("profilePercentageNum").textContent = percentage + "%";
+      document.getElementById("profilePercentageNum").textContent = parseInt(percentage) + "%";
 
 
     }

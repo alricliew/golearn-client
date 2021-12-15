@@ -113,6 +113,7 @@ function codeverify() {
                 // alert("User exist!"+user.uid+" "+user.displayName+" "+user.phoneNumber);
 
             //   });
+                // console.log("docSnapshot.exists");
                 window.location.href = './'
             }else {
 
@@ -197,17 +198,13 @@ function codeverify() {
 
                 }
 
-                // let tutorId = user.phoneNumber;
-                // if (user.displayName == null){
-                //     tutorId =  user.phoneNumber;
-                // }else {
-                //     tutorId = user.email.replace(/[^a-zA-Z0-9]/g,'_').toLowerCase();
-                // }
+
 
                 db.collection("Tutor").doc(tutorId)
                     .set(docData, {merge: true})
                     .then(() => {
                         window.location.href = './'
+                        
                         // console.log("Document successfully written!");
                     })
                     .catch((error) => {

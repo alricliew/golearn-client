@@ -989,9 +989,10 @@
       detail_top_div.setAttribute("data-id", doc.data().id);
       detail_top_div.appendChild(detail_div);
 
-      //Del btn
+      //Buttons
       let btn_div = document.createElement('div');
-      btn_div.className = "col-md-1 align-self-center";
+      btn_div.setAttribute("style"," padding: 12px 0px 12px 0px;");
+      btn_div.className = "col-md-1";
 
       urlArray = [CLASS_CLASS_URL, CLASS_CHAT_GROUP_URL, CLASS_MATERIAL_URL];
       urlArray.forEach((item) => {
