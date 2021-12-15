@@ -1420,8 +1420,7 @@
 
       let blogsHtml_editbtn = '';
       // blogsHtml_editbtn += "<span class='fa-stack'><i class='fas fa-pen-square fa-lg'></i></span>";
-      blogsHtml_editbtn += "<span class='fa-stack' style='vertical-align: middle; font-size: 73%; color: #2e74b6; cursor: pointer; margin-right: 0.5rem;'><i class='fas fa-circle fa-stack-2x'></i><i class='fas fa-pen fa-stack-1x fa-inverse'></i></span>";
-
+      blogsHtml_editbtn += "<span class='fa-stack' style='vertical-align: middle; font-size: 73%; color: #2e74b6; cursor: pointer; margin-right: 0.5rem;'><i class='fas fa-circle fa-stack-2x' style='text-shadow: 2px 2px 4px rgba(46, 46, 46, 0.8);'></i><i class='fas fa-pen fa-stack-1x fa-inverse'></i></span>";
 
       let btn_edit = document.createElement('a');
       btn_edit.innerHTML = blogsHtml_editbtn;
@@ -1559,7 +1558,7 @@
 
           // Send payslip modal
           // Generate Predefined message
-          let line1 = "Hi, "+ doc.data()[PAY_RECEIVER_NAME] ; //invObj[INV_RECEIVER_NAME]+ " ";
+          let line1 = "Hi "+ doc.data()[PAY_RECEIVER_NAME] ; //invObj[INV_RECEIVER_NAME]+ " ";
           let line2 = "\nHere's the payslip for this month. Click on the link below to view. ";
           let line3 = "\nhttps://app.golearn.com.my/s/f/view.html?pid="+ doc.data()[PAY_ID]+ " ";
           let line4 = "\nAmount: " + "RM"+parseFloat(doc.data()[PAY_TOTAL]).toFixed(2);

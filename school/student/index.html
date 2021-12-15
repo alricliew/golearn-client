@@ -826,7 +826,7 @@
 
       //Del btn
       let blogsHtml_btn = '';
-      blogsHtml_btn += "<span class='fa-stack' style='vertical-align: middle; font-size: 73%; color: red; cursor: pointer; margin-right: 0.5rem;'><i class='fas fa-circle fa-stack-2x'></i><i class='fas fa-minus fa-stack-1x fa-inverse'></i></span>";
+      blogsHtml_btn += "<span class='fa-stack' style='vertical-align: middle; font-size: 73%; color: red; cursor: pointer; margin-right: 0.5rem;'><i class='fas fa-circle fa-stack-2x' style='text-shadow: 2px 2px 4px rgba(46, 46, 46, 0.8);'></i><i class='fas fa-minus fa-stack-1x fa-inverse'></i></span>";
 
       // blogsHtml_btn += "<i class='material-icons' style='color: red;''>remove</i>";
       let btn_a = document.createElement('a');
@@ -834,7 +834,7 @@
       // btn_a.className = "btn btn-sm btn-outline-danger btn-round";
       btn_a.setAttribute("id","btnDelStudent");
       btn_a.setAttribute("href","javascript:;");
-      btn_a.setAttribute("style","margin: 0; padding: 0.4em;");
+      btn_a.setAttribute("style","margin: 0; padding: 0.4em; ");
 
       btn_a.setAttribute("data-toggle","modal");
       btn_a.setAttribute("data-target","#delStuModal");
