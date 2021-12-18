@@ -2,23 +2,32 @@
 <html lang="en">
 
 <head>
-  <title>GoLearn</title>
-  <!-- Required meta tags -->
+  <!-- Meta -->
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>GoLearn School</title>
+  <meta name=description content="GoLearn School&trade; is Malaysia #1 learning platform to manage tuition lessons for you and your children. Start now for Free!">
+  <meta property=og:title content="GoLearn School">
+  <meta property=og:site_name content="GoLearn School">
+  <meta property=og:type content=website>
+  <meta property=og:url content=https://app.golearn.com.my/client/dependant/edit-dependant.html >
+  <meta property=og:image content=https://app.golearn.com.my/assets/img/icon-apple-touch-180x180.png>
+  <meta property=og:description content="GoLearn School&trade; is Malaysia #1 learning platform to manage tuition lessons for you and your children. Start now for Free!">
+  <link rel=apple-touch-icon sizes=180x180 href=https://app.golearn.com.my/assets/img/icon-apple-touch-180x180.png>
+  <link rel=icon type=image/png sizes=32x32 href=https://app.golearn.com.my/assets/img/icon-32x32.png>
+  <link rel=icon type=image/png sizes=16x16 href=https://app.golearn.com.my/assets/img/icon-16x16.png>
   <!-- Fonts and icons -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
   <!-- Material Kit CSS -->
-  <link href="../../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <link href="../../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
   <!-- Tutor specific css -->
   <link href="../../assets/css/tutor.css" rel="stylesheet" />
-  <link href="../css/tutor-portal.css" rel="stylesheet" />
+  <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
   <script src="../../assets/js/firebase.js"></script>
@@ -30,33 +39,22 @@
 
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../../assets/img/sidebar-3.jpg">
-
       <div class="logo">
-        <a href="../" class="simple-text logo-mini">
-			    <img src="../../assets/img/logo.png" style="width: 216px; height: auto;" alt=""></img>
-          
-        </a>
-        <a href="../" class="simple-text logo-normal">
-          Welcome!
+        <a href="../" class="simple-text logo-mini" style="padding: 0.5rem">
+			    <img src="../../assets/img/golearn-school-logo.svg" style="width: 200px; height: auto;" alt=""></img>
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="../">
-              <i class="material-icons">home</i>
-              <p>Home</p>
-            </a>
-          </li>
 		  		<li class="nav-item">
             <a class="nav-link" href="../class/">
-              <i class="material-icons">school</i>
+              <i class="fas fa-chalkboard fa-fw nav-icon"></i>
               <p>My Classes</p>
             </a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="./">
-              <i class="material-icons">escalator_warning</i>
+              <i class="fas fa-user-graduate fa-fw nav-icon"></i>
               <p>My Dependants</p>
             </a>
           </li>
@@ -64,6 +62,12 @@
             <a class="nav-link" href="../payment/">
               <i class="fas fa-file-invoice-dollar fa-fw nav-icon"></i>
               <p>Payments</p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="../request/">
+              <i class="fas fa-briefcase fa-fw nav-icon"></i>
+              <p>Lesson Requests</p>
             </a>
           </li>
         </ul>
@@ -130,10 +134,7 @@
                   <a class="dropdown-item" href="../edit-profile.html">Edit Profile</a>
 									<a class="display:block; dropdown-item" href="../about.html">About</a>
 									<div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
-									<!-- <div class="dropdown-divider"></div> -->
-									<!-- <a style="font-weight: 500 ;padding: 0.5em ;text-align: center; width: 200px; background-color: #428dd4 ;display: block; color: #fff;" href="https://golearn.com.my/pricing/" target="_blank" id="btnUpgradeToPro">Upgrade to Pro</a> -->
-
+                  <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#signOutModal" id="btn-logout">Log out</a>
                 </div>
               </li>
             </ul>
@@ -166,14 +167,14 @@
         </div>
       </div>
 
-      <!-- Sign-out modal -->
+      <!-- Sign Out modal -->
       <div class="row">
         <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="signOutModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="signOutLabel">Logging Out</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnSignOutModalClose1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -181,7 +182,7 @@
                 Are you sure you want to continue?
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSignOutModalClose2">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSignOutModalUpdate">Confirm</button>
               </div>
             </div>
@@ -193,16 +194,15 @@
 
       <div class="content">
         <div class="container-fluid">
-          <div class="row" id="desciption-row" >
-            <!-- Update button -->
-
-            <div class="col-md-12 d-flex flex-row">
-              <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
-              <a href="javascript:;" class="btn btn-primary btn-round" id="btnSave"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</a>
-            </div>
-          </div>
-
           <div class="container">
+            
+            <div class="row">
+              <div class="col-md-12 d-flex flex-row">
+                <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
+                <a href="javascript:;" class="btn btn-primary btn-round" id="btnSave"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</a>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col-md-12">
                 <!--multitabs-form navbar-->
@@ -458,39 +458,6 @@
 	  
   </div>
   
-  <div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-      <a href="javascript:;" data-toggle="dropdown">
-        <i class="material-icons" style="font-size: 36px; padding: 0.2em; color: white;">apps</i>
-      </a>
-      <ul class="dropdown-menu">
-		    <br>
-		    <li class="button-container text-center">
-          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >CONTACT US</p>
-          <button id="twitter" style="background-color: #128C7E;" class="btn btn-round btn-facebook" onclick="location.href = 'https://api.whatsapp.com/send?phone=601115131661&text=Hello!%20I%27m%20looking%20for%20a%20tutor.';"><i class="fa fa-whatsapp"></i> &middot; Reply in 1 hour</button>
-        </li>
-        <br>
-        <li class="button-container text-center">
-          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >I want more subjects.</p>
-          <a href="https://golearn.com.my/request-a-tutor/" target="_blank" class="btn btn-primary btn-block">Request A Tutor Now</a>
-        </li>
-        <li class="button-container text-center">
-          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >Check us out now.</p>
-          <a href="https://golearn.com.my/" target="_blank" class="btn btn-warning btn-block">
-            Visit GoLearn
-          </a>
-        </li>
-        <li class="button-container text-center">
-          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >CONTACT US</p>
-			    <button id="facebook" class="btn btn-round btn-facebook" onclick="location.href = 'https://www.facebook.com/FindTutorInMalaysia/';"><i class="fa fa-facebook-f"></i> &middot; facebook</button>
-          <button id="twitter"  class="btn btn-round btn-twitter" onclick="location.href = 'https://twitter.com/golearnmalaysia';"><i class="fa fa-twitter"></i> &middot; twitter</button>
-          <br>
-          <br>
-        </li>
-      </ul>
-    </div>
-  </div>
-  
   <script src="../../assets/js/core/jquery.min.js"></script>
   <script src="../../assets/js/core/popper.min.js"></script>
   <script src="../../assets/js/core/bootstrap-material-design.min.js"></script>
@@ -506,29 +473,39 @@
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
   <!-- bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"  crossorigin="anonymous"></script>
   <!-- Common constants -->
   <script src="../../assets/js/common.js" type="text/javascript"></script>
   <!-- General Info -->
   <script src="../../assets/js/const.js" type="text/javascript"></script>
-  <!-- Core Tutor Js -->
-  <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
+  <!-- Global Var -->
+  <script src="../../assets/js/client-globalvar.js" type="text/javascript"></script>
+  <!-- Core Client Js -->
+  <script src="../../assets/js/client-core.js" type="text/javascript"></script>
   <!-- International Telephone Input -->
   <script src="../../assets/js/plugins/intlTelInput/intlTelInput.js"></script>
 
   <script>
-    // Global Variables
-    var userId;
-    var current_name, current_email, current_phone, current_imgUri, current_nric,
-      current_address1, current_address2, current_addressPostCode, current_addressState, current_address;
+    // // Global Variables
+    // var userId;
+    // var current_name, current_email, current_phone, current_imgUri, current_nric,
+    //   current_address1, current_address2, current_addressPostCode, current_addressState, current_address;
 
-		var db = firebase.firestore();
-		db.settings({ timestampsInSnapshots: true });
+		// var db = firebase.firestore();
+		// db.settings({ timestampsInSnapshots: true });
 
     // Check the current CLASS in session Storage - Valid only if user come from class.html
     var currentDependantObj = null;
-    getStudentObject()
+    getStudentObject();
 
+    // Initialization
+    AuthCheck();
+
+    // Page Specific Initialization
+    function loadPageInitFunc(){
+      // Do nothing
+    }
+    
     function getStudentObject(){
       // Check if there are valid class data in session storage.
       if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_DEPENDANT_CURRENT_DOC_KEY)) == null || 
@@ -546,75 +523,75 @@
       }
     }
 
-		firebase.auth().onAuthStateChanged(function(user){
+		// firebase.auth().onAuthStateChanged(function(user){
       
-			if(!user){
-        // Return to login if user does not exist.
-				window.location.href = "./login.html"
-			}else{
-        // if the displayName is null, it means user register using Phone
-        if (firebase.auth().currentUser.displayName == null ){
-          userId = firebase.auth().currentUser.phoneNumber;
-        }else
-          userId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+		// 	if(!user){
+    //     // Return to login if user does not exist.
+		// 		window.location.href = "./login.html"
+		// 	}else{
+    //     // if the displayName is null, it means user register using Phone
+    //     if (firebase.auth().currentUser.displayName == null ){
+    //       userId = firebase.auth().currentUser.phoneNumber;
+    //     }else
+    //       userId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
 
-        loadUserInfo(userId);
-        updateLastOnline(userId)
+    //     loadUserInfo(userId);
+    //     updateLastOnline(userId)
 
-      }
-		});
+    //   }
+		// });
 
-    // Tutor Specific
-    function loadUserInfo(userId){
-      // Tutor Id must be a phone with +60, no spacing or other chars
-      var docRef = db.collection("Users").doc(userId);
+    // // Tutor Specific
+    // function loadUserInfo(userId){
+    //   // Tutor Id must be a phone with +60, no spacing or other chars
+    //   var docRef = db.collection("Users").doc(userId);
       
-      // docRef.get().then((doc) => {
-      docRef.onSnapshot((doc) => {
-        if (doc.exists) {
-          // console.log("Document data:", doc.data());
-          current_name = (doc.data().name == null || doc.data().name == "")? "New User" : doc.data().name;
-          current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email;
-          current_phone = (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone; 
-          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/empty-photo.png" : doc.data().imgUrl;
-          current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
-          current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
-          current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
-          current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
-          current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
+    //   // docRef.get().then((doc) => {
+    //   docRef.onSnapshot((doc) => {
+    //     if (doc.exists) {
+    //       // console.log("Document data:", doc.data());
+    //       current_name = (doc.data().name == null || doc.data().name == "")? "New User" : doc.data().name;
+    //       current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email;
+    //       current_phone = (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone; 
+    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/empty-photo.png" : doc.data().imgUrl;
+    //       current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
+    //       current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
+    //       current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
+    //       current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
+    //       current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
 
-          // Set the nav user name and public profile link
-          document.getElementById("user").textContent = doc.data().name;
+    //       // Set the nav user name and public profile link
+    //       document.getElementById("user").textContent = doc.data().name;
 
-        } 
-        else {
-          console.log("No user! Redirecting to login");
-          window.location = "./login.html"
+    //     } 
+    //     else {
+    //       console.log("No user! Redirecting to login");
+    //       window.location = "./login.html"
           
-        }
-      });
-    };
+    //     }
+    //   });
+    // };
 
-    // Update Last Online
-    function updateLastOnline(userId){
-      // Update last online
-      var docRefDate = db.collection("Users").doc(userId);
+    // // Update Last Online
+    // function updateLastOnline(userId){
+    //   // Update last online
+    //   var docRefDate = db.collection("Users").doc(userId);
 
-      docRefDate.get().then((doc) => {
-        if (doc.exists) {
-          let docRef = db.collection("Users").doc(userId);
-          let docRefWithMerge = docRef.set({
-            [SYSTEM_LAST_ONLINE_KEY] : firebase.firestore.Timestamp.fromDate(new Date())
-            }, { merge: true });
+    //   docRefDate.get().then((doc) => {
+    //     if (doc.exists) {
+    //       let docRef = db.collection("Users").doc(userId);
+    //       let docRefWithMerge = docRef.set({
+    //         [SYSTEM_LAST_ONLINE_KEY] : firebase.firestore.Timestamp.fromDate(new Date())
+    //         }, { merge: true });
             
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-      }).catch((error) => {
-          console.log("Error getting document:", error);
-      });
-    }
+    //     } else {
+    //         // doc.data() will be undefined in this case
+    //         console.log("No such document!");
+    //     }
+    //   }).catch((error) => {
+    //       console.log("Error getting document:", error);
+    //   });
+    // }
 
     // Update the page content
     function updatePageContent(currentObj){
@@ -679,12 +656,6 @@
 
     }
 
-
-    // Sign out
-    function signOutFunction(){
-      $('#signOutModal').modal('show');
-      $("#signOutModal").appendTo("body");
-    }
   </script>
 
   <script>
@@ -799,23 +770,13 @@
       });
 
       $('#btnSignOutModalUpdate').on('click', function (e) {
-      
         firebase.auth().signOut().then(() => {
             // Sign-out successful.
           }).catch((error) => {
-            window.alert("Logging out failed");
             func.showNotification('top','center', 'danger', 'error_outline', "Logging out failed." );
           });
-        // Do something
-        $('#signOutModal').modal('hide');
       });
 
-      $('#btnSignOutModalClose1').on('click', function (e) {
-        $('#signOutModal').modal('hide');
-      });
-      $('#btnSignOutModalClose2').on('click', function (e) {
-        $('#signOutModal').modal('hide');
-      });
 
     });
 

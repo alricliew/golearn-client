@@ -2,11 +2,21 @@
 <html lang="en">
 
 <head>
-  <title>GoLearn App</title>
-  <!-- Required meta tags -->
+  <!-- Meta -->
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>GoLearn School</title>
+  <meta name=description content="GoLearn School&trade; is Malaysia #1 learning platform to manage tuition lessons for you and your children. Start now for Free!">
+  <meta property=og:title content="GoLearn School">
+  <meta property=og:site_name content="GoLearn School">
+  <meta property=og:type content=website>
+  <meta property=og:url content=https://app.golearn.com.my/client/class/ >
+  <meta property=og:image content=https://app.golearn.com.my/assets/img/icon-apple-touch-180x180.png>
+  <meta property=og:description content="GoLearn School&trade; is Malaysia #1 learning platform to manage tuition lessons for you and your children. Start now for Free!">
+  <link rel=apple-touch-icon sizes=180x180 href=https://app.golearn.com.my/assets/img/icon-apple-touch-180x180.png>
+  <link rel=icon type=image/png sizes=32x32 href=https://app.golearn.com.my/assets/img/icon-32x32.png>
+  <link rel=icon type=image/png sizes=16x16 href=https://app.golearn.com.my/assets/img/icon-16x16.png>
   <!-- Fonts and icons -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
@@ -15,12 +25,11 @@
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
-  <script src="../js/firebase.js"></script>
+  <script src="../../assets/js/firebase.js"></script>
   <!-- Tutor Portal specific CSS -->
-  <link href="../css/tutor-portal.css" rel="stylesheet" />
+  <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -28,30 +37,21 @@
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../../assets/img/sidebar-3.jpg">
       <div class="logo">
-        <a href="../" class="simple-text logo-mini">
-			    <img src="../../assets/img/logo.png" style="width: 216px; height: auto;" alt=""></img>
-        </a>
-        <a href="../" class="simple-text logo-normal">
-         Welcome!
+        <a href="../" class="simple-text logo-mini" style="padding: 0.5rem">
+			    <img src="../../assets/img/golearn-school-logo.svg" style="width: 200px; height: auto;" alt=""></img>
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="../">
-              <i class="material-icons">home</i>
-              <p>Home</p>
-            </a>
-          </li>
 		  		<li class="nav-item active">
             <a class="nav-link" href="./">
-              <i class="material-icons">school</i>
+              <i class="fas fa-chalkboard fa-fw nav-icon"></i>
               <p>My Classes</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="../dependant/">
-              <i class="material-icons">escalator_warning</i>
+              <i class="fas fa-user-graduate fa-fw nav-icon"></i>
               <p>My Dependants</p>
             </a>
           </li>
@@ -61,24 +61,12 @@
               <p>Payments</p>
             </a>
           </li>
-		  		<!-- <li class="nav-item">
-            <a class="nav-link" href="./job.html">
-              <i class="material-icons">work_outline</i>
-              <p>Tuition Jobs</p>
+		  		<li class="nav-item">
+            <a class="nav-link" href="../request/">
+              <i class="fas fa-briefcase fa-fw nav-icon"></i>
+              <p>Lesson Requests</p>
             </a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="./course.html">
-              <i class="material-icons">format_list_bulleted</i>
-              <p>My Courses</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./update.html">
-              <i class="material-icons">note_alt</i>
-              <p>Update Information</p>
-            </a>
-          </li> -->
         </ul>
       </div>
     </div>
@@ -142,7 +130,7 @@
                   <a class="dropdown-item" href="../edit-profile.html">Edit Profile</a>
 									<a class="display:block; dropdown-item" href="../about.html">About</a>
 									<div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
+                  <a class="dropdown-item" href="javascript:;" onclick="//signOutFunction()"  data-toggle="modal" data-target="#signOutModal" id="btn-logout">Log out</a>
                 </div>
               </li>
             </ul>
@@ -159,7 +147,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="signOutLabel">Logging Out</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnSignOutModalClose1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -167,7 +155,7 @@
                 Are you sure you want to continue?
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSignOutModalClose2">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSignOutModalUpdate">Confirm</button>
               </div>
             </div>
@@ -211,33 +199,75 @@
               <div class="row" >
                 <div class="col-md-11" style="padding: 0;">
                   <div class="row" style="margin: 0;">
-                    <div class="col-md-2">
-                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Class Name</h6>
+                    <div class="col-md-4">
+                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Class</h6>
                     </div>
-                    <div class="col-md-3">
-                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Class Announcement</h6>
+                    <div class="col-md-4">
+                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Announcement</h6>
                     </div>
                     <div class="col-md-2">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Schedule</h6>
                     </div>
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Teacher</h6>
-                    </div>
+                    </div> -->
                     <div class="col-md-2">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Last Update</h6>
                     </div>
-                    <div class="col-md-1">
+                    <!-- <div class="col-md-1">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Status</h6>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
                 <div class="col-md-1">
-                  <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Action</h6>
+                  <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Link</h6>
                 </div>
 
               </div>
             </div>
 
+            <!-- <div class="col-md-12 card-v1">
+              <div class="row ">
+                <div class="col-md-11">
+                  <div class="row" style="margin-bottom: 8px;">
+                    <div class="col-md-5">
+                      <div class="row">
+                        <div class="col-3 text-center">
+                          <div style="height: 60px; width: 60px; display: inline-block; overflow: hidden; border-radius: 50%;">
+                            <img id="inTutor1ImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+                          </div>
+                        </div>
+                        <div class="col-9">
+                          <p style="font-size: 1rem; font-weight:400;">Year 3 Std Mathematics asdas asdqw adsadqw adswdqd asda asdq dfewad da <span class="card-v1-status-label active" style="font-size: smaller;">Active</span></p>
+                          <p>Cikgu Norhalizah Binti Mahmud</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <p style="font-weight: 400;">Class AnnoucementClass AnnoucementClass AnnoucementClass AnnoucementClass Annoucement</p>
+                    </div>
+                    <div class="col-md-2">
+                      <p >Tuesday 8:00am - 9:00am</p>
+                    </div>
+                    <div class="col-md-2">
+                      <p >20/2/2021: Updated by Agnes Liew</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <a href="#" style="margin: 0.1rem; padding: 0.3em; background-color: white;   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 0, 0, 0.05);" class="btn btn-sm btn-outline-default btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" >
+                    <img id='inUrlGroupIcon' height="22" width="22" src="http://www.google.com/s2/favicons?domain=https://meet.google.com/" style="object-fit: cover; border-radius: 50%; "/>
+                  </a>
+                  <a href="#" style="margin: 0.1rem; padding: 0.3em;background-color: white;   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 0, 0, 0.05);" class="btn btn-sm btn-outline-default btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" >
+                    <img id='inUrlGroupIcon' height="22" width="22" src="http://www.google.com/s2/favicons?domain=https://web.whatsapp.com/" style="object-fit: cover; border-radius: 50%; "/>
+                  </a>
+                  <a href="#" style="margin: 0.1rem; padding: 0.3em;background-color: white;   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 0, 0, 0.05);" class="btn btn-sm btn-outline-default btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" >
+                    <img id='inUrlGroupIcon' height="22" width="22" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/" style="object-fit: cover; border-radius: 50%; "/>
+                  </a>
+                </div>
+              </div>
+            </div> -->
+ 
           </div>
 
           <!-- Load More -->
@@ -266,38 +296,6 @@
 	  
   </div>
 
-  <div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-      <a href="javascript:;" data-toggle="dropdown">
-        <i class="material-icons" style="font-size: 36px; padding: 0.2em; color: white;">apps</i>
-      </a>
-      <ul class="dropdown-menu">
-		    <br>
-		    <li class="button-container text-center">
-          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >CONTACT US</p>
-          <button id="twitter" style="background-color: #128C7E;" class="btn btn-round btn-facebook" onclick="location.href = 'https://api.whatsapp.com/send?phone=601115131661&text=Hello!%20I%27m%20looking%20for%20a%20tutor.';"><i class="fa fa-whatsapp"></i> &middot; Reply in 1 hour</button>
-        </li>
-        <br>
-        <li class="button-container text-center">
-          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >I want more subjects.</p>
-          <a href="https://golearn.com.my/request-a-tutor/" target="_blank" class="btn btn-primary btn-block">Request A Tutor Now</a>
-        </li>
-        <li class="button-container text-center">
-          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >Check us out now.</p>
-          <a href="https://golearn.com.my/" target="_blank" class="btn btn-warning btn-block">
-            Visit GoLearn
-          </a>
-        </li>
-        <li class="button-container text-center">
-          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >CONTACT US</p>
-			    <button id="facebook" class="btn btn-round btn-facebook" onclick="location.href = 'https://www.facebook.com/FindTutorInMalaysia/';"><i class="fa fa-facebook-f"></i> &middot; facebook</button>
-          <button id="twitter"  class="btn btn-round btn-twitter" onclick="location.href = 'https://twitter.com/golearnmalaysia';"><i class="fa fa-twitter"></i> &middot; twitter</button>
-          <br>
-          <br>
-        </li>
-      </ul>
-    </div>
-  </div>
 
   <script src="../../assets/js/core/jquery.min.js"></script>
   <script src="../../assets/js/core/popper.min.js"></script>
@@ -314,18 +312,20 @@
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
   
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
   <!-- Common constants -->
   <script src="../../assets/js/common.js" type="text/javascript"></script>
   <!-- General Info -->
   <script src="../../assets/js/const.js" type="text/javascript"></script>
-  <!-- Core Tutor Js -->
-  <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
+  <!-- Global Var -->
+  <script src="../../assets/js/client-globalvar.js" type="text/javascript"></script>
+  <!-- Core Client Js -->
+  <script src="../../assets/js/client-core.js" type="text/javascript"></script>
 	<script>
     // Global Variables
-    var userId;
-    var current_name, current_email, current_phone, current_imgUri, current_nric,
-      current_address1, current_address2, current_addressPostCode, current_addressState, current_address;
+    // var userId;
+    // var current_name, current_email, current_phone, current_imgUri, current_nric,
+    //   current_address1, current_address2, current_addressPostCode, current_addressState, current_address;
   
     // Course-specific var
     var allCourseSize;
@@ -334,59 +334,65 @@
     // Session Storage data
     var docsObj = [];
 
+    // Initialization
+    AuthCheck();
 
-		var db = firebase.firestore();
-		db.settings({ timestampsInSnapshots: true });
+    // Page Specific Initialization
+    function loadPageInitFunc(){
 
-		firebase.auth().onAuthStateChanged(function(user){
+      loadAllClassInfo();
+    }
+
+		// var db = firebase.firestore();
+		// db.settings({ timestampsInSnapshots: true });
+
+		// firebase.auth().onAuthStateChanged(function(user){
       
-			if(!user){
-        // Return to login if user does not exist.
-				window.location.href = "./login.html"
-			}else{
-        // if the displayName is null, it means user register using Phone
-        if (firebase.auth().currentUser.displayName == null ){
-          userId = firebase.auth().currentUser.phoneNumber;
-        }else
-          userId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+		// 	if(!user){
+    //     // Return to login if user does not exist.
+		// 		window.location.href = "../login.html"
+		// 	}else{
+    //     // if the displayName is null, it means user register using Phone
+    //     if (firebase.auth().currentUser.displayName == null ){
+    //       userId = firebase.auth().currentUser.phoneNumber;
+    //     }else
+    //       userId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
 
-        loadUserInfo(userId)
-        loadAllClassInfo();
+    //     loadUserInfo(userId)
+    //     loadAllClassInfo();
           
-			}
-		});
+		// 	}
+		// });
 
-    // Client Specific
-    function loadUserInfo(userId){
-      // Tutor Id must be a phone with +60, no spacing or other chars
-      var docRef = db.collection("Users").doc(userId);
+    // // Client Specific
+    // function loadUserInfo(userId){
+    //   // Tutor Id must be a phone with +60, no spacing or other chars
+    //   var docRef = db.collection("Users").doc(userId);
       
-      // docRef.get().then((doc) => {
-      docRef.onSnapshot((doc) => {
-        if (doc.exists) {
-          // console.log("Document data:", doc.data());
-          current_name = (doc.data().name == null || doc.data().name == "")? "New User" : doc.data().name;
-          current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email;
-          current_phone = (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone; 
-          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/empty-photo.png" : doc.data().imgUrl;
-          current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
-          current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
-          current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
-          current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
-          current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
+    //   // docRef.get().then((doc) => {
+    //   docRef.onSnapshot((doc) => {
+    //     if (doc.exists) {
+    //       // console.log("Document data:", doc.data());
+    //       current_name = (doc.data().name == null || doc.data().name == "")? "New User" : doc.data().name;
+    //       current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email;
+    //       current_phone = (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone; 
+    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/empty-photo.png" : doc.data().imgUrl;
+    //       current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
+    //       current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
+    //       current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
+    //       current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
+    //       current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
 
-          // Set the nav user name 
-          document.getElementById("user").textContent = doc.data()[NAME_KEY];
-        } 
-        else {
-          console.log("No user! Redirecting to login");
-          window.location = "login.html"
+    //       // Set the nav user name 
+    //       document.getElementById("user").textContent = doc.data()[NAME_KEY];
+    //     } 
+    //     else {
+    //       console.log("No user! Redirecting to login");
+    //       window.location = "../login.html"
           
-        }
-      });
-    };
-
-
+    //     }
+    //   });
+    // };
 
     //---------- Load all class details ----------//
     // Lesson Load More Button - Init
@@ -416,7 +422,7 @@
           // console.log(doc.data())
           docsObj.push(doc.data());
           // courseId = doc.id;
-          renderAllActiveClasses2(doc, "", false);
+          renderAllActiveClasses3(doc, "", false);
 
         });
 
@@ -479,16 +485,29 @@
       // Class Name
       let className_p = document.createElement('p');
       className_p.textContent = doc.data()[CLASS_NAME];
+      className_p.setAttribute("style", "font-size: 1rem; font-weight:400;");
+      let classOwner_p = document.createElement('p');
+      let teacherText = '';
+      if (doc.data()[CLASS_TUTOR_NAME_ARR][1] == null || doc.data()[CLASS_TUTOR_NAME_ARR][1] == ""){
+        // Check if second teacher existed
+        teacherText = doc.data()[CLASS_TUTOR_NAME_ARR][0];
+      }else {
+        teacherText = doc.data()[CLASS_TUTOR_NAME_ARR][0]+", "+doc.data()[CLASS_TUTOR_NAME_ARR][1];
+      }
+      classOwner_p.textContent = teacherText;
       let className_div = document.createElement('div');
-      className_div.className = "col-md-2";
+      className_div.className = "col-md-3";
       className_div.appendChild(className_p);
+      className_div.appendChild(classOwner_p);
 
       // Announcement
       let announcement_p = document.createElement('p');
       announcement_p.textContent = doc.data()[CLASS_ANNOUNCEMENT];
+      // announcement_p.setAttribute("style", " font-weight:400;");
       let announcement_div = document.createElement('div');
-      announcement_div.className = "col-md-3";
+      announcement_div.className = "col-md-4";
       announcement_div.appendChild(announcement_p);
+
 
       // Timeslot
       let myDayOfWeekId = MyDayOfWeekId; 
@@ -516,6 +535,7 @@
       }
       let timeslot_p = document.createElement('p');
       timeslot_p.textContent = timeslot;
+      // timeslot_p.setAttribute("style", " font-weight:400;");
       let timeSlot_div = document.createElement('div');
       timeSlot_div.className = "col-md-2";
       timeSlot_div.appendChild(timeslot_p);
@@ -530,6 +550,7 @@
       // Last Update
       let lastUpdate_p = document.createElement('p');
       lastUpdate_p.textContent = doc.data()[CLASS_DATE_EDIT].toDate().toLocaleDateString("en-GB") + ': '+ doc.data()[CLASS_EDIT_MSG] ;
+      // lastUpdate_p.setAttribute("style", " font-weight:400;");
       let lastUpdate_div = document.createElement('div');
       lastUpdate_div.className = "col-md-2";
       lastUpdate_div.appendChild(lastUpdate_p);
@@ -550,22 +571,23 @@
       // Student Detail 
       let detail_div = document.createElement('div');
       detail_div.className = 'row';
-      detail_div.setAttribute("style","margin: 0;");
       detail_div.appendChild(className_div);
       detail_div.appendChild(announcement_div);
       detail_div.appendChild(timeSlot_div);
-      detail_div.appendChild(tutor_div);
+      // detail_div.appendChild(tutor_div);
       detail_div.appendChild(lastUpdate_div);
       detail_div.appendChild(status_div);
       let detail_top_div = document.createElement('div');
       detail_top_div.className = "col-md-11";
-      detail_top_div.setAttribute("style","padding: 0;");
+      // detail_top_div.setAttribute("style","padding: 12px 0px 12px 0px;");
+      detail_top_div.setAttribute("style","padding-bottom: 12px;");
       detail_top_div.setAttribute("onclick","editClassFunction(this)");
       detail_top_div.setAttribute("data-id", doc.data().id);
       detail_top_div.appendChild(detail_div);
 
-      //Del btn
+      //Buttons
       let btn_div = document.createElement('div');
+      // btn_div.setAttribute("style","padding: 12px auto 12px auto; margin: 12px auto 12px auto");
       btn_div.className = "col-md-1";
 
       urlArray = [CLASS_CLASS_URL, CLASS_CHAT_GROUP_URL, CLASS_MATERIAL_URL];
@@ -606,33 +628,21 @@
         
       });
 
-      //Update btn
-      // let blogsHtml_btn = '';
-      // blogsHtml_btn += "<i class='material-icons'>campaign</i>";
-      // let btn_announcement = document.createElement('a');
-      // btn_announcement.innerHTML = blogsHtml_btn;
-      // btn_announcement.className = "btn btn-primary btn-sm btn-round";
-      // btn_announcement.setAttribute("style","background-color: white; color: #2e74b6; margin: 0.1rem; padding: 0.3rem; box-shadow: 2px 2px 4px rgba(46, 46, 46, 0.8);");
-      // btn_announcement.setAttribute("data-toggle","modal");
-      // btn_announcement.setAttribute("data-target","#editClassModal");
-      // btn_announcement.setAttribute("data-id", doc.data().id);
-      // if (doc.data().announcement == '' || doc.data().announcement == null){
-      //   btn_announcement.setAttribute("data-announcement",  "");
-      // }else{
-      //   btn_announcement.setAttribute("data-announcement",  doc.data().announcement);
-      // }
-      // btn_div.appendChild(btn_announcement);
-
- 
       // Student Top
       let card_div = document.createElement('div');
       card_div.className = "row"
       card_div.appendChild(detail_top_div);
       card_div.appendChild(btn_div);
 
+      // card temp
+      // let cardTemp = document.createElement('div');
+      // cardTemp.className = "card-v1 card-kpm"
+      // cardTemp.appendChild(card_div);
+
       // Card top
       let card_top_div = document.createElement('div');
-      card_top_div.className = "col-md-12 card-student-item"
+      // card_top_div.className = "col-md-12 card-student-item" older
+      card_top_div.className = "col-md-12 card-v1 card-kpm"
       card_top_div.appendChild(card_div);
 
       const card_all_students = document.getElementById("card-all-classes");
@@ -640,38 +650,109 @@
 
     }
     
-    function renderAllActiveClasses(doc, courseId, renderNull){
 
-      // subject
-      let blogsHtml_subject = '';
-      if (doc.data().online){
-        blogsHtml_subject += doc.data()[CLASS_NAME]+"<span class='card-class-online-label'>OL</span>";
+    function renderAllActiveClasses3(doc, courseId, renderNull){
+      // <div class="col-md-12 card-v1">
+      //   <div class="row ">
+      //     <div class="col-md-11">
+      //       <div class="row" style="margin-bottom: 8px;">
+      //         <div class="col-md-5">
+      //           <div class="row">
+      //             <div class="col-3 text-center">
+      //               <div style="height: 60px; width: 60px; display: inline-block; overflow: hidden; border-radius: 50%;">
+      //                 <img id="inTutor1ImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+      //               </div>
+      //             </div>
+      //             <div class="col-9">
+      //               <p style="font-size: 1rem; font-weight:400;">Year 3 Std Mathematics asdas asdqw adsadqw adswdqd asda asdq dfewad da <span class="card-v1-status-label active" style="font-size: smaller;">Active</span></p>
+      //               <p>Cikgu Norhalizah Binti Mahmud</p>
+      //             </div>
+      //           </div>
+      //         </div>
+      //         <div class="col-md-3">
+      //           <p style="font-weight: 400;">Class AnnoucementClass AnnoucementClass AnnoucementClass AnnoucementClass Annoucement</p>
+      //         </div>
+      //         <div class="col-md-2">
+      //           <p >Tuesday 8:00am - 9:00am</p>
+      //         </div>
+      //         <div class="col-md-2">
+      //           <p >20/2/2021: Updated by Agnes Liew</p>
+      //         </div>
+      //       </div>
+      //     </div>
+      //     <div class="col-md-1">
+      //       <a href="#" style="margin: 0.1rem; padding: 0.3em; background-color: white;   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 0, 0, 0.05);" class="btn btn-sm btn-outline-default btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" >
+      //         <img id='inUrlGroupIcon' height="22" width="22" src="http://www.google.com/s2/favicons?domain=https://meet.google.com/" style="object-fit: cover; border-radius: 50%; "/>
+      //       </a>
+      //       <a href="#" style="margin: 0.1rem; padding: 0.3em;background-color: white;   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 0, 0, 0.05);" class="btn btn-sm btn-outline-default btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" >
+      //         <img id='inUrlGroupIcon' height="22" width="22" src="http://www.google.com/s2/favicons?domain=https://web.whatsapp.com/" style="object-fit: cover; border-radius: 50%; "/>
+      //       </a>
+      //       <a href="#" style="margin: 0.1rem; padding: 0.3em;background-color: white;   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 0, 0, 0.05);" class="btn btn-sm btn-outline-default btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" >
+      //         <img id='inUrlGroupIcon' height="22" width="22" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/" style="object-fit: cover; border-radius: 50%; "/>
+      //       </a>
+      //     </div>
+      //   </div>
+      // </div>
+
+      // Class Name
+      // Profile picture
+      let img = document.createElement("img");
+      img.setAttribute("style", "height: 100%;width: 100%; object-fit: cover;");
+      if (doc.data()[CLASS_IMG_URL] == null || doc.data()[CLASS_IMG_URL] == "")
+        img.src = "https://app.golearn.com.my/assets/img/empty-photo.png";
+      else 
+        img.src = doc.data()[CLASS_IMG_URL];
+
+      let img_div = document.createElement("div");
+      img_div.setAttribute("style", "height: 60px; width: 60px; display: inline-block; overflow: hidden; border-radius: 50%;");
+      img_div.appendChild(img);
+      let img_div_top = document.createElement("div")
+      img_div_top.className = "col-3 text-center";
+      img_div_top.appendChild(img_div);
+      // <img id="inTutor1ImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+      // Name and Teacher
+      let status_html = "";
+      if (doc.data()[CLASS_STATUS] === CLASS_STATUS_ACTIVE){
+        status_html = "<span class='card-v1-status-label active' style='font-size: smaller;'>Active</span>";
       }else{
-        blogsHtml_subject += doc.data()[CLASS_NAME];
+        status_html = "<span class='card-v1-status-label pending' style='font-size: smaller;'>Inactive</span>";
       }
-      let subject_h4 = document.createElement('h4');
-      subject_h4.innerHTML = blogsHtml_subject;
+      let className_p = document.createElement('p');
+      className_p.innerHTML = doc.data()[CLASS_NAME] +" "+ status_html;
+      className_p.setAttribute("style", "font-size: 1rem; font-weight:400;");
+      let classOwner_p = document.createElement('p');
+      let teacherText = '';
+      if (doc.data()[CLASS_TUTOR_NAME_ARR][1] == null || doc.data()[CLASS_TUTOR_NAME_ARR][1] == ""){
+        // Check if second teacher existed
+        teacherText = doc.data()[CLASS_TUTOR_NAME_ARR][0];
+      }else {
+        teacherText = doc.data()[CLASS_TUTOR_NAME_ARR][0]+", "+doc.data()[CLASS_TUTOR_NAME_ARR][1];
+      }
+      classOwner_p.textContent = teacherText;
+      let name_div_top = document.createElement('div');
+      name_div_top.className = "col-9";
+      name_div_top.appendChild(className_p);
+      name_div_top.appendChild(classOwner_p);
 
-      // Update
-      let lastUpdate_p = document.createElement('p');
-      lastUpdate_p.className = "card-class-item";
-      lastUpdate_p.setAttribute("style","font-size: x-small; line-height: 1.5em;");
-      lastUpdate_p.textContent = 'Last updated: ' + doc.data()[CLASS_DATE_EDIT].toDate().toLocaleDateString("en-GB") + ' '+ doc.data()[CLASS_EDIT_MSG] ;
+      let className_child_row = document.createElement('div');
+      className_child_row.className = "row";
+      className_child_row.appendChild(img_div_top);
+      className_child_row.appendChild(name_div_top);
+
+      let className_div = document.createElement('div');
+      className_div.className = "col-md-4";
+      className_div.appendChild(className_child_row);
 
       // Announcement
-      let blogsHtml_announcement = '';
-      if (doc.data().announcement == '' || doc.data().announcement == null){
-        blogsHtml_announcement += "<i class='fas fa-bullhorn fa-fw'></i>No recent announcement.";
-      }else{
-        blogsHtml_announcement += "<i class='fas fa-bullhorn fa-fw'></i>"+doc.data()[CLASS_ANNOUNCEMENT];
-      }
       let announcement_p = document.createElement('p');
-      announcement_p.className = "card-class-item";
-      announcement_p.innerHTML = blogsHtml_announcement;
-      let announcement_a = document.createElement('a');
-      announcement_a.className = "card-class-item-wrapper"
-      announcement_a.appendChild(announcement_p);
-     // Timeslot
+      announcement_p.textContent = doc.data()[CLASS_ANNOUNCEMENT];
+      announcement_p.setAttribute("style", " font-weight:400;");
+      let announcement_div = document.createElement('div');
+      announcement_div.className = "col-md-4";
+      announcement_div.appendChild(announcement_p);
+
+
+      // Timeslot
       let myDayOfWeekId = MyDayOfWeekId; 
       let myDayOfWeek = MyDayOfWeek; 
       let timeslot = '';
@@ -684,10 +765,8 @@
 
         startTime = doc.data()[CLASS_TIMESLOT_START_ARR][i];
         endTime = doc.data()[CLASS_TIMESLOT_END_ARR][i];
-        // console.log(parseInt(startTime.substring(0, 2)))
         startTime = (parseInt(startTime.substring(0, 2))>12) ? (parseInt(startTime.substring(0, 2)) - 12) + startTime.substring(2, 5) + 'PM' : startTime + 'AM';
         endTime = (parseInt(endTime.substring(0, 2))>12) ? (parseInt(endTime.substring(0, 2)) - 12) + endTime.substring(2, 5) + 'PM' : endTime + 'AM';
-
         
         timeslot += myDayOfWeek[myDayOfWeekId.indexOf(doc.data()[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i])] +' '+startTime+'-'+endTime;
         // console.log
@@ -697,82 +776,101 @@
           timeslot += ', '
         }
       }
-      let blogsHtml_timeslot = '';
-      blogsHtml_timeslot += "<i class='fas fa-calendar fa-fw'></i>"+timeslot;
       let timeslot_p = document.createElement('p');
-      timeslot_p.className = "card-class-item";
-      timeslot_p.innerHTML = blogsHtml_timeslot;
-      let timeslot_a = document.createElement('a');
-      timeslot_a.className = "card-class-item-wrapper"
-      timeslot_a.appendChild(timeslot_p);
-     // Venue
-      let blogsHtml_student = '';
-      blogsHtml_student += "<i class='fas fa-map-marker-alt fa-fw'></i>"+doc.data()[CLASS_VENUE];
-      let student_p = document.createElement('p');
-      student_p.className = "card-class-item";
-      student_p.innerHTML = blogsHtml_student;
-      let student_a = document.createElement('a');
-      student_a.className = "card-class-item-wrapper"
-      student_a.appendChild(student_p);
+      timeslot_p.textContent = timeslot;
+      // timeslot_p.setAttribute("style", " font-weight:400;");
+      let timeSlot_div = document.createElement('div');
+      timeSlot_div.className = "col-md-2";
+      timeSlot_div.appendChild(timeslot_p);
+
       // Teacher
-      let blogsHtml_teacher = '';
-      blogsHtml_teacher += "<i class='fas fa-chalkboard-teacher fa-fw'></i>"+doc.data()[CLASS_TUTOR_NAME_ARR][0];
-      let teacher_p = document.createElement('p');
-      teacher_p.className = "card-class-item";
-      teacher_p.innerHTML = blogsHtml_teacher;
-      let teacher_a = document.createElement('a');
-      teacher_a.className = "card-class-item-wrapper"
-      teacher_a.appendChild(teacher_p);
+      // let tutor_p = document.createElement('p');
+      // tutor_p.textContent = doc.data()[CLASS_TUTOR_NAME_ARR][0];
+      // let tutor_div = document.createElement('div');
+      // tutor_div.className = "col-md-2";
+      // tutor_div.appendChild(tutor_p);
+
+      // Last Update
+      let lastUpdate_p = document.createElement('p');
+      lastUpdate_p.textContent = doc.data()[CLASS_DATE_EDIT].toDate().toLocaleDateString("en-GB") + ': '+ doc.data()[CLASS_EDIT_MSG] ;
+      lastUpdate_p.setAttribute("style", "font-style: italic");
+      let lastUpdate_div = document.createElement('div');
+      lastUpdate_div.className = "col-md-2";
+      lastUpdate_div.appendChild(lastUpdate_p);
+
+
+      // Student Detail 
+      let detail_div = document.createElement('div');
+      detail_div.className = 'row';
+      detail_div.appendChild(className_div);
+      detail_div.appendChild(announcement_div);
+      detail_div.appendChild(timeSlot_div);
+      // detail_div.appendChild(tutor_div);
+      detail_div.appendChild(lastUpdate_div);
+      // detail_div.appendChild(status_div);
+      let detail_top_div = document.createElement('div');
+      detail_top_div.className = "col-md-11";
+      detail_top_div.setAttribute("style","margin-bottom: 12px;");
+      detail_top_div.setAttribute("onclick","editClassFunction(this)");
+      detail_top_div.setAttribute("data-id", doc.data().id);
+      detail_top_div.appendChild(detail_div);
+
+      //Buttons
+      let btn_div = document.createElement('div');
+      btn_div.className = "col-md-1";
+
+      urlArray = [CLASS_CLASS_URL, CLASS_CHAT_GROUP_URL, CLASS_MATERIAL_URL];
+      urlArray.forEach((item) => {
+        // console.log(item);
+          
+        let UrlGroupUrl = '';
+        let UrlGroupFaviconUrl = ''
+        if (isValidHttpUrl(doc.data()[item])){
+          UrlGroupUrl = doc.data()[item];
+          UrlGroupFaviconUrl = "http://www.google.com/s2/favicons?domain="+doc.data()[item];
+        }else{
+          UrlGroupUrl = 'javascript:;';
+          UrlGroupFaviconUrl = "../../assets/img/broken-link.png";
+        }
+
+        let urlGroupHtml = '';
+        urlGroupHtml += "<img height='22' width='22' src=" + UrlGroupFaviconUrl + " style='object-fit: cover; border-radius: 50%;'/>";
+        let btn_a = document.createElement('a');
+        btn_a.innerHTML = urlGroupHtml;
+        btn_a.className = "btn btn-sm btn-danger btn-round";
+        btn_a.setAttribute("href", UrlGroupUrl);
+        btn_a.setAttribute("target", 'blank');
+        btn_a.setAttribute("style","margin: 0.1rem; padding: 0.3em; background-color: white; box-shadow: 2px 2px 4px rgba(46, 46, 46, 0.8);");
+
+        if (isValidHttpUrl(doc.data()[item])){
+          btn_div.appendChild(btn_a);
+        }else{
+
+        }
+        
+      });
+
+      // Student Top
+      let card_div = document.createElement('div');
+      card_div.className = "row"
+      card_div.appendChild(detail_top_div);
+      card_div.appendChild(btn_div);
+
+      // card temp
+      // let cardTemp = document.createElement('div');
+      // cardTemp.className = "card-v1 card-kpm"
+      // cardTemp.appendChild(card_div);
 
       // Card top
-      let card_div = document.createElement('div');
-      card_div.className = "card-class-wrapper"
-      card_div.setAttribute("style","padding: 0;");
-      card_div.setAttribute("onclick","editClassFunction(this)");
-      card_div.setAttribute("data-id", doc.data().id);
-      card_div.appendChild(subject_h4);
-      card_div.appendChild(lastUpdate_p);
-      card_div.appendChild(announcement_a);
-      card_div.appendChild(timeslot_a);
-      card_div.appendChild(student_a);
-      card_div.appendChild(teacher_a);
-      //Update btn
-      let blogsHtml_btn = '';
-      blogsHtml_btn += "Update <i class='fas fa-bullhorn fa-fw' style='margin-left: 0.5rem;'></i>";
-      let btn_a = document.createElement('a');
-      btn_a.innerHTML = blogsHtml_btn;
-      btn_a.className = "btn btn-primary btn-round";
-      btn_a.setAttribute("style","color: white;");
-      btn_a.setAttribute("data-toggle","modal");
-      btn_a.setAttribute("data-target","#editClassModal");
-      btn_a.setAttribute("data-id", doc.data().id);
-      if (doc.data().announcement == '' || doc.data().announcement == null){
-        btn_a.setAttribute("data-announcement",  "");
-      }else{
-        btn_a.setAttribute("data-announcement",  doc.data().announcement);
-      }
-
-      // Create card-class
       let card_top_div = document.createElement('div');
-      card_top_div.className = "card-class"
+      // card_top_div.className = "col-md-12 card-student-item" older
+      card_top_div.className = "col-md-12 card-v1"
       card_top_div.appendChild(card_div);
-      card_top_div.appendChild(btn_a);
 
-      let card_top = document.createElement('div');
-      card_top.className = "col-md-3 col-lg-3 col-sm-3";
-      // If the course size is less than 2, we need to render empty placeholder so bootstrap looks good.
-      if (renderNull){
-        // render nothing
-      }else{
-        card_top.appendChild(card_top_div);
-      }
-
-      const card_all_courses = document.getElementById("card-all-classes");
-      card_all_courses.appendChild(card_top);
-
+      const card_all_students = document.getElementById("card-all-classes");
+      card_all_students.appendChild(card_top_div);
     }
-
-     
+    
     // Check if valid url. Return true if valid.
     function isValidHttpUrl(string) {
       let url;
@@ -784,10 +882,10 @@
       return true;
     }
     // Sign out
-    function signOutFunction(){
-      $('#signOutModal').modal('show');
-      $("#signOutModal").appendTo("body");
-    }
+    // function signOutFunction(){
+    //   $('#signOutModal').modal('show');
+    //   $("#signOutModal").appendTo("body");
+    // }
   
   </script>
 
@@ -850,15 +948,15 @@
 
           });
         // Do something
-        $('#signOutModal').modal('hide');
+        // $('#signOutModal').modal('hide');
       });
 
-      $('#btnSignOutModalClose1').on('click', function (e) {
-        $('#signOutModal').modal('hide');
-      });
-      $('#btnSignOutModalClose2').on('click', function (e) {
-        $('#signOutModal').modal('hide');
-      });
+      // $('#btnSignOutModalClose1').on('click', function (e) {
+      //   $('#signOutModal').modal('hide');
+      // });
+      // $('#btnSignOutModalClose2').on('click', function (e) {
+      //   $('#signOutModal').modal('hide');
+      // });
     
 		});
 

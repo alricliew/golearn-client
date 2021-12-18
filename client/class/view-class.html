@@ -2,35 +2,43 @@
 <html lang="en">
 
 <head>
-  <title>GoLearn Tutor</title>
-  <!-- Required meta tags -->
+  <!-- Meta -->
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <!--     Fonts and icons     -->
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>GoLearn School</title>
+  <meta name=description content="GoLearn School&trade; is Malaysia #1 learning platform to manage tuition lessons for you and your children. Start now for Free!">
+  <meta property=og:title content="GoLearn School">
+  <meta property=og:site_name content="GoLearn School">
+  <meta property=og:type content=website>
+  <meta property=og:url content=https://app.golearn.com.my/client/class/view-class.html >
+  <meta property=og:image content=https://app.golearn.com.my/assets/img/icon-apple-touch-180x180.png>
+  <meta property=og:description content="GoLearn School&trade; is Malaysia #1 learning platform to manage tuition lessons for you and your children. Start now for Free!">
+  <link rel=apple-touch-icon sizes=180x180 href=https://app.golearn.com.my/assets/img/icon-apple-touch-180x180.png>
+  <link rel=icon type=image/png sizes=32x32 href=https://app.golearn.com.my/assets/img/icon-32x32.png>
+  <link rel=icon type=image/png sizes=16x16 href=https://app.golearn.com.my/assets/img/icon-16x16.png>
+  <!-- Fonts and icons -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous"> -->
   <!-- Material Kit CSS -->
-  <link href="../../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-  <!-- <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
-  <link href="../css/tutor-portal.css" rel="stylesheet" />
+  <link href="../../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
+  <!-- Tutor Portal specific CSS -->
+  <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
-  <script src="../js/firebase.js"></script>
+  <script src="../../assets/js/firebase.js"></script>
   <link href="../../assets/css/multistepform.css" rel="stylesheet" />
   <link href="../../assets/css/multitabform.css" rel="stylesheet" />
   <link href="../../assets/css/mc-calendar.min.css" rel="stylesheet"/>
   <link href="../../assets/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
-
   <!-- ClockPicker Stylesheet -->
   <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap-clockpicker.min.css">
 
   <style>
+
     .tooltiptext-general {
       /* This is for the tooltip text */
       visibility: hidden;
@@ -64,33 +72,22 @@
 
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../../assets/img/sidebar-3.jpg">
-
       <div class="logo">
-        <a href="../" class="simple-text logo-mini">
-			    <img src="../../assets/img/logo.png" style="width: 216px; height: auto;" alt=""></img>
-          
-        </a>
-        <a href="../" class="simple-text logo-normal">
-         Welcome!
+        <a href="../" class="simple-text logo-mini" style="padding: 0.5rem">
+			    <img src="../../assets/img/golearn-school-logo.svg" style="width: 200px; height: auto;" alt=""></img>
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="../">
-              <i class="material-icons">home</i>
-              <p>Home</p>
-            </a>
-          </li>
 		  		<li class="nav-item active">
-            <a class="nav-link" href="../class/">
-              <i class="material-icons">school</i>
+            <a class="nav-link" href="./">
+              <i class="fas fa-chalkboard fa-fw nav-icon"></i>
               <p>My Classes</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="../dependant/">
-              <i class="material-icons">escalator_warning</i>
+              <i class="fas fa-user-graduate fa-fw nav-icon"></i>
               <p>My Dependants</p>
             </a>
           </li>
@@ -100,24 +97,12 @@
               <p>Payments</p>
             </a>
           </li>
-		  		<!-- <li class="nav-item">
-            <a class="nav-link" href="./job.html">
-              <i class="material-icons">work_outline</i>
-              <p>Tuition Jobs</p>
+		  		<li class="nav-item">
+            <a class="nav-link" href="../request/">
+              <i class="fas fa-briefcase fa-fw nav-icon"></i>
+              <p>Lesson Requests</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./course.html">
-              <i class="material-icons">format_list_bulleted</i>
-              <p>My Courses</p>
-            </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="./update.html">
-              <i class="material-icons">note_alt</i>
-              <p>Update Information</p>
-            </a>
-          </li> -->
         </ul>
       </div>
     </div>
@@ -181,7 +166,7 @@
                   <a class="dropdown-item" href="../edit-profile.html">Edit Profile</a>
 									<a class="display:block; dropdown-item" href="../about.html">About</a>
 									<div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
+                  <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#signOutModal" id="btn-logout">Log out</a>
                 </div>
               </li>
             </ul>
@@ -722,36 +707,14 @@
         </div>
       </div>
 
-      <!-- Activation modal -->
-      <div class="row">
-        <div class="modal fade" id="activationModal" tabindex="-1" role="dialog" aria-labelledby="activationModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="activationModalLabel">New message</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnActivationModalClose1">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" id="activationModalBody">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnActivationModalClose2">Not Now</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnActivationModalUpdate">Join Us</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-			
-      <!-- Sign-out modal -->
+      <!-- Sign Out modal -->
       <div class="row">
         <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="signOutModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
+          <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="signOutLabel">Logging Out</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnSignOutModalClose1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -759,7 +722,7 @@
                 Are you sure you want to continue?
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSignOutModalClose2">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSignOutModalUpdate">Confirm</button>
               </div>
             </div>
@@ -769,11 +732,12 @@
 
       <div class="content">
         <div class="container" style="padding-right: 0; padding-left: 0;">
+
           <!-- Back button -->
-          <div class="row" id="desciption-row" >
-            <div class="col-md-12 d-flex flex-row">
+          <div class="row">
+            <div class="col-md-12 d-flex flex-row" style="margin-left: 10px;">
+
               <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
-            <!-- <a href="" class="btn btn-primary btn-round" id="btnSave" data-toggle="modal" data-target="#saveModal"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</a> -->            
 
             </div>
           </div>
@@ -785,11 +749,11 @@
                   <div class="col-12 col-lg-12 ml-auto mr-auto mb-4">
                     <div class="d-flex flex-wrap multitabs-form__progress">
                       <button class="multitabs-form__progress-btn js-active" type="button" title="Lessons">Lessons</button>
-                      <button class="multitabs-form__progress-btn" type="button" title="General Info">General</button>
-                      <button class="multitabs-form__progress-btn" type="button" title="Time Slot">Time Slot</button>
+                      <button class="multitabs-form__progress-btn" type="button" title="General Info">Info</button>
+                      <!-- <button class="multitabs-form__progress-btn" type="button" title="Time Slot">Time Slot</button> -->
                       <button class="multitabs-form__progress-btn" type="button" title="Students">Students</button>
-                      <button class="multitabs-form__progress-btn" type="button" title="Teacher">Teacher</button>
-                      <button class="multitabs-form__progress-btn" type="button" title="Fee">Fee</button>
+                      <!-- <button class="multitabs-form__progress-btn" type="button" title="Teacher">Teacher</button> -->
+                      <!-- <button class="multitabs-form__progress-btn" type="button" title="Fee">Fee</button> -->
                       <!-- <button class="multitabs-form__progress-btn" type="button" title="Advanced Settings">Advanced <span class='card-class-status-label'>Admin</span></button> -->
                       
                     </div>
@@ -803,10 +767,12 @@
                   <div class="col-12">
                     <form class="multitabs-form__form">
                       <!--Lessons form panel-->        
-                      <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn" >
                         <h4 class="multitabs-form__title">Lessons 
                           <!-- <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddLesson" data-toggle="modal" data-target="#addLessonModal" data-button-text="Add" data-title="Add New Lesson"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">add</i></a>  -->
-                          <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestLessonDoc=null; removeElementsByClass('row lesson-wrapper'); LoadLessonInfo();"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">refresh</i></a>
+                          <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestLessonDoc=null; removeElementsByClass('row lesson-wrapper'); LoadLessonInfo();"><i class="fas fa-redo fa-fw" style="color: #2e74b6;"></i></a>
+                          <a class="btn btn-sm btn-outline-primary btn-round" onclick="generatePDFeKoopmans('lessonTop')"><i class="fas fa-file-download fa-fw" style="color: #2e74b6;"></i></a>
+
                         </h4>
                         <div class="multitabs-form__content">
 
@@ -822,31 +788,32 @@
                               <div class="row lesson-header">
                                 <div class="col-md-12" >
                                   <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                       <div class="row">
                                         <div class="col-4 ">
                                           <p>Date</p> 
                                         </div>
-                                        <div class="col-4">
-                                          <p>Start Time</p> 
+                                        <div class="col-8">
+                                          <p>Time</p> 
                                         </div>
-                                        <div class="col-4">
+                                        <!-- <div class="col-4">
                                           <p>End Time</p> 
-                                        </div>
+                                        </div> -->
                                       </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-5">
                                       <p>Class Notes</p> 
                                     </div>
                                     <div class="col-md-4">
-                                      <div class="row" style="padding:0; margin: 0;">
+                                      <p>Teacher's Feedback</p> 
+                                      <!-- <div class="row" style="padding:0; margin: 0;">
                                         <div class="col-8" style="padding:0; margin: 0;">
                                           <p>Teacher's Feedback</p> 
                                         </div>
                                         <div class="col-4" style="padding-right:0; margin-right: 0;">
                                           <p>Score</p> 
                                         </div>
-                                      </div>
+                                      </div> -->
                                     </div>
                                   </div>
                                 </div>
@@ -866,41 +833,31 @@
                               <!-- Add new lesson here .... -->
                               <!-- Lesson List Start -->
                               <!-- <div class="row lesson-wrapper">
-                                <div class="col-md-11" >
+                                <div class="col-md-12" >
                                   <div class="row">
                                     <div class="col-md-4 lesson-active" data-toggle="modal" data-target="#editLessonModal">
                                       <div class="row">
-                                        <div class="col-4" >
-                                            <p class="lesson-item">12/6/2022</p>
-                                        </div>
                                         <div class="col-4">
-                                            <p class="lesson-item">11:12</p>
+                                          <p class="lesson-item" style="font-weight: 400;">12/6/2022</p>
                                         </div>
-                                        <div class="col-4">
-                                            <p class="lesson-item">11:12</p>
+                                        <div class="col-8">
+                                          <p class="lesson-item"style="font-weight: 400;">11:00AM - 12:00AM</p>
                                         </div>
                                       </div>
                                     </div>
                                     <div class="col-md-4 lesson-active" data-toggle="modal" data-target="#editLessonModal">
-                                        <p class="lesson-item">Announcement Text Here a a a a a a a a Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here</p>
+                                        <p class="lesson-item">Announcement Text Here Please complete your homework before today. Pls bring color pensil and eraser to class next monday</p>
                                     </div>
                                     <div class="col-md-4 lesson-active" data-toggle="modal" data-target="#editLessonModal">
-                                      <div class="row" style="padding:0; margin: 0;">
-                                        <div class="col-md-8" style="padding:0;">
-                                          <p class="lesson-item">Feedback Text Here a a a a a aa  a a a adsa a adsa as ada as da a sadas asda  </p>
-                                        </div>
-                                        <div class="col-md-4" style="padding-right:0;">
-                                          <span class="d-flex flex-wrap align-content-center" style="margin-top: 1rem;">5<i class="material-icons">star</i></span> 
-                                        </div>
+                                      <div  class="lesson-item">
+                                        <span style="font-size: small; font-weight:600;">5 <i class="fas fa-star" style="color: #FF9529;"></i></span>  
+                                        <span class="lesson-item">Feedback Text Here Alice is very talkertive. need more attention. Overall the class is good. Students interact actively with teacher. </span>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-  
-                                <div class="col-md-1">
-                                  <a href="#" class="btn btn-sm btn-outline-danger btn-round" id="btnRemoveTimeSlot" data-toggle="modal" data-target="#delLessonModal" data-id="lessonId" style="margin-top: 1rem;"><i class="material-icons" style="color: red;">remove</i></a>
-                                </div>
                               </div> -->
+
                             </div>
                           </div>
                           <div class="row">
@@ -913,40 +870,55 @@
                       </div>
                       <!--General form panel-->
                       <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                        <h4 class="multitabs-form__title">General Info</h4>
+                        <!-- <h4 class="multitabs-form__title">General</h4> -->
                         <div class="multitabs-form__content">
                           <div class="col-md-12">
-                            <!-- Announcement -->
-                            <div class="form-group" style="margin-top: 1.5rem;" >
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Announcement</span> 
-                              <textarea class="form-control" maxlength="511" rows="3" id="inClassAnnouncement" data-compulsory="false" placeholder="Write something ..." readonly></textarea>
-                            </div>
-
-                            <div class="form-group" style="margin-top: 2rem;">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Name* <span id="countClassName" style="color: grey; margin-left: 1rem;">0/40</span></span> 
-                              <input type="text" class="form-control" id="inClassName" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" readonly>
-                            </div>
-
-
-                            <div class="form-group" style="margin-top: 2rem;">
-                              <p class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 1rem;">Class Icon</p> 
+                            <!-- Icon -->
+                            <div class="form-group">
                               <div style="height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%; cursor: pointer;">
                                 <img id="tutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
                               </div>
-                              <input type="file" id="select_image" name="image" style="display:none" accept="image/x-png,image/jpeg" readonly>
                             </div>
 
-                            <div class="form-group" style="margin-top: 1.5rem;" >
+                            <h3 id="inClassName"></h3>
+                            <p id="inClassDesc"></p>
+
+                            <!-- <p class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Announcement</p>  -->
+                            <p id="inClassAnnouncement" style="font-size: 14px; font-weight: 300; color: gray; margin-bottom: 12px;"></p>
+
+                            <p id="inTimeSlot" style="font-size: 14px; font-weight: 300; color: gray; margin-bottom: 12px;"></p>
+
+
+                            <p id="inVenue" style="font-size: 14px; font-weight: 300; color: gray; margin-bottom: 12px;"></p>
+
+                            <p id="inTeacher" style="font-size: 14px; font-weight: 300; color: gray; margin-bottom: 12px;"></p>
+
+                            <p id="inTuitionFee" style="font-size: 14px; font-weight: 300; color: gray; margin-bottom: 12px;"></p>
+
+                            <!-- <div class="form-group" style="margin-top: 1.5rem;" >
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Announcement</span> 
+                              <textarea class="form-control" maxlength="511" rows="3" id="inClassAnnouncement" data-compulsory="false" placeholder="Write something ..." readonly></textarea>
+                            </div> -->
+
+                            <!-- <div class="form-group" style="margin-top: 2rem;">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Name* <span id="countClassName" style="color: grey; margin-left: 1rem;">0/40</span></span> 
+                              <input type="text" class="form-control" id="inClassName" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" readonly>
+                            </div> -->
+
+
+
+
+                            <!-- <div class="form-group" style="margin-top: 1.5rem;" >
                               <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Description <span id="countClassDesc" style="color: grey; margin-left: 1rem;">0/400</span></span> 
                               <textarea class="form-control" maxlength="400" rows="4" id="inClassDesc" data-compulsory="false" readonly></textarea>
-                            </div>
+                            </div> -->
             
-                            <div class="form-group" style="margin-top: 2rem;">
+                            <!-- <div class="form-group" style="margin-top: 2rem;">
                               <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Venue <span id="countClassVenue" style="color: grey; margin-left: 1rem;">0/250</span></span> 
                               <textarea class="form-control" maxlength="250" rows="3"  id="inVenue" data-compulsory="false" readonly></textarea>
-                            </div>
+                            </div> -->
 
-                            <div class="form-group" style="margin-top: 2rem;">
+                            <div id="inUrlClassBlock" style="margin-bottom: 12px;">
                               <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Link</span>
                               <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
                                 <span class="tooltiptext-general" style="left: 10%;">
@@ -954,16 +926,25 @@
                                   <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">Link to the platform where this class will be conducted. I.e Google Meet, Zoom or other platforms.</p>
                                 </span> 
                               </span>
-                              <div class="input-group">
+                              <div class="d-flex align-items-center">
+                                <div class="p-2" id="inUrlClassIconWrapper" style="margin-right: 0.5em; cursor: pointer; padding: 0!important;" onclick="RedirectTo('')">
+                                  <img id='inUrlClassIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
+                                </div>
+                                <div class="mr-auto p-2" style="white-space: wrap; overflow: hidden; padding: 0!important;">
+                                  <a href="#" id="inUrlClass" style="font-size: 12px；"></a>
+                                </div>
+                              </div>
+                              <!-- <div class="input-group">
                                 <span class="d-flex align-items-center input-group-addon" id="inUrlClassIconWrapper" style="margin-right: 0.5em; cursor: pointer;" onclick="RedirectTo('')">
                                   <img id='inUrlClassIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
                                 </span>
-                                <input type="text" class="form-control" id="inUrlClass" data-compulsory="true" oninput="this.className = 'form-control'" readonly>
-                              </div>
+           
+                                <a href="#" id="inUrlClass" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"></a>
+                              </div> -->
                             </div>
 
 
-                            <div class="form-group" style="margin-top: 2rem;">
+                            <div id="inUrlGroupBlock" style="margin-bottom: 12px;">
                               <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Chat Group Link</span> 
                               <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
                                 <span class="tooltiptext-general" style="left: 10%;">
@@ -971,15 +952,17 @@
                                   <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">Link to this class chat group. I.e Whatsapp, Telegram, Facebook group or other groups.</p>
                                 </span> 
                               </span>
-                              <div class="input-group">
-                                <span class="d-flex align-items-center input-group-addon" id="inUrlGroupIconWrapper" style="margin-right: 0.5em; cursor: pointer;" onclick="RedirectTo('')">
+                              <div class="d-flex align-items-center">
+                                <div class="p-2" id="inUrlGroupIconWrapper" style="margin-right: 0.5em; cursor: pointer; padding: 0!important;" onclick="RedirectTo('')">
                                   <img id='inUrlGroupIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
-                                </span>
-                                <input type="text" class="form-control" id="inUrlGroup" data-compulsory="true" oninput="this.className = 'form-control'" readonly>
+                                </div>
+                                <div class="mr-auto p-2" style="white-space: wrap; overflow: hidden; padding: 0!important;">
+                                  <a href="#" id="inUrlGroup" style="font-size: 12px；"></a>
+                                </div>
                               </div>
                             </div>
 
-                            <div class="form-group" style="margin-top: 2rem;">
+                            <div id="inUrlMaterialBlock" style="margin-bottom: 12px;">
                               <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Lesson Material Link </span>
                               <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
                                 <span class="tooltiptext-general" style="left: 10%;">
@@ -987,23 +970,81 @@
                                   <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">Link to material that will be used for the class. I.e Google Classroom, Drive, or other storage places.</p>
                                 </span> 
                               </span>
-                              <div class="input-group">
-                                <span class="d-flex align-items-center input-group-addon" id="inUrlMaterialIconWrapper" style="margin-right: 0.5em; cursor: pointer;" onclick="RedirectTo('')">
+   
+                              <div class="d-flex align-items-center">
+                                <div class="p-2" id="inUrlMaterialIconWrapper" style="margin-right: 0.5em; cursor: pointer; padding: 0!important;" onclick="RedirectTo('')">
                                   <img id='inUrlMaterialIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
-                                </span>
-                                <input type="text" class="form-control" id="inUrlMaterial" data-compulsory="true" oninput="this.className = 'form-control'" readonly>
+                                </div>
+                                <div class="mr-auto p-2" style="white-space: wrap; overflow: hidden; padding: 0!important;">
+                                  <a href="#" id="inUrlMaterial" style="font-size: 12px；"></a>
+                                </div>
                               </div>
                             </div>
-  
                           </div>
 
-                          <div class="button-row d-flex mt-4">
-                            <!-- <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button> -->
+                        </div>
+                       
+                      </div>
+
+                      <!--Students form panel-->
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                        <h4 class="multitabs-form__title">Students 
+                          <!-- <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddStudent" data-toggle="modal" data-target="#addStudentModal" data-button-text="Add" data-title="Add New Student"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">add</i></a>  -->
+                          <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestStuDoc=null; removeElementsByClass('row student-wrapper'); loadAllStudents();"><i class="fas fa-redo fa-fw" style="color: #2e74b6;"></i></a>
+                        </h4>
+                        <div class="multitabs-form__content">
+                          <div class="col-md-12" id="studentTop">
+                          
+                            <div class="container" id="students-container">
+                              <!-- Student header -->
+                              <div class="row lesson-header">
+                                <div class="col-md-12" >
+                                  <div class="row" >
+                                    <div class="col-md-6">
+                                      <p>Student Name</p>
+                                    </div>
+                                    <div class="col-3">
+                                      <p>Gender</p>
+                                    </div>
+                                    <!-- <div class="col-md-3">
+                                      <p>Guardian Name</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <p>Guardian Phone</p>
+                                    </div> -->
+                                    <div class="col-3">
+                                      <p>Status</p>
+                                    </div>
+                                    <!-- <div class="col-md-2">
+                                      <p>Date Joined</p>
+                                    </div> -->
+                                  </div>
+                                </div>
+                                <!-- <div class="col-md-1">
+                                  <p>Action</p> 
+                                </div> -->
+                              </div>
+
+                            <!-- No data placeholder -->
+                            <div class="row" style="display: none;" id="studentNoDataPlaceholder">
+                              <div class="col-md-12 text-center">
+                                No student
+                              </div>
+                            </div>
+
+                            </div>
                           </div>
+
+                          <div class="row">
+                            <div class="col-md-12" >
+                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnStudentLoadMore">Load More <i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">expand_more</i></a> 
+                            </div>
+                          </div>
+
                         </div>
                       </div>
                       <!--Time Slot form panel-->
-                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn" style="display: none;">
                         <h4 class="multitabs-form__title">Timeslot</h4>
                         <div class="multitabs-form__content">
                           <div class="col-md-12" id="timeSlotTop">
@@ -1075,65 +1116,9 @@
                           </div>
                         </div>
                       </div>
-                      <!--Students form panel-->
-                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                        <h4 class="multitabs-form__title">Students 
-                          <!-- <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddStudent" data-toggle="modal" data-target="#addStudentModal" data-button-text="Add" data-title="Add New Student"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">add</i></a>  -->
-                          <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestStuDoc=null; removeElementsByClass('row student-wrapper'); loadAllStudents();"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">refresh</i></a>
-                        </h4>
-                        <div class="multitabs-form__content">
-                          <div class="col-md-12" id="studentTop">
-                          
-                            <div class="container" id="students-container">
-                              <!-- Student header -->
-                              <div class="row lesson-header">
-                                <div class="col-md-12" >
-                                  <div class="row" >
-                                    <div class="col-md-4">
-                                      <p>Student Name</p>
-                                    </div>
-                                    <div class="col-3">
-                                      <p>Gender</p>
-                                    </div>
-                                    <!-- <div class="col-md-3">
-                                      <p>Guardian Name</p>
-                                    </div>
-                                    <div class="col-md-2">
-                                      <p>Guardian Phone</p>
-                                    </div> -->
-                                    <div class="col-3">
-                                      <p>Status</p>
-                                    </div>
-                                    <!-- <div class="col-md-2">
-                                      <p>Date Joined</p>
-                                    </div> -->
-                                  </div>
-                                </div>
-                                <!-- <div class="col-md-1">
-                                  <p>Action</p> 
-                                </div> -->
-                              </div>
 
-                            <!-- No data placeholder -->
-                            <div class="row" style="display: none;" id="studentNoDataPlaceholder">
-                              <div class="col-md-12 text-center">
-                                No student
-                              </div>
-                            </div>
-
-                            </div>
-                          </div>
-
-                          <div class="row">
-                            <div class="col-md-12" >
-                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnStudentLoadMore">Load More <i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">expand_more</i></a> 
-                            </div>
-                          </div>
-
-                        </div>
-                      </div>
                       <!--Teacher form panel-->
-                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn" style="display: none;">
                         <h4 class="multitabs-form__title">Teacher</h4>
                         <div class="multitabs-form__content">
                           <!-- Teacher 1  -->
@@ -1182,15 +1167,11 @@
                             <!-- <div class="col-md-2 d-flex align-items-center">
                               <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher2" data-toggle="" data-target="#myTeacherModal" data-num='2' href="javascript:;" style="pointer-events:none; background-color: #f5f5f5;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
                             </div> -->
-                          </div>
-                          <div class="button-row d-flex mt-4">
-                            <!-- <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button> -->
-                            <!-- <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button> -->
-                          </div>
+                          </div>>
                         </div>
                       </div>
                       <!--Fee form panel-->
-                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn" style="display: none;">
                         <h4 class="multitabs-form__title">Fee</h4>
                         <div class="multitabs-form__content">
     
@@ -1429,40 +1410,6 @@
 	  
   </div>
 
-
-  <div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-      <a href="javascript:;" data-toggle="dropdown">
-        <i class="material-icons" style="font-size: 36px; padding: 0.2em; color: white;">apps</i>
-      </a>
-      <ul class="dropdown-menu">
-		    <br>
-		    <li class="button-container text-center">
-          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >CONTACT US</p>
-          <button id="twitter" style="background-color: #128C7E;" class="btn btn-round btn-facebook" onclick="location.href = 'https://api.whatsapp.com/send?phone=601115131661&text=Hello!%20I%27m%20looking%20for%20a%20tutor.';"><i class="fa fa-whatsapp"></i> &middot; Reply in 1 hour</button>
-        </li>
-        <br>
-        <li class="button-container text-center">
-          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >I want more subjects.</p>
-          <a href="https://golearn.com.my/request-a-tutor/" target="_blank" class="btn btn-primary btn-block">Request A Tutor Now</a>
-        </li>
-        <li class="button-container text-center">
-          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >Check us out now.</p>
-          <a href="https://golearn.com.my/" target="_blank" class="btn btn-warning btn-block">
-            Visit GoLearn
-          </a>
-        </li>
-        <li class="button-container text-center">
-          <p style="margin : 0; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;" >CONTACT US</p>
-			    <button id="facebook" class="btn btn-round btn-facebook" onclick="location.href = 'https://www.facebook.com/FindTutorInMalaysia/';"><i class="fa fa-facebook-f"></i> &middot; facebook</button>
-          <button id="twitter"  class="btn btn-round btn-twitter" onclick="location.href = 'https://twitter.com/golearnmalaysia';"><i class="fa fa-twitter"></i> &middot; twitter</button>
-          <br>
-          <br>
-        </li>
-      </ul>
-    </div>
-  </div>
-  
   <script src="../../assets/js/core/jquery.min.js"></script>
   <script src="../../assets/js/core/popper.min.js"></script>
   <script src="../../assets/js/core/bootstrap-material-design.min.js"></script>
@@ -1478,26 +1425,29 @@
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
   
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
   <!-- Common constants -->
   <script src="../../assets/js/common.js" type="text/javascript"></script>
   <!-- General Info -->
   <script src="../../assets/js/const.js" type="text/javascript"></script>
-  <!-- Core Tutor Js -->
-  <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
+  <!-- Global Var -->
+  <script src="../../assets/js/client-globalvar.js" type="text/javascript"></script>
+  <!-- Core Client Js -->
+  <script src="../../assets/js/client-core.js" type="text/javascript"></script>
   <!-- Datepicker -->
   <script src="../../assets/js/mc-calendar.min.js" type="text/javascript"></script>
   <!-- ClockPicker -->
-  <script type="text/javascript" src="../../assets/js/bootstrap-clockpicker.min.js"></script>
+  <script src="../../assets/js/bootstrap-clockpicker.min.js" type="text/javascript"></script>
   <script src="../../assets/js/star-rating.js" type="text/javascript"></script>
   <script src="../../assets/js/star-rating-theme.js" type="text/javascript"></script>
-
+  <!-- Generate pdf -->
+  <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script> 
 
   <script>
-    // Global Variables
-    var userId;
-    var current_name, current_email, current_phone, current_imgUri, current_nric,
-      current_address1, current_address2, current_addressPostCode, current_addressState, current_address;
+    // // Global Variables
+    // var userId;
+    // var current_name, current_email, current_phone, current_imgUri, current_nric,
+    //   current_address1, current_address2, current_addressPostCode, current_addressState, current_address;
 
     var latestLessonDoc = null;// Store last document - Used for Lesson Load More btn
     var latestStuDoc = null;// Store last document - Used for Student Load More btn
@@ -1505,8 +1455,8 @@
     var latestAdminTutorDoc = null;// Store last document - Used for Admin's Tutor Load More btn in Add Teacher Modal
     let tutorBtnNum; // used to differentiate btn Teacher 1 / 2
 
-		var db = firebase.firestore();
-		db.settings({ timestampsInSnapshots: true });
+		// var db = firebase.firestore();
+		// db.settings({ timestampsInSnapshots: true });
 
 
     
@@ -1535,41 +1485,65 @@
       document.getElementById("titleClassName").textContent = currentClassObj[CLASS_NAME];
 
       // Lesson Panel
-      document.getElementById("inClassAnnouncement").value = currentClassObj[CLASS_ANNOUNCEMENT];
+      let announcement = "";
+      if (currentClassObj[CLASS_ANNOUNCEMENT] == null || currentClassObj[CLASS_ANNOUNCEMENT] == ""){
+        announcement = "<i class='fas fa-bullhorn fa-fw' style='margin-right:0.8rem'></i>" + " - ";
+      }else{
+        announcement = "<i class='fas fa-bullhorn fa-fw' style='margin-right:0.8rem'></i>"+ currentClassObj[CLASS_ANNOUNCEMENT];
+      }
+      document.getElementById("inClassAnnouncement").innerHTML = announcement;
 
       // General Panel
-      document.getElementById("inClassName").value = currentClassObj[CLASS_NAME];
-      document.getElementById("countClassName").textContent = currentClassObj[CLASS_NAME].length + '/40'
+      document.getElementById("inClassName").textContent = currentClassObj[CLASS_NAME];
+      // document.getElementById("countClassName").value = currentClassObj[CLASS_NAME].length + '/40'
       document.getElementById("tutorImgUrl").src = currentClassObj[CLASS_IMG_URL] == null || currentClassObj[CLASS_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : currentClassObj[CLASS_IMG_URL];
-      document.getElementById("inClassDesc").value = currentClassObj[CLASS_DESC];
-      document.getElementById("countClassDesc").textContent = currentClassObj[CLASS_DESC].length + '/400'
-      document.getElementById("inVenue").value = currentClassObj[CLASS_VENUE];
-      document.getElementById("countClassVenue").textContent = currentClassObj[CLASS_VENUE].length + '/250'
-      document.getElementById("inUrlClass").value = currentClassObj[CLASS_CLASS_URL];
+      document.getElementById("inClassDesc").textContent = currentClassObj[CLASS_DESC];
+      // document.getElementById("countClassDesc").value = currentClassObj[CLASS_DESC].length + '/400'
+      let venue = "";
+      if (currentClassObj[CLASS_VENUE] == null || currentClassObj[CLASS_VENUE] == ""){
+        venue = "<i class='fas fa-map-marker-alt fa-fw' style='margin-right:0.8rem'></i>" + " - ";
+      }else{
+        venue = "<i class='fas fa-map-marker-alt fa-fw' style='margin-right:0.8rem'></i>"+ currentClassObj[CLASS_VENUE];
+      }
+      document.getElementById("inVenue").innerHTML = venue;
+      // document.getElementById("countClassVenue").value = currentClassObj[CLASS_VENUE].length + '/250'
+
+
+      document.getElementById("inUrlClass").textContent = currentClassObj[CLASS_CLASS_URL];
+      document.getElementById("inUrlClass").src = currentClassObj[CLASS_CLASS_URL];
 
       if (isValidHttpUrl(currentClassObj[CLASS_CLASS_URL])){
         document.getElementById("inUrlClassIcon").src = "http://www.google.com/s2/favicons?domain="+currentClassObj[CLASS_CLASS_URL];
         document.getElementById("inUrlClassIconWrapper").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_CLASS_URL]+"')");
       }else{
-        document.getElementById("inUrlClassIcon").src = "../../assets/img/broken-link.png";
+        document.getElementById("inUrlClassBlock").style.display = "none";
+        document.getElementById("inUrlClassIcon").src = "https://app.golearn.com.my/assets/img/broken-link.png";
         document.getElementById("inUrlClassIconWrapper").setAttribute("onclick", "");
       }
 
-      document.getElementById("inUrlGroup").value = currentClassObj[CLASS_CHAT_GROUP_URL];
+      if (currentClassObj[CLASS_CHAT_GROUP_URL] == null){
+
+      }
+
+      document.getElementById("inUrlGroup").textContent = currentClassObj[CLASS_CHAT_GROUP_URL];
+      document.getElementById("inUrlGroup").src = currentClassObj[CLASS_CHAT_GROUP_URL];
       if (isValidHttpUrl(currentClassObj[CLASS_CHAT_GROUP_URL])){
         document.getElementById("inUrlGroupIcon").src = "http://www.google.com/s2/favicons?domain="+currentClassObj[CLASS_CHAT_GROUP_URL];
         document.getElementById("inUrlGroupIconWrapper").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_CHAT_GROUP_URL]+"')");
       }else{
-        document.getElementById("inUrlGroupIcon").src = "../../assets/img/broken-link.png";
+        document.getElementById("inUrlGroupBlock").style.display = "none";
+        document.getElementById("inUrlGroupIcon").src = "https://app.golearn.com.my/assets/img/broken-link.png";
         document.getElementById("inUrlGroupIconWrapper").setAttribute("onclick", "");
       }
 
-      document.getElementById("inUrlMaterial").value = currentClassObj[CLASS_MATERIAL_URL];
+      document.getElementById("inUrlMaterial").textContent = currentClassObj[CLASS_MATERIAL_URL];
+      document.getElementById("inUrlMaterial").src = currentClassObj[CLASS_MATERIAL_URL];
       if (isValidHttpUrl(currentClassObj[CLASS_MATERIAL_URL])){
         document.getElementById("inUrlMaterialIcon").src = "http://www.google.com/s2/favicons?domain="+currentClassObj[CLASS_MATERIAL_URL];
         document.getElementById("inUrlMaterialIconWrapper").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_MATERIAL_URL]+"')");
       }else{
-        document.getElementById("inUrlMaterialIcon").src = "../../assets/img/broken-link.png";
+        document.getElementById("inUrlMaterialBlock").style.display = "none";
+        document.getElementById("inUrlMaterialIcon").src = "https://app.golearn.com.my/assets/img/broken-link.png";
         document.getElementById("inUrlMaterialIconWrapper").setAttribute("onclick", "");
       }
 
@@ -1586,6 +1560,35 @@
         addTimeSlot(currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i], currentClassObj[CLASS_TIMESLOT_START_ARR][i], currentClassObj[CLASS_TIMESLOT_END_ARR][i]); 
         }
       }
+
+
+      // Timeslot
+      let myDayOfWeekId = MyDayOfWeekId; 
+      let myDayOfWeek = MyDayOfWeek; 
+      let timeslot = '';
+      let startTime, endTime = '';
+
+      for (let i = 0; i<currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR].length; i++){
+        if (currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i] == null || currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i] == ''){
+          continue;
+        }
+
+        startTime = currentClassObj[CLASS_TIMESLOT_START_ARR][i];
+        endTime = currentClassObj[CLASS_TIMESLOT_END_ARR][i];
+        startTime = (parseInt(startTime.substring(0, 2))>12) ? (parseInt(startTime.substring(0, 2)) - 12) + startTime.substring(2, 5) + 'PM' : startTime + 'AM';
+        endTime = (parseInt(endTime.substring(0, 2))>12) ? (parseInt(endTime.substring(0, 2)) - 12) + endTime.substring(2, 5) + 'PM' : endTime + 'AM';
+        
+        timeslot += myDayOfWeek[myDayOfWeekId.indexOf(currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i])] +' '+startTime+'-'+endTime;
+        // console.log
+        if (i == currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR].length - 1){
+          // Last item
+        }else{
+          timeslot += ', '
+        }
+      }
+      let inTimeSlot = "<i class='fas fa-calendar-alt fa-fw' style='margin-right:0.8rem'></i>"+ timeslot;
+      document.getElementById("inTimeSlot").innerHTML = inTimeSlot
+
 
       // Tutor Panel
       document.getElementById("inTutor1ImgUrl").src = currentClassObj[CLASS_TUTOR_IMG_URL_ARR][0];
@@ -1612,11 +1615,29 @@
       tutor2Name = currentClassObj[CLASS_TUTOR_NAME_ARR][1];
       tutor2Phone = currentClassObj[CLASS_TUTOR_PHONE_ARR][1];
 
+      let inTeacher = "";
+      if (currentClassObj[CLASS_TUTOR_NAME_ARR][1] == null || currentClassObj[CLASS_TUTOR_NAME_ARR][1] == ""){
+        inTeacher= currentClassObj[CLASS_TUTOR_NAME_ARR][0];
+      }else {
+        inTeacher= currentClassObj[CLASS_TUTOR_NAME_ARR][0] + ", " +  currentClassObj[CLASS_TUTOR_NAME_ARR][1];
+      }
+      let inTeacherFinal = "<i class='fas fa-chalkboard-teacher fa-fw' style='margin-right:0.8rem'></i>" + inTeacher;
+      document.getElementById("inTeacher").innerHTML = inTeacherFinal;
+
       // Fee Panel
       document.getElementById("inFee").value = currentClassObj[FEES_KEY];
       document.getElementById("feeTypePerMonthRadio").checked = currentClassObj[FEES_TYPE_KEY] === FEES_TYPE_PER_MONTH_KEY ;
       document.getElementById("feeTypePerHourRadio").checked = currentClassObj[FEES_TYPE_KEY] === FEES_TYPE_PER_HOUR_KEY ;
 
+      let feeType = "";
+      if (currentClassObj[FEES_TYPE_KEY] === FEES_TYPE_PER_MONTH_KEY)
+        feeType = "Per Month";
+      else 
+        feeType = "Per Hour";
+
+      let inTuitionFee = "<i class='fas fa-dollar-sign fa-fw' style='margin-right:0.8rem'></i>" + "RM" + currentClassObj[FEES_KEY] +" ("+feeType+") ";
+      document.getElementById("inTuitionFee").innerHTML = inTuitionFee;
+      
       // Admin Panel
       // document.getElementById("onlineonly_check").checked = currentClassObj[ONLINE_KEY];
       // if (currentClassObj[ONLINE_KEY]){
@@ -1661,8 +1682,19 @@
 
     }
 
+    // Initialization
+    AuthCheck();
+
+    // Page Specific Initialization
+    function loadPageInitFunc(){
+
+      LoadLessonInfo();
+
+      loadAllStudents();
+    }
+
     //---------- Load all lessons details ----------//
-    LoadLessonInfo();
+    // LoadLessonInfo();
     // Lesson Load More Button - Init
     const lessonLoadmore = document.querySelector('#btnLessonLoadMore');
     lessonLoadmore.style.visibility='hidden';
@@ -1672,7 +1704,7 @@
     lessonLoadmore.addEventListener('click', lessonLoadMoreHandleClick );
 
     //---------- Load all students details ----------//
-    loadAllStudents();
+    // loadAllStudents();
     // Lesson Load More Button - Init
     const stuLoadmore = document.querySelector('#btnStudentLoadMore');
     stuLoadmore.style.visibility='hidden';
@@ -1681,22 +1713,22 @@
     }
     stuLoadmore.addEventListener('click', stuLoadMoreHandleClick );
 
-		firebase.auth().onAuthStateChanged(function(user){
+		// firebase.auth().onAuthStateChanged(function(user){
       
-			if(!user){
-        // Return to login if user does not exist.
-				window.location.href = "./login.html"
-			}else{
-        // if the displayName is null, it means user register using Phone
-        if (firebase.auth().currentUser.displayName == null ){
-            userId = firebase.auth().currentUser.phoneNumber;
-        }else
-            userId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+		// 	if(!user){
+    //     // Return to login if user does not exist.
+		// 		window.location.href = "./login.html"
+		// 	}else{
+    //     // if the displayName is null, it means user register using Phone
+    //     if (firebase.auth().currentUser.displayName == null ){
+    //         userId = firebase.auth().currentUser.phoneNumber;
+    //     }else
+    //         userId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
 
-        loadUserInfo(userId);
+    //     loadUserInfo(userId);
 
-			}
-		});
+		// 	}
+		// });
 
 
     //---------- Init All Admin's Student details ----------//
@@ -1719,58 +1751,52 @@
     }
     tutorAdminLoadmore.addEventListener('click', tutorAdminLoadMoreHandleClick );
 
-    // User Specific
-    function loadUserInfo(userId){
-      // Tutor Id must be a phone with +60, no spacing or other chars
-      var docRef = db.collection("Users").doc(userId);
+    // // User Specific
+    // function loadUserInfo(userId){
+    //   // Tutor Id must be a phone with +60, no spacing or other chars
+    //   var docRef = db.collection("Users").doc(userId);
       
-      // docRef.get().then((doc) => {
-      docRef.onSnapshot((doc) => {
-        if (doc.exists) {
-          // console.log("Document data:", doc.data());
-          current_name = (doc.data().name == null || doc.data().name == "")? "New User" : doc.data().name;
-          current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email;
-          current_phone = (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone; 
-          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/empty-photo.png" : doc.data().imgUrl;
-          current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
-          current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
-          current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
-          current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
-          current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
+    //   // docRef.get().then((doc) => {
+    //   docRef.onSnapshot((doc) => {
+    //     if (doc.exists) {
+    //       // console.log("Document data:", doc.data());
+    //       current_name = (doc.data().name == null || doc.data().name == "")? "New User" : doc.data().name;
+    //       current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email;
+    //       current_phone = (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone; 
+    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/empty-photo.png" : doc.data().imgUrl;
+    //       current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
+    //       current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
+    //       current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
+    //       current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
+    //       current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
 
-          // Store data to sessionStorage
-          // var tutorDataObj = {
-          //   [NAME_KEY] : doc.data().name,
-          //   [EMAIL_KEY] : doc.data().email,
-          //   [PHONE_KEY] : doc.data().phone,
-          //   [ADDRESS_1_KEY] :doc.data().address1,
-          //   [ADDRESS_2_KEY] :doc.data().address2,
-          //   [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
-          //   [ADDRESS_STATE_KEY] :doc.data().addressState,
-          //   [IMAGE_KEY] : doc.data().imgUrl,
-          //   [PROFILE_STATUS_KEY] : doc.data().profileStatus,
-          // }
+    //       // Store data to sessionStorage
+    //       // var tutorDataObj = {
+    //       //   [NAME_KEY] : doc.data().name,
+    //       //   [EMAIL_KEY] : doc.data().email,
+    //       //   [PHONE_KEY] : doc.data().phone,
+    //       //   [ADDRESS_1_KEY] :doc.data().address1,
+    //       //   [ADDRESS_2_KEY] :doc.data().address2,
+    //       //   [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
+    //       //   [ADDRESS_STATE_KEY] :doc.data().addressState,
+    //       //   [IMAGE_KEY] : doc.data().imgUrl,
+    //       //   [PROFILE_STATUS_KEY] : doc.data().profileStatus,
+    //       // }
 
-          // Set tutorInfoObj as sessionStorage
-          // sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
+    //       // Set tutorInfoObj as sessionStorage
+    //       // sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
 
-          // Set the nav user name and public profile link
-          document.getElementById("user").textContent = doc.data().name;
-        } 
-        else {
-          console.log("No user! Redirecting to login");
-          window.location = "login.html"
+    //       // Set the nav user name and public profile link
+    //       document.getElementById("user").textContent = doc.data().name;
+    //     } 
+    //     else {
+    //       console.log("No user! Redirecting to login");
+    //       window.location = "login.html"
           
-        }
-      });
-    };
+    //     }
+    //   });
+    // };
 
-
-    // Sign out
-    function signOutFunction(){
-      $('#signOutModal').modal('show');
-      $("#signOutModal").appendTo("body");
-    }
 
     // Add Time Slot
     function addTimeSlot(dayOfWeekVal, startTime, endTime){
@@ -2139,6 +2165,159 @@
 
     }
 
+    function addLesson2(type='NEW', doc, lessonId){
+      // <div class="row lesson-wrapper">
+      //   <div class="col-md-12" >
+      //     <div class="row">
+      //       <div class="col-md-4 lesson-active" data-toggle="modal" data-target="#editLessonModal">
+      //         <div class="row">
+      //           <div class="col-4">
+      //             <p class="lesson-item" style="font-weight: 400;">12/6/2022</p>
+      //           </div>
+      //           <div class="col-8">
+      //             <p class="lesson-item" style="font-weight: 400;">11:00AM - 12:00AM</p>
+      //           </div>
+      //         </div>
+      //       </div>
+      //       <div class="col-md-4 lesson-active" data-toggle="modal" data-target="#editLessonModal">
+      //           <p class="lesson-item">Announcement Text Here Please complete your homework before today. Pls bring color pensil and eraser to class next monday</p>
+      //       </div>
+      //       <div class="col-md-4 lesson-active" data-toggle="modal" data-target="#editLessonModal">
+      //         <div class="lesson-item">
+      //           <span style="font-size: small; font-weight:600;">5 <i class="fas fa-star" style="color: #FF9529;"></i></span>  
+      //           <span class="lesson-item">Feedback Text Here Alice is very talkertive. need more attention. Overall the class is good. Students interact actively with teacher. </span>
+      //         </div>
+      //       </div>
+      //     </div>
+      //   </div>
+      // </div>
+      // Type:
+      // 'NEW' - Add a new lesson
+      // 'LOAD' - Load data from doc. 
+
+      // 
+      let date_item_p = document.createElement('p');
+      date_item_p.className = "lesson-item";
+      date_item_p.setAttribute("style", "font-weight: 400;")
+      if (type == 'NEW'){
+        // date_item_p.textContent = document.getElementById("datepicker").value;
+      }else if (type == 'LOAD'){
+        date_item_p.textContent = doc.data()[LESSON_DATE ].toDate().toLocaleDateString("en-GB");
+      }
+      let date_item_div = document.createElement('div');
+      date_item_div.className = "col-4";
+      date_item_div.appendChild(date_item_p);
+
+      let start_item_p = document.createElement('p');
+      start_item_p.className = "lesson-item";
+      start_item_p.setAttribute("style", "font-weight: 400;")
+
+      let startTime = doc.data()[LESSON_START];
+      let endTime = doc.data()[LESSON_END];
+      startTime = (parseInt(startTime.substring(0, 2))>12) ? (parseInt(startTime.substring(0, 2)) - 12) + startTime.substring(2, 5) + 'PM' : startTime + 'AM';
+      endTime = (parseInt(endTime.substring(0, 2))>12) ? (parseInt(endTime.substring(0, 2)) - 12) + endTime.substring(2, 5) + 'PM' : endTime + 'AM';
+      let timeslot = startTime+' - '+endTime;
+
+      if (type == 'NEW'){
+        // start_item_p.textContent = document.getElementById("addLessonStart").value
+      }else if (type == 'LOAD'){
+        start_item_p.textContent = timeslot;
+      }
+      let start_item_div = document.createElement('div');
+      start_item_div.className = "col-8";
+      start_item_div.appendChild(start_item_p);
+
+      let time_div = document.createElement('div');
+      time_div.className = "row"
+      time_div.appendChild(date_item_div);
+      time_div.appendChild(start_item_div);
+      // time_div.appendChild(end_item_div);
+
+      let time_top_div = document.createElement('div');
+      time_top_div.className = "col-md-3 lesson-active"
+      time_top_div.appendChild(time_div);
+
+      let description = (doc.data()[LESSON_DESC] == null || doc.data()[LESSON_DESC] == "") ? "No notes" : doc.data()[LESSON_DESC];
+      let desc_p = document.createElement('p');
+      desc_p.className = "lesson-item";
+      if (type == 'NEW'){
+        // desc_p.textContent =  document.getElementById("addLessonDesc").value
+      }else if (type == 'LOAD'){
+        desc_p.textContent = description;
+      }
+      let desc_top_div = document.createElement('div');
+      desc_top_div.className = "col-md-5 lesson-active"
+      // desc_top_div.setAttribute('data-toggle', 'modal');
+      // desc_top_div.setAttribute('data-target', '#editLessonModal');
+      desc_top_div.appendChild(desc_p);
+
+      // Feedback
+      let ratingSpanHtml ="";
+      if (doc.data()[LESSON_RATE] == null || isNaN(doc.data()[LESSON_RATE]) || doc.data()[LESSON_RATE] == 0){
+        ratingSpanHtml = "<i class='fas fa-star' style='color: #ff9529;''></i> ";
+      }else {
+        ratingSpanHtml = doc.data()[LESSON_RATE] + " <i class='fas fa-star' style='color: #ff9529;'></i> ";
+      }
+      let ratingSpan = document.createElement('span');
+      ratingSpan.setAttribute("style", "font-size: small; font-weight:600;");
+      ratingSpan.innerHTML = ratingSpanHtml;
+
+      let feedback = (doc.data()[LESSON_FEEDBACK] == null || doc.data()[LESSON_FEEDBACK] == "") ? "" : doc.data()[LESSON_FEEDBACK];
+      let feedback_item_p = document.createElement('span');
+      feedback_item_p.className = "lesson-item";
+      if (type == 'NEW'){
+        // feedback_item_p.textContent = document.getElementById("addLessonFeedback").value;
+      }else if (type == 'LOAD'){
+        feedback_item_p.textContent = feedback;
+      }
+
+      let feedback_item_div = document.createElement('div');
+      feedback_item_div.className = "lesson-item"; 
+      feedback_item_div.appendChild(ratingSpan);
+      feedback_item_div.appendChild(feedback_item_p);
+ 
+      let feedback_top_div = document.createElement('div');
+      feedback_top_div.className = "col-md-4 lesson-active"; 
+      feedback_top_div.appendChild(feedback_item_div);
+
+      let edit_wrapper = document.createElement('div');        
+      edit_wrapper.className = "row"
+      edit_wrapper.appendChild(time_top_div);
+      edit_wrapper.appendChild(desc_top_div);
+      edit_wrapper.appendChild(feedback_top_div);
+      let edit_wrapper_top = document.createElement('div');        
+      edit_wrapper_top.className = "col-md-12"
+      // edit_wrapper_top.setAttribute('data-toggle', 'modal');
+      // edit_wrapper_top.setAttribute('data-target', '#editLessonModal');
+      if (type == 'NEW'){
+        // edit_wrapper_top.setAttribute('data-id', lessonId);
+        // edit_wrapper_top.setAttribute('data-date', document.getElementById("datepicker").value);
+        // edit_wrapper_top.setAttribute('data-start', document.getElementById("addLessonStart").value);
+        // edit_wrapper_top.setAttribute('data-end', document.getElementById("addLessonEnd").value);
+        // edit_wrapper_top.setAttribute('data-desc', document.getElementById("addLessonDesc").value);
+        // edit_wrapper_top.setAttribute('data-feedback', document.getElementById("addLessonFeedback").value);
+        // edit_wrapper_top.setAttribute('data-rate', document.getElementById("addLessonRate").value);
+      }else if (type == 'LOAD'){
+        edit_wrapper_top.setAttribute('data-id', doc.data()[LESSON_ID]);
+        edit_wrapper_top.setAttribute('data-date', doc.data()[LESSON_DATE].toDate().toLocaleDateString("en-GB"));
+        edit_wrapper_top.setAttribute('data-start', doc.data()[LESSON_START]);
+        edit_wrapper_top.setAttribute('data-end', doc.data()[LESSON_END]);
+        edit_wrapper_top.setAttribute('data-desc', doc.data()[LESSON_DESC]);
+        edit_wrapper_top.setAttribute('data-feedback', doc.data()[LESSON_FEEDBACK]);
+        edit_wrapper_top.setAttribute('data-rate', doc.data()[LESSON_RATE]);
+      }
+      
+      edit_wrapper_top.appendChild(edit_wrapper);
+
+      let wrapper_div = document.createElement('div');
+      wrapper_div.className = "row lesson-wrapper";
+      wrapper_div.appendChild(edit_wrapper_top);
+
+      const lesson_container = document.getElementById("lesson-container");
+      lesson_container.appendChild(wrapper_div);
+
+    }
+
     // Load Lesson Details
     function LoadLessonInfo(){
       let today = new Date();
@@ -2161,7 +2340,7 @@
         }
         querySnapshot.forEach((doc) => {
           // console.log(doc.data());
-          addLesson(type='LOAD', doc, '');
+          addLesson2(type='LOAD', doc, '');
 
         });
 
@@ -2388,9 +2567,10 @@
  
       let stuName_p = document.createElement('p');
       stuName_p.className = "student-item";
+      stuName_p.setAttribute("style", "font-size: 1rem; font-weight: 400;")
       stuName_p.textContent = doc.data()[CLASS_STUDENT_STU_NAME];
       let stuName_div = document.createElement('div');
-      stuName_div.className = "col-md-4";
+      stuName_div.className = "col-md-6";
       stuName_div.appendChild(stuName_p);
 
       let stuGender_p = document.createElement('p');
@@ -3391,6 +3571,101 @@
 
     }
 
+    // https://ekoopmans.github.io/html2pdf.js/
+    function generatePDFeKoopmans(id){
+
+      element = document.getElementById(id);
+      var cln = element.cloneNode(true);
+
+      // let title = document.createElement("div");
+      // title.className = "col-12";
+
+      // title.textContent = "Progress Report";
+
+      // <div class="row" id="header">
+      //   <div class="col-md-12 text-center">
+      //     <h3 id="">English H/L Language</h3>
+      //   </div>
+      //   <div class="col-md-12 text-center" >
+      //     <h4 id="">Progress Report</h4>
+      //   </div>
+      //   <div class="col-md-12 text-center">
+      //     <p id="" style="font-size: 14px; font-weight: 300; color: gray; margin-bottom: 12px;">Nurfarizah biti adsasdas, Cikgu Jee</p>
+      //   </div>
+      //   <div class="col-md-12 text-center">
+      //     <p id="" style="font-size: 14px; font-weight: 300; color: gray; margin-bottom: 12px;">Date Generated: `+new Date().toLocaleDateString("en-gb")+`</p>
+      //   </div>
+      // </div>
+
+
+      // <div class="col-md-12 text-center">
+      //   <p>Powered by 
+      //     <span>
+      //       <a href="https://golearn.com.my/" class="simple-text logo-mini">
+      //         <img src="../../assets/img/golearn-plain.svg" style="width: 108px; height: auto; " alt=""></img>
+      //       </a>
+      //     </span>
+      //   </p>
+      // </div>
+
+      let className_temp = currentClassObj[CLASS_NAME]
+      let inTeacher = "";
+      if (currentClassObj[CLASS_TUTOR_NAME_ARR][1] == null || currentClassObj[CLASS_TUTOR_NAME_ARR][1] == ""){
+        inTeacher= currentClassObj[CLASS_TUTOR_NAME_ARR][0];
+      }else {
+        inTeacher= currentClassObj[CLASS_TUTOR_NAME_ARR][0] + ", " +  currentClassObj[CLASS_TUTOR_NAME_ARR][1];
+      }
+
+      let header_html = `
+        <div class="col-md-12 text-center">
+          <h3 id="">`+className_temp+`</h3>
+        </div>
+        <div class="col-md-12 text-center" >
+          <h4 id="">Progress Report</h4>
+        </div>
+        <div class="col-md-12 text-center">
+          <p id="" style="font-size: 14px; font-weight: 300; color: gray; margin-bottom: 12px;">`+inTeacher+`</p>
+        </div>
+        <div class="col-md-12 text-center">
+          <p id="" style="font-size: 14px; font-weight: 300; color: gray; margin-bottom: 12px;">Date Generated: `+new Date().toLocaleDateString("en-gb")+`</p>
+        </div>
+      `;
+      let header_div = document.createElement("div");
+      header_div.className = "row";
+      header_div.innerHTML = header_html;
+
+      let footer_html = `
+        <div class="col-md-12 text-center">
+          <p style="margin-bottom: 0;">Powered by
+            <span>
+              <a href="https://golearn.com.my/" class="simple-text logo-mini">
+                <img src="../../assets/img/golearn-plain.svg" style="width: 108px; height: auto; " alt=""></img>
+              </a>
+            </span>
+          </p>
+        </div>
+      `;
+      let footer_div = document.createElement("div");
+      footer_div.className = "row";
+      footer_div.setAttribute("style", "margin-top: 3rem")
+      footer_div.innerHTML = footer_html;
+
+      let report = document.createElement("div");
+      report.appendChild(header_div);
+      report.appendChild(cln);
+      report.appendChild(footer_div);
+
+      var opt = {
+        margin:       0.2,
+        filename:     'progress_report.pdf',
+        pagebreak:    { before: '.beforeClass', after: ['#after1', '#after2'], avoid: 'img' },
+        image:        { type: 'jpeg', quality: 0.95 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(report).save();
+    }
   </script>
 
   <!-- Script -->
@@ -3984,44 +4259,14 @@
 
 
       $('#btnSignOutModalUpdate').on('click', function (e) {
-      
         firebase.auth().signOut().then(() => {
             // Sign-out successful.
           }).catch((error) => {
-            window.alert("Logging out failed");
             func.showNotification('top','center', 'danger', 'error_outline', "Logging out failed." );
           });
-        // Do something
-        $('#signOutModal').modal('hide');
       });
 
-      $('#btnSignOutModalClose1').on('click', function (e) {
-        $('#signOutModal').modal('hide');
-      });
-      $('#btnSignOutModalClose2').on('click', function (e) {
-        $('#signOutModal').modal('hide');
-      });
-    
-      // Activate Account
-      $('#btnActivationModalUpdate').on('click', function (e) {
-        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-          window.location = "https://golearn.com.my/join-us/";
-        }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-          window.location = "https://golearn.com.my/contact-us/";
-        }else {
-          window.location = "https://golearn.com.my/pricing/";
-        }
-        // Do something
-        $('#activationModal').modal('hide');
-      });
 
-      $('#btnActivationModalClose1').on('click', function (e) {
-        $('#activationModal').modal('hide');
-      });
-      $('#btnActivationModalClose2').on('click', function (e) {
-        $('#activationModal').modal('hide');
-      });
-    
     });
 
   </script>
