@@ -86,6 +86,101 @@
   margin-right: 0.5em;
 } */
 
+/* Card-v1 */
+/* Used in class.html */
+.card-v1 {
+  margin-top: 2px;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 2px 2px 10px rgba(46, 46, 46, 0.3);
+  /* transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12); */
+  padding: 14px 24px 14px 24px;
+  cursor: pointer;
+}
+
+.card-v1:hover {
+  /* transform: scale(1.05); */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-v1 h3 {
+  font-weight: 600;
+}
+
+.card-v1 h4 {
+  font-weight: 400;
+}
+
+.card-v1 p {
+  font-size: smaller;
+  font-weight: 300;
+  margin: 0;
+}
+
+/* .card-v1 img {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  max-height: 120px;
+} */
+.card-v1-online-label {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-left: 0.5em;
+  color: white;
+  background-color: rgb(253, 114, 0);
+  border-radius: 10px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  box-shadow: 2px 2px 4px rgb(46, 46, 46);
+}
+
+.card-v1-status-label {
+  /* font-size: 1rem; */
+  font-weight: 400;
+  margin-left: 0.5em;
+  color: white;
+  background-color: rgb(253, 114, 0);
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  box-shadow: 2px 2px 3px rgba(46, 46, 46, 0.7);
+}
+
+.card-v1-status-label.primary {
+  background-color: #2e74b6 !important;
+}
+
+.card-v1-status-label.pending {
+  background-color: rgb(253, 114, 0) !important;
+}
+
+.card-v1-status-label.active {
+  background-color: #4bb543 !important;
+}
+
+.card-v1-status-label.passive {
+  background-color: gray !important;
+}
+
+.card-v1-status-label.danger {
+  background-color: red !important;
+}
+
+.card-v1-item-wrapper {
+  display: flex;
+}
+
+.card-v1-item {
+  font-weight: 600;
+  color: #6d6d6d;
+}
 /* Class Specific */
 .card-class {
   margin-top: 1rem;
@@ -174,7 +269,7 @@
 
 /* Student Specific */
 .card-student {
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   border-radius: 4px;
   background: #fff;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
@@ -260,10 +355,10 @@
 }
 
 .card-student-item {
-  /* margin-top: 0.2rem; */
-  /* border-radius: 4px; */
-  /* background: #fff; */
-  /* box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05); */
+  margin-top: 0.1rem;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
   transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
     0.3s box-shadow,
     0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
@@ -275,11 +370,11 @@
 
 .card-student-item:hover {
   /* transform: scale(1.05); */
-  background: #dddddd;
+  /* background: #dddddd;
   transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
     0.3s box-shadow,
-    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
-  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06); */
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12); */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
 
 .card-student-item > p {
@@ -435,7 +530,7 @@
 
 /* Lesson Specific  */
 .lesson-header {
-  padding: 0rem 0rem 0rem 0rem;
+  padding: 0.5rem 0.3rem 0.5rem 0.3rem;
   border-top: solid #2e74b6;
   border-bottom: solid #2e74b6;
   border-width: 2px;
@@ -451,18 +546,31 @@
 }
 
 .lesson-wrapper {
-  padding: 0rem 0rem 0rem 0rem;
+  /* padding: 0rem 0rem 0rem 0rem;
+  background-color: #fff;
   border-bottom: solid #2e74b6;
   border-width: thin;
   transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
     0.3s box-shadow,
-    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12); */
+
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 4px;
+  /* margin-left: 0.5em; */
+  background-color: #fff;
+  border-radius: 10px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
 }
 
 .lesson-wrapper:hover {
-  transform: scale(1.01);
+  /* transform: scale(1.01); */
 
-  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06); */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .lesson-active {
@@ -486,18 +594,29 @@
 }
 
 .student-wrapper {
-  padding: 0rem 0rem 0rem 0rem;
+  /* padding: 0rem 0rem 0rem 0rem;
   border-bottom: solid #2e74b6;
   border-width: thin;
   transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
     0.3s box-shadow,
-    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12); */
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 4px;
+  /* margin-left: 0.5em; */
+  background-color: #fff;
+  border-radius: 10px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
 }
 
 .student-wrapper:hover {
-  transform: scale(1.01);
+  /* transform: scale(1.01); */
 
-  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06); */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Tutor specific - Used in Class-Select Tutor */
@@ -684,4 +803,27 @@ td input[type="number"] {
 .addrow {
   text-transform: none;
   font-weight: bold;
+}
+
+@media (max-width: 576px) {
+  /* .card-header {
+    display: none;
+  } */
+  .card-v1 {
+    margin-bottom: 0.8rem;
+    border-radius: 10px;
+  }
+  .lesson-header {
+    display: none;
+  }
+
+  .card-student {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+}
+
+@media (max-width: 992px) {
 }
