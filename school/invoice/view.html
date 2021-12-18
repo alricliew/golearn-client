@@ -703,11 +703,15 @@
       <!-- Main content -->
       <div class="content">
         <div class="container-fluid">
+
           <!-- Main panel -->
           <div class="row">
    
             <div class="col-md-12"  style="padding-bottom: 0">
               <div class="row d-flex">
+                <div class="p-2">
+                  <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
+                </div>
                 <div class="p-2">
                   <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Invoice Status</span> 
                   <p id="invStatus" style="font-weight: bold; font-size: x-large;  margin-bottom: 0;">-</p>
@@ -1293,7 +1297,7 @@
         btnRecordPayment.style.pointerEvents = 'none';
         
       }else if (invObj[INV_INV_STATUS] === INV_STATUS_NEW){
-        document.getElementById("invStatus").textContent = 'New';
+        document.getElementById("invStatus").textContent = 'Unpaid';
         btnStep1.className = 'btn btn-primary btn-just-icon btn-round';
         btnStep2.className = 'btn btn-primary btn-just-icon btn-round';
         btnStep3.className = 'btn btn-default btn-just-icon btn-round';
@@ -1378,7 +1382,7 @@
       if (invObj[INV_INV_STATUS] === INV_STATUS_DRAFT){
         document.getElementById("previewInvStatus").textContent = 'Draft';
       }else if (invObj[INV_INV_STATUS] === INV_STATUS_NEW){
-        document.getElementById("previewInvStatus").textContent = 'New';
+        document.getElementById("previewInvStatus").textContent = 'Unpaid';
       }else if (invObj[INV_INV_STATUS] === INV_STATUS_PAID){
         document.getElementById("previewInvStatus").textContent = 'Paid';
       }

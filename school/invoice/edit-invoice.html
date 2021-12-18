@@ -656,13 +656,11 @@
       <!-- Main content -->
       <div class="content">
         <div class="container-fluid">
-          <!-- your content here -->
-
           <!-- Main content -->
           <!-- Button -->
-          <div class="row d-flex" id="desciption-row" >
+          <div class="row d-flex">
             <div class="p-2">
-              <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
+              <a href="./view.html" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
             </div>
             <div class="p-2">
               <a href="javascript:;" class="btn btn-outline-primary btn-round" id="btnSave" style="background-color: #2e74b6; color: white;" data-toggle="modal" data-target="#saveModal" onclick="validateForm('accordionExample'); fieldChecker();" disabled> <i class="material-icons" style="color: #fff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save </a>
@@ -1480,7 +1478,16 @@
       document.getElementById("invNum").value =invObj[INV_NUMBER];
       document.getElementById("invIssueDate").value = new Date(invObj[INV_ISSUE_DATE].seconds*1000).toLocaleDateString("en-GB");
       document.getElementById("invPaymentDue").value = new Date(invObj[INV_DUE_DATE].seconds*1000).toLocaleDateString("en-GB");
-      document.getElementById("invStatus").value =invObj[INV_INV_STATUS];
+      
+      let status = ''
+      if (invObj[INV_INV_STATUS] === INV_STATUS_DRAFT)
+        status = 'Draft'
+      else if (invObj[INV_INV_STATUS] === INV_STATUS_NEW)
+        status = 'Unpaid'
+      else if (invObj[INV_INV_STATUS] === INV_STATUS_PAID)
+        status = 'Paid'
+      else  status = 'Unknown'
+      document.getElementById("invStatus").value =status;
 
       document.getElementById("invNotes").innerHTML = invObj[INV_NOTES];
       // tinymce.get("invNotes").setContent(invObj[INV_NOTES]);
@@ -1511,14 +1518,7 @@
       document.getElementById("previewInvNum").textContent = invObj[INV_NUMBER];
       document.getElementById("previewInvIssueDate").textContent = new Date(invObj[INV_ISSUE_DATE].seconds*1000).toLocaleDateString("en-GB");
       document.getElementById("previewInvPaymentDue").textContent = new Date(invObj[INV_DUE_DATE].seconds*1000).toLocaleDateString("en-GB");
-      let status = ''
-      if (invObj[INV_INV_STATUS] === INV_STATUS_DRAFT)
-        status = 'Draft'
-      else if (invObj[INV_INV_STATUS] === INV_STATUS_NEW)
-        status = 'New'
-      else if (invObj[INV_INV_STATUS] === INV_STATUS_PAID)
-        status = 'Paid'
-      else  status = 'Unknown'
+
       document.getElementById("previewInvStatus").textContent = status;
       document.getElementById("previewInvNotes").innerHTML = invObj[INV_NOTES];
       document.getElementById("previewInvFooterNotes").innerHTML = invObj[INV_FOOTER_NOTES];

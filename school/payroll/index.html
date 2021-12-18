@@ -585,9 +585,9 @@
                     <!-- </div> -->
                   <!-- </div> -->
 
-                  <div class="col-md-12" id="payrollList">
+                  <div class="col-md-12" id="payrollList" style="margin-top: 0.5rem;">
 
-                    <a href="javascript:;" name="daterange" id='daterange' style="padding:0.2rem 0.5rem 0.2rem 0.2rem; border: solid thin #2e74b6; width: 500px;">
+                    <a href="javascript:;" name="daterange" id='daterange' style="padding:0.2rem 0.5rem 0.2rem 0.2rem; border: solid thin #2e74b6; width: 500px; font-size: 14px; ">
                       <i class="fa fa-calendar"></i>&nbsp;
                       <span>Select date range</span> <i class="fa fa-caret-down"></i> 
                     </a>
@@ -603,81 +603,13 @@
               </div>
             </div>
 
-
-
-
-            <div class="row" id="card-all-students">
-  
-              <!-- <div class="col-md-12 card-student">
-                <div class="row" >
-                  <div class="col-md-11" style="padding: 0;">
-                    <div class="row" style="margin: 0;">
-                      <div class="col-md-3">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Student Name</h6>
-                      </div>
-                      <div class="col-md-1">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Gender</h6>
-                      </div>
-                      <div class="col-md-3">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Guardian</h6>
-                      </div>
-                      <div class="col-md-2">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Contact No.</h6>
-                      </div>
-                      <div class="col-md-1">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Status</h6>
-                      </div>
-                      <div class="col-md-2">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Date Added</h6>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-1">
-                    <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Action</h6>
-                  </div>
-  
-                </div>
-              </div> -->
-  
-              <!-- Student List Start -->
-              <!-- <div class="col-md-12 card-student-item">
-                <div class="row">
-                  <div class="col-md-11" style="padding: 0;">
-                    <div class="row" style="margin: 0;">
-                      <div class="col-md-3">
-                        <p>Alric Liew</p>
-                      </div>
-                      <div class="col-md-1">
-                        <p>Male</p>
-                      </div>
-                      <div class="col-md-3">
-                        <p >A Bong</p>
-                      </div>
-                      <div class="col-md-2">
-                        <p>+60138252818</p>
-                      </div>
-                      <div class="col-md-1">
-                        <p class="card-student-status-label active">ACTIVE</p>
-                      </div>
-                      <div class="col-md-2">
-                        <p>12/2/2021</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-1">
-                    <a href="#" style="margin: 0; padding: 0.3em;" class="btn btn-sm btn-outline-danger btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" ><i class="material-icons" style="color: red;">remove</i></a>
-                  </div>
-                </div>
-              </div> -->
-      
-            </div>
   
           </div>
 
 
           <div class="container-fluid" >
 
-            <div class="row" id="card-main">
+            <div class="row" id="card-main"  style="margin-top: 1rem;">
   
               <div class="col-md-12 card-student">
                 <div class="row" >
@@ -1131,7 +1063,7 @@
       // Card top
       let payroll_a = document.createElement('a');
       payroll_a.setAttribute('href', 'javascript:;');
-      payroll_a.setAttribute('style', 'margin-right:1rem');
+      payroll_a.setAttribute('style', 'margin-right:1rem; font-size:14px');
       payroll_a.setAttribute('onclick', 'loadPayslipFixed('+doc.data()[PAYROLL_DATE_START].seconds +', '+ doc.data()[PAYROLL_DATE_END].seconds+');');
       payroll_a.textContent = doc.data()[PAYROLL_NAME];
 
@@ -1327,6 +1259,7 @@
       // Description
       let desc_p = document.createElement('p');
       desc_p.textContent = doc.data()[TRANS_TITLE];
+      desc_p.setAttribute("style","font-weight: 400;");
       let desc_div = document.createElement('div');
       desc_div.className = "col-md-3";
       desc_div.appendChild(desc_p);
@@ -1347,6 +1280,8 @@
       // Amount
       let total_p = document.createElement('p');
       total_p.textContent = 'RM'+ parseFloat(doc.data()[TRANS_TOTAL]).toFixed(2);
+      total_p.setAttribute("style","font-weight: 400;");
+
       let total_div = document.createElement('div');
       total_div.className = "col-md-2";
       total_div.appendChild(total_p);
@@ -1386,7 +1321,7 @@
         status_p.textContent = 'Unknown';
       }
       let status_div = document.createElement('div');
-      status_div.className = "col-md-1 align-self-center";
+      status_div.className = "col-md-1";
       status_div.appendChild(status_p);
 
 
@@ -1451,6 +1386,8 @@
       // btn_a.setAttribute("data-studentname",  doc.data().childName);
       let btn_div = document.createElement('div');
       btn_div.className = "col-md-1 align-self-center";
+      btn_div.setAttribute("style"," margin-bottom: 12px");
+
       btn_div.appendChild(btn_edit);
       // btn_div.appendChild(btn_a);
  

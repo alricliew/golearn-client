@@ -458,17 +458,17 @@
   
               <div class="col-md-12 card-student">
                 <div class="row" >
-                  <div class="col-md-11">
+                  <div class="col-md-12">
                     <div class="row">
                       <div class="col-md-1">
                         <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Date</h6>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-6">
                         <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="Client Name">Employer</h6>
                       </div>
-                      <div class="col-md-3">
+                      <!-- <div class="col-md-3">
                         <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="Description">Description</h6>
-                      </div>
+                      </div> -->
                       <div class="col-md-2">
                         <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="Amount">Amount</h6>
                       </div>
@@ -480,9 +480,9 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-1">
+                  <!-- <div class="col-md-1">
                     <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Action</h6>
-                  </div>
+                  </div> -->
   
                 </div>
               </div>
@@ -969,13 +969,6 @@
       docNum_div.className = "col-md-2";
       docNum_div.appendChild(docNum_p);
 
-      // Description
-      let desc_p = document.createElement('p');
-      desc_p.textContent = doc.data()[TRANS_TITLE];
-      let desc_div = document.createElement('div');
-      desc_div.className = "col-md-3";
-      desc_div.appendChild(desc_p);
-
       // Employer
       let clientName = doc.data()[TRANS_SENDER_NAME];
       let clientName_p = document.createElement('p');
@@ -984,10 +977,22 @@
       clientName_div.className = "col-md-3";
       clientName_div.appendChild(clientName_p);
 
+      // Description
+      let desc_p = document.createElement('p');
+      desc_p.textContent = doc.data()[TRANS_TITLE];
+      desc_p.setAttribute('style', 'font-size: 1rem; font-weight: 400');
+      let desc_div = document.createElement('div');
+      desc_div.className = "col-md-6";
+      desc_div.appendChild(desc_p);
+      desc_div.appendChild(clientName_p);
+
+
+
+
       // Amount
       let total_p = document.createElement('p');
       total_p.textContent = 'RM'+ parseFloat(doc.data()[TRANS_TOTAL]).toFixed(2);
-      total_p.setAttribute('style', 'color: green;');
+      total_p.setAttribute('style', 'color: green; font-weight: 500');
 
       let total_div = document.createElement('div');
       total_div.className = "col-md-2";
@@ -1028,7 +1033,7 @@
         status_p.textContent = 'Unknown';
       }
       let status_div = document.createElement('div');
-      status_div.className = "col-md-1 align-self-center";
+      status_div.className = "col-md-1";
       status_div.appendChild(status_p);
 
 
@@ -1037,13 +1042,13 @@
       detail_div.className = 'row';
       detail_div.setAttribute("style","margin: 0;");
       detail_div.appendChild(transDate_div);
-      detail_div.appendChild(clientName_div);
+      // detail_div.appendChild(clientName_div);
       detail_div.appendChild(desc_div);
       detail_div.appendChild(total_div);
       detail_div.appendChild(docNum_div);
       detail_div.appendChild(status_div);
       let detail_top_div = document.createElement('div');
-      detail_top_div.className = "col-md-11";
+      detail_top_div.className = "col-md-12";
       detail_top_div.setAttribute("style"," padding: 12px 0px 12px 0px;");
       detail_top_div.setAttribute("data-toggle","modal");
       detail_top_div.setAttribute("data-target","#previewModal");
@@ -1090,7 +1095,7 @@
       let card_div = document.createElement('div');
       card_div.className = "row"
       card_div.appendChild(detail_top_div);
-      card_div.appendChild(btn_div);
+      // card_div.appendChild(btn_div);
 
       // Card top
       let card_top_div = document.createElement('div');

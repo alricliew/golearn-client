@@ -300,31 +300,33 @@
   
               <div class="col-md-12 card-student">
                 <div class="row" >
-                  <div class="col-md-11" style="padding: 0;">
+                  <div class="col-md-12" style="padding: 0;">
                     <div class="row" style="margin: 0;">
-                      <div class="col-md-2">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Date Issued</h6>
+      
+                      <div class="col-md-5">
+                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Item</h6>
                       </div>
-                      <div class="col-md-2">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Client</h6>
-                      </div>
-                      <div class="col-md-3">
+                      <!-- <div class="col-md-3">
                         <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Description</h6>
-                      </div>
+                      </div> -->
                       <div class="col-md-2">
                         <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Amount</h6>
-                      </div>
-                      <div class="col-md-2">
-                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Invoice No.</h6>
                       </div>
                       <div class="col-md-1">
                         <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Status</h6>
                       </div>
+                      <div class="col-md-2">
+                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Date Issued</h6>
+                      </div>
+                      <div class="col-md-2">
+                        <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Invoice No.</h6>
+                      </div>
+
                     </div>
                   </div>
-                  <div class="col-md-1">
+                  <!-- <div class="col-md-1">
                     <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Action</h6>
-                  </div>
+                  </div> -->
   
                 </div>
               </div>
@@ -434,7 +436,7 @@
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
   
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
   <!-- Common constants -->
   <script src="../../assets/js/common.js" type="text/javascript"></script>
   <!-- Global Var -->
@@ -796,26 +798,26 @@
     //   </div>
     // </div>
 
-      // Trans Date
-      let transDate_p = document.createElement('p');
-      transDate_p.textContent = doc.data()[TRANS_DATE].toDate().toLocaleDateString("en-GB");;
-      let transDate_div = document.createElement('div');
-      transDate_div.className = "col-md-2";
-      transDate_div.appendChild(transDate_p);
 
-      // Doc Number
-      let docNum_p = document.createElement('p');
-      docNum_p.textContent = doc.data()[TRANS_DOC_NUM];
-      let docNum_div = document.createElement('div');
-      docNum_div.className = "col-md-2";
-      docNum_div.appendChild(docNum_p);
+    // let invSender_p = document.createElement('p');
+    //   invSender_p.setAttribute('style', 'font-size: small;');
+    //   invSender_p.textContent = doc.data()[INV_SENDER_NAME];
+    //   let invItem_div = document.createElement('div');
+    //   invItem_div.className = "col-md-6";
+    //   invItem_div.appendChild(invTitle_p);
+    //   invItem_div.appendChild(invSender_p);
 
+
+
+      
       // Description
       let desc_p = document.createElement('p');
       desc_p.textContent = doc.data()[TRANS_TITLE];
-      let desc_div = document.createElement('div');
-      desc_div.className = "col-md-3";
-      desc_div.appendChild(desc_p);
+      desc_p.setAttribute("style", "font-size: 1rem; font-weight: 400;")
+
+      // let desc_div = document.createElement('div');
+      // desc_div.className = "col-md-3";
+      // desc_div.appendChild(desc_p);
 
       // Client
       let clientName = '';
@@ -827,16 +829,18 @@
       let clientName_p = document.createElement('p');
       clientName_p.textContent = clientName;
       let clientName_div = document.createElement('div');
-      clientName_div.className = "col-md-2";
+      clientName_div.className = "col-md-5";
+      clientName_div.appendChild(desc_p);
       clientName_div.appendChild(clientName_p);
 
       // Amount
       let total_p = document.createElement('p');
       total_p.textContent = 'RM'+ parseFloat(doc.data()[TRANS_TOTAL]).toFixed(2);
+      total_p.setAttribute("style", "font-weight: 500;")
+
       let total_div = document.createElement('div');
       total_div.className = "col-md-2";
       total_div.appendChild(total_p);
-
 
       // Status
       let status_p = document.createElement('p');
@@ -864,23 +868,39 @@
         status_p.textContent = 'Unknown';
       }
       let status_div = document.createElement('div');
-      status_div.className = "col-md-1";
+      status_div.className = "col-md-1 col-3";
       status_div.appendChild(status_p);
+
+      // Trans Date
+      let transDate_p = document.createElement('p');
+      transDate_p.textContent = doc.data()[TRANS_DATE].toDate().toLocaleDateString("en-GB");;
+      let transDate_div = document.createElement('div');
+      transDate_div.className = "col-md-2 col-9";
+      transDate_div.appendChild(transDate_p);
+
+      // Doc Number
+      let docNum_p = document.createElement('p');
+      docNum_p.textContent = doc.data()[TRANS_DOC_NUM];
+      let docNum_div = document.createElement('div');
+      docNum_div.className = "col-md-2";
+      docNum_div.appendChild(docNum_p);
+
 
 
       // Student Detail 
       let detail_div = document.createElement('div');
       detail_div.className = 'row';
       detail_div.setAttribute("style","margin: 0;");
-      detail_div.appendChild(transDate_div);
       detail_div.appendChild(clientName_div);
-      detail_div.appendChild(desc_div);
+      // detail_div.appendChild(desc_div);
+
       detail_div.appendChild(total_div);
-      detail_div.appendChild(docNum_div);
       detail_div.appendChild(status_div);
+      detail_div.appendChild(transDate_div);
+      detail_div.appendChild(docNum_div);
 
       let detail_top_div = document.createElement('div');
-      detail_top_div.className = "col-md-11";
+      detail_top_div.className = "col-md-12";
       detail_top_div.setAttribute("style"," padding: 12px 0px 12px 0px;");
       detail_top_div.setAttribute("onclick","viewInvFunction(this)");
       detail_top_div.setAttribute("data-id", doc.data()[TRANS_ID]);
@@ -922,7 +942,7 @@
       let card_div = document.createElement('div');
       card_div.className = "row"
       card_div.appendChild(detail_top_div);
-      card_div.appendChild(btn_div);
+      // card_div.appendChild(btn_div);
 
       // Card top
       let card_top_div = document.createElement('div');

@@ -438,30 +438,30 @@
           </div>
 
           <!-- All Class -->
-          <div class="row" id="card-all-classes">
+          <div class="row" id="card-all-classes" style="margin-top: 1rem;">
 
             <div class="col-md-12 card-student">
               <div class="row" >
                 <div class="col-md-11" style="padding: 0;">
                   <div class="row" style="margin: 0;">
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Class Name</h6>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Class Announcement</h6>
                     </div>
                     <div class="col-md-2">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Schedule</h6>
                     </div>
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Teacher</h6>
-                    </div>
+                    </div> -->
                     <div class="col-md-2">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Last Update</h6>
                     </div>
-                    <div class="col-md-1">
+                    <!-- <div class="col-md-1">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Status</h6>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
                 <div class="col-md-1">
@@ -470,6 +470,48 @@
 
               </div>
             </div>
+
+            <!-- <div class="col-md-12 card-v1">
+              <div class="row ">
+                <div class="col-md-11">
+                  <div class="row" style="margin-bottom: 8px;">
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-3 text-center">
+                          <div style="height: 60px; width: 60px; display: inline-block; overflow: hidden; border-radius: 50%;">
+                            <img id="inTutor1ImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+                          </div>
+                        </div>
+                        <div class="col-9">
+                          <p style="font-size: 1rem; font-weight:400;">Year 3 Std Mathematics asdas asdqw adsadqw adswdqd asda asdq dfewad da <span class="card-v1-status-label active" style="font-size: smaller;">Active</span></p>
+                          <p>Cikgu Norhalizah Binti Mahmud</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <p style="font-weight: 400;">Class AnnoucementClass AnnoucementClass AnnoucementClass AnnoucementClass Annoucement</p>
+                    </div>
+                    <div class="col-md-2">
+                      <p >Tuesday 8:00am - 9:00am</p>
+                    </div>
+                    <div class="col-md-2">
+                      <p >20/2/2021: Updated by Agnes Liew</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <a href="#" style="margin: 0.1rem; padding: 0.3em; background-color: white;   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 0, 0, 0.05);" class="btn btn-sm btn-outline-default btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" >
+                    <img id='inUrlGroupIcon' height="22" width="22" src="http://www.google.com/s2/favicons?domain=https://meet.google.com/" style="object-fit: cover; border-radius: 50%; "/>
+                  </a>
+                  <a href="#" style="margin: 0.1rem; padding: 0.3em;background-color: white;   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 0, 0, 0.05);" class="btn btn-sm btn-outline-default btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" >
+                    <img id='inUrlGroupIcon' height="22" width="22" src="http://www.google.com/s2/favicons?domain=https://web.whatsapp.com/" style="object-fit: cover; border-radius: 50%; "/>
+                  </a>
+                  <a href="#" style="margin: 0.1rem; padding: 0.3em;background-color: white;   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 0, 0, 0.05);" class="btn btn-sm btn-outline-default btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" >
+                    <img id='inUrlGroupIcon' height="22" width="22" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/" style="object-fit: cover; border-radius: 50%; "/>
+                  </a>
+                </div>
+              </div>
+            </div> -->
 
             <!-- <div class="col-md-12 card-student-item">
               <div class="row">
@@ -810,7 +852,7 @@
         querySnapshot.forEach((doc) => {
           // console.log(doc.data())
           docsObj.push(doc.data());
-          renderAllActiveClasses2(doc, "", false);
+          renderAllActiveClasses3(doc, "", false);
 
         });
 
@@ -856,6 +898,228 @@
       });
 
     };
+
+    
+    function renderAllActiveClasses3(doc, courseId, renderNull){
+      // <div class="col-md-12 card-v1">
+      //   <div class="row ">
+      //     <div class="col-md-11">
+      //       <div class="row" style="margin-bottom: 8px;">
+      //         <div class="col-md-5">
+      //           <div class="row">
+      //             <div class="col-3 text-center">
+      //               <div style="height: 60px; width: 60px; display: inline-block; overflow: hidden; border-radius: 50%;">
+      //                 <img id="inTutor1ImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+      //               </div>
+      //             </div>
+      //             <div class="col-9">
+      //               <p style="font-size: 1rem; font-weight:400;">Year 3 Std Mathematics asdas asdqw adsadqw adswdqd asda asdq dfewad da <span class="card-v1-status-label active" style="font-size: smaller;">Active</span></p>
+      //               <p>Cikgu Norhalizah Binti Mahmud</p>
+      //             </div>
+      //           </div>
+      //         </div>
+      //         <div class="col-md-3">
+      //           <p style="font-weight: 400;">Class AnnoucementClass AnnoucementClass AnnoucementClass AnnoucementClass Annoucement</p>
+      //         </div>
+      //         <div class="col-md-2">
+      //           <p >Tuesday 8:00am - 9:00am</p>
+      //         </div>
+      //         <div class="col-md-2">
+      //           <p >20/2/2021: Updated by Agnes Liew</p>
+      //         </div>
+      //       </div>
+      //     </div>
+      //     <div class="col-md-1">
+      //       <a href="#" style="margin: 0.1rem; padding: 0.3em; background-color: white;   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 0, 0, 0.05);" class="btn btn-sm btn-outline-default btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" >
+      //         <img id='inUrlGroupIcon' height="22" width="22" src="http://www.google.com/s2/favicons?domain=https://meet.google.com/" style="object-fit: cover; border-radius: 50%; "/>
+      //       </a>
+      //       <a href="#" style="margin: 0.1rem; padding: 0.3em;background-color: white;   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 0, 0, 0.05);" class="btn btn-sm btn-outline-default btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" >
+      //         <img id='inUrlGroupIcon' height="22" width="22" src="http://www.google.com/s2/favicons?domain=https://web.whatsapp.com/" style="object-fit: cover; border-radius: 50%; "/>
+      //       </a>
+      //       <a href="#" style="margin: 0.1rem; padding: 0.3em;background-color: white;   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 0, 0, 0.05);" class="btn btn-sm btn-outline-default btn-round" id="btnDelStudent" data-toggle="modal" data-target="#delStuModal" data-id="stuId" >
+      //         <img id='inUrlGroupIcon' height="22" width="22" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/" style="object-fit: cover; border-radius: 50%; "/>
+      //       </a>
+      //     </div>
+      //   </div>
+      // </div>
+
+      // Class Name
+      // Profile picture
+      let img = document.createElement("img");
+      img.setAttribute("style", "height: 100%;width: 100%; object-fit: cover;");
+      if (doc.data()[CLASS_IMG_URL] == null || doc.data()[CLASS_IMG_URL] == "")
+        img.src = "https://app.golearn.com.my/assets/img/empty-photo.png";
+      else 
+        img.src = doc.data()[CLASS_IMG_URL];
+
+      let img_div = document.createElement("div");
+      img_div.setAttribute("style", "height: 60px; width: 60px; display: inline-block; overflow: hidden; border-radius: 50%;");
+      img_div.appendChild(img);
+      let img_div_top = document.createElement("div")
+      img_div_top.className = "col-3 text-center";
+      img_div_top.appendChild(img_div);
+      // <img id="inTutor1ImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+      // Name and Teacher
+      let status_html = "";
+      if (doc.data()[CLASS_STATUS] === CLASS_STATUS_ACTIVE){
+        status_html = "<span class='card-v1-status-label active' style='font-size: smaller;'>Active</span>";
+      }else{
+        status_html = "<span class='card-v1-status-label pending' style='font-size: smaller;'>Inactive</span>";
+      }
+      let className_p = document.createElement('p');
+      className_p.innerHTML = doc.data()[CLASS_NAME] +" "+ status_html;
+      className_p.setAttribute("style", "font-size: 1rem; font-weight:400;");
+      let classOwner_p = document.createElement('p');
+      let teacherText = '';
+      if (doc.data()[CLASS_TUTOR_NAME_ARR][1] == null || doc.data()[CLASS_TUTOR_NAME_ARR][1] == ""){
+        // Check if second teacher existed
+        teacherText = doc.data()[CLASS_TUTOR_NAME_ARR][0];
+      }else {
+        teacherText = doc.data()[CLASS_TUTOR_NAME_ARR][0]+", "+doc.data()[CLASS_TUTOR_NAME_ARR][1];
+      }
+      classOwner_p.textContent = teacherText;
+      let name_div_top = document.createElement('div');
+      name_div_top.className = "col-9";
+      name_div_top.appendChild(className_p);
+      name_div_top.appendChild(classOwner_p);
+
+      let className_child_row = document.createElement('div');
+      className_child_row.className = "row";
+      className_child_row.appendChild(img_div_top);
+      className_child_row.appendChild(name_div_top);
+
+      let className_div = document.createElement('div');
+      className_div.className = "col-md-4";
+      className_div.appendChild(className_child_row);
+
+      // Announcement
+      let announcement_p = document.createElement('p');
+      announcement_p.textContent = doc.data()[CLASS_ANNOUNCEMENT];
+      announcement_p.setAttribute("style", " font-weight:400;");
+      let announcement_div = document.createElement('div');
+      announcement_div.className = "col-md-4";
+      announcement_div.appendChild(announcement_p);
+
+
+      // Timeslot
+      let myDayOfWeekId = MyDayOfWeekId; 
+      let myDayOfWeek = MyDayOfWeek; 
+      let timeslot = '';
+      let startTime, endTime = '';
+
+      for (let i = 0; i<doc.data()[CLASS_TIMESLOT_DAY_OF_WEEK_ARR].length; i++){
+        if (doc.data()[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i] == null || doc.data()[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i] == ''){
+          continue;
+        }
+
+        startTime = doc.data()[CLASS_TIMESLOT_START_ARR][i];
+        endTime = doc.data()[CLASS_TIMESLOT_END_ARR][i];
+        startTime = (parseInt(startTime.substring(0, 2))>12) ? (parseInt(startTime.substring(0, 2)) - 12) + startTime.substring(2, 5) + 'PM' : startTime + 'AM';
+        endTime = (parseInt(endTime.substring(0, 2))>12) ? (parseInt(endTime.substring(0, 2)) - 12) + endTime.substring(2, 5) + 'PM' : endTime + 'AM';
+        
+        timeslot += myDayOfWeek[myDayOfWeekId.indexOf(doc.data()[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i])] +' '+startTime+'-'+endTime;
+        // console.log
+        if (i == doc.data()[CLASS_TIMESLOT_DAY_OF_WEEK_ARR].length - 1){
+          // Last item
+        }else{
+          timeslot += ', '
+        }
+      }
+      let timeslot_p = document.createElement('p');
+      timeslot_p.textContent = timeslot;
+      // timeslot_p.setAttribute("style", " font-weight:400;");
+      let timeSlot_div = document.createElement('div');
+      timeSlot_div.className = "col-md-2";
+      timeSlot_div.appendChild(timeslot_p);
+
+      // Teacher
+      // let tutor_p = document.createElement('p');
+      // tutor_p.textContent = doc.data()[CLASS_TUTOR_NAME_ARR][0];
+      // let tutor_div = document.createElement('div');
+      // tutor_div.className = "col-md-2";
+      // tutor_div.appendChild(tutor_p);
+
+      // Last Update
+      let lastUpdate_p = document.createElement('p');
+      lastUpdate_p.textContent = doc.data()[CLASS_DATE_EDIT].toDate().toLocaleDateString("en-GB") + ': '+ doc.data()[CLASS_EDIT_MSG] ;
+      lastUpdate_p.setAttribute("style", "font-style: italic");
+      let lastUpdate_div = document.createElement('div');
+      lastUpdate_div.className = "col-md-2";
+      lastUpdate_div.appendChild(lastUpdate_p);
+
+
+      // Student Detail 
+      let detail_div = document.createElement('div');
+      detail_div.className = 'row';
+      detail_div.appendChild(className_div);
+      detail_div.appendChild(announcement_div);
+      detail_div.appendChild(timeSlot_div);
+      // detail_div.appendChild(tutor_div);
+      detail_div.appendChild(lastUpdate_div);
+      // detail_div.appendChild(status_div);
+      let detail_top_div = document.createElement('div');
+      detail_top_div.className = "col-md-11";
+      detail_top_div.setAttribute("style","margin-bottom: 12px;");
+      detail_top_div.setAttribute("onclick","editClassFunction(this)");
+      detail_top_div.setAttribute("data-id", doc.data().id);
+      detail_top_div.appendChild(detail_div);
+
+      //Buttons
+      let btn_div = document.createElement('div');
+      btn_div.className = "col-md-1";
+
+      urlArray = [CLASS_CLASS_URL, CLASS_CHAT_GROUP_URL, CLASS_MATERIAL_URL];
+      urlArray.forEach((item) => {
+        // console.log(item);
+          
+        let UrlGroupUrl = '';
+        let UrlGroupFaviconUrl = ''
+        if (isValidHttpUrl(doc.data()[item])){
+          UrlGroupUrl = doc.data()[item];
+          UrlGroupFaviconUrl = "http://www.google.com/s2/favicons?domain="+doc.data()[item];
+        }else{
+          UrlGroupUrl = 'javascript:;';
+          UrlGroupFaviconUrl = "../../assets/img/broken-link.png";
+        }
+
+        let urlGroupHtml = '';
+        urlGroupHtml += "<img height='22' width='22' src=" + UrlGroupFaviconUrl + " style='object-fit: cover; border-radius: 50%;'/>";
+        let btn_a = document.createElement('a');
+        btn_a.innerHTML = urlGroupHtml;
+        btn_a.className = "btn btn-sm btn-danger btn-round";
+        btn_a.setAttribute("href", UrlGroupUrl);
+        btn_a.setAttribute("target", 'blank');
+        btn_a.setAttribute("style","margin: 0.1rem; padding: 0.3em; background-color: white; box-shadow: 2px 2px 4px rgba(46, 46, 46, 0.8);");
+
+        if (isValidHttpUrl(doc.data()[item])){
+          btn_div.appendChild(btn_a);
+        }else{
+
+        }
+        
+      });
+
+      // Student Top
+      let card_div = document.createElement('div');
+      card_div.className = "row"
+      card_div.appendChild(detail_top_div);
+      card_div.appendChild(btn_div);
+
+      // card temp
+      // let cardTemp = document.createElement('div');
+      // cardTemp.className = "card-v1 card-kpm"
+      // cardTemp.appendChild(card_div);
+
+      // Card top
+      let card_top_div = document.createElement('div');
+      // card_top_div.className = "col-md-12 card-student-item" older
+      card_top_div.className = "col-md-12 card-v1"
+      card_top_div.appendChild(card_div);
+
+      const card_all_students = document.getElementById("card-all-classes");
+      card_all_students.appendChild(card_top_div);
+    }
+    
 
     function renderAllActiveClasses2(doc, courseId, renderNull){
     //   <div class="col-md-12 card-student-item">

@@ -294,11 +294,13 @@
 
       <!-- Main content -->
       <div class="content">
-        <div class="container-fluid">
-          <!-- your content here -->
+ 
+
+        <!-- Main content -->
+        <div class="container overflow-hidden">
 
           <!-- Main content -->
-          <div class="row  d-flex" id="desciption-row" >
+          <div class="row d-flex">
             <!-- button -->
             <div class="p-2">
               <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
@@ -310,312 +312,218 @@
 
           </div>
 
-          <!-- Main content -->
-          <div class="container overflow-hidden">
-            <div class="row">
-              <div class="col-md-12">
-                <!--multitabs-form navbar-->
-                <div class="row" >
-                  <div class="col-12 col-lg-12 ml-auto mr-auto mb-4">
-                    <div class="d-flex flex-wrap multitabs-form__progress">
-                      <button class="multitabs-form__progress-btn js-active" type="button" title="Business Profile">Business Profile</button>
-                      <button class="multitabs-form__progress-btn" type="button" title="Banking">Bank Settings</button>
-                      <button class="multitabs-form__progress-btn" type="button" title="Banking">Invoice Template</button>
+          <div class="row">
+            <div class="col-md-12">
+              <!--multitabs-form navbar-->
+              <div class="row" >
+                <div class="col-12 col-lg-12 ml-auto mr-auto mb-4">
+                  <div class="d-flex flex-wrap multitabs-form__progress">
+                    <button class="multitabs-form__progress-btn js-active" type="button" title="Business Profile">Business Profile</button>
+                    <button class="multitabs-form__progress-btn" type="button" title="Banking">Bank Settings</button>
+                    <button class="multitabs-form__progress-btn" type="button" title="Banking">Invoice Template</button>
 
-                    </div>
                   </div>
                 </div>
+              </div>
 
-                <!--multitabs-form-->
-                <div class="multitabs-form" id="multitabs_form">
-                  <div class="row">
-                    <div class="col-12">
-                      <form class="multitabs-form__form">
-                        <!-- Business Profile panel-->
-                        <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
-                          <h4 class="multitabs-form__title">Business Profile</h4>
-                          <div class="multitabs-form__content">
-                            <div class="row">
-                               <!-- Name -->
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Business Name</span> 
-                                  <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
-                                    <span class="tooltiptext-general" style="left: 10%;">
-                                      <h6 style="margin: 0; color: #2e74b6;">Business Name</h6>
-                                      <p style="margin: 0; color: grey; font-size: small;">Default: Tutor's name. Change to be your registered business name if applicable. </p>
-                                    </span> 
-                                  </span>
-                                  <input type="text" class="form-control" id="inBizName" data-compulsory="true" oninput="updateInvoiceTemplateView()">
+              <!--multitabs-form-->
+              <div class="multitabs-form" id="multitabs_form">
+                <div class="row">
+                  <div class="col-12">
+                    <form class="multitabs-form__form">
+                      <!-- Business Profile panel-->
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
+                        <h4 class="multitabs-form__title">Business Profile</h4>
+                        <div class="multitabs-form__content">
+                          <div class="row">
+                              <!-- Name -->
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Business Name</span> 
+                                <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
+                                  <span class="tooltiptext-general" style="left: 10%;">
+                                    <h6 style="margin: 0; color: #2e74b6;">Business Name</h6>
+                                    <p style="margin: 0; color: grey; font-size: small;">Default: Tutor's name. Change to be your registered business name if applicable. </p>
+                                  </span> 
+                                </span>
+                                <input type="text" class="form-control" id="inBizName" data-compulsory="true" oninput="updateInvoiceTemplateView()">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="form-group" style="margin-top: 2rem;">
+                                <p class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 1rem;">Business Logo (Max 5MB, JPEG or PNG formats, Recommended size (h x w): 200 x 300 pixels)</p> 
+                                <div style="height: 100px; width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer; border: thin dotted #2e74b6 ;">
+                                  <img id="bizLogoImgUrl" style="height: 100%; width: auto;" src="../../assets/img/empty-photo.png"/>
                                 </div>
+                                <input type="file" id="select_image" name="image" style="display:none" accept="image/x-png,image/jpeg"> </input>
+                              </div> 
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <!-- Phone -->
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Business Contact</span> 
+                                <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
+                                  <span class="tooltiptext-general" style="left: 10%;">
+                                    <h6 style="margin: 0; color: #2e74b6;">Business Contact</h6>
+                                    <p style="margin: 0; color: grey; font-size: small;">Default: Tutor's phone. Change to be your business contact if applicable. </p>
+                                  </span> 
+                                </span>
+                                <input type="text" class="form-control" id="inBizPhone" data-compulsory="true" oninput="updateInvoiceTemplateView()">
                               </div>
                             </div>
 
-                            <div class="row">
-                              <div class="col-md-12">
-                                <div class="form-group" style="margin-top: 2rem;">
-                                  <p class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 1rem;">Business Logo (Max 5MB, JPEG or PNG formats, Recommended size (h x w): 200 x 300 pixels)</p> 
-                                  <div style="height: 100px; width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer; border: thin dotted #2e74b6 ;">
-                                    <img id="bizLogoImgUrl" style="height: 100%; width: auto;" src="../../assets/img/empty-photo.png"/>
-                                  </div>
-                                  <input type="file" id="select_image" name="image" style="display:none" accept="image/x-png,image/jpeg"> </input>
-                                </div> 
+                            <!-- Email -->
+                            <div class="col-md-6">
+                              <div class="form-group" >
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Business Email</span>
+                                <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
+                                  <span class="tooltiptext-general" style="left: 10%;">
+                                    <h6 style="margin: 0; color: #2e74b6;">Business Email</h6>
+                                    <p style="margin: 0; color: grey; font-size: small;">Default: Tutor's email. Change to be your business email if applicable. </p>
+                                  </span> 
+                                </span>
+                                <input type="text" class="form-control" id="inBizEmail" data-compulsory="false" oninput="updateInvoiceTemplateView()">
                               </div>
                             </div>
-  
-                            <div class="row">
-                              <!-- Phone -->
-                              <div class="col-md-6">
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Business Contact</span> 
-                                  <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
-                                    <span class="tooltiptext-general" style="left: 10%;">
-                                      <h6 style="margin: 0; color: #2e74b6;">Business Contact</h6>
-                                      <p style="margin: 0; color: grey; font-size: small;">Default: Tutor's phone. Change to be your business contact if applicable. </p>
-                                    </span> 
-                                  </span>
-                                  <input type="text" class="form-control" id="inBizPhone" data-compulsory="true" oninput="updateInvoiceTemplateView()">
-                                </div>
-                              </div>
+                          </div>
 
-                              <!-- Email -->
-                              <div class="col-md-6">
-                                <div class="form-group" >
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Business Email</span>
-                                  <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
-                                    <span class="tooltiptext-general" style="left: 10%;">
-                                      <h6 style="margin: 0; color: #2e74b6;">Business Email</h6>
-                                      <p style="margin: 0; color: grey; font-size: small;">Default: Tutor's email. Change to be your business email if applicable. </p>
-                                    </span> 
-                                  </span>
-                                  <input type="text" class="form-control" id="inBizEmail" data-compulsory="false" oninput="updateInvoiceTemplateView()">
-                                </div>
+                          <div class="row">
+                            <!-- Address -->
+                            <div class="col-md-12">
+                              <div class="form-group" style="margin-top: 1.5rem;" >
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Business Address</span> 
+                                <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
+                                  <span class="tooltiptext-general" style="left: 10%;">
+                                    <h6 style="margin: 0; color: #2e74b6;">Business Address</h6>
+                                    <p style="margin: 0; color: grey; font-size: small;">Default: Tutor's address. Change to be your business address if applicable. </p>
+                                  </span> 
+                                </span>
+                                <textarea class="form-control" maxlength="250" rows="3" id="inBizAddress" data-compulsory="false" placeholder="Write something ..."></textarea>
                               </div>
                             </div>
-
-                            <div class="row">
-                              <!-- Address -->
-                              <div class="col-md-12">
-                                <div class="form-group" style="margin-top: 1.5rem;" >
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Business Address</span> 
-                                  <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
-                                    <span class="tooltiptext-general" style="left: 10%;">
-                                      <h6 style="margin: 0; color: #2e74b6;">Business Address</h6>
-                                      <p style="margin: 0; color: grey; font-size: small;">Default: Tutor's address. Change to be your business address if applicable. </p>
-                                    </span> 
-                                  </span>
-                                  <textarea class="form-control" maxlength="250" rows="3" id="inBizAddress" data-compulsory="false" placeholder="Write something ..."></textarea>
-                                </div>
-                              </div>
-                           </div>
                           </div>
                         </div>
+                      </div>
 
-                        <!-- Bank Settings panel-->
-                        <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                          <h4 class="multitabs-form__title">Bank Settings </h4>
-                          <span class="" style="font-size: smaller; font-weight: 300; color: red; margin-bottom: 0; font-style: italic;">Important Note: Do not share sensitive credit card or banking information here. (e.g CVV or login credentials)</span> 
+                      <!-- Bank Settings panel-->
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                        <h4 class="multitabs-form__title">Bank Settings </h4>
+                        <span class="" style="font-size: smaller; font-weight: 300; color: red; margin-bottom: 0; font-style: italic;">Important Note: Do not share sensitive credit card or banking information here. (e.g CVV or login credentials)</span> 
 
-                          <div class="multitabs-form__content">
-                            <div class="row">
-                               <!-- Bank Account Holder Name -->
-                              <div class="col-md-6">
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Account Holder Name</span> 
-                                  <input type="text" class="form-control" id="inBankAccName" data-compulsory="true" oninput="this.className = 'form-control'" >
-                                </div>
+                        <div class="multitabs-form__content">
+                          <div class="row">
+                              <!-- Bank Account Holder Name -->
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Account Holder Name</span> 
+                                <input type="text" class="form-control" id="inBankAccName" data-compulsory="true" oninput="this.className = 'form-control'" >
                               </div>
-                              <!-- Bank Account Number -->
-                              <div class="col-md-6">
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Account Number</span> 
-                                  <input type="text" class="form-control" id="inBankAccNum" data-compulsory="true" oninput="this.className = 'form-control'" >
-                                </div>
-                              </div>
-
                             </div>
-                              
-                            <div class="row">
-                              <!-- Bank Name -->
-                              <div class="col-md-6">
-                                <div class="form-group" >
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Name</span> 
-                                  <input type="text" class="form-control" id="inBankName" data-compulsory="false">
-                                </div>
+                            <!-- Bank Account Number -->
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Account Number</span> 
+                                <input type="text" class="form-control" id="inBankAccNum" data-compulsory="true" oninput="this.className = 'form-control'" >
                               </div>
                             </div>
 
                           </div>
+                            
+                          <div class="row">
+                            <!-- Bank Name -->
+                            <div class="col-md-6">
+                              <div class="form-group" >
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Name</span> 
+                                <input type="text" class="form-control" id="inBankName" data-compulsory="false">
+                              </div>
+                            </div>
+                          </div>
+
                         </div>
+                      </div>
 
-                        <!-- Invoice Template panel-->
-                        <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                          <h4 class="multitabs-form__title">Invoice Template</h4>
-                          <div class="multitabs-form__content">
-                            <div class="row">
-                              <div class="col-md-12">
+                      <!-- Invoice Template panel-->
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                        <h4 class="multitabs-form__title">Invoice Template</h4>
+                        <div class="multitabs-form__content">
+                          <div class="row">
+                            <div class="col-md-12">
 
-                                <div class="card">
+                              <div class="card">
 
-                                  <!-- Header -->
-                                  <div class="card-body">
+                                <!-- Header -->
+                                <div class="card-body">
 
-                                    <div class="row">
-                                      <div class="col-md-4 text-center">
-              
-                                        <div class="form-group">
-                                          
-                                          <div style="height:150px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
-                                            <img id="invTemplateImgUrl" style="height: 100%;width: auto;" src="../../assets/img/empty-photo.png"/>
-                                          </div>
+                                  <div class="row">
+                                    <div class="col-md-4 text-center">
+            
+                                      <div class="form-group">
+                                        
+                                        <div style="height:150px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
+                                          <img id="invTemplateImgUrl" style="height: 100%;width: auto;" src="../../assets/img/empty-photo.png"/>
                                         </div>
-                                      </div>
-              
-                                      <div class="col-md-4">
-                                        <!--  Do nothing -->
-                                      </div>
-              
-                                      <div class="col-md-4 text-right">
-                                        <h4 style="font-size: xx-large;margin-top: 1rem;">INVOICE</h4> 
-              
-                                        <div class="form-group">
-                                          <h5 id="invTitle"> Invoice Title</h5>
-                                        </div>
-                                        <h4 id="invBizName" style="font-weight: 500;">Business name</h4>
-                                        <p id="invBizDetail">Business Details</p>
-                                        <!-- <a id="invBizDetail" href="javascript:;" data-toggle="modal" data-target="#addBusinessDetailModal">Edit Business Address and Contact</a> -->
-                                      </div>
-              
-                                    </div>
-                                  </div>
-
-                                  <hr>
-
-                                  <!-- Body -->
-                                  <div class="card-body">
-                                    
-                                    <div class="row">
-                                      <div class="col-md-4">
-                                        <h6>Billed To:</h6>
-                                        <h4 style="font-weight: 500;">Client Name</h4>
-                                        <p>+60 12-345 6789 <br>client1@example.com <br> No.1 Jalan Example, 50450 Kuala Lumpur, Malaysia</p>                
-                                      </div>
-
-                                      <div class="col-md-4"></div>
-                                      <div class="col-md-4">
-                                        <div class="row">
-                                          <div class="col-md-8 col-6 text-right" style="padding-right: 0;">
-                                            <div style="margin-top: 0.8rem;">
-                                              <p style="font-weight: 500;">Invoice Number</p>                            
-                                            </div>
-                                            <div style="margin-top: 0.8rem;">
-                                              <p style="font-weight: 500;">Invoice Date</p>                           
-                                            </div>
-                                            <div style="margin-top: 0.8rem;">
-                                              <p style="font-weight: 500;">Payment Due</p>                            
-                                            </div>
-                                            <div style="margin-top: 0.8rem;">
-                                              <p style="font-weight: 500;">Status</p>                            
-                                            </div>
-                        
-                                          </div>
-                                          <div class="col-md-4 col-6 text-left"  style="margin-top: 0.8rem;">
-                                            <p>INV-00001</p>
-                                            <p>01/10/2025</p>
-                                            <p>01/11/2025</p>
-                                            <p>New</p>
-                                          </div>
-                                        </div>
-
                                       </div>
                                     </div>
-
+            
+                                    <div class="col-md-4">
+                                      <!--  Do nothing -->
+                                    </div>
+            
+                                    <div class="col-md-4 text-right">
+                                      <h4 style="font-size: xx-large;margin-top: 1rem;">INVOICE</h4> 
+            
+                                      <div class="form-group">
+                                        <h5 id="invTitle"> Invoice Title</h5>
+                                      </div>
+                                      <h4 id="invBizName" style="font-weight: 500;">Business name</h4>
+                                      <p id="invBizDetail">Business Details</p>
+                                      <!-- <a id="invBizDetail" href="javascript:;" data-toggle="modal" data-target="#addBusinessDetailModal">Edit Business Address and Contact</a> -->
+                                    </div>
+            
                                   </div>
+                                </div>
 
-                                  <div class="card-body" >
+                                <hr>
 
-                                    <div class="row">
-                                      <div class="col-12" style="overflow-x:auto;" >
-                                        <table id="table" class="table-light table-sm" cellspacing="0" width="100%"  style="padding: 0; margin: 0;">
-                                          <thead>
-                                            <tr style="background-color: grey; color: white;">
-                                              <th style="min-width: 200px; ">Items</th>
-                                              <th style="width: 100px; min-width: 100px;text-align: right;">Hour</th>
-                                              <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
-                                              <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <tr class="item">
-                                              <td>Sample Tutoring Course 1</td>
-                                              <td style="text-align: right;">6</td>
-                                              <td style="text-align: right;">40</td>
-                                              <td style="text-align: right;">RM240.00</td>
-                                            </tr>
-                                            <tr class="item">
-                                              <td>Sample Tutoring Course 2</td>
-                                              <td style="text-align: right;">1</td>
-                                              <td style="text-align: right;">300</td>
-                                              <td style="text-align: right;">RM300.00</td>
-                                            </tr>
-                                            <tr class="subtotal">
-                                              <td></td>
-                                              <td></td>
-                                              <td style="text-align: right; font-weight: 500; border-bottom: thin solid grey;">Subtotal</td>
-                                              <td style="text-align: right; font-weight: 500; border-bottom: thin solid grey;">RM540.00</td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                
-                                        <table id="tableAdditionalItem" class="table-light table-sm" cellspacing="0" width="100%">
-                                          <thead style="visibility: collapse;">
-                                            <tr>
-                                              <th style="min-width: 200px;">Items</th>
-                                              <th style="width: 100px; min-width: 100px;text-align: right;">Hour</th>
-                                              <th style="width: 100px; min-width: 100px;text-align: right;">Rate</th>
-                                              <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>                
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <tr class="additional">
-                                              <td></td>
-                                              <td style="text-align: right;"></td>
-                                              <td style="text-align: right;">Discount</td>
-                                              <td style="text-align: right;">- RM40.00</td>
-                                            </tr>
-                                            <tr class="additional">
-                                              <td></td>
-                                              <td style="text-align: right;"></td>
-                                              <td style="text-align: right; border-bottom: thin solid grey;">Tax 6%</td>
-                                              <td style="text-align: right; border-bottom: thin solid grey;">+ RM30.00</td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                      </div>
-
-                                      <div class="col-12">
-                                        <h3 style="text-align: right; font-weight: 500;">Total <span style="margin-left: 2rem;" id="grandTotal">RM0.00</span></h3>
-                                      </div>
-
-                                      <div class="col-12">
-                                        <div class="form-group">
-                                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Enter Notes <span id="countNotes" style="color: grey; margin-left: 1rem;">0/400</span></span> 
-                                          <textarea class="form-control" maxlength="400" rows="5"  id="invNotes" data-compulsory="false" placeholder="Enter notes that are visible to your client. (e.g payment guidelines) "></textarea>
-                                        </div>
-                                      </div>
-
+                                <!-- Body -->
+                                <div class="card-body">
+                                  
+                                  <div class="row">
+                                    <div class="col-md-4">
+                                      <h6>Billed To:</h6>
+                                      <h4 style="font-weight: 500;">Client Name</h4>
+                                      <p>+60 12-345 6789 <br>client1@example.com <br> No.1 Jalan Example, 50450 Kuala Lumpur, Malaysia</p>                
                                     </div>
 
-                                  </div>
-
-                                  <hr>
-
-                                  <div class="card-body">
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <div class="form-group">
-                                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Enter Footer Notes <span id="countFooterNotes" style="color: grey; margin-left: 1rem;">0/200</span></span> 
-                                          <textarea class="form-control" maxlength="200" rows="4"  id="invFooterNotes" data-compulsory="false" placeholder="Write something ..."></textarea>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                      <div class="row">
+                                        <div class="col-md-8 col-6 text-right" style="padding-right: 0;">
+                                          <div style="margin-top: 0.8rem;">
+                                            <p style="font-weight: 500;">Invoice Number</p>                            
+                                          </div>
+                                          <div style="margin-top: 0.8rem;">
+                                            <p style="font-weight: 500;">Invoice Date</p>                           
+                                          </div>
+                                          <div style="margin-top: 0.8rem;">
+                                            <p style="font-weight: 500;">Payment Due</p>                            
+                                          </div>
+                                          <div style="margin-top: 0.8rem;">
+                                            <p style="font-weight: 500;">Status</p>                            
+                                          </div>
+                      
+                                        </div>
+                                        <div class="col-md-4 col-6 text-left"  style="margin-top: 0.8rem;">
+                                          <p>INV-00001</p>
+                                          <p>01/10/2025</p>
+                                          <p>01/11/2025</p>
+                                          <p>New</p>
                                         </div>
                                       </div>
 
@@ -624,19 +532,111 @@
 
                                 </div>
 
+                                <div class="card-body" >
 
-                            <!-- End of invoice template -->
-                          </div>
+                                  <div class="row">
+                                    <div class="col-12" style="overflow-x:auto;" >
+                                      <table id="table" class="table-light table-sm" cellspacing="0" width="100%"  style="padding: 0; margin: 0;">
+                                        <thead>
+                                          <tr style="background-color: grey; color: white;">
+                                            <th style="min-width: 200px; ">Items</th>
+                                            <th style="width: 100px; min-width: 100px;text-align: right;">Hour</th>
+                                            <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
+                                            <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr class="item">
+                                            <td>Sample Tutoring Course 1</td>
+                                            <td style="text-align: right;">6</td>
+                                            <td style="text-align: right;">40</td>
+                                            <td style="text-align: right;">RM240.00</td>
+                                          </tr>
+                                          <tr class="item">
+                                            <td>Sample Tutoring Course 2</td>
+                                            <td style="text-align: right;">1</td>
+                                            <td style="text-align: right;">300</td>
+                                            <td style="text-align: right;">RM300.00</td>
+                                          </tr>
+                                          <tr class="subtotal">
+                                            <td></td>
+                                            <td></td>
+                                            <td style="text-align: right; font-weight: 500; border-bottom: thin solid grey;">Subtotal</td>
+                                            <td style="text-align: right; font-weight: 500; border-bottom: thin solid grey;">RM540.00</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+              
+                                      <table id="tableAdditionalItem" class="table-light table-sm" cellspacing="0" width="100%">
+                                        <thead style="visibility: collapse;">
+                                          <tr>
+                                            <th style="min-width: 200px;">Items</th>
+                                            <th style="width: 100px; min-width: 100px;text-align: right;">Hour</th>
+                                            <th style="width: 100px; min-width: 100px;text-align: right;">Rate</th>
+                                            <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>                
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr class="additional">
+                                            <td></td>
+                                            <td style="text-align: right;"></td>
+                                            <td style="text-align: right;">Discount</td>
+                                            <td style="text-align: right;">- RM40.00</td>
+                                          </tr>
+                                          <tr class="additional">
+                                            <td></td>
+                                            <td style="text-align: right;"></td>
+                                            <td style="text-align: right; border-bottom: thin solid grey;">Tax 6%</td>
+                                            <td style="text-align: right; border-bottom: thin solid grey;">+ RM30.00</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+
+                                    <div class="col-12">
+                                      <h3 style="text-align: right; font-weight: 500;">Total <span style="margin-left: 2rem;" id="grandTotal">RM0.00</span></h3>
+                                    </div>
+
+                                    <div class="col-12">
+                                      <div class="form-group">
+                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Enter Notes <span id="countNotes" style="color: grey; margin-left: 1rem;">0/400</span></span> 
+                                        <textarea class="form-control" maxlength="400" rows="5"  id="invNotes" data-compulsory="false" placeholder="Enter notes that are visible to your client. (e.g payment guidelines) "></textarea>
+                                      </div>
+                                    </div>
+
+                                  </div>
+
+                                </div>
+
+                                <hr>
+
+                                <div class="card-body">
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <div class="form-group">
+                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Enter Footer Notes <span id="countFooterNotes" style="color: grey; margin-left: 1rem;">0/200</span></span> 
+                                        <textarea class="form-control" maxlength="200" rows="4"  id="invFooterNotes" data-compulsory="false" placeholder="Write something ..."></textarea>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+
+                              </div>
+
+
+                          <!-- End of invoice template -->
                         </div>
-                      </form>
-                    </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
+
+        <!-- </div> -->
 
         <footer class="footer">
           <div class="container-fluid">

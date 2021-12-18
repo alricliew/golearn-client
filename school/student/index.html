@@ -268,18 +268,18 @@
         </div>
         <div class="container-fluid" >
 
-          <div class="row" id="card-all-students">
+          <div class="row" id="card-all-students" style="margin-top: 1rem;">
 
             <div class="col-md-12 card-student">
               <div class="row" >
                 <div class="col-md-11" style="padding: 0;">
                   <div class="row" style="margin: 0;">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Student Name</h6>
                     </div>
-                    <div class="col-md-1">
+                    <!-- <div class="col-md-1">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Gender</h6>
-                    </div>
+                    </div> -->
                     <div class="col-md-3">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Guardian</h6>
                     </div>
@@ -764,21 +764,30 @@
     //   </div>
     // </div>
       // Reference: https://codepen.io/Corsurath/pen/abbxNpj
+
       // Student Name
       let stuName_p = document.createElement('p');
       stuName_p.textContent = doc.data().childName;
-      let stuName_div = document.createElement('div');
-      stuName_div.className = "col-md-3";
-      stuName_div.appendChild(stuName_p);
+      stuName_p.setAttribute("style", "font-size:1rem; font-weight:400;")
       // Gender
       let stuGender_p = document.createElement('p');
       stuGender_p.textContent = (doc.data().childGender === 0) ? 'Male' : 'Female';
-      let stuGender_div = document.createElement('div');
-      stuGender_div.className = "col-md-1";
-      stuGender_div.appendChild(stuGender_p);
+
+      let stuName_div = document.createElement('div');
+      stuName_div.className = "col-md-4";
+      stuName_div.appendChild(stuName_p);
+      stuName_div.appendChild(stuGender_p);
+
+      // // Gender
+      // let stuGender_p = document.createElement('p');
+      // stuGender_p.textContent = (doc.data().childGender === 0) ? 'Male' : 'Female';
+      // let stuGender_div = document.createElement('div');
+      // stuGender_div.className = "col-md-1";
+      // stuGender_div.appendChild(stuGender_p);
       // Gurdian Name
       let gurName_p = document.createElement('p');
       gurName_p.textContent = doc.data().gurName;
+      gurName_p.setAttribute("style", "font-weight:400;")
       let gurName_div = document.createElement('div');
       gurName_div.className = "col-md-3";
       gurName_div.appendChild(gurName_p);
@@ -798,13 +807,14 @@
         status_p.textContent = 'Pending';
       }
       let status_div = document.createElement('div');
-      status_div.className = "col-md-1";
+      status_div.className = "col-md-1 col-3";
       status_div.appendChild(status_p);
+
       // Date Join
       let dateAdd_p = document.createElement('p');
       dateAdd_p.textContent = doc.data().dateAdd.toDate().toLocaleDateString("en-GB") ;
       let dateAdd_div = document.createElement('div');
-      dateAdd_div.className = "col-md-2";
+      dateAdd_div.className = "col-md-2 col-9";
       dateAdd_div.appendChild(dateAdd_p);
 
       // Student Detail 
@@ -812,7 +822,7 @@
       detail_div.className = 'row';
       detail_div.setAttribute("style","margin: 0;");
       detail_div.appendChild(stuName_div);
-      detail_div.appendChild(stuGender_div);
+      // detail_div.appendChild(stuGender_div);
       detail_div.appendChild(gurName_div);
       detail_div.appendChild(gurPhone_div);
       detail_div.appendChild(status_div);
@@ -842,6 +852,8 @@
       btn_a.setAttribute("data-studentname",  doc.data().childName);
       let btn_div = document.createElement('div');
       btn_div.className = "col-md-1 align-self-center";
+      btn_div.setAttribute("style"," margin-bottom: 12px");
+
       btn_div.appendChild(btn_a);
  
       // Student Top

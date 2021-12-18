@@ -1224,411 +1224,400 @@
 
       <!-- Main content -->
       <div class="content">
-        <div class="container-fluid">
-          <!-- your content here -->
 
-          <!-- Main content -->
-          <div class="row  d-flex" id="desciption-row" >
-            <!-- button -->
+        <div class="container-fluid" >
+          <div class="row d-flex">
             <div class="p-2">
-              <!-- <a href="settings.html" class="btn btn-outline-primary btn-round" id="btnBack"><i class="fas fa-cog" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;"></i> Financial Settings</a> -->
+              <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
             </div>
-
-            <div class="ml-auto p-2">
-              <!-- <a href="./run-payroll.html" class="btn btn-primary btn-round" style="background-color: #2e74b6;">Run Payroll <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a> -->
-            </div>
-
           </div>
-
-          <div class="container-fluid" >
-
-            <div class="row">
-              <div class="col-md-12">
-                
-                <!-- Step 1 -->
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="social">
-                          <h4 style="font-size: x-large;"><span> <button  id="btnStep1" class="btn btn-primary btn-just-icon btn-round" style="margin-right: 1rem;">
-                            <p>1</p>
-                            <!-- <i class="fas fa-check-circle"></i> -->
-                            </button></span> 
-                            Select payroll period
-                          </h4>
-                          <!-- <h4 style="font-size: x-large;">Create single payslip</h4> -->
-
-                          <!-- <p>Create payslip for each teacher.</p> -->
-                        </div>
-
-                        <div class="row">
-                          <div class="col-md-12" id="payrollList">
-                            <!-- <a href="javascript:;" style="margin-right: 0.5rem;">1/10/2021 - 31/10/2021</a>
-                            <a href="javascript:;" style="margin-right: 0.5rem;">1/11/2021 - 30/11/2021</a>
-                            <a href="javascript:;" style="margin-right: 0.5rem;">1/12/2021 - 31/12/2021</a> -->
-                            <!-- <a href="javascript:;" style="margin-right: 0.5rem;" data-target="#loadPayrollModal" data-toggle="modal">All payrolls</a> -->
-                            <a href="javascript:;" style="margin-right: 0.5rem;" onclick="enableStep1();">New</a>
-                          </div>
-                        </div>
-
-
-
-                      </div>
-  
-                      <div class="col-md-6">
-         
-                        <div class="row">
-
-                          <div class="col-md-12">
-                            <div class="form-group">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payroll period</span> 
-
-                              <input class="form-control" type="text" name="daterange" id='daterange' value="Select date range"/>
-                            </div>
-                          </div>
-
-                          <!-- <div class="col-md-6">
-                            <div class="form-group">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payroll Title</span> 
-                              <input class="form-control" type="text" id='payrollTitle'/>
-                            </div>
-                          </div> -->
-
-                        </div>
-
-                        <div class="row">
-                          <div class="col-md-12 text-right">
-                            <a id="btnCreatePayroll" href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#createPayrollModal">Create Payroll <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-
-                  </div>
-  
-                </div>
-
-                <!-- Step 2 -->
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-8">
-                        <div class="social">
-                          <h4 style="font-size: x-large;"><span> <button  id="btnStep2" class="btn btn-default btn-just-icon btn-round" style="margin-right: 1rem;">
-                            <p>2</p>
-                            <!-- <i class="fas fa-check-circle"></i> -->
-                            </button></span> 
-                            Select employee
-                          </h4>
-                          <!-- <h4 style="font-size: x-large;">Create single payslip</h4> -->
-                          <p>Update your employees' hours and additional earnings.</p>
-                        </div>
-                      </div>
-  
-                      <div class="col-md-4 align-self-center text-right">
-
-                        <a id='btnAddEmployee' href="javascript:;" class="btn btn-outline-default btn-round" style="background-color: #999999; color: white; pointer-events: none;" data-toggle="modal" data-target="#myTeacherModal">Add Employee </a>
-
-                        <!-- <a id='btnAddAllEmployee' href="javascript:;" class="btn btn-outline-default btn-round" style="pointer-events: none;" data-toggle="modal" data-target="#addAllEmployeeModal">Add All Employees</a> -->
-
-                      </div>
-                    </div>
-
-                    <!-- All Teachers -->
-                    <div class="row" id="card-main">
-        
-                      <!-- No data placeholder -->
-                      <div class="col-md-12 text-center" style="display: none; margin: 1rem;" id="noDataPlaceholder">
-                        <p>No data</p>
-                          
-                      </div>
           
 
-                      <!-- Employee List Start -->
+          <div class="row">
+            <div class="col-md-12">
+              <!-- Step 1 -->
+              <div class="card"   style="margin-top: 0;">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="social">
+                        <h4 style="font-size: x-large;"><span> <button  id="btnStep1" class="btn btn-primary btn-just-icon btn-round" style="margin-right: 1rem;">
+                          <p>1</p>
+                          <!-- <i class="fas fa-check-circle"></i> -->
+                          </button></span> 
+                          Select payroll period
+                        </h4>
+                        <!-- <h4 style="font-size: x-large;">Create single payslip</h4> -->
 
-                      <div class="col-md-12">
-                        <div class="accordion" id="accordionTutor">
+                        <!-- <p>Create payslip for each teacher.</p> -->
+                      </div>
 
-                          <!-- card 1 -->
-                          <!-- <div class="card" id='wwwwww'>
-                            <div class="card-header" id="headingOne" style="padding: 0; margin: 0; ">
-                              <div class="row" >
-                                <div class="col-md-10">
-                                  <a class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapseOne" style="text-transform: none; white-space: normal; font-size: medium;">
-                                    Aishah Aishah Aishah Aishah &middot; <span id="netpayview_wwwwwww">RM1028.70</span> <span class="card-student-status-label active" id="paymentstatus_wwwwww" style="font-size: small;">New</span>
-                                  </a>
-                                </div>
-                                <div class="col-md-2  align-self-center text-center">
-
-                                  <span class="fa-stack" style="vertical-align: top; font-size: 73%; color: #2e74b6; cursor: pointer; margin-right: 0.5rem;" data-target="#recordPaymentModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas">
-                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                    <i class="fas fa-pen fa-stack-1x fa-inverse"></i>
-                                  </span>
-                                  <i class="fas fa-check-circle fa-lg" name='update' style="color: #42ba96; cursor: pointer; margin-right: 0.5rem;" data-target="#confirmEmployeeModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas"></i>
-                                  <i class="fas fa-minus-circle fa-lg" name='remove' style="color: red; cursor: pointer;" data-target="#removeEmployeeModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas"></i>
-                                </div>
-                              </div>
-                            </div>
-                            <div id="collapse1" class="collapse" aria-labelledby="headingOne" data-parent="#accordionTutor" style="padding: 0; margin: 0; ">
-                              <div class="card-body">
-                                <div class="row d-flex">
-                                  <div class="ml-auto p-2">
-                                    <button href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#previewModal" onclick=""> <i class="fas fa-eye" style="margin-right: 0.5rem;"></i> Preview</button>
-                                  </div>
-                                  <div class="p-2">
-                                    <button href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#editPayslipModal" data-cardid='wwwwww'> <i class="fas fa-pen-square" style="margin-right: 0.5rem;"></i> Edit</button>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-12"  style="overflow-x:auto;">
-                                    <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
-                                    <table id="table_item_wwwwww" class="table-light table-sm" cellspacing="0" width="100%" >
-                                      <thead id='thead_item_wwwwww' style="background-color: grey; color: white;">
-                                        <tr>
-                                          <th style="min-width: 200px; font-size: small;">Items</th>
-                                          <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity*</th>
-                                          <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
-                                          <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Payout</th>
-                                          <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Earning</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody id="tbody_item_wwwwww">
-                                        <tr class="item">
-                                          <td style="font-size: small;">Standard 3 English</td>
-                                          <td style="text-align: right; font-size: small;">1</td>
-                                          <td style="text-align: right; font-size: small;">100</td>
-                                          <td style="text-align: right; font-size: small;">100</td>
-                                          <td style="text-align: right; font-size: small;">RM100</td>
-                                        </tr>
-                                        <tr class="subtotal" id='previewItemSubtotal'>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td style="text-align: right; font-weight: 500; font-size: small;">Gross Pay</td>
-                                          <td style="text-align: right; font-weight: 500; font-size: small;" id="previewSubtotalItem">RM100</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                    <table id="table_additem_wwwwww" class="table-light table-sm" cellspacing="0" width="100%">
-                                      <thead id="thead_additem_wwwwww" style="visibility: collapse;">
-                                        <tr>
-                                          <th style="min-width: 200px;">Items</th>
-                                          <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
-                                          <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
-                                          <th style="width: 100px; min-width: 100px;text-align: right;">Payout</th>
-                                          <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody id="tbody_additem_wwwwww">
-                                        <tr class="additional">
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td style="text-align: right; font-size: small;" data-selector='Earning ( + )' data-item='Extra Cash' data-value='10'>Extra Cash</td>
-                                          <td style="text-align: right; font-size: small;">+ RM10</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                  <div class="col-12">
-                                    <h4 style="text-align: right; font-weight: 500;">Net Pay <span style="margin-left: 2rem;" id="netpay_wwwwww">RM100.00</span></h4>
-                                  </div>
-                                </div>
-
-                                <div class="row"  style="margin-top: 1rem">
-                                  <div class="col-md-12 text-right">
-                                    <button href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#editPayslipEmployeeModal" data-cardid='wwwwww'> <i class="fas fa-pen-square" style="margin-right: 0.5rem;"></i> Edit Details</button>
-                                  </div>
-                                </div>
-
-
-                                <div class="row">
-                                  <div class="col-md-4">
-                                    <h5>General</h5>
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payslip Title</span> 
-                                        <p name="title">Payslip of November</p>
-                                      </div>
-                                    </div>
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payslip No</span> 
-                                        <p name="refNo">PV9128391890</p>
-                                      </div>
-                                    </div>
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Date</span> 
-                                        <p name="date">12/2/2021</p>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  <div class="col-md-4">
-                                    <h5>Employee Details</h5>
-                                    <div id='employeeid' value=''></div>
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Name</span> 
-                                        <p name="name">Alric Liew</p>
-                                      </div>
-                                    </div>
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Position</span> 
-                                        <p name="position">Tutor</p>
-                                      </div>
-                                    </div>
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">EPF No</span> 
-                                        <p name="epf">8946146465</p>
-                                      </div>
-                                    </div>
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Socso No</span> 
-                                        <p name="socso">64631894616584</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                    <h5>Banking Information</h5>
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Name</span> 
-                                        <p name="bankName">CIMB Bank</p>
-                                      </div>
-                                    </div>
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Account Number</span> 
-                                        <p name="acNo">98s5ew5xdfle</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div> -->
-  
-                          <!-- card 2 -->
-                          <!-- <div class="card" id='wwwwwv'>
-                            <div class="card-header" id="headingOne" style="padding: 0; margin: 0; ">
-                              <div class="row" >
-                                <div class="col-md-11">
-                                  <a class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapseOne" style="text-transform: none; white-space: normal; font-size: medium;">
-                                    Chang Ai Ling (RM128.30)
-                                  </a>
-                                </div>
-                                <div class="col-md-1  align-self-center text-center">
-                                  <i class="far fa-check-circle fa-lg" style="color: #42ba96; cursor: pointer; margin-right: 0.5rem;" data-target="#confirmEmployeeModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas"></i>
-                                  <i class="fas fa-minus-circle" style="color: red; cursor: pointer;" data-target="#removeEmployeeModal" data-toggle="modal" data-employeecardid="wwwwwv" data-employeecardname="aishas"></i>
-                                </div>
-                              </div>
-                            </div>
-                            <div id="collapse2" class="collapse" aria-labelledby="headingOne" data-parent="#accordionTutor" style="padding: 0; margin: 0; ">
-                              <div class="card-body">
-                                <div class="row d-flex" id="desciption-row" >
-                                  <div class="ml-auto p-2">
-                                    <button href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#previewModal" onclick=""> <i class="fas fa-eye" style="margin-right: 0.5rem;"></i> Preview</button>
-                                  </div>
-                                  <div class="p-2">
-                                    <button href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#editPayslipModal" onclick=""> <i class="fas fa-pen-square" style="margin-right: 0.5rem;"></i> Edit</button>
-                                  </div>
-                                </div>
-                                <div style="margin-top: 1rem;"></div>
-                                
-                                <div class="row">
-                                  <div class="col-12"  style="overflow-x:auto;">
-                                    <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
-                                    <table id="table_item_wwwwww" class="table-light table-sm" cellspacing="0" width="100%" >
-                                      <thead style="background-color: grey; color: white;">
-                                        <tr>
-                                          <th style="min-width: 200px; font-size: small;">Items</th>
-                                          <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Price</th>
-                                          <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody id="previewItemBody">
-                                        <tr class="item">
-                                          <td style="font-size: small;">Food</td>
-                                          <td style="text-align: right; font-size: small;">20</td>
-                                          <td style="text-align: right; font-size: small;">RM20</td>
-                                        </tr>
-                                        <tr class="subtotal" id='previewItemSubtotal'>
-                                          <td></td>
-                                          <td style="text-align: right; font-weight: 500; font-size: small;">Gross Earning</td>
-                                          <td style="text-align: right; font-weight: 500; font-size: small;" id="previewSubtotalItem">RM20</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                  
-                                    <table id="table_additem_wwwwww" class="table-light table-sm" cellspacing="0" width="100%">
-                                      <thead style="visibility: collapse;">
-                                        <tr>
-                                          <th style="min-width: 200px;">Items</th>
-                                          <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
-                                          <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody id="previewAdditionalItemBody">
-                                        <tr class="additional">
-                                          <td></td>
-                                          <td style="text-align: right; font-size: small;">Extra</td>
-                                          <td style="text-align: right; font-size: small;">+ RM10</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                  
-                                  <div class="col-12">
-                                    <h4 style="text-align: right; font-weight: 500;">Net Pay <span style="margin-left: 2rem;" id="previewGrandTotal">RM30.00</span></h4>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-
-                          </div> -->
-
+                      <div class="row">
+                        <div class="col-md-12" id="payrollList">
+                          <!-- <a href="javascript:;" style="margin-right: 0.5rem;">1/10/2021 - 31/10/2021</a>
+                          <a href="javascript:;" style="margin-right: 0.5rem;">1/11/2021 - 30/11/2021</a>
+                          <a href="javascript:;" style="margin-right: 0.5rem;">1/12/2021 - 31/12/2021</a> -->
+                          <!-- <a href="javascript:;" style="margin-right: 0.5rem;" data-target="#loadPayrollModal" data-toggle="modal">All payrolls</a> -->
+                          <a href="javascript:;" style="margin-right: 0.5rem;" onclick="enableStep1();">New</a>
                         </div>
                       </div>
 
-              
+
+
                     </div>
 
+                    <div class="col-md-6">
+        
+                      <div class="row">
+
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payroll period</span> 
+
+                            <input class="form-control" type="text" name="daterange" id='daterange' value="Select date range"/>
+                          </div>
+                        </div>
+
+                        <!-- <div class="col-md-6">
+                          <div class="form-group">
+                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payroll Title</span> 
+                            <input class="form-control" type="text" id='payrollTitle'/>
+                          </div>
+                        </div> -->
+
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12 text-right">
+                          <a id="btnCreatePayroll" href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#createPayrollModal">Create Payroll <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
-  
+
                 </div>
 
-                <!-- <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-8">
-                        <div class="social">
-                          <h4 style="font-size: x-large;"><span> <button  id="btnStep1" class="btn btn-primary btn-just-icon btn-round" style="margin-right: 1rem;">
-                            <p>3</p>
-                            </button></span> 
-                            Confirmation
-                          </h4>
-                          <p>Everything looks good!</p>
-                        </div>
-                      </div>
-                      <div class="col-md-4 align-self-center text-right">
-                        <a href="javascript:;" class="btn btn-primary btn-round" style="background-color: #2e74b6;">Submit Payroll <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="social">
+                        <h4 style="font-size: x-large;"><span> <button  id="btnStep2" class="btn btn-default btn-just-icon btn-round" style="margin-right: 1rem;">
+                          <p>2</p>
+                          <!-- <i class="fas fa-check-circle"></i> -->
+                          </button></span> 
+                          Select employee
+                        </h4>
+                        <!-- <h4 style="font-size: x-large;">Create single payslip</h4> -->
+                        <p>Update your employees' hours and additional earnings.</p>
                       </div>
                     </div>
+
+                    <div class="col-md-4 align-self-center text-right">
+
+                      <a id='btnAddEmployee' href="javascript:;" class="btn btn-outline-default btn-round" style="background-color: #999999; color: white; pointer-events: none;" data-toggle="modal" data-target="#myTeacherModal">Add Employee </a>
+
+                      <!-- <a id='btnAddAllEmployee' href="javascript:;" class="btn btn-outline-default btn-round" style="pointer-events: none;" data-toggle="modal" data-target="#addAllEmployeeModal">Add All Employees</a> -->
+
+                    </div>
                   </div>
-                </div> -->
+
+                  <!-- All Teachers -->
+                  <div class="row" id="card-main">
+      
+                    <!-- No data placeholder -->
+                    <div class="col-md-12 text-center" style="display: none; margin: 1rem;" id="noDataPlaceholder">
+                      <p>No data</p>
+                        
+                    </div>
+        
+
+                    <!-- Employee List Start -->
+
+                    <div class="col-md-12">
+                      <div class="accordion" id="accordionTutor">
+
+                        <!-- card 1 -->
+                        <!-- <div class="card" id='wwwwww'>
+                          <div class="card-header" id="headingOne" style="padding: 0; margin: 0; ">
+                            <div class="row" >
+                              <div class="col-md-10">
+                                <a class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapseOne" style="text-transform: none; white-space: normal; font-size: medium;">
+                                  Aishah Aishah Aishah Aishah &middot; <span id="netpayview_wwwwwww">RM1028.70</span> <span class="card-student-status-label active" id="paymentstatus_wwwwww" style="font-size: small;">New</span>
+                                </a>
+                              </div>
+                              <div class="col-md-2  align-self-center text-center">
+
+                                <span class="fa-stack" style="vertical-align: top; font-size: 73%; color: #2e74b6; cursor: pointer; margin-right: 0.5rem;" data-target="#recordPaymentModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas">
+                                  <i class="fas fa-circle fa-stack-2x"></i>
+                                  <i class="fas fa-pen fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <i class="fas fa-check-circle fa-lg" name='update' style="color: #42ba96; cursor: pointer; margin-right: 0.5rem;" data-target="#confirmEmployeeModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas"></i>
+                                <i class="fas fa-minus-circle fa-lg" name='remove' style="color: red; cursor: pointer;" data-target="#removeEmployeeModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <div id="collapse1" class="collapse" aria-labelledby="headingOne" data-parent="#accordionTutor" style="padding: 0; margin: 0; ">
+                            <div class="card-body">
+                              <div class="row d-flex">
+                                <div class="ml-auto p-2">
+                                  <button href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#previewModal" onclick=""> <i class="fas fa-eye" style="margin-right: 0.5rem;"></i> Preview</button>
+                                </div>
+                                <div class="p-2">
+                                  <button href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#editPayslipModal" data-cardid='wwwwww'> <i class="fas fa-pen-square" style="margin-right: 0.5rem;"></i> Edit</button>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-12"  style="overflow-x:auto;">
+                                  <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
+                                  <table id="table_item_wwwwww" class="table-light table-sm" cellspacing="0" width="100%" >
+                                    <thead id='thead_item_wwwwww' style="background-color: grey; color: white;">
+                                      <tr>
+                                        <th style="min-width: 200px; font-size: small;">Items</th>
+                                        <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity*</th>
+                                        <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
+                                        <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Payout</th>
+                                        <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Earning</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="tbody_item_wwwwww">
+                                      <tr class="item">
+                                        <td style="font-size: small;">Standard 3 English</td>
+                                        <td style="text-align: right; font-size: small;">1</td>
+                                        <td style="text-align: right; font-size: small;">100</td>
+                                        <td style="text-align: right; font-size: small;">100</td>
+                                        <td style="text-align: right; font-size: small;">RM100</td>
+                                      </tr>
+                                      <tr class="subtotal" id='previewItemSubtotal'>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: right; font-weight: 500; font-size: small;">Gross Pay</td>
+                                        <td style="text-align: right; font-weight: 500; font-size: small;" id="previewSubtotalItem">RM100</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <table id="table_additem_wwwwww" class="table-light table-sm" cellspacing="0" width="100%">
+                                    <thead id="thead_additem_wwwwww" style="visibility: collapse;">
+                                      <tr>
+                                        <th style="min-width: 200px;">Items</th>
+                                        <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
+                                        <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
+                                        <th style="width: 100px; min-width: 100px;text-align: right;">Payout</th>
+                                        <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="tbody_additem_wwwwww">
+                                      <tr class="additional">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: right; font-size: small;" data-selector='Earning ( + )' data-item='Extra Cash' data-value='10'>Extra Cash</td>
+                                        <td style="text-align: right; font-size: small;">+ RM10</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div class="col-12">
+                                  <h4 style="text-align: right; font-weight: 500;">Net Pay <span style="margin-left: 2rem;" id="netpay_wwwwww">RM100.00</span></h4>
+                                </div>
+                              </div>
+
+                              <div class="row"  style="margin-top: 1rem">
+                                <div class="col-md-12 text-right">
+                                  <button href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#editPayslipEmployeeModal" data-cardid='wwwwww'> <i class="fas fa-pen-square" style="margin-right: 0.5rem;"></i> Edit Details</button>
+                                </div>
+                              </div>
+
+
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <h5>General</h5>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payslip Title</span> 
+                                      <p name="title">Payslip of November</p>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payslip No</span> 
+                                      <p name="refNo">PV9128391890</p>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Date</span> 
+                                      <p name="date">12/2/2021</p>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <h5>Employee Details</h5>
+                                  <div id='employeeid' value=''></div>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Name</span> 
+                                      <p name="name">Alric Liew</p>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Position</span> 
+                                      <p name="position">Tutor</p>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">EPF No</span> 
+                                      <p name="epf">8946146465</p>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Socso No</span> 
+                                      <p name="socso">64631894616584</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <h5>Banking Information</h5>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Name</span> 
+                                      <p name="bankName">CIMB Bank</p>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Account Number</span> 
+                                      <p name="acNo">98s5ew5xdfle</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div> -->
+
+                        <!-- card 2 -->
+                        <!-- <div class="card" id='wwwwwv'>
+                          <div class="card-header" id="headingOne" style="padding: 0; margin: 0; ">
+                            <div class="row" >
+                              <div class="col-md-11">
+                                <a class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapseOne" style="text-transform: none; white-space: normal; font-size: medium;">
+                                  Chang Ai Ling (RM128.30)
+                                </a>
+                              </div>
+                              <div class="col-md-1  align-self-center text-center">
+                                <i class="far fa-check-circle fa-lg" style="color: #42ba96; cursor: pointer; margin-right: 0.5rem;" data-target="#confirmEmployeeModal" data-toggle="modal" data-employeecardid="wwwwww" data-employeecardname="aishas"></i>
+                                <i class="fas fa-minus-circle" style="color: red; cursor: pointer;" data-target="#removeEmployeeModal" data-toggle="modal" data-employeecardid="wwwwwv" data-employeecardname="aishas"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <div id="collapse2" class="collapse" aria-labelledby="headingOne" data-parent="#accordionTutor" style="padding: 0; margin: 0; ">
+                            <div class="card-body">
+                              <div class="row d-flex" id="desciption-row" >
+                                <div class="ml-auto p-2">
+                                  <button href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#previewModal" onclick=""> <i class="fas fa-eye" style="margin-right: 0.5rem;"></i> Preview</button>
+                                </div>
+                                <div class="p-2">
+                                  <button href="javascript:;" class="btn btn-primary btn-round" data-toggle="modal" data-target="#editPayslipModal" onclick=""> <i class="fas fa-pen-square" style="margin-right: 0.5rem;"></i> Edit</button>
+                                </div>
+                              </div>
+                              <div style="margin-top: 1rem;"></div>
+                              
+                              <div class="row">
+                                <div class="col-12"  style="overflow-x:auto;">
+                                  <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
+                                  <table id="table_item_wwwwww" class="table-light table-sm" cellspacing="0" width="100%" >
+                                    <thead style="background-color: grey; color: white;">
+                                      <tr>
+                                        <th style="min-width: 200px; font-size: small;">Items</th>
+                                        <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Price</th>
+                                        <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="previewItemBody">
+                                      <tr class="item">
+                                        <td style="font-size: small;">Food</td>
+                                        <td style="text-align: right; font-size: small;">20</td>
+                                        <td style="text-align: right; font-size: small;">RM20</td>
+                                      </tr>
+                                      <tr class="subtotal" id='previewItemSubtotal'>
+                                        <td></td>
+                                        <td style="text-align: right; font-weight: 500; font-size: small;">Gross Earning</td>
+                                        <td style="text-align: right; font-weight: 500; font-size: small;" id="previewSubtotalItem">RM20</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                
+                                  <table id="table_additem_wwwwww" class="table-light table-sm" cellspacing="0" width="100%">
+                                    <thead style="visibility: collapse;">
+                                      <tr>
+                                        <th style="min-width: 200px;">Items</th>
+                                        <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
+                                        <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="previewAdditionalItemBody">
+                                      <tr class="additional">
+                                        <td></td>
+                                        <td style="text-align: right; font-size: small;">Extra</td>
+                                        <td style="text-align: right; font-size: small;">+ RM10</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                
+                                <div class="col-12">
+                                  <h4 style="text-align: right; font-weight: 500;">Net Pay <span style="margin-left: 2rem;" id="previewGrandTotal">RM30.00</span></h4>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                        </div> -->
+
+                      </div>
+                    </div>
+
+            
+                  </div>
+
+                </div>
+
               </div>
+
+              <!-- <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="social">
+                        <h4 style="font-size: x-large;"><span> <button  id="btnStep1" class="btn btn-primary btn-just-icon btn-round" style="margin-right: 1rem;">
+                          <p>3</p>
+                          </button></span> 
+                          Confirmation
+                        </h4>
+                        <p>Everything looks good!</p>
+                      </div>
+                    </div>
+                    <div class="col-md-4 align-self-center text-right">
+                      <a href="javascript:;" class="btn btn-primary btn-round" style="background-color: #2e74b6;">Submit Payroll <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
             </div>
           </div>
-
         </div>
+
 
         <footer class="footer">
           <div class="container-fluid">
