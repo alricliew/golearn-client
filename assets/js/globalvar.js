@@ -1,4 +1,4 @@
-  // Global Variables
+  // Global Variables for Tutor
   var tutorId; // For tutor-portal
   var userId; // for client
   var current_name, current_email, current_phone, current_age, current_gender, current_imgUri, current_nric,

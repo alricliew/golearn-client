@@ -717,6 +717,8 @@ const NUM_VALUE = "value";
 const NUM_DATE_EDIT = "dateEdit";
 
 // -------------- Session Storage Key Start -------------- //
+// CLIENT: Profile Obj
+const PROFILE_CLIENT_INFO = "clientInfoObj";
 // TUTOR: Profile Obj
 const PROFILE_TUTOR_INFO = "tutorInfoObj";
 // TUTOR: Class Module 
