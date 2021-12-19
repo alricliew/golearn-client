@@ -37,7 +37,7 @@ function loadClientInfoObj(userId){
     current_phone = (clientInfoObj.phone == null || clientInfoObj.phone == "")? "New Tutor" : clientInfoObj.phone; 
     current_age = (clientInfoObj.age == null || clientInfoObj.age == "")? "18" : clientInfoObj.age; 
     current_gender= (clientInfoObj.gender == 0)? "Male" : "Female"; 
-    current_imgUri = (clientInfoObj.imgUrl == null || clientInfoObj.imgUrl == "")? "../assets/img/hello.gif" : clientInfoObj.imgUrl;
+    current_imgUri = (clientInfoObj.imgUrl == null || clientInfoObj.imgUrl == "")? "https://app.golearn.com.my/assets/img/hello.gif" : clientInfoObj.imgUrl;
     current_accountStatus = clientInfoObj.accountStatus; // bool
     current_address1= (clientInfoObj.address1 == null || clientInfoObj.address1 == "")? '' : clientInfoObj.address1 + ', ';
     current_address2= (clientInfoObj.address2 == null || clientInfoObj.address2 == "")? '' : clientInfoObj.address2 + ', '; 
@@ -94,7 +94,7 @@ function loadUserInfo(userId){
       current_name = (doc.data().name == null || doc.data().name == "")? "New User" : doc.data().name;
       current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email;
       current_phone = (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone; 
-      current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "https://app.golearn.com.my/assets/img/empty-photo.png" : doc.data().imgUrl;
+      current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "https://app.golearn.com.my/assets/img/hello.gif" : doc.data().imgUrl;
       current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
       current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
       current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
