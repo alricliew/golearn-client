@@ -290,7 +290,7 @@
                                 <div class="card card-profile">
                                   <div class="card-avatar" style="height: 150px;width: 150px;">
                                     <a href="javascript:;" >
-                                      <img class="img" id="tutorImgUrl" style="height: 100%; width:100%; object-fit: cover; border-radius: 50%;" src="../assets/img/empty-photo.png"/>
+                                      <img class="img" id="tutorImgUrl" style="height: 100%; width:100%; object-fit: cover; border-radius: 50%;" src="https://app.golearn.com.my/assets/img/empty-photo.png"/>
                                     </a>
                                   </div>
                                   <div class="card-body">
@@ -565,7 +565,7 @@
           admin_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
           admin_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email; 
           admin_phone= (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone;
-          admin_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
+          admin_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "https://app.golearn.com.my/assets/img/hello.gif" : doc.data().imgUrl;
           admin_accountStatus = doc.data().accountStatus; 
           admin_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
           admin_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
@@ -642,7 +642,7 @@
           
           current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
           current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
-          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
+          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "https://app.golearn.com.my/assets/img/hello.gif" : doc.data().imgUrl;
           current_accountStatus = doc.data().accountStatus; 
           current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
           current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
@@ -719,11 +719,27 @@
           }
         });
     }
-    // Set the statuses to active
+    // Set the statuses to active and update the details
     function SetAdminStatusToActive(docId, statusAdmin){
       // NEW: Add tutor to the Tutor Module
       let tutorModuleDocRef = db.collection("Class").doc('v1').collection('Tutor').doc(docId);
       let tutorModuleData = {
+        [TUTOR_ADMIN_NAME]: admin_name,
+        [TUTOR_ADMIN_PHONE]: admin_phone,
+        [TUTOR_ADMIN_EMAIL]: admin_email,
+        [TUTOR_ADMIN_ADDR]: admin_address,
+        [TUTOR_ADMIN_IMG_URL]: admin_imgUri,
+        [TUTOR_ADMIN_WEB_URL]: admin_weburl,
+        // Tutor specific
+        [TUTOR_TUTOR_NAME]: document.getElementById("name").value,
+        [TUTOR_TUTOR_EMAIL]: document.getElementById("email").value,
+        [TUTOR_TUTOR_PHONE]: document.getElementById("phoneTutor").value,
+        [TUTOR_TUTOR_AGE]: parseInt(document.getElementById("age").value, 10),
+        [TUTOR_TUTOR_GENDER]: gender_temp,
+        [TUTOR_TUTOR_ADDR]: final_address,
+        [TUTOR_TUTOR_IMG_URL]: imgUrl_temp,
+        [TUTOR_TUTOR_WEB_URL]: current_aweburl,
+
         [TUTOR_DATE_EDIT]: new Date(),
         [TUTOR_STATUS_ADMIN]: TUTOR_STATUS_TYPE_ACTIVE,
         [TUTOR_STATUS_TUTOR]: TUTOR_STATUS_TYPE_ACTIVE,

@@ -636,12 +636,12 @@
       document.getElementById("viewTutorImgUrl").src = currentObj[TUTOR_TUTOR_IMG_URL];
       console.log(currentObj[TUTOR_TUTOR_WEB_URL])
       if (currentObj[TUTOR_TUTOR_WEB_URL] == null || currentObj[TUTOR_TUTOR_WEB_URL] == ''){
-        document.getElementById("btnViewTutorModalFullProfile").setAttribute('style', 'none');     
+        document.getElementById("btnViewTutorModalFullProfile").setAttribute('style', 'visibility: hidden');     
         document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','#'); 
         document.getElementById("btnViewTutorModalFullProfile").setAttribute('target',''); 
       }
       else{
-        document.getElementById("btnViewTutorModalFullProfile").setAttribute('style', 'visible');     
+        document.getElementById("btnViewTutorModalFullProfile").setAttribute('style', 'visibility: visible');     
         document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','https://golearn.com.my/tutor/'+currentObj[TUTOR_TUTOR_WEB_URL]); 
         document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','_blank'); 
       }
@@ -885,11 +885,18 @@
       // console.log("Saving...")
       // console.log(data)
 
-      docRef.set(data, { merge: true })
+      // docRef.set(data, { merge: true })
+      // .then(() => {
+      //   updateTeacherNum(1)
+      //   // window.location.href='./'
+      // });
+
+      docRef.delete()
       .then(() => {
         updateTeacherNum(1)
         // window.location.href='./'
       });
+
 
 
     }
