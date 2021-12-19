@@ -387,6 +387,22 @@
           current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
           current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
 
+          // Store data to sessionStorage
+          var tutorDataObj = {
+              [NAME_KEY] : doc.data().name,
+              [EMAIL_KEY] : doc.data().email,
+              [PHONE_KEY] : doc.data().phone,
+              [ADDRESS_1_KEY] :doc.data().address1,
+              [ADDRESS_2_KEY] :doc.data().address2,
+              [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
+              [ADDRESS_STATE_KEY] :doc.data().addressState,
+              [IMAGE_KEY] : doc.data().imgUrl,
+              [SYSTEM_LAST_ONLINE_KEY] : doc.data()[SYSTEM_LAST_ONLINE_KEY],
+            }
+
+            // Set tutorInfoObj as sessionStorage
+            sessionStorage.setItem(PROFILE_CLIENT_INFO, JSON.stringify(tutorDataObj));
+            
           // Set the nav user name and public profile link
           document.getElementById("user").textContent = doc.data().name;
 

@@ -453,6 +453,7 @@
               </div>
               <div class="modal-body" id="editStudentModalBody">
                 <div id="editStudentId" value=""></div>
+                <div id="editGuardianId" value=""></div>
                 <div id="editStudentEnrollmentStatus" value=""></div>
                 <div class="row">
                   <div class="col-md-4">
@@ -873,7 +874,6 @@
           </div>
 
           <div class="row">
-            <!-- <div class="col-md-1"></div> -->
             <div class="col-md-12">
               <div class="row" >
                 <div class="col-12 col-lg-12 ml-auto mr-auto mb-4">
@@ -1704,7 +1704,6 @@
             </div>
 
             </div>
-            <!-- <div class="col-md-1"></div> -->
           </div>
 
         </div>
@@ -1843,6 +1842,8 @@
       }else{
         // Set the fields
         currentClassObj = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_CURRENT_DOC_KEY));
+        console.log("currentClassObj");
+        console.log(currentClassObj);
         updatePageContent(currentClassObj);
 
         // If user is NOT the admin of this class, disable non admin edits
@@ -1903,6 +1904,8 @@
 
 
       // Time Slot Panel
+      // Remove second and above time slot
+      clearTimeSlot();
       //    1st Slot
       let subject_drop = document.getElementById("inDayOfWeek1");
       $('#inDayOfWeek1').find('option[value='+currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][0]+']').attr('selected','selected');
@@ -1911,10 +1914,12 @@
       // console.log(CLASS_TIMESLOT_DAY_OF_WEEK_ARR)
       // console.log(CLASS_TIMESLOT_DAY_OF_WEEK_ARR.length)
       if (currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR].length > 1){
+        // Add time slot
         for (let i = 1; i<currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR].length; i++){
-        addTimeSlot(currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i], currentClassObj[CLASS_TIMESLOT_START_ARR][i], currentClassObj[CLASS_TIMESLOT_END_ARR][i]); 
+          addTimeSlot(currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i], currentClassObj[CLASS_TIMESLOT_START_ARR][i], currentClassObj[CLASS_TIMESLOT_END_ARR][i]); 
         }
       }
+      initTimePicker();
 
 
       // Tutor Panel
@@ -2392,7 +2397,12 @@
 
       docRef.set(data, { merge: true })
       .then(() => {
-        window.location.href='./'
+        // Reload the page view after changing removing tutor.
+        reload();
+
+        func.showNotification('top','center', 'success', 'check_circle', "Class updated!" );
+
+        // window.location.href='./'
       });
 
 
@@ -2494,7 +2504,7 @@
           
           querySnapshot.forEach((doc) => {
 
-            console.log(doc.data());
+            // console.log(doc.data());
 
             let reportDocRef = db.collection("Report")
               .doc("v1")
@@ -2728,6 +2738,24 @@
       $( "#timeSlot-"+id ).remove();
     }
   
+    // Remove second and above Time Slot
+    function clearTimeSlot(){
+      var timeSlotContainerChildCount = document.getElementById("timeSlot-container").childElementCount;
+      var timeSlotContainer = document.getElementById("timeSlot-container").children;
+      console.log(timeSlotContainerChildCount);
+
+      // console.log(timeSlotContainer);
+      Array.from(timeSlotContainer).forEach((row, index) => {
+
+        if (index > 0){
+          row.remove();
+        }
+        // console.log(row);
+        // console.log(index);
+      });
+
+    }
+    
     // Add a new lesson item
     function addLesson(type='NEW', doc, lessonId){
       // Type:
@@ -3100,7 +3128,7 @@
           document.getElementById("lessonNoDataPlaceholder").style.display = 'initial';
         }
         querySnapshot.forEach((doc) => {
-          console.log(doc.data());
+          // console.log(doc.data());
           // latestLessonDoc = doc.data()[LESSON_DATE];
           // console.log(latestLessonDoc);
 
@@ -3299,7 +3327,6 @@
       docRef
       .get()
       .then((querySnapshot) => {
-        console.log('Total Students Found: '+querySnapshot.docs.length);
 
         if (querySnapshot.docs.length == null || querySnapshot.docs.length == 0){
           document.getElementById("studentNoDataPlaceholder").style.display = 'initial';
@@ -3479,7 +3506,7 @@
       .then(() => {
         func.showNotification('top','center', 'success', 'check_circle', "Successfully added a new student: " + selectedStuModuleDoc.childName );
         // Add studentId and gurId from Student Module to class's viewerId array in Class Module
-        addStudentIdToClassDB(selectedStuModuleDoc[STU_GUR_ID], selectedStuModuleDoc[STU_CHILD_ID], selectedStuModuleDoc[STU_CHILD_NAME],);
+        addStudentIdToClassDB(selectedStuModuleDoc[STU_GUR_ID], selectedStuModuleDoc[STU_CHILD_ID], selectedStuModuleDoc[STU_CHILD_NAME]);
 
         
         // window.location.reload(true); 
@@ -3497,6 +3524,7 @@
     }
 
     // Add new studentId & parentID as viewer to Class DB
+    // Note: Guardian ID is always valid. Sometime, childId is empty.
     function addStudentIdToClassDB(guardianId, childId, childName) {
       
       let docRef = db.collection("Class")
@@ -3506,76 +3534,32 @@
 
 
       // Update the Teacher panel
-      let viewerArray = currentClassObj[CLASS_VIEWER_ID_ARR];
+      // If the CLASS_VIEWER_ID_ARR or CLASS_STUDENT_ID_ARR is null or empty, assign empty arr to them.
+      let viewerArray = (currentClassObj[CLASS_VIEWER_ID_ARR] == null || currentClassObj[CLASS_VIEWER_ID_ARR] == "") ? [] : currentClassObj[CLASS_VIEWER_ID_ARR];
       viewerArray.push(guardianId);
       viewerArray.push(childId);
-      let stuArray = currentClassObj[CLASS_STUDENT_ID_ARR];
+
+      let stuArray = (currentClassObj[CLASS_STUDENT_ID_ARR] == null || currentClassObj[CLASS_STUDENT_ID_ARR] == "") ? [] : currentClassObj[CLASS_STUDENT_ID_ARR];
       stuArray.push(childId);
 
       let data = {
-        // [CLASS_ID]: docRef.id,
-        // [CLASS_NAME]: document.getElementById("inClassName").value,
-        // [CLASS_DESC]: document.getElementById("inClassDesc").value,
-        // [CATEGORY_KEY]: category,
-        // [CATEGORY_ID_KEY]: categoryId,
-        // [SUBJECT_KEY]: subject,
-        // [SUBJECT_ID_KEY]: subjectId,
-        // [ONLINE_KEY]: document.getElementById("onlineonly_check").checked,
-        // [CLASS_STUDENT_LIMIT]: document.getElementById("inStudentLimit").value,
-        // [CLASS_ANNOUNCEMENT]: document.getElementById("inClassAnnouncement").value,
-        // [CLASS_URL]: "UNUSED",
-        // [CLASS_TYPE]: (document.getElementById("classTypeRadioPrivate").checked)? CLASS_TYPE_PRIVATE : CLASS_TYPE_PUBLIC,
-        // [CLASS_STATUS]: (document.getElementById("classStatusRadioActive").checked)? CLASS_STATUS_ACTIVE : CLASS_STATUS_INACTIVE,
-        // [CLASS_VENUE]: document.getElementById("inVenue").value,
-        // [STATE_KEY]: gStateName,
-        // [STATE_ID_KEY]: gState,
-        // [AREA_KEY]: gAreaName,
-        // [AREA_ID_KEY]: gArea,
-
-        // Time slot
-        // [CLASS_TIMESLOT_DAY_OF_WEEK_ARR]: dayOfWeekArr,
-        // [CLASS_TIMESLOT_START_ARR]: startTimeArr,
-        // [CLASS_TIMESLOT_END_ARR]: endTimeArr,
-        // IDs
-        // [CLASS_ADMIN_ID]: tutorId,
-        // [CLASS_TUTOR_ID_ARR]: [tutor1_id, tutor2_id],
-        // [CLASS_TUTOR_NAME_ARR]: [tutor1_name, tutor2_name],
-        // [CLASS_TUTOR_PHONE_ARR]: [tutor1_phone, tutor2_phone],
         [CLASS_STUDENT_ID_ARR]: stuArray,
         [CLASS_VIEWER_ID_ARR]: viewerArray,
-        // Fee type
-        // [FEES_KEY]: parseFloat(document.getElementById("inFee").value),
-        // [FEES_PER_MONTH_KEY]: (document.getElementById("feeTypePerMonthRadio").checked)? parseFloat(document.getElementById("inFee").value) : parseFloat(document.getElementById("inFee").value * 2 * 4),
-        // [FEES_TYPE_KEY]: (document.getElementById("feeTypePerMonthRadio").checked)? FEES_TYPE_PER_MONTH_KEY : FEES_TYPE_PER_HOUR_KEY,
-        // Special Permission
-        // [CLASS_TUTOR1_ADD_EDIT_STUDENT_ENABLE]: (document.getElementById("t1AddEditStuEn").checked)? true : false,
-        // [CLASS_TUTOR1_REMOVE_STUDENT_ENABLE]: (document.getElementById("t1DelStuEn").checked)? true : false,
-        // [CLASS_TUTOR1_ADD_EDIT_LESSON_ENABLE]: (document.getElementById("t1AddEditLessonEn").checked)? true : false,
-        // [CLASS_TUTOR1_REMOVE_LESSON_ENABLE]: (document.getElementById("t1DelLessonEn").checked)? true : false,
-        // [CLASS_TUTOR2_ADD_EDIT_STUDENT_ENABLE]: (document.getElementById("t2AddEditStuEn").checked)? true : false,
-        // [CLASS_TUTOR2_REMOVE_STUDENT_ENABLE]: (document.getElementById("t2DelStuEn").checked)? true : false,
-        // [CLASS_TUTOR2_ADD_EDIT_LESSON_ENABLE]: (document.getElementById("t2AddEditLessonEn").checked)? true : false,
-        // [CLASS_TUTOR2_REMOVE_LESSON_ENABLE]: (document.getElementById("t2DelLessonEn").checked)? true : false,
-        // [CLASS_STUDENT_AUTO_JOIN_ENABLE]: (document.getElementById("stuAutoJoinEn").checked)? true : false,
-
-        // [CLASS_DATE_ADD]: '',
         [CLASS_DATE_EDIT]: new Date(),
-        // [CLASS_DATE_DEL]: '',
-        [CLASS_EDIT_MSG]: childName + ' joined.', // Update: CLASS_DATE_EDIT + CLASS_EDIT_MSG
-
-        // [STATUS_KEY]: true,
+        [CLASS_EDIT_MSG]: childName + ' joined.',
       }
       console.log('StudentID Array Data');
       console.log(data);
       docRef.set( data, { merge: true })
       .then(() => {
+        reload();
         // func.showNotification('top','center', 'success', 'check_circle', "New student added.");
       });
 
     }
 
     // Remove a studentId & parentID as viewer from Class DB
-    function delStudentIdFromClassDB(guardianId, studentId) {
+    function delStudentIdFromClassDB(guardianId, studentId, studentName) {
       
       let docRef = db.collection("Class")
           .doc("v1")
@@ -3584,125 +3568,88 @@
 
 
       // Removed the student and gurdian Id
-      let viewerArray = currentClassObj[CLASS_VIEWER_ID_ARR];
-      viewerArray = viewerArray.filter(e => e !== guardianId);
-      viewerArray = viewerArray.filter(e => e !== studentId);
+      let viewerArray = (currentClassObj[CLASS_VIEWER_ID_ARR] == null || currentClassObj[CLASS_VIEWER_ID_ARR] == "") ? [] : currentClassObj[CLASS_VIEWER_ID_ARR];
+      // viewerArray = viewerArray.filter(e => e !== guardianId); // Remove all gurId
+      // viewerArray = viewerArray.filter(e => e !== studentId); // Remove all stuId
+      viewerArray = viewerArray.filter(e => e !== ""); // Remove empty items
 
-      let stuArray = currentClassObj[CLASS_STUDENT_ID_ARR];
-      stuArray = viewerArray.filter(e => e !== studentId);
-
-
-      let data = {
-        // [CLASS_ID]: docRef.id,
-        // [CLASS_NAME]: document.getElementById("inClassName").value,
-        // [CLASS_DESC]: document.getElementById("inClassDesc").value,
-        // [CATEGORY_KEY]: category,
-        // [CATEGORY_ID_KEY]: categoryId,
-        // [SUBJECT_KEY]: subject,
-        // [SUBJECT_ID_KEY]: subjectId,
-        // [ONLINE_KEY]: document.getElementById("onlineonly_check").checked,
-        // [CLASS_STUDENT_LIMIT]: document.getElementById("inStudentLimit").value,
-        // [CLASS_ANNOUNCEMENT]: document.getElementById("inClassAnnouncement").value,
-        // [CLASS_URL]: "UNUSED",
-        // [CLASS_TYPE]: (document.getElementById("classTypeRadioPrivate").checked)? CLASS_TYPE_PRIVATE : CLASS_TYPE_PUBLIC,
-        // [CLASS_STATUS]: (document.getElementById("classStatusRadioActive").checked)? CLASS_STATUS_ACTIVE : CLASS_STATUS_INACTIVE,
-        // [CLASS_VENUE]: document.getElementById("inVenue").value,
-        // [STATE_KEY]: gStateName,
-        // [STATE_ID_KEY]: gState,
-        // [AREA_KEY]: gAreaName,
-        // [AREA_ID_KEY]: gArea,
-
-        // Time slot
-        // [CLASS_TIMESLOT_DAY_OF_WEEK_ARR]: dayOfWeekArr,
-        // [CLASS_TIMESLOT_START_ARR]: startTimeArr,
-        // [CLASS_TIMESLOT_END_ARR]: endTimeArr,
-        // IDs
-        // [CLASS_ADMIN_ID]: tutorId,
-        // [CLASS_TUTOR_ID_ARR]: [tutor1_id, tutor2_id],
-        // [CLASS_TUTOR_NAME_ARR]: [tutor1_name, tutor2_name],
-        // [CLASS_TUTOR_PHONE_ARR]: [tutor1_phone, tutor2_phone],
-        [CLASS_STUDENT_ID_ARR]: stuArray,
-        [CLASS_VIEWER_ID_ARR]: viewerArray,
-        // Fee type
-        // [FEES_KEY]: parseFloat(document.getElementById("inFee").value),
-        // [FEES_PER_MONTH_KEY]: (document.getElementById("feeTypePerMonthRadio").checked)? parseFloat(document.getElementById("inFee").value) : parseFloat(document.getElementById("inFee").value * 2 * 4),
-        // [FEES_TYPE_KEY]: (document.getElementById("feeTypePerMonthRadio").checked)? FEES_TYPE_PER_MONTH_KEY : FEES_TYPE_PER_HOUR_KEY,
-        // Special Permission
-        // [CLASS_TUTOR1_ADD_EDIT_STUDENT_ENABLE]: (document.getElementById("t1AddEditStuEn").checked)? true : false,
-        // [CLASS_TUTOR1_REMOVE_STUDENT_ENABLE]: (document.getElementById("t1DelStuEn").checked)? true : false,
-        // [CLASS_TUTOR1_ADD_EDIT_LESSON_ENABLE]: (document.getElementById("t1AddEditLessonEn").checked)? true : false,
-        // [CLASS_TUTOR1_REMOVE_LESSON_ENABLE]: (document.getElementById("t1DelLessonEn").checked)? true : false,
-        // [CLASS_TUTOR2_ADD_EDIT_STUDENT_ENABLE]: (document.getElementById("t2AddEditStuEn").checked)? true : false,
-        // [CLASS_TUTOR2_REMOVE_STUDENT_ENABLE]: (document.getElementById("t2DelStuEn").checked)? true : false,
-        // [CLASS_TUTOR2_ADD_EDIT_LESSON_ENABLE]: (document.getElementById("t2AddEditLessonEn").checked)? true : false,
-        // [CLASS_TUTOR2_REMOVE_LESSON_ENABLE]: (document.getElementById("t2DelLessonEn").checked)? true : false,
-        // [CLASS_STUDENT_AUTO_JOIN_ENABLE]: (document.getElementById("stuAutoJoinEn").checked)? true : false,
-
-        // [CLASS_DATE_ADD]: '',
-        [CLASS_DATE_EDIT]: new Date(),
-        // [CLASS_DATE_DEL]: '',
-        [CLASS_EDIT_MSG]: current_name, // Update: CLASS_DATE_EDIT + CLASS_EDIT_MSG
-        // [STATUS_KEY]: true,
+      const indexGur = viewerArray.indexOf(guardianId);
+      if (indexGur > -1) {
+        viewerArray.splice(indexGur, 1);
       }
 
-      // console.log('StudentID Array Data');
-      // console.log(data);
+      const indexStu = viewerArray.indexOf(studentId);
+      if (indexStu > -1) {
+        viewerArray.splice(indexStu, 1);
+      }
+
+      let stuArray = (currentClassObj[CLASS_STUDENT_ID_ARR] == null || currentClassObj[CLASS_STUDENT_ID_ARR] == "") ? [] : currentClassObj[CLASS_STUDENT_ID_ARR];
+      // stuArray = stuArray.filter(e => e !== studentId); // Remove all stuId
+      stuArray = stuArray.filter(e => e !== ""); // Remove empty items
+
+      const indexStuArray = stuArray.indexOf(studentId);
+      if (indexStuArray > -1) {
+        stuArray.splice(indexStuArray, 1);
+      }
+
+      let data = {
+        [CLASS_STUDENT_ID_ARR]: stuArray,
+        [CLASS_VIEWER_ID_ARR]: viewerArray,
+        [CLASS_DATE_EDIT]: new Date(),
+        [CLASS_EDIT_MSG]: current_name, // Update: CLASS_DATE_EDIT + CLASS_EDIT_MSG
+      }
+
+      console.log('StudentID Array Data');
+      console.log(data);
+      
       docRef.set( data, { merge: true })
       .then(() => {
-        // func.showNotification('top','center', 'success', 'check_circle', "Tutor Removed.");
+
+        // Reload the page view after changing removing tutor.
+        reload();
+
+        // Reset the pagination cursor, remove all student-wrapper & reload the lessons
+        latestStuDoc = null;
+        removeElementsByClass('row student-wrapper');
+        loadAllStudents();
+        func.showNotification('top','center', 'success', 'check_circle', studentName + " has been removed." );
       });
 
     }
 
-    // Remove a student from class
+    // Remove permanantly a student from class
     function removeStudent(studentClassId, studentName, studentId, guardianId){
       // studentClassId is the id of student in Student_Class Module
-      var docRef = db.collection("Class")
+      let docRef = db.collection("Class")
           .doc("v1")
           .collection("Class_Student")
           .doc(studentClassId);
 
       let data = {
-        // [CLASS_STUDENT_ID]: docRef.id,
-        // [CLASS_STUDENT_CLASS_ID]: currentClassObj[CLASS_ID],
-        // [CLASS_STUDENT_ADMIN_ID]: currentClassObj[CLASS_ADMIN_ID],
         [CLASS_STUDENT_STATUS]: false,
-        // [CLASS_STUDENT_DATE_ADD]: new Date(),
-        // [CLASS_STUDENT_DATE_EDIT]: '',
         [CLASS_STUDENT_DATE_DEL]: new Date(),
-        // [CLASS_STUDENT_ENROLLMENT_STATUS]: CLASS_STUDENT_ENROLLMENT_STATUS_ACTIVE,
-        // [CLASS_STUDENT_FEEDBACK]: '',
-        // Student Module
-        // [CLASS_STUDENT_DEPENDENT_ID]: selectedStuModuleDoc.depId,
-        // [CLASS_STUDENT_STU_NAME]: selectedStuModuleDoc.childName,
-        // [CLASS_STUDENT_STU_PHONE]: selectedStuModuleDoc.childPhone,
-        // [CLASS_STUDENT_STU_GENDER]: selectedStuModuleDoc.childGender,
-        // [CLASS_STUDENT_STU_EMAIL]: selectedStuModuleDoc.childEmail,
-        // [CLASS_STUDENT_GUR_NAME]: selectedStuModuleDoc.gurName,
-        // [CLASS_STUDENT_GUR_PHONE]: selectedStuModuleDoc.gurPhone,
-        // [CLASS_STUDENT_GUR_EMAIL]: selectedStuModuleDoc.gurEmail,
-        // [CLASS_STUDENT_GUR_ADDR]: selectedStuModuleDoc.gurAddr,
-
       }  
 
       // console.log('Delete Student Class_Student Sub Module: '+ studentId)
       // console.log(data)
       
-      var docRefWithMerge = docRef.set(data , { merge: true })
-      .then(() => {
-        func.showNotification('top','center', 'success', 'check_circle', studentName + " has been removed." );
-        // Remove studentId and gurId from class's viewerId & studentId array in Class Module
-        delStudentIdFromClassDB(guardianId, studentId);
-
-
-        // Reset the paginnation cursor, remove all student-wrapper & reload the lessons
-        latestStuDoc = null;
-        removeElementsByClass('row student-wrapper');
-        loadAllStudents();
+      docRef.delete().then(() => {
+        console.log("Document successfully deleted!");
+        delStudentIdFromClassDB(guardianId, studentId, studentName);
 
       }).catch((error) => {
-        console.log("Error getting document:", error);
+
+        console.error("Error removing document: ", error);
       });
+      // docRef.set(data, { merge: true })
+      // .then(() => {
+      //   // Remove studentId and gurId from class's viewerId & studentId array in Class Module
+      //   delStudentIdFromClassDB(guardianId, studentId, studentName);
+
+
+      // }).catch((error) => {
+      //   console.log("Error getting document:", error);
+      // });
 
     }
     
@@ -3819,8 +3766,8 @@
       // add_student_modal_container.insertBefore(stuDetail_div, add_student_modal_container.children[1])
     }
 
-    // Edit the student in class and update to Class_Student module
-    function updateStudent(studentId, studentFeedback, studenEnrollmentStatus){
+    // Edit the Feedback or approve a new student to Class_Student module in editStudentModal.
+    function updateStudent(studentId, guardianId, studentName, studentFeedback, studenEnrollmentStatus){
 
       var docRef = db.collection("Class")
           .doc("v1")
@@ -3847,8 +3794,13 @@
       // console.log('Class_Student UPDATE Data:')
       // console.log(data)
       // console.log(studentId)
-      var docRefWithMerge = docRef.set(data , { merge: true })
+
+      docRef.set(data , { merge: true })
       .then(() => {
+
+        // Add the student view to the class
+        addStudentIdToClassDB(guardianId, studentId, studentName);
+
         func.showNotification('top','center', 'success', 'check_circle', "Successfully updated student info!" );
         // Reset the paginnation cursor, remove all student-wrapper & reload the lessons
         latestStuDoc = null;
@@ -3857,6 +3809,8 @@
       }).catch((error) => {
           console.log("Error getting document:", error);
       });
+
+
 
     }
 
@@ -4568,6 +4522,51 @@
       }
     }
 
+
+    // Reload the page after edited something  
+    function reload(){
+
+      var docRef = db.collection("Class")
+        .doc("v1")
+        .collection("Class")
+        .doc(currentClassObj[CLASS_ID]);
+
+      // Reload Invoice data
+      docRef
+      .get()
+      .then((doc) => {
+
+
+        if (doc.exists) {
+          console.log("Reload document");
+          console.log(doc.data());
+
+          sessionStorage.setItem(SESSION_STORAGE_CLASS_CURRENT_DOC_KEY, JSON.stringify(doc.data()));
+
+          // Reload page view
+          getClassObject();
+
+        } 
+        else {
+          window.location = "./"
+          console.log("No such document!");
+        }
+
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
+    }
+
+    // Init Time picker
+    function initTimePicker(){
+      $('.clockpicker').clockpicker()
+      .find('input').change(function(){
+        // Time changed
+        // console.log(this.value);
+      });
+
+    }
   </script>
 
   <!-- Script -->
@@ -4847,7 +4846,7 @@
         addTimeSlot('','','');
 
         // Reinit the time picker 
-        initTimePicker()
+        initTimePicker();
       });
 
       // Add / Edit Lesson Modal
@@ -5167,6 +5166,7 @@
         });
 
         document.getElementById("editStudentId").setAttribute('value', STUDENT_ID);
+        document.getElementById("editGuardianId").setAttribute('value', selectedClassStuDoc.gurId);
         document.getElementById("editStudentEnrollmentStatus").setAttribute('value', STUDENT_ENROLLMENT_STATUS);
 
         document.getElementById("stuName").value = selectedClassStuDoc.stuName;
@@ -5204,11 +5204,13 @@
       // Update Student's Feedback from class
       $('#btnEditStudentModalUpdate').on('click', function (event) {
         let studentId =  document.getElementById("editStudentId").getAttribute('value');
+        let guardianId =  document.getElementById("editGuardianId").getAttribute('value');
+        let studentName = document.getElementById("stuName").value;
         let studentFeedback =  document.getElementById("stuFeedback").value;
         let studenEnrollmentStatus=  document.getElementById("editStudentEnrollmentStatus").value;
 
         // console.log()
-        updateStudent(studentId, studentFeedback, studenEnrollmentStatus);
+        updateStudent(studentId, guardianId, studentName, studentFeedback, studenEnrollmentStatus);
 
       });
 
@@ -5216,6 +5218,22 @@
       $('#editStudentModal').on('hide.bs.modal', function (event) {
         STUDENT_ID = "";
         STUDENT_NAME = "";
+        STUDENT_ENROLLMENT_STATUS = "";
+
+        document.getElementById("editStudentId").setAttribute('value', "");
+        document.getElementById("editGuardianId").setAttribute('value', "");
+        document.getElementById("editStudentEnrollmentStatus").setAttribute('value', "");
+        document.getElementById("stuName").value = "";
+        document.getElementById("stuPhone").value = "";
+        document.getElementById("stuEmail").value = "";
+        document.getElementById("stuGenderMale").checked = false;
+        document.getElementById("stuGenderFemale").checked = false;
+        document.getElementById("gurName").value = "";
+        document.getElementById("gurPhone").value = "";
+        document.getElementById("gurEmail").value = "";
+        document.getElementById("gurAddr").value = "";
+        document.getElementById("stuFeedback").value = "";
+
       });
 
 
@@ -5572,45 +5590,45 @@
       return valid; // return the valid status
     }
 
-    function getAllTimeSlots() {
-      dayOfWeekArr = [];
-      startTimeArr = [];
-      endTimeArr = [];
-      // This function deals with validation of the form fields with data-compulsory = 'true'
-      var x, y, i, valid = true;
-      x = document.getElementById("timeSlotTop");
-      console.log(x)
-      // y = x[activePanelNum].getElementsByTagName("input") && x[activePanelNum].querySelectorAll('[type="text"]');
-      y =x.querySelectorAll('[data-compulsory="true"]');
+    // function getAllTimeSlots() {
+    //   dayOfWeekArr = [];
+    //   startTimeArr = [];
+    //   endTimeArr = [];
+    //   // This function deals with validation of the form fields with data-compulsory = 'true'
+    //   var x, y, i, valid = true;
+    //   x = document.getElementById("timeSlotTop");
+    //   console.log(x)
+    //   // y = x[activePanelNum].getElementsByTagName("input") && x[activePanelNum].querySelectorAll('[type="text"]');
+    //   y =x.querySelectorAll('[data-compulsory="true"]');
 
-      // A loop that checks every input field in the current tab:
-      for (i = 0; i < y.length; i++) {
+    //   // A loop that checks every input field in the current tab:
+    //   for (i = 0; i < y.length; i++) {
 
-        if (i % 3 === 0){
-          dayOfWeekArr.push(y[i].value)
-        }
-        if (i % 3 === 1){
-          startTimeArr.push(y[i].value)
-        }
-        if (i % 3 === 2){
-          endTimeArr.push(y[i].value)
-        }
+    //     if (i % 3 === 0){
+    //       dayOfWeekArr.push(y[i].value)
+    //     }
+    //     if (i % 3 === 1){
+    //       startTimeArr.push(y[i].value)
+    //     }
+    //     if (i % 3 === 2){
+    //       endTimeArr.push(y[i].value)
+    //     }
    
         
-        // If a field is empty...
-        if (y[i].value == "") {
-          // add an "invalid" class to the field:
-          // y[i].className += " invalid";
-          // and set the current valid status to false:
-          valid = false;
-        }
-      }
+    //     // If a field is empty...
+    //     if (y[i].value == "") {
+    //       // add an "invalid" class to the field:
+    //       // y[i].className += " invalid";
+    //       // and set the current valid status to false:
+    //       valid = false;
+    //     }
+    //   }
 
-      // console.log(dayOfWeekArr)
-      // console.log(startTimeArr)
-      // console.log(endTimeArr)
-      return valid; // return the valid status
-    }
+    //   // console.log(dayOfWeekArr)
+    //   // console.log(startTimeArr)
+    //   // console.log(endTimeArr)
+    //   return valid; // return the valid status
+    // }
 
 
   </script>
@@ -5623,24 +5641,7 @@
         // TODO: time changed
         // console.log(this.value);
       });
-    // $('#demo-input').clockpicker({
-    //   autoclose: true
-    // });
 
-    // if (something) {
-    //   // Manual operations (after clockpicker is initialized).
-    //   $('#demo-input').clockpicker('show') // Or hide, remove ...
-    //       .clockpicker('toggleView', 'minutes');
-    // }
-
-    function initTimePicker(){
-      $('.clockpicker').clockpicker()
-      .find('input').change(function(){
-        // TODO: time changed
-        // console.log(this.value);
-      });
-
-    }
     // Date picjer
     // Source: https://mcdatepicker.netlify.app/docs/
     const calendarTheme = {
@@ -5691,6 +5692,7 @@
       // markDates: [new Date(2021, 2, 21), new Date(2021, 3, 1)],
       // disableYears: [2020],
       // disableMonths: [8],
+      customClearBTN: '',
       theme: calendarTheme
     });
     const editLessonModalDatePicker = MCDatepicker.create({
@@ -5700,6 +5702,7 @@
       selectedDate: new Date(),
       firstWeekday: 1,
       minDate: new Date(2020, 0, 1),
+      customClearBTN: '',
       theme: calendarTheme
     });
     const firstClassDatePicker = MCDatepicker.create({
@@ -5709,6 +5712,7 @@
       selectedDate: new Date(),
       firstWeekday: 1,
       minDate: new Date(2020, 0, 1),
+      customClearBTN: '',
       theme: calendarTheme
     });
 
@@ -6576,13 +6580,6 @@
     },
   });
 
-
-
-  // let dataTag = ['a', 'b', 'c']
-  // dataTag.forEach((item) => {
-  //   $('#classTag').tagsinput('add', item, {preventPost: true});
-  // })
-  
   </script>
 </body>
 
