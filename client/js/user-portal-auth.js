@@ -32,7 +32,7 @@ function render() {
 function phoneAuth() {
   //get the number
   // let number = document.getElementById('phone').value;
-  let number = inputPhone.getNumber();
+  let number = itiPhone.getNumber();
   console.log(number)
   //phone number authentication function of firebase
   //it takes two parameter first one is number,,,second one is recaptcha
@@ -97,7 +97,7 @@ function codeverify() {
                 [TOKEN_KEY]: null,    //main
                 [NAME_KEY] : 'New User',    //main
                 [EMAIL_KEY]  : "", //main
-                [PHONE_KEY]  : inputPhone.getNumber(), //main
+                [PHONE_KEY]  : itiPhone.getNumber(), //main
                 [ADDRESS_1_KEY]  : "",
                 [ADDRESS_2_KEY]  : "",
                 [ADDRESS_POSTCODE_KEY]  : "",
