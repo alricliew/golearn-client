@@ -431,9 +431,43 @@
 
               </div>
               <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-success" data-dismiss="modal" id="" >Add New Teacher</button> -->
+                <button type="button" class="btn btn-success" data-target="#invitationModal" data-toggle="modal" id="btnAutoJoinLink2" >Invite Students</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddStudentModalUpdate" >Add</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Invitation modal -->
+      <div class="row">
+        <div class="modal fade" id="invitationModal" tabindex="-1" role="dialog" aria-labelledby="invitationModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Invite Students</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="addTutorModalBody">
+
+                <div class="form-group" style="margin-top: 0rem;">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Online Registration Link</span> 
+                  <div class="input-group">
+                    <span class="d-flex align-items-center input-group-addon" style="margin-right: 0.5em; cursor: pointer;" onclick="copyText('inAutoJoinLink2')">
+                      <span class="material-icons">
+                        content_copy
+                      </span>
+                    </span>
+                    <input type="text" value='' class="form-control" style="background-color: #f5f5f5; pointer-events: none;" id="inAutoJoinLink2">
+                  </div>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
               </div>
             </div>
           </div>
@@ -866,10 +900,10 @@
           <!-- Back button -->
           <div class="row d-flex">
             <div class="p-2">
-              <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
+              <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em;">west</i> Back</a>
             </div>
             <div class="p-2">
-              <a href="" class="btn btn-primary btn-round" id="btnSave" data-toggle="modal" data-target="#saveModal"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</a>
+              <a href="javascript:;" class="btn btn-primary btn-round" id="btnSave" data-toggle="modal" data-target="#saveModal"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em;">save</i> Save</a>
             </div>
           </div>
 
@@ -899,8 +933,8 @@
                     <!--Lessons form panel-->        
                     <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
                       <h4 class="multitabs-form__title">Lessons 
-                        <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddLesson" data-toggle="modal" data-target="#addLessonModal" data-button-text="Add" data-title="Add New Lesson"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">add</i></a> 
-                        <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestLessonDoc=null; removeElementsByClass('row lesson-wrapper'); LoadLessonInfo();"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">refresh</i></a>
+                        <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddLesson" data-toggle="modal" data-target="#addLessonModal" data-button-text="Add" data-title="Add New Lesson"><i class="material-icons" style="color: #2e74b6;">add</i></a> 
+                        <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestLessonDoc=null; removeElementsByClass('row lesson-wrapper'); LoadLessonInfo();"><i class="material-icons" style="color: #2e74b6;">refresh</i></a>
                       </h4>
                       <div class="multitabs-form__content">
 
@@ -1160,7 +1194,7 @@
                           </div>
 
                           <div class="col-lg-4 col-md-4 col-sm-4">
-                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTimeSlot"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">add</i></a>
+                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTimeSlot"><i class="material-icons" style="color: #2e74b6;">add</i></a>
                           </div>
                         </div>
 
@@ -1173,8 +1207,8 @@
                     <!--Students form panel-->
                     <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                       <h4 class="multitabs-form__title">Students 
-                        <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddStudent" data-toggle="modal" data-target="#addStudentModal" data-button-text="Add" data-title="Add New Student"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">add</i></a> 
-                        <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestStuDoc=null; removeElementsByClass('row student-wrapper'); loadAllStudents();"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">refresh</i></a>
+                        <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddStudent" data-toggle="modal" data-target="#addStudentModal" data-button-text="Add" data-title="Add New Student"><i class="material-icons" style="color: #2e74b6;">add</i></a> 
+                        <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestStuDoc=null; removeElementsByClass('row student-wrapper'); loadAllStudents();"><i class="material-icons" style="color: #2e74b6;">refresh</i></a>
                       </h4>
                       <div class="multitabs-form__content">
                         <div class="col-md-12" id="studentTop">
@@ -1249,7 +1283,7 @@
 
                         <div class="row">
                           <div class="col-md-12" >
-                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnStudentLoadMore">Load More <i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">expand_more</i></a> 
+                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnStudentLoadMore">Load More <i class="material-icons" style="color: #2e74b6;">expand_more</i></a> 
                           </div>
                         </div>
 
@@ -2015,10 +2049,22 @@
 
       if (currentClassObj[CLASS_STUDENT_AUTO_JOIN_ENABLE]){
         document.getElementById("inAutoJoinLinkTop").style.display = 'initial';
+
+        document.getElementById("btnAutoJoinLink2").className = "btn btn-success";
+        document.getElementById("btnAutoJoinLink2").style.pointerEvents= 'auto';
+        document.getElementById("inAutoJoinLink2").value = 'https://app.golearn.com.my/client/online-registration.html?aid='+uriAdminId+'&cid='+uriClassId;
+
       }else{
         document.getElementById("inAutoJoinLinkTop").style.display = 'none';
+
+        document.getElementById("btnAutoJoinLink2").className = "btn btn-default";
+        document.getElementById("btnAutoJoinLink2").style.pointerEvents= 'none';
+        document.getElementById("inAutoJoinLink2").value = 'https://app.golearn.com.my/client/online-registration.html?aid='+uriAdminId+'&cid='+uriClassId;
+
       }
 
+
+      btnAutoJoinLink2
       // Check if class status
       if (currentClassObj[CLASS_STATUS] === CLASS_STATUS_INACTIVE){
         disableAllEdits();
@@ -4186,6 +4232,7 @@
       /* Copy the text inside the text field */
       navigator.clipboard.writeText(copyText.value);
 
+      func.showNotification('top','center', 'success', 'check_circle', "Link copied.");
       /* Alert the copied text */
       // alert("Copied the text: " + copyText.value);
     }
@@ -4407,6 +4454,7 @@
 
       document.getElementById("tAddEditLessonEn").setAttribute("disabled", true);
       document.getElementById("tDelLessonEn").setAttribute("disabled", true);
+
 
     }
 
@@ -5305,8 +5353,15 @@
       $('#stuAutoJoinEn').on('change', function (event) {
         if (this.checked){
           document.getElementById("inAutoJoinLinkTop").style.display = 'initial';
+
+          document.getElementById("btnAutoJoinLink2").className = "btn btn-success";
+          document.getElementById("btnAutoJoinLink2").style.pointerEvents= 'auto';
+
         }else{
           document.getElementById("inAutoJoinLinkTop").style.display = 'none';
+
+          document.getElementById("btnAutoJoinLink2").className = "btn btn-default";
+          document.getElementById("btnAutoJoinLink2").style.pointerEvents= 'none';
         }
       });
       

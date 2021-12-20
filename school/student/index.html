@@ -272,7 +272,7 @@
 
             <div class="col-md-12 card-student">
               <div class="row" >
-                <div class="col-md-11" style="padding: 0;">
+                <div class="col-md-12" style="padding: 0;">
                   <div class="row" style="margin: 0;">
                     <div class="col-md-4">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Student Name</h6>
@@ -294,9 +294,9 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-1">
+                <!-- <div class="col-md-1">
                   <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Action</h6>
-                </div>
+                </div> -->
 
               </div>
             </div>
@@ -828,7 +828,7 @@
       detail_div.appendChild(status_div);
       detail_div.appendChild(dateAdd_div);
       let detail_top_div = document.createElement('div');
-      detail_top_div.className = "col-md-11";
+      detail_top_div.className = "col-md-12";
       detail_top_div.setAttribute("style"," padding: 12px 0px 12px 0px;");
       detail_top_div.setAttribute("onclick","editStudentFunction(this)");
       detail_top_div.setAttribute("data-id", doc.data().id);
@@ -851,8 +851,11 @@
       btn_a.setAttribute("data-id", doc.data().id);
       btn_a.setAttribute("data-studentname",  doc.data().childName);
       let btn_div = document.createElement('div');
-      btn_div.className = "col-md-1 align-self-center";
-      btn_div.setAttribute("style"," margin-bottom: 12px");
+      // btn_div.className = "col-md-1 align-self-center";
+
+      btn_div.className = "col-1";
+      btn_div.setAttribute("style"," margin-bottom: 12px; padding-top: 12px; padding-left: 0;padding-right: 0; border-top: solid thin #f8f8f8; minwidth: fix-content;");
+      // btn_div.setAttribute("style"," margin-bottom: 12px; margin-top: 12px;border-top: solid thin #fafafa");
 
       btn_div.appendChild(btn_a);
  
@@ -860,7 +863,7 @@
       let card_div = document.createElement('div');
       card_div.className = "row"
       card_div.appendChild(detail_top_div);
-      card_div.appendChild(btn_div);
+      // card_div.appendChild(btn_div);
 
       // Card top
       let card_top_div = document.createElement('div');

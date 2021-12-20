@@ -5,8 +5,7 @@ function AuthCheck(){
   firebase.auth().onAuthStateChanged(function(user){
     if(!user){
       // Return to login if user does not exist.
-      console.log("No user")
-      // window.location.href = "https://app.golearn.com.my/"
+      window.location.href = "https://app.golearn.com.my/"
     }else{
       // if the displayName is null, it means user register using Phone
       if (firebase.auth().currentUser.displayName == null )

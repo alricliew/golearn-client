@@ -1214,7 +1214,7 @@
         document.getElementById("tutorGenderAgeYearsExperience").textContent = detail;
       }else{
         // This is only for the very first time login
-        document.getElementById("tutorImgUrl").src = "../assets/img/hello.gif";
+        document.getElementById("tutorImgUrl").src = "https://app.golearn.com.my/assets/img/hello.gif";
         document.getElementById("tutorName").textContent = "Boo Boo";
         document.getElementById("tutorTutoringApproach").textContent = "I am passionate about teaching and love little teddies.";
         document.getElementById("tutorTutoringExperience").textContent = " I have 9 months of teaching experience. Hire me starting from 2 cans of honey 🍯🍯.";
@@ -1227,7 +1227,7 @@
 
       // Update Dashboard > Profile
       let checker = 0; // max = 7
-      if (current_imgUri != null && current_imgUri != "" && current_imgUri != "../assets/img/hello.gif"){
+      if (current_imgUri != null && current_imgUri != "" && current_imgUri != "https://app.golearn.com.my/assets/img/hello.gif"){
         document.getElementById("profilePic").style.color = "green";
         document.getElementById("profilePic").className = "fas fa-check-circle fa-fw";
         checker = checker + 1;

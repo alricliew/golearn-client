@@ -69,40 +69,26 @@
 <body>
 
 
-  <div class="wrapper ">
-    <!-- <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/img/sidebar-3.jpg">
+  <div class="wrapper">
+    <div class="sidebar" data-color="transparent" data-background-color="transparent" data-image="../../assets/img/sidebar-3.jpg" style="background: transparent">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
-			<img src="../assets/img/logo.png" style="width: 216px; height: auto;" alt=""></img>
-          
+			    <img src="https://app.golearn.com.my/assets/img/golearn-school-logo.svg" style="width: 216px; height: auto;" alt=""></img>
         </a>
-        <a href="#" class="simple-text logo-normal">
-         Welcome!
-        </a>
+
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="./">
-              <i class="material-icons">home</i>
-              <p>Home</p>
-            </a>
-          </li>
-		  		<li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="material-icons">work_outline</i>
-              <p>My Classes</p>
-            </a>
-          </li>
+ 
         </ul>
       </div>
-    </div> -->
+    </div>
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Online Registration: <span id="classFullName"></span></a>
+            <a class="navbar-brand" href="javascript:;" style="white-space: nowrap!important; overflow: hidden!important; text-overflow: ellipsis!important; display: block!important;">Online Registration</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -115,13 +101,13 @@
             </form>
 
             <ul class="navbar-nav">
-              <li class="nav-item" id="activationNavItem">
-                <a href="#" class="btn btn-danger btn-round" style="visibility: hidden;" id="btnActivateAccount" ></a>
-              </li>
               <li class="nav-item">
                 <a class="navbar-brand" href="javascript:;">
                    Hi <span id="user"></span> !
                 </a> 
+              </li>
+              <li class="nav-item" id="activationNavItem">
+                <a href="https://app.golearn.com.my/client/" class="btn btn-primary btn-round btn-sm" style="color: white;">Go to my profile </a>
               </li>
               <!-- <li class="nav-item dropdown">
                 <a class="nav-link" href="javascript:;" id="navbarDropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -222,15 +208,23 @@
       </div>
 
       <div class="content">
-
+      
+        <div class="row text-center" style=" padding-bottom: 20px;">
+          <div class="col-md-12">
+            <span id="classFullName" style="font-weight: 400;"></span>
+          </div>
+  
+        </div>
 
         <div class="container">
    
           <div class="container overflow-hidden">
+
+
             <div class="row" >
 
               <!-- Invalid screen -->
-              <div class="col-md-9" id="invalid-screen" style="display: none;">
+              <div class="col-md-12" id="invalid-screen" style="display: none;">
                 <div class="row text-center">
                   <div class="col-md-12">
                     <h2 id="invalidScreenTitle">Invalid Registration Link...</h2>
@@ -241,15 +235,16 @@
               </div>
 
               <!-- Invalid screen -->
-              <div class="col-md-9" id="registration-complete-screen" style="display: none;">
+              <div class="col-md-12" id="registration-complete-screen" style="display: none;">
                 <h2>You have completed your registration!</h2>
-                <a href="./" class="btn btn-outline-primary btn-round" id="btnBack">View my profile <i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">east</i></a>
+                <p>You will see your class after the class owner approves your enrollment. </p>
+                <a href="./" class="btn btn-outline-primary btn-round" id="btnBack">Go to my profile <i class="material-icons" style="color: #2e74b6; margin-right: 0.5em;">east</i></a>
 
               </div>
 
     
               <!-- Main content -->
-              <div class="col-md-9" id="multisteps-form">
+              <div class="col-md-12" id="multisteps-form">
                 <!--multisteps-form navbar-->
                 <div class="row" >
                   <div class="col-12 col-lg-12 ml-auto mr-auto mb-4">
@@ -291,14 +286,14 @@
                 
                                 <div class="social">
                         
-                                  <h4><span> <button class="btn btn-just-icon btn-round btn-facebook">
+                                  <h4><span> <button class="btn btn-just-icon btn-round btn-primary">
                                     <p>1</p>
                                     </button></span> Enter Your Contact Number</h4>
                                 </div>
                                 
                   
                                 <!-- <form class="form" method="" action=""> -->
-                                  <div class="card-body">
+                                  <div class="card-body"  style="padding-left: 0; padding-right: 0;">
                                     <div class="form-group  d-flex justify-content-center">
                                       <div class="input-group">
                                         <input id="phone" name="phone" type="tel"  class="form-control">
@@ -321,20 +316,25 @@
                                   </div>
                                 <!-- </form> -->
                                 <div class="social">
-                                  <h4 ><span> <button class="btn btn-just-icon btn-round btn-facebook">
+                                  <h4 ><span> <button class="btn btn-just-icon btn-round btn-primary">
                                     <p>2</p>
                                     </button></span> Verification </h4>
                                   <p>Enter the 6-digit verification code from your SMS.</p>
                                 </div>
                                 <!-- <form class="form " method="" action=""> -->
-                                  <div class="card-body">
+                                  <div class="card-body align-content-center" style="padding-left: 0; padding-right: 0;">
                                     <div class="form-group">
                                       <div class="input-group">
-                                        <div id="divOuter" style="width: 250px; overflow: hidden;">
+                                        <div id="divOuter" style="width: 240px; ">
+                                          <div id="divInner" style="left: 0; position: sticky;">
+                                            <input style="background-color: transparent; border: 0; width: 280px; letter-spacing: 30px;  padding-left: 10px; margin-left:0em; background-position-x: 25px!important;  background-repeat: repeat-x; background-size: 40px 1px;  background-position: bottom; background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);" type="text" id="verificationCode" maxlength="6" placeholder="">                            
+                                          </div>
+                                        </div>
+                                        <!-- <div id="divOuter" style="width: 250px; ">
                                           <div id="divInner" style="left: 0; position: sticky;">
                                             <input style="background-color: transparent; border: 0; width: 280px; letter-spacing: 31px;  padding-left: 20px; margin-left:0em; background-position-x: 0;  background-repeat: repeat-x;background-size: 40px 1px;  background-position: bottom; background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);" type="text" id="verificationCode" maxlength="6" placeholder="">                            
                                           </div>
-                                        </div>
+                                        </div> -->
                                       </div>
                                     </div>
                                     <div class="form-group">
@@ -346,11 +346,7 @@
                                 <!-- </form> -->
                               </div>
                             </div>
-                            <div class="button-row d-flex mt-4">
-                              <!-- <button class="btn btn-primary ml-auto" type="button" title="Next">Next</button> -->
-                            </div>
-
-                            
+                          
                           </div>
                         </div>
 
@@ -362,7 +358,7 @@
                               <div class="col-md-12">
                                 <div class="social">
                         
-                                  <h4><span> <button class="btn btn-just-icon btn-round btn-facebook">
+                                  <h4><span> <button class="btn btn-just-icon btn-round btn-primary">
                                     <p>1</p>
                                     </button></span> I am Parent / Guardian</h4>
                                 </div>
@@ -379,7 +375,7 @@
                               <!-- Header -->
                               <div class="col-md-12 card-student">
                                 <div class="row" >
-                                  <div class="col-md-11" style="padding: 0;">
+                                  <div class="col-md-10" style="padding: 0;">
                                     <div class="row" style="margin: 0;">
                                       <div class="col-md-3">
                                         <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Name</h6>
@@ -459,7 +455,7 @@
                               <div class="col-md-12" id="card-add-dependant-btn">
                                 <div class="row">
                                   <div class="col-md-12">
-                                    <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next" id="btnAddNewDependant">Add New Dependant</button>
+                                    <button class="btn btn-primary ml-auto btn-round js-btn-next" type="button" title="Next" id="btnAddNewDependant">Add New Dependant</button>
                                   </div>
                                 </div>
                               </div>
@@ -469,7 +465,7 @@
                             <div class="row" style="margin-top: 2rem;">
                               <div class="col-md-12">
                                 <p>I register for my-self</p>
-                                <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next" id="btnEnrollMyself">Enroll Myself</button>
+                                <button class="btn btn-primary ml-auto btn-round js-btn-next" type="button" title="Next" id="btnEnrollMyself">Enroll Myself</button>
 
                               </div>
                             </div>
@@ -478,7 +474,7 @@
                               <div class="col-md-12">
                                 <div class="social">
                         
-                                  <h4><span> <button class="btn btn-just-icon btn-round btn-facebook">
+                                  <h4><span> <button class="btn btn-just-icon btn-round btn-primary">
                                     <p>2</p>
                                     </button></span> I am Student</h4>
                                 </div>
@@ -488,7 +484,7 @@
                             <div class="row">
                               <div class="col-md-12">
                                 <!-- <p>I register for my-self</p> -->
-                                <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next" id="btnEnrollNow">Enroll Now</button>
+                                <button class="btn btn-primary ml-auto btn-round js-btn-next" type="button" title="Next" id="btnEnrollNow">Enroll Now</button>
 
                               </div>
                             </div>
@@ -724,6 +720,7 @@
                               <button class="btn btn-success ml-auto js-btn-send" type="button" title="Send" id="btnRegister" >Register & Close</button>
                             </div>
 
+
                           </div>
                         </div>
 
@@ -740,23 +737,18 @@
 
       <footer class="footer">
         <div class="container-fluid">
-          <nav class="float-left">
-          <ul>
-            <!-- <li>
-            <a href="https://golearn.com.my/join-us" target="_blank">
-              Visit GoLearn Tutor
-            </a>
-            </li> -->
-          </ul>
-          </nav>
-          <!-- <div class="copyright float-right">
-            &copy;
-            <script>
-              document.write(new Date().getFullYear())
-            </script> 
-            , made with <i class="material-icons">favorite</i> by <a href="#" >GoLearn Team</a>
+          <!-- <div class="row">
+            <div class="col-md-12 text-center">
+              <p>Powered by 
+                <span>
+                  <a href="https://golearn.com.my/" class="simple-text logo-mini">
+                    <img src="https://app.golearn.com.my/assets/img/golearn-plain.svg" style="width: 108px; height: auto; " alt=""></img>
+                  </a>
+                </span>
+              </p>
+  
+            </div>
           </div> -->
-          <!-- your footer here -->
         </div>
       </footer>
     </div>
@@ -1036,7 +1028,7 @@
           
           current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
           current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
-          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
+          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "https://app.golearn.com.my/assets/img/hello.gif" : doc.data().imgUrl;
           current_accountStatus = doc.data().accountStatus; 
           current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
           current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
@@ -1044,6 +1036,8 @@
           current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
           current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
 
+          document.getElementById("user").textContent = doc.data().name;
+          
         } else {
             //  Error: Invalid user
         }
@@ -1091,6 +1085,7 @@
       // Name
       let stuName_p = document.createElement('p');
       stuName_p.textContent = doc.data().childName;
+      stuName_p.setAttribute("style", "font-weight:400; font-size:1rem")
       let stuName_div = document.createElement('div');
       stuName_div.className = "col-md-3";
       stuName_div.appendChild(stuName_p);
@@ -1129,7 +1124,7 @@
       // detail_div.appendChild(email_div);
       detail_div.appendChild(school_div);
       let detail_top_div = document.createElement('div');
-      detail_top_div.className = "col-md-11";
+      detail_top_div.className = "col-md-10 align-self-center";
       detail_top_div.setAttribute("style","padding: 0;");
       // detail_top_div.setAttribute("onclick","editDependantFunction(this)");
       // detail_top_div.setAttribute("data-id", doc.data().id);
@@ -1140,7 +1135,7 @@
       // blogsHtml_btn += "<i class='material-icons' style='color: red;''>remove</i>";
       let btn_a = document.createElement('button');
       // btn_a.innerHTML = blogsHtml_btn;
-      btn_a.className = "btn btn-primary ml-auto js-btn-next";
+      btn_a.className = "btn btn-primary btn-sm btn-round ml-auto js-btn-next";
       btn_a.textContent = "Select";
       btn_a.setAttribute("type","button");
       // btn_a.setAttribute("id","btnDelStudent");
@@ -1152,7 +1147,7 @@
       // btn_a.setAttribute("data-studentname",  doc.data().childName);
       btn_a.setAttribute("onclick","useThisDependant(this)");
       let btn_div = document.createElement('div');
-      btn_div.className = "col-md-1";
+      btn_div.className = "col-md-2";
       btn_div.appendChild(btn_a);
  
       // Student Top
@@ -1519,10 +1514,12 @@
         [CLASS_STUDENT_FEEDBACK]: '',
         // Get from Dependant Module
         [CLASS_STUDENT_DEPENDENT_ID]: depId,
+        [CLASS_STUDENT_STU_ID]: itiStudent.getNumber(),
         [CLASS_STUDENT_STU_NAME]: document.getElementById("inStuName").value,
         [CLASS_STUDENT_STU_PHONE]: itiStudent.getNumber(),
         [CLASS_STUDENT_STU_GENDER]: document.getElementById("inStuMaleChecked").checked ? 0 : 1,
         [CLASS_STUDENT_STU_EMAIL]: document.getElementById("inStuEmail").value,
+        [CLASS_STUDENT_GUR_ID]: itiGuardian.getNumber(),
         [CLASS_STUDENT_GUR_NAME]: document.getElementById("inGurName").value,
         [CLASS_STUDENT_GUR_PHONE]: itiGuardian.getNumber(),
         [CLASS_STUDENT_GUR_EMAIL]: document.getElementById("inGurEmail").value,
@@ -1624,8 +1621,7 @@
           reportDocRef
             .set(reportData, { merge: true })
             .then(() => {
-              $('#loadingModal').modal('hide');
-              window.location.href='./';
+
             });
 
         } 
@@ -1654,7 +1650,6 @@
             reportDocRef
               .set(reportData, { merge: true })
               .then(() => {
-                window.location.href='./';
               });
 
           });
