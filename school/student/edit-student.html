@@ -182,7 +182,7 @@
                   <a id="navPublicProfile" class="dropdown-item" href="#">My Public Profile</a>
 									<a class="display:block; dropdown-item" href="../about.html">About</a>
 									<div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#signOutModal" id="btn-logout">Log out</a>
+                  <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#signOutModal" onclick="signOutFunction()" id="btn-logout">Log out</a>
 									<div class="dropdown-divider"></div>
 									<a style="font-weight: 500 ;padding: 0.5em ;text-align: center; width: 200px; background-color: #428dd4 ;display: block; color: #fff;" href="https://golearn.com.my/pricing/" target="_blank" id="btnUpgradeToPro">Upgrade to Pro</a>
 
@@ -293,25 +293,28 @@
       <div class="content">
 
 
-        <div class="container">
+        <!-- <div class="container"> -->
 
-          <!-- Back button -->
-          <div class="row d-flex" style="margin: auto 10px 0 10px;">
-            <div class="p-2">
-              <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
-            </div>
-            <div class="p-2">
-              <a href="javascript:;" class="btn btn-primary btn-round" id="btnSave"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</a>
-            </div>
-            <div class="p-2">
-              <a href="javascript:;" class="btn btn-warning btn-round" id="btnApprove" data-toggle="modal" data-target="#approveStuModal" style="display: none;"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">report_problem</i> Approve ?</a>
-            </div>
-            <div class="ml-auto p-2">
-              <a href="javascript:;" class="btn btn-danger btn-round" data-toggle="modal" data-target="#delStuModal"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">remove</i> Remove</a>
-            </div>
-          </div>
           
           <div class="container overflow-hidden">
+
+            
+            <!-- Back button -->
+            <div class="row d-flex" style="margin: auto 10px 0 10px;">
+              <div class="p-2" style="padding: 0 8px 8px 0!important;">
+                <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
+              </div>
+              <div class="p-2" style="padding: 0 8px 8px 0!important;">
+                <a href="javascript:;" class="btn btn-primary btn-round" id="btnSave"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</a>
+              </div>
+              <div class="p-2" style="padding: 0 8px 8px 0!important;">
+                <a href="javascript:;" class="btn btn-warning btn-round" id="btnApprove" data-toggle="modal" data-target="#approveStuModal" style="display: none;">Approve ?</a>
+              </div>
+              <div class="ml-auto p-2" style="padding: 0 0 8px 0!important;">
+                <a href="javascript:;" class="btn btn-danger btn-round" data-toggle="modal" data-target="#delStuModal"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">remove</i> Remove</a>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col-md-12">
                 <!--multitabs-form navbar-->
@@ -537,7 +540,7 @@
               </div>
             </div>
           </div>
-        </div>
+        <!-- </div> -->
       </div>
 
       <footer class="footer">

@@ -287,7 +287,7 @@
                   <a id="navPublicProfile" class="dropdown-item" href="#">My Public Profile</a>
 									<a class="display:block; dropdown-item" href="../about.html">About</a>
 									<div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#signOutModal" id="btn-logout">Log out</a>
+                  <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#signOutModal" onclick="signOutFunction()" id="btn-logout">Log out</a>
 									<div class="dropdown-divider"></div>
 									<a style="font-weight: 500 ;padding: 0.5em ;text-align: center; width: 200px; background-color: #428dd4 ;display: block; color: #fff;" href="https://golearn.com.my/pricing/" target="_blank" id="btnUpgradeToPro">Upgrade to Pro</a>
 
@@ -707,11 +707,11 @@
           <!-- Main panel -->
           <div class="row">
    
+            <div class="col-md-12">
+              <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
+            </div>
             <div class="col-md-12"  style="padding-bottom: 0">
-              <div class="row d-flex">
-                <div class="p-2">
-                  <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
-                </div>
+              <div class="row d-flex" style="padding: 0 5px 0 5px;">
                 <div class="p-2">
                   <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Invoice Status</span> 
                   <p id="invStatus" style="font-weight: bold; font-size: x-large;  margin-bottom: 0;">-</p>

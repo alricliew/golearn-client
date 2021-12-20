@@ -421,6 +421,11 @@ $( document ).ready(function() {
 
 });
 
+// Sign out
+function signOutFunction(){
+  // $('#signOutModal').modal('show');
+  $("#signOutModal").appendTo("body");
+}
 
 // Function to show notification
 func = {
