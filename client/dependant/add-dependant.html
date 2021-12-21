@@ -78,7 +78,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Dependants <span><i class="material-icons" style="color: gray;">chevron_right</i></span> Add Dependant</a>
+            <a class="navbar-brand" href="javascript:;">Dependants <span><i class="material-icons" style="color: gray;">chevron_right</i></span> Add New</a>
           </div>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -195,237 +195,233 @@
       <div class="content">
         <div class="container-fluid">
 
-
-          <div class="container">
-            <div class="row">
-              <!-- Update button -->
-  
-              <div class="col-md-12 d-flex flex-row">
-                <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
-                <a href="javascript:;" class="btn btn-primary btn-round" id="btnSave"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</a>
-              </div>
+          <div class="row">
+            <!-- Update button -->
+            <div class="col-md-12 d-flex flex-row">
+              <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 5px;">west</i> Back</a>
+              <a href="javascript:;" class="btn btn-primary btn-round" id="btnSave"><i class="material-icons" style="color: #ffffff; margin-right: 5px;">save</i> Save</a>
             </div>
+          </div>
 
-            <div class="row">
-              <div class="col-md-12">
-                <!--multitabs-form navbar-->
-                <div class="row" >
-                  <div class="col-12 col-lg-12 ml-auto mr-auto mb-4">
-                    <div class="d-flex flex-wrap multitabs-form__progress">
-                      <button class="multitabs-form__progress-btn js-active" type="button" title="Student Info">Profile</button>
-                    </div>
+          <div class="row">
+            <div class="col-md-12">
+              <!--multitabs-form navbar-->
+              <div class="row" >
+                <div class="col-12 col-lg-12 ml-auto mr-auto mb-4">
+                  <div class="d-flex flex-wrap multitabs-form__progress">
+                    <button class="multitabs-form__progress-btn js-active" type="button" title="Student Info">Profile</button>
                   </div>
                 </div>
+              </div>
 
-                <!--multitabs-form-->
-                <div class="multitabs-form" id="multitabs_form">
-                  <!--form panels-->
-                  <div class="row">
-                    <div class="col-12">
-                      <form class="multitabs-form__form">
-                        <!-- Form panel-->
-                        <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
-                          <h4 class="multitabs-form__title">Dependant Profile (Student / Child)</h4>
-                          <div class="multitabs-form__content">
-                            <!-- Student Info -->
-                            <div class="row">
-                               <!-- Name -->
-                              <div class="col-md-6">
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Full Name*</span> 
-                                  <input type="text" class="form-control" id="inStuName" data-compulsory="true" oninput="this.className = 'form-control'">
-                                </div>
-                              </div>
-
-                              <!-- Phone -->
-                              <div class="col-md-6">
-                                <div class="form-group" style="padding-bottom: 0;">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Phone</span> 
-                                </div>
-                                <div class="form-group" style="margin-top: 0;">
-                                  <!-- <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Phone*</span>  -->
-                                  <!-- <i style="margin-right: 1rem;" class="material-icons">smartphone</i> -->
-                                  <input id="phoneStudent" name="phone" type="tel" class="form-control" oninput="this.className = 'form-control'">
-                                  <span id="valid-msg" class="hide" style="color: #42ba96;">✓ Valid</span>
-                                  <span id="error-msg" class="hide" style="color: #F32013;"></span>
-                                </div>
-                              </div>
-                            </div>
-                              
-                            <div class="row">
-                              <!-- Email -->
-                              <div class="col-md-6">
-                                <div class="form-group" >
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Email</span> 
-                                  <input type="text" class="form-control" id="inStuEmail" data-compulsory="false">
-                                </div>
-                              </div>
-
-                              <!-- Gender -->
-                              <div class="col-md-6">
-                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;" >Gender</span> 
-                                <div class="form-group" >
-                                  <div class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="StudentGender" id="inStuMaleChecked" value="option1" data-compulsory="false" checked>
-                                      Male
-                                      <span class="circle">
-                                        <span class="check"></span>
-                                      </span>
-                                    </label>
-                                  </div>
-                                  <div class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="StudentGender" id="inStuFemaleChecked" value="option2" data-compulsory="false">
-                                      Female
-                                      <span class="circle">
-                                        <span class="check"></span>
-                                      </span>
-                                    </label>
-                                  </div>
-                                </div>
+              <!--multitabs-form-->
+              <div class="multitabs-form" id="multitabs_form">
+                <!--form panels-->
+                <div class="row">
+                  <div class="col-12">
+                    <form class="multitabs-form__form">
+                      <!-- Form panel-->
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
+                        <h4 class="multitabs-form__title">Dependant Profile (Student / Child)</h4>
+                        <div class="multitabs-form__content">
+                          <!-- Student Info -->
+                          <div class="row">
+                              <!-- Name -->
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Full Name*</span> 
+                                <input type="text" class="form-control" id="inStuName" data-compulsory="true" oninput="this.className = 'form-control'">
                               </div>
                             </div>
 
-                            <div class="row">
-                              <!-- School -->
-                             <div class="col-md-12">
-                               <div class="form-group">
-                                 <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">School</span> 
-                                 <input type="text" class="form-control" id="inStuSchool" data-compulsory="false">
-                               </div>
-                             </div>
+                            <!-- Phone -->
+                            <div class="col-md-6">
+                              <div class="form-group" style="padding-bottom: 0;">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Phone</span> 
+                              </div>
+                              <div class="form-group" style="margin-top: 0;">
+                                <!-- <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Phone*</span>  -->
+                                <!-- <i style="margin-right: 1rem;" class="material-icons">smartphone</i> -->
+                                <input id="phoneStudent" name="phone" type="tel" class="form-control" oninput="this.className = 'form-control'">
+                                <span id="valid-msg" class="hide" style="color: #42ba96;">✓ Valid</span>
+                                <span id="error-msg" class="hide" style="color: #F32013;"></span>
+                              </div>
                             </div>
-  
-
                           </div>
-                          <div style="margin: 2em;" ></div>
-                          
-                          <h4 class="multitabs-form__title">Guardian Profile</h4>
-                          <div class="multitabs-form__content">
-
-                            <!-- Guardian Info-->
-                              <div class="row">
-                                <!-- Name -->
-                              <div class="col-md-6">
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Name*</span> 
-                                  <input type="text" class="form-control" id="inGurName" data-compulsory="true" oninput="this.className = 'form-control'" >
-                                </div>
-                              </div>
-
-                              <!-- Phone -->
-                              <div class="col-md-6">
-                                <div class="form-group" style="padding-bottom: 0;">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Phone</span> 
-                                </div>
-                                <div class="form-group" style="margin-top: 0;">
-                                  <!-- <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Phone*</span>  -->
-                                  <!-- <i style="margin-right: 1rem;" class="material-icons">smartphone</i> -->
-                                  <input id="phoneGuardian" name="phone" type="tel" class="form-control" data-compulsory="true" oninput="this.className = 'form-control'" readonly>
-                                </div>
-                              </div>
-                            </div>
-                              
-                            <div class="row">
-                              <!-- Email -->
-                              <div class="col-md-6">
-                                <div class="form-group" >
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Email</span> 
-                                  <input type="text" class="form-control" id="inGurEmail" data-compulsory="false">
-                                </div>
-                              </div>
-
-                              <!-- Gender -->
-                              <div class="col-md-6">
-                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;" >Gender</span> 
-                                <div class="form-group" >
-                                  <div class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="GurdianGender" id="inGurMaleChecked" value="option1" data-compulsory="false" checked>
-                                      Male
-                                      <span class="circle">
-                                        <span class="check"></span>
-                                      </span>
-                                    </label>
-                                  </div>
-                                  <div class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="GurdianGender" id="inGurFemaleChecked" value="option2" data-compulsory="false">
-                                      Female
-                                      <span class="circle">
-                                        <span class="check"></span>
-                                      </span>
-                                    </label>
-                                  </div>
-                                </div>
+                            
+                          <div class="row">
+                            <!-- Email -->
+                            <div class="col-md-6">
+                              <div class="form-group" >
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Email</span> 
+                                <input type="text" class="form-control" id="inStuEmail" data-compulsory="false">
                               </div>
                             </div>
 
-                            <div class="row">
-                              <!-- Relationship -->
-                              <div class="col-md-6">
-                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;" >Relationship</span> 
-                                <div class="form-group" >
-                                  <div class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="GuardianRelationship" id="inRelParentsChecked" value="option1" data-compulsory="false" checked>
-                                        Parents
-                                      <span class="circle">
-                                        <span class="check"></span>
-                                      </span>
-                                    </label>
-                                  </div>
-                                  <div class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="GuardianRelationship" id="inRelGurdianChecked" value="option2" data-compulsory="false">
-                                        Legal Guardian
-                                      <span class="circle">
-                                        <span class="check"></span>
-                                      </span>
-                                    </label>
-                                  </div>
+                            <!-- Gender -->
+                            <div class="col-md-6">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;" >Gender</span> 
+                              <div class="form-group" >
+                                <div class="form-check form-check-radio form-check-inline">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="StudentGender" id="inStuMaleChecked" value="option1" data-compulsory="false" checked>
+                                    Male
+                                    <span class="circle">
+                                      <span class="check"></span>
+                                    </span>
+                                  </label>
                                 </div>
-                              </div>
-
-                              <!-- Address -->
-                              <div class="col-md-12">
-                                <div class="form-group" style="margin-top: 1.5rem;" >
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Address</span> 
-                                  <textarea class="form-control" maxlength="511" rows="3" id="inGurAddress" data-compulsory="false" placeholder="Write something ..."></textarea>
+                                <div class="form-check form-check-radio form-check-inline">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="StudentGender" id="inStuFemaleChecked" value="option2" data-compulsory="false">
+                                    Female
+                                    <span class="circle">
+                                      <span class="check"></span>
+                                    </span>
+                                  </label>
                                 </div>
                               </div>
                             </div>
+                          </div>
 
-                            <div class="row" style="margin-top: 0.5rem;">
-                              <div class="col-md-6">
-                                  <!-- State -->
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray;">State</span> 
-                                  <select class="form-control" name="tutor_course[]" id="state_drop" data-compulsory="false">
-                                    <option value="">Select state</option>
-                      
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-md-6">
-                                <!-- Area -->
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Area</span>
-                                  <select class="form-control" name="tutor_course[]" id="area_drop" data-compulsory="false">
-                                    <option value="">Select area</option>
-                                  </select>
-                                </div>
+                          <div class="row">
+                            <!-- School -->
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">School</span> 
+                                <input type="text" class="form-control" id="inStuSchool" data-compulsory="false">
                               </div>
                             </div>
-
                           </div>
 
 
                         </div>
+                        <div style="margin: 2em;" ></div>
+                        
+                        <h4 class="multitabs-form__title">Guardian Profile</h4>
+                        <div class="multitabs-form__content">
 
-                      </form>
-                    </div>
+                          <!-- Guardian Info-->
+                            <div class="row">
+                              <!-- Name -->
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Name*</span> 
+                                <input type="text" class="form-control" id="inGurName" data-compulsory="true" oninput="this.className = 'form-control'" >
+                              </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="col-md-6">
+                              <div class="form-group" style="padding-bottom: 0;">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Phone</span> 
+                              </div>
+                              <div class="form-group" style="margin-top: 0;">
+                                <!-- <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Phone*</span>  -->
+                                <!-- <i style="margin-right: 1rem;" class="material-icons">smartphone</i> -->
+                                <input id="phoneGuardian" name="phone" type="tel" class="form-control" data-compulsory="true" oninput="this.className = 'form-control'" readonly>
+                              </div>
+                            </div>
+                          </div>
+                            
+                          <div class="row">
+                            <!-- Email -->
+                            <div class="col-md-6">
+                              <div class="form-group" >
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Email</span> 
+                                <input type="text" class="form-control" id="inGurEmail" data-compulsory="false">
+                              </div>
+                            </div>
+
+                            <!-- Gender -->
+                            <div class="col-md-6">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;" >Gender</span> 
+                              <div class="form-group" >
+                                <div class="form-check form-check-radio form-check-inline">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="GurdianGender" id="inGurMaleChecked" value="option1" data-compulsory="false" checked>
+                                    Male
+                                    <span class="circle">
+                                      <span class="check"></span>
+                                    </span>
+                                  </label>
+                                </div>
+                                <div class="form-check form-check-radio form-check-inline">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="GurdianGender" id="inGurFemaleChecked" value="option2" data-compulsory="false">
+                                    Female
+                                    <span class="circle">
+                                      <span class="check"></span>
+                                    </span>
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <!-- Relationship -->
+                            <div class="col-md-6">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;" >Relationship</span> 
+                              <div class="form-group" >
+                                <div class="form-check form-check-radio form-check-inline">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="GuardianRelationship" id="inRelParentsChecked" value="option1" data-compulsory="false" checked>
+                                      Parents
+                                    <span class="circle">
+                                      <span class="check"></span>
+                                    </span>
+                                  </label>
+                                </div>
+                                <div class="form-check form-check-radio form-check-inline">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="GuardianRelationship" id="inRelGurdianChecked" value="option2" data-compulsory="false">
+                                      Legal Guardian
+                                    <span class="circle">
+                                      <span class="check"></span>
+                                    </span>
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="col-md-12">
+                              <div class="form-group" style="margin-top: 1.5rem;" >
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Address</span> 
+                                <textarea class="form-control" maxlength="511" rows="3" id="inGurAddress" data-compulsory="false" placeholder="Write something ..."></textarea>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row" style="margin-top: 0.5rem;">
+                            <div class="col-md-6">
+                                <!-- State -->
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray;">State</span> 
+                                <select class="form-control" name="tutor_course[]" id="state_drop" data-compulsory="false">
+                                  <option value="">Select state</option>
+                    
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <!-- Area -->
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Area</span>
+                                <select class="form-control" name="tutor_course[]" id="area_drop" data-compulsory="false">
+                                  <option value="">Select area</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                      </div>
+
+                    </form>
                   </div>
                 </div>
               </div>

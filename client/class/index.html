@@ -30,6 +30,64 @@
   <script src="../../assets/js/firebase.js"></script>
   <!-- Tutor Portal specific CSS -->
   <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
+
+  <style>
+    .br {
+      border-radius: 8px;  
+    }
+    .w30 {
+      width: 30%;
+    }
+    .w50 {
+      width: 50%;
+    }
+    .w80 {
+      width: 80%;
+    }
+    .card {
+      border: 2px solid #fff;
+      /* box-shadow:0px 0px 10px 0 #a9a9a9; */
+      padding: 12px 20px;
+      /* width: 80%; */
+      /* margin: 50px auto; */
+      margin-top: 0.2rem;
+    }
+    .card-shimmer-wrapper {
+      width: 0px;
+      animation: fullView 0.5s forwards cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    }
+    .profilePic {
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+    }
+    .comment {
+      height: 10px;
+      background: #777;
+      margin-top: 15px;
+    }
+
+    @keyframes fullView {
+      100% {
+        width: 100%;
+      }
+    }
+
+    .animate {
+      animation : shimmer 2s infinite linear;
+      background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+        background-size: 1000px 100%;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -1000px 0;
+      }
+      100% {
+        background-position: 1000px 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -270,10 +328,28 @@
               </div>
             </div> -->
  
+
+            <div class="card br" id="card-load">
+              <div class="card-shimmer-wrapper">
+                <div class="row">
+                  <div class="col-md-1 col-3">
+                    <div class="profilePic animate din"></div>
+                  </div>
+                  <div class="col-md-11 col-9">
+                    <div class="comment br animate w50"></div>
+                    <div class="comment br animate w30"></div>
+                  </div>
+                </div>
+                <div class="comment br animate w80"></div>
+                <div class="comment br animate"></div>
+              </div>
+            </div>
+
+          
           </div>
 
           <!-- Load More -->
-          <div class="row" id="desciption-row" >
+          <div class="row">
             <div class="col-md-12 d-flex flex-row" style="margin-top: 1rem;">
               <a href="javascript:;" class="btn btn-outline-primary btn-round" id="btnClassLoadMore">Load More <i class="material-icons" style="color: #2e74b6; margin-left: 0.5em; padding-bottom: 0.2em;">expand_more</i></a>
             </div>
@@ -420,14 +496,20 @@
       docRef
       .get()
       .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          // console.log(doc.data())
-          docsObj.push(doc.data());
-          // courseId = doc.id;
-          renderAllActiveClasses3(doc, "", false);
 
-        });
+        document.getElementById("card-load").style.display = "none";
+        if (querySnapshot.empty){
+          // Load empty data 
+        }else {
+          querySnapshot.forEach((doc) => {
+            // console.log(doc.data())
+            docsObj.push(doc.data());
+            // courseId = doc.id;
+            renderAllActiveClasses3(doc, "", false);
 
+          });
+        }
+        
         // Store in session storage
         sessionStorage.setItem(SESSION_STORAGE_CLIENT_CLASS_ALL_DOCS_KEY, JSON.stringify(docsObj));
         sessionStorage.setItem(SESSION_STORAGE_CLIENT_CLASS_CURRENT_DOC_KEY, null);
@@ -444,6 +526,8 @@
         }else{
           classLoadmore.style.visibility='hidden';
         }
+      }).catch((error) => {
+        console.log("Error getting document:", error);
       });
 
     };
