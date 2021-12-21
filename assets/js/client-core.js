@@ -54,6 +54,7 @@ function loadClientInfoObj(userId){
 
     // Check last online. If > 6hr, reload
     if (current_uLastOnline == null || current_uLastOnline == ""){
+      console.log("current_uLastOnline == null, loadUserInfo")
       loadUserInfo(userId);
     }else{
       let secondLastOnline = current_uLastOnline.seconds;
@@ -61,10 +62,13 @@ function loadClientInfoObj(userId){
       let hoursEllapsed = (secondCurrent - secondLastOnline) / 60 / 60;
       let reload = hoursEllapsed > 6;
       
-      // console.log(secondLastOnline, secondCurrent, hoursEllapsed, reload);
-      if (reload)
+      console.log(secondLastOnline, secondCurrent, hoursEllapsed, reload);
+      if (reload){
+        console.log("reload, loadUserInfo")
         loadUserInfo(userId);
+      }
       else {
+        console.log("local storage found")
         // Update the general view
         updateGeneralView();
         // Finally, load page specific view.
@@ -173,6 +177,12 @@ $( document ).ready(function() {
   });
 
 });
+
+// Sign out
+function signOutFunction(){
+  // $('#signOutModal').modal('show');
+  $("#signOutModal").appendTo("body");
+}
 
 
 // Function to show notification
