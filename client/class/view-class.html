@@ -97,12 +97,12 @@
               <p>Payments</p>
             </a>
           </li>
-		  		<li class="nav-item">
+		  		<!-- <li class="nav-item">
             <a class="nav-link" href="../request/">
               <i class="fas fa-briefcase fa-fw nav-icon"></i>
               <p>Lesson Requests</p>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -787,7 +787,7 @@
                             <div class="row lesson-header">
                               <div class="col-md-12" >
                                 <div class="row">
-                                  <div class="col-md-3">
+                                  <div class="col-md-4">
                                     <div class="row">
                                       <div class="col-4 ">
                                         <p>Date</p> 
@@ -800,7 +800,7 @@
                                       </div> -->
                                     </div>
                                   </div>
-                                  <div class="col-md-5">
+                                  <div class="col-md-4">
                                     <p>Class Notes</p> 
                                   </div>
                                   <div class="col-md-4">
@@ -2203,7 +2203,7 @@
         date_item_p.textContent = doc.data()[LESSON_DATE ].toDate().toLocaleDateString("en-GB");
       }
       let date_item_div = document.createElement('div');
-      date_item_div.className = "col-4";
+      date_item_div.className = "col-md-4";
       date_item_div.appendChild(date_item_p);
 
       let start_item_p = document.createElement('p');
@@ -2222,7 +2222,7 @@
         start_item_p.textContent = timeslot;
       }
       let start_item_div = document.createElement('div');
-      start_item_div.className = "col-8";
+      start_item_div.className = "col-md-8";
       start_item_div.appendChild(start_item_p);
 
       let time_div = document.createElement('div');
@@ -2232,7 +2232,7 @@
       // time_div.appendChild(end_item_div);
 
       let time_top_div = document.createElement('div');
-      time_top_div.className = "col-md-3 lesson-active"
+      time_top_div.className = "col-md-4 lesson-active"
       time_top_div.appendChild(time_div);
 
       let description = (doc.data()[LESSON_DESC] == null || doc.data()[LESSON_DESC] == "") ? "No notes" : doc.data()[LESSON_DESC];
@@ -2244,7 +2244,7 @@
         desc_p.textContent = description;
       }
       let desc_top_div = document.createElement('div');
-      desc_top_div.className = "col-md-5 lesson-active"
+      desc_top_div.className = "col-md-4 lesson-active"
       // desc_top_div.setAttribute('data-toggle', 'modal');
       // desc_top_div.setAttribute('data-target', '#editLessonModal');
       desc_top_div.appendChild(desc_p);
