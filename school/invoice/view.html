@@ -1394,7 +1394,7 @@
       printPreview(invObj[INV_ITEMS_ARR]);
 
       // Generate Predefined message
-      let line1 = "Hi, "+ invObj[INV_RECEIVER_NAME]+ " ";
+      let line1 = "Hi "+ invObj[INV_RECEIVER_NAME]+ ", ";
       let line2 = "\nHere's the invoice for the tuition fee this month. Click on the link below to view. ";
       // let line5 = "\nYou are welcome to download a copy as your reference.";
       let line3 = "\nhttps://app.golearn.com.my/c/f/view.html?iid="+invObj[INV_ID]+ " ";
@@ -2161,19 +2161,20 @@
         // let tag = (tag_temp == null || tag_temp == "") ? "" : tag_temp;
         let tagArray = (tag_temp == null || tag_temp == "") ? [] : tag_temp.split(",");
         
+        // Create cat item
         let itemCatJson = {};
         if (refId === 'uncategorized') // New item
         itemCatJson = { 
             "name": className, //"Uncategorized", 
             "refId": refId, 
-            "type": "cat", 
+            "type": REV_TYPE_CAT, 
             "total": subtotalItem 
           };
         else if (refId != 'tax' && refId != 'other')
           itemCatJson = { 
             "name": className, 
             "refId": refId, 
-            "type": "cat", 
+            "type": REV_TYPE_CAT, 
             "total": subtotalItem 
           };
         else{
@@ -2183,13 +2184,14 @@
 
         ReportList.push(itemCatJson);
 
+        // Create tag item if exist
         let itemTagJson = {};
         if (tagArray.length >= 1){
           tagArray.forEach((item) => {
             itemTagJson = { 
               "name": item, 
               "refId": item, 
-              "type": "tag", 
+              "type": REV_TYPE_TAG, 
               "total": subtotalItem 
             };
             ReportList.push(itemTagJson)
@@ -2258,18 +2260,22 @@
         console.log("subTotal: "+ subTotal);
       });
 
+
+
+      // Create 'other' cat item if exist
       let addItemOtherJson = { 
         "name": 'Others', 
         "refId": 'other', 
-        "type": "cat", 
+        "type": REV_TYPE_CAT, 
         "total": addItemOtherTotal 
       };
       ReportList.push(addItemOtherJson)
 
+      // Create 'tax' cat item if exist
       let addItemTaxJson = { 
         "name": 'Tax', 
         "refId": 'tax', 
-        "type": "cat", 
+        "type": REV_TYPE_CAT, 
         "total": addItemTaxTotal 
       };
       ReportList.push(addItemTaxJson)
@@ -2277,6 +2283,9 @@
 
       console.log(ReportList);
 
+      // If there's more than one duplicated items in the array of Json item. i.e consist of multiple similar tag,
+      // or multiple tax or multiple other discount.
+      // Combined the duplicated items.
       // Ref: https://www.codegrepper.com/code-examples/javascript/pick+the+duplicate+objects+from+json+array+javascript
       var ids = [];
       var clean = [];
@@ -2298,11 +2307,27 @@
       console.log(ids)
       console.log(clean)
 
+      // return a json array:
+      // [
+      //   {
+      //     "name": 'Tax', 
+      //     "refId": 'tax', 
+      //     "type": "cat", 
+      //     "total": 2313 
+      //   },
+      //   {
+      //     "name": 'Tax', 
+      //     "refId": 'tax', 
+      //     "type": "cat", 
+      //     "total": 5443 
+      //   },
+      //   ......
+      // ]
       return clean;
     }
 
 
-    
+    // Update revenue doc
     function updateRevenueDoc(reportList, invDocId){
   
       console.log("UpdateRevenueDoc ... ")
@@ -2353,7 +2378,7 @@
           let differenceList = refIdReportList.filter(x => !refIdRevenueDocList.includes(x));
           console.log(differenceList);
 
-          console.log("Step  2.1 Update the existed reportDoc in batc")
+          console.log("Step  2.1 Update the existed reportDoc in batch")
           // Step 2.1 Update the existed reportDoc in batch 
           querySnapshot.forEach((doc) => {
             console.log(doc.data());
@@ -2469,7 +2494,7 @@
           }
           else {
             // Do nothing
-            console.log("Step  2.2: empthy differenceList ")
+            console.log("Step  2.2: empty differenceList ")
           }
 
           console.log("Step  2.2: Commit new document ")
@@ -2575,7 +2600,7 @@
 
         let reportList = getReportList2(currentInvoiceObj[INV_ITEMS_ARR]);
 
-        // Get the documents with the similar invoice id, and 
+        // Get the Report documents with the similar invoice id, and 
         // remove the corresponding id in REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR.
         // Update the doc with new value
         let reportDocRef = db.collection("Report")

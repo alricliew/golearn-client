@@ -55,6 +55,63 @@
     }
   </style>
 
+  <style>
+    .br {
+      border-radius: 8px;  
+    }
+    .w30 {
+      width: 30%;
+    }
+    .w50 {
+      width: 50%;
+    }
+    .w80 {
+      width: 80%;
+    }
+    .card {
+      border: 2px solid #fff;
+      /* box-shadow:0px 0px 10px 0 #a9a9a9; */
+      padding: 12px 20px;
+      /* width: 80%; */
+      /* margin: 50px auto; */
+      margin-top: 0.2rem;
+    }
+    .card-shimmer-wrapper {
+      width: 0px;
+      animation: fullView 0.5s forwards cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    }
+    .profilePic {
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+    }
+    .comment {
+      height: 10px;
+      background: #777;
+      margin-top: 15px;
+    }
+
+    @keyframes fullView {
+      100% {
+        width: 100%;
+      }
+    }
+
+    .animate {
+      animation : shimmer 2s infinite linear;
+      background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+        background-size: 1000px 100%;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -1000px 0;
+      }
+      100% {
+        background-position: 1000px 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -642,6 +699,14 @@
                 </div>
               </div>
 
+              <!-- Loading block -->
+              <div class="card br" id="card-load">
+                <div class="card-shimmer-wrapper">
+                  <div class="comment br animate w80"></div>
+                  <div class="comment br animate w30"></div>
+                </div>
+              </div>
+
               <!-- No data placeholder -->
               <div class="col-md-12 text-center" style="display: none; margin: 1rem;" id="noDataPlaceholder">
                 <p>No data</p>
@@ -1160,6 +1225,8 @@
       .get()
       .then((querySnapshot) => {
 
+        document.getElementById("card-load").style.display = "none";
+        
         if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0) && latestInvoiceDoc == null){
           document.getElementById("noDataPlaceholder").style.display = 'initial';
         }else{

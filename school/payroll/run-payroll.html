@@ -680,7 +680,7 @@
       <!-- Edit Payslip modal -->
       <div class="row">
         <div class="modal fade" id="editPayslipModal" tabindex="-1" role="dialog" aria-labelledby="editPayslipModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="overflow-y:scroll;">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="editPayslipModalTitle">Edit Payslip</h5>
@@ -1258,7 +1258,7 @@
                           <a href="javascript:;" style="margin-right: 0.5rem;">1/11/2021 - 30/11/2021</a>
                           <a href="javascript:;" style="margin-right: 0.5rem;">1/12/2021 - 31/12/2021</a> -->
                           <!-- <a href="javascript:;" style="margin-right: 0.5rem;" data-target="#loadPayrollModal" data-toggle="modal">All payrolls</a> -->
-                          <a href="javascript:;" style="margin-right: 0.5rem;" onclick="enableStep1();">New</a>
+                          <a href="javascript:;" style="margin-right: 0.5rem;" onclick="window.location.reload(); //enableStep1();">New</a>
                         </div>
                       </div>
 
@@ -2038,7 +2038,7 @@
         } 
         else {
 
-          console.log("Payroll found");
+          console.log("Load Single Payroll: Payroll found");
           console.log(doc.data());
           
           // Get data from payroll
@@ -2053,12 +2053,14 @@
           // Load the payslip of each tutor. 
           loadPayroll(payrollId);
 
-          let startDate = moment(payrollStart.toDate());
-          let endDate = moment(payrollEnd.toDate());
+          console.log(payrollStart.toDate(), payrollEnd.toDate())
+          let startDate_temp = moment(payrollStart.toDate());
+          let endDate_temp = moment(payrollEnd.toDate());
 
+          console.log(startDate_temp, endDate_temp)
           $('input[name="daterange"]').daterangepicker({
-            startDate: startDate,
-            endDate: endDate,
+            startDate: startDate_temp,
+            endDate: endDate_temp,
             locale: {
               format: 'DD/MM/YYYY'
             },
@@ -2506,13 +2508,17 @@
 
 
     function CreatePayroll(){
+
+      console.log(payrollStart, payrollEnd)
+      // Check if payroll existed
       var docRef = db.collection("Financial")
           .doc("v1")
           .collection("Payroll")
           .where(PAYROLL_ADMIN_ID, '==', tutorId)
           .where(PAYROLL_STATUS, '==', true)
           .where(PAYROLL_DATE_START, '==', payrollStart)
-          .where(PAYROLL_DATE_END, '==', payrollEnd);
+          .where(PAYROLL_DATE_END, '==', payrollEnd)
+          // .limit(1);
 
       docRef
       .get()
@@ -2541,6 +2547,7 @@
             [PAYROLL_STATUS]: true,
           }
 
+          console.log(data);
           payrollDocRef.set(data, { merge: true })
             .then(() => {
 
@@ -2556,10 +2563,15 @@
 
         } 
         else {
+          func.showNotification('top','center', 'warning', 'error_outline', "Payroll already existed." );
+
           querySnapshot.forEach((doc) => {
             console.log("Payroll found");
-            console.log(doc.data());
-            
+            console.log(doc.data()[PAYROLL_NAME]);
+            console.log(doc.data()[PAYROLL_ID]);
+
+            console.log(doc.data()[PAYROLL_DATE_START].toDate());
+            // console.log(doc.data()[PAYROLL_DATE_END].toDate());
             // Get data from payroll
             payrollId = doc.data()[PAYROLL_ID];
             payrollName = doc.data()[PAYROLL_NAME];
@@ -2575,7 +2587,7 @@
             // Enable Step 2
             enableStep2();
 
-            func.showNotification('top','center', 'warning', 'error_outline', "Payroll already existed." );
+            
           });
         }
  
@@ -3674,28 +3686,33 @@
 
       // Body
       // TODO: Add the body item
-      previewBtn_html = "<i class='fas fa-eye' style='margin-right: 0.5rem;'></i> Preview";
+      // previewBtn_html = "<i class='fas fa-eye' style='margin-right: 0.5rem;'></i> Preview";
+      previewBtn_html = "Preview";
       previewBtn = document.createElement('button');
       previewBtn.innerHTML = previewBtn_html;
-      previewBtn.setAttribute('class', 'btn btn-primary btn-round');
+      previewBtn.setAttribute('class', 'btn btn-primary btn-round btn-sm');
       previewBtn.setAttribute('href', 'javascript:;');
       previewBtn.setAttribute('data-toggle', 'modal');
       previewBtn.setAttribute('data-target', '#previewModal');
       previewBtn.setAttribute('data-cardid', payslipData.tutorId);
       previewBtnDiv = document.createElement('div');
-      previewBtnDiv.className = 'ml-auto p-2';
+      // previewBtnDiv.className = 'ml-auto p-2';
+      previewBtnDiv.className = 'p-2';
+      previewBtnDiv.setAttribute('style', 'margin-left:0; margin-right:5px; padding-right:0!important;');
       previewBtnDiv.appendChild(previewBtn);
 
-      editBtn_html = "<i class='fas fa-pen-square' style='margin-right: 0.5rem;'></i> Edit";
+      // editBtn_html = "<i class='fas fa-pen-square' style='margin-right: 0.5rem;'></i> Edit";
+      editBtn_html = "Edit";
       editBtn = document.createElement('button');
       editBtn.innerHTML = editBtn_html;
-      editBtn.setAttribute('class', 'btn btn-primary btn-round');
+      editBtn.setAttribute('class', 'btn btn-primary btn-round btn-sm');
       editBtn.setAttribute('href', 'javascript:;');
       editBtn.setAttribute('data-toggle', 'modal');
       editBtn.setAttribute('data-target', '#editPayslipModal');
       editBtn.setAttribute('data-cardid', payslipData.tutorId);
       editBtnDiv = document.createElement('div');
       editBtnDiv.className = 'p-2'
+      editBtnDiv.setAttribute('style', 'margin-left:0; margin-right:5px; padding-left:0!important; padding-right:0!important;');
       editBtnDiv.appendChild(editBtn);
 
       btnDiv = document.createElement('div');
@@ -3772,16 +3789,19 @@
       //   </div>
       // </div>
 
-      editDetailsBtn_html = "<i class='fas fa-pen-square' style='margin-right: 0.5rem;'></i> Edit Details";
+      // editDetailsBtn_html = "<i class='fas fa-pen-square' style='margin-right: 0.5rem;'></i> Edit Details";
+      editDetailsBtn_html = "Edit Details";
       editDetailsBtn = document.createElement('button');
       editDetailsBtn.innerHTML = editDetailsBtn_html;
-      editDetailsBtn.setAttribute('class', 'btn btn-primary btn-round');
+      editDetailsBtn.setAttribute('class', 'btn btn-primary btn-round btn-sm');
       editDetailsBtn.setAttribute('href', 'javascript:;');
       editDetailsBtn.setAttribute('data-toggle', 'modal');
       editDetailsBtn.setAttribute('data-target', '#editPayslipEmployeeModal');
       editDetailsBtn.setAttribute('data-cardid', payslipData.tutorId);
       editDetailsBtnDiv = document.createElement('div');
-      editDetailsBtnDiv.className = 'col-md-12 text-right';
+      // editDetailsBtnDiv.className = 'col-md-12 text-right';
+      editDetailsBtnDiv.className = 'col-md-12';
+
       editDetailsBtnDiv.appendChild(editDetailsBtn);
 
       editDetailsBtnTopDiv  = document.createElement('div');
@@ -6598,15 +6618,15 @@
           payrollTotal = payrollDocTotalArr.reduce((a, b) => a + b, 0)
 
           var payrollData = {
-            [PAYROLL_ID]: payrollId,
-            [PAYROLL_ADMIN_ID]: tutorId,
-            [PAYROLL_NAME]: payrollName,
-            [PAYROLL_DATE_START]: payrollStart,
-            [PAYROLL_DATE_END]: payrollEnd,
+            // [PAYROLL_ID]: payrollId,
+            // [PAYROLL_ADMIN_ID]: tutorId,
+            // [PAYROLL_NAME]: payrollName,
+            // [PAYROLL_DATE_START]: payrollStart,
+            // [PAYROLL_DATE_END]: payrollEnd,
             [PAYROLL_DOC_ID_ARR]: payrollDocIdArr,
             [PAYROLL_DOC_TOTAL_ARR]: payrollDocTotalArr,
             [PAYROLL_TOTAL]: payrollTotal,
-            [PAYROLL_STATUS]: true,
+            // [PAYROLL_STATUS]: true,
           }
           console.log("Payroll Data...")
           console.log(payrollData);

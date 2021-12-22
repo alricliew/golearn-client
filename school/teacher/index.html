@@ -30,6 +30,64 @@
   <script src="../../assets/js/firebase.js"></script>
   <!-- Tutor Portal specific CSS -->
   <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
+  <style>
+    .br {
+      border-radius: 8px;  
+    }
+    .w30 {
+      width: 30%;
+    }
+    .w50 {
+      width: 50%;
+    }
+    .w80 {
+      width: 80%;
+    }
+    .card {
+      border: 2px solid #fff;
+      /* box-shadow:0px 0px 10px 0 #a9a9a9; */
+      padding: 12px 20px;
+      /* width: 80%; */
+      /* margin: 50px auto; */
+      margin-top: 0.2rem;
+    }
+    .card-shimmer-wrapper {
+      width: 0px;
+      animation: fullView 0.5s forwards cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    }
+    .profilePic {
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+    }
+    .comment {
+      height: 10px;
+      background: #777;
+      margin-top: 15px;
+    }
+
+    @keyframes fullView {
+      100% {
+        width: 100%;
+      }
+    }
+
+    .animate {
+      animation : shimmer 2s infinite linear;
+      background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+        background-size: 1000px 100%;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -1000px 0;
+      }
+      100% {
+        background-position: 1000px 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -374,6 +432,34 @@
                 </div>
               </div>
             </div> -->
+
+            <!-- Loading block -->
+            <div class="col-lg-2 col-md-3 col-6" id="card-load">
+              <div class="card br" style="margin-top:1rem;">
+                <div class="card-shimmer-wrapper text-center">
+                  <div class="profilePic animate din"></div>
+                  <div class="comment br animate w80"></div>
+                  <div class="comment br animate"></div>
+
+                </div>
+              </div>
+            </div>
+
+
+            <!-- No data placeholder -->
+            <div class="col-md-12" style="display: none; "id="noDataPlaceholder">
+              <div class="card-tutor text-center">
+                <div style="height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
+                  <img id="tutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/hello.gif"/>
+                </div>
+                <div style="margin-top:1rem">
+                  <h4 id="className">Ooops. No Teacher Found! </h4>
+                  <a href="#" class="btn btn-primary btn-round" style="background-color: #2e74b6;" data-target="#addTutorModal" data-toggle="modal">Invite Teacher</a>
+                </div>
+              </div>
+            </div>
+ 
+
           </div>
         </div>
 
@@ -702,6 +788,15 @@
       .get()
       .then((querySnapshot) => {
 
+        document.getElementById("card-load").style.display = "none";
+
+        if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0)){
+        // if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0) && latestInvoiceDoc == null){
+          document.getElementById("noDataPlaceholder").style.display = 'initial';
+        }else{
+          document.getElementById("noDataPlaceholder").style.display = 'none';
+        }
+        
         // Session Storage data
         let docsObj = [];
 
