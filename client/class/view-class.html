@@ -770,7 +770,7 @@
                       <h4 class="multitabs-form__title">Lessons 
                         <!-- <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddLesson" data-toggle="modal" data-target="#addLessonModal" data-button-text="Add" data-title="Add New Lesson"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">add</i></a>  -->
                         <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestLessonDoc=null; removeElementsByClass('row lesson-wrapper'); LoadLessonInfo();"><i class="fas fa-redo fa-fw" style="color: #2e74b6;"></i></a>
-                        <a class="btn btn-sm btn-outline-primary btn-round" onclick="generatePDFeKoopmans('lessonTop')"><i class="fas fa-file-download fa-fw" style="color: #2e74b6;"></i></a>
+                        <a class="btn btn-sm btn-outline-primary btn-round" onclick="generatePDFeKoopmans('lessonTop')"><i class="fas fa-file-download fa-fw" style="color: #2e74b6; font-size: 0.8rem;"></i></a>
 
                       </h4>
                       <div class="multitabs-form__content">
@@ -2318,8 +2318,7 @@
 
     // Load Lesson Details
     function LoadLessonInfo(){
-      let today = new Date();
-
+      let today = new Date(2100, 12, 31);// Set a big date
       let docRef = db.collection("Class")
           .doc("v1")
           .collection("Lesson")
@@ -2333,9 +2332,12 @@
       .get()
       .then((querySnapshot) => {
         
-        if ( querySnapshot.docs.length== null || querySnapshot.docs.length == 0){
+        if ((querySnapshot.docs.length== null || querySnapshot.docs.length == 0) && latestLessonDoc == null) {
           document.getElementById("lessonNoDataPlaceholder").style.display = 'initial';
+        }else {
+          document.getElementById("lessonNoDataPlaceholder").style.display = 'none';
         }
+
         querySnapshot.forEach((doc) => {
           // console.log(doc.data());
           addLesson2(type='LOAD', doc, '');
@@ -2530,8 +2532,10 @@
       .get()
       .then((querySnapshot) => {
 
-        if (querySnapshot.docs.length == null || querySnapshot.docs.length == 0){
+        if ((querySnapshot.docs.length == null || querySnapshot.docs.length == 0) && latestStuDoc == null){
           document.getElementById("studentNoDataPlaceholder").style.display = 'initial';
+        }else {
+          document.getElementById("studentNoDataPlaceholder").style.display = 'none';
         }
         querySnapshot.forEach((doc) => {
           allClassStuDoc.push(doc.data());
@@ -3649,12 +3653,13 @@
       footer_div.innerHTML = footer_html;
 
       let report = document.createElement("div");
+      report.setAttribute("style", "margin: 0.5rem")
       report.appendChild(header_div);
       report.appendChild(cln);
       report.appendChild(footer_div);
 
       var opt = {
-        margin:       0.2,
+        margin:       0,
         filename:     'progress_report.pdf',
         pagebreak:    { before: '.beforeClass', after: ['#after1', '#after2'], avoid: 'img' },
         image:        { type: 'jpeg', quality: 0.95 },

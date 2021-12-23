@@ -283,7 +283,7 @@
                         content_copy
                       </span>
                     </span>
-                    <input type="text" value='' class="form-control" style="background-color: #f5f5f5; pointer-events: none;" id="inAutoJoinLink">
+                    <textarea type="text" value='' class="form-control" style="background-color: #f5f5f5;" id="inAutoJoinLink" row="auto" readonly></textarea>
                   </div>
                 </div>
 
@@ -445,18 +445,21 @@
               </div>
             </div>
 
-
+            <!-- position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%); -->
             <!-- No data placeholder -->
-            <div class="col-md-12" style="display: none; "id="noDataPlaceholder">
-              <div class="card-tutor text-center">
+            <div class="col-md-12 text-center" style="display: none; left: 50%;top: 50%; transform: translate(-50%, -50%);  position: absolute;"id="noDataPlaceholder">
+              <!-- <div class="card align-items-center"> -->
                 <div style="height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
                   <img id="tutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/hello.gif"/>
                 </div>
-                <div style="margin-top:1rem">
+                <div style="margin-top:1rem; text-align: center;">
                   <h4 id="className">Ooops. No Teacher Found! </h4>
-                  <a href="#" class="btn btn-primary btn-round" style="background-color: #2e74b6;" data-target="#addTutorModal" data-toggle="modal">Invite Teacher</a>
+                  <a href="#" class="btn btn-outline-primary btn-round" data-target="#addTutorModal" data-toggle="modal">Invite Teacher</a>
                 </div>
-              </div>
+              <!-- </div> -->
             </div>
  
 
@@ -905,8 +908,8 @@
     function copyText(targetElemId){
       /* Get the text field */
       let copyText = document.getElementById(targetElemId);
-      console.log(copyText)
-      console.log(copyText.select())
+      // console.log(copyText)
+      // console.log(copyText.select())
       /* Select the text field */
       copyText.focus();
       copyText.select();

@@ -269,10 +269,10 @@
       </div>
 
       <div class="content">
-        <div class="container-fluid">
+        <div class="container">
 
           <!-- profile -->
-          <div class="col-md-12" id="tutorNull">
+          <!-- <div class="col-md-12" id="tutorNull"> -->
             <div class="card card-profile">
               <!-- https://www.webfx.com/blog/web-design/circular-images-css/ -->
               <div class="card-avatar" style="height: 150px;width: 150px;">
@@ -280,49 +280,73 @@
                   <img class="img" id="tutorImgUrl" style="height: 100%; width:100%; object-fit: cover; border-radius: 50%; pointer-events: none;" src="../assets/img/empty-photo.png"/>
                 </a>
               </div>
-              <div class="card-body">
+              <div class="card-body text-left">
                 <input type="file" id="select_image" name="image" style="display:none" accept="image/x-png,image/jpeg"> </input>
 
-                <div class="input-group" style="padding: 1rem;">
+                <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                  <span class="" style="font-weight: 300; color: gray; margin-bottom: 0;">Name</span> 
+                  <input type="text" class="form-control" id="name">
+                </div>
+
+                <!-- <div class="input-group" style="padding: 1rem;">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <!-- <i class="fa fa-group"></i> -->
                       <i class="material-icons">perm_identity</i>
                     </span>
                   </div>
                   <input type="text" class="form-control" id="name" placeholder="Name">
-                </div>
+                </div> -->
  
-                <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                  <span class="" style="font-weight: 300; color: gray; margin-bottom: 0;">Phone</span> 
+                  <input type="text" class="form-control" id="phone"readonly>
+                </div>
+
+                <!-- <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="material-icons">phone</i>
                     </span>
                   </div>
                   <input type="text" class="form-control" id="phone" placeholder="Phone Number" readonly>
+                </div> -->
+
+                <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                  <span class="" style="font-weight: 300; color: gray; margin-bottom: 0;">Email</span> 
+                  <input type="text" class="form-control" id="email">
                 </div>
 
-                <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                <!-- <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="material-icons">email</i>
                     </span>
                   </div>
                   <input type="text" class="form-control" id="email" placeholder="Email Address">
-                </div>
+                </div> -->
+
+
 
                 <div class="row">
                   <div class="col-md-3">
-                    <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                    <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                      <span class="" style="font-weight: 300; color: gray; margin-bottom: 0;">Age</span> 
+                      <input type="number" class="form-control" id="age">
+                    </div>
+                    <!-- <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
                       <div class="input-group-prepend">
                         <span class="input-group-text">
                           <i class="material-icons">contacts</i>
                         </span>
                       </div>
                       <input type="number" class="form-control" id="age" placeholder="Age">
-                    </div>
+                    </div> -->
                   </div>
-                  <div class="col-md-3" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                  <div class="col-md-9">
+                    <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                      <span class="" style="font-weight: 300; color: gray; margin-bottom: 0;">Gender</span> 
+                    </div>
+                    
                     <div class="form-group">
                       <div class="form-check form-check-radio form-check-inline">
                         <label class="form-check-label">
@@ -346,7 +370,39 @@
                   </div>
                 </div>
  
-                <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 1rem; padding-bottom: 0;">
+                  <span style="font-weight: 300; color: gray; margin-bottom: 0;">Address</span> 
+                </div>
+
+                <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Address 1</span> 
+                  <input type="text" class="form-control" id="address1">
+                </div>
+
+                <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Address 2</span> 
+                  <input type="text" class="form-control" id="address2">
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Postcode</span> 
+                      <input type="text" class="form-control" id="addressPostCode">
+                    </div>
+
+                  </div>
+                  <div class="col-md-8">
+                    <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">State/Country</span> 
+                      <input type="text" class="form-control" id="addressState">
+                    </div>
+  
+                  </div>
+                </div>
+
+
+                <!-- <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="material-icons" style="margin-left: 24px;"></i>
@@ -378,18 +434,17 @@
                     <div class="input-group" style="padding-top: 0.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
                       <div class="input-group-prepend">
                         <span class="input-group-text">
-                          <!-- <i class="material-icons">contacts</i> -->
                         </span>
                       </div>
                       <input type="text" class="form-control" id="addressState" placeholder="State">
                     </div>
                   </div>
-                </div>
-                <a href="javascript:;" class="btn btn-lg btn-primary btn-round" id="btnUpdateProfile" style="background-color: grey; pointer-events: none;" >Update Profile</a>
+                </div> -->
+                <a href="javascript:;" class="btn btn-primary btn-round" id="btnUpdateProfile" style="background-color: grey; pointer-events: none; margin-top: 1rem;" >Update Profile</a>
               </div>
             </div>
 
-          </div>
+          <!-- </div> -->
 		    </div>
       </div>
 

@@ -328,7 +328,7 @@
               </div>
             </div> -->
  
-
+            <!-- Loading block -->
             <div class="card br" id="card-load">
               <div class="card-shimmer-wrapper">
                 <div class="row">
@@ -345,6 +345,10 @@
               </div>
             </div>
 
+            <!-- No data placeholder -->
+            <div class="col-md-12 text-center" style="display: none; margin: 1rem;" id="noDataPlaceholder">
+              <p>No data</p>
+            </div>
           
           </div>
 
@@ -498,6 +502,13 @@
       .then((querySnapshot) => {
 
         document.getElementById("card-load").style.display = "none";
+
+        if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0) && latestClassDoc == null){
+          document.getElementById("noDataPlaceholder").style.display = 'initial';
+        }else{
+          document.getElementById("noDataPlaceholder").style.display = 'none';
+        }
+
         if (querySnapshot.empty){
           // Load empty data 
         }else {

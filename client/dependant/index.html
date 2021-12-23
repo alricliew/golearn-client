@@ -526,6 +526,12 @@
 
         document.getElementById("card-load").style.display = "none";
         
+        if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0)){
+          document.getElementById("noDataPlaceholder").style.display = 'initial';
+        }else{
+          document.getElementById("noDataPlaceholder").style.display = 'none';
+        }
+
         if (querySnapshot.empty){
           // Render empty data
         }else {

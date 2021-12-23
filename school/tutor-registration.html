@@ -36,6 +36,10 @@
   <link href="../assets/css/intlTelInput.css" rel="stylesheet">
 
   <style>
+    .iti { 
+      width: 100%; 
+    }
+
     .centered {
       position: fixed;
       top: 50%;
@@ -299,7 +303,7 @@
                         <div class="multisteps-form__content">
                           <div class="row">
                             <div class="col-md-12" id="tutorNull">
-                              <div class="card card-profile">
+                              <div class="card card-profile text-left" style="margin-top:4rem;">
                                 <div class="card-avatar" style="height: 150px;width: 150px;">
                                   <a href="javascript:;" >
                                     <img class="img" id="tutorImgUrl" style="height: 100%; width:100%; object-fit: cover; border-radius: 50%;" src="https://app.golearn.com.my/assets/img/empty-photo.png"/>
@@ -309,51 +313,71 @@
                                   
                                   <input type="file" id="select_image" name="image" style="display:none" accept="image/x-png,image/jpeg">
                                   
-                                  <div class="input-group" style="padding: 1rem;">
-
+                                  <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                                    <span class="" style="font-weight: 300; color: gray; margin-bottom: 0;">Name</span> 
+                                    <input type="text" class="form-control" id="name">
+                                  </div>
+                                  <!-- <div class="input-group" style="padding: 1rem;">
                                     <div class="input-group-prepend">
-
                                       <span class="input-group-text">
                                         <i class="material-icons">perm_identity</i>
                                       </span>
                                     </div>
-
                                     <input type="text" class="form-control" id="name" placeholder="Name" data-compulsory="true" oninput="this.className = 'form-control'">
-                                  </div>
+                                  </div> -->
                                   
-                                  <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                                  
+                                  <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                                    <span class="" style="font-weight: 300; color: gray; margin-bottom: 0;">Phone</span> 
+                                    <input id="phoneTutor" name="phone" type="tel"  class="form-control" readonly>
+                                    <span id="valid-msgTutor" class="hide" style="color: #42ba96;">✓ Valid</span>
+                                    <span id="error-msgTutor" class="hide" style="color: #F32013;"></span>
+                                  </div>
+
+                                  <!-- <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
                                     <div class="input-group-prepend">
                                       <span class="input-group-text">
                                         <i class="material-icons">phone</i>
                                       </span>
                                     </div>
-                                    <!-- <input type="text" class="form-control" id="phone" placeholder="Phone Number" readonly> -->
                                     <input id="phoneTutor" name="phone" type="tel"  class="form-control" readonly>
                                     <span id="valid-msgTutor" class="hide" style="color: #42ba96;">✓ Valid</span>
                                     <span id="error-msgTutor" class="hide" style="color: #F32013;"></span>
-                                  </div>
+                                  </div> -->
                   
-                                  <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                                  <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                                    <span class="" style="font-weight: 300; color: gray; margin-bottom: 0;">Email</span> 
+                                    <input type="text" class="form-control" id="email">
+                                  </div>
+
+                                  <!-- <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
                                     <div class="input-group-prepend">
                                       <span class="input-group-text">
                                         <i class="material-icons">email</i>
                                       </span>
                                     </div>
                                     <input type="text" class="form-control" id="email" placeholder="Email Address">
-                                  </div>
+                                  </div> -->
                   
                                   <div class="row">
-                                    <div class="col-md-6">
-                                      <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                                    <div class="col-md-3">
+                                      <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                                        <span class="" style="font-weight: 300; color: gray; margin-bottom: 0;">Age</span> 
+                                        <input type="number" class="form-control" id="age">
+                                      </div>
+                                      <!-- <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
                                         <div class="input-group-prepend">
                                           <span class="input-group-text">
                                             <i class="material-icons">contacts</i>
                                           </span>
                                         </div>
                                         <input type="number" class="form-control" id="age" placeholder="Age" min="0" max="100">
-                                      </div>
+                                      </div> -->
                                     </div>
-                                    <div class="col-md-6" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                                    <div class="col-md-9">
+                                      <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                                        <span class="" style="font-weight: 300; color: gray; margin-bottom: 0;">Gender</span> 
+                                      </div>
                                       <div class="form-group">
                                         <div class="form-check form-check-radio form-check-inline">
                                           <label class="form-check-label">
@@ -377,43 +401,63 @@
                                     </div>
                                   </div>
                     
-                                  <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                                  <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 1rem; padding-bottom: 0;">
+                                    <span style="font-weight: 300; color: gray; margin-bottom: 0;">Address</span> 
+                                  </div>
+                
+                                  <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Address 1</span> 
+                                    <input type="text" class="form-control" id="address1">
+                                  </div>
+
+                                  <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Address 2</span> 
+                                    <input type="text" class="form-control" id="address2">
+                                  </div>
+                                  <!-- <div class="input-group" style="padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
                                     <div class="input-group-prepend">
                                       <span class="input-group-text">
                                         <i class="material-icons" style="margin-left: 24px;"></i>
                                       </span>
                                     </div>
                                     <input type="text" class="form-control" id="address1" placeholder="Address 1">
-                                  </div>
-                                  <div class="input-group" style="padding-top: 0.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                                  </div> -->
+                                  <!-- <div class="input-group" style="padding-top: 0.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
                                     <div class="input-group-prepend">
                                       <span class="input-group-text">
                                         <i class="material-icons">place</i>
                                       </span>
                                     </div>
                                     <input type="text" class="form-control" id="address2" placeholder="Address 2">
-                                  </div>
+                                  </div> -->
                   
                                   <div class="row">
                                     <div class="col-md-6">
-                                      <div class="input-group" style="padding-top: 0.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                                      <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Postcode</span> 
+                                        <input type="text" class="form-control" id="addressPostCode">
+                                      </div>
+                                      <!-- <div class="input-group" style="padding-top: 0.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
                                         <div class="input-group-prepend">
                                           <span class="input-group-text">
                                             <i class="material-icons"  style="margin-left: 24px;" ></i>
                                           </span>
                                         </div>
                                         <input type="number" class="form-control" id="addressPostCode" placeholder="Postcode">
-                                      </div>
+                                      </div> -->
                                     </div>
                                     <div class="col-md-6">
-                                      <div class="input-group" style="padding-top: 0.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
+                                      <div class="form-group" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">State/Country</span> 
+                                        <input type="text" class="form-control" id="addressState">
+                                      </div>
+                                      <!-- <div class="input-group" style="padding-top: 0.5rem; padding-left: 1rem; padding-right: 1rem; padding-bottom: 1rem;">
                                         <div class="input-group-prepend">
                                           <span class="input-group-text">
-                                            <!-- <i class="material-icons">contacts</i> -->
                                           </span>
                                         </div>
                                         <input type="text" class="form-control" id="addressState" placeholder="State">
-                                      </div>
+                                      </div> -->
                                     </div>
                                   </div>
                                 </div>
@@ -673,7 +717,8 @@
           imgUrl_temp = current_imgUri;
           document.getElementById("name").value = doc.data().name;
           document.getElementById("email").value = doc.data().email;
-          document.getElementById("phoneTutor").value = doc.data().phone;
+          // document.getElementById("phoneTutor").value = doc.data().phone;
+          itiStudent.setNumber(doc.data().phone);
           document.getElementById("age").value = doc.data().age;
           document.getElementById("address1").value = doc.data().address1;
           document.getElementById("address2").value = doc.data().address2;
@@ -694,7 +739,6 @@
           document.getElementById("user").textContent = current_name;
 
           //------ edit-profile.html specific End -------------//
-
 
 
         } else {
@@ -749,7 +793,7 @@
         // Tutor specific
         [TUTOR_TUTOR_NAME]: document.getElementById("name").value,
         [TUTOR_TUTOR_EMAIL]: document.getElementById("email").value,
-        [TUTOR_TUTOR_PHONE]: document.getElementById("phoneTutor").value,
+        [TUTOR_TUTOR_PHONE]: itiStudent.getNumber(), //document.getElementById("phoneTutor").value,
         [TUTOR_TUTOR_AGE]: parseInt(document.getElementById("age").value, 10),
         [TUTOR_TUTOR_GENDER]: gender_temp,
         [TUTOR_TUTOR_ADDR]: final_address,
@@ -761,21 +805,22 @@
         [TUTOR_STATUS_TUTOR]: TUTOR_STATUS_TYPE_ACTIVE,
    
       }
-      tutorModuleDocRef
-      .set(tutorModuleData, { merge: true })
-      .then(()=> {
-        func.showNotification('top','center', 'success', 'error_outline', "You are successfully registered!");
+      console.log()
+      // tutorModuleDocRef
+      // .set(tutorModuleData, { merge: true })
+      // .then(()=> {
+      //   func.showNotification('top','center', 'success', 'error_outline', "You are successfully registered!");
 
-        if (statusAdmin === TUTOR_STATUS_TYPE_ACTIVE || statusAdmin === TUTOR_STATUS_TYPE_PASSIVE) {
-          registrationCompletePage();
-        }
-        else{
-          // statusAdmin === TUTOR_STATUS_TYPE_DELETE
-          // Update the the Tutor Num before running registration Page Complete
-          updateTeacherNum(1);
-        }
+      //   if (statusAdmin === TUTOR_STATUS_TYPE_ACTIVE || statusAdmin === TUTOR_STATUS_TYPE_PASSIVE) {
+      //     registrationCompletePage();
+      //   }
+      //   else{
+      //     // statusAdmin === TUTOR_STATUS_TYPE_DELETE
+      //     // Update the the Tutor Num before running registration Page Complete
+      //     updateTeacherNum(1);
+      //   }
 
-      });
+      // });
     }
 
 
@@ -803,7 +848,7 @@
         // Tutor specific
         [TUTOR_TUTOR_NAME]: document.getElementById("name").value,
         [TUTOR_TUTOR_EMAIL]: document.getElementById("email").value,
-        [TUTOR_TUTOR_PHONE]: document.getElementById("phoneTutor").value,
+        [TUTOR_TUTOR_PHONE]: itiStudent.getNumber(), //document.getElementById("phoneTutor").value,
         [TUTOR_TUTOR_AGE]: parseInt(document.getElementById("age").value, 10),
         [TUTOR_TUTOR_GENDER]: gender_temp,
         [TUTOR_TUTOR_ADDR]: final_address,
@@ -850,7 +895,7 @@
       let data = {
         [NAME_KEY]: document.getElementById("name").value,
         [EMAIL_KEY]: document.getElementById("email").value,
-        [PHONE_KEY]: document.getElementById("phoneTutor").value,
+        [PHONE_KEY]: itiStudent.getNumber(), // document.getElementById("phoneTutor").value,
         [ADDRESS_1_KEY]: document.getElementById("address1").value,
         [ADDRESS_2_KEY]: document.getElementById("address2").value,
         [ADDRESS_POSTCODE_KEY]: document.getElementById("addressPostCode").value,
@@ -877,7 +922,7 @@
       var allActiveCourseData = {
         [NAME_KEY]: document.getElementById("name").value,
         [EMAIL_KEY]: document.getElementById("email").value,
-        [PHONE_KEY]: document.getElementById("phoneTutor").value,
+        [PHONE_KEY]: itiStudent.getNumber(), //document.getElementById("phoneTutor").value,
         [ADDRESS_KEY]: final_address,
         [AGE_KEY]: parseInt(document.getElementById("age").value, 10),
         [GENDER_KEY]: gender_temp,
@@ -1445,7 +1490,7 @@
       autoHideDialCode: false,
       nationalMode: false,
       // onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
-      preferredCountries: ['MY', 'SG', 'ID'],
+      preferredCountries: ['MY', 'SG'],
       separateDialCode: true,
       utilsScript: "js/utils.js",
     });
@@ -1454,7 +1499,7 @@
       autoHideDialCode: false,
       nationalMode: false,
       // onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
-      preferredCountries: ['MY', 'SG', 'ID'],
+      // preferredCountries: ['MY', 'SG', 'ID'],
       separateDialCode: true,
       utilsScript: "js/utils.js",
       });
