@@ -212,41 +212,6 @@
         </div>
       </div>
 
-      <!-- Send Invoice modal -->
-      <div class="row">
-        <div class="modal fade" id="sendInvoiceModal" tabindex="-1" role="dialog" aria-labelledby="sendInvoiceModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="saveLabel">Send Invoice</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-
-                <div class="form-group"  style="padding: 0.5rem;">
-                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Copy View Invoice Message:</span> 
-                  <div class="input-group">
-                    <span class="d-flex align-items-center input-group-addon" id="btnCopyMessage" style="margin-right: 0.5em; cursor: pointer;" onclick="copyText('inPredefinedMessage')">
-                      <span class="material-icons">
-                        content_copy
-                      </span>
-                    </span>
-                    <textarea class="form-control" rows="5"  style="background-color: #e9ecef; pointer-events: none;"  id="inPredefinedMessage"></textarea>
-
-                  </div>
-                </div>
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSendInvoiceModalUpdate">Use Own Mail</button> -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Approve Draft modal -->
       <div class="row">
@@ -601,34 +566,32 @@
                   <div class="row">
                     <div class="col-6">
                       <div class="row">
-                        <div class="col-6 text-right" style="padding-right: 0;">
-                          <h6>Bank Name</h6>
-                          <h6>AC No</h6>
+                        <div class="col-4 text-left" style="padding-right: 0;">
+                          <h6>Bank Name:</h6>
+                          <h6>AC No:</h6>
                         </div>
-                        <div class="col-6 text-left">
-                          <h6 id="previewBankName" style="font-weight: normal;"> - </h6>
-                          <h6 id="previewAcNo"> - </h6>
+                        <div class="col-8 text-left">
+                          <h6 id="previewBankName" style="font-weight: normal; text-transform: none;"> - </h6>
+                          <h6 id="previewAcNo" style="font-weight: normal; text-transform: none;"> - </h6>
                         </div>
                       </div>
                     </div>
-
-
-                    <!-- <div class="col-4"></div> -->
                     <div class="col-6">
                       <div class="row">
-                        <div class="col-6 text-right" style="padding-right: 0;">
-                          <h6 id='previewEpfTitle' style="display: none;">EPF No</h6>
-                          <h6 id='previewSocsoTitle' style="display: none;">Socso</h6>
+                        <div class="col-4 text-left" style="padding-right: 0;">
+                          <h6 id='previewEpfTitle' style="display: none;">EPF No:</h6>
+                          <h6 id='previewSocsoTitle' style="display: none;">Socso:</h6>
                         </div>
-                        <div class="col-6 text-left">
-                          <h6 id="previewEpf" style="display: none;"> - </h6>
-                          <h6 id="previewSocso" style="display: none;"> - </h6>
+                        <div class="col-8 text-left">
+                          <h6 id="previewEpf" style="display: none; text-transform: none;"> - </h6>
+                          <h6 id="previewSocso" style="display: none; text-transform: none;"> - </h6>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 
+                <hr style="margin: 0rem">
                 <!-- <div class="card-body" id="preview-footer" style="padding-top: 0; margin-top: 0; position: absolute; bottom: 0; width: 100%;">
                   <p id="previewInvFooterNotes"></p>
                 </div> -->
@@ -975,19 +938,8 @@
       document.getElementById("previewEpf").textContent = epf;
       document.getElementById("previewSocso").textContent = socso;
 
-      document.getElementById("previewBankName").textContent = bankName;
-      document.getElementById("previewAcNo").textContent = acNo;
-
-      // Send payslip modal
-      // Generate Predefined message
-      let line1 = "Hi, "+ doc.data()[PAY_RECEIVER_NAME] ; //invObj[INV_RECEIVER_NAME]+ " ";
-      let line2 = "\nHere's the payslip for this month. Click on the link below to view. ";
-      let line3 = "\nhttps://app.golearn.com.my/s/f/view.html?iid="+ doc.data()[PAY_ID]+ " ";
-      let line4 = "\nAmount: " + "RM"+parseFloat(doc.data()[PAY_TOTAL]).toFixed(2);
-      let line5 = "\nThank you! ";
-      let finalline= line1 + line2 + line3  + line4 + line5;
-
-      document.getElementById("inPredefinedMessage").innerHTML = finalline ;
+      document.getElementById("previewBankName").textContent = (bankName == null || bankName == "") ? "No information available" : bankName;
+      document.getElementById("previewAcNo").textContent = (acNo == null || acNo == "") ? "No information available" : acNo;
 
     }
 

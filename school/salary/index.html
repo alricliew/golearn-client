@@ -918,8 +918,9 @@
     }
     loadmore.addEventListener('click', loadmoreHandleClick );
     
-    // Tutor Specific
+    // Load all payslip doc that are marked as paid
     function loadAllTransDoc(){
+      
       let today = new Date(2100, 12, 31);// Set a big date
 
       let docRef = db.collection("Financial")
@@ -928,6 +929,7 @@
           .where(TRANS_VIEWER_ARR, "array-contains", tutorId)
           .where(TRANS_TYPE, "==", TRANS_TYPE_PAY)
           .where(TRANS_RECEIVER_ID, "==", tutorId)
+          .where(TRANS_DOC_STATUS, "==", TRANS_PAY_STATUS_PAID)
           .where(TRANS_STATUS, "==", true)
           .orderBy(TRANS_DATE, 'desc')
           .startAfter(latestInvoiceDoc || today)

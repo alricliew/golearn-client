@@ -719,6 +719,8 @@
           document.getElementById("email").value = doc.data().email;
           // document.getElementById("phoneTutor").value = doc.data().phone;
           itiStudent.setNumber(doc.data().phone);
+
+          // itiStudent.setNumber(doc.data().phone);
           document.getElementById("age").value = doc.data().age;
           document.getElementById("address1").value = doc.data().address1;
           document.getElementById("address2").value = doc.data().address2;
@@ -753,7 +755,7 @@
 
       // Check if the adminId & tutorId match. If exist, it means the the tutor already under the admin, 
       // so reactivate them (TUTOR_STATUS_TYPE_ACTIVE) & do not add the tutor to admin's tutor pool.
-      console.log('ValidateTutorInTutorDB: ');
+      // console.log('ValidateTutorInTutorDB: ');
       let docRef = db.collection("Class")
         .doc("v1")
         .collection("Tutor")
@@ -805,22 +807,23 @@
         [TUTOR_STATUS_TUTOR]: TUTOR_STATUS_TYPE_ACTIVE,
    
       }
-      console.log()
-      // tutorModuleDocRef
-      // .set(tutorModuleData, { merge: true })
-      // .then(()=> {
-      //   func.showNotification('top','center', 'success', 'error_outline', "You are successfully registered!");
+      // console.log()
 
-      //   if (statusAdmin === TUTOR_STATUS_TYPE_ACTIVE || statusAdmin === TUTOR_STATUS_TYPE_PASSIVE) {
-      //     registrationCompletePage();
-      //   }
-      //   else{
-      //     // statusAdmin === TUTOR_STATUS_TYPE_DELETE
-      //     // Update the the Tutor Num before running registration Page Complete
-      //     updateTeacherNum(1);
-      //   }
+      tutorModuleDocRef
+      .set(tutorModuleData, { merge: true })
+      .then(()=> {
+        func.showNotification('top','center', 'success', 'error_outline', "You are successfully registered!");
 
-      // });
+        if (statusAdmin === TUTOR_STATUS_TYPE_ACTIVE || statusAdmin === TUTOR_STATUS_TYPE_PASSIVE) {
+          registrationCompletePage();
+        }
+        else{
+          // statusAdmin === TUTOR_STATUS_TYPE_DELETE
+          // Update the the Tutor Num before running registration Page Complete
+          updateTeacherNum(1);
+        }
+
+      });
     }
 
 

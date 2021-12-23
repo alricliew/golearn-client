@@ -417,34 +417,34 @@
                       <div class="row">
                         <div class="col-6">
                           <div class="row">
-                            <div class="col-6 text-right" style="padding-right: 0;">
-                              <h6>Bank Name</h6>
-                              <h6>AC No</h6>
+                            <div class="col-4 text-left" style="padding-right: 0;">
+                              <h6>Bank Name:</h6>
+                              <h6>AC No:</h6>
                             </div>
-                            <div class="col-6 text-left">
-                              <h6 id="previewBankName" style="font-weight: normal;"> - </h6>
-                              <h6 id="previewAcNo"> - </h6>
+                            <div class="col-8 text-left">
+                              <h6 id="previewBankName" style="font-weight: normal; text-transform: none;"> - </h6>
+                              <h6 id="previewAcNo" style="font-weight: normal; text-transform: none;"> - </h6>
                             </div>
                           </div>
                         </div>
 
-    
-                        <!-- <div class="col-4"></div> -->
                         <div class="col-6">
                           <div class="row">
-                            <div class="col-6 text-right" style="padding-right: 0;">
-                              <h6 id='previewEpfTitle' style="display: none;">EPF No</h6>
-                              <h6 id='previewSocsoTitle' style="display: none;">Socso</h6>
+                            <div class="col-4 text-left" style="padding-right: 0;">
+                              <h6 id='previewEpfTitle' style="display: none;">EPF No:</h6>
+                              <h6 id='previewSocsoTitle' style="display: none;">Socso:</h6>
                             </div>
-                            <div class="col-6 text-left">
-                              <h6 id="previewEpf" style="display: none;"> - </h6>
-                              <h6 id="previewSocso" style="display: none;"> - </h6>
+                            <div class="col-8 text-left">
+                              <h6 id="previewEpf" style="display: none; text-transform: none;"> - </h6>
+                              <h6 id="previewSocso" style="display: none; text-transform: none;"> - </h6>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     
+                    <hr style="margin: 0rem">
+
                     <!-- <div class="card-body" id="preview-footer" style="padding-top: 0; margin-top: 0; position: absolute; bottom: 0; width: 100%;">
                       <p id="previewInvFooterNotes"></p>
                     </div> -->
@@ -480,7 +480,7 @@
                     <span class="tooltiptext-trigger">? 
                       <span class="tooltiptext-general">
                         <h6>Status</h6>
-                        <p>Set to <strong style="color: #2e74b6;">Paid</strong> to indicate you have completed the payment and to let your employee view this payslip. </p>
+                        <p>Set to <strong style="color: #2e74b6;">Paid</strong> to indicate you have completed the salary disbursement and this payslip will be visible to the employee. </p>
                       </span> 
                     </span>
                   </div>
@@ -1156,13 +1156,14 @@
       latestInvoiceDoc = null;
 
       
-      let start1 = new Date('2021-11-04').setSeconds(start-1000);
-      let end2 = new Date('2021-11-13').setSeconds(end+1000);
+      // let start1 = new Date('2021-11-04').setSeconds(start-1000);
+      // let end2 = new Date('2021-11-13').setSeconds(end+1000);
 
       let docRef = db.collection("Financial")
           .doc("v1")
           .collection("Transaction")
-          .where(TRANS_VIEWER_ARR, "array-contains", tutorId)
+          // .where(TRANS_VIEWER_ARR, "array-contains", tutorId)
+          .where(TRANS_SENDER_ID, "==", tutorId)
           .where(TRANS_TYPE, "==", TRANS_TYPE_PAY)
           .where(TRANS_DATE, ">=",  new Date((start)*1000)) // Set the start time a little bit before to make sure > works
           .where(TRANS_DATE, "<=", new Date((end)*1000))
@@ -1213,7 +1214,8 @@
       let docRef = db.collection("Financial")
           .doc("v1")
           .collection("Transaction")
-          .where(TRANS_VIEWER_ARR, "array-contains", tutorId)
+          // .where(TRANS_VIEWER_ARR, "array-contains", tutorId)
+          .where(TRANS_SENDER_ID, "==", tutorId)
           .where(TRANS_TYPE, "==", TRANS_TYPE_PAY)
           .where(TRANS_STATUS, "==", true)
           .orderBy(TRANS_DATE, 'desc')
@@ -1556,12 +1558,12 @@
           document.getElementById("previewEpf").textContent = epf;
           document.getElementById("previewSocso").textContent = socso;
 
-          document.getElementById("previewBankName").textContent = bankName;
-          document.getElementById("previewAcNo").textContent = acNo;
+          document.getElementById("previewBankName").textContent = (bankName == null || bankName == "") ? "No information available" : bankName;
+          document.getElementById("previewAcNo").textContent = (acNo == null || acNo == "") ? "No information available" : acNo;
 
           // Send payslip modal
           // Generate Predefined message
-          let line1 = "Hi "+ doc.data()[PAY_RECEIVER_NAME] ; //invObj[INV_RECEIVER_NAME]+ " ";
+          let line1 = "Hi "+ doc.data()[PAY_RECEIVER_NAME] + ","; //invObj[INV_RECEIVER_NAME]+ " ";
           let line2 = "\nHere's the payslip for this month. Click on the link below to view. ";
           let line3 = "\nhttps://app.golearn.com.my/s/f/view.html?pid="+ doc.data()[PAY_ID]+ " ";
           let line4 = "\nAmount: " + "RM"+parseFloat(doc.data()[PAY_TOTAL]).toFixed(2);

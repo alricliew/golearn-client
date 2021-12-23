@@ -1213,7 +1213,7 @@
                         <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestStuDoc=null; removeElementsByClass('row student-wrapper'); loadAllStudents();"><i class="material-icons" style="color: #2e74b6;">refresh</i></a>
                       </h4>
                       <div class="multitabs-form__content">
-                        <div class="col-md-12" id="studentTop">
+                        <div class="col-md-12" style="padding: 0; margin-top: 1rem;">
                         
                           <div class="container" id="students-container">
                             <!-- Student header -->
@@ -1251,6 +1251,7 @@
                                 No student
                               </div>
                             </div>
+
                             <!-- Student List Start -->
                             <!-- <div class="row lesson-wrapper">
                               <div class="col-md-11" >
@@ -3252,10 +3253,25 @@
         removeElementsByClass('row lesson-wrapper');
         LoadLessonInfo();
 
+        // Change Last Update in Class Module
+        var classDocRef = db.collection("Class")
+          .doc("v1")
+          .collection("Class")
+          .doc(currentClassObj[CLASS_ID]);
+
+        var classData = {
+          [CLASS_DATE_EDIT]: new Date(),
+          [CLASS_EDIT_MSG]: current_name + ' added a new lesson', // Update: CLASS_DATE_EDIT + CLASS_EDIT_MSG
+          [STATUS_KEY]: true,
+        }
+        classDocRef.set(classData, { merge: true })
+        .then(() => {
+          // Reload the page view after changing removing tutor.
+          // reload();
+        });
+
       }).catch((error) => {
-          console.log("Error getting document:", error);
-        // return '';
-        
+        console.log("Error getting document:", error);        
       });
 
     }
@@ -3307,6 +3323,22 @@
           removeElementsByClass('row lesson-wrapper');
           LoadLessonInfo();
           
+          // Change Last Update in Class Module
+          var classDocRef = db.collection("Class")
+            .doc("v1")
+            .collection("Class")
+            .doc(currentClassObj[CLASS_ID]);
+
+          var classData = {
+            [CLASS_DATE_EDIT]: new Date(),
+            [CLASS_EDIT_MSG]: 'Lesson updated by '+ current_name, // Update: CLASS_DATE_EDIT + CLASS_EDIT_MSG
+          }
+          classDocRef.set(classData, { merge: true })
+          .then(() => {
+            // Reload the page view after changing removing tutor.
+            // reload();
+          });
+
         }).catch((error) => {
           console.log("Error getting document:", error);
         });
@@ -3354,6 +3386,23 @@
           removeElementsByClass('row lesson-wrapper');
           LoadLessonInfo();
           
+          // Change Last Update in Class Module
+          var classDocRef = db.collection("Class")
+            .doc("v1")
+            .collection("Class")
+            .doc(currentClassObj[CLASS_ID]);
+
+          var classData = {
+            [CLASS_DATE_EDIT]: new Date(),
+            [CLASS_EDIT_MSG]: current_name + " removed a lesson", // Update: CLASS_DATE_EDIT + CLASS_EDIT_MSG
+            [STATUS_KEY]: true,
+          }
+          classDocRef.set(classData, { merge: true })
+          .then(() => {
+            // Reload the page view after changing removing tutor.
+            // reload();
+          });
+
         }).catch((error) => {
           console.log("Error getting document:", error);
         });
@@ -3496,6 +3545,7 @@
       stuDetailTop_div.setAttribute('data-id', doc.data()[CLASS_STUDENT_ID]);
       stuDetailTop_div.setAttribute('data-stuname', doc.data()[CLASS_STUDENT_STU_NAME]);
       stuDetailTop_div.setAttribute('data-enrollmentstatus', doc.data()[CLASS_STUDENT_ENROLLMENT_STATUS]);
+      stuDetailTop_div.setAttribute('style','padding-bottom: 12px')
       stuDetailTop_div.appendChild(stuDetail_div);
 
       let stuTop_div = document.createElement('div');
