@@ -93,7 +93,7 @@ function codeverify() {
       }else {
         console.log("USer does not exist! Create a new one: "+ userId );
         // alert("USer does not exist! Create a new one: "+ tutorId );
-          // User does not exist. Register a new user.  Move to Step 2.     
+        // User does not exist. Register a new user then move to Step 2.     
         var docData = {
           [TOKEN_KEY]: null,    //main
           [NAME_KEY] : 'New User',    //main
@@ -108,17 +108,24 @@ function codeverify() {
           [SYSTEM_LAST_ONLINE_KEY]  : firebase.firestore.Timestamp.fromDate(new Date())
         }
 
+
         console.log(docData);
 
         db.collection("Users").doc(userId)
           .set(docData, {merge: true})
           .then(() => {
-              setActiveStep(1);
-              setActivePanel(1);
+            // Move to page 2
+            setActiveStep(1);
+            setActivePanel(1);
+
+            // Load the User Info
+            loadUserInfo(userId);
+            // loadAllDependantInfo(userId);
+
               // console.log("Document successfully written!");
           })
           .catch((error) => {
-              func.showNotification('top','center', 'danger', 'error_outline', "Registration failed. Please try again" );
+              func.showNotification('top','center', 'danger', 'error_outline', "Registration failed. Please try again");
               // console.error("Error writing document: ", error);
           });
       }

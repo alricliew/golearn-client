@@ -313,20 +313,22 @@
       <div class="content">
 
 
-        <div class="container">
+        <!-- <div class="container"> -->
 
-          <!-- Back button -->
-          <div class="row d-flex" id="desciption-row" >
-            <!-- <div class="p-2"> -->
-              <!-- <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a> -->
-            <!-- </div> -->
-            <div class="p-2">
-              <a href="javascript:;" class="btn btn-primary btn-round" id="btnSave" data-toggle="modal" data-target="#saveModal" style="margin-left: 1.5rem; background-color: grey; pointer-events: none;"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</a>
-            </div>
 
-          </div>
           
           <div class="container overflow-hidden">
+            <!-- Back button -->
+            <div class="row d-flex">
+              <!-- <div class="p-2"> -->
+                <!-- <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a> -->
+              <!-- </div> -->
+              <div class="p-2">
+                <a href="javascript:;" class="btn btn-primary btn-round" id="btnSave" data-toggle="modal" data-target="#saveModal" style="background-color: grey; pointer-events: none;"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</a>
+              </div>
+
+            </div>
+
             <div class="row">
               <div class="col-md-12">
                 <!--multitabs-form navbar-->
@@ -4503,7 +4505,7 @@
               </div>
             </div>
           </div>
-        </div>
+        <!-- </div> -->
       </div>
 
       <footer class="footer">
@@ -4847,7 +4849,7 @@
 
       //------ Save Button -------------//
       document.getElementById('btnSave').removeAttribute('disabled');
-      document.getElementById('btnSave').setAttribute('style','margin-left: 1.5rem; background-color: #2e74b6; pointer-events: auto; ');
+      document.getElementById('btnSave').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
       
       //------ Load success, Renabled the inputs -------------//
       let inputBasic = document.getElementById("tabBasic").querySelectorAll("input");

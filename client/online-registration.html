@@ -901,7 +901,7 @@
           admin_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
           admin_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email; 
           admin_phone= (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone;
-          admin_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
+          admin_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "https://app.golearn.com.my/assets/img/hello.gif" : doc.data().imgUrl;
           admin_accountStatus = doc.data().accountStatus; 
           admin_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
           admin_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
@@ -995,10 +995,8 @@
             userId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
 
         loadUserInfo(userId);
-        loadAllDependantInfo(userId)
-        // User exist. Move to Step 2.
-        setActiveStep(1);
-        setActivePanel(1);        
+        loadAllDependantInfo(userId);
+      
 			}
 		});
 
@@ -1008,8 +1006,8 @@
       var docRef = db.collection("Users").doc(userId);
       
 
-      // docRef.get().then((doc) => {
-      docRef.onSnapshot((doc) => {
+      docRef.get().then((doc) => {
+      // docRef.onSnapshot((doc) => {
 
         if (doc.exists) {
           // console.log("Document data:", doc.data());
@@ -1030,8 +1028,14 @@
 
           document.getElementById("user").textContent = doc.data().name;
           
+          // User exist. Move to Step 2.
+          console.log("User logged in, profile exist")
+          setActiveStep(1);
+          setActivePanel(1);  
+
         } else {
-            //  Error: Invalid user
+          console.log("User logged in, but profile do not exist")
+          //  Error: Invalid user
         }
       });
 
@@ -1184,7 +1188,8 @@
             console.log('dependant clicked');
             document.getElementById("inStuName").value = currentObj[DEP_CHILD_NAME];
             document.getElementById("inStuName").setAttribute('readonly','readonly');
-            document.getElementById("phoneStudent").value = currentObj[DEP_CHILD_PHONE];
+            // document.getElementById("phoneStudent").value = currentObj[DEP_CHILD_PHONE];
+            itiStudent.setNumber(currentObj[DEP_CHILD_PHONE]);
             document.getElementById("phoneStudent").setAttribute('readonly','readonly');
             document.getElementById("inStuEmail").value = currentObj[DEP_CHILD_EMAIL];
             document.getElementById("inStuEmail").setAttribute('readonly','readonly');
@@ -1198,7 +1203,8 @@
             // Guardian Profile Panel
             document.getElementById("inGurName").value = currentObj[DEP_GUR_NAME];
             document.getElementById("inGurName").setAttribute('readonly','readonly');
-            document.getElementById("phoneGuardian").value = currentObj[DEP_GUR_PHONE];
+            // document.getElementById("phoneGuardian").value = currentObj[DEP_GUR_PHONE];
+            itiGuardian.setNumber(currentObj[DEP_GUR_PHONE]);
             document.getElementById("phoneGuardian").setAttribute('readonly','readonly');
             document.getElementById("inGurEmail").value = currentObj[DEP_GUR_EMAIL];
             document.getElementById("inGurEmail").setAttribute('readonly','readonly');
@@ -1289,7 +1295,8 @@
     function resetStudentGuardianPanel(){
       document.getElementById("inStuName").value = '';
       document.getElementById("inStuName").removeAttribute('readonly');
-      document.getElementById("phoneStudent").value = '';
+      // document.getElementById("phoneStudent").value = '';
+      itiStudent.setNumber("");
       document.getElementById("phoneStudent").removeAttribute('readonly');
       document.getElementById("inStuEmail").value = '';
       document.getElementById("inStuEmail").removeAttribute('readonly');
@@ -1303,7 +1310,8 @@
       // Guardian Profile Panel
       document.getElementById("inGurName").value = '';
       document.getElementById("inGurName").removeAttribute('readonly');
-      document.getElementById("phoneGuardian").value = '';
+      // document.getElementById("phoneGuardian").value = '';
+      itiGuardian.setNumber("");
       document.getElementById("phoneGuardian").removeAttribute('readonly');
       document.getElementById("inGurEmail").value = '';
       document.getElementById("inGurEmail").removeAttribute('readonly');
@@ -1713,7 +1721,8 @@
 
         // Student Profile Panel
         document.getElementById("inStuName").value = '';
-        document.getElementById("phoneStudent").value = '';
+        // document.getElementById("phoneStudent").value = '';
+        itiStudent.setNumber("");
         document.getElementById("inStuEmail").value = '';
         document.getElementById("inStuMaleChecked").checked = true;
         document.getElementById("inStuFemaleChecked").checked = false;
@@ -1721,7 +1730,8 @@
         
         // Guardian Profile Panel
         document.getElementById("inGurName").value = current_name;
-        document.getElementById("phoneGuardian").value = current_phone;
+        // document.getElementById("phoneGuardian").value = current_phone;
+        itiGuardian.setNumber(current_phone);
         document.getElementById("phoneGuardian").setAttribute('readonly','readonly');
         document.getElementById("inGurEmail").value = current_email;
         document.getElementById("inGurMaleChecked").checked = true ;
@@ -1753,7 +1763,8 @@
 
         // Student Profile Panel
         document.getElementById("inStuName").value = current_name;
-        document.getElementById("phoneStudent").value = current_phone;
+        // document.getElementById("phoneStudent").value = current_phone;
+        itiStudent.setNumber(current_phone);
         document.getElementById("phoneStudent").setAttribute('readonly','readonly');
         document.getElementById("inStuEmail").value = current_email;
         document.getElementById("inStuMaleChecked").checked = true;
@@ -1762,7 +1773,8 @@
         
         // Guardian Profile Panel
         document.getElementById("inGurName").value = current_name;
-        document.getElementById("phoneGuardian").value = current_phone;
+        // document.getElementById("phoneGuardian").value = current_phone;
+        itiGuardian.setNumber(current_phone);
         document.getElementById("phoneGuardian").setAttribute('readonly','readonly');
         document.getElementById("inGurEmail").value = current_email;
         document.getElementById("inGurMaleChecked").checked = true ;
@@ -1793,8 +1805,9 @@
 
         // Student Profile Panel
         document.getElementById("inStuName").value = current_name;
-        document.getElementById("phoneStudent").value = current_phone;
+        // document.getElementById("phoneStudent").value = current_phone;
         document.getElementById("phoneStudent").setAttribute('readonly','readonly');
+        itiStudent.setNumber(current_phone);
         document.getElementById("inStuEmail").value = current_email;
         document.getElementById("inStuMaleChecked").checked = true;
         document.getElementById("inStuFemaleChecked").checked = false;
@@ -1802,7 +1815,8 @@
         
         // Guardian Profile Panel
         document.getElementById("inGurName").value = '';
-        document.getElementById("phoneGuardian").value = '';
+        // document.getElementById("phoneGuardian").value = '';
+        itiGuardian.setNumber("");
         document.getElementById("inGurEmail").value = '';
         document.getElementById("inGurMaleChecked").checked = true ;
         document.getElementById("inGurFemaleChecked").checked = false;
@@ -2256,7 +2270,7 @@
     var itiPhone = intlTelInput(inputPhone,{
       autoHideDialCode: false,
       nationalMode: false,
-      onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
+      // onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
       preferredCountries: ['MY', 'SG'],
       separateDialCode: true,
       utilsScript: "js/utils.js",
@@ -2280,7 +2294,7 @@
       // localizedCountries: { 'de': 'Deutschland' },
       nationalMode: false,
       // onlyCountries: ['my'],
-      onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
+      // onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
       preferredCountries: ['MY', 'SG'],
       // placeholderNumberType: "MOBILE",
       separateDialCode: true,
@@ -2290,7 +2304,7 @@
     var itiGuardian = intlTelInput(inputGuardian,{
       autoHideDialCode: false,
       nationalMode: false,
-      onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
+      // onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
       preferredCountries: ['MY', 'SG'],
       separateDialCode: true,
       utilsScript: "js/utils.js",

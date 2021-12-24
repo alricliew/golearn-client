@@ -666,6 +666,7 @@
 			if(!user){
         // Return to login if user does not exist.
 
+        console.log("User not logged in.")
 				// window.location.href = "login.html"
 			}else{
         // if the displayName is null, it means user register using Phone
@@ -674,12 +675,15 @@
         }else
             tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
 
+
+
         loadUserInfo(tutorId);
-        // User exist. Move to Step 1.
-        setActiveStep(1);
-        setActivePanel(1);        
+        // // User exist. Move to Step 1.
+        // setActiveStep(1);
+        // setActivePanel(1);        
 			}
 		});
+
 
     // Tutor Specific
     function loadUserInfo(tutorId){
@@ -687,8 +691,8 @@
       var docRef = db.collection("Tutor").doc(tutorId);
       
 
-      // docRef.get().then((doc) => {
-      docRef.onSnapshot((doc) => {
+      docRef.get().then((doc) => {
+      // docRef.onSnapshot((doc) => {
 
         if (doc.exists) {
           // console.log("Document data:", doc.data());
@@ -740,11 +744,18 @@
 
           document.getElementById("user").textContent = current_name;
 
-          //------ edit-profile.html specific End -------------//
+          //------ tutor-registration.html specific End -------------//
+
+          // User exist and logged in. Move to Step 1.
+          console.log("User logged in, profile exist")
+          setActiveStep(1);
+          setActivePanel(1);   
 
 
-        } else {
-            //  Error: Invalid user
+        } 
+        else {
+          // User exist but NOT logged in. Stay at login page
+          console.log("User logged in, but profile do not exist")
         }
       });
 

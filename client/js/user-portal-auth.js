@@ -46,7 +46,7 @@ function phoneAuth() {
     document.getElementById("btnLogin").style.cursor='pointer';
     document.getElementById("btnLogin").disabled = false;
 
-    func.showNotification('top','center', 'success', 'check_circle', "We just sent a 6-digit verification code to "+document.getElementById('phone').value );
+    func.showNotification('top','center', 'success', 'check_circle', "We just sent a 6-digit verification code to "+itiPhone.getNumber());
 
     // console.log(coderesult);
 

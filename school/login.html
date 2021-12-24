@@ -182,7 +182,9 @@
                         <!-- <div class="input-group-text"><i class="material-icons">smartphone</i></div> -->
                       <!-- </div> -->
                       <!-- <i style="margin-right: 1rem;" class="material-icons">smartphone</i> -->
-                      <input id="phone" name="phone" type="tel">
+                      <input id="phone" name="phone" type="tel" class="form-control">
+                      <span id="valid-msg" class="hide" style="color: #42ba96;">✓ Valid</span>
+                      <span id="error-msg" class="hide" style="color: #F32013;"></span>
                     </div>
                   </div>
     
@@ -334,17 +336,53 @@
     // Auto Login
     firebase.auth().onAuthStateChanged(function(user){
       if(user){
+        
+        if (firebase.auth().currentUser.displayName == null )
+          tutorId = firebase.auth().currentUser.phoneNumber;
+        else
+          tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+    
+
+        checkIfUserExist(tutorId);
+
         // This is a hack to prevent auto signin for new user. 
         // If the phone fill is empty and user exist, auto signin.
-        if (itiPhone.getNumber() == null || itiPhone.getNumber() == "")
-          window.location.href = "./"
-        else {
-          // Do nothing
-        }
+        // if (itiPhone.getNumber() == null || itiPhone.getNumber() == "")
+        //   window.location.href = "./"
+        // else {
+        //   // Do nothing
+        // }
       }else{
         // Do nothing
+        console.log("User not logged in.")
       }
     });
+
+
+    // Check if a user exist in db.
+    // Rationale: Some user may login to client portal, and they switch to school portal. 
+    // They are by default logged in, however do not have school profile. Auto login will
+    // cause undefined page views in school portal. So, enforce login to create the profile
+    // first
+    function checkIfUserExist(tutorId){
+
+      let docRef = db.collection("Tutor").doc(tutorId);
+
+      docRef.get().then((doc) => {
+        if (doc.exists) {
+          // Auto login
+          console.log("User logged in, profile exist")
+          window.location.href = "./"
+        }
+        else {
+          console.log("User logged in, but profile do not exist")
+          // User logged in, but no profile found.
+          // Do not autologin
+        }
+
+      });
+
+    }
   </script>
   
   <script>
@@ -372,6 +410,41 @@
       separateDialCode: true,
       utilsScript: "js/utils.js",
     });
+
+    
+    var errorMsg = document.querySelector("#error-msg");
+    var validMsg = document.querySelector("#valid-msg");
+
+    // here, the index maps to the error code returned from getValidationError - see readme
+    var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+    var reset = function() {
+      input.classList.remove("error");
+      errorMsg.innerHTML = "";
+      errorMsg.classList.add("hide");
+      validMsg.classList.add("hide");
+    };
+
+
+    // on blur: validate
+    input.addEventListener('blur', function() {
+      reset();
+      console.log(itiPhone.getNumber());
+      if (input.value.trim()) {
+        if (itiPhone.isValidNumber()) {
+          validMsg.classList.remove("hide");
+        } else {
+          input.classList.add("error");
+          var errorCode = itiPhone.getValidationError();
+          errorMsg.innerHTML = errorMap[errorCode];
+          errorMsg.classList.remove("hide");
+        }
+      }
+    });
+    // on keyup / change flag: reset
+    input.addEventListener('change', reset);
+    input.addEventListener('keyup', reset);
+    
   </script>
 
   <script>
