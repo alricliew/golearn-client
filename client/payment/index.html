@@ -255,11 +255,9 @@
                 </div> -->
 
               </div>
-
-
-
             </div>
 
+            <!-- Loading block -->
             <div class="card br" id="card-load">
               <div class="card-shimmer-wrapper">
                 <div class="comment br animate w80"></div>
@@ -269,7 +267,11 @@
               </div>
             </div>
 
-
+            <!-- No data placeholder -->
+            <div class="col-md-12 text-center" style="display: none; margin: 1rem;" id="noDataPlaceholder">
+              <p>No data</p>
+            </div>
+            
             <!-- <div class="col-md-12 card-student-item">
               <div class="row">
                 <div class="col-md-11" style="padding: 0;">
@@ -450,6 +452,12 @@
 
         document.getElementById("card-load").style.display = "none";
         
+        if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0) && latestInvoiceDoc == null){
+          document.getElementById("noDataPlaceholder").style.display = 'initial';
+        }else{
+          document.getElementById("noDataPlaceholder").style.display = 'none';
+        }
+
         if (querySnapshot.empty){
 
           // Render empty data
