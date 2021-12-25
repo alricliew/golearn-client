@@ -1040,8 +1040,6 @@
           // Render the monthly subtotal row first.
           renderMonthlyRevenueCategory()
           
-
-
           querySnapshot.forEach((doc) => {
             // console.log("Revenue Report found");
             // console.log(doc.data());
@@ -1355,7 +1353,7 @@
         // Update monthly revenue
         // console.log(monthSum)
         // console.log(tableCategory.rows[categoryItemTrLength+1].cells[k].innerHTML)
-        tableCategory.rows[categoryItemTrLength+1].cells[k].innerHTML = ""+ monthSum;
+        tableCategory.rows[categoryItemTrLength+1].cells[k].innerHTML = ""+ (monthSum == 0 ? 0 : parseFloat(monthSum).toFixed(2));
 
         monthlyRevenue.push(monthSum)
       }
@@ -1378,7 +1376,7 @@
         // console.log(rowSum)
         // console.log(tableCategory.rows[i].cells[14].innerHTML)
         // cells 14 -> total
-        tableCategory.rows[i].cells[14].innerHTML = ""+ rowSum;
+        tableCategory.rows[i].cells[14].innerHTML = ""+ (rowSum == 0 ? 0 : parseFloat(rowSum).toFixed(2));
       }
 
       return monthlyRevenue;

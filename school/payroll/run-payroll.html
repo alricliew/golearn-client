@@ -610,7 +610,7 @@
                   <div class="col-md-6"></div>
                 </div>
 
-                <h5 class="">Employment Details</h5>
+                <h5 class="" style="margin-top: 1rem;">Employment Details</h5>
 
                 <div class="row">
                   <div class="col-md-6">
@@ -2260,13 +2260,20 @@
       docRef.get().then((doc) => {
  
         if (doc.exists){
-          bizName = doc.data()[SET_BIZ_NAME];
-          bizPhone = doc.data()[SET_BIZ_PHONE];
-          bizEmail = doc.data()[SET_BIZ_EMAIL];
-          bizAddr = doc.data()[SET_BIZ_ADDR];
-          bizImgUrl = doc.data()[SET_BIZ_IMG_URL];
+          
+          bizName = (doc.data()[SET_BIZ_NAME] == null || doc.data()[SET_BIZ_NAME] == "") ? current_name : doc.data()[SET_BIZ_NAME];
+          bizPhone = (doc.data()[SET_BIZ_PHONE] == null || doc.data()[SET_BIZ_PHONE] == "") ? current_phone : doc.data()[SET_BIZ_PHONE];
+          bizEmail = (doc.data()[SET_BIZ_EMAIL] == null || doc.data()[SET_BIZ_EMAIL] == "") ? current_email : doc.data()[SET_BIZ_EMAIL];
+          bizAddr = (doc.data()[SET_BIZ_ADDR] == null || doc.data()[SET_BIZ_ADDR] == "") ? "" : doc.data()[SET_BIZ_ADDR];
+          bizImgUrl = (doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == "") ? "" : doc.data()[SET_BIZ_IMG_URL];
         }else {
-          // Do nothing
+          // If no business details, substitue it with user settings.
+          
+          bizName = current_name;
+          bizPhone = current_phone;
+          bizEmail = current_email;
+          bizAddr = "";
+          bizImgUrl = "";
         }
 
 
@@ -7343,8 +7350,8 @@
       // Remove all Admin's Teachers when the List Teacher Modal close
       $('#myTeacherModal').on('hidden.bs.modal', function (event) {
         // NOTE: div:gt(5) - get the 6th div child in the parent node.
-        // NOTE: div:gt(7) - get the 7th div child in the parent node. (myself)
-        $('#add-tutor-modal-container div:gt(12)').remove();
+        // NOTE: div:gt(5) - get the 4th div child in the parent node. (myself)
+        $('#add-tutor-modal-container div:gt(10)').remove();
       });
 
 

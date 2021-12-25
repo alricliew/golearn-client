@@ -83,7 +83,7 @@ function codeverify() {
         // alert("Tutor Id: " + userId);
         // console.log("Tutor registered, ID: " + userId);
 
-        const tutorRef = db.collection('Tutor').doc(userId);
+        const tutorRef = db.collection('Users').doc(userId);
 
         tutorRef.get()
           .then((docSnapshot) => {
@@ -114,16 +114,16 @@ function codeverify() {
               //     userId = user.email.replace(/[^a-zA-Z0-9]/g,'_').toLowerCase();
               // }
 
-              // db.collection("Users").doc(userId)
-              //   .set(docData, {merge: true})
-              //   .then(() => {
-              //       window.location.href = './'
-              //       // console.log("Document successfully written!");
-              //   })
-              //   .catch((error) => {
-              //       func.showNotification('top','center', 'danger', 'error_outline', "Registration failed. Please try again" );
-              //       // console.error("Error writing document: ", error);
-              //   });
+              db.collection("Users").doc(userId)
+                .set(docData, {merge: true})
+                .then(() => {
+                    window.location.href = './'
+                    // console.log("Document successfully written!");
+                })
+                .catch((error) => {
+                    func.showNotification('top','center', 'danger', 'error_outline', "Registration failed. Please try again" );
+                    // console.error("Error writing document: ", error);
+                });
 
             }
         });

@@ -1412,6 +1412,11 @@
         validateForm(activePanelNum);
     
         if (validateForm(activePanelNum)){
+          // Disable the submit button
+          document.getElementById("btnRegister").setAttribute('disabled', 'disabled');
+          // Change the "Submit" text
+          document.getElementById("btnRegister").textContent = 'Please wait...';
+
           // TODO: Create Tutor
           UpdateTutorProfile();
           console.log('All guardian fields are valid');
