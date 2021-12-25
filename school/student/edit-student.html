@@ -366,7 +366,7 @@
                               <div class="col-md-6">
                                 <div class="form-group" >
                                   <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Email</span> 
-                                  <input type="text" class="form-control" id="inStuEmail" data-compulsory="true" oninput="this.className = 'form-control'">
+                                  <input type="text" class="form-control" id="inStuEmail" data-compulsory="false" oninput="this.className = 'form-control'">
                                 </div>
                               </div>
 
@@ -401,7 +401,7 @@
                              <div class="col-md-12">
                                <div class="form-group">
                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">School</span> 
-                                 <input type="text" class="form-control" id="inStuSchool" data-compulsory="true" oninput="this.className = 'form-control'">
+                                 <input type="text" class="form-control" id="inStuSchool" data-compulsory="false" oninput="this.className = 'form-control'">
                                </div>
                              </div>
                            </div>
@@ -429,7 +429,7 @@
                                 <div class="form-group" style="margin-top: 0;">
                                   <!-- <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Phone*</span>  -->
                                   <!-- <i style="margin-right: 1rem;" class="material-icons">smartphone</i> -->
-                                  <input id="phoneGurdian" name="phone" type="tel" class="form-control">
+                                  <input id="phoneGurdian" name="phone" type="tel" data-compulsory="true" class="form-control">
                                   <span id="valid-msgGuardian" class="hide" style="color: #42ba96;">✓ Valid</span>
                                   <span id="error-msgGuardian" class="hide" style="color: #F32013;"></span>
                                 </div>
@@ -443,7 +443,7 @@
                               <div class="col-md-6">
                                 <div class="form-group" >
                                   <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Email</span> 
-                                  <input type="text" class="form-control" id="inGurEmail" data-compulsory="true" oninput="this.className = 'form-control'">
+                                  <input type="text" class="form-control" id="inGurEmail" data-compulsory="false" oninput="this.className = 'form-control'">
                                 </div>
                               </div>
 
@@ -513,7 +513,7 @@
                                   <!-- State -->
                                 <div class="form-group">
                                   <span class="" style="font-size: smaller; font-weight: 300; color: gray;">State</span> 
-                                  <select class="form-control" name="tutor_course[]" id="state_drop" data-compulsory="true" oninput="this.className = 'form-control'">
+                                  <select class="form-control" name="tutor_course[]" id="state_drop" data-compulsory="false" oninput="this.className = 'form-control'">
                                     <option value="">Select state</option>
                       
                                   </select>
@@ -523,7 +523,7 @@
                                 <!-- Area -->
                                 <div class="form-group">
                                   <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Area</span>
-                                  <select class="form-control" name="tutor_course[]" id="area_drop" data-compulsory="true" oninput="this.className = 'form-control'">
+                                  <select class="form-control" name="tutor_course[]" id="area_drop" data-compulsory="false" oninput="this.className = 'form-control'">
                                     <option value="">Select area</option>
                                   </select>
                                 </div>
@@ -910,6 +910,9 @@
         [STU_CHILD_SCHOOL]: document.getElementById("inStuSchool").value,
         
       }  
+      
+      
+      // console.log("StudentData");
       // console.log(data);
       var docRefWithMerge = docRef.set(data , { merge: true })
       .then(() => {
@@ -1072,6 +1075,7 @@
       });
 
       $('#btnSaveModalUpdate').on('click', function (e) {
+        $('#saveModal').modal('hide');
         UpdateStudentToDB(currentStudentObj[STU_ID]);
       });
 
