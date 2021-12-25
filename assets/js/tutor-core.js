@@ -12,10 +12,11 @@ function AuthCheck(){
         tutorId = firebase.auth().currentUser.phoneNumber;
       else
         tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-  
+
       loadTutorInfoObj(tutorId); // tutor-core.js
   
     }
+
   });
 }
 
@@ -97,9 +98,13 @@ function loadTutorInfoObj(tutorId){
     current_aPreferredAreaLimit = tutorInfoObj.aPreferredAreaLimit;
     current_uLastOnline = tutorInfoObj.uLastOnline;
 
+
+    // Check if user logged in with other number. If true, logout
+    if (current_phone != tutorId){
+      // console.log("Stored TutorId in session storage is equal to latest tutorId. ")
+      window.location.href = "https://app.golearn.com.my/school/login.html";
+    }
     // console.log(current_uLastOnline)
-
-
     // let secondLastOnline = current_uLastOnline.seconds;
     // let secondCurrent = new Date().getTime() / 1000;
     // let hoursEllapsed = (secondCurrent - secondLastOnline) / 60 / 60;
@@ -108,17 +113,22 @@ function loadTutorInfoObj(tutorId){
 
     // Check last online. If > 6hr, reload
     if (current_uLastOnline == null || current_uLastOnline == ""){
+      // console.log("PROFILE_TUTOR_INFO exits, current_uLastOnline is null")
       loadUserInfo(tutorId);
-    }else{
+    }
+    else{
       let secondLastOnline = current_uLastOnline.seconds;
       let secondCurrent = new Date().getTime() / 1000;
       let hoursEllapsed = (secondCurrent - secondLastOnline) / 60 / 60;
       let reload = hoursEllapsed > 6;
       
       // console.log(secondLastOnline, secondCurrent, hoursEllapsed, reload);
-      if (reload)
+      if (reload){
+        // console.log("PROFILE_TUTOR_INFO exits, current_uLastOnline exits, reload true")
         loadUserInfo(tutorId);
+      }
       else {
+        // console.log("PROFILE_TUTOR_INFO exits, current_uLastOnline exits, reload false")
         // Update the general view
         updateGeneralView();
         // Finally, load page specific view.
@@ -126,11 +136,6 @@ function loadTutorInfoObj(tutorId){
         loadPageInitFunc(); 
       }
 
-      // // Update the general view
-      // updateGeneralView();
-      // // Finally, load page specific view.
-      // // This function will be declared separately in each page
-      // loadPageInitFunc(); 
     }
 
 
@@ -302,7 +307,7 @@ function loadUserInfo(tutorId){
     } 
     
     else {
-      window.location = "https://app.golearn.com.my/"
+      window.location.href = "https://app.golearn.com.my/"
     }
   });
 

@@ -361,17 +361,24 @@
       docRef.get().then((doc) => {
         if (doc.exists) {
           // Auto login
-          console.log("User logged in, profile exist")
+          console.log("User logged in, profile exist: "+userId)
           window.location.href = "./"
         }
         else {
-          console.log("User logged in, but profile do not exist")
+          console.log("User logged in, but profile do not exist: "+userId)
           // User logged in, but no profile found.
           // Do not autologin
         }
 
       });
 
+    }
+
+    // Clear PROFILE_TUTOR_INFO session storage. So after login, user update PROFILE_TUTOR_INFO
+    // with latest value.
+    if (JSON.parse(sessionStorage.getItem(PROFILE_CLIENT_INFO)) != null ){
+      // Although user exist, but the storage is null. Reload.
+      sessionStorage.removeItem(PROFILE_CLIENT_INFO);
     }
 
   </script>

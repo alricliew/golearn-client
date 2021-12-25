@@ -747,27 +747,69 @@
             document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
             document.getElementById("navPublicProfile").target = "_blank";
           }
-          
-          if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-            document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
-            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
+          if (current_accountStatus == ACTIVE_ACCOUNT_STATUS_KEY){
+            // let activationNavItem = document.querySelector('#activationNavItem');
+            // // activationNavItem.parentNode.removeChild(activationNavItem);
+            // let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
+            // // console.log(activationNavItemIsExist)
+            // // Remove NavItem if exist
+            // if (activationNavItemIsExist){
+            //   activationNavItem.parentNode.removeChild(activationNavItem);
+            // }else{
+            //   // Do nothing
+            // }
+            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
+            document.getElementById("btnActivateAccount").textContent = "UPGRADE";
+            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
             document.getElementById("btnActivateAccount").target = "_blank";
+            // Payroll
+            document.getElementById("navPayroll").setAttribute("style", "display: none;");
+          }
+          else if (current_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY){
+            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
+            document.getElementById("btnActivateAccount").textContent = "PREMIUM";
+            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
+            document.getElementById("btnActivateAccount").target = "_blank";
+            // Payroll
+            document.getElementById("navPayroll").setAttribute("style", "display: none;");
+          }
+          else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY){
+            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
+            document.getElementById("btnActivateAccount").textContent = "ORGANIZATION";
+            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
+            document.getElementById("btnActivateAccount").target = "_blank";
+            // Payroll
+            document.getElementById("navPayroll").setAttribute("style", "display: inline;");
+          }
+          else if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
+            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
+            document.getElementById("btnActivateAccount").textContent = "UPGRADE";
+            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
+            document.getElementById("btnActivateAccount").target = "_blank";
+            // Payroll
+            document.getElementById("navPayroll").setAttribute("style", "display: none;" );
           }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
+            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
             document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
             document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
             document.getElementById("btnActivateAccount").target = "_blank";
+            // Payroll
+            document.getElementById("navPayroll").setAttribute("style", "display: none;");
+
           }else {
             let activationNavItem = document.querySelector('#activationNavItem');
-			      let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
-            console.log(activationNavItemIsExist)
+            // activationNavItem.parentNode.removeChild(activationNavItem);
+            let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
+            // console.log(activationNavItemIsExist)
             // Remove NavItem if exist
             if (activationNavItemIsExist){
               activationNavItem.parentNode.removeChild(activationNavItem);
             }else{
               // Do nothing
             }
+            // Payroll
+            document.getElementById("navPayroll").setAttribute("style", "display: inline;");
+
           }
 
           //------ edit-profile.html specific Start -------------//

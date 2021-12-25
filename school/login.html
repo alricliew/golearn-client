@@ -333,8 +333,11 @@
   </script>
   <script>
 
+    var tutorId;
+
     // Auto Login
     firebase.auth().onAuthStateChanged(function(user){
+ 
       if(user){
         
         if (firebase.auth().currentUser.displayName == null )
@@ -371,11 +374,11 @@
       docRef.get().then((doc) => {
         if (doc.exists) {
           // Auto login
-          console.log("User logged in, profile exist")
+          console.log("User logged in, profile exist: "+tutorId)
           window.location.href = "./"
         }
         else {
-          console.log("User logged in, but profile do not exist")
+          console.log("User logged in, but profile do not exist: "+tutorId)
           // User logged in, but no profile found.
           // Do not autologin
         }
@@ -383,6 +386,15 @@
       });
 
     }
+  
+    // Clear PROFILE_TUTOR_INFO session storage. So after login, user update PROFILE_TUTOR_INFO
+    // with latest value.
+    if (JSON.parse(sessionStorage.getItem(PROFILE_TUTOR_INFO)) != null ){
+      // Although user exist, but the storage is null. Reload.
+      sessionStorage.removeItem(PROFILE_TUTOR_INFO);
+    }
+    
+    
   </script>
   
   <script>

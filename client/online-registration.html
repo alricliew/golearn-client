@@ -143,6 +143,7 @@
       <!-- End Navbar -->
 
 			<!-- Modal Start -->
+
       <!-- Save Student modal -->
       <div class="row">
         <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
@@ -223,7 +224,7 @@
           <div class="row" >
 
             <!-- Invalid screen -->
-            <div class="col-md-12" id="invalid-screen" style="display: none;">
+            <div class="col-md-12" id="invalid-screen" style="display: none; padding-left: 0; padding-right: 0;">
               <div class="row text-center">
                 <div class="col-md-12">
                   <h2 id="invalidScreenTitle">Invalid Registration Link...</h2>
@@ -234,7 +235,7 @@
             </div>
 
             <!-- Invalid screen -->
-            <div class="col-md-12" id="registration-complete-screen" style="display: none;">
+            <div class="col-md-12" id="registration-complete-screen" style="display: none; padding-left: 0; padding-right: 0;">
               <h2>You have completed your registration!</h2>
               <p>You will see your class after the class owner approves your enrollment. </p>
               <a href="./" class="btn btn-outline-primary btn-round" id="btnBack">Go to my profile <i class="material-icons" style="color: #2e74b6; margin-right: 0.5em;">east</i></a>
@@ -710,7 +711,7 @@
 
                           <div class="button-row d-flex mt-4">
                             <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                            <button class="btn btn-success ml-auto js-btn-send" type="button" title="Send" id="btnRegister" >Register & Close</button>
+                            <button class="btn btn-success ml-auto js-btn-send" type="button" title="Send" id="btnRegister">Register & Close</button>
                           </div>
 
 
@@ -955,10 +956,10 @@
 
     function invalidatePage(title, desc){
       let multisteps = document.getElementById("multisteps-form"); 
-      multisteps.setAttribute('style', 'display: none;');
+      multisteps.setAttribute('style', 'display: none; ');
       let invalid_screen = document.getElementById("invalid-screen"); 
       invalid_screen.className = 'centered';
-      invalid_screen.removeAttribute("style");
+      invalid_screen.setAttribute('style', 'padding-left: 0; padding-right: 0;');
 
       let invalidScreenTitle = document.getElementById("invalidScreenTitle"); 
       invalidScreenTitle.textContent = (title == null || title == "") ? "Invalid Registration Link..." : title;
@@ -977,7 +978,7 @@
       multisteps.setAttribute('style', 'display: none;');
       let invalid_screen = document.getElementById("registration-complete-screen"); 
       invalid_screen.className = 'centered';
-      invalid_screen.setAttribute('style', 'display: inline;');
+      invalid_screen.setAttribute('style', 'display: inline; padding-left: 0; padding-right: 0;');
       // func.showNotification('top','center', 'danger', 'error_outline', "Congratulation! Your registration is completed." );
     }
 
@@ -1890,11 +1891,11 @@
 
       // Create and Register Modal
       // $('#btnRegister').on('click', function (e) {
-        // e.preventDefault();
-        // let fieldsValid = validateForm(3); // Validate guardian pannel
-        // let phoneValid = ValidatePhone('phoneGuardian');
-        // $('#registerWaitModal').modal('show');
-        // $('#registerWaitModal').modal('hide');
+      //   e.preventDefault();
+      //   let fieldsValid = validateForm(3); // Validate guardian pannel
+      //   let phoneValid = ValidatePhone('phoneGuardian');
+      //   $('#registerWaitModal').modal('show');
+      //   $('#registerWaitModal').modal('hide');
       // });
 
       $("#registerWaitModal").on('show.bs.modal', function (e) {
@@ -2092,8 +2093,15 @@
         console.log(itiGuardian.getNumber())
         console.log(validateForm(activePanelNum), ValidatePhone('phoneGuardian'))
 
+
         if (validateForm(activePanelNum) && ValidatePhone('phoneGuardian')){
       
+          // Disable the submit button
+          document.getElementById("btnRegister").setAttribute('disabled', 'disabled');
+
+          // Change the "Submit" text
+          document.getElementById("btnRegister").textContent = 'Please wait...';
+
           // Dependant > Student > Class_Student
           if (action === JOIN_AS_STUDENT){
             // User join themselves or join as student

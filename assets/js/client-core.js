@@ -1,4 +1,4 @@
-// This is tutor core js
+// This is client core js
 
 // Check if user logged on
 function AuthCheck(){
@@ -13,7 +13,7 @@ function AuthCheck(){
       else
         userId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
   
-      loadClientInfoObj(userId); // tutor-core.js
+      loadClientInfoObj(userId); // client-core.js
   
     }
   });
@@ -46,6 +46,12 @@ function loadClientInfoObj(userId){
     current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
     current_uLastOnline = clientInfoObj.uLastOnline;
 
+    // Check if user logged in with other number. If true, logout
+    if (current_phone != userId){
+      // console.log("Stored userId in session storage is equal to latest tutorId. ")
+      window.location.href = "https://app.golearn.com.my/client/login.html";
+    }
+
     // let secondLastOnline = current_uLastOnline.seconds;
     // let secondCurrent = new Date().getTime() / 1000;
     // let hoursEllapsed = (secondCurrent - secondLastOnline) / 60 / 60;
@@ -54,7 +60,7 @@ function loadClientInfoObj(userId){
 
     // Check last online. If > 6hr, reload
     if (current_uLastOnline == null || current_uLastOnline == ""){
-      console.log("current_uLastOnline == null, loadUserInfo")
+      // console.log("current_uLastOnline == null, loadUserInfo "+userId )
       loadUserInfo(userId);
     }else{
       let secondLastOnline = current_uLastOnline.seconds;
@@ -64,23 +70,17 @@ function loadClientInfoObj(userId){
       
       console.log(secondLastOnline, secondCurrent, hoursEllapsed, reload);
       if (reload){
-        console.log("reload, loadUserInfo")
+        // console.log("reload, loadUserInfo "+userId )
         loadUserInfo(userId);
       }
       else {
-        console.log("local storage found")
+        // console.log("local storage found "+userId )
         // Update the general view
         updateGeneralView();
         // Finally, load page specific view.
         // This function will be declared separately in each page
         loadPageInitFunc(); 
       }
-
-      // // Update the general view
-      // updateGeneralView();
-      // // Finally, load page specific view.
-      // // This function will be declared separately in each page
-      // loadPageInitFunc(); 
     }
 
 
@@ -91,8 +91,7 @@ function loadUserInfo(userId){
   // Tutor Id must be a phone with +60, no spacing or other chars
   var docRef = db.collection("Users").doc(userId);
   
-  // docRef.get().then((doc) => {
-  docRef.onSnapshot((doc) => {
+  docRef.get().then((doc) => {
     if (doc.exists) {
       // console.log("Document data:", doc.data());
       current_name = (doc.data().name == null || doc.data().name == "")? "New User" : doc.data().name;
@@ -139,18 +138,18 @@ function loadUserInfo(userId){
   // Log last online
   let docLastOnlineRef = db.collection("Users").doc(userId);
   docLastOnlineRef.get().then((doc) => {
-      if (doc.exists) {
-        // Update last online 
-        let docRef = db.collection("Users").doc(userId);
-        docRef.set({
-          [SYSTEM_LAST_ONLINE_KEY] : new Date() //firebase.firestore.Timestamp.fromDate(new Date())
-          }, 
-          { merge: true });
-      } 
-      else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
+    if (doc.exists) {
+      // Update last online 
+      let docRef = db.collection("Users").doc(userId);
+      docRef.set({
+        [SYSTEM_LAST_ONLINE_KEY] : new Date() //firebase.firestore.Timestamp.fromDate(new Date())
+        }, 
+        { merge: true });
+    } 
+    else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
   }).catch((error) => {
       console.log("Error getting document:", error);
   });
