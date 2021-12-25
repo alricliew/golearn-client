@@ -1281,7 +1281,13 @@
       var docRef = db.collection("Settings").doc("v1").collection("Financial").doc(tutorId);
       
       docRef.get().then((doc) => {
-        updatePageContent(doc);
+
+        if (doc.exists){
+          updatePageContent(doc);
+        }else {
+          updatePageContent(null);
+        }
+        
         // $('#loadingModal').modal('hide');
       })
     }
@@ -1289,69 +1295,96 @@
     // Init Page View
     function updatePageContent(doc){
 
-      // Business Profile
-      document.getElementById("invBizName").textContent = doc.data()[SET_BIZ_NAME];
-      let bizDetail = '';
-      bizDetail += (doc.data()[SET_BIZ_PHONE] == null || doc.data()[SET_BIZ_PHONE] == '') ? '' : doc.data()[SET_BIZ_PHONE];
-      bizDetail += (doc.data()[SET_BIZ_EMAIL] == null || doc.data()[SET_BIZ_EMAIL] == '') ? '' : ', <br>' + doc.data()[SET_BIZ_EMAIL];
-      bizDetail += (doc.data()[SET_BIZ_ADDR] == null || doc.data()[SET_BIZ_ADDR] == '') ? '' : ', <br>' + doc.data()[SET_BIZ_ADDR];
-      document.getElementById("invBizDetails").innerHTML = bizDetail;
-      if (doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == ''){
+      if (doc != null){
+        
+        // Business Profile
+        document.getElementById("invBizName").textContent = (doc.data()[SET_BIZ_NAME] == null || doc.data()[SET_BIZ_NAME] == '') ? current_name : doc.data()[SET_BIZ_NAME];
+        let bizDetail = '';
+        bizDetail += (doc.data()[SET_BIZ_PHONE] == null || doc.data()[SET_BIZ_PHONE] == '') ? current_phone : doc.data()[SET_BIZ_PHONE];
+        bizDetail += (doc.data()[SET_BIZ_EMAIL] == null || doc.data()[SET_BIZ_EMAIL] == '') ? '' : ', <br>' + doc.data()[SET_BIZ_EMAIL];
+        bizDetail += (doc.data()[SET_BIZ_ADDR] == null || doc.data()[SET_BIZ_ADDR] == '') ? '' : ', <br>' + doc.data()[SET_BIZ_ADDR];
+        document.getElementById("invBizDetails").innerHTML = bizDetail;
+        if (doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == ''){
+          document.getElementById("tutorImgUrl").style.display = 'none';
+          document.getElementById("tutorImgUrl").src =  '';
+        }
+        else{
+          document.getElementById("tutorImgUrl").src =  doc.data()[SET_BIZ_IMG_URL];
+        }
+        // document.getElementById("tutorImgUrl").src = doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : doc.data()[SET_BIZ_IMG_URL];
+
+        document.getElementById("invIssueDate").value = new Date().toLocaleDateString("en-GB");
+
+        tinymce.get("invNotes").setContent(doc.data()[SET_INV_NOTE]);
+        let invNotesContent = tinymce.get("invNotes").getContent({ format: "text" });
+        document.getElementById("countNotes").textContent = invNotesContent.length + '/400';
+
+        tinymce.get("invFooterNotes").setContent(doc.data()[SET_INV_FOOTER_NOTE]);
+        let invFooterNotesContent = tinymce.get("invFooterNotes").getContent({ format: "text" });
+        document.getElementById("countFooterNotes").textContent = invFooterNotesContent.length + '/200';
+
+        // Preview 
+        // document.getElementById("previewTutorImgUrl").src = doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : doc.data()[SET_BIZ_IMG_URL];
+        // document.getElementById("previewTutorImgUrl").src = 'https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png';
+        // document.getElementById("previewTutorImgUrl").src = '../../assets/img/empty-photo.png';
+
+        // Sample test img
+        // https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0
+        // https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png'
+        // https://github.com/softius/php-cross-domain-proxy
+
+        if (doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == ''){
+          document.getElementById("previewTutorImgUrl").style.display = 'none';
+          // document.getElementById("previewTutorImgUrl");
+        }
+        else {
+          toDataURL(
+            // 'https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0',
+            // 'https://murmuring-headland-66106.herokuapp.com/https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0',
+            // 'https://murmuring-headland-66106.herokuapp.com/https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png',
+            // 'https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png',
+            // 'https://cors-anywhere.herokuapp.com/https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png',
+            // doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : 'https://golearn.com.my/proxy.php?csurl='+doc.data()[SET_BIZ_IMG_URL],
+            doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : 'https://murmuring-headland-66106.herokuapp.com/'+doc.data()[SET_BIZ_IMG_URL],
+
+            function(dataUrl) {
+              // console.log('RESULT:', dataUrl)
+            },
+          );
+        }
+
+        // document.getElementById("previewInvTitle").textContent = doc.data()[SET_BIZ_NAME];
+        document.getElementById("previewInvBizName").textContent = (doc.data()[SET_BIZ_NAME] == null || doc.data()[SET_BIZ_NAME] == '') ? current_name : doc.data()[SET_BIZ_NAME];
+        document.getElementById("previewInvBizDetails").innerHTML = bizDetail;
+        document.getElementById("previewInvIssueDate").textContent = new Date().toLocaleDateString("en-GB");
+        document.getElementById("previewInvNotes").innerHTML = doc.data()[SET_INV_NOTE];
+        document.getElementById("previewInvFooterNotes").innerHTML = doc.data()[SET_INV_FOOTER_NOTE];
+      }
+      // No business setting found
+      else{
+        // Business Profile
+        document.getElementById("invBizName").textContent = (current_name == null || current_name == '') ? "Your Name" : current_name;
+        document.getElementById("invBizDetails").innerHTML = "";
+
         document.getElementById("tutorImgUrl").style.display = 'none';
         document.getElementById("tutorImgUrl").src =  '';
-      }
-      else{
-        document.getElementById("tutorImgUrl").src =  doc.data()[SET_BIZ_IMG_URL];
-      }
-      // document.getElementById("tutorImgUrl").src = doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : doc.data()[SET_BIZ_IMG_URL];
+        
+        document.getElementById("invIssueDate").value = new Date().toLocaleDateString("en-GB");
 
-      document.getElementById("invIssueDate").value = new Date().toLocaleDateString("en-GB");
+        tinymce.get("invNotes").setContent("");
+        document.getElementById("countNotes").textContent = '0/400';
 
-      tinymce.get("invNotes").setContent(doc.data()[SET_INV_NOTE]);
-      let invNotesContent = tinymce.get("invNotes").getContent({ format: "text" });
-      document.getElementById("countNotes").textContent = invNotesContent.length + '/400';
+        tinymce.get("invFooterNotes").setContent("");
+        document.getElementById("countFooterNotes").textContent = '0/200';
 
-      tinymce.get("invFooterNotes").setContent(doc.data()[SET_INV_FOOTER_NOTE]);
-      let invFooterNotesContent = tinymce.get("invFooterNotes").getContent({ format: "text" });
-      document.getElementById("countFooterNotes").textContent = invFooterNotesContent.length + '/200';
-
-      // Preview 
-      // document.getElementById("previewTutorImgUrl").src = doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : doc.data()[SET_BIZ_IMG_URL];
-      // document.getElementById("previewTutorImgUrl").src = 'https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png';
-      // document.getElementById("previewTutorImgUrl").src = '../../assets/img/empty-photo.png';
-
-      // Sample test img
-      // https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0
-      // https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png'
-      // https://github.com/softius/php-cross-domain-proxy
-
-      if (doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == ''){
         document.getElementById("previewTutorImgUrl").style.display = 'none';
-        // document.getElementById("previewTutorImgUrl");
+        
+        document.getElementById("previewInvBizName").textContent = (current_name == null || current_name == '') ? "Your Name" : current_name;
+        document.getElementById("previewInvBizDetails").innerHTML = "";
+        document.getElementById("previewInvIssueDate").textContent = new Date().toLocaleDateString("en-GB");
+        document.getElementById("previewInvNotes").innerHTML = "";
+        document.getElementById("previewInvFooterNotes").innerHTML = "";
       }
-      else {
-        toDataURL(
-          // 'https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0',
-          // 'https://murmuring-headland-66106.herokuapp.com/https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0',
-          // 'https://murmuring-headland-66106.herokuapp.com/https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png',
-          // 'https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png',
-          // 'https://cors-anywhere.herokuapp.com/https://golearn.com.my/wp-content/uploads/Home-3-Simple-Steps-Photo-1-1-1536x1257.png',
-          // doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : 'https://golearn.com.my/proxy.php?csurl='+doc.data()[SET_BIZ_IMG_URL],
-          doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : 'https://murmuring-headland-66106.herokuapp.com/'+doc.data()[SET_BIZ_IMG_URL],
-
-          function(dataUrl) {
-            // console.log('RESULT:', dataUrl)
-          },
-        );
-      }
-
-      // document.getElementById("previewInvTitle").textContent = doc.data()[SET_BIZ_NAME];
-      document.getElementById("previewInvBizName").textContent = doc.data()[SET_BIZ_NAME];
-      document.getElementById("previewInvBizDetails").innerHTML = bizDetail;
-      document.getElementById("previewInvIssueDate").textContent = new Date().toLocaleDateString("en-GB");
-      document.getElementById("previewInvNotes").innerHTML = doc.data()[SET_INV_NOTE];
-      document.getElementById("previewInvFooterNotes").innerHTML = doc.data()[SET_INV_FOOTER_NOTE];
-
     }
 
 
