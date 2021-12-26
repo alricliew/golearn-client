@@ -1515,13 +1515,14 @@
   
           document.getElementById("previewBizName").textContent = bizName;
           document.getElementById("previewBizDetails").textContent = bizDetail;
-          if (bizImgUrl == null || bizImgUrl == ''){
+          if (bizImgUrl == null || bizImgUrl == ''|| bizImgUrl == "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"){
             document.getElementById("previewTutorImgUrl").style.display = 'none';
+            document.getElementById("previewTutorImgUrl").src = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D';
           }
           else {
             $("#previewTutorImgUrl").css("display", "");
             toDataURL(
-              bizImgUrl == null || bizImgUrl == '' ?  '../../assets/img/empty-photo.png' : 'https://murmuring-headland-66106.herokuapp.com/'+bizImgUrl,
+              bizImgUrl == null || bizImgUrl == '' ?  'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D' : 'https://murmuring-headland-66106.herokuapp.com/'+bizImgUrl,
               function(dataUrl) {
                 // console.log('RESULT:', dataUrl)
               },
