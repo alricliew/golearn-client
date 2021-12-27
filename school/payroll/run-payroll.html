@@ -1087,21 +1087,21 @@
       <!-- Load Previous Payroll modal -->
       <div class="row">
         <div class="modal fade" id="loadPayrollModal" tabindex="-1" role="dialog" aria-labelledby="loadPayrollModalLabel" aria-hidden="true">
-          <div class="modal-dialog  modal-dialog-centered" role="document">
+          <div class="modal-dialog  modal-dialog-centered" role="document" style="overflow-y: auto;">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="loadPayrollModalTitle">Create A Payroll</h5>
+                <h5 class="modal-title" id="loadPayrollModalTitle">All Payrolls</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body" id="loadPayrollModalBody">
-                <div class="row">
-                  <div class="col-md-12" id="payrollFullList">
+                <div class="row" id="payrollFullList" style="padding: 1rem;">
+                  <!-- <div class="col-md-12" id="payrollFullList"> -->
                     <!-- <a href="javascript:;" style="margin-right: 0.5rem;">1/10/2021 - 31/10/2021(12)</a>
                     <a href="javascript:;" style="margin-right: 0.5rem;">1/11/2021 - 30/11/2021(5)</a>
                     <a href="javascript:;" style="margin-right: 0.5rem;">1/12/2021 - 31/12/2021(23)</a> -->
-                  </div>
+                  <!-- </div> -->
                 </div>
                 
                 <div class="row">
@@ -2519,8 +2519,9 @@
 
 
     function CreatePayroll(){
-
-      console.log(payrollStart, payrollEnd)
+      console.log("Payroll period")
+      console.log(payrollStart)
+      console.log(payrollEnd)
       // Check if payroll existed
       var docRef = db.collection("Financial")
           .doc("v1")
@@ -2534,6 +2535,7 @@
       docRef
       .get()
       .then((querySnapshot) => {
+
 
         if(querySnapshot.empty) {
 
@@ -2578,11 +2580,11 @@
 
           querySnapshot.forEach((doc) => {
             console.log("Payroll found");
-            console.log(doc.data()[PAYROLL_NAME]);
-            console.log(doc.data()[PAYROLL_ID]);
-
-            console.log(doc.data()[PAYROLL_DATE_START].toDate());
+            // console.log(doc.data()[PAYROLL_NAME]);
+            // console.log(doc.data()[PAYROLL_ID]);
+            // console.log(doc.data()[PAYROLL_DATE_START].toDate());
             // console.log(doc.data()[PAYROLL_DATE_END].toDate());
+
             // Get data from payroll
             payrollId = doc.data()[PAYROLL_ID];
             payrollName = doc.data()[PAYROLL_NAME];
@@ -3370,16 +3372,19 @@
       // console.log(classDoc.data())
       // let start = new Date('2021-11-04');
       // let end = new Date('2021-11-13');
-      payrollStart = new Date(start);
-      payrollEnd = new Date(end);
-      console.log(payrollStart,payrollEnd, classDoc.data()[CLASS_ID] )
+      // payrollStart = new Date(start);
+      // payrollEnd = new Date(end);
+      console.log(payrollStart)
+      console.log(payrollEnd)
+      console.log(classDoc.data()[CLASS_ID] )
+
       let docRef = db.collection("Class")
           .doc("v1")
           .collection("Lesson")
           .where("classId", "==", classDoc.data()[CLASS_ID])
           .where("status", "==", true)
-          .where("lesDate", ">", payrollStart)
-          .where("lesDate", "<", payrollEnd)
+          .where("lesDate", ">=", payrollStart)
+          .where("lesDate", "<=", payrollEnd)
           // .orderBy('lesDate', 'desc')
           // .startAfter(latestLessonDoc || today)
           // .limit(10);
@@ -7629,15 +7634,6 @@
 
   <!-- Date range picker -->
   <script>
-    // $(function() {
-    //   $('input[name="daterange"]').daterangepicker({
-    //     opens: 'left',
-    //     timePicker: true,
-    //   }, function(start, end, label) {
-    //     console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-    //   });
-    // });
-
 
 
     function cb(start, end, label) {
@@ -7672,6 +7668,8 @@
         }
     }, cb);
 
+
+    
     cb(start, end);
 
 
@@ -7680,10 +7678,10 @@
       singleDatePicker: true,
       showDropdowns: true,
       locale: {
-          format: 'DD/MM/YYYY'
+        format: 'DD/MM/YYYY'
       },
     }, function(start, end, label) {
-      payrollDate = start;
+      payrollDate = start.format('DD/MM/YYYY');
       payrollDateMonth = start.format('MMMM YYYY');
       // var years = moment().diff(start, 'years');
       // alert("You are " + years + " years old!");

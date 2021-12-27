@@ -435,12 +435,46 @@
                 </button>
               </div>
               <div class="modal-body">
+
+                <div class="row">
+                  <div class="col-sm-12 text-left">
+                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-top: 1.0rem;">Status</span> 
+                    <span class="tooltiptext-trigger">? 
+                      <span class="tooltiptext-general">
+                        <h6>Status</h6>
+                        <p>Set to <strong style="color: #2e74b6;">Paid</strong> to indicate you have receive the payment.</p>
+                      </span> 
+                    </span>
+                  </div>
+                </div>
+
+                <div class="form-group" >
+                  <div class="form-check form-check-radio form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="statusRadio" id="statusNew" value="option1">
+                        Unpaid
+                      <span class="circle">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="form-check form-check-radio form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="statusRadio" id="statusPaid" value="option2">
+                        Paid
+                      <span class="circle">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
                 <div class="form-group">
                   <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payment Date*</span> 
                   <input type="text" class="form-control" id="inPaymentDate" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40" style="cursor: pointer; cursor: pointer;" >                
                 </div>
                 <div class="form-group">
-                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payment Amount (RM)</span> 
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Payment Amount* (RM)</span> 
                   <input type="number" class="form-control" id="inPaymentAmount" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
                 </div>
                 <div class="form-group">
@@ -2692,13 +2726,22 @@
         document.getElementById("inPaymentAmount").value = currentInvoiceObj[INV_PAYMENT_AMOUNT];
         document.getElementById("inPaymentNotes").value = currentInvoiceObj[INV_PAYMENT_NOTE];
 
+        if (currentInvoiceObj[INV_INV_STATUS] === INV_STATUS_PAID){
+          document.getElementById("statusNew").checked = false;
+          document.getElementById("statusPaid").checked = true;
+        }else{
+          document.getElementById("statusNew").checked = true;
+          document.getElementById("statusPaid").checked = false;
+        }
+
       });
 
       $('#recordPaymentModal').on('hide.bs.modal', function (event) {
         document.getElementById("inPaymentDate").value = '';
         document.getElementById("inPaymentAmount").value = '';
         document.getElementById("inPaymentNotes").value = '';
-
+        document.getElementById("statusNew").checked = false;
+        document.getElementById("statusPaid").checked = false;
       });
 
       // Record Payment
@@ -2721,7 +2764,7 @@
         let paymentDateFinal = firebase.firestore.Timestamp.fromDate(newPaymentDate);
 
         var invData = {
-          [INV_INV_STATUS]: INV_STATUS_PAID,
+          [INV_INV_STATUS]: document.getElementById("statusPaid").checked ? INV_STATUS_PAID : INV_STATUS_NEW,
           [INV_PAYMENT_DATE]: paymentDateFinal,
           [INV_PAYMENT_AMOUNT]: document.getElementById("inPaymentAmount").value,
           [INV_PAYMENT_NOTE]: document.getElementById("inPaymentNotes").value,
