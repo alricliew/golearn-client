@@ -2056,9 +2056,15 @@
     function generatePDFeKoopmans(id){
 
       element = document.getElementById(id);
+      var cln = element.cloneNode(true);
+      let wrapper = document.createElement("div")
+      wrapper.setAttribute("style", "padding: 0.5rem; ")
+      wrapper.appendChild(cln);
+
+
 
       var opt = {
-        margin:       [0, 0, 0, 0],
+        margin:       0,
         filename:     'invoice.pdf',
         pagebreak:    { before: '.beforeClass', after: ['#after1', '#after2'], avoid: 'img' },
         image:        { type: 'jpeg', quality: 0.95 },
@@ -2066,7 +2072,7 @@
         jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
       };
 
-      html2pdf().set(opt).from(element).save();
+      html2pdf().set(opt).from(wrapper).save();
     }
 
     function reload(){
