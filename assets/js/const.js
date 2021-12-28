@@ -1270,6 +1270,20 @@ const ProfileSettingsValue_Active = [5, 50, 1, 50];
 const ProfileSettingsValue_Premium = [50, 500, 1, 50];
 const ProfileSettingsValue_Org = [50, 500, 50, 50];
 
+// Class number settings based on account status
+const ClassNum_Deactivated = 10;
+const ClassNum_Active = 10;
+const ClassNum_Premium1 = 20;
+const ClassNum_Premium2 = 500;
+const ClassNum_Premium3 = 500;
+
+// Teacher number settings based on account status
+const TeacherNum_Deactivated = 0;
+const TeacherNum_Active = 0;
+const TeacherNum_Premium1 = 0;
+const TeacherNum_Premium2 = 10;
+const TeacherNum_Premium3 = 500;
+
 // A VERY Simple Encrypt and Decrypt
 const cipher = salt => {
 const textToChars = text => text.split('').map(c => c.charCodeAt(0));

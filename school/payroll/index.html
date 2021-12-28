@@ -1253,6 +1253,7 @@
         // Handle Lesson Load more btn
         if (querySnapshot.empty){
           loadmore.removeEventListener('click', loadmoreHandleClick );
+          
         }
         if (querySnapshot.docs.length == 20){
           loadmore.style.visibility='visible';

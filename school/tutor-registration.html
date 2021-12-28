@@ -187,7 +187,8 @@
 
             <!-- Invalid screen -->
             <div class="col-md-9" id="invalid-screen" style="display: none;">
-              <h2>Invalid Registration Link...</h2>
+              <h2 id="invalidScreenTitle">Invalid Registration Link...</h2>
+              <p id="invalidScreenDescription">Please contact the owner to fix this for you.</p>
             </div>
 
             <!-- Invalid screen -->
@@ -626,9 +627,12 @@
           admin_address = admin_address1 + admin_address2 + admin_addressPostCode + admin_addressState;
           admin_weburl = doc.data().aWebUrl;
             
-          
+          loadAllTutorInfo(adminId, admin_accountStatus)
+
           document.getElementById("adminName").textContent = "Owner: "+ admin_name; 
-        } else {
+
+        } 
+        else {
           // console.log("No such admin Id!");
           invalidatePage();
         }
@@ -641,13 +645,23 @@
       });
     }
 
-    function invalidatePage(){
+    function invalidatePage(title, desc){
       let multisteps = document.getElementById("multisteps-form"); 
       multisteps.setAttribute('style', 'display: none;');
       let invalid_screen = document.getElementById("invalid-screen"); 
       invalid_screen.className = 'centered';
       invalid_screen.setAttribute('style', 'display: inline;');
-      func.showNotification('top','center', 'danger', 'error_outline', "Invalid Link: Please contact your class owner to fix this for you." );
+
+      let invalidScreenTitle = document.getElementById("invalidScreenTitle"); 
+      invalidScreenTitle.textContent = (title == null || title == "") ? "Invalid Registration Link..." : title;
+      let invalidScreenDescription = document.getElementById("invalidScreenDescription");
+      invalidScreenDescription.textContent = (desc == null || desc == "") ? "Please contact the owner to fix this for you." : desc;
+
+      let funcText = (title == null || title == "" || desc == null || desc == "") ? 
+        "Invalid Link: Please contact your class owner to fix this for you." :
+        title + ": " + desc;
+
+      func.showNotification('top','center', 'danger', 'error_outline', funcText );
     }
 
     function registrationCompletePage(){
@@ -657,6 +671,75 @@
       invalid_screen.className = 'centered';
       invalid_screen.setAttribute('style', 'display: inline;');
     }
+
+
+    // Get the number of teacher of admin. 
+    function loadAllTutorInfo(id, admin_accountStatus){
+      let docRef = db.collection("Class")
+          .doc("v1")
+          .collection("Tutor")
+          .where(TUTOR_ADMIN_ID, "==", id)
+          .where(TUTOR_STATUS_ADMIN, "in", [TUTOR_STATUS_TYPE_ACTIVE, TUTOR_STATUS_TYPE_PASSIVE]);
+          
+      let adminTeacherNum = 0;
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        querySnapshot.forEach((doc) => {
+          
+          console.log(doc.data())
+
+          adminTeacherNum = adminTeacherNum + 1;
+
+        });
+ 
+      })
+      .then(() => {
+
+        console.log(adminTeacherNum)
+        console.log(admin_accountStatus)
+
+          // Check admin account status 
+          if (admin_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || 
+          admin_accountStatus == ACTIVE_ACCOUNT_STATUS_KEY|| 
+            admin_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY){
+            if (adminTeacherNum > TeacherNum_Active){
+              invalidatePage(
+                "Registration is Closed", 
+                ""
+              );
+            }
+          }
+          else if (admin_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY){
+            if (adminTeacherNum > TeacherNum_Premium2){
+              invalidatePage(
+                "Registration is Closed", 
+                ""
+              );            
+            }
+          }
+          else if (admin_accountStatus == PREMIUM_ACCOUNT_3_STATUS_KEY){
+            if (adminTeacherNum > TeacherNum_Premium3){
+              invalidatePage(
+                "Registration is Closed", 
+                ""
+              );            
+            }
+          }
+          else {
+            // Deactivated or other status
+            invalidatePage(
+                "Registration is Closed", 
+                ""
+              );
+            }
+
+
+      });
+
+    };
 
 		firebase.auth().onAuthStateChanged(function(user){
       

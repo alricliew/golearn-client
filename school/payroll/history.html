@@ -918,6 +918,7 @@
             else {
               
               querySnapshot.forEach((doc) => {
+                console.log("Deleting deleted! " + payrollCurrentObj[PAYROLL_ID]);
                 console.log(doc.data()[PAY_ID])
                 console.log(doc.data()[PAY_TRANS_ID])
 

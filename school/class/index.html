@@ -263,6 +263,35 @@
 
 			<!-- Modal Start -->
       
+
+      <!-- Limit Reach modal -->
+      <div class="row">
+        <div class="modal fade" id="limitReachModal" tabindex="-1" role="dialog" aria-labelledby="limitReachModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Limit reached!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" >
+                <p>
+                  You have reached the maximum number of classes available for your account. 
+                </p>
+                <p>
+                  Upgrade to <strong style="color: #2e74b6;">unlock more slots</strong> and enjoy a tonne of <strong style="color: #2e74b6;">other benefits</strong>.
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Not Now</button>
+                <a type="button" class="btn btn-primary" id="btnLimitReachModalUpdate" style="color: white;" href="https://golearn.com.my/pricing" target="_blank">Upgrade Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Add Class modal -->
       <div class="row">
         <div class="modal fade" id="addClassModal" tabindex="-1" role="dialog" aria-labelledby="addClassModalLabel" aria-hidden="true">
@@ -475,25 +504,11 @@
           <!-- Main content -->
           <div class="row">
             <!-- Update button -->
-
             <div class="col-md-12 d-flex flex-row">
-              <a href="javascript:;" class="btn btn-primary btn-round" id="btnAddClass" style="background-color: #2e74b6;">Add Class <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
-
-              <!-- <div class="dropdown">
-                <button class="btn btn-success dropdown-toggle bg-white text-dark text-right" type="button" id="SortBy" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Sort By
-                </button>
-                <div class="dropdown-menu" aria-labelledby="SortBy" id="sort-dropdown-menu">
-                  <a class="dropdown-item"  href="#">Price Low to High</a>
-                  <a class="dropdown-item"  href="#">Price High to Low</a>
-                  <a class="dropdown-item"  href="#">Highest Rated</a>
-                </div>
-              </div> -->
+              <a href="javascript:;" class="btn btn-default btn-round" id="btnAddClass" style="pointer-events: none;">Add Class <i class="material-icons" style="color: white; margin-left: 0.5em; ">east</i></a>
             </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-6 ">
-              <!-- <a class="d-flex justify-content-end" href="javascript:;" id="btnUpdate" style="margin-top: 1rem;" >About Premium Subjects</a> -->
-            </div>
+            <!-- <div class="col-lg-6 col-md-6 col-sm-6 ">
+            </div> -->
           </div>
 
           <!-- All Class -->
@@ -693,7 +708,7 @@
     // Session Storage data
     var docsObj = [];
 
-
+    const btnAddClass = document.getElementById("btnAddClass");
 		// var db = firebase.firestore();
 		// db.settings({ timestampsInSnapshots: true });
 
@@ -925,6 +940,7 @@
           .startAfter(latestClassDoc)
           .limit(10);
       
+      let adminClassNum = 0;
 
       docRef
       .get()
@@ -946,6 +962,10 @@
             docsObj.push(doc.data());
             renderAllActiveClasses3(doc, "", false);
 
+            // Increment adminClassNum if the user own this class
+            if (tutorId == doc.data()[CLASS_ADMIN_ID]){
+              adminClassNum = adminClassNum + 1;
+            }
           });
         }
 
@@ -973,6 +993,8 @@
           sessionStorage.setItem(SESSION_STORAGE_CLASS_LOAD_KEY, false);
         }
 
+        // Store actual class num in obj
+        sessionStorage.setItem(SESSION_STORAGE_CLASS_NUM_KEY, adminClassNum);
 
         // Load more handling
         latestClassDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
@@ -988,6 +1010,60 @@
         }else{
           classLoadmore.style.visibility='hidden';
         }
+      })
+
+      .then(() => {
+        console.log(sessionStorage.getItem(SESSION_STORAGE_CLASS_NUM_KEY))
+        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || 
+          current_accountStatus == ACTIVE_ACCOUNT_STATUS_KEY){
+          // Note: ClassNum_Active = ClassNum_Deactivated
+          if (adminClassNum > ClassNum_Active){
+            btnAddClass.className = "btn btn-default btn-round";
+            btnAddClass.style.pointerEvents = "auto";
+            btnAddClass.setAttribute("data-toggle", "modal");
+            btnAddClass.setAttribute("data-target", "#limitReachModal");
+          }else {
+            btnAddClass.className = "btn btn-primary btn-round";
+            btnAddClass.style.pointerEvents = "auto";
+            btnAddClass.setAttribute("onclick", "window.location = './add-class.html';");       
+          }
+
+        }
+        else if (current_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY){
+          if (adminClassNum > ClassNum_Premium1){
+            btnAddClass.className = "btn btn-default btn-round";
+            btnAddClass.style.pointerEvents = "auto";
+            btnAddClass.setAttribute("data-toggle", "modal");
+            btnAddClass.setAttribute("data-target", "#limitReachModal");
+          }else {
+            btnAddClass.className = "btn btn-primary btn-round";
+            btnAddClass.style.pointerEvents = "auto";
+            btnAddClass.setAttribute("onclick", "window.location = './add-class.html';");
+          }
+        }
+        else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY| 
+          current_accountStatus == PREMIUM_ACCOUNT_3_STATUS_KEY){
+          // Note: ClassNum_Premium2 = ClassNum_Premium3
+          if (adminClassNum > ClassNum_Premium2){
+            btnAddClass.className = "btn btn-default btn-round";
+            btnAddClass.style.pointerEvents = "auto";
+            btnAddClass.setAttribute("data-toggle", "modal");
+            btnAddClass.setAttribute("data-target", "#limitReachModal");
+          }else {
+            btnAddClass.className = "btn btn-primary btn-round";
+            btnAddClass.style.pointerEvents = "auto";
+            btnAddClass.setAttribute("onclick", "window.location = './add-class.html';");
+          }
+        }
+        else {
+          // Deactivated or other status
+          btnAddClass.className = "btn btn-default btn-round";
+          btnAddClass.style.pointerEvents = "auto";
+          btnAddClass.setAttribute("data-toggle", "modal");
+          btnAddClass.setAttribute("data-target", "#limitReachModal");
+        }
+
+
       });
 
     };
@@ -1675,21 +1751,21 @@
 
 
 
-			// Add New Course
-			$("#btnAddClass").click(function(){
-        window.location = "./add-class.html"
+			// // Add New Course
+			// $("#btnAddClass").click(function(){
+      //   window.location = "./add-class.html"
 
-        // if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-        //   func.showNotification('top','center', 'danger', 'error_outline', "Activate your account to add new courses." );
-        // }else if  (allCourseSize >= current_aTotalSubjectLimit){
-        //   func.showNotification('top','center', 'danger', 'error_outline', "You have reach maximum ("+current_aTotalSubjectLimit+") subjects. Upgrade to Pro now!" );
-        // }else if (current_preferedAreaList == null || current_preferedAreaList.length == 0){
-        //   func.showNotification('top','center', 'danger', 'error_outline', "Please fill in Update Information > Preferred Area");
-        // }
-        // else{
-        //   window.location = "./add-class.html"
-        // }
-			});
+      //   // if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+      //   //   func.showNotification('top','center', 'danger', 'error_outline', "Activate your account to add new courses." );
+      //   // }else if  (allCourseSize >= current_aTotalSubjectLimit){
+      //   //   func.showNotification('top','center', 'danger', 'error_outline', "You have reach maximum ("+current_aTotalSubjectLimit+") subjects. Upgrade to Pro now!" );
+      //   // }else if (current_preferedAreaList == null || current_preferedAreaList.length == 0){
+      //   //   func.showNotification('top','center', 'danger', 'error_outline', "Please fill in Update Information > Preferred Area");
+      //   // }
+      //   // else{
+      //   //   window.location = "./add-class.html"
+      //   // }
+			// });
     
 		});
 

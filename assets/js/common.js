@@ -727,6 +727,7 @@ const SESSION_STORAGE_CLASS_CURRENT_DOC_KEY = "currentDoc";
 const SESSION_STORAGE_CLASS_CURRENT_DOC_ID_KEY = "currentDocId";
 const SESSION_STORAGE_CLASS_LOAD_KEY = "load"; // True => load/show, vice versa
 const SESSION_STORAGE_CLASS_NON_ADMIN_KEY = "nonAdmin";
+const SESSION_STORAGE_CLASS_NUM_KEY = "classNum";
 // const SESSION_STORAGE_CLASS_KEY = "sessionStorageClass";
 // TUTOR: Student Module 
 const SESSION_STORAGE_STUDENT_ALL_DOCS_KEY = "allStudentsDocs";
