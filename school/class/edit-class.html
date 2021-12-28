@@ -3424,7 +3424,7 @@
           .where("status", "==", true)
           .orderBy('stuName', 'asc')
           .startAfter(latestStuDoc)
-          .limit(10);
+          .limit(25);
 
       docRef
       .get()
@@ -3449,7 +3449,7 @@
           stuLoadmore.removeEventListener('click', stuLoadMoreHandleClick );
         }
 
-        if (querySnapshot.docs.length == 10){
+        if (querySnapshot.docs.length == 25){
           stuLoadmore.style.visibility='visible';
         }else{
           stuLoadmore.style.visibility='hidden';
@@ -3771,7 +3771,7 @@
           .where(STU_STATUS_ADMIN, "==", true)
           .orderBy(STU_CHILD_NAME, 'asc')
           .startAfter(latestAdminStuDoc)
-          .limit(10);
+          .limit(25);
 
       docRef
       .get()
@@ -3812,7 +3812,7 @@
           stuAdminLoadmore.removeEventListener('click', stuAdminLoadMoreHandleClick );
         }
 
-        if (querySnapshot.docs.length == 10){
+        if (querySnapshot.docs.length == 25){
           stuAdminLoadmore.style.visibility='visible';
         }else{
           stuAdminLoadmore.style.visibility='hidden';
@@ -3933,7 +3933,7 @@
           .where(TUTOR_STATUS_ADMIN, "==", TUTOR_STATUS_TYPE_ACTIVE)
           .orderBy(TUTOR_TUTOR_NAME, 'asc')
           .startAfter(latestAdminTutorDoc)
-          .limit(10);
+          .limit(25);
 
       docRef
       .get()
@@ -3951,7 +3951,7 @@
           tutorAdminLoadmore.removeEventListener('click', tutorAdminLoadMoreHandleClick );
         }
 
-        if (querySnapshot.docs.length == 10){
+        if (querySnapshot.docs.length == 25){
           tutorAdminLoadmore.style.visibility='visible';
         }else{
           tutorAdminLoadmore.style.visibility='hidden';

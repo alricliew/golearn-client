@@ -854,7 +854,7 @@
           .where(TRANS_STATUS, "==", true)
           .orderBy(TRANS_DATE, 'desc')
           .startAfter(latestInvoiceDoc || today)
-          .limit(20);
+          .limit(25);
 
       docRef
       .get()
@@ -901,7 +901,7 @@
         if (querySnapshot.empty){
           loadmore.removeEventListener('click', loadmoreHandleClick );
         }
-        if (querySnapshot.docs.length == 20){
+        if (querySnapshot.docs.length == 25){
           loadmore.style.visibility='visible';
         }else{
           loadmore.style.visibility='hidden';

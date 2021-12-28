@@ -1285,7 +1285,7 @@
       initPage();
 
       var adminClassNum = sessionStorage.getItem(SESSION_STORAGE_CLASS_NUM_KEY);
-      
+
       console.log(adminClassNum)
       console.log(current_accountStatus)
 
@@ -1554,7 +1554,7 @@
           .where(TUTOR_STATUS_ADMIN, "==", TUTOR_STATUS_TYPE_ACTIVE)
           .orderBy(TUTOR_TUTOR_NAME, 'asc')
           .startAfter(latestAdminTutorDoc)
-          .limit(10);
+          .limit(25);
 
       docRef
       .get()
@@ -1572,7 +1572,7 @@
           tutorAdminLoadmore.removeEventListener('click', tutorAdminLoadMoreHandleClick );
         }
 
-        if (querySnapshot.docs.length == 10){
+        if (querySnapshot.docs.length == 25){
           tutorAdminLoadmore.style.visibility='visible';
         }else{
           tutorAdminLoadmore.style.visibility='hidden';

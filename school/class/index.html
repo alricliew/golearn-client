@@ -938,7 +938,7 @@
           .orderBy(CLASS_STATUS, 'asc')
           .orderBy(CLASS_NAME, 'asc')
           .startAfter(latestClassDoc)
-          .limit(10);
+          .limit(25);
       
       let adminClassNum = 0;
 
@@ -1005,7 +1005,7 @@
         if (querySnapshot.empty){
           classLoadmore.removeEventListener('click', classLoadMoreHandleClick );
         }
-        if (querySnapshot.docs.length == 10){
+        if (querySnapshot.docs.length == 25){
           classLoadmore.style.visibility='visible';
         }else{
           classLoadmore.style.visibility='hidden';

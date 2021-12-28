@@ -1903,7 +1903,7 @@
           .where(PAYROLL_STATUS, '==', true)
           .orderBy(PAYROLL_DATE_START, 'desc')
           .startAfter(latestPayrollDoc || today)
-          .limit(20);
+          .limit(25);
 
       docRef
       .get()
@@ -1937,7 +1937,7 @@
         if (querySnapshot.empty){
           payrollLoadmore.removeEventListener('click', payrollLoadmoreHandleClick );
         }
-        if (querySnapshot.docs.length == 20){
+        if (querySnapshot.docs.length == 25){
           payrollLoadmore.style.visibility='visible';
         }else{
           payrollLoadmore.style.visibility='hidden';
@@ -2126,7 +2126,7 @@
           .where(TUTOR_STATUS_ADMIN, "==", TUTOR_STATUS_TYPE_ACTIVE)
           .orderBy(TUTOR_TUTOR_NAME, 'asc')
           .startAfter(latestAdminTutorDoc)
-          .limit(10);
+          .limit(25);
 
       docRef
       .get()
@@ -2151,7 +2151,7 @@
           tutorAdminLoadmore.removeEventListener('click', tutorAdminLoadMoreHandleClick );
         }
 
-        if (querySnapshot.docs.length == 10){
+        if (querySnapshot.docs.length == 25){
           tutorAdminLoadmore.style.visibility='visible';
         }else{
           tutorAdminLoadmore.style.visibility='hidden';

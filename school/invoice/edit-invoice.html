@@ -527,7 +527,7 @@
                 <div class="row">
                   <div class="col-md-12" id="loadAdminStudentTop">
 
-                    <div class="container" id="add-student-modal-container">
+                    <div class="container" id="add-student-modal-container" style="padding-bottom: 1rem; padding-top: 0.5rem;">
                       <!-- Student header -->
                       <div class="row lesson-header">
                         <div class="col-md-3">
@@ -1372,7 +1372,8 @@
         // do nothing
         func.showNotification('top','center', 'danger', 'error_outline', "Error: No Transaction ID detected." );
 
-      }else{
+      }
+      else{
         // Set the fields
         let currentTransactionObj
         currentTransactionObj = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TRANSACTION_CURRENT_DOC_KEY));
@@ -1433,24 +1434,20 @@
 		// 	}
 		// });
 
-    // // Load Tutor Settings
-    // function loadUserSettings(tutorId){
-      
-    //   // Tutor Id must be a phone with +60, no spacing or other chars
-    //   var docRef = db.collection("Settings").doc(tutorId);
-      
-    //   docRef.get().then((doc) => {
-    //     // updatePageContent(doc);
-    //     $('#loadingModal').modal('hide');
-    //   })
-    // }
 
     // Initialization
     AuthCheck();
 
     // Page Specific Initialization
     function loadPageInitFunc(){
-  
+
+      loadUserSettings(tutorId);
+
+      // Enable Add Student Modal
+      document.getElementById("invAllStudentLink").setAttribute('data-target', '#addStudentModal');
+      
+      // Enable Save Inv Modal
+      document.getElementById("btnSave").removeAttribute('disabled');
     }
 
     // Init Page View
@@ -1637,7 +1634,16 @@
 
     }
 
-
+    // Load Tutor Settings
+    function loadUserSettings(tutorId){
+      // Tutor Id must be a phone with +60, no spacing or other chars
+      var docRef = db.collection("Settings").doc(tutorId);
+      
+      docRef.get().then((doc) => {
+        // updatePageContent(doc);
+        $('#loadingModal').modal('hide');
+      })
+    }
     //---------- Init All Admin's Student details ----------//
     // Lesson Load More Button - Init
     const stuAdminLoadmore = document.querySelector('#btnAddAdminStudentModalLoadMore');
@@ -1662,7 +1668,7 @@
           .where(STU_STATUS_ADMIN, "==", true)
           .orderBy(STU_GUR_PHONE, 'asc')
           .startAfter(latestAdminStuDoc)
-          .limit(10);
+          .limit(25);
 
       docRef
       .get()
@@ -1686,7 +1692,7 @@
           stuAdminLoadmore.removeEventListener('click', stuAdminLoadMoreHandleClick );
         }
 
-        if (querySnapshot.docs.length == 10){
+        if (querySnapshot.docs.length == 25){
           stuAdminLoadmore.style.visibility='visible';
         }else{
           stuAdminLoadmore.style.visibility='hidden';
