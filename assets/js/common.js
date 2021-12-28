@@ -746,6 +746,10 @@ const SESSION_STORAGE_TRANSACTION_CURRENT_DOC_KEY = "currentTransactionDoc";
 const SESSION_STORAGE_INVOICE_ALL_DOCS_KEY = "allInvoiceDocs";
 const SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY = "currentInvoiceDoc";
 
+// TUTOR:Payroll Module
+const SESSION_STORAGE_PAYROLL_ALL_DOCS_KEY = "allPayrollDocs";
+const SESSION_STORAGE_PAYROLL_CURRENT_DOC_KEY = "currentPayrollDoc";
+
 // TUTOR:Payslip Module
 const SESSION_STORAGE_PAYSLIP_ALL_DOCS_KEY = "allPayslipDocs";
 const SESSION_STORAGE_PAYSLIP_CURRENT_DOC_KEY = "currentPayslipDoc";

@@ -1864,7 +1864,7 @@
       payroll_a.setAttribute('href', 'javascript:;');
       payroll_a.setAttribute('style', 'margin-right:1rem');
       payroll_a.setAttribute('onclick', 'loadPayrollSingle("'+doc.data()[PAYROLL_ID]+'");');
-      payroll_a.textContent = doc.data()[PAYROLL_NAME]+" ("+doc.data()[PAYROLL_DOC_ID_ARR].length+")";;
+      payroll_a.textContent = doc.data()[PAYROLL_NAME]+" ("+doc.data()[PAYROLL_DOC_ID_ARR].length+")";
 
       const payrollList = document.getElementById("payrollList");
       payrollList.insertBefore( payroll_a, payrollList.children[0]);

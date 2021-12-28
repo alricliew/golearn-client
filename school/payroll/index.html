@@ -593,19 +593,6 @@
         <div class="container-fluid">
           <!-- your content here -->
 
-          <!-- Main content -->
-          <div class="row d-flex">
-            <!-- button -->
-            <div class="p-2">
-              <!-- <a href="settings.html" class="btn btn-outline-primary btn-round" id="btnBack"><i class="fas fa-cog" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;"></i> Financial Settings</a> -->
-            </div>
-
-            <div class="ml-auto p-2">
-              <!-- <a href="./employee.html" class="btn btn-primary btn-round" style="background-color: #2e74b6;">Employee <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a> -->
-            </div>
-
-          </div>
-
           <div class="container-fluid" >
 
             <div class="row">
@@ -629,25 +616,25 @@
 
                   </div>
 
-                  <div class="col-md-2 align-self-center">
-
-                    <a href="./run-payroll.html" class="btn btn-primary btn-round" style="background-color: #2e74b6;">Run Payroll <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
-  
+                  <div class="col-md-2">
+                    <div class="row justify-content-center text-center">
+                      <a href="./run-payroll.html" class="btn btn-primary btn-round" style="background-color: #2e74b6;">Run Payroll <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
+                    </div>
+                    <div class="row justify-content-center text-center">                      
+                      <a href="./history.html" style="font-size: small;">View History</a>
+                    </div>
                   </div>
 
-                  <!-- <div class="col-md-2"> -->
-                    <!-- <div class="form-group"> -->
-                      <!-- <input class="form-control" type="text" name="daterange" id='daterange' value="Select date range"/> -->
-                    <!-- </div> -->
-                  <!-- </div> -->
+                  <div class="col-md-12"  style="margin-top: 0.5rem;">
 
-                  <div class="col-md-12" id="payrollList" style="margin-top: 0.5rem;">
+                    <div class="row" id="payrollList" style="margin-left: 0.1rem; margin-right: 0.1rem;">
 
+                    </div>
+ 
                     <a href="javascript:;" name="daterange" id='daterange' style="padding:0.2rem 0.5rem 0.2rem 0.2rem; border: solid thin #2e74b6; width: 500px; font-size: 14px; ">
                       <i class="fa fa-calendar"></i>&nbsp;
                       <span>Select date range</span> <i class="fa fa-caret-down"></i> 
                     </a>
-
 
                     <!-- <div id="daterange" name="daterange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: fit-content;">
                       <i class="fa fa-calendar"></i>&nbsp;
@@ -1129,7 +1116,7 @@
       payroll_a.setAttribute('href', 'javascript:;');
       payroll_a.setAttribute('style', 'margin-right:1rem; font-size:14px');
       payroll_a.setAttribute('onclick', 'loadPayslipFixed('+doc.data()[PAYROLL_DATE_START].seconds +', '+ doc.data()[PAYROLL_DATE_END].seconds+');');
-      payroll_a.textContent = doc.data()[PAYROLL_NAME];
+      payroll_a.textContent = doc.data()[PAYROLL_NAME]+" ("+doc.data()[PAYROLL_DOC_ID_ARR].length+")";;
 
       const payrollList = document.getElementById("payrollList");
       payrollList.insertBefore( payroll_a, payrollList.children[0])

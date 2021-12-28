@@ -219,7 +219,7 @@
 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnDelTeacherModalUpdate" disabled>I understand the consequences. Delete this person.</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnDelTeacherModalUpdate" style="white-space: normal; word-wrap: break-word;" disabled>I understand the consequences. Delete this person.</button>
               </div>
             </div>
           </div>
@@ -866,7 +866,7 @@
       .then(()=> {
         $('#saveModal').modal('hide');
         window.location = './'
-        func.showNotification('top','center', 'success', 'error_outline', "Updated successfully!");
+        func.showNotification('top','center', 'success', 'check_circle', "Updated successfully!");
       });
     }
 
