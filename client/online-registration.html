@@ -877,6 +877,15 @@
           action = JOIN_AS_STUDENT;
 
           document.getElementById("classFullName").textContent = "Invalid class. Continue to enroll as student.";
+
+          // If admin is suspended. Invalidate page
+
+          if (admin_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+            console.log("Owner is suspended.");
+            invalidatePage(
+              "Class is Not Available", 
+              admin_name+"'s account is no longer active.");
+          }
             
         } else {
           //  Error: Invalid Tutor/ organization
