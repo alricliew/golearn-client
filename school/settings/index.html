@@ -5379,6 +5379,7 @@
         // If the preferredSubjectList_temp is null in db, remake this var into a empty array
         preferredSubjectList_temp = []
         // Subject list is null. It must be a new account. Do nothing and enable all checker input.
+        disableUncheckedInputSubject(false);
       }
       else{
         // console.log("preferredSubjectList_temp init:"+preferredSubjectList_temp);
@@ -5585,7 +5586,8 @@
       if ( preferredAreaList_temp == null || preferredAreaList_temp.length == 0){ 
         // If the preferredAreaList_temp is null in db, remake this var into a empty array
         preferredAreaList_temp = []
-        // Subject list is null. It must be a new account. Do nothing and enable all checker input.
+        // Area list is null. It must be a new account. Do nothing and enable all checker input.
+        disableUncheckedInputArea(false);
       }
       else{
         // console.log("preferredAreaList_temp init:"+preferredAreaList_temp);

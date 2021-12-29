@@ -2313,6 +2313,12 @@
         // Generate simple empty payslip
         renderTableTemplate(tutorId);
 
+        let grossPay = calculateGrossPayDuringInit(tutorId);
+        // document.getElementById("netpayview_"+cardId).value = netPayTextAdv;
+        console.log('grossPay '+grossPay);
+        calculateNetPayDuringInit(tutorId, grossPay);
+
+
     }
     
 
@@ -3253,13 +3259,13 @@
       item1.textContent = data.item; // + ' '+firstClassDate_temp;
       let item2 = document.createElement('td');
       item2.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
-      item2.textContent = data.quantity;
+      item2.textContent = (data.quantity == null || data.quantity == "") ? "" : data.quantity;
       let item3 = document.createElement('td');
       item3.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
-      item3.textContent = data.price;
+      item3.textContent = (data.price == null || data.price == "") ? "" : data.price;
       let item4 = document.createElement('td');
       item4.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
-      item4.textContent = data.payout;
+      item4.textContent = (data.payout == null || data.payout == "") ? "" : data.payout;
       let item5 = document.createElement('td');
       item5.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
       item5.textContent = '';
@@ -5731,9 +5737,9 @@
           
           // Calculate the subtotal amount
           let item = row.getElementsByTagName("td")[0].textContent; // Unused: Input
-          let quantity = parseFloat(row.getElementsByTagName("td")[1].textContent);
-          let amount = parseFloat(row.getElementsByTagName("td")[2].textContent);
-          let payout = parseFloat(row.getElementsByTagName("td")[3].textContent);
+          let quantity = isNaN(parseFloat(row.getElementsByTagName("td")[1].textContent)) ? "" : parseFloat(row.getElementsByTagName("td")[1].textContent);
+          let amount = isNaN(parseFloat(row.getElementsByTagName("td")[2].textContent)) ? "" : parseFloat(row.getElementsByTagName("td")[2].textContent);
+          let payout = isNaN(parseFloat(row.getElementsByTagName("td")[3].textContent)) ? "" : parseFloat(row.getElementsByTagName("td")[3].textContent);
 
           payItemsArr.push(item+';; '+ quantity+';; '+  amount+';; '+  payout)
         });

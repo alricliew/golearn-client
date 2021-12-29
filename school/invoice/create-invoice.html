@@ -655,7 +655,7 @@
                   <div class="card-header" id="headingOne" style="padding: 0; margin: 0; ">
                     <h2 class="mb-0">
                       <a class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="text-transform: none; font-size: medium;">
-                        Add business details and logo
+                        Add business details
                       </a>
                     </h2>
                   </div>
@@ -3762,6 +3762,7 @@
       issueDate = issueDate.split("/");
       let newIssueDate = new Date( issueDate[2], issueDate[1] - 1, issueDate[0]);
       let issueDateFinal = firebase.firestore.Timestamp.fromDate(newIssueDate);
+
       // Payment Due
       let dueDate = document.getElementById("invPaymentDue").value;
       dueDate = dueDate.split("/");
@@ -3778,7 +3779,7 @@
       let total = calculateTotal2(subTotal);
       console.log("tutorImgUrl");
       console.log(document.getElementById("tutorImgUrl").src);
-
+      console.log(firebase.firestore.Timestamp.fromDate(new Date()))
       let invData = {
         [INV_ID]: invDocId,
         [INV_TRANS_ID]: transDocId,
@@ -3806,7 +3807,7 @@
         [INV_PAYMENT_AMOUNT]: '',
         [INV_PAYMENT_NOTE]: '',
 
-        [INV_DATE_ADD]: new Date(),
+        [INV_DATE_ADD]: firebase.firestore.Timestamp.fromDate(new Date()), // This is a hack to allow the "Create:" in invoice > view to show correct value
         [INV_DATE_EDIT]: '',
         [INV_DATE_DEL]: '',
         [INV_STATUS]: true,
@@ -3840,7 +3841,6 @@
       // Store in session storage to be used in view-invoice.html
       sessionStorage.setItem(SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY, JSON.stringify(invData));
       sessionStorage.setItem(SESSION_STORAGE_TRANSACTION_CURRENT_DOC_KEY, JSON.stringify(transData));
-
 
       // Set the value of 'Invoice'
       batch.set(invDocRef, invData, { merge: true });
@@ -4869,6 +4869,8 @@
       });
 
 		});
+
+
 
   </script>
   

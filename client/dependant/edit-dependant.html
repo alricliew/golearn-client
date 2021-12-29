@@ -772,15 +772,6 @@
         $('#saveModal').modal('hide');
       });
 
-      $('#btnSignOutModalUpdate').on('click', function (e) {
-        firebase.auth().signOut().then(() => {
-            // Sign-out successful.
-          }).catch((error) => {
-            func.showNotification('top','center', 'danger', 'error_outline', "Logging out failed." );
-          });
-      });
-
-
     });
 
   </script>

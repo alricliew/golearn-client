@@ -1399,33 +1399,17 @@
     var inputStudent = document.querySelector("#phoneStudent");
     var inputGuardian = document.querySelector("#phoneGurdian");
     var itiStudent = intlTelInput(inputStudent,{
-      // allowDropdown: false,
       autoHideDialCode: false,
-      // autoPlaceholder: "off",
-      // dropdownContainer: document.body,
-      // excludeCountries: ["my"],
-      // formatOnDisplay: true,
-      // geoIpLookup: function(callback) {
-      //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-      //     var countryCode = (resp && resp.country) ? resp.country : "";
-      //     callback(countryCode);
-      //   });
-      // },
-      // hiddenInput: "full_number",
-      // initialCountry: "auto",
-      // localizedCountries: { 'de': 'Deutschland' },
-      nationalMode: false,
-      onlyCountries: ['my'],
-      // placeholderNumberType: "MOBILE",
-      // preferredCountries: ['cn', 'jp'],
-      // separateDialCode: true,
+      preferredCountries: ['my', 'sg'],
+      separateDialCode: true,
       utilsScript: "../js/utils.js",
       });
    
     var itiGuardian = intlTelInput(inputGuardian,{
     autoHideDialCode: false,
-    nationalMode: false,
-    onlyCountries: ['my'],
+    // nationalMode: false,
+    preferredCountries: ['my', 'sg'],
+    separateDialCode: true,
     utilsScript: "../js/utils.js",
     });
    
