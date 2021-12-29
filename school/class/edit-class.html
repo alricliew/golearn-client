@@ -486,6 +486,7 @@
                 </button>
               </div>
               <div class="modal-body" id="editStudentModalBody">
+                <div id="editClassStudentDocId" value=""></div>
                 <div id="editStudentId" value=""></div>
                 <div id="editGuardianId" value=""></div>
                 <div id="editStudentEnrollmentStatus" value=""></div>
@@ -3872,21 +3873,21 @@
     }
 
     // Edit the Feedback or approve a new student to Class_Student module in editStudentModal.
-    function updateStudent(studentId, guardianId, studentName, studentFeedback, studenEnrollmentStatus){
+    function updateStudent(classStudentDocId, studentId, guardianId, studentName, studentFeedback, studenEnrollmentStatus){
 
       var docRef = db.collection("Class")
           .doc("v1")
           .collection("Class_Student")
-          .doc(studentId);
+          .doc(classStudentDocId);
       let data = {};
 
       // If the enrollment status is still pending, approve the student
-      if (STUDENT_ENROLLMENT_STATUS === CLASS_STUDENT_ENROLLMENT_STATUS_PENDING){
+      if (studenEnrollmentStatus === CLASS_STUDENT_ENROLLMENT_STATUS_PENDING){
         data = {
           [CLASS_STUDENT_ENROLLMENT_STATUS]: CLASS_STUDENT_ENROLLMENT_STATUS_ACTIVE,
           [CLASS_STUDENT_FEEDBACK]: studentFeedback,
         } 
-      }else if (STUDENT_ENROLLMENT_STATUS === CLASS_STUDENT_ENROLLMENT_STATUS_ACTIVE){
+      }else if (studenEnrollmentStatus === CLASS_STUDENT_ENROLLMENT_STATUS_ACTIVE){
         data = {
           [CLASS_STUDENT_FEEDBACK]: studentFeedback,
         } 
@@ -3898,7 +3899,7 @@
 
       // console.log('Class_Student UPDATE Data:')
       // console.log(data)
-      // console.log(studentId)
+      // console.log(classStudentDocId, studentId, guardianId, studentName, studentFeedback, studenEnrollmentStatus)
 
       docRef.set(data , { merge: true })
       .then(() => {
@@ -4816,7 +4817,7 @@
     var RATE = ""; 
     // Class_Student Submodule
     var STUDENT_CLASS_ID = '';
-    var STUDENT_ID = '';
+    var CLASS_STUDENT_DOC_ID = '';
     var STUDENT_NAME = '';
     var GUARDIAN_ID = '';
 
@@ -5305,7 +5306,7 @@
      $('#delStudentModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         STUDENT_CLASS_ID = button.data('id') // Extract info from data-* attributes
-        STUDENT_ID = button.data('stuid') // Extract info from data-* attributes
+        CLASS_STUDENT_DOC_ID = button.data('stuid') // Extract info from data-* attributes
         STUDENT_NAME = button.data('stuname') // Extract info from data-* attributes
         GUARDIAN_ID = button.data('gurid') // Extract info from data-* attributes
 
@@ -5315,7 +5316,7 @@
         modal.find('.modal-title').text('Deleting '+ STUDENT_NAME)
         document.getElementById("deleteStudentClassId").setAttribute('value', STUDENT_CLASS_ID);
         document.getElementById("deleteStudentName").setAttribute('value', STUDENT_NAME);
-        document.getElementById("deleteStudentId").setAttribute('value', STUDENT_ID);
+        document.getElementById("deleteStudentId").setAttribute('value', CLASS_STUDENT_DOC_ID);
         document.getElementById("deleteGuardianId").setAttribute('value', GUARDIAN_ID);
 
       });
@@ -5333,7 +5334,7 @@
 
      // Remove Student Modal: Clear key and fields in modal when modal dismiss
      $('#delStudentModal').on('hide.bs.modal', function (event) {
-        STUDENT_ID = "";
+        CLASS_STUDENT_DOC_ID = "";
         STUDENT_NAME = "";
       });
 
@@ -5342,11 +5343,11 @@
      // Edit Students
      $('#editStudentModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
-        STUDENT_ID = button.data('id') // Extract info from data-* attributes
-        STUDENT_NAME = button.data('stuname') // Extract info from data-* attributes
-        STUDENT_ENROLLMENT_STATUS = button.data('enrollmentstatus')
+        CLASS_STUDENT_DOC_ID = button.data('id') // CLASS_STUDENT_ID
+        STUDENT_NAME = button.data('stuname') // CLASS_STUDENT_STU_NAME
+        STUDENT_ENROLLMENT_STATUS = button.data('enrollmentstatus') // CLASS_STUDENT_ENROLLMENT_STATUS
 
-        console.log(STUDENT_ID);
+        console.log(CLASS_STUDENT_DOC_ID);
         console.log(STUDENT_NAME);
         console.log(STUDENT_ENROLLMENT_STATUS);
         console.log(allClassStuDoc);
@@ -5357,25 +5358,26 @@
 
         allClassStuDoc.forEach((doc) => {
           // console.log(doc);
-          if (STUDENT_ID === doc.id){
+          if (CLASS_STUDENT_DOC_ID === doc.id){
             selectedClassStuDoc = doc;
           }
         });
 
-        document.getElementById("editStudentId").setAttribute('value', STUDENT_ID);
-        document.getElementById("editGuardianId").setAttribute('value', selectedClassStuDoc.gurId);
+        document.getElementById("editClassStudentDocId").setAttribute('value', CLASS_STUDENT_DOC_ID);
+        document.getElementById("editStudentId").setAttribute('value', selectedClassStuDoc[CLASS_STUDENT_STU_ID]);
+        document.getElementById("editGuardianId").setAttribute('value', selectedClassStuDoc[CLASS_STUDENT_GUR_ID]);
         document.getElementById("editStudentEnrollmentStatus").setAttribute('value', STUDENT_ENROLLMENT_STATUS);
 
-        document.getElementById("stuName").value = selectedClassStuDoc.stuName;
-        document.getElementById("stuPhone").value = selectedClassStuDoc.stuPhone;
-        document.getElementById("stuEmail").value = selectedClassStuDoc.stuEmail; 
-        document.getElementById("stuGenderMale").checked = selectedClassStuDoc.stuGender === 0 ? true : false;
-        document.getElementById("stuGenderFemale").checked = selectedClassStuDoc.stuGender === 1 ? true : false;
-        document.getElementById("gurName").value = selectedClassStuDoc.gurName;
-        document.getElementById("gurPhone").value = selectedClassStuDoc.gurPhone;
-        document.getElementById("gurEmail").value = selectedClassStuDoc.gurEmail;
-        document.getElementById("gurAddr").value = selectedClassStuDoc.gurAddr;
-        document.getElementById("stuFeedback").value = selectedClassStuDoc.feedback;
+        document.getElementById("stuName").value = selectedClassStuDoc[CLASS_STUDENT_STU_NAME];
+        document.getElementById("stuPhone").value = selectedClassStuDoc[CLASS_STUDENT_STU_PHONE];
+        document.getElementById("stuEmail").value = selectedClassStuDoc[CLASS_STUDENT_STU_EMAIL];
+        document.getElementById("stuGenderMale").checked = selectedClassStuDoc[CLASS_STUDENT_STU_GENDER] === 0 ? true : false;
+        document.getElementById("stuGenderFemale").checked = selectedClassStuDoc[CLASS_STUDENT_STU_GENDER] === 1 ? true : false;
+        document.getElementById("gurName").value = selectedClassStuDoc[CLASS_STUDENT_GUR_NAME];
+        document.getElementById("gurPhone").value = selectedClassStuDoc[CLASS_STUDENT_GUR_PHONE];
+        document.getElementById("gurEmail").value = selectedClassStuDoc[CLASS_STUDENT_GUR_EMAIL];
+        document.getElementById("gurAddr").value = selectedClassStuDoc[CLASS_STUDENT_GUR_ADDR];
+        document.getElementById("stuFeedback").value = selectedClassStuDoc[CLASS_STUDENT_FEEDBACK];
 
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -5400,23 +5402,25 @@
 
       // Update Student's Feedback from class
       $('#btnEditStudentModalUpdate').on('click', function (event) {
+        let classStudentDocId =  document.getElementById("editClassStudentDocId").getAttribute('value');
         let studentId =  document.getElementById("editStudentId").getAttribute('value');
         let guardianId =  document.getElementById("editGuardianId").getAttribute('value');
         let studentName = document.getElementById("stuName").value;
         let studentFeedback =  document.getElementById("stuFeedback").value;
-        let studenEnrollmentStatus=  document.getElementById("editStudentEnrollmentStatus").value;
+        let studenEnrollmentStatus=  document.getElementById("editStudentEnrollmentStatus").getAttribute('value');
 
         // console.log()
-        updateStudent(studentId, guardianId, studentName, studentFeedback, studenEnrollmentStatus);
+        updateStudent(classStudentDocId, studentId, guardianId, studentName, studentFeedback, studenEnrollmentStatus);
 
       });
 
       // Remove Student Modal: Clear key and fields in modal when modal dismiss
       $('#editStudentModal').on('hide.bs.modal', function (event) {
-        STUDENT_ID = "";
+        CLASS_STUDENT_DOC_ID = "";
         STUDENT_NAME = "";
         STUDENT_ENROLLMENT_STATUS = "";
 
+        document.getElementById("editClassStudentDocId").setAttribute('value', "");
         document.getElementById("editStudentId").setAttribute('value', "");
         document.getElementById("editGuardianId").setAttribute('value', "");
         document.getElementById("editStudentEnrollmentStatus").setAttribute('value', "");
