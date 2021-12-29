@@ -879,7 +879,6 @@
           document.getElementById("classFullName").textContent = "Invalid class. Continue to enroll as student.";
 
           // If admin is suspended. Invalidate page
-
           if (admin_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
             console.log("Owner is suspended.");
             invalidatePage(
@@ -919,6 +918,14 @@
           admin_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
           admin_address = admin_address1 + admin_address2 + admin_addressPostCode + admin_addressState;
 
+          // If admin is suspended. Invalidate page
+          if (admin_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+            console.log("Owner is suspended.");
+            invalidatePage(
+              "Class is Not Available", 
+              admin_name+"'s account is no longer active.");
+          }
+          
           // Step 2: Check if the class exists
           docRefClass.get().then((doc) => {
             if (doc.exists) {
