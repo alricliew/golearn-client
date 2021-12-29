@@ -611,9 +611,11 @@
       if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY)) == null || 
         JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY)).id == null || 
         JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY)).id == '' ){
-        // TODO: Flag warning
-        
+        func.showNotification('top','center', 'danger', 'error_outline', "Error: No student selected." );
+        window.location.href='./';    
+            
         return;
+
       }else{
         // Set the fields
         currentTeacherObj = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY));

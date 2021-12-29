@@ -1057,15 +1057,27 @@
     // Page Specific Initialization
     function loadPageInitFunc(){
 
+      // Check eligibility based on account status. If not premium2 or premium3, redirect back to home
+      accountStatusCheck();
+
       // Load recent payroll
       loadPayroll();
 
       // Load all payslip
       loadAllPayslip();
-
         
     }
 
+    // Check eligibility based on account status.
+    function accountStatusCheck(){
+      if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY ||
+      current_accountStatus == ACTIVE_ACCOUNT_STATUS_KEY ||
+      current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY ||
+      current_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY){
+        func.showNotification('top','center', 'danger', 'error_outline', "Function not supported." );
+        window.location.href = "https://app.golearn.com.my/school/"
+      }
+    }
 
     // Load recent payrolls
     function loadPayroll(){
@@ -1140,11 +1152,8 @@
         row.remove();
       })
       
+      // Reset the latestInvoiceDoc
       latestInvoiceDoc = null;
-
-      
-      // let start1 = new Date('2021-11-04').setSeconds(start-1000);
-      // let end2 = new Date('2021-11-13').setSeconds(end+1000);
 
       let docRef = db.collection("Financial")
           .doc("v1")

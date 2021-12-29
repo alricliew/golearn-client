@@ -860,7 +860,7 @@
         if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || 
           current_accountStatus == ACTIVE_ACCOUNT_STATUS_KEY|| 
           current_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY){
-          if (adminTeacherNum > TeacherNum_Active){
+          if (adminTeacherNum >= TeacherNum_Active){
             btnAddTeacher.className = "btn btn-default btn-round";
             btnAddTeacher.style.pointerEvents = "auto";
             btnAddTeacher.setAttribute("data-toggle", "modal");
@@ -873,7 +873,7 @@
           }
         }
         else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY){
-          if (adminTeacherNum > TeacherNum_Premium2){
+          if (adminTeacherNum >= TeacherNum_Premium2){
             btnAddTeacher.className = "btn btn-default btn-round";
             btnAddTeacher.style.pointerEvents = "auto";
             btnAddTeacher.setAttribute("data-toggle", "modal");
@@ -886,7 +886,7 @@
           }
         }
         else if (current_accountStatus == PREMIUM_ACCOUNT_3_STATUS_KEY){
-          if (adminTeacherNum > TeacherNum_Premium3){
+          if (adminTeacherNum >= TeacherNum_Premium3){
             btnAddTeacher.className = "btn btn-default btn-round";
             btnAddTeacher.style.pointerEvents = "auto";
             btnAddTeacher.setAttribute("data-toggle", "modal");

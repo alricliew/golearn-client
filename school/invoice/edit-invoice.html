@@ -1351,9 +1351,9 @@
       if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY)) == null || 
         JSON.parse(sessionStorage.getItem(SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY)).id == null || 
         JSON.parse(sessionStorage.getItem(SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY)).id == '' ){
-        // Return to class.html if invalid class obj
+        // Return to invoice/ if invalid inv obj
         func.showNotification('top','center', 'danger', 'error_outline', "Error: No invoice selected." );
-        // window.location.href='./';
+        window.location.href='./';
 
       }else{
         // Set the fields
