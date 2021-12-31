@@ -651,6 +651,12 @@
       if (!notRated){
         console.log("No rating");
         func.showNotification('top','center', 'warning', 'error_outline', "Please enter a rating." );
+
+        // Disable the submit button
+        document.getElementById("btnSubmit").removeAttribute('disabled');
+        // Change the "Submit" text
+        document.getElementById("btnSubmit").textContent = 'Submit';
+        
       } 
       else {
         var batch = db.batch(); 
