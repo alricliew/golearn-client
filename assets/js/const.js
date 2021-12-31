@@ -138,7 +138,6 @@ const citySarawakId = ["swKch", "swBin", "swSbu", "swSAman", "swBau", "swLndu",
     "swBtg", "swSrtok", "swTtau"]; //27
 
 // This function select city based on State
-// TODO: Change the 
 function  selectCityBasedOnState (selectedCity){
     // List<AreaOfState> areaOfStateList = new ArrayList<>();
     switch (selectedCity){
@@ -293,6 +292,7 @@ function selectCityListBasedOnStateId(selectedStateId) {
 
 // This function select City based on City Id (same as City) and State Id
 // Note: This is for tutor portal specific
+// DEPRECIATED
 
 function getCityNameBasedOnCityIdAndStateId(stateId, cityId ){
     switch (stateId){
@@ -326,6 +326,47 @@ function getCityNameBasedOnCityIdAndStateId(stateId, cityId ){
             return cityPerlis[cityPerlis.indexOf(cityId)];
         case "putrajaya":
             return cityPutraJaya[cityPutraJaya.indexOf(cityId)];
+        default:
+            return null;
+    }
+}
+
+// This function select City Name based on City Id and State Id.
+// This is used in https://golearn.com.my/tutor/?aaaaaa
+function getCityNameBasedOnCityIdAndStateId2(stateId, cityId ){
+    switch (stateId){
+        case "kl":
+            return cityKL[cityKLId.indexOf(cityId)];
+        case "sg":
+            return citySelangor[citySelangorId.indexOf(cityId)];
+        case "pn":
+            return cityPenang[cityPenangId.indexOf(cityId)];
+        case "jh":
+            return cityJohor[cityJohorId.indexOf(cityId)];
+        case "mk":
+            return cityMelaka[cityMelakaId.indexOf(cityId)];
+        case "ns":
+            return cityNegeriSembilan[cityNegeriSembilanId.indexOf(cityId)];
+        case "ph":
+            return cityPahang[cityPahangId.indexOf(cityId)];
+        case "pk":
+            return cityPerak[cityPerakId.indexOf(cityId)];
+        case "tr":
+            return cityTerengganu[cityTerengganuId.indexOf(cityId)];
+        case "kt":
+            return cityKelantan[cityKelantanId.indexOf(cityId)];
+        case "kd":
+            return cityKedah[cityKedahId.indexOf(cityId)];
+        case "sb":
+            return citySabah[citySabahId.indexOf(cityId)];
+        case "sw":
+            return citySarawak[citySarawakId.indexOf(cityId)];
+        case "pl":
+            return cityPerlis[cityPerlisId.indexOf(cityId)];
+        case "pj":
+            return cityPutraJaya[cityPutraJayaId.indexOf(cityId)];
+        case "lb":
+            return cityLabuan[cityLabuanId.indexOf(cityId)];
         default:
             return null;
     }
@@ -1284,7 +1325,7 @@ const TeacherNum_Premium1 = 0;
 const TeacherNum_Premium2 = 10;
 const TeacherNum_Premium3 = 500;
 
-// A VERY Simple Encrypt and Decrypt
+// 1. A VERY Simple Encrypt and Decrypt
 const cipher = salt => {
 const textToChars = text => text.split('').map(c => c.charCodeAt(0));
 const byteHex = n => ("0" + Number(n).toString(16)).substr(-2);
@@ -1306,6 +1347,17 @@ const decipher = salt => {
     .map(charCode => String.fromCharCode(charCode))
     .join('');
 }
+
+// 2.Encode/decode a string in/from base-64 format
+const encode64 = baseString => {
+    return encoded = window.btoa(baseString);
+}
+const decode64 = baseString => {
+    return encoded = window.atob(baseString);
+}
+
+
+
 
 
 

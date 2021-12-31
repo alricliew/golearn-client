@@ -716,6 +716,16 @@ const NUM_TYPE = "type";
 const NUM_VALUE = "value";
 const NUM_DATE_EDIT = "dateEdit";
 
+//  Review (Review > v1 > Review)
+const REVIEW_ID = "id";
+const REVIEW_RECEIVER_ID = "recId"; // PK
+const REVIEW_REVIEWER_ID = "revId";
+const REVIEW_REVIEWER_NAME = "revName";
+const REVIEW_REVIEWER_IMG = "revImgUrl"
+const REVIEW_RATE = "value";
+const REVIEW_COMMENT = "comment";
+const REVIEW_DATE_ADDED = "dateAdded";
+
 // -------------- Session Storage Key Start -------------- //
 // CLIENT: Profile Obj
 const PROFILE_CLIENT_INFO = "clientInfoObj";

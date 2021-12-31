@@ -335,28 +335,25 @@ function loadUserInfo(tutorId){
 
 // Update General View
 function updateGeneralView(){
-  // Set the nav user name and public profile link
+  // Set the nav user name.
   document.getElementById("user").textContent = current_name;
     
+  // Set the public profile link.
+  // By default, general link were given.
   if (current_aweburl == null || current_aweburl == ""){
-    document.getElementById("navPublicProfile").href = "#"  ;
-    document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
-  } else{
+    let url = encode64(tutorId);
+    document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/?tid="+ url;
+    // document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
+    document.getElementById("navPublicProfile").target = "_blank";
+  } 
+  // aWebUrl assigned to the account. Swicth to that new links
+  else{
     document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+current_aweburl;
     document.getElementById("navPublicProfile").target = "_blank";
   }
   
+  // Set badge and sidebar based on account status.
   if (current_accountStatus == ACTIVE_ACCOUNT_STATUS_KEY){
-    // let activationNavItem = document.querySelector('#activationNavItem');
-    // // activationNavItem.parentNode.removeChild(activationNavItem);
-    // let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
-    // // console.log(activationNavItemIsExist)
-    // // Remove NavItem if exist
-    // if (activationNavItemIsExist){
-    //   activationNavItem.parentNode.removeChild(activationNavItem);
-    // }else{
-    //   // Do nothing
-    // }
     document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
     document.getElementById("btnActivateAccount").textContent = "UPGRADE";
     document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
@@ -366,13 +363,21 @@ function updateGeneralView(){
   }
   else if (current_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY){
     document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
-    document.getElementById("btnActivateAccount").textContent = "PREMIUM";
+    document.getElementById("btnActivateAccount").textContent = "BASIC";
     document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
     document.getElementById("btnActivateAccount").target = "_blank";
     // Payroll
     document.getElementById("navPayroll").setAttribute("style", "display: none;");
   }
   else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY){
+    document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
+    document.getElementById("btnActivateAccount").textContent = "ENTERPRISE";
+    document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
+    document.getElementById("btnActivateAccount").target = "_blank";
+    // Payroll
+    document.getElementById("navPayroll").setAttribute("style", "display: inline;");
+  }
+  else if (current_accountStatus == PREMIUM_ACCOUNT_3_STATUS_KEY){
     document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
     document.getElementById("btnActivateAccount").textContent = "ORGANIZATION";
     document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
@@ -388,12 +393,14 @@ function updateGeneralView(){
     // Payroll
     document.getElementById("navPayroll").setAttribute("style", "display: none;" );
   }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-    document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
+    document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white; background: red" );
     document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
     document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
     document.getElementById("btnActivateAccount").target = "_blank";
     // Payroll
     document.getElementById("navPayroll").setAttribute("style", "display: none;");
+    // Public profile link is disabled for suspended user
+    document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
 
   }else {
     let activationNavItem = document.querySelector('#activationNavItem');
@@ -407,7 +414,7 @@ function updateGeneralView(){
       // Do nothing
     }
     // Payroll
-    document.getElementById("navPayroll").setAttribute("style", "display: inline;");
+    document.getElementById("navPayroll").setAttribute("style", "display: none;");
 
   }
 }
