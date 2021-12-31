@@ -1917,7 +1917,8 @@
       document.getElementById("inUrlClass").value = currentClassObj[CLASS_CLASS_URL];
 
       if (isValidHttpUrl(currentClassObj[CLASS_CLASS_URL])){
-        document.getElementById("inUrlClassIcon").src = "http://www.google.com/s2/favicons?domain="+currentClassObj[CLASS_CLASS_URL];
+        let uri = checkDomainNameException(currentClassObj[CLASS_CLASS_URL])
+        document.getElementById("inUrlClassIcon").src = "http://www.google.com/s2/favicons?domain="+uri;
         document.getElementById("inUrlClassIconWrapper").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_CLASS_URL]+"')");
       }else{
         document.getElementById("inUrlClassIcon").src = "../../assets/img/broken-link.png";
@@ -1926,7 +1927,8 @@
 
       document.getElementById("inUrlGroup").value = currentClassObj[CLASS_CHAT_GROUP_URL];
       if (isValidHttpUrl(currentClassObj[CLASS_CHAT_GROUP_URL])){
-        document.getElementById("inUrlGroupIcon").src = "http://www.google.com/s2/favicons?domain="+currentClassObj[CLASS_CHAT_GROUP_URL];
+        let uri = checkDomainNameException(currentClassObj[CLASS_CHAT_GROUP_URL])
+        document.getElementById("inUrlGroupIcon").src = "http://www.google.com/s2/favicons?domain="+uri;
         document.getElementById("inUrlGroupIconWrapper").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_CHAT_GROUP_URL]+"')");
       }else{
         document.getElementById("inUrlGroupIcon").src = "../../assets/img/broken-link.png";
@@ -1935,7 +1937,8 @@
 
       document.getElementById("inUrlMaterial").value = currentClassObj[CLASS_MATERIAL_URL];
       if (isValidHttpUrl(currentClassObj[CLASS_MATERIAL_URL])){
-        document.getElementById("inUrlMaterialIcon").src = "http://www.google.com/s2/favicons?domain="+currentClassObj[CLASS_MATERIAL_URL];
+        let uri = checkDomainNameException(currentClassObj[CLASS_MATERIAL_URL])
+        document.getElementById("inUrlMaterialIcon").src = "http://www.google.com/s2/favicons?domain="+uri;
         document.getElementById("inUrlMaterialIconWrapper").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_MATERIAL_URL]+"')");
       }else{
         document.getElementById("inUrlMaterialIcon").src = "../../assets/img/broken-link.png";
@@ -5250,7 +5253,8 @@
       $('#inUrlClass').on('change', function(){  
 
         if (isValidHttpUrl(this.value)){
-          document.getElementById("inUrlClassIcon").src = "http://www.google.com/s2/favicons?domain="+this.value;
+          let uri = checkDomainNameException(this.value)
+          document.getElementById("inUrlClassIcon").src = "http://www.google.com/s2/favicons?domain="+uri;
           document.getElementById("inUrlClassIconWrapper").setAttribute("onclick", "RedirectTo('"+this.value+"')");
         }else{
           document.getElementById("inUrlClassIcon").src = "../../assets/img/broken-link.png";
@@ -5261,7 +5265,8 @@
       $('#inUrlGroup').on('change', function(){  
 
         if (isValidHttpUrl(this.value)){
-          document.getElementById("inUrlGroupIcon").src = "http://www.google.com/s2/favicons?domain="+this.value;
+          let uri = checkDomainNameException(this.value)
+          document.getElementById("inUrlGroupIcon").src = "http://www.google.com/s2/favicons?domain="+uri;
           document.getElementById("inUrlGroupIconWrapper").setAttribute("onclick", "RedirectTo('"+this.value+"')");
         }else{
           document.getElementById("inUrlGroupIcon").src = "../../assets/img/broken-link.png";
@@ -5272,7 +5277,9 @@
       $('#inUrlMaterial').on('change', function(){  
 
         if (isValidHttpUrl(this.value)){
-          document.getElementById("inUrlMaterialIcon").src = "http://www.google.com/s2/favicons?domain="+this.value;
+          let uri = checkDomainNameException(this.value)
+          document.getElementById("inUrlMaterialIcon").src = "http://www.google.com/s2/favicons?domain="+uri;
+          // document.getElementById("inUrlMaterialIcon").src = "http://www.google.com/s2/favicons?domain="+this.value;
           document.getElementById("inUrlMaterialIconWrapper").setAttribute("onclick", "RedirectTo('"+this.value+"')");
         }else{
           document.getElementById("inUrlMaterialIcon").src = "../../assets/img/broken-link.png";

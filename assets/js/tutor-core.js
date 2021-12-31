@@ -458,3 +458,21 @@ func = {
     });
   },
 }
+
+
+
+// This function checks some exception cases for domain that dont show correct img when used with 
+// http://www.google.com/s2/favicons?domain=domain.com
+function checkDomainNameException(url){
+  // const str = 'hello world!';
+  let result1 = /web.whatsapp.com/.test(url);
+  let result2 = /chat.whatsapp.com/.test(url);
+  let result3 = /us04web.zoom.us/.test(url);
+  // console.log(url)
+  // console.log(result1, result2);
+
+  if (result1) return "https://whatsapp.com";
+  else if (result2) return "https://whatsapp.com";
+  else if (result3) return "https://zoom.us";
+  else return url;
+}

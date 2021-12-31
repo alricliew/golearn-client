@@ -1245,7 +1245,9 @@
         let UrlGroupFaviconUrl = ''
         if (isValidHttpUrl(doc.data()[item])){
           UrlGroupUrl = doc.data()[item];
-          UrlGroupFaviconUrl = "http://www.google.com/s2/favicons?domain="+doc.data()[item];
+          let uri = checkDomainNameException(UrlGroupUrl)
+          UrlGroupFaviconUrl = "http://www.google.com/s2/favicons?domain="+uri;
+          // UrlGroupFaviconUrl = "http://www.google.com/s2/favicons?domain="+doc.data()[item];
         }else{
           UrlGroupUrl = 'javascript:;';
           UrlGroupFaviconUrl = "../../assets/img/broken-link.png";
@@ -1459,7 +1461,8 @@
         let UrlGroupFaviconUrl = ''
         if (isValidHttpUrl(doc.data()[item])){
           UrlGroupUrl = doc.data()[item];
-          UrlGroupFaviconUrl = "http://www.google.com/s2/favicons?domain="+doc.data()[item];
+          let uri = checkDomainNameException(UrlGroupUrl)
+          UrlGroupFaviconUrl = "http://www.google.com/s2/favicons?domain="+uri;
         }else{
           UrlGroupUrl = 'javascript:;';
           UrlGroupFaviconUrl = "../../assets/img/broken-link.png";
@@ -1695,6 +1698,7 @@
       }
       return true;
     }
+
 
   </script>
 
