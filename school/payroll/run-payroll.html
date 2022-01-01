@@ -2243,9 +2243,9 @@
       sel_btn.setAttribute('type','button')
       // AddNewEmployee(tutorId, name, position, bankName, acNo, epf, socso)
 
-      sel_btn.setAttribute('onclick',"AddNewEmployee('"+ doc.data()[TUTOR_TUTOR_ID]+"', '"+
-        doc.data()[TUTOR_TUTOR_NAME]+"', 'Tutor', '"+doc.data()[TUTOR_BANK_NAME]+"', '"+
-        doc.data()[TUTOR_AC_NO]+"', '"+doc.data()[TUTOR_EPF]+"', '"+doc.data()[TUTOR_SOCSO]+"')");
+      sel_btn.setAttribute('onclick',"AddNewEmployee(`"+ doc.data()[TUTOR_TUTOR_ID]+"`, `"+
+        doc.data()[TUTOR_TUTOR_NAME]+"`, 'Tutor', `"+doc.data()[TUTOR_BANK_NAME]+"`, `"+
+        doc.data()[TUTOR_AC_NO]+"`, `"+doc.data()[TUTOR_EPF]+"`, `"+doc.data()[TUTOR_SOCSO]+"`)");
       if (disableSelect)
         sel_btn.setAttribute('disabled', true);
 

@@ -539,83 +539,6 @@
         </div>
       </div>
 
-      <!-- List Admins's Teacher modal -->
-      <div class="row">
-        <div class="modal fade" id="myTeacherModal" tabindex="-1" role="dialog" aria-labelledby="myTeacherModalLabel" aria-hidden="true">
-          <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="myTeacherModalLabel">My Teachers</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnMyTeacherModalClose1">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" id="myTeacherModalBody">
-                <div class="row">
-                  <div class="col-md-12" id="studentTop">
-                          
-                    <div class="container" id="add-tutor-modal-container">
-                      <!-- Tutor header -->
-                      <div class="row lesson-header text-center">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-3">
-                          <p>Tutor Name</p>
-                        </div>
-                        <div class="col-md-3">
-                          <p>Phone</p>
-                        </div>
-                        <div class="col-md-2">
-                          <p>Age</p>
-                        </div>
-                        <div class="col-md-2">
-                          <p>Action</p> 
-                        </div>
-                      </div>
-
-                      <!-- Tutor List Start -->
-
-                      <!-- <div class="row tutor-wrapper text-center">
-                        <div class="col-md-2">
-                          <div style="height: 50px; width: 50px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
-                            <img id="viewTutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/test.jpg"/>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <p class="tutor-item">Alric Liew</p>
-                        </div>
-                        <div class="col-md-3">
-                          <p class="tutor-item">Phone</p>
-                        </div>
-                        <div class="col-md-2">
-                          <p class="tutor-item">12</p>
-                        </div>
-
-                        <div class="col-md-2">
-                          <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" id="btnSelectTutor">Select</button>
-                        </div>
-                      </div> -->
-
-                    </div>
-
-  
-                    <div class="row align-content-center">
-                      <button type="button" class="btn btn-success" id="btnAddTeacherModalLoadMore" >Load More</button>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"  data-dismiss="modal" id="btnMyTeacherModalClose2">Close</button>
-                <!-- <a type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#addTeacherModal" id="btnAddTeacherModal">Add New Teacher</a> -->
-                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnMyTeacherModalUpdate">Add</button> -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Add Teacher Modal -->
       <div class="row">
         <div class="modal fade" id="addTeacherModal" tabindex="-1" role="dialog" aria-labelledby="addTeacherModalLabel" aria-hidden="true">
@@ -1140,9 +1063,6 @@
                               <input type="text" class="form-control" style="background-color: #f5f5f5;" disabled  id="inTutor1Phone">
                             </div>
                           </div>
-                          <!-- <div class="col-md-2 d-flex align-items-center">
-                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher1" data-toggle="" data-target="#myTeacherModal" data-num='1' href="javascript:;" style="pointer-events:none; background-color: #f5f5f5;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
-                          </div> -->
                         </div>
                         <!-- Teacher 2  -->
                         <div class="row" style="margin-top: 1.0rem;">
@@ -1164,9 +1084,6 @@
                               <input type="text" class="form-control" style="background-color: #f5f5f5;" disabled id="inTutor2Phone">
                             </div>
                           </div>
-                          <!-- <div class="col-md-2 d-flex align-items-center">
-                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher2" data-toggle="" data-target="#myTeacherModal" data-num='2' href="javascript:;" style="pointer-events:none; background-color: #f5f5f5;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
-                          </div> -->
                         </div>>
                       </div>
                     </div>
@@ -1452,7 +1369,6 @@
     var latestStuDoc = null;// Store last document - Used for Student Load More btn
     var latestAdminStuDoc = null;// Store last document - Used for Admin's Student Load More btn in Add Student Modal
     var latestAdminTutorDoc = null;// Store last document - Used for Admin's Tutor Load More btn in Add Teacher Modal
-    let tutorBtnNum; // used to differentiate btn Teacher 1 / 2
 
 		// var db = firebase.firestore();
 		// db.settings({ timestampsInSnapshots: true });
@@ -1743,15 +1659,6 @@
     }
     stuAdminLoadmore.addEventListener('click', stuAdminLoadMoreHandleClick );
 
-    //---------- Init All Admin's Teacher details ----------//
-    // Lesson Load More Button - Init
-    const tutorAdminLoadmore = document.querySelector('#btnAddTeacherModalLoadMore');
-    tutorAdminLoadmore.style.visibility='hidden';
-
-    const tutorAdminLoadMoreHandleClick = () =>{
-      loadAllAdminTeachers(tutorBtnNum)
-    }
-    tutorAdminLoadmore.addEventListener('click', tutorAdminLoadMoreHandleClick );
 
     // // User Specific
     // function loadUserInfo(userId){
@@ -3095,234 +3002,6 @@
 
     }
 
-
-    // Load All Teachers that owned by class admin. 
-    var allTutorModuleDoc = []; // Reset all Tutors doc
-    function loadAllAdminTeachers(tutorBtnNum){
-
-      allTutorModuleDoc = []; // Init All Tutors Doc array
-      // STUDENT Module
-      let docRef = db.collection("Class")
-          .doc("v1")
-          .collection("Tutor")
-          .where(TUTOR_ADMIN_ID, "==", tutorId)
-          .where(TUTOR_STATUS_ADMIN, "==", true)
-          .orderBy(TUTOR_TUTOR_NAME, 'asc')
-          .startAfter(latestAdminTutorDoc)
-          .limit(10);
-
-      docRef
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          console.log(doc.data().id);
-          allTutorModuleDoc.push(doc.data());
-          renderAllAdminTeachers(doc, tutorBtnNum);
-        });
-
-        latestAdminTutorDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
-        console.log(querySnapshot.docs.length)
-        // Handle Lesson Load more btn
-        if (querySnapshot.empty){
-          tutorAdminLoadmore.removeEventListener('click', tutorAdminLoadMoreHandleClick );
-        }
-
-        if (querySnapshot.docs.length == 10){
-          tutorAdminLoadmore.style.visibility='visible';
-        }else{
-          tutorAdminLoadmore.style.visibility='hidden';
-        }
-
- 
-      }).catch((error) => {
-          console.log("Error getting document:", error);
-      });
-
-
-    }
-
-    // Render all teachers view in Add Teachers Modal
-    function renderAllAdminTeachers(doc, tutorBtnNum){
-      //  <div class="row tutor-wrapper text-center">
-      //   <div class="col-md-2">
-      //     <div style="height: 50px; width: 50px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
-      //       <img style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/test.jpg"/>
-      //     </div>
-      //   </div>
-      //   <div class="col-md-3">
-      //     <p class='tutor-item'>Alric Liew</p>
-      //   </div>
-      //   <div class="col-md-3">
-      //     <p class='tutor-item'>Phone</p>
-      //   </div>
-      //   <div class="col-md-2">
-      //     <p class='tutor-item'>12</p>
-      //   </div>
-
-      //   <div class="col-md-2">
-      //     <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" id="btnSelectTutor">Select</button>
-      //   </div>
-      // </div>
-
-      let img = document.createElement('img');
-      img.setAttribute('style', 'height: 100%; width: 100%; object-fit: cover;');
-      img.src = doc.data()[TUTOR_TUTOR_IMG_URL];
-      let img_div = document.createElement('div');
-      img_div.setAttribute('style', 'height: 50px; width: 50px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;');
-      img_div.appendChild(img);
-      let imgTop_div = document.createElement('div');
-      imgTop_div.className = "col-md-2";
-      imgTop_div.appendChild(img_div);
-
-
-      let tutorName_p = document.createElement('p');
-      tutorName_p.className = "tutor-item";
-      tutorName_p.textContent = doc.data()[TUTOR_TUTOR_NAME];
-      let tutorName_div = document.createElement('div');
-      tutorName_div.className = "col-md-3";
-      tutorName_div.appendChild(tutorName_p);
-
-      let tutorPhone_p = document.createElement('p');
-      tutorPhone_p.className = "tutor-item";
-      tutorPhone_p.textContent = doc.data()[TUTOR_TUTOR_PHONE];
-      let tutorPhone_div = document.createElement('div');
-      tutorPhone_div.className = "col-md-3";
-      tutorPhone_div.appendChild(tutorPhone_p);
-
-      let tutorAge_p = document.createElement('p');
-      tutorAge_p.className = "tutor-item";
-      tutorAge_p.textContent = doc.data()[TUTOR_TUTOR_AGE];
-      let tutorAge_div = document.createElement('div');
-      tutorAge_div.className = "col-md-2";
-      tutorAge_div.appendChild(tutorAge_p);
-
-      let sel_btn = document.createElement('button');
-      sel_btn.className = "btn btn-primary btn-sm";
-      sel_btn.textContent = 'Select';
-      sel_btn.setAttribute('data-dismiss','modal');
-      sel_btn.setAttribute('type','button')
-      sel_btn.setAttribute('onclick',"AddNewTutorToDB("+ tutorBtnNum+", '"+ doc.data()[TUTOR_TUTOR_ID]+"', '"+doc.data()[TUTOR_TUTOR_NAME]+"', '"+doc.data()[TUTOR_TUTOR_PHONE]+"')");
-      let sel_div = document.createElement('div');
-      sel_div.className = "col-md-2";
-      sel_div.appendChild(sel_btn);
-
-      let tutorDetail_div = document.createElement('div');
-      tutorDetail_div.className = 'row tutor-wrapper text-center';
-      tutorDetail_div.appendChild(imgTop_div);
-      tutorDetail_div.appendChild(tutorName_div);
-      tutorDetail_div.appendChild(tutorPhone_div);
-      tutorDetail_div.appendChild(tutorAge_div);
-      tutorDetail_div.appendChild(sel_div);
-
-      const add_tutor_modal_container = document.getElementById("add-tutor-modal-container");
-      add_tutor_modal_container.appendChild(tutorDetail_div);
-
-      // add_tutor_modal_container.insertBefore(tutorDetail_div, add_tutor_modal_container.children[1])
-    }
-    
-    // Add Tutor to Class (Subset of Add to Class function)
-    function AddNewTutorToDB(tutorNum, tutorId, tutorName, tutorPhone){
-      // tutorNum refer to Teacher 1 / 2 since we share the similar modal
-      // console.log(tutorNum)
-      // console.log(tutorId)
-      // console.log(tutorName)
-      // console.log(tutorPhone)
-
-      
-      let docRef = db.collection("Class")
-          .doc("v1")
-          .collection("Class")
-          .doc(currentClassObj[CLASS_ID]);
-
-      // First, get the original value first
-      let idInput1 = $('#inTutor1Name')
-      let tutor1_id = idInput1.data("tutor1id");
-      let tutor1_name = document.getElementById("inTutor1Name").value
-      let tutor1_phone = document.getElementById("inTutor1Phone").value
-
-      let idInput2 = $('#inTutor2Name')
-      let tutor2_id = idInput2.data('tutor2id')
-      let tutor2_name = document.getElementById("inTutor2Name").value
-      let tutor2_phone = document.getElementById("inTutor2Phone").value
-      
-      // Update the Teacher panel
-      if (tutorNum == 1){
-        tutor1_id = tutorId;
-        tutor1_name = tutorName;
-        tutor1_phone = tutorPhone;
-        document.getElementById('inTutor1Name').setAttribute("data-tutor1id", tutorId);
-        document.getElementById("inTutor1Name").value = tutorName;
-        document.getElementById("inTutor1Phone").value = tutorPhone;
-      }else if (tutorNum == 2){
-        tutor2_id = tutorId;
-        tutor2_name = tutorName;
-        tutor2_phone = tutorPhone; 
-        document.getElementById('inTutor2Name').setAttribute("data-tutor2id", tutorId);
-        document.getElementById("inTutor2Name").value = tutorName;
-        document.getElementById("inTutor2Phone").value = tutorPhone;
-      }else{
-
-      }
-
-      let data = {
-        // [CLASS_ID]: docRef.id,
-        // [CLASS_NAME]: document.getElementById("inClassName").value,
-        // [CLASS_DESC]: document.getElementById("inClassDesc").value,
-        // [CATEGORY_KEY]: category,
-        // [CATEGORY_ID_KEY]: categoryId,
-        // [SUBJECT_KEY]: subject,
-        // [SUBJECT_ID_KEY]: subjectId,
-        // [ONLINE_KEY]: document.getElementById("onlineonly_check").checked,
-        // [CLASS_STUDENT_LIMIT]: document.getElementById("inStudentLimit").value,
-        // [CLASS_ANNOUNCEMENT]: document.getElementById("inClassAnnouncement").value,
-        // [CLASS_URL]: "UNUSED",
-        // [CLASS_TYPE]: (document.getElementById("classTypeRadioPrivate").checked)? CLASS_TYPE_PRIVATE : CLASS_TYPE_PUBLIC,
-        // [CLASS_STATUS]: (document.getElementById("classStatusRadioActive").checked)? CLASS_STATUS_ACTIVE : CLASS_STATUS_INACTIVE,
-        // [CLASS_VENUE]: document.getElementById("inVenue").value,
-        // [STATE_KEY]: gStateName,
-        // [STATE_ID_KEY]: gState,
-        // [AREA_KEY]: gAreaName,
-        // [AREA_ID_KEY]: gArea,
-
-        // Time slot
-        // [CLASS_TIMESLOT_DAY_OF_WEEK_ARR]: dayOfWeekArr,
-        // [CLASS_TIMESLOT_START_ARR]: startTimeArr,
-        // [CLASS_TIMESLOT_END_ARR]: endTimeArr,
-        // IDs
-        // [CLASS_ADMIN_ID]: tutorId,
-        [CLASS_TUTOR_ID_ARR]: [tutor1_id, tutor2_id],
-        [CLASS_TUTOR_NAME_ARR]: [tutor1_name, tutor2_name],
-        [CLASS_TUTOR_PHONE_ARR]: [tutor1_phone, tutor2_phone],
-        // [CLASS_STUDENT_ID_ARR]: [],
-        // [CLASS_VIEWER_ID_ARR]:[],
-        // Fee type
-        // [FEES_KEY]: parseFloat(document.getElementById("inFee").value),
-        // [FEES_PER_MONTH_KEY]: (document.getElementById("feeTypePerMonthRadio").checked)? parseFloat(document.getElementById("inFee").value) : parseFloat(document.getElementById("inFee").value * 2 * 4),
-        // [FEES_TYPE_KEY]: (document.getElementById("feeTypePerMonthRadio").checked)? FEES_TYPE_PER_MONTH_KEY : FEES_TYPE_PER_HOUR_KEY,
-        // Special Permission
-        // [CLASS_TUTOR1_ADD_EDIT_STUDENT_ENABLE]: (document.getElementById("t1AddEditStuEn").checked)? true : false,
-        // [CLASS_TUTOR1_REMOVE_STUDENT_ENABLE]: (document.getElementById("t1DelStuEn").checked)? true : false,
-        // [CLASS_TUTOR1_ADD_EDIT_LESSON_ENABLE]: (document.getElementById("t1AddEditLessonEn").checked)? true : false,
-        // [CLASS_TUTOR1_REMOVE_LESSON_ENABLE]: (document.getElementById("t1DelLessonEn").checked)? true : false,
-        // [CLASS_TUTOR2_ADD_EDIT_STUDENT_ENABLE]: (document.getElementById("t2AddEditStuEn").checked)? true : false,
-        // [CLASS_TUTOR2_REMOVE_STUDENT_ENABLE]: (document.getElementById("t2DelStuEn").checked)? true : false,
-        // [CLASS_TUTOR2_ADD_EDIT_LESSON_ENABLE]: (document.getElementById("t2AddEditLessonEn").checked)? true : false,
-        // [CLASS_TUTOR2_REMOVE_LESSON_ENABLE]: (document.getElementById("t2DelLessonEn").checked)? true : false,
-        // [CLASS_STUDENT_AUTO_JOIN_ENABLE]: (document.getElementById("stuAutoJoinEn").checked)? true : false,
-
-        // [DATE_CREATED_KEY]: new Date(),
-        // [DATE_CLOSED_KEY]: "",
-        // [STATUS_KEY]: true,
-      }
-      console.log('Tutors Data');
-      console.log(data);
-      docRef.set( data, { merge: true })
-      .then(() => {
-        func.showNotification('top','center', 'success', 'check_circle', "New tutor added.");
-      });
-
-    }
-
     // Remove Elements by Class Name
     function removeElemenentByClassName(elem){
       $( "."+elem).remove();
@@ -4250,21 +3929,6 @@
       $('#editStudentModal').on('hide.bs.modal', function (event) {
         STUDENT_ID = "";
         STUDENT_NAME = "";
-      });
-
-
-      // Load All Admin's Teachers
-      $('#myTeacherModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        tutorBtnNum = parseInt(button.data('num')); // Extract info from data-* attributes
-        latestAdminTutorDoc = null;
-        loadAllAdminTeachers(tutorBtnNum);
-      });
-      // Remove all Admin's Teachers when the List Teacher Modal close
-      $('#myTeacherModal').on('hidden.bs.modal', function (event) {
-        // NOTE: div:gt(5) - get the 6th div child in the parent node.
-        $('#add-tutor-modal-container div:gt(5)').remove();
-        tutorBtnNum = 0; 
       });
 
 

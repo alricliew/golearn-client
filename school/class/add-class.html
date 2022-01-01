@@ -1367,7 +1367,7 @@
       document.getElementById("viewTutorMySelfPhone").textContent = current_phone;
       document.getElementById("viewTutorMySelfAge").textContent = current_age;
       const btnSelectMyself = document.getElementById("btnSelectMyself");
-      btnSelectMyself.setAttribute('onclick', "AddNewTutorToField('"+ tutorId+"', '"+current_name+"', '"+current_phone+"', '"+current_imgUri+"')");
+      btnSelectMyself.setAttribute('onclick', "AddNewTutorToField('"+ tutorId+"', `"+current_name+"`, '"+current_phone+"', `"+current_imgUri+"`)");
       
 
     }
@@ -1646,7 +1646,7 @@
       sel_btn.textContent = 'Select';
       sel_btn.setAttribute('data-dismiss','modal');
       sel_btn.setAttribute('type','button')
-      sel_btn.setAttribute('onclick',"AddNewTutorToField('"+ doc.data()[TUTOR_TUTOR_ID]+"', '"+doc.data()[TUTOR_TUTOR_NAME]+"', '"+doc.data()[TUTOR_TUTOR_PHONE]+"', '"+doc.data()[TUTOR_TUTOR_IMG_URL]+"')");
+      sel_btn.setAttribute('onclick',"AddNewTutorToField('"+ doc.data()[TUTOR_TUTOR_ID]+"', `"+doc.data()[TUTOR_TUTOR_NAME]+"`, '"+doc.data()[TUTOR_TUTOR_PHONE]+"', '"+doc.data()[TUTOR_TUTOR_IMG_URL]+"')");
       let sel_div = document.createElement('div');
       sel_div.className = "col-md-2";
       sel_div.appendChild(sel_btn);
@@ -2046,7 +2046,7 @@
 
         // Specific to myself
         const btnSelectMyself = document.getElementById('btnSelectMyself');
-        btnSelectMyself.setAttribute('onclick', "AddNewTutorToField('"+ tutorId+"', '"+current_name+"', '"+current_phone+"', '"+current_imgUri+"')");
+        btnSelectMyself.setAttribute('onclick', "AddNewTutorToField('"+ tutorId+"', `"+current_name+"`, '"+current_phone+"', `"+current_imgUri+"`)");
 
 
       });
