@@ -276,6 +276,29 @@
         </div>
       </div>
 
+      <!-- Link Share modal -->
+      <div class="row">
+        <div class="modal fade" id="linkShareModal" tabindex="-1" role="dialog" aria-labelledby="linkShareModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+
+                <span style="font-weight: 400; margin-top: 1rem;">Ask for reviews to improve your profile and be better positioned in the search results!</span> 
+                <div class="row" style="padding: 1rem 1rem; background: #f6f6f6; border-radius: 12px; margin: 1rem 0rem 2rem 0rem;" >
+                  <div class="col-lg-10 col-md-9" style="padding: 0!important;">
+                    <textarea type="text" class="form-control" id="tutorReviewLink" style="background: transparent; word-break: break-all; resize: none;" rows="2"></textarea>
+                  </div>
+                  <div class="col-lg-2 col-md-3 text-center" style="padding: 0!important;">
+                    <a href="javascript:;" class="btn btn-primary btn-round btn-sm" id="btnCopyLink" style="margin: 0;" onclick="copyText('tutorReviewLink')">Copy Link</a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Loading Modal -->
       <div class="row">
         <div class="modal fade" tabindex="-1" role="dialog" id="loadingModal" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -346,8 +369,51 @@
       <div class="content">
         <div class="container-fluid">
           <!-- your content here -->
+          
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body">
+                  <h3>
+                    Share Your Profile
+                  </h3>
+                  <div class="row">
+                    <div class="col-md-6" style="margin-top: 0.5rem;">
+                      <span style="font-weight: 400; margin-top: 1rem;">Share with your friends, family and future students.</span> 
 
-          <!-- <button id="btnTest" class="btn btn-round btn-twitter"><i class="fa fa-twitter"></i> &middot; 45</button> -->
+                      <div style="padding: 1rem 1.5rem; background: #f6f6f6; border-radius: 12px; margin-bottom: 2rem; margin-top: 1rem;" >
+                        <div class="row justify-content-around">
+                          <a id="btnFbShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Facebook"><i class="fab fa-facebook-f fa-lg" style="color: #4267B2;"></i></a>
+                          <a id="btnTelegramShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Telegram"><i class="fab fa-telegram-plane fa-lg" style="color: #0088CC;"></i></a>
+                          <a id="btnWhatsappShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on WhatsApp"><i class="fab fa-whatsapp fa-lg" style="color: #128C7E;"></i></a>
+                          <a id="btnTwitterShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Twitter"><i class="fab fa-twitter fa-lg" style="color: #1DA1F2;"></i></a>
+                          <a id="btnLinkedInShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on LinkedIn"><i class="fab fa-linkedin fa-lg" style="color: #0e76a8;"></i></a>
+                        </div>
+                      </div>
+
+                      <span style="font-weight: 400; margin-top: 1rem;">Ask for reviews to improve your profile and be better positioned in the search results!</span> 
+                      <a href="javascript:;" class="btn btn-primary btn-round btn-sm" data-toggle="modal" data-target="#linkShareModal">Get Review Link</a>
+
+                    </div>
+                    <div class="col-md-6" style="margin-top: 0.5rem;">
+                      <span style="font-weight: 400;"> Share this link with your contacts.</span> 
+
+                      <div class="row" style="padding: 1rem 1.5rem; background: #f6f6f6; border-radius: 12px; margin-bottom: 2rem; margin-top: 1rem;" >
+                        <div class="col-lg-10 col-md-9" style="padding: 0!important;">
+                          <textarea type="text" class="form-control" id="tutorLink" style="background: transparent; word-break: break-all; resize: none;" rows="2" ></textarea>
+                        </div>
+                        <div class="col-lg-2 col-md-3 text-center" style="padding: 0!important;">
+                          <a href="javascript:;" class="btn btn-primary btn-round btn-sm" id="btnCopyLink" style="margin: 0;" onclick="copyText('tutorLink')">Copy Link</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
 
           <div class="row">
 
@@ -1200,6 +1266,22 @@
 
   // Update Page Specific View
     function updatePageView(){
+
+      // Update sharing button
+      let url = encode64(tutorId);
+      let url_string = "https://golearn.com.my/tutor?tid="+ url;
+      let textMessage = "Hi. "+ current_name +" is now teaching and giving private classes on GoLearn. Your recommendation would helpful to " +current_name+ " and future students."
+      let textMessageWithUrl = "Hi. "+ current_name +" is now teaching and giving private classes on GoLearn. Your recommendation would helpful to " +current_name+ " and future students. Link: " +url_string;
+
+      document.getElementById("btnFbShare").href = "https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url_string)+"&quote="+textMessage;
+      document.getElementById("btnTwitterShare").href = "http://www.twitter.com/share?url="+ encodeURIComponent(url_string)+"&text=" + textMessage;
+      document.getElementById("btnWhatsappShare").href = "https://wa.me/?text="+ textMessageWithUrl;
+      document.getElementById("btnTelegramShare").href = "https://telegram.me/share/url?url="+ url_string+"&text=" + textMessage;
+      document.getElementById("btnLinkedInShare").href = "https://www.linkedin.com/shareArticle?mini=true&url="+ encodeURIComponent(url_string)+"&summary=" +textMessage +"&source=golearn.com.my";
+
+      document.getElementById("tutorLink").value = "https://golearn.com.my/tutor/?tid="+ url;
+      document.getElementById("tutorReviewLink").value = "https://app.golearn.com.my/c/r/review.html?tid="+ url;
+
       // Create Tutor Public profile
       if (current_name != "New Tutor"){
         let detail =""
@@ -1466,6 +1548,25 @@
     //   $('#signOutModal').modal('show');
     //   $("#signOutModal").appendTo("body");
     // }
+
+    // Copy a text based on element ID
+    function copyText(targetElemId){
+      /* Get the text field */
+      let copyText = document.getElementById(targetElemId);
+      // console.log(copyText)
+      // console.log(copyText.select())
+      /* Select the text field */
+      copyText.focus();
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the text field */
+      navigator.clipboard.writeText(copyText.value);
+
+      func.showNotification('top','center', 'success', 'check_circle', "Link copied.");
+      /* Alert the copied text */
+      // alert("Copied the text: " + copyText.value);
+    }
 
   </script>
 
