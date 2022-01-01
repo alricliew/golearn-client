@@ -226,29 +226,6 @@
         </div>
       </div>
 
-      <!-- Approve New Student modal -->
-      <div class="row">
-        <div class="modal fade" id="approveStuModal" tabindex="-1" role="dialog" aria-labelledby="approveStuModalLabel" aria-hidden="true">
-          <div class="modal-dialog  modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="approveStuModalLabel"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnApproveStuModalClose1">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" id="approveStuModalBody">
-                Are you sure you want to continue?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnApproveStuModalClose2">Not Now</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnApproveStuModalUpdate">Confirm</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Save Student modal -->
       <div class="row">
         <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
@@ -272,6 +249,33 @@
         </div>
       </div>
 
+      <!-- Different Tutor Id Warning  modal -->
+      <div class="row">
+        <div class="modal fade" id="diffTutorIdWarningModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="saveLabel">Phone number Change Detected: 
+                  <span id="diffTutorIdWarningTitle"></span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnDiffTutorIdWarningModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Changing the teacher's phone number will not change the original phone number used by the teacher to access the classes assigned to him/her.</p>
+                <p>You need to <strong style="color: #2e74b6;">manually remove and add back the teacher to his/her previous class</strong> for he/she to continue teaching.</p>
+                <p>Are you sure you want to continue?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnDiffTutorIdWarningModalClose2">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnDiffTutorIdWarningModalUpdate">Continue</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+            
        <!-- Sign-out modal -->
        <div class="row">
         <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="signOutModalLabel" aria-hidden="true">
@@ -330,8 +334,8 @@
                   <div class="row">
                     <div class="col-12">
                       <form class="multitabs-form__form">
-                        <!-- Student form panel-->
-                        <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
+                        <!-- Teacher form panel-->
+                        <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn" id="teacherForm">
                           <h4 class="multitabs-form__title">Teacher Profile</h4>
                           <div class="multitabs-form__content">
                             <div class="row">
@@ -355,17 +359,20 @@
             
                               <div class="col-md-8">
                                 <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Name</span> 
-                                <input id="viewTutorName"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
+                                <input id="viewTutorName"  type="text" value='' class="form-control" data-compulsory="true" oninput="this.className = 'form-control'">
             
                                 <div class="row">
                                   <div class="col-md-6">
                                     <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Phone</span> 
-                                    <input id="viewTutorPhone"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-                
+                                    <div class="input-group">
+                                      <input id="viewTutorPhone" type="text" value='' class="form-control" data-compulsory="true">
+                                      <span id="valid-msg" class="hide" style="color: #42ba96;">✓ Valid</span>
+                                      <span id="error-msg" class="hide" style="color: #F32013;"></span>
+                                    </div>
                                   </div>
                                   <div class="col-md-6">
                                     <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Email</span> 
-                                    <input id="viewTutorEmail"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
+                                    <input id="viewTutorEmail"  type="text" value='' class="form-control">
                 
                                   </div>
                                 </div>
@@ -377,7 +384,7 @@
                                     <div class="form-group">
                                       <div class="form-check form-check-radio form-check-inline">
                                         <label class="form-check-label">
-                                          <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioMale" value="optionActive" data-compulsory="false" disabled>
+                                          <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioMale" value="optionActive" data-compulsory="false">
                                           Male
                                           <span class="circle">
                                             <span class="check"></span>
@@ -386,7 +393,7 @@
                                       </div>
                                       <div class="form-check form-check-radio form-check-inline">
                                         <label class="form-check-label">
-                                          <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioFemale" value="optionInactive" data-compulsory="false" disabled>
+                                          <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioFemale" value="optionInactive" data-compulsory="false">
                                           Female
                                           <span class="circle">
                                             <span class="check"></span>
@@ -397,15 +404,13 @@
                                   </div>
                                   <div class="col-md-6">
                                     <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Age</span> 
-                                    <input id="viewTutorAge"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-                
+                                    <input id="viewTutorAge"  type="number" value='' class="form-control">
                                   </div>
                                 </div>
                                 <div class="row">
                                   <div class="col-md-6">
                                     <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Date Joined</span> 
                                     <input id="viewTutorDateAdd"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-              
                                   </div>
                                 </div>
             
@@ -590,6 +595,15 @@
     const inEPFNo = document.getElementById("inEPFNo");
     const inSocsoNo = document.getElementById("inSocsoNo");
 
+    // Init Tutor Phone
+    var inputTutor = document.querySelector("#viewTutorPhone");
+    var itiTutor = intlTelInput(inputTutor,{
+      autoHideDialCode: false,
+      preferredCountries: ['my', 'sg'],
+      separateDialCode: true,
+      utilsScript: "../js/utils.js",
+      });
+
 		// var db = firebase.firestore();
 		// db.settings({ timestampsInSnapshots: true });
 
@@ -629,14 +643,14 @@
     function updatePageContent(currentObj){
       // Teacher Profile
       document.getElementById("viewTutorName").value = currentObj[TUTOR_TUTOR_NAME];
-      document.getElementById("viewTutorPhone").value = currentObj[TUTOR_TUTOR_PHONE];
+      // document.getElementById("viewTutorPhone").value = currentObj[TUTOR_TUTOR_PHONE];
+      document.getElementById("viewTutorPhone").value = currentObj[TUTOR_TUTOR_ID];
       document.getElementById("viewTutorEmail").value = currentObj[TUTOR_TUTOR_EMAIL];
       document.getElementById("viewTutorGenderRadioMale").checked = currentObj[TUTOR_TUTOR_GENDER] == 0 ? true: false;
       document.getElementById("viewTutorGenderRadioFemale").checked = currentObj[TUTOR_TUTOR_GENDER] == 1 ? true: false;
       document.getElementById("viewTutorAge").value = currentObj[TUTOR_TUTOR_AGE];
       document.getElementById("viewTutorDateAdd").value = new Date(currentObj[TUTOR_DATE_ADD].seconds * 1000).toLocaleDateString("en-GB");
       document.getElementById("viewTutorImgUrl").src = currentObj[TUTOR_TUTOR_IMG_URL];
-      console.log(currentObj[TUTOR_TUTOR_WEB_URL])
       if (currentObj[TUTOR_TUTOR_WEB_URL] == null || currentObj[TUTOR_TUTOR_WEB_URL] == ''){
         document.getElementById("btnViewTutorModalFullProfile").setAttribute('style', 'visibility: hidden');     
         document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','#'); 
@@ -647,6 +661,8 @@
         document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','https://golearn.com.my/tutor/'+currentObj[TUTOR_TUTOR_WEB_URL]); 
         document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','_blank'); 
       }
+
+      let url = encode64(tutorId);
 
 
       // Employment Details 
@@ -855,7 +871,16 @@
         .doc('v1')
         .collection('Tutor')
         .doc(docId);
+
+
       let data = {
+        [TUTOR_TUTOR_ID]: itiTutor.getNumber(),
+        [TUTOR_TUTOR_NAME]: document.getElementById("viewTutorName").value,
+        [TUTOR_TUTOR_PHONE]: itiTutor.getNumber(),
+        [TUTOR_TUTOR_EMAIL]: document.getElementById("viewTutorEmail").value,
+        [TUTOR_TUTOR_GENDER]: document.getElementById("viewTutorGenderRadioMale").checked ? 0 : 1,
+        [TUTOR_TUTOR_AGE]: document.getElementById("viewTutorAge").value,
+
         [TUTOR_DATE_EDIT]: new Date(),
         [TUTOR_BANK_NAME]: inBankName.value,
         [TUTOR_AC_NO]: inBankAcNo.value,
@@ -863,6 +888,9 @@
         [TUTOR_SOCSO]: inSocsoNo.value,
         [TUTOR_STATUS_ADMIN]: document.getElementById("employmentStatusRadioActive").checked? TUTOR_STATUS_TYPE_ACTIVE : TUTOR_STATUS_TYPE_PASSIVE,
       }
+
+      console.log("Update Data: ")
+      console.log(data)
       docRef
       .set(data, { merge: true })
       .then(()=> {
@@ -967,10 +995,56 @@
 
       // Save student info
       $('#btnSave').on('click', function (e) {
+        let oriId = currentTeacherObj[TUTOR_TUTOR_ID];
+        let newId = itiTutor.getNumber();
+        console.log(oriId, newId)
+
+        let phoneValid =  ValidatePhone("viewTutorPhone");
+        console.log(phoneValid)
+
+        let fieldValid = ValidateFields("teacherForm");
+        console.log(fieldValid)
+
+        if (phoneValid && fieldValid){
+
+          if (oriId == newId){
+            $('#saveModal').modal('show');
+          }else {
+            document.getElementById("diffTutorIdWarningTitle").textContent = oriId +" -> "+ newId;
+            $('#diffTutorIdWarningModal').modal('show');
+          }
+        }
+        else{
+          // Do nothing
+        }
+          
+      });
+
+      $('#btnDiffTutorIdWarningModalUpdate').on('click', function (e) {
+        document.getElementById("diffTutorIdWarningTitle").textContent = "";
+        $('#diffTutorIdWarningModal').modal('hide');
         $('#saveModal').modal('show');
       });
 
+      // tutor Id change modal
+      $('#btnDiffTutorIdWarningModalClose1').on('click', function (e) {
+        document.getElementById("diffTutorIdWarningTitle").textContent = "";
+        $('#diffTutorIdWarningModal').modal('hide');
+      });
+
+      $('#btnDiffTutorIdWarningModalClose2').on('click', function (e) {
+        document.getElementById("diffTutorIdWarningTitle").textContent = "";
+        $('#diffTutorIdWarningModal').modal('hide');
+      });
+
       $('#btnSaveModalUpdate').on('click', function (e) {
+
+        // Disable the submit button
+        document.getElementById("btnSaveModalUpdate").setAttribute('disabled', 'disabled');
+
+        // Change the "Submit" text
+        document.getElementById("btnSaveModalUpdate").textContent = 'Please wait...';
+
         UpdateTeacherToDB(currentTeacherObj[TUTOR_ID]);
       });
 
@@ -980,38 +1054,6 @@
 
       $('#btnSaveModalClose2').on('click', function (e) {
         $('#saveModal').modal('hide');
-      });
-
-      // Approve New Student Modal
-      $('#approveStuModal').on('show.bs.modal', function (event) {
-  
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('New Student: '+ currentTeacherObj[STU_CHILD_NAME] +'. Approve ?');
-
-      });
-
-      $('#btnApproveStuModalUpdate').on('click', function (e) {
-
-        var docRef = db.collection("Class")
-          .doc("v1")
-          .collection("Student")
-          .doc(currentTeacherObj[STU_ID]);
-
-        let data = {
-          [STU_ENROLLMENT_STATUS]: STU_ENROLLMENT_STATUS_ACTIVE,
-        }  
-        // console.log(studentId);
-        console.log(data);
-        var docRefWithMerge = docRef.set(data , { merge: true })
-        .then(() => {
-          window.location = "./student.html";
-        }).catch((error) => {
-          console.log("Error getting document:", error);
-        });
-
-      
       });
 
 
@@ -1267,8 +1309,42 @@
 
   </script>
 
+  <!-- Teacher's Phone related -->
   <script>
-  
+    var errorMsg = document.querySelector("#error-msg");
+    var validMsg = document.querySelector("#valid-msg");
+
+    // here, the index maps to the error code returned from getValidationError - see readme
+    var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+    var reset = function() {
+      inputTutor.classList.remove("error");
+      errorMsg.innerHTML = "";
+      errorMsg.classList.add("hide");
+      validMsg.classList.add("hide");
+    };
+
+    // on blur: validate
+    inputTutor.addEventListener('blur', function() {
+      reset();
+      if (inputTutor.value.trim()) {
+        if (itiTutor.isValidNumber()) {
+          validMsg.classList.remove("hide");
+
+          // Remove the invalid tag on the phone input
+          document.getElementById("viewTutorPhone").className = "form-control"
+        } else {
+          inputTutor.classList.add("error");
+          var errorCode = itiTutor.getValidationError();
+          errorMsg.innerHTML = errorMap[errorCode];
+          errorMsg.classList.remove("hide");
+        }
+      }
+    });
+
+    // on keyup / change flag: reset
+    inputTutor.addEventListener('change', reset);
+    inputTutor.addEventListener('keyup', reset);
     // Validate fields in based on parents. 
     function ValidateFields(parentId){
       // This function deals with validation of the form fields with data-compulsory = 'true'
@@ -1296,7 +1372,7 @@
       let inPhone = document.querySelector("#"+phoneId);
       // console.log(inPhone.value)
       if (inPhone.value.trim()) {
-        if (itiGuardian.isValidNumber()) {
+        if (itiTutor.isValidNumber()) {
           // Do nothing
         } else {
           inPhone.className += " invalid";
