@@ -876,7 +876,7 @@
 
           action = JOIN_AS_STUDENT;
 
-          document.getElementById("classFullName").textContent = "Invalid class. Continue to enroll as student.";
+          document.getElementById("classFullName").textContent = "Enroll as student: " + admin_name;
 
           // If admin is suspended. Invalidate page
           if (admin_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
@@ -947,7 +947,7 @@
               // invalidatePage();
               func.showNotification('top','center', 'warning', 'error_outline', "Warning: The class that you are trying to join is currently not available. However, you may still proceed with registration." );
               
-              document.getElementById("classFullName").textContent = "Invalid class. Continue to enroll as student.";
+              document.getElementById("classFullName").textContent = "Invalid class. Continue to enroll as student: "+admin_name;
             }
           })
           .catch((error) => {
