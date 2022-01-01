@@ -80,6 +80,14 @@ function loadClientInfoObj(userId){
         // Finally, load page specific view.
         // This function will be declared separately in each page
         loadPageInitFunc(); 
+
+        // Update last online 
+        let docLastOnlineRef = db.collection("Users").doc(userId);
+        docLastOnlineRef.set({
+          [SYSTEM_LAST_ONLINE_KEY] : new Date() //firebase.firestore.Timestamp.fromDate(new Date())
+          },{ merge: true }
+        );
+
       }
     }
 
@@ -127,33 +135,20 @@ function loadUserInfo(userId){
       // This function will be declared separately in each page
       loadPageInitFunc(); 
 
-      // Set the nav user name 
-      // document.getElementById("user").textContent = doc.data()[NAME_KEY];
+      // Update last online 
+      let docLastOnlineRef = db.collection("Users").doc(userId);
+      docLastOnlineRef.set({
+        [SYSTEM_LAST_ONLINE_KEY] : new Date() //firebase.firestore.Timestamp.fromDate(new Date())
+        },{ merge: true }
+      );
+
+
     } 
     else {
       window.location = "https://app.golearn.com.my/"
     }
   });
 
-  // Log last online
-  let docLastOnlineRef = db.collection("Users").doc(userId);
-  docLastOnlineRef.get().then((doc) => {
-    if (doc.exists) {
-      // Update last online 
-      let docRef = db.collection("Users").doc(userId);
-      docRef.set({
-        [SYSTEM_LAST_ONLINE_KEY] : new Date() //firebase.firestore.Timestamp.fromDate(new Date())
-        }, 
-        { merge: true });
-    } 
-    else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  }).catch((error) => {
-      console.log("Error getting document:", error);
-  });
-  
 };
 
 // Update General View

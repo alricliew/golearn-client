@@ -773,6 +773,9 @@
   <script src="../assets/js/tutor-core.js" type="text/javascript"></script>
 
   <script>
+
+
+
     // // Global Variables
     // var tutorId;
     // var current_name, current_email, current_phone, current_age, current_gender, current_imgUri, current_nric,
@@ -1100,6 +1103,7 @@
 
       // Load revenue chart
       loadAllOrgRevenue();
+
     }
 
     // Load the student number
@@ -1264,8 +1268,7 @@
       chart.update();
     }
 
-
-  // Update Page Specific View
+    // Update Page Specific View
     function updatePageView(){
 
       // Update sharing button
@@ -1358,7 +1361,6 @@
 
     }
 
-
     // Reload student number
     function reloadStudentNum(){
       $('#loadingModal').modal('show'); 
@@ -1429,7 +1431,6 @@
 
     }
 
-
     // Reload teacer number
     function reloadTutorNum(){
       $('#loadingModal').modal('show'); 
@@ -1462,8 +1463,6 @@
       });
 
     }
-
-
 
     // Report: Update Student Number
     function resetNum(value, type){
@@ -1574,13 +1573,7 @@
   <script>
 		$( document ).ready(function() {
 
-      // Update last online 
-      var docRef = db.collection("Tutor").doc(tutorId);
-      var docRefWithMerge = docRef.set({
-        [SYSTEM_LAST_ONLINE_KEY] : firebase.firestore.Timestamp.fromDate(new Date())
-        }, { merge: true });
-
-     
+   
       $('#btnIWantThisTutor').on('click', function (e) {
         $('#activationModal').modal('show');
         if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){

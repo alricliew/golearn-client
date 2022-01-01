@@ -651,22 +651,23 @@
       document.getElementById("viewTutorAge").value = currentObj[TUTOR_TUTOR_AGE];
       document.getElementById("viewTutorDateAdd").value = new Date(currentObj[TUTOR_DATE_ADD].seconds * 1000).toLocaleDateString("en-GB");
       document.getElementById("viewTutorImgUrl").src = currentObj[TUTOR_TUTOR_IMG_URL];
-      if (currentObj[TUTOR_TUTOR_WEB_URL] == null || currentObj[TUTOR_TUTOR_WEB_URL] == ''){
-        document.getElementById("btnViewTutorModalFullProfile").setAttribute('style', 'visibility: hidden');     
-        document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','#'); 
-        document.getElementById("btnViewTutorModalFullProfile").setAttribute('target',''); 
-      }
-      else{
-        document.getElementById("btnViewTutorModalFullProfile").setAttribute('style', 'visibility: visible');     
-        document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','https://golearn.com.my/tutor/'+currentObj[TUTOR_TUTOR_WEB_URL]); 
-        document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','_blank'); 
-      }
+      // if (currentObj[TUTOR_TUTOR_WEB_URL] == null || currentObj[TUTOR_TUTOR_WEB_URL] == ''){
+      //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('style', 'visibility: hidden');     
+      //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','#'); 
+      //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('target',''); 
+      // }
+      // else{
+      //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('style', 'visibility: visible');     
+      //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','https://golearn.com.my/tutor/'+currentObj[TUTOR_TUTOR_WEB_URL]); 
+      //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','_blank'); 
+      // }
 
-      let url = encode64(tutorId);
-
+      let url = encode64(currentObj[TUTOR_TUTOR_ID]);
+      document.getElementById("btnViewTutorModalFullProfile").setAttribute('style', 'visibility: visible');     
+      document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','https://golearn.com.my/tutor/?tid='+url); 
+      document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','_blank'); 
 
       // Employment Details 
-      console.log(currentObj[TUTOR_AC_NO])
       inBankName.value = (currentObj[TUTOR_BANK_NAME] == null || currentObj[TUTOR_BANK_NAME] == '')? '' : currentObj[TUTOR_BANK_NAME];
       inBankAcNo.value = (currentObj[TUTOR_AC_NO] == null || currentObj[TUTOR_AC_NO] == '') ?  '' : currentObj[TUTOR_AC_NO];
       inEPFNo.value = (currentObj[TUTOR_EPF] == null || currentObj[TUTOR_EPF] == '')? '' : currentObj[TUTOR_EPF];
