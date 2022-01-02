@@ -32,7 +32,7 @@ function loadTutorInfoObj(tutorId){
   else{
     // Set the nav user name
     tutorInfoObj = JSON.parse(sessionStorage.getItem(PROFILE_TUTOR_INFO));
-
+    current_id = (tutorInfoObj.id == null || tutorInfoObj.id == "") ? "NO_ID" : tutorInfoObj.id; // This was added to check if different user is logged in on the same browser.
     current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
     current_email = (tutorInfoObj.email == null || tutorInfoObj.email == "")? "" : tutorInfoObj.email; 
     current_phone = (tutorInfoObj.phone == null || tutorInfoObj.phone == "")? "New Tutor" : tutorInfoObj.phone; 
@@ -100,7 +100,7 @@ function loadTutorInfoObj(tutorId){
 
 
     // Check if user logged in with other number. If true, logout
-    if (current_phone != tutorId){
+    if (current_id != tutorId){
       // console.log("Stored TutorId in session storage is equal to latest tutorId. ")
       window.location.href = "https://app.golearn.com.my/school/login.html";
     }
@@ -225,6 +225,7 @@ function loadUserInfo(tutorId){
 
       // Store data to sessionStorage
       var tutorDataObj = {
+        [ID_KEY] : tutorId, // This was added to check if different user is logged in on the same browser.
         [NAME_KEY] : doc.data().name,
         [EMAIL_KEY] : doc.data().email,
         [PHONE_KEY] : doc.data().phone,
@@ -240,10 +241,6 @@ function loadUserInfo(tutorId){
         [RATING_TIMES_KEY] : doc.data().ratingTimes,
         [RATING_FINAL_KEY] : doc.data().ratingFinal,
         [PROFILE_STATUS_KEY] : doc.data().profileStatus,
-        // [CHECK_HOMETUTOR_KEY] : doc.data().name,
-        // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
-        // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
-        // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
         [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
         [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
         [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,

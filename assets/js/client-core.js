@@ -1,5 +1,4 @@
 // This is client core js
-
 // Check if user logged on
 function AuthCheck(){
   firebase.auth().onAuthStateChanged(function(user){
@@ -31,7 +30,7 @@ function loadClientInfoObj(userId){
   else{
     // Set the nav user name
     clientInfoObj = JSON.parse(sessionStorage.getItem(PROFILE_CLIENT_INFO));
-
+    current_id = (clientInfoObj.id == null || clientInfoObj.id == "") ? "NO_ID" : clientInfoObj.id; // This was added to check if different user is logged in on the same browser.
     current_name = (clientInfoObj.name == null || clientInfoObj.name == "")? "New Tutor" : clientInfoObj.name;
     current_email = (clientInfoObj.email == null || clientInfoObj.email == "")? "" : clientInfoObj.email; 
     current_phone = (clientInfoObj.phone == null || clientInfoObj.phone == "")? "New Tutor" : clientInfoObj.phone; 
@@ -47,7 +46,7 @@ function loadClientInfoObj(userId){
     current_uLastOnline = clientInfoObj.uLastOnline;
 
     // Check if user logged in with other number. If true, logout
-    if (current_phone != userId){
+    if (current_id != userId){
       // console.log("Stored userId in session storage is equal to latest tutorId. ")
       window.location.href = "https://app.golearn.com.my/client/login.html";
     }
@@ -101,7 +100,6 @@ function loadUserInfo(userId){
   
   docRef.get().then((doc) => {
     if (doc.exists) {
-      // console.log("Document data:", doc.data());
       current_name = (doc.data().name == null || doc.data().name == "")? "New User" : doc.data().name;
       current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email;
       current_phone = (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone; 
@@ -115,6 +113,7 @@ function loadUserInfo(userId){
 
       // Store data to sessionStorage
       var clientDataObj = {
+        [ID_KEY] : userId, // This was added to check if different user is logged in on the same browser.
         [NAME_KEY] : doc.data()[NAME_KEY],
         [EMAIL_KEY] : doc.data()[EMAIL_KEY],
         [PHONE_KEY] : doc.data()[PHONE_KEY],

@@ -1,6 +1,7 @@
   // Global Variables for Tutor
   var tutorId; // For tutor-portal
   var userId; // for client
+  var current_id; // This was added to check if different user is logged in on the same browser.
   var current_name, current_email, current_phone, current_age, current_gender, current_imgUri, current_nric,
     current_address1, current_address2, current_addressPostCode, current_addressState,
     current_rating, current_ratingTimes, current_ratingFinal, current_profileStatus,
