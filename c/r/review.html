@@ -674,7 +674,8 @@
           [REVIEW_REVIEWER_IMG]: current_imgUri,
           [REVIEW_RATE]: rating,
           [REVIEW_COMMENT]: reviewText,
-          [REVIEW_DATE_ADDED]: new Date()
+          [REVIEW_DATE_ADDED]: new Date(),
+          [REVIEW_STATUS]: REVIEW_STATUS_PENDING,
         }
 
         console.log("Review Data");
@@ -699,7 +700,8 @@
         console.log("Tutor Rating Data Update");
         console.log(tutorDocData);
 
-        batch.set(tutorDocRef, tutorDocData, { merge: true });
+        // !IMPORTANT, DO NOT UPDATE THE tutorDoc directly.
+        // batch.set(tutorDocRef, tutorDocData, { merge: true });
 
         // Commit the batch
         batch.commit().then(() => {
