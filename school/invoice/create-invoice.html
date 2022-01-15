@@ -1310,7 +1310,6 @@
     // Init Page View
     function updatePageContent(doc){
 
-      console.log(doc)
       if (doc != null){
         
         // Business Profile
@@ -1443,8 +1442,8 @@
           
         });
         
-        console.log("allStuModuleDoc")
-        console.log(allStuModuleDoc)
+        // console.log("allStuModuleDoc")
+        // console.log(allStuModuleDoc)
 
         latestAdminStuDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
         // console.log(querySnapshot.docs.length)
@@ -1774,21 +1773,20 @@
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          console.log(doc.data())
-          // docsObj.push(doc.data());
-          // courseId = doc.id;
+          // console.log("Load Client's Class")
+          // console.log(doc.data())
 
           if (doc.data()[CLASS_FEES_TYPE_KEY] === FEES_TYPE_PER_MONTH_KEY){
             // Per month
             // renderAllInvoiceItems(doc);
+
             renderAllInvoiceItems2(doc, clientId);
-            
           }else{
             // Per Hour
-            LoadLessonInfo(doc, clientId);
-            
 
+            LoadLessonInfo(doc, clientId);
           }
+          
         });
         // Assign draggle feature to all items
         // assignDraggable();
@@ -1807,14 +1805,17 @@
       let month = today.getUTCMonth() + 1; //months from 1-12
       let day = today.getUTCDate();
       let year = today.getUTCFullYear();
-      // console.log(''+month+year);
-      
+      // Prepend a 0 to all month
+      let formattedMonth = ("0" + month).slice(-2);
+      // console.log(''+year+month);
+      // console.log(''+year+formattedmonth);
+
       // Get all lessons of this month
       let docRef = db.collection("Class")
           .doc("v1")
           .collection("Lesson")
           .where("classId", "==", classDoc.data()[CLASS_ID])
-          .where(LESSON_MONTH_TYPE, "==", parseInt(''+year+month)) 
+          .where(LESSON_MONTH_TYPE, "==", parseInt(''+year+formattedMonth)) 
           .where("status", "==", true)
           .orderBy('lesDate', 'asc');
    
@@ -2114,8 +2115,7 @@
 
       let item = document.getElementById('table-top').querySelectorAll("div[name='"+classId+"']");
       const itemBody =item[0].getElementsByTagName('tbody')[0];
-      console.log('item')
-      console.log(item)
+
       // console.log(itemBody)
       // const itemBody = document.getElementById('itemBody');
       itemBody.insertBefore(tr, itemBody.children[1])
@@ -2300,7 +2300,7 @@
         let additionalItem = row.children[1].getElementsByTagName("input")[0].value;
         let additionalItemValue = row.children[2].getElementsByTagName("input")[0].value;
         let amount = row.children[3].textContent;
-        console.log(additionalSelector, additionalItem, additionalItemValue,amount)
+        // console.log(additionalSelector, additionalItem, additionalItemValue,amount)
 
         if (additionalSelector === 'Select one'){
           // Do nothing
@@ -3453,8 +3453,8 @@
 
       // Get the inv data
       let invData = getAllItems2();
-      console.log('invData')
-      console.log(invData)
+      // console.log('invData')
+      // console.log(invData)
 
 
       // Step 2: Print Items & Additional Items
@@ -3483,7 +3483,7 @@
 
       // console.log(itemList)
       // console.log(itemIndex)
-      console.log(additionalItem)
+      // console.log(additionalItem)
       // console.log(total)
 
       // Loop through each 'ITEM' index

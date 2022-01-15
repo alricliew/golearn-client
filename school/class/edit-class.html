@@ -3320,7 +3320,7 @@
           
         }  
 
-        var docRefWithMerge = docRef.set(data , { merge: true })
+        docRef.set(data , { merge: true })
         .then(() => {
           func.showNotification('top','center', 'success', 'check_circle', "Successfully updated lesson info!" );
 
