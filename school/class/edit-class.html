@@ -424,14 +424,14 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-12 align-content-center">
+                  <div class="col-md-12 text-center">
                     <button type="button" class="btn btn-outline-primary btn-sm btn-round" id="btnAddAdminStudentModalLoadMore" >Load More</button>
                   </div>
                 </div>
 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-target="#invitationModal" data-toggle="modal" id="btnAutoJoinLink2" >Invite Students</button>
+                <button type="button" class="btn btn-success" data-target="#invitationModal" data-toggle="modal" onclick="appendModal('invitationModal')" id="btnAutoJoinLink2" >Invite Students</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddStudentModalUpdate" >Add</button> -->
               </div>
@@ -692,8 +692,10 @@
                     </div>
 
   
-                    <div class="row align-content-center">
-                      <button type="button" class="btn btn-success" id="btnAddTeacherModalLoadMore" >Load More</button>
+                    <div class="row">
+                      <div class="col-md-12 text-center">
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-round" id="btnAddTeacherModalLoadMore" >Load More</button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1210,7 +1212,7 @@
                     <!--Students form panel-->
                     <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                       <h4 class="multitabs-form__title">Students 
-                        <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddStudent" data-toggle="modal" data-target="#addStudentModal" data-button-text="Add" data-title="Add New Student"><i class="material-icons" style="color: #2e74b6;">add</i></a> 
+                        <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddStudent" data-toggle="modal" data-target="#addStudentModal" data-button-text="Add" data-title="Add New Student"  onclick="appendModal('addStudentModal')"><i class="material-icons" style="color: #2e74b6;">add</i></a> 
                         <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestStuDoc=null; removeElementsByClass('row student-wrapper'); loadAllStudents();"><i class="material-icons" style="color: #2e74b6;">refresh</i></a>
                       </h4>
                       <div class="multitabs-form__content">
@@ -1317,7 +1319,7 @@
                             </div>
                           </div>
                           <div class="col-md-2 d-flex align-items-center">
-                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher1" data-toggle="modal" data-target="#myTeacherModal" data-num='1' href="javascript:;" style="pointer-events:none; background-color: #e9ecef;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
+                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher1" data-toggle="modal" data-target="#myTeacherModal" data-num='1' onclick="appendModal('myTeacherModal')" href="javascript:;" style="pointer-events:none; background-color: #e9ecef;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
                           </div>
                         </div>
                         <!-- Teacher 2  -->
@@ -1340,7 +1342,7 @@
                             </div>
                           </div>
                           <div class="col-md-2 d-flex align-items-center">
-                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher2" data-toggle="" data-target="#myTeacherModal" data-num='2' style="pointer-events:none; background-color: #e9ecef;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
+                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher2" data-toggle="" data-target="#myTeacherModal" data-num='2' onclick="appendModal('myTeacherModal')" href="javascript:;" style="pointer-events:none; background-color: #e9ecef;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
                             <a class="btn btn-sm btn-outline-danger btn-round" id="btnDelTeacher2" data-toggle="modal" data-target="#delTutor2Modal" href="javascript:;" ><i class="material-icons" style="color: red;">remove</i></a>
                           </div>
                         </div>

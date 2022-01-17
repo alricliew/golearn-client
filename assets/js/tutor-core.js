@@ -434,6 +434,37 @@ function signOutFunction(){
   $("#signOutModal").appendTo("body");
 }
 
+// Append Modal to Body
+// Note: This hack is to (1) make sure the long model scrollable on open & 
+//       (2) signout Modal open normally.
+function appendModal(modalId){
+  $("#"+modalId).appendTo("body");
+}
+
+// Generate avatar for invalid img
+function generateAvatar(text, foregroundColor, backgroundColor, fontSize) {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+
+  canvas.width = 200;
+  canvas.height = 200;
+
+  // Draw background
+  context.fillStyle = backgroundColor;
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Draw text
+  context.font = "bold "+fontSize+" Arial";
+  context.fillStyle = foregroundColor;
+  context.textAlign = "center";
+  context.textBaseline = "middle";
+  context.fillText(text, canvas.width / 2, canvas.height / 2);
+
+  return canvas.toDataURL("image/png");
+}
+
+
+
 // Function to show notification
 func = {
   showNotification: function(from, align, type, material_icon, message) {

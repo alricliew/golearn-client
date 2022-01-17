@@ -548,8 +548,10 @@
                     </div>
 
   
-                    <div class="row align-content-center">
-                      <button type="button" class="btn btn-success" id="btnAddTeacherModalLoadMore" >Load More</button>
+                    <div class="row">
+                      <div class="col-md-12 text-center">
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-round" id="btnAddTeacherModalLoadMore" >Load More</button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1323,7 +1325,7 @@
 
                     <div class="col-md-4 align-self-center text-right">
 
-                      <a id='btnAddEmployee' href="javascript:;" class="btn btn-outline-default btn-round" style="background-color: #999999; color: white; pointer-events: none;" data-toggle="modal" data-target="#myTeacherModal">Add Employee </a>
+                      <a id='btnAddEmployee' href="javascript:;" class="btn btn-outline-default btn-round" style="background-color: #999999; color: white; pointer-events: none;" data-toggle="modal" data-target="#myTeacherModal" onclick="appendModal('myTeacherModal')">Add Employee </a>
 
                       <!-- <a id='btnAddAllEmployee' href="javascript:;" class="btn btn-outline-default btn-round" style="pointer-events: none;" data-toggle="modal" data-target="#addAllEmployeeModal">Add All Employees</a> -->
 
@@ -2204,9 +2206,38 @@
       //   </div>
       // </div>
 
+
+      // Image
       let img = document.createElement('img');
       img.setAttribute('style', 'height: 100%; width: 100%; object-fit: cover;');
-      img.src = doc.data()[TUTOR_TUTOR_IMG_URL];
+      // img.src = doc.data()[TUTOR_TUTOR_IMG_URL];
+
+      // Check img Url
+      let isHelloGifExist = false ;
+      let helloGifArr =  doc.data()[TUTOR_TUTOR_IMG_URL].match(/hello.gif/gi)
+      if ( helloGifArr != null) {
+        if (helloGifArr.length > 0){
+          isHelloGifExist = true;
+        }
+      }
+      let isEmptyPhotoPngExist;
+      let emptyPhotoPngArr = doc.data()[TUTOR_TUTOR_IMG_URL].match(/empty-photo.png/gi)
+      if ( emptyPhotoPngArr != null) {
+        if (emptyPhotoPngArr.length > 0){
+          isEmptyPhotoPngExist = true;
+        }
+      }
+      // Check if img is valid. If no, create a 2 chars avatar
+      if (doc.data()[TUTOR_TUTOR_IMG_URL] == null || doc.data()[TUTOR_TUTOR_IMG_URL] == "" 
+      || doc.data()[TUTOR_TUTOR_IMG_URL] == "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"
+      || isHelloGifExist || isEmptyPhotoPngExist){
+        let AvatarText = doc.data()[TUTOR_TUTOR_NAME][0] + doc.data()[TUTOR_TUTOR_NAME][1];
+        img.src = generateAvatar(AvatarText, "#eaeaea", "#f6f6f6", "100px");
+      }
+      else {
+        img.src = doc.data()[TUTOR_TUTOR_IMG_URL];
+      }
+
       let img_div = document.createElement('div');
       img_div.setAttribute('style', 'height: 50px; width: 50px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;');
       img_div.appendChild(img);
