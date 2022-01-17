@@ -493,15 +493,15 @@
                       <!-- Student header -->
                       <div class="row lesson-header">
                         <div class="col-md-3">
-                          <p>Guardian Phone</p>
+                          <p>Guardian Name</p>
                         </div>
                         <div class="col-md-3">
-                          <p>Guardian Name</p>
+                          <p>Guardian Phone</p>
                         </div>
                         <div class="col-md-3">
                           <p>Student Name</p>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 text-center">
                           <p>Action</p> 
                         </div>
                       </div>
@@ -1426,7 +1426,7 @@
           .collection("Student")
           .where(STU_ADMIN_ID, "==", tutorId)
           .where(STU_STATUS_ADMIN, "==", true)
-          .orderBy(STU_GUR_PHONE, 'asc')
+          .orderBy(STU_GUR_NAME, 'asc')
           .startAfter(latestAdminStuDoc)
           .limit(25);
 
@@ -1437,7 +1437,6 @@
           
           allStuModuleDoc.push(doc.data());
           // console.log(doc.data());
-          // renderAllAdminStudents(doc);
           renderAllAdminGuardian(doc);
           
         });
@@ -1511,69 +1510,19 @@
       sel_btn.setAttribute('data-guremail',doc.data()[STU_GUR_EMAIL]);
       sel_btn.setAttribute('data-guraddr',doc.data()[STU_GUR_ADDR]);
       let sel_div = document.createElement('div');
-      sel_div.className = "col-md-3";
+      sel_div.className = "col-md-3 text-center";
       sel_div.appendChild(sel_btn);
 
       let stuDetail_div = document.createElement('div');
       stuDetail_div.className = 'row student-wrapper';
+      stuDetail_div.appendChild(gurName_div);
       stuDetail_div.appendChild(gurPhone_div);
-      stuDetail_div.appendChild(gurName_div);
       stuDetail_div.appendChild(stuName_div);
       stuDetail_div.appendChild(sel_div);
 
       const add_student_modal_container = document.getElementById("add-student-modal-container");
       add_student_modal_container.appendChild(stuDetail_div)
-      // add_student_modal_container.insertBefore(stuDetail_div, add_student_modal_container.children[1])
     }
-
-
-
-    // Render all admin's students in Add Student Modal
-    function renderAllAdminStudents(doc){
-      
-      let stuName_p = document.createElement('p');
-      stuName_p.className = "student-item";
-      stuName_p.textContent = doc.data().childName;
-      let stuName_div = document.createElement('div');
-      stuName_div.className = "col-md-3";
-      stuName_div.appendChild(stuName_p);
-
-      let stuGender_p = document.createElement('p');
-      stuGender_p.className = "student-item";
-      stuGender_p.textContent = (doc.data().childGender === 0) ? 'Male' : 'Female';
-      let stuGender_div = document.createElement('div');
-      stuGender_div.className = "col-md-3";
-      stuGender_div.appendChild(stuGender_p);
-
-      let gurName_p = document.createElement('p');
-      gurName_p.className = "student-item";
-      gurName_p.textContent = doc.data().gurName;
-      let gurName_div = document.createElement('div');
-      gurName_div.className = "col-md-3";
-      gurName_div.appendChild(gurName_p);
-
-      let sel_btn = document.createElement('button');
-      sel_btn.className = "btn btn-primary btn-sm";
-      sel_btn.textContent = 'Select';
-      sel_btn.setAttribute('data-dismiss','modal');
-      sel_btn.setAttribute('type','button')
-      // sel_btn.setAttribute('onclick',"AddNewStudentsToDB('"+doc.data().id+"')");
-      let sel_div = document.createElement('div');
-      sel_div.className = "col-md-3";
-      sel_div.appendChild(sel_btn);
-
-      let stuDetail_div = document.createElement('div');
-      stuDetail_div.className = 'row student-wrapper';
-      stuDetail_div.appendChild(stuName_div);
-      stuDetail_div.appendChild(stuGender_div);
-      stuDetail_div.appendChild(gurName_div);
-      stuDetail_div.appendChild(sel_div);
-
-      const add_student_modal_container = document.getElementById("add-student-modal-container");
-      add_student_modal_container.appendChild(stuDetail_div)
-      // add_student_modal_container.insertBefore(stuDetail_div, add_student_modal_container.children[1])
-    }
-
 
     // Tutor Specific
     function loadUserInfo(tutorId){

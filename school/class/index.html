@@ -928,7 +928,6 @@
 
     // Tutor Specific
     function loadAllClassInfo(){
-      // Tutor Id must be a phone with +60, no spacing or other chars
       var docRef = db.collection("Class")
           .doc("v1")
           .collection("Class")
@@ -938,7 +937,7 @@
           .orderBy(CLASS_STATUS, 'asc')
           .orderBy(CLASS_NAME, 'asc')
           .startAfter(latestClassDoc)
-          .limit(25);
+          .limit(50);
       
       let adminClassNum = 0;
 
@@ -1005,7 +1004,7 @@
         if (querySnapshot.empty){
           classLoadmore.removeEventListener('click', classLoadMoreHandleClick );
         }
-        if (querySnapshot.docs.length == 25){
+        if (querySnapshot.docs.length == 50){
           classLoadmore.style.visibility='visible';
         }else{
           classLoadmore.style.visibility='hidden';
