@@ -447,7 +447,7 @@
             </div>
           </div>
 
-          <!-- All Class -->
+          <!-- All Teachers -->
           <div class="row" id="card-all-tutor">
             <!-- <div class="col-lg-2 col-md-3 col-6">
               <div class="card-tutor text-center ">
@@ -472,10 +472,6 @@
               </div>
             </div>
 
-            <!-- position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%); -->
             <!-- No data placeholder -->
             <div class="col-md-12 text-center" style="display: none; left: 50%;top: 50%; transform: translate(-50%, -50%);  position: absolute;"id="noDataPlaceholder">
               <!-- <div class="card align-items-center"> -->
@@ -816,7 +812,8 @@
           .doc("v1")
           .collection("Tutor")
           .where(TUTOR_ADMIN_ID, "==", tutorId)
-          .where(TUTOR_STATUS_ADMIN, "in", [TUTOR_STATUS_TYPE_ACTIVE, TUTOR_STATUS_TYPE_PASSIVE]);
+          .where(TUTOR_STATUS_ADMIN, "in", [TUTOR_STATUS_TYPE_ACTIVE, TUTOR_STATUS_TYPE_PASSIVE])
+          .orderBy(TUTOR_TUTOR_NAME, 'asc')
           
       let adminTeacherNum = 0;
 
@@ -837,10 +834,8 @@
         let docsObj = [];
 
         querySnapshot.forEach((doc) => {
-          
           docsObj.push(doc.data());
-          // courseId = doc.id;
-          console.log(doc.data())
+          // console.log(doc.data())
           renderAllActiveTutor(doc);
 
           adminTeacherNum = adminTeacherNum + 1;
@@ -854,8 +849,8 @@
       })
       .then(() => {
 
-        console.log(adminTeacherNum)
-        console.log(current_accountStatus)
+        // console.log(adminTeacherNum)
+        // console.log(current_accountStatus)
 
         if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || 
           current_accountStatus == ACTIVE_ACCOUNT_STATUS_KEY|| 
@@ -923,9 +918,22 @@
       //   </div>
       // </div>
 
+      // Image
       let img = document.createElement('img');
       img.setAttribute('style', 'height: 100%; width: 100%; object-fit: cover;');
-      img.setAttribute('src', doc.data()[TUTOR_TUTOR_IMG_URL]);
+      // img.setAttribute('src', doc.data()[TUTOR_TUTOR_IMG_URL]);
+
+      // Check if img is valid. If no, create a 2 chars avatar
+      if (doc.data()[TUTOR_TUTOR_IMG_URL] == null || doc.data()[TUTOR_TUTOR_IMG_URL] == "" 
+      || doc.data()[TUTOR_TUTOR_IMG_URL] == "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"
+      || tutorImgUrlChecker(doc.data()[TUTOR_TUTOR_IMG_URL])){
+        let AvatarText = doc.data()[TUTOR_TUTOR_NAME][0] + doc.data()[TUTOR_TUTOR_NAME][1];
+        img.src = generateAvatar(AvatarText, "#eaeaea", "#f6f6f6", "100px");
+      }
+      else {
+        img.src = doc.data()[TUTOR_TUTOR_IMG_URL];
+      }
+
       let img_div = document.createElement('div');
       img_div.setAttribute('style', 'height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;')
       img_div.appendChild(img)
@@ -951,6 +959,37 @@
         
       const card_all_tutor = document.getElementById("card-all-tutor");
       card_all_tutor.appendChild(tutor_card_div);
+    }
+
+    // This function check the validity of imgUrl. Return true when invalid.
+    function tutorImgUrlChecker(imgUrl){
+      // Tutor Panel
+      let isHelloGifExist = false ;
+      let helloGifArr =  imgUrl.match(/hello.gif/gi)
+      if ( helloGifArr != null) {
+        if (helloGifArr.length > 0){
+          isHelloGifExist = true;
+        }
+      }
+      let isEmptyPhotoPngExist = false;
+      let emptyPhotoPngArr = imgUrl.match(/empty-photo.png/gi)
+      if ( emptyPhotoPngArr != null) {
+        if (emptyPhotoPngArr.length > 0){
+          isEmptyPhotoPngExist = true;
+        }
+      }
+      let isGeneratedAvatar = false; 
+      let generatedAvatarArr = imgUrl.match(/data:image\/png;base64,/gi)
+      if ( generatedAvatarArr != null) {
+        if (generatedAvatarArr.length > 0){
+          isGeneratedAvatar = true;
+        }
+      }
+
+      if (isHelloGifExist || isEmptyPhotoPngExist || isGeneratedAvatar)
+        return true;
+      else
+        return false;
     }
 
 	  function viewTutorFunction(elem){

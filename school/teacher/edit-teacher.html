@@ -650,7 +650,18 @@
       document.getElementById("viewTutorGenderRadioFemale").checked = currentObj[TUTOR_TUTOR_GENDER] == 1 ? true: false;
       document.getElementById("viewTutorAge").value = currentObj[TUTOR_TUTOR_AGE];
       document.getElementById("viewTutorDateAdd").value = new Date(currentObj[TUTOR_DATE_ADD].seconds * 1000).toLocaleDateString("en-GB");
-      document.getElementById("viewTutorImgUrl").src = currentObj[TUTOR_TUTOR_IMG_URL];
+      // document.getElementById("viewTutorImgUrl").src = currentObj[TUTOR_TUTOR_IMG_URL];
+      // Check if img is valid. If no, create a 2 chars avatar
+      if (currentObj[TUTOR_TUTOR_IMG_URL] == null || currentObj[TUTOR_TUTOR_IMG_URL] == "" 
+      || currentObj[TUTOR_TUTOR_IMG_URL] == "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"
+      || tutorImgUrlChecker(currentObj[TUTOR_TUTOR_IMG_URL])){
+        let AvatarText = currentObj[TUTOR_TUTOR_NAME][0] + currentObj[TUTOR_TUTOR_NAME][1];
+        document.getElementById("viewTutorImgUrl").src = generateAvatar(AvatarText, "#eaeaea", "#f6f6f6", "100px");
+      }
+      else {
+        document.getElementById("viewTutorImgUrl").src = currentObj[TUTOR_TUTOR_IMG_URL];
+      }
+
       // if (currentObj[TUTOR_TUTOR_WEB_URL] == null || currentObj[TUTOR_TUTOR_WEB_URL] == ''){
       //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('style', 'visibility: hidden');     
       //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','#'); 
@@ -678,6 +689,37 @@
 
 
 
+    }
+
+    // This function check the validity of imgUrl. Return true when invalid.
+    function tutorImgUrlChecker(imgUrl){
+      // Tutor Panel
+      let isHelloGifExist = false ;
+      let helloGifArr =  imgUrl.match(/hello.gif/gi)
+      if ( helloGifArr != null) {
+        if (helloGifArr.length > 0){
+          isHelloGifExist = true;
+        }
+      }
+      let isEmptyPhotoPngExist = false;
+      let emptyPhotoPngArr = imgUrl.match(/empty-photo.png/gi)
+      if ( emptyPhotoPngArr != null) {
+        if (emptyPhotoPngArr.length > 0){
+          isEmptyPhotoPngExist = true;
+        }
+      }
+      let isGeneratedAvatar = false; 
+      let generatedAvatarArr = imgUrl.match(/data:image\/png;base64,/gi)
+      if ( generatedAvatarArr != null) {
+        if (generatedAvatarArr.length > 0){
+          isGeneratedAvatar = true;
+        }
+      }
+
+      if (isHelloGifExist || isEmptyPhotoPngExist || isGeneratedAvatar)
+        return true;
+      else
+        return false;
     }
 
     // // Set the nav name and global var, if user already login and have session Storage 
@@ -872,7 +914,6 @@
         .doc('v1')
         .collection('Tutor')
         .doc(docId);
-
 
       let data = {
         [TUTOR_TUTOR_ID]: itiTutor.getNumber(),

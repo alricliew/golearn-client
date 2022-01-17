@@ -1320,6 +1320,38 @@
       }
     }
 
+    // This function check the validity of imgUrl. Return true when invalid.
+    function tutorImgUrlChecker(imgUrl){
+      // Tutor Panel
+      let isHelloGifExist = false ;
+      let helloGifArr =  imgUrl.match(/hello.gif/gi)
+      if ( helloGifArr != null) {
+        if (helloGifArr.length > 0){
+          isHelloGifExist = true;
+        }
+      }
+      let isEmptyPhotoPngExist = false;
+      let emptyPhotoPngArr = imgUrl.match(/empty-photo.png/gi)
+      if ( emptyPhotoPngArr != null) {
+        if (emptyPhotoPngArr.length > 0){
+          isEmptyPhotoPngExist = true;
+        }
+      }
+      let isGeneratedAvatar = false; 
+      let generatedAvatarArr = imgUrl.match(/data:image\/png;base64,/gi)
+      if ( generatedAvatarArr != null) {
+        if (generatedAvatarArr.length > 0){
+          isGeneratedAvatar = true;
+        }
+      }
+
+      if (isHelloGifExist || isEmptyPhotoPngExist || isGeneratedAvatar)
+        return true;
+      else
+        return false;
+    }
+
+
     //---------- Init All Admin's Teacher details ----------//
     const tutorAdminLoadmore = document.querySelector('#btnAddTeacherModalLoadMore');
     tutorAdminLoadmore.style.visibility='hidden';
@@ -1384,6 +1416,15 @@
       let tutor1Name_temp = document.getElementById("inTutor1Name").value;
       let tutor1Phone_temp = document.getElementById("inTutor1Phone").value;
       let tutor1_imgurl = document.getElementById("viewTutor1ImgUrl").src;
+      // Check if tutor1_imgurl is valid. If no, set to empty
+      if (tutor1_imgurl == null || tutor1_imgurl == "" || tutorImgUrlChecker(tutor1_imgurl)){
+        tutor1_imgurl = "";
+      }
+      else {
+        // Do nothing, remain the same.
+        // tutor1_imgurl = tutor1_imgurl; 
+      }
+
 
         // Notice that I use .add(..), instead of .set(..). This is because the docRef do not specify the docId.
       let docData = {
@@ -1447,14 +1488,13 @@
         // [DATE_CREATED_KEY]: new Date(),
         // [DATE_CLOSED_KEY]: "",
         [STATUS_KEY]: true,
-
       }
 
       // console.log("Create Class");
       // console.log(docData);
+
       docRef.set( docData, { merge: true })
       .then(() => {
-
         // Report: Update the class num in Reporting
         updateClassNum(1);
 
@@ -1610,9 +1650,26 @@
       //   </div>
       // </div>
 
+      let imgUrl_temp = "";
       let img = document.createElement('img');
       img.setAttribute('style', 'height: 100%; width: 100%; object-fit: cover;');
-      img.src = doc.data()[TUTOR_TUTOR_IMG_URL];
+      // img.src = doc.data()[TUTOR_TUTOR_IMG_URL];
+
+      // Check if img is valid. If no, create a 2 chars avatar
+      if (doc.data()[TUTOR_TUTOR_IMG_URL] == null || doc.data()[TUTOR_TUTOR_IMG_URL] == "" 
+      || doc.data()[TUTOR_TUTOR_IMG_URL] == "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"
+      || tutorImgUrlChecker(doc.data()[TUTOR_TUTOR_IMG_URL])){
+
+        let AvatarText = doc.data()[TUTOR_TUTOR_NAME][0] + doc.data()[TUTOR_TUTOR_NAME][1];
+        img.src = generateAvatar(AvatarText, "#eaeaea", "#f6f6f6", "100px");
+        imgUrl_temp = "";
+
+      }
+      else {
+        img.src = doc.data()[TUTOR_TUTOR_IMG_URL];
+        imgUrl_temp = doc.data()[TUTOR_TUTOR_IMG_URL];
+      }
+
       let img_div = document.createElement('div');
       img_div.setAttribute('style', 'height: 50px; width: 50px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;');
       img_div.appendChild(img);
@@ -1647,7 +1704,7 @@
       sel_btn.textContent = 'Select';
       sel_btn.setAttribute('data-dismiss','modal');
       sel_btn.setAttribute('type','button')
-      sel_btn.setAttribute('onclick',"AddNewTutorToField('"+ doc.data()[TUTOR_TUTOR_ID]+"', `"+doc.data()[TUTOR_TUTOR_NAME]+"`, '"+doc.data()[TUTOR_TUTOR_PHONE]+"', '"+doc.data()[TUTOR_TUTOR_IMG_URL]+"')");
+      sel_btn.setAttribute('onclick',"AddNewTutorToField('"+ doc.data()[TUTOR_TUTOR_ID]+"', `"+doc.data()[TUTOR_TUTOR_NAME]+"`, '"+doc.data()[TUTOR_TUTOR_PHONE]+"', `"+imgUrl_temp+"`)");
       let sel_div = document.createElement('div');
       sel_div.className = "col-md-2";
       sel_div.appendChild(sel_btn);
@@ -1668,7 +1725,17 @@
 
     // Add the tutor 1 data to fields
     function AddNewTutorToField(tutorId, tutorName, tutorPhone, tutorImgUrl){
-      document.getElementById("viewTutor1ImgUrl").src = tutorImgUrl;
+
+      // Check if img is valid. If no, create a 2 chars avatar
+      if (tutorImgUrl == null || tutorImgUrl == "" || tutorImgUrlChecker(tutorImgUrl)){
+        let AvatarText = tutorName[0] + tutorName[1];
+        document.getElementById("viewTutor1ImgUrl").src = generateAvatar(AvatarText, "#eaeaea", "#f6f6f6", "100px");
+      }
+      else {
+        document.getElementById("viewTutor1ImgUrl").src = tutorImgUrl;
+      }
+
+      // document.getElementById("viewTutor1ImgUrl").src = tutorImgUrl;
       document.getElementById("inTutor1Name").value = tutorName;
       document.getElementById("inTutor1Phone").value = tutorPhone;
       document.getElementById("inTutor1Name").setAttribute("data-tutor1Id", tutorId);

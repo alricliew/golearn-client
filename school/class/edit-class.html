@@ -1889,11 +1889,10 @@
         updatePageContent(currentClassObj);
 
         // If user is NOT the admin of this class, disable non admin edits
-        console.log('SESSION_STORAGE_CLASS_NON_ADMIN_KEY')
-        console.log(JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_NON_ADMIN_KEY)));
+        // console.log('SESSION_STORAGE_CLASS_NON_ADMIN_KEY')
+        // console.log(JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_NON_ADMIN_KEY)));
 
         if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_NON_ADMIN_KEY))){
-          console.log('I am here')
           disableAllEditsForNonAdmin();
 
         }
@@ -1966,9 +1965,19 @@
       }
       initTimePicker();
 
+      let tutor1ImgUrlInvalid = tutorImgUrlChecker(currentClassObj[CLASS_TUTOR_IMG_URL_ARR][0]);
+      let tutor2ImgUrlInvalid = tutorImgUrlChecker(currentClassObj[CLASS_TUTOR_IMG_URL_ARR][1]);
 
-      // Tutor Panel
-      document.getElementById("inTutor1ImgUrl").src = currentClassObj[CLASS_TUTOR_IMG_URL_ARR][0];
+      // Check if img is valid. If no, create a 2 chars avatar
+      if (currentClassObj[CLASS_TUTOR_IMG_URL_ARR][0] == null || currentClassObj[CLASS_TUTOR_IMG_URL_ARR][0] == "" || tutor1ImgUrlInvalid){
+        let AvatarText = currentClassObj[CLASS_TUTOR_NAME_ARR][0][0] + currentClassObj[CLASS_TUTOR_NAME_ARR][0][1];
+        document.getElementById("inTutor1ImgUrl").src = generateAvatar(AvatarText, "#eaeaea", "#f6f6f6", "100px");
+      }
+      else {
+        document.getElementById("inTutor1ImgUrl").src = currentClassObj[CLASS_TUTOR_IMG_URL_ARR][0];
+      }
+
+      // document.getElementById("inTutor1ImgUrl").src = currentClassObj[CLASS_TUTOR_IMG_URL_ARR][0];
       document.getElementById("inTutor1Name").value = currentClassObj[CLASS_TUTOR_NAME_ARR][0];
       document.getElementById("inTutor1Phone").value = currentClassObj[CLASS_TUTOR_PHONE_ARR][0];
       document.getElementById("inTutor1Name").setAttribute("data-tutor1Id", currentClassObj[CLASS_TUTOR_ID_ARR][0]);
@@ -1976,13 +1985,23 @@
       tutor1Name = currentClassObj[CLASS_TUTOR_NAME_ARR][0];
       tutor1Phone = currentClassObj[CLASS_TUTOR_PHONE_ARR][0];
 
+      
       if (currentClassObj[CLASS_TUTOR_ID_ARR][1] == null || currentClassObj[CLASS_TUTOR_ID_ARR][1] == ''){
         document.getElementById("inTutor2ImgUrl").src = '../../assets/img/empty-photo.png';
         document.getElementById("inTutor2Name").value = '';
         document.getElementById("inTutor2Phone").value = '';
         document.getElementById("inTutor2Name").setAttribute("data-tutor2Id", '');   
       }else{
-        document.getElementById("inTutor2ImgUrl").src = currentClassObj[CLASS_TUTOR_IMG_URL_ARR][1];
+        // Check if second tutor img is valid. If no, create a 2 chars avatar
+        if (currentClassObj[CLASS_TUTOR_IMG_URL_ARR][1] == null || currentClassObj[CLASS_TUTOR_IMG_URL_ARR][1] == "" || tutor2ImgUrlInvalid){
+          let AvatarText = currentClassObj[CLASS_TUTOR_NAME_ARR][1][0] + currentClassObj[CLASS_TUTOR_NAME_ARR][1][1];
+          document.getElementById("inTutor2ImgUrl").src = generateAvatar(AvatarText, "#eaeaea", "#f6f6f6", "100px");
+        }
+        else {
+          document.getElementById("inTutor2ImgUrl").src = currentClassObj[CLASS_TUTOR_IMG_URL_ARR][1];
+        }
+
+        // document.getElementById("inTutor2ImgUrl").src = currentClassObj[CLASS_TUTOR_IMG_URL_ARR][1];
         document.getElementById("inTutor2Name").value = currentClassObj[CLASS_TUTOR_NAME_ARR][1];
         document.getElementById("inTutor2Phone").value = currentClassObj[CLASS_TUTOR_PHONE_ARR][1];
         document.getElementById("inTutor2Name").setAttribute("data-tutor2Id", currentClassObj[CLASS_TUTOR_ID_ARR][1]);
@@ -2083,6 +2102,37 @@
       
 
 
+    }
+
+    // This function check the validity of imgUrl. Return true when invalid.
+    function tutorImgUrlChecker(imgUrl){
+      // Tutor Panel
+      let isHelloGifExist = false ;
+      let helloGifArr =  imgUrl.match(/hello.gif/gi)
+      if ( helloGifArr != null) {
+        if (helloGifArr.length > 0){
+          isHelloGifExist = true;
+        }
+      }
+      let isEmptyPhotoPngExist = false;
+      let emptyPhotoPngArr = imgUrl.match(/empty-photo.png/gi)
+      if ( emptyPhotoPngArr != null) {
+        if (emptyPhotoPngArr.length > 0){
+          isEmptyPhotoPngExist = true;
+        }
+      }
+      let isGeneratedAvatar = false; 
+      let generatedAvatarArr = imgUrl.match(/data:image\/png;base64,/gi)
+      if ( generatedAvatarArr != null) {
+        if (generatedAvatarArr.length > 0){
+          isGeneratedAvatar = true;
+        }
+      }
+
+      if (isHelloGifExist || isEmptyPhotoPngExist || isGeneratedAvatar)
+        return true;
+      else
+        return false;
     }
 
 
@@ -2419,10 +2469,10 @@
         [CLASS_TIMESLOT_END_ARR]: endTimeArr,
         // IDs
         [CLASS_ADMIN_ID]: currentClassObj[CLASS_ADMIN_ID],
-        [CLASS_TUTOR_ID_ARR]: [document.getElementById("inTutor1Name").getAttribute('data-tutor1id'), document.getElementById("inTutor2Name").getAttribute('data-tutor2id'), currentClassObj[CLASS_ADMIN_ID]],
-        [CLASS_TUTOR_NAME_ARR]: [document.getElementById("inTutor1Name").value, document.getElementById("inTutor2Name").value],
-        [CLASS_TUTOR_PHONE_ARR]: [document.getElementById("inTutor1Phone").value, document.getElementById("inTutor2Phone").value],
-        [CLASS_TUTOR_IMG_URL_ARR]: [document.getElementById("inTutor1ImgUrl").src, document.getElementById("inTutor2ImgUrl").src],
+        // [CLASS_TUTOR_ID_ARR]: [document.getElementById("inTutor1Name").getAttribute('data-tutor1id'), document.getElementById("inTutor2Name").getAttribute('data-tutor2id'), currentClassObj[CLASS_ADMIN_ID]],
+        // [CLASS_TUTOR_NAME_ARR]: [document.getElementById("inTutor1Name").value, document.getElementById("inTutor2Name").value],
+        // [CLASS_TUTOR_PHONE_ARR]: [document.getElementById("inTutor1Phone").value, document.getElementById("inTutor2Phone").value],
+        // [CLASS_TUTOR_IMG_URL_ARR]: [document.getElementById("inTutor1ImgUrl").src, document.getElementById("inTutor2ImgUrl").src],
         // [CLASS_STUDENT_ID_ARR]: [],
         // [CLASS_VIEWER_ID_ARR]:[],
         // Fee type
@@ -2799,7 +2849,6 @@
     function clearTimeSlot(){
       var timeSlotContainerChildCount = document.getElementById("timeSlot-container").childElementCount;
       var timeSlotContainer = document.getElementById("timeSlot-container").children;
-      console.log(timeSlotContainerChildCount);
 
       // console.log(timeSlotContainer);
       Array.from(timeSlotContainer).forEach((row, index) => {
@@ -3180,7 +3229,7 @@
       docRef
       .get()
       .then((querySnapshot) => {
-        console.log('Total Lessons Found: '+querySnapshot.docs.length);
+        // console.log('Total Lessons Found: '+querySnapshot.docs.length);
 
         if ((querySnapshot.docs.length== null || querySnapshot.docs.length == 0) && latestLessonDoc == null){
           document.getElementById("lessonNoDataPlaceholder").style.display = 'initial';
@@ -3200,7 +3249,7 @@
         });
 
         latestLessonDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
-        console.log(querySnapshot.docs.length)
+        // console.log(querySnapshot.docs.length)
         // Handle Lesson Load more btn
         if (querySnapshot.empty){
           lessonLoadmore.removeEventListener('click', lessonLoadMoreHandleClick );
@@ -3994,9 +4043,26 @@
       //   </div>
       // </div>
 
+      let imgUrl_temp = "";
       let img = document.createElement('img');
       img.setAttribute('style', 'height: 100%; width: 100%; object-fit: cover;');
-      img.src = doc.data()[TUTOR_TUTOR_IMG_URL];
+      // img.src = doc.data()[TUTOR_TUTOR_IMG_URL];
+
+      // Check if img is valid. If no, create a 2 chars avatar
+      if (doc.data()[TUTOR_TUTOR_IMG_URL] == null || doc.data()[TUTOR_TUTOR_IMG_URL] == "" 
+      || doc.data()[TUTOR_TUTOR_IMG_URL] == "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"
+      || tutorImgUrlChecker(doc.data()[TUTOR_TUTOR_IMG_URL])){
+
+        let AvatarText = doc.data()[TUTOR_TUTOR_NAME][0] + doc.data()[TUTOR_TUTOR_NAME][1];
+        img.src = generateAvatar(AvatarText, "#eaeaea", "#f6f6f6", "100px");
+        imgUrl_temp = "";
+
+      }
+      else {
+        img.src = doc.data()[TUTOR_TUTOR_IMG_URL];
+        imgUrl_temp = doc.data()[TUTOR_TUTOR_IMG_URL];
+      }
+      
       let img_div = document.createElement('div');
       img_div.setAttribute('style', 'height: 50px; width: 50px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;');
       img_div.appendChild(img);
@@ -4031,7 +4097,7 @@
       sel_btn.textContent = 'Select';
       sel_btn.setAttribute('data-dismiss','modal');
       sel_btn.setAttribute('type','button')
-      sel_btn.setAttribute('onclick',"AddNewTutorToDB("+ tutorBtnNum+", '"+ doc.data()[TUTOR_TUTOR_ID]+"', `"+doc.data()[TUTOR_TUTOR_NAME]+"`, '"+doc.data()[TUTOR_TUTOR_PHONE]+"', `"+doc.data()[TUTOR_TUTOR_IMG_URL]+"`)");
+      sel_btn.setAttribute('onclick',"AddNewTutorToDB("+ tutorBtnNum+", '"+ doc.data()[TUTOR_TUTOR_ID]+"', `"+doc.data()[TUTOR_TUTOR_NAME]+"`, '"+doc.data()[TUTOR_TUTOR_PHONE]+"', `"+imgUrl_temp+"`)");
       let sel_div = document.createElement('div');
       sel_div.className = "col-md-2";
       sel_div.appendChild(sel_btn);
@@ -4058,7 +4124,6 @@
       // console.log(tutorName)
       // console.log(tutorPhone)
 
-      
       let docRef = db.collection("Class")
           .doc("v1")
           .collection("Class")
@@ -4070,13 +4135,30 @@
       let tutor1_name = document.getElementById("inTutor1Name").value;
       let tutor1_phone = document.getElementById("inTutor1Phone").value;
       let tutor1_imgurl = document.getElementById("inTutor1ImgUrl").src;
+      // Check if tutor1_imgurl is valid. If no, set to empty
+      if (tutor1_imgurl == null || tutor1_imgurl == "" || tutorImgUrlChecker(tutor1_imgurl)){
+        tutor1_imgurl = "";
+      }
+      else {
+        // Do nothing, remain the same.
+        // tutor1_imgurl = tutor1_imgurl; 
+      }
+
 
       let idInput2 = $('#inTutor2Name');
       let tutor2_id = idInput2.data('tutor2id');
       let tutor2_name = document.getElementById("inTutor2Name").value;
       let tutor2_phone = document.getElementById("inTutor2Phone").value;
       let tutor2_imgurl = document.getElementById("inTutor2ImgUrl").src;
-      
+      // Check if tutor2_imgurl is valid. If no, set to empty
+      if (tutor2_imgurl == null || tutor2_imgurl == "" || tutorImgUrlChecker(tutor2_imgurl)){
+        tutor2_imgurl = "";
+      }
+      else {
+        // Do nothing, remain the same.
+        // tutor1_imgurl = tutor1_imgurl; 
+      }
+
       // Update the Teacher panel
       if (tutorNum == 1){
         tutor1_id = tutorId_temp;
@@ -4153,12 +4235,13 @@
         [CLASS_EDIT_MSG]: tutorName + ' joined as tutor.', // Update: CLASS_DATE_EDIT + CLASS_EDIT_MSG
         // [STATUS_KEY]: true,
       }
+      
       console.log('Tutors Data');
       console.log(data);
       docRef.set( data, { merge: true })
       .then(() => {
         func.showNotification('top','center', 'success', 'check_circle', "New tutor added.");
-
+        reload();
         // markTutor
       });
 
@@ -4178,7 +4261,14 @@
       let tutor1_name = document.getElementById("inTutor1Name").value;
       let tutor1_phone = document.getElementById("inTutor1Phone").value;
       let tutor1_imgurl = document.getElementById("inTutor1ImgUrl").src;
-
+      // Check if tutor1_imgurl is valid. If no, set to empty
+      if (tutor1_imgurl == null || tutor1_imgurl == "" || tutorImgUrlChecker(tutor1_imgurl)){
+        tutor1_imgurl = "";
+      }
+      else {
+        // Do nothing, remain the same.
+        // tutor1_imgurl = tutor1_imgurl; 
+      }
 
       let tutor2_name = document.getElementById("inTutor2Name").value;
       // Clear the fields
@@ -4246,6 +4336,7 @@
       docRef.set( data, { merge: true })
       .then(() => {
         func.showNotification('top','center', 'success', 'check_circle', tutor2_name + " removed.");
+        reload();
       });
 
     }
@@ -4652,7 +4743,7 @@
 
         if (doc.exists) {
           console.log("Reload document");
-          console.log(doc.data());
+          // console.log(doc.data());
 
           sessionStorage.setItem(SESSION_STORAGE_CLASS_CURRENT_DOC_KEY, JSON.stringify(doc.data()));
 

@@ -2212,25 +2212,10 @@
       img.setAttribute('style', 'height: 100%; width: 100%; object-fit: cover;');
       // img.src = doc.data()[TUTOR_TUTOR_IMG_URL];
 
-      // Check img Url
-      let isHelloGifExist = false ;
-      let helloGifArr =  doc.data()[TUTOR_TUTOR_IMG_URL].match(/hello.gif/gi)
-      if ( helloGifArr != null) {
-        if (helloGifArr.length > 0){
-          isHelloGifExist = true;
-        }
-      }
-      let isEmptyPhotoPngExist;
-      let emptyPhotoPngArr = doc.data()[TUTOR_TUTOR_IMG_URL].match(/empty-photo.png/gi)
-      if ( emptyPhotoPngArr != null) {
-        if (emptyPhotoPngArr.length > 0){
-          isEmptyPhotoPngExist = true;
-        }
-      }
       // Check if img is valid. If no, create a 2 chars avatar
       if (doc.data()[TUTOR_TUTOR_IMG_URL] == null || doc.data()[TUTOR_TUTOR_IMG_URL] == "" 
       || doc.data()[TUTOR_TUTOR_IMG_URL] == "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"
-      || isHelloGifExist || isEmptyPhotoPngExist){
+      || tutorImgUrlChecker(doc.data()[TUTOR_TUTOR_IMG_URL])){
         let AvatarText = doc.data()[TUTOR_TUTOR_NAME][0] + doc.data()[TUTOR_TUTOR_NAME][1];
         img.src = generateAvatar(AvatarText, "#eaeaea", "#f6f6f6", "100px");
       }
@@ -7089,7 +7074,38 @@
       };
 
       html2pdf().set(opt).from(element).save();
+    }
+
+    // This function check the validity of imgUrl. Return true when invalid.
+    function tutorImgUrlChecker(imgUrl){
+      // Tutor Panel
+      let isHelloGifExist = false ;
+      let helloGifArr =  imgUrl.match(/hello.gif/gi)
+      if ( helloGifArr != null) {
+        if (helloGifArr.length > 0){
+          isHelloGifExist = true;
+        }
       }
+      let isEmptyPhotoPngExist = false;
+      let emptyPhotoPngArr = imgUrl.match(/empty-photo.png/gi)
+      if ( emptyPhotoPngArr != null) {
+        if (emptyPhotoPngArr.length > 0){
+          isEmptyPhotoPngExist = true;
+        }
+      }
+      let isGeneratedAvatar = false; 
+      let generatedAvatarArr = imgUrl.match(/data:image\/png;base64,/gi)
+      if ( generatedAvatarArr != null) {
+        if (generatedAvatarArr.length > 0){
+          isGeneratedAvatar = true;
+        }
+      }
+
+      if (isHelloGifExist || isEmptyPhotoPngExist || isGeneratedAvatar)
+        return true;
+      else
+        return false;
+    }
 
   </script>
 
