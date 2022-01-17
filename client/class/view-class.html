@@ -1429,7 +1429,7 @@
 
       if (isValidHttpUrl(currentClassObj[CLASS_CLASS_URL])){
         let uri = checkDomainNameException(currentClassObj[CLASS_CLASS_URL])
-        document.getElementById("inUrlClassIcon").src = "http://www.google.com/s2/favicons?domain="+uri;
+        document.getElementById("inUrlClassIcon").src = uri;
         document.getElementById("inUrlClassIconWrapper").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_CLASS_URL]+"')");
       }else{
         document.getElementById("inUrlClassBlock").style.display = "none";
@@ -1445,7 +1445,7 @@
       document.getElementById("inUrlGroup").src = currentClassObj[CLASS_CHAT_GROUP_URL];
       if (isValidHttpUrl(currentClassObj[CLASS_CHAT_GROUP_URL])){
         let uri = checkDomainNameException(currentClassObj[CLASS_CHAT_GROUP_URL])
-        document.getElementById("inUrlGroupIcon").src = "http://www.google.com/s2/favicons?domain="+uri;
+        document.getElementById("inUrlGroupIcon").src = uri;
         document.getElementById("inUrlGroupIconWrapper").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_CHAT_GROUP_URL]+"')");
       }else{
         document.getElementById("inUrlGroupBlock").style.display = "none";
@@ -1457,7 +1457,7 @@
       document.getElementById("inUrlMaterial").src = currentClassObj[CLASS_MATERIAL_URL];
       if (isValidHttpUrl(currentClassObj[CLASS_MATERIAL_URL])){
         let uri = checkDomainNameException(currentClassObj[CLASS_MATERIAL_URL])
-        document.getElementById("inUrlMaterialIcon").src = "http://www.google.com/s2/favicons?domain="+uri;
+        document.getElementById("inUrlMaterialIcon").src = uri;
         document.getElementById("inUrlMaterialIconWrapper").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_MATERIAL_URL]+"')");
       }else{
         document.getElementById("inUrlMaterialBlock").style.display = "none";

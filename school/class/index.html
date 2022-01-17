@@ -1246,11 +1246,11 @@
         if (isValidHttpUrl(doc.data()[item])){
           UrlGroupUrl = doc.data()[item];
           let uri = checkDomainNameException(UrlGroupUrl)
-          UrlGroupFaviconUrl = "http://www.google.com/s2/favicons?domain="+uri;
+          UrlGroupFaviconUrl = uri;
           // UrlGroupFaviconUrl = "http://www.google.com/s2/favicons?domain="+doc.data()[item];
         }else{
           UrlGroupUrl = 'javascript:;';
-          UrlGroupFaviconUrl = "../../assets/img/broken-link.png";
+          UrlGroupFaviconUrl = "https://app.golearn.com.my/assets/img/broken-link.png";
         }
 
         let urlGroupHtml = '';
@@ -1462,10 +1462,10 @@
         if (isValidHttpUrl(doc.data()[item])){
           UrlGroupUrl = doc.data()[item];
           let uri = checkDomainNameException(UrlGroupUrl)
-          UrlGroupFaviconUrl = "http://www.google.com/s2/favicons?domain="+uri;
+          UrlGroupFaviconUrl = uri;
         }else{
           UrlGroupUrl = 'javascript:;';
-          UrlGroupFaviconUrl = "../../assets/img/broken-link.png";
+          UrlGroupFaviconUrl = "https://app.golearn.com.my/assets/img/broken-link.png";
         }
 
         let urlGroupHtml = '';

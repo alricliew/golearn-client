@@ -202,14 +202,19 @@ func = {
 // http://www.google.com/s2/favicons?domain=domain.com
 function checkDomainNameException(url){
   // const str = 'hello world!';
-  let result1 = /web.whatsapp.com/.test(url);
-  let result2 = /chat.whatsapp.com/.test(url);
-  let result3 = /us04web.zoom.us/.test(url);
+  let result_web_wa = /web.whatsapp.com/.test(url);
+  let result_chat_wa = /chat.whatsapp.com/.test(url);
+  let result_us04web_zoom = /us04web.zoom.us/.test(url);
+  let result_teams_microsoft = /teams.microsoft.com/.test(url);
+  let result_classroom_google = /classroom.google.com/.test(url);
+  
   // console.log(url)
-  // console.log(result1, result2);
+  // console.log(result_web_wa, result_chat_wa);
 
-  if (result1) return "https://whatsapp.com";
-  else if (result2) return "https://whatsapp.com";
-  else if (result3) return "https://zoom.us";
-  else return url;
+  if (result_web_wa) return "http://www.google.com/s2/favicons?domain=https://whatsapp.com";
+  else if (result_chat_wa) return "http://www.google.com/s2/favicons?domain=https://whatsapp.com";
+  else if (result_us04web_zoom) return "http://www.google.com/s2/favicons?domain=https://zoom.us";
+  else if (result_teams_microsoft) return "http://127.0.0.1:8080/assets/img/favicon-teams-32x32.png";
+  else if (result_classroom_google) return "http://127.0.0.1:8080/assets/img/favicon-googleclassroom-32x32.png";
+  else return "http://www.google.com/s2/favicons?domain="+url;
 }
