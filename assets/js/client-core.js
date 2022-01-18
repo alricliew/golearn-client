@@ -205,6 +205,7 @@ function checkDomainNameException(url){
   let result_web_wa = /web.whatsapp.com/.test(url);
   let result_chat_wa = /chat.whatsapp.com/.test(url);
   let result_us04web_zoom = /us04web.zoom.us/.test(url);
+  let result_us05web_zoom = /us05web.zoom.us/.test(url);
   let result_teams_microsoft = /teams.microsoft.com/.test(url);
   let result_classroom_google = /classroom.google.com/.test(url);
   
@@ -214,6 +215,7 @@ function checkDomainNameException(url){
   if (result_web_wa) return "http://www.google.com/s2/favicons?domain=https://whatsapp.com";
   else if (result_chat_wa) return "http://www.google.com/s2/favicons?domain=https://whatsapp.com";
   else if (result_us04web_zoom) return "http://www.google.com/s2/favicons?domain=https://zoom.us";
+  else if (result_us05web_zoom) return "http://www.google.com/s2/favicons?domain=https://zoom.us";
   else if (result_teams_microsoft) return "https://app.golearn.com.my/assets/img/favicon-teams-32x32.png";
   else if (result_classroom_google) return "https://app.golearn.com.my/assets/img/favicon-googleclassroom-32x32.png";
   else return "http://www.google.com/s2/favicons?domain="+url;
