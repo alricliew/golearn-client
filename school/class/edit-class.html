@@ -1952,7 +1952,12 @@
       clearTimeSlot();
       //    1st Slot
       let subject_drop = document.getElementById("inDayOfWeek1");
-      $('#inDayOfWeek1').find('option[value='+currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][0]+']').attr('selected','selected');
+
+      if (currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][0] == null || currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][0] == ""){
+        // Someone removed the first Day of Week. So do nothing here
+      }else {
+        $('#inDayOfWeek1').find('option[value='+currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][0]+']').attr('selected','selected');
+      }
       document.getElementById("inStartTime1").value = currentClassObj[CLASS_TIMESLOT_START_ARR][0];
       document.getElementById("inEndTime1").value = currentClassObj[CLASS_TIMESLOT_END_ARR][0];
       // console.log(CLASS_TIMESLOT_DAY_OF_WEEK_ARR)
