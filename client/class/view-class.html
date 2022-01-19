@@ -1465,19 +1465,19 @@
         document.getElementById("inUrlMaterialIconWrapper").setAttribute("onclick", "");
       }
 
-      // Time Slot Panel
-      //    1st Slot
-      let subject_drop = document.getElementById("inDayOfWeek1");
-      $('#inDayOfWeek1').find('option[value='+currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][0]+']').attr('selected','selected');
-      document.getElementById("inStartTime1").value = currentClassObj[CLASS_TIMESLOT_START_ARR][0];
-      document.getElementById("inEndTime1").value = currentClassObj[CLASS_TIMESLOT_END_ARR][0];
-      // console.log(CLASS_TIMESLOT_DAY_OF_WEEK_ARR)
-      // console.log(CLASS_TIMESLOT_DAY_OF_WEEK_ARR.length)
-      if (currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR].length > 1){
-        for (let i = 1; i<currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR].length; i++){
-        addTimeSlot(currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i], currentClassObj[CLASS_TIMESLOT_START_ARR][i], currentClassObj[CLASS_TIMESLOT_END_ARR][i]); 
-        }
-      }
+      // // Time Slot Panel
+      // //    1st Slot
+      // let subject_drop = document.getElementById("inDayOfWeek1");
+      // $('#inDayOfWeek1').find('option[value='+currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][0]+']').attr('selected','selected');
+      // document.getElementById("inStartTime1").value = currentClassObj[CLASS_TIMESLOT_START_ARR][0];
+      // document.getElementById("inEndTime1").value = currentClassObj[CLASS_TIMESLOT_END_ARR][0];
+      // // console.log(CLASS_TIMESLOT_DAY_OF_WEEK_ARR)
+      // // console.log(CLASS_TIMESLOT_DAY_OF_WEEK_ARR.length)
+      // if (currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR].length > 1){
+      //   for (let i = 1; i<currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR].length; i++){
+      //   addTimeSlot(currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][i], currentClassObj[CLASS_TIMESLOT_START_ARR][i], currentClassObj[CLASS_TIMESLOT_END_ARR][i]); 
+      //   }
+      // }
 
 
       // Timeslot
@@ -1543,9 +1543,9 @@
       document.getElementById("inTeacher").innerHTML = inTeacherFinal;
 
       // Fee Panel
-      document.getElementById("inFee").value = currentClassObj[FEES_KEY];
-      document.getElementById("feeTypePerMonthRadio").checked = currentClassObj[FEES_TYPE_KEY] === FEES_TYPE_PER_MONTH_KEY ;
-      document.getElementById("feeTypePerHourRadio").checked = currentClassObj[FEES_TYPE_KEY] === FEES_TYPE_PER_HOUR_KEY ;
+      // document.getElementById("inFee").value = currentClassObj[FEES_KEY];
+      // document.getElementById("feeTypePerMonthRadio").checked = currentClassObj[FEES_TYPE_KEY] === FEES_TYPE_PER_MONTH_KEY ;
+      // document.getElementById("feeTypePerHourRadio").checked = currentClassObj[FEES_TYPE_KEY] === FEES_TYPE_PER_HOUR_KEY ;
 
       let feeType = "";
       if (currentClassObj[FEES_TYPE_KEY] === FEES_TYPE_PER_MONTH_KEY)
