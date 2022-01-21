@@ -15,6 +15,7 @@ function render() {
             // Enable the step1 verify button
             document.getElementById("btnVerify").setAttribute("style", "background-color: #2e74b6");
             document.getElementById("btnVerify").style.cursor='pointer';
+            document.getElementById("btnVerify").style.pointerEvents='auto';
             document.getElementById("btnVerify").disabled = false;
 
             document.getElementById("verificationCode").style.backgroundColor = '#eeeeee'
