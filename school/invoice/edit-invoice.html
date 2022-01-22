@@ -40,94 +40,102 @@
   <script src="../../assets/js/plugins/tinymce/tinymce.min.js" type="text/javascript"></script>
   <!-- Tinymce init -->
   <script>
-    tinymce.init({
-      mode : "exact",
-      selector:'#invNotes',
-      plugins: "link",
-      max_chars: 400,
-      setup: function (ed) {
-        var allowedKeys = [8, 13, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40, 46];
-        ed.on('keydown', function (e) {
-          console.log(tinymce_getContentLength());
-          invNotesOnChangeHandler();
-          if (allowedKeys.indexOf(e.keyCode) != -1){
+    function initTinyMCE(){
+      tinymce.init({
+        mode : "exact",
+        selector:'#invNotes',
+        plugins: "link",
+        max_chars: 400,
+        setup: function (ed) {
+          var allowedKeys = [8, 13, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40, 46];
+          ed.on('keydown', function (e) {
+            console.log(tinymce_getContentLength());
+            invNotesOnChangeHandler();
+            if (allowedKeys.indexOf(e.keyCode) != -1){
+              return true;
+            }
+            if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
+              func.showNotification('top','center', 'warning', 'error_outline', 'You have reach maximum allowed number of ' + ed.settings.max_chars + ' characters.' );
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
             return true;
-          }
-          if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
-            func.showNotification('top','center', 'warning', 'error_outline', 'You have reach maximum allowed number of ' + ed.settings.max_chars + ' characters.' );
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-          }
-          return true;
-        });
-      },
-           
-      init_instance_callback: function () { // initialize counter div
-        // $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
-        tinymce_updateCharCounter(this, tinymce_getContentLength());
-      },
-      paste_preprocess: function (plugin, args) {
-        var editor = tinymce.get(tinymce.activeEditor.id);
-        var len = editor.contentDocument.body.innerText.length;
-        var text = $(args.content).text();
-        if (len + text.length > editor.settings.max_chars) {
-            func.showNotification('top','center', 'warning', 'error_outline', 'Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.' );
-            args.content = '';
-        } else {
+          });
+        },
+            
+        init_instance_callback: function () { // initialize counter div
+          // $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
+          tinymce_updateCharCounter(this, tinymce_getContentLength());
+
+          let invNotesContent = tinymce.get("invNotes").getContent({ format: "text" });
+          document.getElementById("countNotes").textContent = invNotesContent.length + '/400';
+        },
+        paste_preprocess: function (plugin, args) {
+          var editor = tinymce.get(tinymce.activeEditor.id);
+          var len = editor.contentDocument.body.innerText.length;
+          var text = $(args.content).text();
+          if (len + text.length > editor.settings.max_chars) {
+              func.showNotification('top','center', 'warning', 'error_outline', 'Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.' );
+              args.content = '';
+          } else {
             tinymce_updateCharCounter(editor, len + text.length);
+          }
         }
+
+      });
+      tinymce.init({
+        mode : "exact",
+        selector:'#invFooterNotes',
+        plugins: "link",
+        max_chars: 200,
+        setup: function (ed) {
+          var allowedKeys = [8, 13, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40, 46];
+
+          ed.on('keydown', function (e) {
+            console.log(tinymce_getContentLength());
+            invFooterNotesOnChangeHandler();
+            if (allowedKeys.indexOf(e.keyCode) != -1){
+              return true;
+            }
+            if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
+              func.showNotification('top','center', 'warning', 'error_outline', 'You have reach maximum allowed number of ' + ed.settings.max_chars + ' characters.' );
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+            return true;
+          });
+
+        },
+        
+        init_instance_callback: function () { // initialize counter div
+          // $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
+          tinymce_updateCharCounter(this, tinymce_getContentLength());
+
+          let invFooterNotesContent = tinymce.get("invFooterNotes").getContent({ format: "text" });
+          document.getElementById("countFooterNotes").textContent = invFooterNotesContent.length + '/200';
+        },
+        paste_preprocess: function (plugin, args) {
+          var editor = tinymce.get(tinymce.activeEditor.id);
+          var len = editor.contentDocument.body.innerText.length;
+          var text = $(args.content).text();
+          if (len + text.length > editor.settings.max_chars) {
+              func.showNotification('top','center', 'warning', 'error_outline', 'Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.' );
+              args.content = '';
+          } else {
+              tinymce_updateCharCounter(editor, len + text.length);
+          }
+        },
+      });
+
+      function tinymce_updateCharCounter(el, len) {
+        // $('#' + el.id).prev().find('.char_count').text(len + '/' + el.settings.max_chars);
       }
 
-    });
-    tinymce.init({
-      mode : "exact",
-      selector:'#invFooterNotes',
-      plugins: "link",
-      max_chars: 200,
-      setup: function (ed) {
-        var allowedKeys = [8, 13, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40, 46];
-
-        ed.on('keydown', function (e) {
-          console.log(tinymce_getContentLength());
-          invFooterNotesOnChangeHandler();
-          if (allowedKeys.indexOf(e.keyCode) != -1){
-            return true;
-          }
-          if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
-            func.showNotification('top','center', 'warning', 'error_outline', 'You have reach maximum allowed number of ' + ed.settings.max_chars + ' characters.' );
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-          }
-          return true;
-        });
-
-      },
-      
-      init_instance_callback: function () { // initialize counter div
-        // $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
-        tinymce_updateCharCounter(this, tinymce_getContentLength());
-      },
-      paste_preprocess: function (plugin, args) {
-        var editor = tinymce.get(tinymce.activeEditor.id);
-        var len = editor.contentDocument.body.innerText.length;
-        var text = $(args.content).text();
-        if (len + text.length > editor.settings.max_chars) {
-            func.showNotification('top','center', 'warning', 'error_outline', 'Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.' );
-            args.content = '';
-        } else {
-            tinymce_updateCharCounter(editor, len + text.length);
-        }
-      },
-    });
-
-    function tinymce_updateCharCounter(el, len) {
-      // $('#' + el.id).prev().find('.char_count').text(len + '/' + el.settings.max_chars);
-    }
-
-    function tinymce_getContentLength() {
-      return tinymce.get(tinymce.activeEditor.id).contentDocument.body.innerText.length;
+      function tinymce_getContentLength() {
+        return tinymce.get(tinymce.activeEditor.id).contentDocument.body.innerText.length;
+      }
     }
   </script>
  
@@ -1489,12 +1497,12 @@
       else  status = 'Unknown'
       document.getElementById("invStatus").value =status;
 
-      document.getElementById("invNotes").innerHTML = invObj[INV_NOTES];
+      document.getElementById("invNotes").value = invObj[INV_NOTES];
       // tinymce.get("invNotes").setContent(invObj[INV_NOTES]);
       // let invNotesContent = tinymce.get("invNotes").getContent({ format: "text" });
       // document.getElementById("countNotes").textContent = invNotesContent.length + '/400';
 
-      document.getElementById("invFooterNotes").innerHTML = invObj[INV_FOOTER_NOTES];
+      document.getElementById("invFooterNotes").value = invObj[INV_FOOTER_NOTES];
       // tinymce.get("invFooterNotes").setContent(invObj[INV_FOOTER_NOTES]);
       // let invFooterNotesContent = tinymce.get("invFooterNotes").getContent({ format: "text" });
       // document.getElementById("countFooterNotes").textContent = invFooterNotesContent.length + '/200';
@@ -1525,7 +1533,12 @@
       document.getElementById("previewInvNotes").innerHTML = invObj[INV_NOTES];
       document.getElementById("previewInvFooterNotes").innerHTML = invObj[INV_FOOTER_NOTES];
 
+      // Init invoice item. 
       initInvoiceItem(invObj[INV_ITEMS_ARR]);
+
+      // Init TinyMCE for notes and footer
+      initTinyMCE();
+
     }
 
     // Initialize the invoice items

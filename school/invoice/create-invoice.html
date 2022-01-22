@@ -73,6 +73,8 @@
         init_instance_callback: function () { // initialize counter div
           // $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
           tinymce_updateCharCounter(this, tinymce_getContentLength());
+          let invNotesContent = tinymce.get("invNotes").getContent({ format: "text" });
+          document.getElementById("countNotes").textContent = invNotesContent.length + '/400';
         },
         paste_preprocess: function (plugin, args) {
           var editor = tinymce.get(tinymce.activeEditor.id);
@@ -118,6 +120,9 @@
         init_instance_callback: function () { // initialize counter div
           // $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
           tinymce_updateCharCounter(this, tinymce_getContentLength());
+
+          let invFooterNotesContent = tinymce.get("invFooterNotes").getContent({ format: "text" });
+          document.getElementById("countFooterNotes").textContent = invFooterNotesContent.length + '/200';
         },
         paste_preprocess: function (plugin, args) {
           var editor = tinymce.get(tinymce.activeEditor.id);
@@ -1383,12 +1388,6 @@
 
         // Fully populate the fields, Init MCE for notes and footer
         initTinyMCE();
-
-        let invNotesContent = tinymce.get("invNotes").getContent({ format: "text" });
-        document.getElementById("countNotes").textContent = invNotesContent.length + '/400';
-
-        let invFooterNotesContent = tinymce.get("invFooterNotes").getContent({ format: "text" });
-        document.getElementById("countFooterNotes").textContent = invFooterNotesContent.length + '/200';
 
       }
       // No business setting found
