@@ -98,7 +98,6 @@ function loadTutorInfoObj(tutorId){
     current_aPreferredAreaLimit = tutorInfoObj.aPreferredAreaLimit;
     current_uLastOnline = tutorInfoObj.uLastOnline;
 
-
     // Check if user logged in with other number. If true, logout
     if (current_id != tutorId){
       // console.log("Stored TutorId in session storage is equal to latest tutorId. ")

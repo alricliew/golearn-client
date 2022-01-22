@@ -533,59 +533,7 @@
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
-    // Set the nav name and global var, if user already login and have session Storage 
-    var tutorInfoObj = null;
-    if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
-      // Do nothing
-    }else{
-      // Set the nav user name
-      tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
-      document.getElementById("user").textContent = tutorInfoObj.name;
-
-      current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
-      // current_email, 
-      // current_phone, 
-      current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
-      current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
-      current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
-      current_accountStatus = tutorInfoObj.accountStatus; // bool
-      currentYearsExperience = tutorInfoObj.yearsExperience; // number
-      currentTutoringExperience = tutorInfoObj.tutoringExperience;
-      currentTutoringApproach = tutorInfoObj.tutoringApproach;
-      currentQualification= tutorInfoObj.qualification;
-      current_mon_8am = tutorInfoObj.tMon8am;
-      current_mon_12pm= tutorInfoObj.tMon12pm; 
-      current_mon_3pm = tutorInfoObj.tMon3pm;  
-      current_mon_6pm = tutorInfoObj.tMon6pm;  
-      current_tue_8am = tutorInfoObj.tTue8am;  
-      current_tue_12pm= tutorInfoObj.tTue12pm;  
-      current_tue_3pm = tutorInfoObj.tTue3pm;  
-      current_tue_6pm = tutorInfoObj.tTue6pm;  
-      current_wed_8am = tutorInfoObj.tWed8am;  
-      current_wed_12pm= tutorInfoObj.tWed12pm;  
-      current_wed_3pm = tutorInfoObj.tWed3pm;  
-      current_wed_6pm = tutorInfoObj.tWed6pm;  
-      current_thu_8am = tutorInfoObj.tThu8am;  
-      current_thu_12pm= tutorInfoObj.tThu12pm;  
-      current_thu_3pm = tutorInfoObj.tThu3pm;  
-      current_thu_6pm = tutorInfoObj.tThu6pm;  
-      current_fri_8am = tutorInfoObj.tFri8am;  
-      current_fri_12pm= tutorInfoObj.tFri12pm;  
-      current_fri_3pm = tutorInfoObj.tFri3pm;  
-      current_fri_6pm = tutorInfoObj.tFri6pm; 
-      current_sat_8am = tutorInfoObj.tSat8am;  
-      current_sat_12pm= tutorInfoObj.tSat12pm;  
-      current_sat_3pm = tutorInfoObj.tSat3pm;  
-      current_sat_6pm = tutorInfoObj.tSat6pm;  
-      current_sun_8am = tutorInfoObj.tSun8am;  
-      current_sun_12pm= tutorInfoObj.tSun12pm;  
-      current_sun_3pm = tutorInfoObj.tSun3pm;  
-      current_sun_6pm = tutorInfoObj.tSun6pm;
-      current_aweburl = tutorInfoObj.aWebUrl
-
-      // updatePageView(current_accountStatus);
-    }
-
+    
 		firebase.auth().onAuthStateChanged(function(user){
       
 			if(!user){
@@ -594,15 +542,124 @@
 			}else{
         // if the displayName is null, it means user register using Phone
         if (firebase.auth().currentUser.displayName == null ){
-            tutorId = firebase.auth().currentUser.phoneNumber;
+          tutorId = firebase.auth().currentUser.phoneNumber;
         }else
-            tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-
-        loadUserInfo(tutorId);
+          tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+          
+        loadUserInfo(tutorId)
+        // loadTutorInfoObj(tutorId);
         
 			}
 		});
 
+    
+    // Set the nav name and global var, if user already login and have session Storage 
+    var tutorInfoObj = null;
+
+    function loadTutorInfoObj(tutorId){
+      if (JSON.parse(sessionStorage.getItem(PROFILE_TUTOR_INFO)) == null ){
+        // Although user exist, but the storage is null. Reload.
+        loadUserInfo(tutorId);
+      }else{
+        // Set the nav user name
+        tutorInfoObj = JSON.parse(sessionStorage.getItem(PROFILE_TUTOR_INFO));
+        document.getElementById("user").textContent = tutorInfoObj.name;
+
+        current_id = (tutorInfoObj.id == null || tutorInfoObj.id == "") ? "NO_ID" : tutorInfoObj.id; // This was added to check if different user is logged in on the same browser.
+        current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
+        // current_email, 
+        // current_phone, 
+        current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
+        current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
+        current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "https://app.golearn.com.my/assets/img/hello.gif" : tutorInfoObj.imgUrl;
+        current_accountStatus = tutorInfoObj.accountStatus; // bool
+        currentYearsExperience = tutorInfoObj.yearsExperience; // number
+        currentTutoringExperience = tutorInfoObj.tutoringExperience;
+        currentTutoringApproach = tutorInfoObj.tutoringApproach;
+        currentQualification= tutorInfoObj.qualification;
+        current_mon_8am = tutorInfoObj.tMon8am;
+        current_mon_12pm= tutorInfoObj.tMon12pm; 
+        current_mon_3pm = tutorInfoObj.tMon3pm;  
+        current_mon_6pm = tutorInfoObj.tMon6pm;  
+        current_tue_8am = tutorInfoObj.tTue8am;  
+        current_tue_12pm= tutorInfoObj.tTue12pm;  
+        current_tue_3pm = tutorInfoObj.tTue3pm;  
+        current_tue_6pm = tutorInfoObj.tTue6pm;  
+        current_wed_8am = tutorInfoObj.tWed8am;  
+        current_wed_12pm= tutorInfoObj.tWed12pm;  
+        current_wed_3pm = tutorInfoObj.tWed3pm;  
+        current_wed_6pm = tutorInfoObj.tWed6pm;  
+        current_thu_8am = tutorInfoObj.tThu8am;  
+        current_thu_12pm= tutorInfoObj.tThu12pm;  
+        current_thu_3pm = tutorInfoObj.tThu3pm;  
+        current_thu_6pm = tutorInfoObj.tThu6pm;  
+        current_fri_8am = tutorInfoObj.tFri8am;  
+        current_fri_12pm= tutorInfoObj.tFri12pm;  
+        current_fri_3pm = tutorInfoObj.tFri3pm;  
+        current_fri_6pm = tutorInfoObj.tFri6pm; 
+        current_sat_8am = tutorInfoObj.tSat8am;  
+        current_sat_12pm= tutorInfoObj.tSat12pm;  
+        current_sat_3pm = tutorInfoObj.tSat3pm;  
+        current_sat_6pm = tutorInfoObj.tSat6pm;  
+        current_sun_8am = tutorInfoObj.tSun8am;  
+        current_sun_12pm= tutorInfoObj.tSun12pm;  
+        current_sun_3pm = tutorInfoObj.tSun3pm;  
+        current_sun_6pm = tutorInfoObj.tSun6pm;
+        current_aweburl = tutorInfoObj.aWebUrl
+        current_uLastOnline = tutorInfoObj.uLastOnline;
+
+        // Check if user logged in with other number. If true, logout
+        if (current_id != tutorId){
+          // console.log("Stored TutorId in session storage is equal to latest tutorId. ")
+          window.location.href = "https://app.golearn.com.my/school/login.html";
+        }
+        // console.log(current_uLastOnline)
+        // let secondLastOnline = current_uLastOnline.seconds;
+        // let secondCurrent = new Date().getTime() / 1000;
+        // let hoursEllapsed = (secondCurrent - secondLastOnline) / 60 / 60;
+        // let reload = hoursEllapsed > 6;
+        // console.log(secondLastOnline, secondCurrent, hoursEllapsed, reload)
+
+        // Check last online. If > 6hr, reload
+        if (current_uLastOnline == null || current_uLastOnline == ""){
+          loadUserInfo(tutorId);
+        }
+        else{
+          let secondLastOnline = current_uLastOnline.seconds;
+          let secondCurrent = new Date().getTime() / 1000;
+          let hoursEllapsed = (secondCurrent - secondLastOnline) / 60 / 60;
+          let reload = hoursEllapsed > 6;
+          
+          // console.log(secondLastOnline, secondCurrent, hoursEllapsed, reload);
+          if (reload){
+            // console.log("PROFILE_TUTOR_INFO exits, current_uLastOnline exits, reload true")
+            loadUserInfo(tutorId);
+          }
+          else {
+            // console.log("PROFILE_TUTOR_INFO exits, current_uLastOnline exits, reload false")
+            // Update the general view
+            updateGeneralView();
+            // Finally, load page specific view.
+            // This function will be declared separately in each page
+            loadPageInitFunc(); 
+
+            // Last Online
+            let docLastOnlineRef = db.collection("Tutor").doc(tutorId);
+            docLastOnlineRef.set({
+              [SYSTEM_LAST_ONLINE_KEY] : new Date() //firebase.firestore.Timestamp.fromDate(new Date())
+              },{ merge: true }
+            );
+
+
+          }
+
+        }
+      }
+
+
+    }
+
+ 
     // Tutor Specific
     function loadUserInfo(tutorId){
       // Tutor Id must be a phone with +60, no spacing or other chars
@@ -655,9 +712,11 @@
           current_sun_3pm = doc.data().tSun3pm;  
           current_sun_6pm = doc.data().tSun6pm;
           current_aweburl = doc.data().aWebUrl;
+          current_uLastOnline = doc.data()[SYSTEM_LAST_ONLINE_KEY].toDate();
 
           // Store data to sessionStorage
           var tutorDataObj = {
+            [ID_KEY] : tutorId, // This was added to check if different user is logged in on the same browser.
             [NAME_KEY] : doc.data().name,
             [EMAIL_KEY] : doc.data().email,
             [PHONE_KEY] : doc.data().phone,
@@ -733,11 +792,12 @@
             [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
             [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
             [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
-            [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
+            [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit,
+            [SYSTEM_LAST_ONLINE_KEY] : doc.data()[SYSTEM_LAST_ONLINE_KEY],
           }
 
           // Set tutorInfoObj as sessionStorage
-          sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
+          sessionStorage.setItem(PROFILE_TUTOR_INFO, JSON.stringify(tutorDataObj));
 
           // Set the public profile link.
           // By default, general link were given.

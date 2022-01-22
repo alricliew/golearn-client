@@ -432,23 +432,23 @@
 
           // Store data to sessionStorage
           var tutorDataObj = {
-              [NAME_KEY] : doc.data().name,
-              [EMAIL_KEY] : doc.data().email,
-              [PHONE_KEY] : doc.data().phone,
-              [ADDRESS_1_KEY] :doc.data().address1,
-              [ADDRESS_2_KEY] :doc.data().address2,
-              [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
-              [ADDRESS_STATE_KEY] :doc.data().addressState,
-              [IMAGE_KEY] : doc.data().imgUrl,
-              [SYSTEM_LAST_ONLINE_KEY] : doc.data()[SYSTEM_LAST_ONLINE_KEY],
-            }
+            [ID_KEY] : userId, // This was added to check if different user is logged in on the same browser.
+            [NAME_KEY] : doc.data().name,
+            [EMAIL_KEY] : doc.data().email,
+            [PHONE_KEY] : doc.data().phone,
+            [ADDRESS_1_KEY] :doc.data().address1,
+            [ADDRESS_2_KEY] :doc.data().address2,
+            [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
+            [ADDRESS_STATE_KEY] :doc.data().addressState,
+            [IMAGE_KEY] : doc.data().imgUrl,
+            [SYSTEM_LAST_ONLINE_KEY] : doc.data()[SYSTEM_LAST_ONLINE_KEY],
+          }
 
-            // Set tutorInfoObj as sessionStorage
-            sessionStorage.setItem(PROFILE_CLIENT_INFO, JSON.stringify(tutorDataObj));
-            
+          // Set tutorInfoObj as sessionStorage
+          sessionStorage.setItem(PROFILE_CLIENT_INFO, JSON.stringify(tutorDataObj));
+          
           // Set the nav user name and public profile link
           document.getElementById("user").textContent = doc.data().name;
-
 
           //------ edit-profile.html specific Start -------------//
           document.getElementById("tutorImgUrl").src = current_imgUri;
@@ -469,7 +469,7 @@
 
         } else {
           console.log("No user! Redirecting to login");
-          window.location = "login.html"
+          window.location = "https://app.golearn.com.my/"
         }
       });
 
