@@ -41,101 +41,104 @@
   <script src="../../assets/js/plugins/tinymce/tinymce.min.js" type="text/javascript"></script>
   <!-- Tinymce init -->
   <script>
-    tinymce.init({
-      mode : "exact",
-      selector:'#invNotes',
-      plugins: "link",
-      max_chars: 400,
-      setup: function (ed) {
-        var allowedKeys = [8, 13, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40, 46];
-        ed.on('keydown', function (e) {
-          console.log(tinymce_getContentLength());
-          invNotesOnChangeHandler();
-          if (allowedKeys.indexOf(e.keyCode) != -1){
+    function initTinyMCE(){
+
+      tinymce.init({
+        mode : "exact",
+        selector:'#invNotes',
+        plugins: "link",
+        max_chars: 400,
+        setup: function (ed) {
+          var allowedKeys = [8, 13, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40, 46];
+          ed.on('keydown', function (e) {
+            console.log(tinymce_getContentLength());
+            invNotesOnChangeHandler();
+            if (allowedKeys.indexOf(e.keyCode) != -1){
+              return true;
+            }
+            if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
+              func.showNotification('top','center', 'warning', 'error_outline', 'You have reach maximum allowed number of ' + ed.settings.max_chars + ' characters.' );
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
             return true;
-          }
-          if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
-            func.showNotification('top','center', 'warning', 'error_outline', 'You have reach maximum allowed number of ' + ed.settings.max_chars + ' characters.' );
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-          }
-          return true;
-        });
-        ed.on('keyup', function (e) {
-          invFooterNotesOnChangeHandler();
+          });
+          ed.on('keyup', function (e) {
+            invFooterNotesOnChangeHandler();
+            tinymce_updateCharCounter(this, tinymce_getContentLength());
+          });
+        },
+              
+        init_instance_callback: function () { // initialize counter div
+          // $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
           tinymce_updateCharCounter(this, tinymce_getContentLength());
-        });
-      },
-            
-      init_instance_callback: function () { // initialize counter div
-        // $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
-        tinymce_updateCharCounter(this, tinymce_getContentLength());
-      },
-      paste_preprocess: function (plugin, args) {
-        var editor = tinymce.get(tinymce.activeEditor.id);
-        var len = editor.contentDocument.body.innerText.length;
-        var text = $(args.content).text();
-        if (len + text.length > editor.settings.max_chars) {
-            func.showNotification('top','center', 'warning', 'error_outline', 'Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.' );
-            args.content = '';
-        } else {
-            tinymce_updateCharCounter(editor, len + text.length);
+        },
+        paste_preprocess: function (plugin, args) {
+          var editor = tinymce.get(tinymce.activeEditor.id);
+          var len = editor.contentDocument.body.innerText.length;
+          var text = $(args.content).text();
+          if (len + text.length > editor.settings.max_chars) {
+              func.showNotification('top','center', 'warning', 'error_outline', 'Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.' );
+              args.content = '';
+          } else {
+              tinymce_updateCharCounter(editor, len + text.length);
+          }
         }
+
+      });
+      tinymce.init({
+        mode : "exact",
+        selector:'#invFooterNotes',
+        plugins: "link",
+        max_chars: 200,
+        setup: function (ed) {
+          var allowedKeys = [8, 13, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40, 46];
+
+          ed.on('keydown', function (e) {
+            console.log(tinymce_getContentLength());
+            invFooterNotesOnChangeHandler();
+            if (allowedKeys.indexOf(e.keyCode) != -1){
+              return true;
+            }
+            if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
+              func.showNotification('top','center', 'warning', 'error_outline', 'You have reach maximum allowed number of ' + ed.settings.max_chars + ' characters.' );
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+            return true;
+          });
+          ed.on('keyup', function (e) {
+            invFooterNotesOnChangeHandler();
+            tinymce_updateCharCounter(this, tinymce_getContentLength());
+          });
+        },
+        
+        init_instance_callback: function () { // initialize counter div
+          // $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
+          tinymce_updateCharCounter(this, tinymce_getContentLength());
+        },
+        paste_preprocess: function (plugin, args) {
+          var editor = tinymce.get(tinymce.activeEditor.id);
+          var len = editor.contentDocument.body.innerText.length;
+          var text = $(args.content).text();
+          if (len + text.length > editor.settings.max_chars) {
+              func.showNotification('top','center', 'warning', 'error_outline', 'Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.' );
+              args.content = '';
+          } else {
+              tinymce_updateCharCounter(editor, len + text.length);
+          }
+        },
+      });
+
+      function tinymce_updateCharCounter(el, len) {
+        // $('#' + el.id).prev().find('.char_count').text(len + '/' + el.settings.max_chars);
       }
 
-    });
-    tinymce.init({
-      mode : "exact",
-      selector:'#invFooterNotes',
-      plugins: "link",
-      max_chars: 200,
-      setup: function (ed) {
-        var allowedKeys = [8, 13, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40, 46];
-
-        ed.on('keydown', function (e) {
-          console.log(tinymce_getContentLength());
-          invFooterNotesOnChangeHandler();
-          if (allowedKeys.indexOf(e.keyCode) != -1){
-            return true;
-          }
-          if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
-            func.showNotification('top','center', 'warning', 'error_outline', 'You have reach maximum allowed number of ' + ed.settings.max_chars + ' characters.' );
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-          }
-          return true;
-        });
-        ed.on('keyup', function (e) {
-          invFooterNotesOnChangeHandler();
-          tinymce_updateCharCounter(this, tinymce_getContentLength());
-        });
-      },
-      
-      init_instance_callback: function () { // initialize counter div
-        // $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
-        tinymce_updateCharCounter(this, tinymce_getContentLength());
-      },
-      paste_preprocess: function (plugin, args) {
-        var editor = tinymce.get(tinymce.activeEditor.id);
-        var len = editor.contentDocument.body.innerText.length;
-        var text = $(args.content).text();
-        if (len + text.length > editor.settings.max_chars) {
-            func.showNotification('top','center', 'warning', 'error_outline', 'Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.' );
-            args.content = '';
-        } else {
-            tinymce_updateCharCounter(editor, len + text.length);
-        }
-      },
-    });
-
-    function tinymce_updateCharCounter(el, len) {
-      // $('#' + el.id).prev().find('.char_count').text(len + '/' + el.settings.max_chars);
-    }
-
-    function tinymce_getContentLength() {
-      return tinymce.get(tinymce.activeEditor.id).contentDocument.body.innerText.length;
+      function tinymce_getContentLength() {
+        return tinymce.get(tinymce.activeEditor.id).contentDocument.body.innerText.length;
+      }
     }
   </script>
 
@@ -1298,6 +1301,7 @@
       docRef.get().then((doc) => {
 
         if (doc.exists){
+          console.log("Settings exist")
           updatePageContent(doc);
         }else {
           updatePageContent(null);
@@ -1330,13 +1334,15 @@
 
         document.getElementById("invIssueDate").value = new Date().toLocaleDateString("en-GB");
 
-        tinymce.get("invNotes").setContent(doc.data()[SET_INV_NOTE]);
-        let invNotesContent = tinymce.get("invNotes").getContent({ format: "text" });
-        document.getElementById("countNotes").textContent = invNotesContent.length + '/400';
+        document.getElementById("invNotes").value = doc.data()[SET_INV_NOTE];
+        // tinymce.get("invNotes").setContent(doc.data()[SET_INV_NOTE]);
+        // let invNotesContent = tinymce.get("invNotes").getContent({ format: "text" });
+        // document.getElementById("countNotes").textContent = invNotesContent.length + '/400';
 
-        tinymce.get("invFooterNotes").setContent(doc.data()[SET_INV_FOOTER_NOTE]);
-        let invFooterNotesContent = tinymce.get("invFooterNotes").getContent({ format: "text" });
-        document.getElementById("countFooterNotes").textContent = invFooterNotesContent.length + '/200';
+        document.getElementById("invFooterNotes").value = doc.data()[SET_INV_FOOTER_NOTE]
+        // tinymce.get("invFooterNotes").setContent(doc.data()[SET_INV_FOOTER_NOTE]);
+        // let invFooterNotesContent = tinymce.get("invFooterNotes").getContent({ format: "text" });
+        // document.getElementById("countFooterNotes").textContent = invFooterNotesContent.length + '/200';
 
         // Preview 
         // document.getElementById("previewTutorImgUrl").src = doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == '' ?  '../../assets/img/empty-photo.png' : doc.data()[SET_BIZ_IMG_URL];
@@ -1374,6 +1380,16 @@
         document.getElementById("previewInvIssueDate").textContent = new Date().toLocaleDateString("en-GB");
         document.getElementById("previewInvNotes").innerHTML = doc.data()[SET_INV_NOTE];
         document.getElementById("previewInvFooterNotes").innerHTML = doc.data()[SET_INV_FOOTER_NOTE];
+
+        // Fully populate the fields, Init MCE for notes and footer
+        initTinyMCE();
+
+        let invNotesContent = tinymce.get("invNotes").getContent({ format: "text" });
+        document.getElementById("countNotes").textContent = invNotesContent.length + '/400';
+
+        let invFooterNotesContent = tinymce.get("invFooterNotes").getContent({ format: "text" });
+        document.getElementById("countFooterNotes").textContent = invFooterNotesContent.length + '/200';
+
       }
       // No business setting found
       else{
@@ -1386,11 +1402,14 @@
         
         document.getElementById("invIssueDate").value = new Date().toLocaleDateString("en-GB");
 
-        tinymce.get("invNotes").setContent("");
-        document.getElementById("countNotes").textContent = '0/400';
+        document.getElementById("invNotes").value = "";
+        // tinymce.get("invNotes").setContent("");
+        // document.getElementById("countNotes").textContent = '0/400';
 
-        tinymce.get("invFooterNotes").setContent("");
-        document.getElementById("countFooterNotes").textContent = '0/200';
+        document.getElementById("invFooterNotes").value = "";
+        // tinymce.get("invFooterNotes").setContent("");
+        // document.getElementById("countFooterNotes").textContent = '0/200';
+
         document.getElementById("previewTutorImgUrl").src =  "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D";
         document.getElementById("previewTutorImgUrl").style.display = 'none';
         
@@ -1399,6 +1418,10 @@
         document.getElementById("previewInvIssueDate").textContent = new Date().toLocaleDateString("en-GB");
         document.getElementById("previewInvNotes").innerHTML = "";
         document.getElementById("previewInvFooterNotes").innerHTML = "";
+
+        // Fully populate the fields, Init MCE for notes and footer
+        initTinyMCE();
+
       }
       
     }
