@@ -2420,27 +2420,15 @@
     // Update Class
     function UpdateClass(classId){
       var docRef = db.collection("Class")
-          .doc("v1")
-          .collection("Class")
-          .doc(classId);
+        .doc("v1")
+        .collection("Class")
+        .doc(classId);
 
-        // var button = $(event.relatedTarget) // Button that triggered the modal
-        // KEY = button.data('key') // Extract info from data-* attributes
-        // DATETIME = button.data('datetime') // Extract info from data-* attributes
-
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-      let idInput1 = $('#inTutor1Name');
-      let tutor1_id = idInput1.data("tutor1id");
-      let idInput2 = $('#inTutor2Name');
-      let tutor2_id = idInput2.data('tutor2id');
-
+      // Get date from firstClassDate
       let myDate = document.getElementById("firstClassDatePicker").value;
       myDate = myDate.split("/");
       let newDate = new Date( myDate[2], myDate[1] - 1, myDate[0]);
 
-        // Notice that I use .add(..), instead of .set(..). This is because the docRef do not specify the docId.
-      // var docRefWithMerge = docRef.set({
       var data = {
         // [CLASS_ID]: docRef.id,
         [CLASS_NAME]: document.getElementById("inClassName").value,
@@ -4135,8 +4123,7 @@
           .doc(currentClassObj[CLASS_ID]);
 
       // First, get the original value first
-      let idInput1 = $('#inTutor1Name');
-      let tutor1_id = idInput1.data("tutor1id");
+      let tutor1_id = document.getElementById("inTutor1Name").getAttribute("data-tutor1id");
       let tutor1_name = document.getElementById("inTutor1Name").value;
       let tutor1_phone = document.getElementById("inTutor1Phone").value;
       let tutor1_imgurl = document.getElementById("inTutor1ImgUrl").src;
@@ -4149,9 +4136,7 @@
         // tutor1_imgurl = tutor1_imgurl; 
       }
 
-
-      let idInput2 = $('#inTutor2Name');
-      let tutor2_id = idInput2.data('tutor2id');
+      let tutor2_id = document.getElementById("inTutor1Name").getAttribute("data-tutor2id");
       let tutor2_name = document.getElementById("inTutor2Name").value;
       let tutor2_phone = document.getElementById("inTutor2Phone").value;
       let tutor2_imgurl = document.getElementById("inTutor2ImgUrl").src;
@@ -4161,7 +4146,7 @@
       }
       else {
         // Do nothing, remain the same.
-        // tutor1_imgurl = tutor1_imgurl; 
+        // tutor2_imgurl = tutor2_imgurl; 
       }
 
       // Update the Teacher panel
@@ -4184,7 +4169,7 @@
         document.getElementById("inTutor2Phone").value = tutorPhone;
         document.getElementById("inTutor2ImgUrl").src = tutorImgUrl;
       }else{
-
+        // Do nothing
       }
 
       let data = {
@@ -4261,8 +4246,7 @@
           .doc(currentClassObj[CLASS_ID]);
 
       // First, get the original value first
-      let idInput1 = $('#inTutor1Name')
-      let tutor1_id = idInput1.data("tutor1id");
+      let tutor1_id = document.getElementById("inTutor1Name").getAttribute("data-tutor1id");
       let tutor1_name = document.getElementById("inTutor1Name").value;
       let tutor1_phone = document.getElementById("inTutor1Phone").value;
       let tutor1_imgurl = document.getElementById("inTutor1ImgUrl").src;
