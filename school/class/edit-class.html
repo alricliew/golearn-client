@@ -843,23 +843,6 @@
         </div>
       </div>
 
-      <!-- Loading Modal -->
-      <div class="row">
-        <div class="modal fade" tabindex="-1" role="dialog" id="loadingModal" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="container-fluid">
-              <div class="row d-flex">
-                <span class="fa fa-spinner fa-spin fa-5x w-100" style="color: #fff ;"></span>
-                <div class="col align-self-center">
-                  <!-- <h5 class="modal-title" style="color: white;">Generating invoice in progress. </h5> -->
-                  <!-- <h5 class="modal-title" style="color: white;"> Please do not close this window.</h5> -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Delete Class modal -->
       <div class="row">
         <div class="modal fade" id="delClassModal" tabindex="-1" role="dialog" aria-labelledby="delClassModalLabel" aria-hidden="true">
@@ -5259,18 +5242,9 @@
         RATE = "";
 
         $('#btnEditLessonModalUpdate').prop('disabled', true);
-
         // document.getElementById("modalClassAnnouncement").textContent = "";
       });
 
-      $('#editLessonDatepicker').on('change', function(){
-        // console.log($(this).val().length)
-        if( $(this).val().length === 0 || $('#editLessonStart').val().length === 0 || $('#editLessonEnd').val().length === 0) {
-          $('#btnEditLessonModalUpdate').prop('disabled', true);
-        }else{
-          $('#btnEditLessonModalUpdate').prop('disabled', false);
-        }
-      });
       $('#editLessonStart').on('change', function(){
         if( $(this).val().length === 0 || $('#editLessonEnd').val().length === 0 || $('#editLessonDatepicker').val().length === 0 ) {
           $('#btnEditLessonModalUpdate').prop('disabled', true);
@@ -5641,13 +5615,6 @@
         UpdateClass(currentClassObj[CLASS_ID]);
       });
 
-      // Init Modal
-      $('#loadingModal').modal({
-        backdrop:'static',
-        keyboard:false,
-        show: false
-      });
-    
     });
 
   </script>
@@ -6018,6 +5985,7 @@
       customClearBTN: '',
       theme: calendarTheme
     });
+
     const firstClassDatePicker = MCDatepicker.create({
       el: '#firstClassDatePicker',
       bodyType: 'inline',
@@ -6028,11 +5996,15 @@
       customClearBTN: '',
       theme: calendarTheme
     });
+    
+    editLessonModalDatePicker.onSelect((date, formatedDate) => {
+      if($('#editLessonStart').val().length === 0 || $('#editLessonEnd').val().length === 0) {
+        $('#btnEditLessonModalUpdate').prop('disabled', true);
+      }else{
+        $('#btnEditLessonModalUpdate').prop('disabled', false);
+      }
 
-    // const datepickerBTN = document.querySelector('#datepicker_btn');
-    // datepickerBTN.onclick = () => {
-    //   firstDatePicker.open();
-    // };
+    });
 
     // Close the datepicker if we clicked on other components
     document.querySelector('#addLessonModal').addEventListener('click', e => {
@@ -6163,7 +6135,6 @@
 
       }
     }
-
 
     function processfile(file) {
       
