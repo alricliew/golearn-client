@@ -843,6 +843,23 @@
         </div>
       </div>
 
+      <!-- Loading Modal -->
+      <div class="row">
+        <div class="modal fade" tabindex="-1" role="dialog" id="loadingModal" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="container-fluid">
+              <div class="row d-flex">
+                <span class="fa fa-spinner fa-spin fa-5x w-100" style="color: #fff ;"></span>
+                <div class="col align-self-center">
+                  <!-- <h5 class="modal-title" style="color: white;">Generating invoice in progress. </h5> -->
+                  <!-- <h5 class="modal-title" style="color: white;"> Please do not close this window.</h5> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Delete Class modal -->
       <div class="row">
         <div class="modal fade" id="delClassModal" tabindex="-1" role="dialog" aria-labelledby="delClassModalLabel" aria-hidden="true">
@@ -874,7 +891,6 @@
         </div>
       </div>
 
-			
       <!-- Sign-out modal -->
       <div class="row">
         <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="signOutModalLabel" aria-hidden="true">
@@ -2419,6 +2435,8 @@
   
     // Update Class
     function UpdateClass(classId){
+      showLoadingModal(); 
+
       var docRef = db.collection("Class")
         .doc("v1")
         .collection("Class")
@@ -2499,10 +2517,11 @@
       .then(() => {
         // Reload the page view after changing removing tutor.
         reload();
-
         func.showNotification('top','center', 'success', 'check_circle', "Class updated!" );
-
-        // window.location.href='./'
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+        hideLoadingModal();
       });
 
 
@@ -3612,6 +3631,8 @@
 
     // Add the student admin/tutor selected in Add Student Modal to Class_Student module
     function AddNewStudentsToDB(id){
+      showLoadingModal();
+
       // id is the docId of a student in Student Module
       let selectedStuModuleDoc = null;
 
@@ -3671,6 +3692,7 @@
 
       }).catch((error) => {
         console.log("Error getting document:", error);
+        hideLoadingModal();
         // return '';
       });
 
@@ -3679,12 +3701,10 @@
     // Add new studentId & parentID as viewer to Class DB
     // Note: Guardian ID is always valid. Sometime, childId is empty.
     function addStudentIdToClassDB(guardianId, childId, childName) {
-      
       let docRef = db.collection("Class")
           .doc("v1")
           .collection("Class")
           .doc(currentClassObj[CLASS_ID]);
-
 
       // Update the Teacher panel
       // If the CLASS_VIEWER_ID_ARR or CLASS_STUDENT_ID_ARR is null or empty, assign empty arr to them.
@@ -3706,19 +3726,20 @@
       docRef.set( data, { merge: true })
       .then(() => {
         reload();
-        // func.showNotification('top','center', 'success', 'check_circle', "New student added.");
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+        hideLoadingModal();
       });
 
     }
 
     // Remove a studentId & parentID as viewer from Class DB
     function delStudentIdFromClassDB(guardianId, studentId, studentName) {
-      
       let docRef = db.collection("Class")
           .doc("v1")
           .collection("Class")
           .doc(currentClassObj[CLASS_ID]);
-
 
       // Removed the student and gurdian Id
       let viewerArray = (currentClassObj[CLASS_VIEWER_ID_ARR] == null || currentClassObj[CLASS_VIEWER_ID_ARR] == "") ? [] : currentClassObj[CLASS_VIEWER_ID_ARR];
@@ -3752,12 +3773,11 @@
         [CLASS_EDIT_MSG]: current_name, // Update: CLASS_DATE_EDIT + CLASS_EDIT_MSG
       }
 
-      console.log('StudentID Array Data');
-      console.log(data);
+      // console.log('StudentID Array Data');
+      // console.log(data);
       
       docRef.set( data, { merge: true })
       .then(() => {
-
         // Reload the page view after changing removing tutor.
         reload();
 
@@ -3766,12 +3786,18 @@
         removeElementsByClass('row student-wrapper');
         loadAllStudents();
         func.showNotification('top','center', 'success', 'check_circle', studentName + " has been removed." );
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+        hideLoadingModal();
       });
 
     }
 
     // Remove permanantly a student from class
     function removeStudent(studentClassId, studentName, studentId, guardianId){
+      showLoadingModal();
+
       // studentClassId is the id of student in Student_Class Module
       let docRef = db.collection("Class")
           .doc("v1")
@@ -3791,18 +3817,9 @@
         delStudentIdFromClassDB(guardianId, studentId, studentName);
 
       }).catch((error) => {
-
+        hideLoadingModal();
         console.error("Error removing document: ", error);
       });
-      // docRef.set(data, { merge: true })
-      // .then(() => {
-      //   // Remove studentId and gurId from class's viewerId & studentId array in Class Module
-      //   delStudentIdFromClassDB(guardianId, studentId, studentName);
-
-
-      // }).catch((error) => {
-      //   console.log("Error getting document:", error);
-      // });
 
     }
     
@@ -4111,6 +4128,8 @@
     
     // Add Tutor to Class (Subset of Add to Class function)
     function AddNewTutorToDB(tutorNum, tutorId_temp, tutorName, tutorPhone, tutorImgUrl){
+      showLoadingModal();
+
       // tutorNum refer to Teacher 1 / 2 since we share the similar modal
       // console.log(tutorNum)
       // console.log(tutorId)
@@ -4232,13 +4251,17 @@
       .then(() => {
         func.showNotification('top','center', 'success', 'check_circle', "New tutor added.");
         reload();
-        // markTutor
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+        hideLoadingModal();
       });
 
     }
 
     // Remove Tutor 2 from Class
     function removeTutor2FromDB(){
+      showLoadingModal();
 
       let docRef = db.collection("Class")
           .doc("v1")
@@ -4326,8 +4349,11 @@
       .then(() => {
         func.showNotification('top','center', 'success', 'check_circle', tutor2_name + " removed.");
         reload();
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+        hideLoadingModal();
       });
-
     }
 
     // Remove Elements by Class Name
@@ -4729,7 +4755,6 @@
       .get()
       .then((doc) => {
 
-
         if (doc.exists) {
           console.log("Reload document");
           // console.log(doc.data());
@@ -4745,9 +4770,12 @@
           console.log("No such document!");
         }
 
+        hideLoadingModal();
+
       })
       .catch((error) => {
         console.log("Error getting document:", error);
+        hideLoadingModal();
       });
     }
 
@@ -4848,6 +4876,16 @@
       };
 
       html2pdf().set(opt).from(report).save();
+    }
+
+    // Show loading modal
+    function showLoadingModal(){
+      $('#loadingModal').modal('show');
+    }
+
+    // Show hide modal
+    function hideLoadingModal(){
+      $('#loadingModal').modal('hide');
     }
 
   </script>
@@ -5631,6 +5669,12 @@
         UpdateClass(currentClassObj[CLASS_ID]);
       });
 
+      // Init Modal
+      $('#loadingModal').modal({
+        backdrop:'static',
+        keyboard:false,
+        show: false
+      });
     
     });
 
