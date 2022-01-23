@@ -1368,7 +1368,7 @@
       }else{
         // Set the fields
         currentInvoiceObj = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_INVOICE_CURRENT_DOC_KEY));
-        console.log(currentInvoiceObj);
+        // console.log(currentInvoiceObj);
         invId = currentInvoiceObj[INV_ID]
         
         updatePageContent(currentInvoiceObj);
@@ -3802,8 +3802,8 @@
 
       // Get the inv data
       let invData = getAllItems2();
-      console.log('invData')
-      console.log(invData)
+      // console.log('invData')
+      // console.log(invData)
 
 
       // Step 2: Print Items & Additional Items
@@ -3832,7 +3832,7 @@
 
       // console.log(itemList)
       // console.log(itemIndex)
-      console.log(additionalItem)
+      // console.log(additionalItem)
       // console.log(total)
 
       // Loop through each 'ITEM' index
@@ -4149,8 +4149,8 @@
         [INV_STATUS]: true,
       }
 
-      console.log("*Invoice Data...")
-      console.log(invData)
+      // console.log("*Invoice Data...")
+      // console.log(invData)
 
       var transDocRef = db.collection("Financial")
           .doc("v1")
@@ -4175,8 +4175,8 @@
         // [TRANS_STATUS]: true,
       }
 
-      console.log("Transaction Data...")
-      console.log(transData)
+      // console.log("Transaction Data...")
+      // console.log(transData)
 
       // Set the value of 'Invoice'
       batch.set(invDocRef, invData, { merge: true });
@@ -4211,13 +4211,13 @@
             querySnapshot.forEach((doc) => {
               let docItemJson = {};
 
-              console.log(doc.data());
+              // console.log(doc.data());
 
               let invDocIdIndex = null;
               let invDocIdArr = doc.data()[REV_DOC_ID_ARR];
               let invDocTotalArr = doc.data()[REV_DOC_TOTAL_ARR];
 
-              console.log("invDocIdArr Ori")
+              // console.log("invDocIdArr Ori")
               // console.log(invDocIdArr)
               
               let i = invDocIdArr.length

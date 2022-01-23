@@ -296,11 +296,11 @@
       <div class="row" >
         <div class="modal fade" tabindex="-1" role="dialog" id="previewModal" aria-labelledby="staticBackdropLabel" aria-hidden="true"  >
           <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content" style="background-color: transparent;  box-shadow: none; border: none;">
-              <div class="modal-body" style="background-color: transparent; box-shadow: none;  border: none;">
+            <div class="modal-content" style="background-color: transparent; box-shadow: none; border: none;">
+              <div class="modal-body" style="background-color: transparent; box-shadow: none; border: none;">
                <!-- Preview -->
                <div class="row" style="overflow-y:auto;">
-                <div class="col-12" style="overflow-x:auto;  padding: 1rem;">
+                <div class="col-12" style="overflow-x:auto; padding: 1rem;">
                   <a href="javascript:;" class="btn btn-primary btn-round" style="text-transform: none; background-color: white; color: #2e74b6;" onclick="generatePDFeKoopmans('invTemplate')">Download As PDF</a>
 
                   <span id="netpayview_preview" style="color: white;"></span>
@@ -3749,6 +3749,7 @@
       previewBtn.setAttribute('data-toggle', 'modal');
       previewBtn.setAttribute('data-target', '#previewModal');
       previewBtn.setAttribute('data-cardid', payslipData.tutorId);
+      previewBtn.setAttribute('onclick', "appendModal('previewModal')");
       previewBtnDiv = document.createElement('div');
       // previewBtnDiv.className = 'ml-auto p-2';
       previewBtnDiv.className = 'p-2';

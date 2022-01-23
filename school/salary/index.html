@@ -1127,6 +1127,7 @@
       detail_top_div.setAttribute("data-toggle","modal");
       detail_top_div.setAttribute("data-target","#previewModal");
       detail_top_div.setAttribute("data-docid", doc.data()[TRANS_DOC_ID]);
+      detail_top_div.setAttribute('onclick', "appendModal('previewModal')");
       detail_top_div.appendChild(detail_div);
 
       //Edit btn

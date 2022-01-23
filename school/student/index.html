@@ -366,22 +366,22 @@
                 <div class="col-md-12" style="padding: 0;">
                   <div class="row" style="margin: 0;">
                     <div class="col-md-4">
-                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Student Name</h6>
+                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Guardian</h6>
+                    </div>
+                    <div class="col-md-4">
+                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Student</h6>
                     </div>
                     <!-- <div class="col-md-1">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Gender</h6>
                     </div> -->
-                    <div class="col-md-3">
-                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Guardian</h6>
-                    </div>
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Contact No.</h6>
-                    </div>
-                    <div class="col-md-1">
+                    </div> -->
+                    <div class="col-md-2">
                       <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Status</h6>
                     </div>
                     <div class="col-md-2">
-                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Date Added</h6>
+                      <h6 style="font-weight: 600; color: #2e74b6; font-size: 0.8rem; margin: 0;" data-toggle="tooltip" title="No info">Date Joined</h6>
                     </div>
                   </div>
                 </div>
@@ -789,7 +789,7 @@
           .where(STU_ADMIN_ID, "==", tutorId)
           .where(STU_STATUS_ADMIN, "==", true)
           // .orderBy(STU_ENROLLMENT_STATUS, 'desc')
-          .orderBy(STU_CHILD_NAME, 'asc')
+          .orderBy(STU_GUR_NAME, 'asc')
           .startAfter(latestDoc)
           .limit(25);
       
@@ -888,13 +888,18 @@
       stuName_p.textContent = doc.data().childName;
       stuName_p.setAttribute("style", "font-size:1rem; font-weight:400;")
       // Gender
-      let stuGender_p = document.createElement('p');
-      stuGender_p.textContent = (doc.data().childGender === 0) ? 'Male' : 'Female';
+      let stuGender_temp = (doc.data().childGender === 0) ? 'Male' : 'Female';
+      // Student Phone
+      let stuPhone_temp = (doc.data()[STU_CHILD_PHONE] == null || doc.data()[STU_CHILD_PHONE] == "") ? '' : ', '+doc.data()[STU_CHILD_PHONE];
+
+      // Student Details
+      let stuDetail_p = document.createElement('p');
+      stuDetail_p.textContent = stuGender_temp+stuPhone_temp;
 
       let stuName_div = document.createElement('div');
       stuName_div.className = "col-md-4";
       stuName_div.appendChild(stuName_p);
-      stuName_div.appendChild(stuGender_p);
+      stuName_div.appendChild(stuDetail_p);
 
       // // Gender
       // let stuGender_p = document.createElement('p');
@@ -902,19 +907,23 @@
       // let stuGender_div = document.createElement('div');
       // stuGender_div.className = "col-md-1";
       // stuGender_div.appendChild(stuGender_p);
-      // Gurdian Name
-      let gurName_p = document.createElement('p');
-      gurName_p.textContent = doc.data().gurName;
-      gurName_p.setAttribute("style", "font-weight:400;")
-      let gurName_div = document.createElement('div');
-      gurName_div.className = "col-md-3";
-      gurName_div.appendChild(gurName_p);
+
       // Gurdian Phone
       let gurPhone_p = document.createElement('p');
       gurPhone_p.textContent = doc.data().gurPhone;
-      let gurPhone_div = document.createElement('div');
-      gurPhone_div.className = "col-md-2";
-      gurPhone_div.appendChild(gurPhone_p);
+      // let gurPhone_div = document.createElement('div');
+      // gurPhone_div.className = "col-md-2";
+      // gurPhone_div.appendChild(gurPhone_p);
+
+      // Gurdian Name
+      let gurName_p = document.createElement('p');
+      gurName_p.textContent = doc.data().gurName;
+      gurName_p.setAttribute("style", "font-size:1rem; font-weight:400;")
+      let gurName_div = document.createElement('div');
+      gurName_div.className = "col-md-4";
+      gurName_div.appendChild(gurName_p);
+      gurName_div.appendChild(gurPhone_p);
+
       // Status
       let status_p = document.createElement('p');
       if (doc.data()[STU_ENROLLMENT_STATUS] === STU_ENROLLMENT_STATUS_ACTIVE){
@@ -925,7 +934,7 @@
         status_p.textContent = 'Pending';
       }
       let status_div = document.createElement('div');
-      status_div.className = "col-md-1 col-3";
+      status_div.className = "col-md-2 col-3";
       status_div.appendChild(status_p);
 
       // Date Join
@@ -939,10 +948,10 @@
       let detail_div = document.createElement('div');
       detail_div.className = 'row';
       detail_div.setAttribute("style","margin: 0;");
-      detail_div.appendChild(stuName_div);
       // detail_div.appendChild(stuGender_div);
       detail_div.appendChild(gurName_div);
-      detail_div.appendChild(gurPhone_div);
+      detail_div.appendChild(stuName_div);
+      // detail_div.appendChild(gurPhone_div);
       detail_div.appendChild(status_div);
       detail_div.appendChild(dateAdd_div);
       let detail_top_div = document.createElement('div');
