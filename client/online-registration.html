@@ -228,7 +228,7 @@
               <div class="row text-center">
                 <div class="col-md-12">
                   <h2 id="invalidScreenTitle">Invalid Registration Link...</h2>
-                  <p id="invalidScreenDescription">Please contact the class owner to fix this for you.</p>
+                  <p id="invalidScreenDescription">Error 1000. Please contact the class owner to fix this for you.</p>
                 </div>
               </div>
 
@@ -852,7 +852,10 @@
     if (adminId === "" || adminId == null){
       //  Error: Invalid class
       console.log('Invalid Url params');
-      invalidatePage();
+      invalidatePage(
+        "Invalid Registration Link...", 
+        "Error 1010. Please contact the class owner to fix this for you."
+      );
     }
     else if (classId === "" || classId === null){
 
@@ -883,18 +886,25 @@
             console.log("Owner is suspended.");
             invalidatePage(
               "Class is Not Available", 
-              admin_name+"'s account is no longer active.");
+              "Error 2100. "+admin_name+"'s account is no longer active.");
           }
             
-        } else {
+        } 
+        else {
           //  Error: Invalid Tutor/ organization
           console.log("No such admin Id!");
-          invalidatePage();
+          invalidatePage(
+            "Invalid Registration Link...", 
+            "Error 2020. Please contact the class owner to fix this for you."
+          );
         }
       }).catch((error) => {
         // Error: Invalid Tutor/ organization
         console.log("Error getting document:", error);
-        invalidatePage()
+        invalidatePage(
+          "Invalid Registration Link...", 
+          "Error 2010. Please contact the class owner to fix this for you."
+        );
 
       });
 
@@ -923,7 +933,7 @@
             console.log("Owner is suspended.");
             invalidatePage(
               "Class is Not Available", 
-              admin_name+"'s account is no longer active.");
+              "Error 3100. "+admin_name+"'s account is no longer active.");
           }
           
           // Step 2: Check if the class exists
@@ -937,7 +947,7 @@
               if(doc.data()[CLASS_STATUS] === CLASS_STATUS_INACTIVE){
                 invalidatePage(
                   "Class is Not Available", 
-                  doc.data()[CLASS_NAME]+" is no longer accepting new students");
+                  "Error 3220. "+doc.data()[CLASS_NAME]+" is no longer accepting new students");
               }
 
             }else{
@@ -953,19 +963,29 @@
           .catch((error) => {
             // Error: Invalid Tutor/ organization
             console.log("Error getting document:", error);
-            invalidatePage();
+            invalidatePage(
+              "Invalid Registration Link...", 
+              "Error 3120. Please contact the class owner to fix this for you."
+            );
           });
             
-        } else {
+        } 
+        else {
           //  Error: Invalid Tutor/ organization
           console.log("No such admin Id!");
-          invalidatePage();
+          invalidatePage(
+              "Invalid Registration Link...", 
+              "Error 3020. Please contact the class owner to fix this for you."
+          );
         }
       })
       .catch((error) => {
-        // Error: Invalid Tutor/ organization
+        // Error: Error getting doc
         console.log("Error getting document:", error);
-        invalidatePage();
+        invalidatePage(
+              "Invalid Registration Link...", 
+              "Error 3010. Please contact the class owner to fix this for you."
+          );
 
       });
     }
@@ -980,7 +1000,7 @@
       let invalidScreenTitle = document.getElementById("invalidScreenTitle"); 
       invalidScreenTitle.textContent = (title == null || title == "") ? "Invalid Registration Link..." : title;
       let invalidScreenDescription = document.getElementById("invalidScreenDescription");
-      invalidScreenDescription.textContent = (desc == null || desc == "") ? "Please contact the class owner to fix this for you." : desc;
+      invalidScreenDescription.textContent = (desc == null || desc == "") ? "Error 1000. Please contact the class owner to fix this for you." : desc;
 
       let funcText = (title == null || title == "" || desc == null || desc == "") ? 
         "Invalid Link: Please contact your class owner to fix this for you." :
