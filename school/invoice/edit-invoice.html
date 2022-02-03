@@ -2007,18 +2007,24 @@
     // Load Lesson Details
     function LoadLessonInfo( classDoc, clientId ){
       // let today = new Date('11/25/2021');
-      let today = new Date();
+      let invIssueDate = document.getElementById("invIssueDate").value;
+      console.log("invIssueDate: "+invIssueDate)
+      // let today = new Date();
+      let issueDate = invIssueDate.split("/");
+      let today = new Date( issueDate[2], issueDate[1] - 1, issueDate[0]);
+      // let today = new Date();
       let month = today.getUTCMonth() + 1; //months from 1-12
       let day = today.getUTCDate();
       let year = today.getUTCFullYear();
       // console.log(''+month+year);
+      let formattedMonth = ("0" + month).slice(-2);
       
       // Get all lessons of this month
       let docRef = db.collection("Class")
           .doc("v1")
           .collection("Lesson")
           .where("classId", "==", classDoc.data()[CLASS_ID])
-          .where(LESSON_MONTH_TYPE, "==", parseInt(''+year+month)) 
+          .where(LESSON_MONTH_TYPE, "==", parseInt(''+year+formattedMonth)) 
           .where("status", "==", true)
           .orderBy('lesDate', 'asc');
    

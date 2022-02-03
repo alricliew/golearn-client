@@ -1771,15 +1771,18 @@
 
     // Load Lesson Details
     function LoadLessonInfo( classDoc, clientId ){
-      // let today = new Date('11/25/2021');
-      let today = new Date();
+      let invIssueDate = document.getElementById("invIssueDate").value;
+      // console.log("invIssueDate: "+invIssueDate)
+      // let today = new Date();
+      let issueDate = invIssueDate.split("/");
+      let today = new Date( issueDate[2], issueDate[1] - 1, issueDate[0]);
       let month = today.getUTCMonth() + 1; //months from 1-12
       let day = today.getUTCDate();
       let year = today.getUTCFullYear();
       // Prepend a 0 to all month
       let formattedMonth = ("0" + month).slice(-2);
       // console.log(''+year+month);
-      // console.log(''+year+formattedmonth);
+      // console.log(''+year+formattedMonth);
 
       // Get all lessons of this month
       let docRef = db.collection("Class")
@@ -4630,7 +4633,7 @@
       }
       return time.join (''); // return adjusted time or original string
     }
-    
+
   </script>
 
   <script>
