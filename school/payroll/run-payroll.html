@@ -2075,7 +2075,7 @@
           // Load the payslip of each tutor. 
           loadPayroll(payrollId);
 
-          console.log(payrollStart.toDate(), payrollEnd.toDate())
+          // console.log(payrollStart.toDate(), payrollEnd.toDate())
           let startDate_temp = moment(payrollStart.toDate());
           let endDate_temp = moment(payrollEnd.toDate());
 
@@ -2328,13 +2328,20 @@
 
         // Generate placeholder new employee
         renderActiveTutorPlaceholder(payslipData);
-        // Generate simple empty payslip
-        renderTableTemplate(tutorId);
 
-        let grossPay = calculateGrossPayDuringInit(tutorId);
-        // document.getElementById("netpayview_"+cardId).value = netPayTextAdv;
-        console.log('grossPay '+grossPay);
-        calculateNetPayDuringInit(tutorId, grossPay);
+        // Generate simple empty payslip
+        // renderTableTemplate(tutorId);
+
+        // Load tutor Active Classes
+        let tutorData = {
+            tutorId : tutorId
+        }
+        LoadTutorActiveClasses(tutorData);
+
+        // let grossPay = calculateGrossPayDuringInit(tutorId);
+        // // document.getElementById("netpayview_"+cardId).value = netPayTextAdv;
+        // console.log('grossPay '+grossPay);
+        // calculateNetPayDuringInit(tutorId, grossPay);
 
 
     }
@@ -2890,8 +2897,12 @@
 
 
           // Load all active class.
-          activeTutorList.push(doc.data())
-          LoadTutorActiveClasses(doc);
+          activeTutorList.push(doc.data());
+
+          let tutorData = {
+            tutorId : doc.data()[TUTOR_TUTOR_ID]
+          }
+          LoadTutorActiveClasses(tutorData);
           // console.log('Tutor Name: '+doc.data()[TUTOR_TUTOR_NAME]);
 
         });
@@ -2905,12 +2916,17 @@
     
     // Load all the active classes of a tutor
     // Doc is Tutor Module document
-    function LoadTutorActiveClasses(tutorDoc){
-
+    function LoadTutorActiveClasses(tutorData) { // tutorDoc){
+      // Data Model
+      // let tutorData = {
+      //   tutorId : tutorId,
+      // }
+      
       let docRef = db.collection("Class")
         .doc("v1")
         .collection("Class")
-        .where(CLASS_TUTOR_ID_ARR, "array-contains", tutorDoc.data()[TUTOR_TUTOR_ID])
+        .where(CLASS_ADMIN_ID, "==", tutorId) // Admin ID
+        .where(CLASS_TUTOR_ID_ARR, "array-contains", tutorData.tutorId) // Tutor's Id
         .where("status", "==", true);
 
       docRef
@@ -2933,19 +2949,17 @@
 
           if (advanced){
             // Render Advanced Teamplate for header, gross earnings and headers for additional items 
-            renderTableAdvTemplate(tutorDoc.data()[TUTOR_TUTOR_ID]);
+            renderTableAdvTemplate(tutorData.tutorId);
             
             // Advanced Template
             querySnapshot.forEach((doc) => {
 
               if (doc.data()[CLASS_FEES_TYPE_KEY] === FEES_TYPE_PER_MONTH_KEY){
-                // console.log('Tutor, Class Name  (Per Month) : '+tutorDoc.data()[TUTOR_TUTOR_NAME]+doc.data()[CLASS_NAME]);
 
                 // Per month
-                
                 // TutorId, className, firstClassDate, 
                 let payslipItemData={
-                  tutorId: tutorDoc.data()[TUTOR_TUTOR_ID],
+                  tutorId: tutorData.tutorId,
                   item: doc.data()[CLASS_NAME],
                   quantity: '',
                   price: '',
@@ -2954,9 +2968,16 @@
                 renderAllPayslipItemsAdv(payslipItemData);
               }else{
                 // Per Hour
-                // console.log('Tutor, Class Name  (Per Month) : '+tutorDoc.data()[TUTOR_TUTOR_NAME]+doc.data()[CLASS_NAME]);
+                let classData = {
+                  tutorId : tutorData.tutorId,
+                  classId : doc.data()[CLASS_ID],
+                  className : doc.data()[CLASS_NAME],
+                  classFee : doc.data()[CLASS_FEES_KEY],
+                  classFirstDate : doc.data()[CLASS_FIRST_CLASS_DATE].toDate().toLocaleDateString("en-GB"),
+                }
 
-                LoadLessonInfo(tutorDoc, doc);
+                LoadLessonInfo(classData);
+                // LoadLessonInfo(tutorDoc, doc);
                 
               }
 
@@ -2964,7 +2985,7 @@
           }
           else{
             // Render Advanced Teamplate for header, gross earnings and headers for additional items 
-            renderTableTemplate(tutorDoc.data()[TUTOR_TUTOR_ID]);
+            renderTableTemplate(tutorData.tutorId);
 
             // Simple Template
             querySnapshot.forEach((doc) => {
@@ -2972,7 +2993,7 @@
               // console.log(doc.data());
 
               let payslipItemData={
-                tutorId: tutorDoc.data()[TUTOR_TUTOR_ID],
+                tutorId: tutorData.tutorId,
                 item: doc.data()[CLASS_NAME],
                 quantity: '',
                 price: 0,
@@ -3406,7 +3427,16 @@
 
 
     // Doc is Class Module document
-    function LoadLessonInfo(tutorDoc, classDoc){
+    function LoadLessonInfo(classData) { //tutorDoc, classDoc){
+      // Data Model
+      // classData = {
+      //   tutorId : tutorId,
+      //   classId : classId,
+      //   className : className,
+      //   classFee : classFee,
+      //   classFirstDate : classFirstDate,
+      // }
+
       // console.log(classDoc.data())
       // let start = new Date('2021-11-04');
       // let end = new Date('2021-11-13');
@@ -3414,12 +3444,12 @@
       // payrollEnd = new Date(end);
       console.log(payrollStart)
       console.log(payrollEnd)
-      console.log(classDoc.data()[CLASS_ID] )
+      console.log(classData.classId )
 
       let docRef = db.collection("Class")
           .doc("v1")
           .collection("Lesson")
-          .where("classId", "==", classDoc.data()[CLASS_ID])
+          .where("classId", "==", classData.classId)
           .where("status", "==", true)
           .where("lesDate", ">=", payrollStart)
           .where("lesDate", "<=", payrollEnd)
@@ -3438,21 +3468,29 @@
 
           console.log('Lesson Date: '+doc.data()[LESSON_DATE].toDate().toLocaleDateString("en-GB"));
 
-          renderAllLessonAdv(tutorDoc, classDoc, doc)
+          let lesItemData = {
+            tutorId : classData.tutorId,
+            lesDate : doc.data()[LESSON_DATE].toDate().toLocaleDateString("en-GB"),
+            lesStart : doc.data()[LESSON_START],
+            lesEnd : doc.data()[LESSON_END],
+            classFee : classData.classFee,
+          }
+          renderAllLessonAdv(lesItemData);
+          // renderAllLessonAdv(tutorDoc, classDoc, doc)
           
         });
 
         // Per Hour: Show the first class date so it easier to assign payout percentage.
         let payslipItemData={
-          tutorId: tutorDoc.data()[TUTOR_TUTOR_ID],
-          item: classDoc.data()[CLASS_NAME] + '(First lesson: '+classDoc.data()[CLASS_FIRST_CLASS_DATE].toDate().toLocaleDateString("en-GB")+')',
+          tutorId: classData.tutorId,
+          item: classData.className + '(First lesson: '+classData.classFirstDate+')',
           quantity: '',
           price: '',
           payout: '',
         }
         renderAllPayslipItemsAdv(payslipItemData);
 
-        calculateGrossPayDuringInit(tutorDoc.data()[TUTOR_TUTOR_ID]);
+        calculateGrossPayDuringInit(classData.tutorId);
 
 
       }).catch((error) => {
@@ -3462,7 +3500,7 @@
       
     }
 
-    function renderAllLessonAdv(tutorDoc, classDoc, lessonDoc){
+    function renderAllLessonAdv(lesItemData){ //, tutorDoc, classDoc, lessonDoc){
       //   <tbody id="">
       //     <tr class="item">
       //       <td style="font-size: small;">Standard 3 English</td>
@@ -3473,13 +3511,21 @@
       //     </tr>
       //     ....
 
+      // Data model
+      // lesItemData = {
+      //   tutorId : tutorId,
+      //   lesDate : lesDate,
+      //   lesStart : lesStart,
+      //   lesEnd : lesEnd,
+      //   classFee : classFee,
+      // }
+
       // Item
-      
-      let date = lessonDoc.data()[LESSON_DATE].toDate().toLocaleDateString("en-GB");
+      let date = lesItemData.lesDate; //lessonDoc.data()[LESSON_DATE].toDate().toLocaleDateString("en-GB");
       let startTime, endTime = '';
       let timeslot = '';
-      startTime = lessonDoc.data()[LESSON_START];
-      endTime = lessonDoc.data()[LESSON_END];
+      startTime = lesItemData.lesStart;// lessonDoc.data()[LESSON_START];
+      endTime = lesItemData.lesEnd;// lessonDoc.data()[LESSON_END];
       startTime = tConvert (startTime);
       endTime = tConvert (endTime);
       // startTime = (parseInt(startTime.substring(0, 2))>12) ? (parseInt(startTime.substring(0, 2)) - 12) + startTime.substring(2, 5) + 'PM' : startTime + 'AM';
@@ -3491,8 +3537,8 @@
       item1.textContent = timeslot
 
       //create date format          
-      var timeStart = new Date("01/01/2007 " + lessonDoc.data()[LESSON_START]);
-      var timeEnd = new Date("01/01/2007 " + lessonDoc.data()[LESSON_END]);
+      var timeStart = new Date("01/01/2007 " + lesItemData.lesStart);
+      var timeEnd = new Date("01/01/2007 " + lesItemData.lesEnd);
       let timeEllapsed = (timeEnd - timeStart)/1000/60/60; // Convert from ms to Hour
       let quantity = isNaN(timeEllapsed) ? 1 : timeEllapsed;
 
@@ -3500,7 +3546,7 @@
       item2.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
       item2.textContent = quantity;
 
-      let classFee = isNaN(classDoc.data()[CLASS_FEES_KEY]) ? 0 : classDoc.data()[CLASS_FEES_KEY];
+      let classFee = isNaN(lesItemData.classFee) ? 0 : lesItemData.classFee;
       let item3 = document.createElement('td');
       item3.setAttribute('style', 'width: 100px; min-width: 100px;text-align: right; font-size: small;font-weight: 300');
       item3.textContent = classFee;
@@ -3527,7 +3573,7 @@
       item.appendChild(item4);
       item.appendChild(item5);
 
-      const tritem = document.getElementById("tbody_item_"+tutorDoc.data()[TUTOR_TUTOR_ID]);
+      const tritem = document.getElementById("tbody_item_"+lesItemData.tutorId);
       tritem.insertBefore(item, tritem.children[0])
     }
 
