@@ -580,15 +580,14 @@
 
         querySnapshot.forEach((doc) => {
           courseId = doc.id;
+          // console.log(doc.data());
+
           renderAllActiveJobs(doc, courseId, false);
         });
-
-
 
         // Update latest doc.
         latestDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
         
-
         if (querySnapshot.empty){
             loadmore.removeEventListener('click', handleClick );
         }
@@ -669,47 +668,57 @@
       // Reference: https://codepen.io/Corsurath/pen/abbxNpj
       // Code + Date
       let blogsHtml_code = '';
-      blogsHtml_code += "<span style='margin-right: 0.3rem;'>"+doc.data().id.toUpperCase()+"</span> &middot; <span style='margin-left: 0.3rem;'>"+doc.data().dateCreated.toDate().toDateString().slice(-12)+"</span>";
+      blogsHtml_code += "<span style='margin-right: 0.3rem;'>"+doc.data().id.toUpperCase()+"</span> &middot; <span style='margin-left: 0.3rem;'>"+doc.data()[DATE_CREATED_KEY].toDate().toDateString().slice(-12)+"</span>";
+      
+      if (doc.data()[JOB_STATUS_KEY] == JOB_STATUS_OPEN_KEY)
+      blogsHtml_code += "<span class='card-course-status-label' style='background-color: green;''>OPEN</span>";
+      else if (doc.data()[JOB_STATUS_KEY] == JOB_STATUS_CLOSED_KEY || doc.data()[JOB_STATUS_KEY] == JOB_STATUS_SUCCESS_KEY)
+      blogsHtml_code += "<span class='card-course-status-label' style='background-color: red;''>CLOSED</span>";
+      else if (doc.data()[JOB_STATUS_KEY] == JOB_STATUS_FULL_KEY)
+      blogsHtml_code += "<span class='card-course-status-label' style='background-color: #ffd000;''>FULL</span>";
+      else
+      blogsHtml_code += "<span class='card-course-status-label' style='background-color: red;''>CLOSED</span>";
+
       let code_h6 = document.createElement('h6');
       code_h6.innerHTML = blogsHtml_code;
 
       // Status
-      let blogsHtml_status = '';
-      if (doc.data().jobStatus == JOB_STATUS_OPEN_KEY)
-      blogsHtml_status += "<span class='card-course-status-label' style='background-color: green;''>OPEN</span>";
-      else if (doc.data().jobStatus == JOB_STATUS_CLOSED_KEY || doc.data().jobStatus == JOB_STATUS_SUCCESS_KEY)
-      blogsHtml_status += "<span class='card-course-status-label' style='background-color: red;''>CLOSED</span>";
-      else if (doc.data().jobStatus == JOB_STATUS_FULL_KEY)
-      blogsHtml_status += "<span class='card-course-status-label' style='background-color: #ffd000;''>FULL</span>";
-      else
-      blogsHtml_status += "<span class='card-course-status-label' style='background-color: red;''>CLOSED</span>";
-      let status_h6 = document.createElement('h6');
-      status_h6.innerHTML = blogsHtml_status;
+      // let blogsHtml_status = '';
+      // if (doc.data()[JOB_STATUS_KEY] == JOB_STATUS_OPEN_KEY)
+      //   blogsHtml_status += "<span class='card-course-status-label' style='background-color: green;''>OPEN</span>";
+      // else if (doc.data()[JOB_STATUS_KEY] == JOB_STATUS_CLOSED_KEY || doc.data()[JOB_STATUS_KEY] == JOB_STATUS_SUCCESS_KEY)
+      //   blogsHtml_status += "<span class='card-course-status-label' style='background-color: red;''>CLOSED</span>";
+      // else if (doc.data()[JOB_STATUS_KEY] == JOB_STATUS_FULL_KEY)
+      //   blogsHtml_status += "<span class='card-course-status-label' style='background-color: #ffd000;''>FULL</span>";
+      // else
+      //   blogsHtml_status += "<span class='card-course-status-label' style='background-color: red;''>CLOSED</span>";
+      // let status_h6 = document.createElement('h6');
+      // status_h6.innerHTML = blogsHtml_status;
 
       // subject
       let blogsHtml_subject = '';
       if (doc.data().online){
-        blogsHtml_subject += doc.data().category+"  "+doc.data().subject+"<span class='card-course-online-label'>ONLINE</span>";
+        blogsHtml_subject += doc.data()[CATEGORY_KEY]+"  "+doc.data()[SUBJECT_KEY]+"<span class='card-course-online-label' style='font-size: 0.8rem;'>ONLINE</span>";
       }else{
-        blogsHtml_subject += doc.data().category+"  "+doc.data().subject;
+        blogsHtml_subject += doc.data()[CATEGORY_KEY]+"  "+doc.data()[SUBJECT_KEY];
       }
       let subject_h3 = document.createElement('h3');
       subject_h3.innerHTML = blogsHtml_subject;
 
       // Area
       let area_h5 = document.createElement('h5');
-      if (doc.data().online){
+      if (doc.data()[ONLINE_KEY]){
         // Do nothing
       }else{
-        area_h5.textContent = doc.data().area +", "+MYAllState[MYAllStateId.indexOf(doc.data().state)];
+        area_h5.textContent = doc.data()[AREA_KEY] +", "+MYAllState[MYAllStateId.indexOf(doc.data()[STATE_ID_KEY])];
       }
       
       // fee
       let blogsHtml_fee = '';
       if (doc.data().feeType == "Per Hour"){
-        blogsHtml_fee += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >paid</i> RM"+doc.data().fees+" / hour";
+        blogsHtml_fee += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >paid</i> RM"+doc.data()[FEES_KEY]+" / hour";
       }else{
-        blogsHtml_fee += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >paid</i> RM "+ doc.data().fees +" / month";
+        blogsHtml_fee += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >paid</i> RM"+ doc.data()[FEES_KEY] +" / month";
       }
       let fee_p = document.createElement('p');
       fee_p.className = "card-course-item";
@@ -721,11 +730,9 @@
       // duration
       let blogsHtml_duration = '';
       if (doc.data().duration > 1)
-      blogsHtml_duration += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >schedule</i>"+doc.data().duration+" hours / week";
+        blogsHtml_duration += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >schedule</i>"+doc.data()[DURATION_KEY]+" hours / week";
       else
-      blogsHtml_duration += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >schedule</i>"+doc.data().duration+" hour / week";
-
-      // blogsHtml_duration += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >schedule</i>"+doc.data().duration+" hours / lesson";
+        blogsHtml_duration += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >schedule</i>"+doc.data()[DURATION_KEY]+" hour / week";
       let duration_p = document.createElement('p');
       duration_p.className = "card-course-item";
       duration_p.innerHTML = blogsHtml_duration;
@@ -736,9 +743,9 @@
       // Class / week
       let blogsHtml_classPerWeek = '';
       if (doc.data().classPerWeek > 1)
-        blogsHtml_classPerWeek += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >date_range</i>"+doc.data().classPerWeek+" classes / week";
+        blogsHtml_classPerWeek += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >date_range</i>"+doc.data()[CLASSPERWEEK_KEY]+" classes / week";
       else
-        blogsHtml_classPerWeek += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >date_range</i>"+doc.data().classPerWeek+" class / week";
+        blogsHtml_classPerWeek += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >date_range</i>"+doc.data()[CLASSPERWEEK_KEY]+" class / week";
 
       let classPerWeek_p = document.createElement('p');
       classPerWeek_p.className = "card-course-item";
@@ -749,7 +756,7 @@
 
       // Description
       let blogsHtml_description = '';
-      blogsHtml_description += "<i class='material-icons' style='color: #ff7300; margin-right: 0.5em;' >description</i> Description";
+      blogsHtml_description += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >description</i> Description";
       let description_p = document.createElement('p');
       description_p.className = "card-course-item";
       description_p.innerHTML = blogsHtml_description;
@@ -758,49 +765,49 @@
       description_a.appendChild(description_p);
 
       let description_content_p = document.createElement('p');
-      if (doc.data().jobDetail == null || doc.data().jobDetail == ""){
+      if (doc.data()[JOB_DETAIL_KEY] == null || doc.data()[JOB_DETAIL_KEY] == ""){
         description_content_p.textContent = "No description.";
 
       }else{
-        description_content_p.textContent = doc.data().jobDetail;
+        description_content_p.textContent = doc.data()[JOB_DETAIL_KEY];
       }
 
       // Card top
       let card_div = document.createElement('div');
-      if (doc.data().categoryId == "recep" || doc.data().categoryId == "camPri" ||
-      doc.data().categoryId == "camLowerSec" || doc.data().categoryId == "igcse" ||
-      doc.data().categoryId == "alevel"){
+      if (doc.data()[CATEGORY_ID_KEY] == "recep" || doc.data()[CATEGORY_ID_KEY] == "camPri" ||
+      doc.data()[CATEGORY_ID_KEY] == "camLowerSec" || doc.data()[CATEGORY_ID_KEY] == "igcse" ||
+      doc.data()[CATEGORY_ID_KEY] == "alevel"){
         card_div.className = "card-course card-cambridge";
-      }else if(doc.data().categoryId == "ibEyp" || doc.data().categoryId == "ibPyp" ||
-      doc.data().categoryId == "ibMyp" || doc.data().categoryId == "ibDiploma"){
+      }else if(doc.data()[CATEGORY_ID_KEY] == "ibEyp" || doc.data()[CATEGORY_ID_KEY] == "ibPyp" ||
+      doc.data()[CATEGORY_ID_KEY] == "ibMyp" || doc.data()[CATEGORY_ID_KEY] == "ibDiploma"){
         card_div.className = "card-course card-ib";
-      }else if(doc.data().categoryId == "kindergarten" || doc.data().categoryId == "upsr" ||
-      doc.data().categoryId == "pt3" || doc.data().categoryId == "spm" || 
-      doc.data().categoryId == "stpm"){
+      }else if(doc.data()[CATEGORY_ID_KEY] == "kindergarten" || doc.data()[CATEGORY_ID_KEY] == "upsr" ||
+      doc.data()[CATEGORY_ID_KEY] == "pt3" || doc.data()[CATEGORY_ID_KEY] == "spm" || 
+      doc.data()[CATEGORY_ID_KEY] == "stpm"){
         card_div.className = "card-course card-kpm";
-      }else if(doc.data().categoryId == "uecJun" || doc.data().categoryId == "uecSen"){
+      }else if(doc.data()[CATEGORY_ID_KEY] == "uecJun" || doc.data()[CATEGORY_ID_KEY] == "uecSen"){
         card_div.className = "card-course card-uec";
-      }else if(doc.data().categoryId == "engExam" || doc.data().categoryId == "adultLanguage"){
+      }else if(doc.data()[CATEGORY_ID_KEY] == "engExam" || doc.data()[CATEGORY_ID_KEY] == "adultLanguage"){
         card_div.className = "card-course card-language-and-english-exam";
-      }else if(doc.data().categoryId == "music"){
+      }else if(doc.data()[CATEGORY_ID_KEY] == "music"){
         card_div.className = "card-course card-music";
-      }else if(doc.data().categoryId == "computer"){
+      }else if(doc.data()[CATEGORY_ID_KEY] == "computer"){
         card_div.className = "card-course card-computer-programming";
       }else{
         card_div.className = "card-course card-language-and-english-exam";
       }
 
-      card_div.setAttribute("data-category",doc.data().category);
-      card_div.setAttribute("data-category-id",doc.data().categoryId);
-      card_div.setAttribute("data-subject", doc.data().subject);
-      card_div.setAttribute("data-subject-id", doc.data().subjectId);
-      card_div.setAttribute("data-online", doc.data().online);
+      card_div.setAttribute("data-category",doc.data()[CATEGORY_KEY]);
+      card_div.setAttribute("data-category-id",doc.data()[CATEGORY_ID_KEY]);
+      card_div.setAttribute("data-subject", doc.data()[SUBJECT_KEY]);
+      card_div.setAttribute("data-subject-id", doc.data()[SUBJECT_ID_KEY]);
+      card_div.setAttribute("data-online", doc.data()[ONLINE_KEY]);
       card_div.setAttribute("data-course-id",courseId);
       // card_div.setAttribute("onclick","editCourseFunction(this)");
       card_div.appendChild(code_h6);
-      card_div.appendChild(status_h6);
+      // card_div.appendChild(status_h6);
       card_div.appendChild(subject_h3);
-      if (doc.data().online){
+      if (doc.data()[ONLINE_KEY]){
         // Do nothing
       }else{
         // Append area
@@ -814,7 +821,7 @@
 
 
       let card_top = document.createElement('div');
-      card_top.className = "col-md-4 col-lg-4 col-sm-4";
+      card_top.className = "col-md-4 col-lg-4";
 
       // If the course size is less than 2, we need to render empty placeholder so bootstrap looks good.
       if (renderNull){
