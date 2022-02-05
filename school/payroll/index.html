@@ -288,172 +288,172 @@
        <!-- Preview modal -->
        <div class="row" >
         <div class="modal fade" tabindex="-1" role="dialog" id="previewModal" aria-labelledby="staticBackdropLabel" aria-hidden="true"  >
-          <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="padding: 5px;">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="max-width: 22cm!important;">
             <div class="modal-content" style="background-color: transparent;  box-shadow: none; border: none; ">
 
               <div class="modal-body" style="background-color: transparent; box-shadow: none;  border: none;">
-               <!-- Preview -->
-               <div class="row" style="overflow-y:auto;">
-                <div class="col-12" style="overflow-x:auto;  padding: 1rem;">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 0.8rem 0 0 0;">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                  <a href="javascript:;" class="btn btn-primary btn-round" style="text-transform: none; background-color: white; color: #2e74b6;" onclick="generatePDFeKoopmans('invTemplate')">Download As PDF</a>
-                  <a href="javascript:;" class="btn btn-primary btn-round" style="text-transform: none;" data-toggle="modal" data-target="#sendPayslipModal" onclick="//sendPayslip()">Send Payslip</a>
+                 <!-- Preview -->
+                <div class="row" style="overflow-y:auto;">
+                  <div class="col-12" style="overflow-x:auto; padding: 1rem;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 0.8rem 0 0 0;">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <a href="javascript:;" class="btn btn-primary btn-round" style="text-transform: none; background-color: white; color: #2e74b6;" onclick="generatePDFeKoopmans('invTemplate')">Download As PDF</a>
+                    <a href="javascript:;" class="btn btn-primary btn-round" style="text-transform: none;" data-toggle="modal" data-target="#sendPayslipModal" onclick="appendModal('sendPayslipModal')">Send Payslip</a>
 
-                  <span id="netpayview_preview" style="color: white;"></span>
-  
-                  <page size="A4" id="invTemplate" style="position: relative;">
-
-                    <div class="card-body" >
-                      <div class="row">
-                        <div class="col-4 text-center">
+                    <span id="netpayview_preview" style="color: white;"></span>
     
-                          <div class="form-group">
-                            <!-- <canvas id="myCanvas" style="height: 150px;width: 225px; object-fit: cover;" ></canvas> -->
-                            <div style="height: 115px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
-                              <img id="previewTutorImgUrl" style="height: 100%; width: auto; " src="../../assets/img/empty-photo.png" crossorigin="anonymous" alt = ""/>
-                              <!-- <canvas id="myCanvas" ></canvas> -->
+                    <page size="A4" id="invTemplate" style="position: relative;">
+
+                      <div class="card-body" >
+                        <div class="row">
+                          <div class="col-4 text-center">
+      
+                            <div class="form-group">
+                              <!-- <canvas id="myCanvas" style="height: 150px;width: 225px; object-fit: cover;" ></canvas> -->
+                              <div style="height: 115px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
+                                <img id="previewTutorImgUrl" style="height: 100%; width: auto; " src="../../assets/img/empty-photo.png" crossorigin="anonymous" alt = ""/>
+                                <!-- <canvas id="myCanvas" ></canvas> -->
+                              </div>
                             </div>
                           </div>
-                        </div>
-    
-                        <div class="col-2">
-                          <!--  Do nothing -->
-                        </div>
-    
-                        <div class="col-6 text-right">
-                          <h4 style="font-size: xx-large;margin-top: 1rem;">PAYSLIP</h4> 
-                          <h5 id="previewTitle"  style="font-weight: 500;">Payslip of November 2021</h5>
-                          <h4 id="previewBizName" style="font-weight: 500;">Your Name</h4>
-                          <h6 id="previewBizDetails" style="text-transform: none; font-weight: 300;">Your Biz Details</p>
-                        </div>
-                      </div>
-                    </div>
-    
-                    <hr style="margin: 0rem">
-                    <div class="card-body" style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;"> 
-                      <div class="row">
-                        <div class="col-4">
-                          <h6>Paid To:</h6>
-                          <h4 id="previewClientName" style="font-weight: 500;">Tutor's Name</h4>
-                          <h6 id="previewClientPosition"  style="text-transform: none; font-weight: 300;"> Tutor </h6>
-                        </div>
-    
-                        <div class="col-4"></div>
-                        <div class="col-4">
-                          <div class="row">
-                            <div class="col-6 text-right" style="padding-right: 0;">
-                              <h6>Ref No</h6>
-                              <h6>Date</h6>
-                              <h6>Status</h6>
-                            </div>
-                            <div class="col-6 text-right">
-                              <h6 id="previewRefNo" style="font-weight: normal; text-transform: none;"> - </h6>
-                              <h6 id="previewDate" style="font-weight: normal; text-transform: none;"> - </h6>
-                              <h6 id="previewStatus" style="font-weight: normal; text-transform: none;"> - </h6>
-                            </div>
+      
+                          <div class="col-2">
+                            <!--  Do nothing -->
+                          </div>
+      
+                          <div class="col-6 text-right">
+                            <h4 style="font-size: xx-large;margin-top: 1rem;">PAYSLIP</h4> 
+                            <h5 id="previewTitle"  style="font-weight: 500;">Payslip of November 2021</h5>
+                            <h4 id="previewBizName" style="font-weight: 500;">Your Name</h4>
+                            <h6 id="previewBizDetails" style="text-transform: none; font-weight: 300;">Your Biz Details</p>
                           </div>
                         </div>
                       </div>
-    
-                      <div style="margin-top: 1rem;"></div>
+      
+                      <hr style="margin: 0rem">
+                      <div class="card-body" style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;"> 
+                        <div class="row">
+                          <div class="col-4">
+                            <h6>Paid To:</h6>
+                            <h4 id="previewClientName" style="font-weight: 500;">Tutor's Name</h4>
+                            <h6 id="previewClientPosition"  style="text-transform: none; font-weight: 300;"> Tutor </h6>
+                          </div>
+      
+                          <div class="col-4"></div>
+                          <div class="col-4">
+                            <div class="row">
+                              <div class="col-6 text-right" style="padding-right: 0;">
+                                <h6>Ref No</h6>
+                                <h6>Date</h6>
+                                <h6>Status</h6>
+                              </div>
+                              <div class="col-6 text-right">
+                                <h6 id="previewRefNo" style="font-weight: normal; text-transform: none;"> - </h6>
+                                <h6 id="previewDate" style="font-weight: normal; text-transform: none;"> - </h6>
+                                <h6 id="previewStatus" style="font-weight: normal; text-transform: none;"> - </h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+      
+                        <div style="margin-top: 1rem;"></div>
+                        
+                        <div class="row">
+                          <div class="col-12"  style="overflow-x:auto;">
+                            <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
+                            <table id="tablePreview" class="table-light table-sm" cellspacing="0" width="100%" >
+                              <thead id='thead_item_preview' style="background-color: grey; color: white;">
+                                <tr>
+                                  <th style="min-width: 200px; font-size: small;">Items</th>
+                                  <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity</th>
+                                  <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Price</th>
+                                  <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody id="tbody_item_preview">
+                                <tr class="subtotal" id='previewItemSubtotal'>
+                                  <td></td>
+                                  <td></td>
+                                  <td style="text-align: right; font-weight: 500; font-size: small;">Subtotal</td>
+                                  <td style="text-align: right; font-weight: 500; font-size: small;" id="grosspay_preview"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+      
+                            <table id="table_additem_preview" class="table-light table-sm" cellspacing="0" width="100%">
+                              <thead id='thead_additem_preview' style="visibility: collapse;">
+                                <tr>
+                                  <th style="min-width: 200px;">Items</th>
+                                  <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
+                                  <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
+                                  <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody id="tbody_additem_preview">
+                                <tr class="additional">
+                                  <td></td>
+                                  <td></td>
+                                  <td style="text-align: right; font-size: small;"></td>
+                                  <td style="text-align: right; font-size: small;"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+      
+                          <div class="col-12">
+                            <h4 style="text-align: right; font-weight: 500;">Net Pay <span style="margin-left: 2rem;" id="netpay_preview">RM0.00</span></h4>
+                          </div>
+      
+                          <!-- <div class="col-12">
+                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Notes</span>
+                            <span id="previewInvNotes"></span>
+                          </div> -->
+                        </div>
+                      </div>
+
+                      <hr style="margin: 0rem">
+                      <div class="card-body" >
+                        <div class="row">
+                          <div class="col-6">
+                            <div class="row">
+                              <div class="col-4 text-left" style="padding-right: 0;">
+                                <h6>Bank Name:</h6>
+                                <h6>AC No:</h6>
+                              </div>
+                              <div class="col-8 text-left">
+                                <h6 id="previewBankName" style="font-weight: normal; text-transform: none;"> - </h6>
+                                <h6 id="previewAcNo" style="font-weight: normal; text-transform: none;"> - </h6>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-6">
+                            <div class="row">
+                              <div class="col-4 text-left" style="padding-right: 0;">
+                                <h6 id='previewEpfTitle' style="display: none;">EPF No:</h6>
+                                <h6 id='previewSocsoTitle' style="display: none;">Socso:</h6>
+                              </div>
+                              <div class="col-8 text-left">
+                                <h6 id="previewEpf" style="display: none; text-transform: none;"> - </h6>
+                                <h6 id="previewSocso" style="display: none; text-transform: none;"> - </h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       
-                      <div class="row">
-                        <div class="col-12"  style="overflow-x:auto;">
-                          <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
-                          <table id="tablePreview" class="table-light table-sm" cellspacing="0" width="100%" >
-                            <thead id='thead_item_preview' style="background-color: grey; color: white;">
-                              <tr>
-                                <th style="min-width: 200px; font-size: small;">Items</th>
-                                <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity</th>
-                                <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Price</th>
-                                <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
-                              </tr>
-                            </thead>
-                            <tbody id="tbody_item_preview">
-                              <tr class="subtotal" id='previewItemSubtotal'>
-                                <td></td>
-                                <td></td>
-                                <td style="text-align: right; font-weight: 500; font-size: small;">Subtotal</td>
-                                <td style="text-align: right; font-weight: 500; font-size: small;" id="grosspay_preview"></td>
-                              </tr>
-                            </tbody>
-                          </table>
-    
-                          <table id="table_additem_preview" class="table-light table-sm" cellspacing="0" width="100%">
-                            <thead id='thead_additem_preview' style="visibility: collapse;">
-                              <tr>
-                                <th style="min-width: 200px;">Items</th>
-                                <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
-                                <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
-                                <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
-                              </tr>
-                            </thead>
-                            <tbody id="tbody_additem_preview">
-                              <tr class="additional">
-                                <td></td>
-                                <td></td>
-                                <td style="text-align: right; font-size: small;"></td>
-                                <td style="text-align: right; font-size: small;"></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-    
-                        <div class="col-12">
-                          <h4 style="text-align: right; font-weight: 500;">Net Pay <span style="margin-left: 2rem;" id="netpay_preview">RM0.00</span></h4>
-                        </div>
-    
-                        <!-- <div class="col-12">
-                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Notes</span>
-                          <span id="previewInvNotes"></span>
-                        </div> -->
-                      </div>
-                    </div>
+                      <hr style="margin: 0rem">
 
-                    <hr style="margin: 0rem">
-                    <div class="card-body" >
-                      <div class="row">
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-4 text-left" style="padding-right: 0;">
-                              <h6>Bank Name:</h6>
-                              <h6>AC No:</h6>
-                            </div>
-                            <div class="col-8 text-left">
-                              <h6 id="previewBankName" style="font-weight: normal; text-transform: none;"> - </h6>
-                              <h6 id="previewAcNo" style="font-weight: normal; text-transform: none;"> - </h6>
-                            </div>
-                          </div>
-                        </div>
+                      <!-- <div class="card-body" id="preview-footer" style="padding-top: 0; margin-top: 0; position: absolute; bottom: 0; width: 100%;">
+                        <p id="previewInvFooterNotes"></p>
+                      </div> -->
+      
+                    </page>
 
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-4 text-left" style="padding-right: 0;">
-                              <h6 id='previewEpfTitle' style="display: none;">EPF No:</h6>
-                              <h6 id='previewSocsoTitle' style="display: none;">Socso:</h6>
-                            </div>
-                            <div class="col-8 text-left">
-                              <h6 id="previewEpf" style="display: none; text-transform: none;"> - </h6>
-                              <h6 id="previewSocso" style="display: none; text-transform: none;"> - </h6>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                     
-                    <hr style="margin: 0rem">
-
-                    <!-- <div class="card-body" id="preview-footer" style="padding-top: 0; margin-top: 0; position: absolute; bottom: 0; width: 100%;">
-                      <p id="previewInvFooterNotes"></p>
-                    </div> -->
-    
-                  </page>
-
-                  
+                  </div>
                 </div>
-              </div>
               </div>
             </div>
 

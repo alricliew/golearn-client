@@ -295,7 +295,7 @@
       <!-- Preview modal -->
       <div class="row" >
         <div class="modal fade" tabindex="-1" role="dialog" id="previewModal" aria-labelledby="staticBackdropLabel" aria-hidden="true"  >
-          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="max-width: 22cm!important;">
             <div class="modal-content" style="background-color: transparent; box-shadow: none; border: none;">
               <div class="modal-body" style="background-color: transparent; box-shadow: none; border: none;">
                <!-- Preview -->
@@ -696,7 +696,7 @@
               </div>
               <div class="modal-body" id="editPayslipModalBody">
                 <!-- View Switcher -->
-                <div class="row d-flex" id="desciption-row" >
+                <div class="row d-flex">
                   <div class="p-2">
                   </div>
                   <div class="ml-auto p-2">
@@ -2079,7 +2079,8 @@
           let startDate_temp = moment(payrollStart.toDate());
           let endDate_temp = moment(payrollEnd.toDate());
 
-          console.log(startDate_temp, endDate_temp)
+          // console.log(startDate_temp, endDate_temp)
+
           $('input[name="daterange"]').daterangepicker({
             startDate: startDate_temp,
             endDate: endDate_temp,
@@ -2295,7 +2296,7 @@
           
           bizName = (doc.data()[SET_BIZ_NAME] == null || doc.data()[SET_BIZ_NAME] == "") ? current_name : doc.data()[SET_BIZ_NAME];
           bizPhone = (doc.data()[SET_BIZ_PHONE] == null || doc.data()[SET_BIZ_PHONE] == "") ? current_phone : doc.data()[SET_BIZ_PHONE];
-          bizEmail = (doc.data()[SET_BIZ_EMAIL] == null || doc.data()[SET_BIZ_EMAIL] == "") ? current_email : doc.data()[SET_BIZ_EMAIL];
+          bizEmail = (doc.data()[SET_BIZ_EMAIL] == null || doc.data()[SET_BIZ_EMAIL] == "") ? "" : doc.data()[SET_BIZ_EMAIL];
           bizAddr = (doc.data()[SET_BIZ_ADDR] == null || doc.data()[SET_BIZ_ADDR] == "") ? "" : doc.data()[SET_BIZ_ADDR];
           bizImgUrl = (doc.data()[SET_BIZ_IMG_URL] == null || doc.data()[SET_BIZ_IMG_URL] == "") ? "" : doc.data()[SET_BIZ_IMG_URL];
         }else {
@@ -2303,7 +2304,7 @@
           
           bizName = current_name;
           bizPhone = current_phone;
-          bizEmail = current_email;
+          bizEmail = "";
           bizAddr = "";
           bizImgUrl = "";
         }
@@ -2564,9 +2565,10 @@
 
 
     function CreatePayroll(){
-      console.log("Payroll period")
-      console.log(payrollStart)
-      console.log(payrollEnd)
+      // console.log("Payroll period")
+      // console.log(payrollStart)
+      // console.log(payrollEnd)
+
       // Check if payroll existed
       var docRef = db.collection("Financial")
           .doc("v1")
@@ -2663,6 +2665,7 @@
           .collection("Payslip")
           .where(PAY_STATUS, '==', true)
           .where(PAY_PAYROLL_ID, '==', payrollId)
+          .orderBy(PAY_RECEIVER_NAME, 'desc') // Sort by Asc of Receiver Name
 
       docRef
       .get()
@@ -3483,7 +3486,7 @@
         // Per Hour: Show the first class date so it easier to assign payout percentage.
         let payslipItemData={
           tutorId: classData.tutorId,
-          item: classData.className + '(First lesson: '+classData.classFirstDate+')',
+          item: classData.className + ' (First lesson: '+classData.classFirstDate+')',
           quantity: '',
           price: '',
           payout: '',
@@ -3812,6 +3815,7 @@
       editBtn.setAttribute('data-toggle', 'modal');
       editBtn.setAttribute('data-target', '#editPayslipModal');
       editBtn.setAttribute('data-cardid', payslipData.tutorId);
+      editBtn.setAttribute('onclick', "appendModal('editPayslipModal')")
       editBtnDiv = document.createElement('div');
       editBtnDiv.className = 'p-2'
       editBtnDiv.setAttribute('style', 'margin-left:0; margin-right:5px; padding-left:0!important; padding-right:0!important;');
