@@ -11,6 +11,7 @@ const FIREBASE_CONTACTS_KEY = "Contacts";
 // Tutor Personal Details (9) excluded NRIC_KEY
 const TOKEN_KEY = "token";
 const NAME_KEY = "name";
+const FULL_NAME_AS_NRIC_KEY = "aFullNameAsNric";
 const NRIC_KEY = "nric";
 const EMAIL_KEY = "email";
 const PHONE_KEY = "phone";
@@ -35,6 +36,9 @@ const ACCOUNT_STATUS_KEY = "accountStatus";
     const PREMIUM_ACCOUNT_1_STATUS_KEY = "premium1"; // VIP Equivalent
     const PREMIUM_ACCOUNT_2_STATUS_KEY = "premium2"; // VVIP Equivalent
     const PREMIUM_ACCOUNT_3_STATUS_KEY = "premium3"; // VVVIP Equivalent
+    const PREMIUM_ACCOUNT_1_ACTIVE_STATUS_KEY = "premium1act";
+    const PREMIUM_ACCOUNT_2_ACTIVE_STATUS_KEY = "premium2act";
+    const PREMIUM_ACCOUNT_3_ACTIVE_STATUS_KEY = "premium3act";
 // NEW FEATURE 2.0 - Used for sorting in ../find-tutor
 const SYSTEM_LAST_ONLINE_KEY = "uLastOnline";
 // NEW FEATURE 2.0 - Used for general time table

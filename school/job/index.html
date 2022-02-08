@@ -573,15 +573,12 @@
         // const documents = querySnapshot.docs.map(doc => doc.data());
 
         for (let i = 0; i < querySnapshot.docs.length; i++) {
-            let doc = querySnapshot.docs[i];
-            // renderTutor(doc, i, gSubject, gLevel, gArea, gState);
+          let doc = querySnapshot.docs[i];
+          // renderTutor(doc, i, gSubject, gLevel, gArea, gState);
         }
-
 
         querySnapshot.forEach((doc) => {
           courseId = doc.id;
-          // console.log(doc.data());
-
           renderAllActiveJobs(doc, courseId, false);
         });
 

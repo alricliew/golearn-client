@@ -31,6 +31,152 @@
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
   <script src="../assets/js/firebase.js"></script>
+
+<style>
+    .multisteps-form__progress {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    }
+
+    .multisteps-form__progress-btn {
+      transition-property: all;
+      transition-duration: 0.15s;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+      position: relative;
+      padding-top: 20px;
+      color: #2B6AA6;
+      text-indent: 0px;
+      border: none;
+      background-color: transparent;
+      outline: none !important;
+      cursor: pointer;
+    }
+    @media (min-width: 500px) {
+      .multisteps-form__progress-btn {
+        text-indent: 0px;
+      }
+    }
+    .multisteps-form__progress-btn:before {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      display: block;
+      width: 13px;
+      height: 13px;
+      content: "";
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      transition: all 0.15s linear 0s,
+        -webkit-transform 0.15s cubic-bezier(0.05, 1.09, 0.16, 1.4) 0s;
+      transition: all 0.15s linear 0s,
+        transform 0.15s cubic-bezier(0.05, 1.09, 0.16, 1.4) 0s;
+      transition: all 0.15s linear 0s,
+        transform 0.15s cubic-bezier(0.05, 1.09, 0.16, 1.4) 0s,
+        -webkit-transform 0.15s cubic-bezier(0.05, 1.09, 0.16, 1.4) 0s;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      background-color: #2e74b6;
+      box-sizing: border-box;
+      z-index: 3;
+    }
+    .multisteps-form__progress-btn:after {
+      position: absolute;
+      top: 5px;
+      left: calc(-50% - 13px / 2);
+      transition-property: all;
+      transition-duration: 0.15s;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+      display: block;
+      width: 100%;
+      height: 2px;
+      content: "";
+      background-color: currentColor;
+      z-index: 1;
+    }
+    .multisteps-form__progress-btn:first-child:after {
+      display: none;
+    }
+    .multisteps-form__progress-btn.js-active {
+      color: #fff;
+    }
+    .multisteps-form__progress-btn.js-active:before {
+      -webkit-transform: translateX(-50%) scale(1.2);
+      transform: translateX(-50%) scale(1.2);
+      background-color: currentColor;
+    }
+
+    .multisteps-form__form {
+      position: relative;
+    }
+
+    .multisteps-form__panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      opacity: 0;
+      visibility: hidden;
+    }
+    .multisteps-form__panel.js-active {
+      height: auto;
+      opacity: 1;
+      visibility: visible;
+    }
+    .multisteps-form__panel[data-animation="scaleOut"] {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+    .multisteps-form__panel[data-animation="scaleOut"].js-active {
+      transition-property: all;
+      transition-duration: 0.2s;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+    .multisteps-form__panel[data-animation="slideHorz"] {
+      left: 50px;
+    }
+    .multisteps-form__panel[data-animation="slideHorz"].js-active {
+      transition-property: all;
+      transition-duration: 0.25s;
+      transition-timing-function: cubic-bezier(0.2, 1.13, 0.38, 1.43);
+      transition-delay: 0s;
+      left: 0;
+    }
+    .multisteps-form__panel[data-animation="slideVert"] {
+      top: 30px;
+    }
+    .multisteps-form__panel[data-animation="slideVert"].js-active {
+      transition-property: all;
+      transition-duration: 0.2s;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+      top: 0;
+    }
+    .multisteps-form__panel[data-animation="fadeIn"].js-active {
+      transition-property: all;
+      transition-duration: 0.3s;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+    }
+    .multisteps-form__panel[data-animation="scaleIn"] {
+      -webkit-transform: scale(0.9);
+      transform: scale(0.9);
+    }
+    .multisteps-form__panel[data-animation="scaleIn"].js-active {
+      transition-property: all;
+      transition-duration: 0.2s;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+  </style>
+
 </head>
 
 <body>
@@ -365,34 +511,17 @@
           
           <!-- Profile Section -->
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <div class="card">
                 <div class="card-body">
                   <h3>
                     Share Your Profile
                   </h3>
                   <div class="row">
-                    <div class="col-md-6" style="margin-top: 0.5rem;">
-                      <span style="font-weight: 400; margin-top: 1rem;">Share with your friends, family and future students.</span> 
-
-                      <div style="padding: 1rem 1.5rem; background: #f6f6f6; border-radius: 12px; margin-bottom: 2rem; margin-top: 1rem;" >
-                        <div class="row justify-content-around">
-                          <a id="btnFbShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Facebook"><i class="fab fa-facebook-f fa-lg" style="color: #4267B2;"></i></a>
-                          <a id="btnTelegramShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Telegram"><i class="fab fa-telegram-plane fa-lg" style="color: #0088CC;"></i></a>
-                          <a id="btnWhatsappShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on WhatsApp"><i class="fab fa-whatsapp fa-lg" style="color: #128C7E;"></i></a>
-                          <a id="btnTwitterShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Twitter"><i class="fab fa-twitter fa-lg" style="color: #1DA1F2;"></i></a>
-                          <a id="btnLinkedInShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on LinkedIn"><i class="fab fa-linkedin fa-lg" style="color: #0e76a8;"></i></a>
-                        </div>
-                      </div>
-
-                      <span style="font-weight: 400; margin-top: 1rem;">Ask for reviews to improve your profile and be better positioned in the search results!</span> 
-                      <a href="javascript:;" class="btn btn-primary btn-round btn-sm" data-toggle="modal" data-target="#linkShareModal">Get Review Link</a>
-
-                    </div>
-                    <div class="col-md-6" style="margin-top: 0.5rem;">
+                    <div class="col-md-12" style="margin-top: 0.5rem;">
                       <span style="font-weight: 400;"> Share this link with your contacts.</span> 
 
-                      <div class="row" style="padding: 1rem 1.5rem; background: #f6f6f6; border-radius: 12px; margin-bottom: 2rem; margin-top: 1rem;" >
+                      <div class="row" style="padding: 1rem 1.5rem; background: #f6f6f6; border-radius: 12px; margin-bottom: 1rem; margin-top: 1rem;" >
                         <div class="col-lg-10 col-md-9" style="padding: 0!important;">
                           <textarea type="text" class="form-control" id="tutorLink" style="background: transparent; word-break: break-all; resize: none;" rows="2" ></textarea>
                         </div>
@@ -401,11 +530,123 @@
                         </div>
                       </div>
                     </div>
+
+                    <div class="col-md-12" style="margin-top: 0.5rem;">
+                      <span style="font-weight: 400; margin-top: 1rem;">Share with your friends, family and future students.</span> 
+
+                      <div class="row justify-content-around" style="padding: 1rem 1.5rem; background: #f6f6f6; border-radius: 12px; margin-bottom: 2rem; margin-top: 1rem;" >
+                        <!-- <div class="row "> -->
+                          <a id="btnFbShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Facebook"><i class="fab fa-facebook-f fa-lg" style="color: #4267B2;"></i></a>
+                          <a id="btnTelegramShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Telegram"><i class="fab fa-telegram-plane fa-lg" style="color: #0088CC;"></i></a>
+                          <a id="btnWhatsappShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on WhatsApp"><i class="fab fa-whatsapp fa-lg" style="color: #128C7E;"></i></a>
+                          <a id="btnTwitterShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Twitter"><i class="fab fa-twitter fa-lg" style="color: #1DA1F2;"></i></a>
+                          <a id="btnLinkedInShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on LinkedIn"><i class="fab fa-linkedin fa-lg" style="color: #0e76a8;"></i></a>
+                        <!-- </div> -->
+                      </div>
+
+                      <span style="font-weight: 400; margin-top: 1rem;">Ask for reviews to improve your profile and be better positioned in the search results!</span> 
+                      <a href="javascript:;" class="btn btn-primary btn-round btn-sm" data-toggle="modal" data-target="#linkShareModal">Get Review Link</a>
+
+                    </div>
                   </div>
 
                 </div>
               </div>
 
+            </div>
+
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body"  style="background: linear-gradient(23deg,
+                #2b35b8,
+                #5b86e5 32%,
+                #36d1dc); border-radius: 8px;" >
+                  <h3 style="color: #fff">
+                    Level Up! More Visibility & Students!
+                  </h3>
+
+                  <div class="row" >
+                    <div class="col-12 col-lg-12 ml-auto mr-auto mb-4" style="padding-left: 0px; padding-right: 0px; margin-bottom: 0.5rem!important; margin-top: 0.5rem">
+                      <div class="multisteps-form__progress">
+                        <button class="multisteps-form__progress-btn js-active" type="button" title="Login">New</button>
+                        <button class="multisteps-form__progress-btn text-nowrap" type="button" title="Student Info">Experienced</button>
+                        <button class="multisteps-form__progress-btn" type="button" title="Student Info">Pro</button>
+                        <button class="multisteps-form__progress-btn text-nowrap" type="button" title="Guardian Info">Premium</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--multisteps-form-->
+                  <div class="multisteps-form" >
+                    <!--form panels-->
+                    <div class="row">
+                
+                      <div class="col-12">
+                        <form class="multisteps-form__form">
+
+                          <!-- Login form panel-->
+                          <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
+                            <h5 class="multisteps-form__title" style="color: #2e74b6; font-weight: 400;">New Tutor</h5>
+                            <div class="multisteps-form__content">
+                              <p style="margin-bottom: 4px;">Welcome! Complete your profile today to get more rewards!</p>
+                              <p style="font-weight: 300; margin-bottom: 4px;"><span><i class="fas fa-minus-circle fa-fw" id="lvl1Pic" style="color:red; font-size: small;"></i></span> Upload a profile picture</p>
+                              <p style="font-weight: 300; margin-bottom: 4px;"><span><i class="fas fa-minus-circle fa-fw" id="lvl1Qualification" style="color:red; font-size: small;"></i></span> Add a qualification</p>
+                              <p style="font-weight: 300; margin-bottom: 4px;"><span><i class="fas fa-minus-circle fa-fw" id="lvl1ApproachExp" style="color:red; font-size: small;"></i></span> Add teaching approach & experience </p>
+                              <p style="font-weight: 300; margin-bottom: 4px;"><span><i class="fas fa-minus-circle fa-fw" id="lvl1SubjectArea" style="color:red; font-size: small;"></i></span> Add subjects & teaching places</p>
+
+                            </div>
+                          </div>
+
+                          <!-- Choose A Dependant panel-->
+                          <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                            <h5 class="multisteps-form__title" style="color: #2e74b6; font-weight: 400;"><img style="height: 30px; width:30px;" src="../assets/img/badge-experienced.png"/> Experienced Tutor </h5>
+                            
+                            <div class="multisteps-form__content">
+                              <p style="margin-bottom: 4px;">One more step to Pro! Kick your first lesson and get positive reviews</p>
+                              <p style="font-weight: 300; margin-bottom: 4px;"><span><i class="fas fa-minus-circle fa-fw" id="lvl2Review" style="color:red; font-size: small;"></i></span> <span id="lvl2ReviewTxt">0/5 Reviews</span></p>
+                              <!-- <p style="font-weight: 300; margin-bottom: 4px;"><span><i class="fas fa-minus-circle fa-fw" id="lvl2Class" style="color:red; font-size: small;"></i></span> <span id="lvl2ClassTxt">0</span>/1 Class</p> -->
+                              <!-- <p style="font-weight: 300; margin-bottom: 4px;"><span><i class="fas fa-minus-circle fa-fw" id="lvl2Student" style="color:red; font-size: small;"></i></span> <span id="lvl2StudentTxt">0</span>/1 Student</p> -->
+                            </div>
+                          </div>
+
+                          <!-- Student form panel-->
+                          <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                            <h5 class="multisteps-form__title" style="color: #2e74b6; font-weight: 400;"><img style="height: 30px; width:30px;" src="../assets/img/badge-pro.png"/> Pro Tutor </h5>
+                            <div class="multisteps-form__content">
+                              <p style="margin-bottom: 4px;">Congratulation! You are among the top 4%! <br>
+                                <a href="https://golearn.com.my/pricing/" target="_blank" style="font-weight: bold;">Upgrade to Premium</a> Today.
+                              </p>
+                              <p>
+                                <span><i class="fas fa-eye fa-fw" style="color:green; font-size: small;"></i></span> x12 Visibility<br>
+                                <span><i class="fas fa-user-graduate fa-fw" style="color:green; font-size: small;"></i></span> More Students<br>
+                                <span><i class="fas fa-briefcase fa-fw" style="color:green; font-size: small;"></i></span> More Tutoring Jobs<br>
+                                <span><i class="fas fa-chalkboard fa-fw" style="color:green; font-size: small;"></i></span> Premium GoLearn School&trade; Platform 
+                              </p>
+                            </div>
+                          </div>
+
+                          <!-- Guardian form panel-->
+                          <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn" >
+                            <h5 class="multisteps-form__title" style="color: #2e74b6; font-weight: 400;"><img style="height: 30px; width:30px;" src="../assets/img/badge-premium.png"/> Premium </h5>
+                            <div class="multisteps-form__content">
+                              <p style="margin-bottom: 4px;">Welcome Premium Tutor! </p>
+                              <p>
+                                <span><i class="fas fa-eye fa-fw" style="color:green; font-size: small;"></i></span> x12 Visibility<br>
+                                <span><i class="fas fa-user-graduate fa-fw" style="color:green; font-size: small;"></i></span> More Students<br>
+                                <span><i class="fas fa-briefcase fa-fw" style="color:green; font-size: small;"></i></span> More Tutoring Jobs<br>
+                                <span><i class="fas fa-chalkboard fa-fw" style="color:green; font-size: small;"></i></span> Premium GoLearn School&trade; Platform 
+                              </p>
+                            </div>
+                          </div>
+
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
             </div>
           </div>
 
@@ -711,7 +952,6 @@
             </div> -->
 
           </div>
- 
 
 		    </div>
       </div>
@@ -1079,6 +1319,7 @@
 
     // }
 
+    var lvl2ClassNum, lvl2StudentNum = 0;
 
     // Check if user logged on
     AuthCheck();
@@ -1094,6 +1335,82 @@
 
       // Load revenue chart
       loadAllOrgRevenue();
+
+      // Update Level
+      updateProfileLevel();
+
+    }
+
+    function updateProfileLevel() {
+
+      // Level 1: New Tutor
+      let lvl1Checker = 0; // max = 4
+      if (current_imgUri != null && current_imgUri != "" && current_imgUri != "https://app.golearn.com.my/assets/img/hello.gif"){
+        document.getElementById("lvl1Pic").style.color = "green";
+        document.getElementById("lvl1Pic").className = "fas fa-check-circle fa-fw";
+        lvl1Checker = lvl1Checker + 1;
+      }
+      if (currentQualification != null && currentQualification != ""){
+        document.getElementById("lvl1Qualification").style.color = "green";
+        document.getElementById("lvl1Qualification").className = "fas fa-check-circle fa-fw";
+        lvl1Checker = lvl1Checker + 1;
+      }
+      if (currentTutoringApproach != null && currentTutoringExperience != null && currentTutoringApproach != "" && currentTutoringExperience != ""){
+        document.getElementById("lvl1ApproachExp").style.color = "green";
+        document.getElementById("lvl1ApproachExp").className = "fas fa-check-circle fa-fw";
+        lvl1Checker = lvl1Checker + 1;
+      }
+      if (current_preferedSubjectList != null && current_preferedSubjectList != "" && current_preferedSubjectList.length > 0 &&
+      current_preferedAreaList != null && current_preferedAreaList != "" && current_preferedAreaList.length > 0){
+        document.getElementById("lvl1SubjectArea").style.color = "green";
+        document.getElementById("lvl1SubjectArea").className = "fas fa-check-circle fa-fw";
+        lvl1Checker = lvl1Checker + 1;
+      }
+
+      // Level 2: Experienced Tutor
+      let lvl2Checker = 0; // max = 3
+      if (current_ratingTimes == null || current_ratingTimes == "" || current_ratingTimes == 0){
+        document.getElementById("lvl2ReviewTxt").textContent = "0/5 Reviews";
+      }else if (current_ratingTimes > 0 || current_ratingTimes < 5){
+        document.getElementById("lvl2ReviewTxt").textContent = current_ratingTimes + "/5 Reviews";
+      }else if (current_ratingTimes >= 5){
+        document.getElementById("lvl2Review").style.color = "green";
+        document.getElementById("lvl2Review").className = "fas fa-check-circle fa-fw";
+        document.getElementById("lvl2ReviewTxt").textContent = "5/5 Reviews";
+        lvl2Checker = lvl2Checker + 1;
+      }else {
+        document.getElementById("lvl2ReviewTxt").textContent = "0/5 Reviews";
+      }
+
+      // if (lvl2ClassNum > 0){
+      //   lvl2Checker = lvl2Checker + 1;
+      //   document.getElementById("lvl2Class").style.color = "green";
+      //   document.getElementById("lvl2Class").className = "fas fa-check-circle fa-fw";
+      //   document.getElementById("lvl2ClassTxt").textContent = 1;
+      // }
+
+      // if (lvl2StudentNum > 0){
+      //   lvl2Checker = lvl2Checker + 1;
+      //   document.getElementById("lvl2Student").style.color = "green";
+      //   document.getElementById("lvl2Student").className = "fas fa-check-circle fa-fw";
+      //   document.getElementById("lvl2StudentTxt").textContent = 1;
+      // }
+
+      let statusArr = [PREMIUM_ACCOUNT_1_STATUS_KEY, PREMIUM_ACCOUNT_2_STATUS_KEY, PREMIUM_ACCOUNT_3_STATUS_KEY, PREMIUM_ACCOUNT_1_ACTIVE_STATUS_KEY, PREMIUM_ACCOUNT_2_ACTIVE_STATUS_KEY, PREMIUM_ACCOUNT_3_ACTIVE_STATUS_KEY];
+      if (statusArr.indexOf(current_accountStatus) > -1){
+        setActiveStep(3);
+        setActivePanel(3); 
+      }else if (lvl1Checker == 4 && lvl2Checker == 1){
+        setActiveStep(2);
+        setActivePanel(2); 
+      }else if (lvl1Checker == 4){
+        setActiveStep(1);
+        setActivePanel(1); 
+      }else{
+        // Stay at step 1
+      }
+
+      // console.log(lvl1Checker, lvl2Checker, current_accountStatus);
 
     }
 
@@ -1113,11 +1430,8 @@
           clearDashboard();
         } 
         else {
-          console.log("Found ");
           querySnapshot.forEach((doc) => {
-
-            console.log(doc.data());
-
+            // console.log(doc.data());
             updateDashboard(doc);
           });
 
@@ -1136,6 +1450,8 @@
       if (type === NUM_TYPE_STUDENT){
         document.getElementById("studentNum").textContent = value;
         document.getElementById("studentLastEdit").textContent = lastEdit;
+        lvl2StudentNum = value;
+        updateProfileLevel();
       }
       else if (type === NUM_TYPE_TEACHER){
         document.getElementById("tutorNum").textContent = value;
@@ -1144,6 +1460,8 @@
       else if (type === NUM_TYPE_CLASS){
         document.getElementById("classNum").textContent = value;
         document.getElementById("classLastEdit").textContent = lastEdit;
+        lvl2ClassNum = value;
+        updateProfileLevel();
       }
       else if (type === NUM_TYPE_PUBLIC_COURSE){
         document.getElementById("profileViewNum").textContent = value;
@@ -1720,8 +2038,196 @@
 
 
   </script>
- 
- 
+
+  <!-- Multiform-specific script -->
+  <script>
+    //DOM elements
+    const DOMstrings = {
+      stepsBtnClass: 'multisteps-form__progress-btn',
+      stepsBtns: document.querySelectorAll(`.multisteps-form__progress-btn`),
+      stepsBar: document.querySelector('.multisteps-form__progress'),
+      stepsForm: document.querySelector('.multisteps-form__form'),
+      stepsFormTextareas: document.querySelectorAll('.multisteps-form__textarea'),
+      stepFormPanelClass: 'multisteps-form__panel',
+      stepFormPanels: document.querySelectorAll('.multisteps-form__panel'),
+      stepPrevBtnClass: 'js-btn-prev',
+      stepNextBtnClass: 'js-btn-next',
+      stepSendBtnClass: 'js-btn-send' };
+
+
+    //remove class from a set of items
+    const removeClasses = (elemSet, className) => {
+
+      elemSet.forEach(elem => {
+
+        elem.classList.remove(className);
+
+      });
+
+    };
+
+    //return exect parent node of the element
+    const findParent = (elem, parentClass) => {
+
+      let currentNode = elem;
+
+      while (!currentNode.classList.contains(parentClass)) {
+        currentNode = currentNode.parentNode;
+      }
+
+      return currentNode;
+
+    };
+
+    //get active button step number
+    const getActiveStep = elem => {
+      return Array.from(DOMstrings.stepsBtns).indexOf(elem);
+    };
+
+    //set all steps before clicked (and clicked too) to active
+    const setActiveStep = activeStepNum => {
+
+      //remove active state from all the state
+      removeClasses(DOMstrings.stepsBtns, 'js-active');
+
+      //set picked items to active
+      DOMstrings.stepsBtns.forEach((elem, index) => {
+
+        if (index <= activeStepNum) {
+          elem.classList.add('js-active');
+        }
+
+      });
+    };
+
+    //get active panel
+    const getActivePanel = () => {
+
+      let activePanel;
+
+      DOMstrings.stepFormPanels.forEach(elem => {
+
+        if (elem.classList.contains('js-active')) {
+
+          activePanel = elem;
+
+        }
+
+      });
+
+      return activePanel;
+
+    };
+
+    //open active panel (and close unactive panels)
+    const setActivePanel = activePanelNum => {
+
+      //remove active class from all the panels
+      removeClasses(DOMstrings.stepFormPanels, 'js-active');
+
+      //show active panel
+      DOMstrings.stepFormPanels.forEach((elem, index) => {
+        if (index === activePanelNum) {
+
+          elem.classList.add('js-active');
+
+          setFormHeight(elem);
+
+        }
+      });
+
+    };
+
+    //set form height equal to current panel height
+    const formHeight = activePanel => {
+
+      const activePanelHeight = activePanel.offsetHeight;
+
+      DOMstrings.stepsForm.style.height = `${activePanelHeight}px`;
+
+    };
+
+    const setFormHeight = () => {
+      const activePanel = getActivePanel();
+
+      formHeight(activePanel);
+    };
+
+    //STEPS BAR CLICK FUNCTION
+    DOMstrings.stepsBar.addEventListener('click', e => {
+
+      //check if click target is a step button
+      const eventTarget = e.target;
+
+      if (!eventTarget.classList.contains(`${DOMstrings.stepsBtnClass}`)) {
+        return;
+      }
+
+      //get active button step number
+      const activeStep = getActiveStep(eventTarget);
+
+      //set all steps before clicked (and clicked too) to active
+      setActiveStep(activeStep);
+
+      //open active panel
+      setActivePanel(activeStep);
+
+    });
+
+    //PREV/NEXT BTNS CLICK
+    DOMstrings.stepsForm.addEventListener('click', e => {
+      const eventTarget = e.target;
+
+      //find active panel
+      const activePanel = findParent(eventTarget, `${DOMstrings.stepFormPanelClass}`);
+
+      let activePanelNum = Array.from(DOMstrings.stepFormPanels).indexOf(activePanel);
+
+      setActiveStep(activePanelNum);
+      setActivePanel(activePanelNum);
+    });
+
+    //SETTING PROPER FORM HEIGHT ONLOAD
+    window.addEventListener('load', setFormHeight, false);
+
+    //SETTING PROPER FORM HEIGHT ONRESIZE
+    window.addEventListener('resize', setFormHeight, false);
+
+    //changing animation via animation select !!!YOU DON'T NEED THIS CODE (if you want to change animation type, just change form panels data-attr)
+
+    const setAnimationType = newType => {
+      DOMstrings.stepFormPanels.forEach(elem => {
+        elem.dataset.animation = newType;
+      });
+    };
+
+    function validateForm(activePanelNum) {
+      // This function deals with validation of the form fields with data-compulsory = 'true'
+      var x, y, i, valid = true;
+      x = document.getElementsByClassName("multisteps-form__panel");
+      // y = x[activePanelNum].getElementsByTagName("input") && x[activePanelNum].querySelectorAll('[type="text"]');
+      y =x[activePanelNum].querySelectorAll('[data-compulsory="true"]');
+
+      // A loop that checks every input field in the current tab:
+      for (i = 0; i < y.length; i++) {
+        // console.log(y[i].value)
+        // If a field is empty...
+        if (y[i].value == "") {
+          // add an "invalid" class to the field:
+          y[i].className += " invalid";
+          // and set the current valid status to false:
+          valid = false;
+        }
+      }
+      // If the valid status is true, mark the step as finished and valid:
+      if (valid) {
+        // document.getElementsByClassName("step")[activePanelNum].className += " finish";
+      }
+      return valid; // return the valid status
+    }
+
+  </script>
+
 </body>
 
 </html>

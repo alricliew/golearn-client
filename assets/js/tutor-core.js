@@ -49,6 +49,9 @@ function loadTutorInfoObj(tutorId){
     currentTutoringExperience = tutorInfoObj.tutoringExperience;
     currentTutoringApproach = tutorInfoObj.tutoringApproach;
     currentQualification = tutorInfoObj.qualification;
+    current_rating = tutorInfoObj[RATING_KEY];
+    current_ratingTimes = tutorInfoObj[RATING_TIMES_KEY];
+    current_ratingFinal = tutorInfoObj[RATING_FINAL_KEY];
     current_preferedAreaList = tutorInfoObj.preferedAreaList;
     current_preferedSubjectList = tutorInfoObj.preferedSubjectList;
     isModeHomeStudentToTutor = tutorInfoObj.modeHomeStudentToTutor;
@@ -174,6 +177,9 @@ function loadUserInfo(tutorId){
       currentTutoringExperience = doc.data().tutoringExperience;
       currentTutoringApproach = doc.data().tutoringApproach;
       currentQualification = doc.data().qualification;
+      current_rating = doc.data()[RATING_KEY];
+      current_ratingTimes = doc.data()[RATING_TIMES_KEY]; 
+      current_ratingFinal = doc.data()[RATING_FINAL_KEY];
       isModeHomeStudentToTutor = doc.data()[CHECK_HOME_STUDENT_TO_TUTOR_KEY];
       isModeHomeTutorToStudent = doc.data()[CHECK_HOME_TUTOR_TO_STUDENT_KEY];
       isModeGroup = doc.data()[CHECK_GROUP_KEY]; 
