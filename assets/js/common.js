@@ -732,6 +732,52 @@ const REVIEW_DATE_ADDED = "dateAdded";
 const REVIEW_STATUS = "status";
     const REVIEW_STATUS_PENDING = "pending";
     const REVIEW_STATUS_APPROVED = "approved";
+
+//  Track Impressions / Clicks / Pageviews (track > v1 > [imp, clk, pgvw])  
+const TRACK_GEN_ID = "id";
+const TRACK_GEN_TUTOR_ID = "tid";
+const TRACK_GEN_PAGE = "page";
+const TRACK_GEN_POS = "pos";
+const TRACK_GEN_DATE = "date";
+
+const TRACK_GEN_QUERY = "q";
+const TRACK_GEN_QUERY_SUB = "sub";
+const TRACK_GEN_QUERY_CAT = "cat";
+const TRACK_GEN_QUERY_AREA = "area";
+const TRACK_GEN_QUERY_STATE = "state";
+
+const TRACK_GEN_GEO = "geo";
+const TRACK_GEN_GEO_IP = "ip";
+const TRACK_GEN_GEO_CITY = "city";
+const TRACK_GEN_GEO_STATE = "area";
+const TRACK_GEN_GEO_COUNTRY = "country";
+
+//  Track Summary of Impressions / Clicks / Pageviews (track > v1 > [sum_imp, sum_clk, sum_pgvw])  
+const TRACK_SUM_ID = "id";
+const TRACK_SUM_TARGET_ID = "target_id";
+const TRACK_SUM_DATE = "date";
+const TRACK_SUM_SUM = "sum";
+const TRACK_SUM_ITEM = "item";
+const TRACK_SUM_ITEM_KEY = "key";
+const TRACK_SUM_ITEM_VAL = "val";
+
+
+//  Public (public > v1 > tutor > v1> [default, state ,...])  
+const PUBLIC_ID = "id";
+const PUBLIC_TUTOR_ID = "tutorId";
+const PUBLIC_NAME = "name";
+// const PUBLIC_AGE = "age";
+const PUBLIC_IMG_URL = "imgUrl";
+const PUBLIC_TUTORING_APPROACH = "tAprch";
+const PUBLIC_PREFERED_AREA_LIST = "pAreaArr";
+const PUBLIC_RATING_TIMES = "rateTimes";
+const PUBLIC_RATING_FINAL = "rateFinal";
+const PUBLIC_MODE = "mode";
+const PUBLIC_ACCOUNT_STATUS = "accStatus";
+const PUBLIC_RS_SCORE = "rs";
+const PUBLIC_LAST_UPDATE = "lastUpdate";
+
+
 // -------------- Session Storage Key Start -------------- //
 // CLIENT: Profile Obj
 const PROFILE_CLIENT_INFO = "clientInfoObj";
@@ -782,5 +828,8 @@ const SESSION_STORAGE_CLIENT_CLASS_CURRENT_DOC_KEY = "currentClientClassDoc";
 const SESSION_STORAGE_CLIENT_INVOICE_ALL_DOCS_KEY = "allClientInvoiceDocs";
 const SESSION_STORAGE_CLIENT_INVOICE_CURRENT_DOC_KEY = "currentClientInvoiceDoc";
 
+// ADMIN: Review Module 
+const SESSION_STORAGE_REVIEW_ALL_DOCS_KEY = "allReviewDocs";
+const SESSION_STORAGE_REVIEW_CURRENT_DOC_KEY = "currentReviewDoc";
 
 // -------------- Session Storage Key End   -------------- //

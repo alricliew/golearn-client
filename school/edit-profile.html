@@ -440,7 +440,7 @@
                     </div>
                   </div>
                 </div> -->
-                <a href="javascript:;" class="btn btn-primary btn-round" id="btnUpdateProfile" style="background-color: grey; pointer-events: none; margin-top: 1rem;" >Update Profile</a>
+                <button class="btn btn-primary btn-round" id="btnUpdateProfile" style="background-color: grey; pointer-events: none; margin-top: 1rem;" >Update Profile</button>
               </div>
             </div>
 
@@ -533,418 +533,325 @@
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
+    var isFirstTimeLoad = true;
+    var oriName = '';
     
-		firebase.auth().onAuthStateChanged(function(user){
-      
-			if(!user){
-        // Return to login if user does not exist.
-				window.location.href = "https://app.golearn.com.my/"
-			}else{
-        // if the displayName is null, it means user register using Phone
-        if (firebase.auth().currentUser.displayName == null ){
-          tutorId = firebase.auth().currentUser.phoneNumber;
-        }else
-          tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-          
-        loadUserInfo(tutorId)
-        // loadTutorInfoObj(tutorId);
-        
-			}
-		});
+    // Check if user logged on
+    AuthCheck();
 
-    
-    // Set the nav name and global var, if user already login and have session Storage 
-    var tutorInfoObj = null;
+    // Page Specific Initialization
+    function loadPageInitFunc(){
 
-    function loadTutorInfoObj(tutorId){
-      if (JSON.parse(sessionStorage.getItem(PROFILE_TUTOR_INFO)) == null ){
-        // Although user exist, but the storage is null. Reload.
-        loadUserInfo(tutorId);
-      }else{
-        // Set the nav user name
-        tutorInfoObj = JSON.parse(sessionStorage.getItem(PROFILE_TUTOR_INFO));
-        document.getElementById("user").textContent = tutorInfoObj.name;
-
-        current_id = (tutorInfoObj.id == null || tutorInfoObj.id == "") ? "NO_ID" : tutorInfoObj.id; // This was added to check if different user is logged in on the same browser.
-        current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
-        // current_email, 
-        // current_phone, 
-        current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
-        current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
-        current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "https://app.golearn.com.my/assets/img/hello.gif" : tutorInfoObj.imgUrl;
-        current_accountStatus = tutorInfoObj.accountStatus; // bool
-        currentYearsExperience = tutorInfoObj.yearsExperience; // number
-        currentTutoringExperience = tutorInfoObj.tutoringExperience;
-        currentTutoringApproach = tutorInfoObj.tutoringApproach;
-        currentQualification= tutorInfoObj.qualification;
-        current_mon_8am = tutorInfoObj.tMon8am;
-        current_mon_12pm= tutorInfoObj.tMon12pm; 
-        current_mon_3pm = tutorInfoObj.tMon3pm;  
-        current_mon_6pm = tutorInfoObj.tMon6pm;  
-        current_tue_8am = tutorInfoObj.tTue8am;  
-        current_tue_12pm= tutorInfoObj.tTue12pm;  
-        current_tue_3pm = tutorInfoObj.tTue3pm;  
-        current_tue_6pm = tutorInfoObj.tTue6pm;  
-        current_wed_8am = tutorInfoObj.tWed8am;  
-        current_wed_12pm= tutorInfoObj.tWed12pm;  
-        current_wed_3pm = tutorInfoObj.tWed3pm;  
-        current_wed_6pm = tutorInfoObj.tWed6pm;  
-        current_thu_8am = tutorInfoObj.tThu8am;  
-        current_thu_12pm= tutorInfoObj.tThu12pm;  
-        current_thu_3pm = tutorInfoObj.tThu3pm;  
-        current_thu_6pm = tutorInfoObj.tThu6pm;  
-        current_fri_8am = tutorInfoObj.tFri8am;  
-        current_fri_12pm= tutorInfoObj.tFri12pm;  
-        current_fri_3pm = tutorInfoObj.tFri3pm;  
-        current_fri_6pm = tutorInfoObj.tFri6pm; 
-        current_sat_8am = tutorInfoObj.tSat8am;  
-        current_sat_12pm= tutorInfoObj.tSat12pm;  
-        current_sat_3pm = tutorInfoObj.tSat3pm;  
-        current_sat_6pm = tutorInfoObj.tSat6pm;  
-        current_sun_8am = tutorInfoObj.tSun8am;  
-        current_sun_12pm= tutorInfoObj.tSun12pm;  
-        current_sun_3pm = tutorInfoObj.tSun3pm;  
-        current_sun_6pm = tutorInfoObj.tSun6pm;
-        current_aweburl = tutorInfoObj.aWebUrl
-        current_uLastOnline = tutorInfoObj.uLastOnline;
-
-        // Check if user logged in with other number. If true, logout
-        if (current_id != tutorId){
-          // console.log("Stored TutorId in session storage is equal to latest tutorId. ")
-          window.location.href = "https://app.golearn.com.my/school/login.html";
-        }
-        // console.log(current_uLastOnline)
-        // let secondLastOnline = current_uLastOnline.seconds;
-        // let secondCurrent = new Date().getTime() / 1000;
-        // let hoursEllapsed = (secondCurrent - secondLastOnline) / 60 / 60;
-        // let reload = hoursEllapsed > 6;
-        // console.log(secondLastOnline, secondCurrent, hoursEllapsed, reload)
-
-        // Check last online. If > 6hr, reload
-        if (current_uLastOnline == null || current_uLastOnline == ""){
-          loadUserInfo(tutorId);
-        }
-        else{
-          let secondLastOnline = current_uLastOnline.seconds;
-          let secondCurrent = new Date().getTime() / 1000;
-          let hoursEllapsed = (secondCurrent - secondLastOnline) / 60 / 60;
-          let reload = hoursEllapsed > 6;
-          
-          // console.log(secondLastOnline, secondCurrent, hoursEllapsed, reload);
-          if (reload){
-            // console.log("PROFILE_TUTOR_INFO exits, current_uLastOnline exits, reload true")
-            loadUserInfo(tutorId);
-          }
-          else {
-            // console.log("PROFILE_TUTOR_INFO exits, current_uLastOnline exits, reload false")
-            // Update the general view
-            updateGeneralView();
-            // Finally, load page specific view.
-            // This function will be declared separately in each page
-            loadPageInitFunc(); 
-
-            // Last Online
-            let docLastOnlineRef = db.collection("Tutor").doc(tutorId);
-            docLastOnlineRef.set({
-              [SYSTEM_LAST_ONLINE_KEY] : new Date() //firebase.firestore.Timestamp.fromDate(new Date())
-              },{ merge: true }
-            );
-
-
-          }
-
-        }
-      }
-
+      // Update page view
+      updatePageView();
 
     }
 
- 
-    // Tutor Specific
-    function loadUserInfo(tutorId){
-      // Tutor Id must be a phone with +60, no spacing or other chars
-      var docRef = db.collection("Tutor").doc(tutorId);
+    // Update Page Specific View
+    function updatePageView(){
+
+      document.getElementById("tutorImgUrl").src = current_imgUri;
+      // imgUrl_temp = current_imgUri;
+      document.getElementById("name").value = current_name;
+      document.getElementById("email").value = current_email;
+      document.getElementById("phone").value = current_phone;
+      document.getElementById("age").value = current_age;
+      document.getElementById("address1").value = current_address1;
+      document.getElementById("address2").value = current_address2;
+      document.getElementById("addressPostCode").value = current_addressPostCode;
+      document.getElementById("addressState").value = current_addressState;
+
+      if (current_gender == 'Male'){ // Male
+        document.getElementById("radio-male").checked = true;
+      }else if (current_gender == 'Female' ){
+        document.getElementById("radio-female").checked = true
+      }else{
+        document.getElementById("radio-male").checked = true;
+      }
+
+      // Re-Enable img upload and save button
+      document.getElementById("tutorImgUrl").setAttribute("style", "height: 100%; width:100%; object-fit: cover; border-radius: 50%; pointer-events: auto;");
+      document.getElementById('btnUpdateProfile').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
+
+      //------ edit-profile.html specific End -------------//
+
+      // Get the ori copy of subject and area list.
+      if (isFirstTimeLoad){
+        oriName = current_name;
+        isFirstTimeLoad = false;
+      }
+    }
+
+		// firebase.auth().onAuthStateChanged(function(user){
       
-
-      // docRef.get().then((doc) => {
-      docRef.onSnapshot((doc) => {
-
-        if (doc.exists) {
-          // console.log("Document data:", doc.data());
-
-          current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
-          // current_email, 
-          // current_phone, 
-          current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
-          current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
-          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
-          current_accountStatus = doc.data().accountStatus; 
-          currentYearsExperience = doc.data().yearsExperience; // number
-          currentTutoringExperience = doc.data().tutoringExperience;
-          currentTutoringApproach = doc.data().tutoringApproach;
-          currentQualification= doc.data().qualification;
-          current_mon_8am = doc.data().tMon8am;
-          current_mon_12pm= doc.data().tMon12pm; 
-          current_mon_3pm = doc.data().tMon3pm;  
-          current_mon_6pm = doc.data().tMon6pm;  
-          current_tue_8am = doc.data().tTue8am;  
-          current_tue_12pm= doc.data().tTue12pm;  
-          current_tue_3pm = doc.data().tTue3pm;  
-          current_tue_6pm = doc.data().tTue6pm;  
-          current_wed_8am = doc.data().tWed8am;  
-          current_wed_12pm= doc.data().tWed12pm;  
-          current_wed_3pm = doc.data().tWed3pm;  
-          current_wed_6pm = doc.data().tWed6pm;  
-          current_thu_8am = doc.data().tThu8am;  
-          current_thu_12pm= doc.data().tThu12pm;  
-          current_thu_3pm = doc.data().tThu3pm;  
-          current_thu_6pm = doc.data().tThu6pm;  
-          current_fri_8am = doc.data().tFri8am;  
-          current_fri_12pm= doc.data().tFri12pm;  
-          current_fri_3pm = doc.data().tFri3pm;  
-          current_fri_6pm = doc.data().tFri6pm; 
-          current_sat_8am = doc.data().tSat8am;  
-          current_sat_12pm= doc.data().tSat12pm;  
-          current_sat_3pm = doc.data().tSat3pm;  
-          current_sat_6pm = doc.data().tSat6pm;  
-          current_sun_8am = doc.data().tSun8am;  
-          current_sun_12pm= doc.data().tSun12pm;  
-          current_sun_3pm = doc.data().tSun3pm;  
-          current_sun_6pm = doc.data().tSun6pm;
-          current_aweburl = doc.data().aWebUrl;
-          current_uLastOnline = doc.data()[SYSTEM_LAST_ONLINE_KEY].toDate();
-
-          // Store data to sessionStorage
-          var tutorDataObj = {
-            [ID_KEY] : tutorId, // This was added to check if different user is logged in on the same browser.
-            [NAME_KEY] : doc.data().name,
-            [EMAIL_KEY] : doc.data().email,
-            [PHONE_KEY] : doc.data().phone,
-            [AGE_KEY] : doc.data().age,
-            [GENDER_KEY] : doc.data().gender,
-            [ADDRESS_1_KEY] :doc.data().address1,
-            [ADDRESS_2_KEY] :doc.data().address2,
-            [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
-            [ADDRESS_STATE_KEY] :doc.data().addressState,
-            [IMAGE_KEY] : doc.data().imgUrl,
-            // [NRIC_KEY] : doc.data().name,
-            [RATING_KEY] : doc.data().rating,
-            [RATING_TIMES_KEY] : doc.data().ratingTimes,
-            [RATING_FINAL_KEY] : doc.data().ratingFinal,
-            [PROFILE_STATUS_KEY] : doc.data().profileStatus,
-            // [CHECK_HOMETUTOR_KEY] : doc.data().name,
-            // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
-            // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
-            // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
-            [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
-            [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
-            [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
-            [QUALIFICATION_KEY] : doc.data().qualification,
-            [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
-            [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
-            [AGENT_KEY] : doc.data().agent,
-            [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
-            
-            [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
-            [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
-            [CHECK_GROUP_KEY] : doc.data().modeGroup,
-            [CHECK_ONLINE_KEY] : doc.data().modeOnline,
-            [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
-            [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
-            [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
-            [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
-            [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
-            [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
-
-            [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
-            [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
-            [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
-            [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
-            [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
-            [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
-            [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
-            [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
-            [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
-            [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
-            [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
-            [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
-            [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
-            [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
-            [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
-            [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
-            [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
-            [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
-            [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
-            [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
-            [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
-            [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
-            [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
-            [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
-            [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
-            [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
-            [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
-            [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
-            // Create a placeholder for aWebUrl. This param can only initiated by admin
-            // manually through https://golearn.com.my/admin/admin-portal.html
-            [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
-            [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
-            [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
-            [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
-            [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
-            [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
-            [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit,
-            [SYSTEM_LAST_ONLINE_KEY] : doc.data()[SYSTEM_LAST_ONLINE_KEY],
-          }
-
-          // Set tutorInfoObj as sessionStorage
-          sessionStorage.setItem(PROFILE_TUTOR_INFO, JSON.stringify(tutorDataObj));
-
-          // Set the public profile link.
-          // By default, general link were given.
-          document.getElementById("user").textContent = doc.data().name;
-
-          if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
-            let url = encode64(tutorId);
-            document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor?tid="+ url;
-            // document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
-            document.getElementById("navPublicProfile").target = "_blank";
-          } else{
-            document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
-            document.getElementById("navPublicProfile").target = "_blank";
-          }
+		// 	if(!user){
+    //     // Return to login if user does not exist.
+		// 		window.location.href = "https://app.golearn.com.my/"
+		// 	}else{
+    //     // if the displayName is null, it means user register using Phone
+    //     if (firebase.auth().currentUser.displayName == null ){
+    //       tutorId = firebase.auth().currentUser.phoneNumber;
+    //     }else
+    //       tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
           
-          if (current_accountStatus == ACTIVE_ACCOUNT_STATUS_KEY){
+    //     loadUserInfo(tutorId)
+        
+		// 	}
+		// });
 
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
-            document.getElementById("btnActivateAccount").textContent = "UPGRADE";
-            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
-            document.getElementById("btnActivateAccount").target = "_blank";
-            // Payroll
-            document.getElementById("navPayroll").setAttribute("style", "display: none;");
-          }
-          else if (current_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY){
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
-            document.getElementById("btnActivateAccount").textContent = "BASIC";
-            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
-            document.getElementById("btnActivateAccount").target = "_blank";
-            // Payroll
-            document.getElementById("navPayroll").setAttribute("style", "display: none;");
-          }
-          else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY){
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
-            document.getElementById("btnActivateAccount").textContent = "ENTERPRISE";
-            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
-            document.getElementById("btnActivateAccount").target = "_blank";
-            // Payroll
-            document.getElementById("navPayroll").setAttribute("style", "display: inline;");
-          }
-          else if (current_accountStatus == PREMIUM_ACCOUNT_3_STATUS_KEY){
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
-            document.getElementById("btnActivateAccount").textContent = "ORGANIZATION";
-            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
-            document.getElementById("btnActivateAccount").target = "_blank";
-            // Payroll
-            document.getElementById("navPayroll").setAttribute("style", "display: inline;");
-          }
-          else if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
-            document.getElementById("btnActivateAccount").textContent = "UPGRADE";
-            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
-            document.getElementById("btnActivateAccount").target = "_blank";
-            // Payroll
-            document.getElementById("navPayroll").setAttribute("style", "display: none;" );
-          }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white; background: red;" );
-            document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
-            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
-            document.getElementById("btnActivateAccount").target = "_blank";
-            // Payroll
-            document.getElementById("navPayroll").setAttribute("style", "display: none;");
-            // Public profile link is disabled for suspended user
-            document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
-          }else {
-            let activationNavItem = document.querySelector('#activationNavItem');
-            // activationNavItem.parentNode.removeChild(activationNavItem);
-            let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
-            // console.log(activationNavItemIsExist)
-            // Remove NavItem if exist
-            if (activationNavItemIsExist){
-              activationNavItem.parentNode.removeChild(activationNavItem);
-            }else{
-              // Do nothing
-            }
-            // Payroll
-            document.getElementById("navPayroll").setAttribute("style", "display: none;");
+    // // Tutor Specific
+    // function loadUserInfo(tutorId){
+    //   // Tutor Id must be a phone with +60, no spacing or other chars
+    //   var docRef = db.collection("Tutor").doc(tutorId);
+      
+    //   // docRef.get().then((doc) => {
+    //   docRef.onSnapshot((doc) => {
 
-          }
+    //     if (doc.exists) {
+    //       // console.log("Document data:", doc.data());
 
-          //------ edit-profile.html specific Start -------------//
-          document.getElementById("tutorImgUrl").src = current_imgUri;
-          imgUrl_temp = current_imgUri;
-          document.getElementById("name").value = doc.data().name;
-          document.getElementById("email").value = doc.data().email;
-          document.getElementById("phone").value = doc.data().phone;
-          document.getElementById("age").value = doc.data().age;
-          document.getElementById("address1").value = doc.data().address1;
-          document.getElementById("address2").value = doc.data().address2;
-          document.getElementById("addressPostCode").value = doc.data().addressPostCode;
-          document.getElementById("addressState").value = doc.data().addressState;
+    //       current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
+    //       current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
+    //       current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
+    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
+    //       current_accountStatus = doc.data().accountStatus; 
+    //       currentYearsExperience = doc.data().yearsExperience; // number
+    //       currentTutoringExperience = doc.data().tutoringExperience;
+    //       currentTutoringApproach = doc.data().tutoringApproach;
+    //       currentQualification= doc.data().qualification;
+    //       // current_mon_8am = doc.data().tMon8am;
+    //       // current_mon_12pm= doc.data().tMon12pm; 
+    //       // current_mon_3pm = doc.data().tMon3pm;  
+    //       // current_mon_6pm = doc.data().tMon6pm;  
+    //       // current_tue_8am = doc.data().tTue8am;  
+    //       // current_tue_12pm= doc.data().tTue12pm;  
+    //       // current_tue_3pm = doc.data().tTue3pm;  
+    //       // current_tue_6pm = doc.data().tTue6pm;  
+    //       // current_wed_8am = doc.data().tWed8am;  
+    //       // current_wed_12pm= doc.data().tWed12pm;  
+    //       // current_wed_3pm = doc.data().tWed3pm;  
+    //       // current_wed_6pm = doc.data().tWed6pm;  
+    //       // current_thu_8am = doc.data().tThu8am;  
+    //       // current_thu_12pm= doc.data().tThu12pm;  
+    //       // current_thu_3pm = doc.data().tThu3pm;  
+    //       // current_thu_6pm = doc.data().tThu6pm;  
+    //       // current_fri_8am = doc.data().tFri8am;  
+    //       // current_fri_12pm= doc.data().tFri12pm;  
+    //       // current_fri_3pm = doc.data().tFri3pm;  
+    //       // current_fri_6pm = doc.data().tFri6pm; 
+    //       // current_sat_8am = doc.data().tSat8am;  
+    //       // current_sat_12pm= doc.data().tSat12pm;  
+    //       // current_sat_3pm = doc.data().tSat3pm;  
+    //       // current_sat_6pm = doc.data().tSat6pm;  
+    //       // current_sun_8am = doc.data().tSun8am;  
+    //       // current_sun_12pm= doc.data().tSun12pm;  
+    //       // current_sun_3pm = doc.data().tSun3pm;  
+    //       // current_sun_6pm = doc.data().tSun6pm;
+    //       current_aweburl = doc.data().aWebUrl;
+    //       current_uLastOnline = doc.data()[SYSTEM_LAST_ONLINE_KEY].toDate();
 
-          if (doc.data().gender == 0){ // Male
-            document.getElementById("radio-male").checked = true;
-          }else if (doc.data().gender == 1 ){
-            document.getElementById("radio-female").checked = true
-          }else{
-            document.getElementById("radio-male").checked = true;
-          }
+    //       // Store data to sessionStorage
+    //       var tutorDataObj = {
+    //         [ID_KEY] : tutorId, // This was added to check if different user is logged in on the same browser.
+    //         [NAME_KEY] : doc.data().name,
+    //         [EMAIL_KEY] : doc.data().email,
+    //         [PHONE_KEY] : doc.data().phone,
+    //         [AGE_KEY] : doc.data().age,
+    //         [GENDER_KEY] : doc.data().gender,
+    //         [ADDRESS_1_KEY] :doc.data().address1,
+    //         [ADDRESS_2_KEY] :doc.data().address2,
+    //         [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
+    //         [ADDRESS_STATE_KEY] :doc.data().addressState,
+    //         [IMAGE_KEY] : doc.data().imgUrl,
+    //         // [NRIC_KEY] : doc.data().name,
+    //         [RATING_KEY] : doc.data().rating,
+    //         [RATING_TIMES_KEY] : doc.data().ratingTimes,
+    //         [RATING_FINAL_KEY] : doc.data().ratingFinal,
+    //         [PROFILE_STATUS_KEY] : doc.data().profileStatus,
+    //         // [CHECK_HOMETUTOR_KEY] : doc.data().name,
+    //         // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
+    //         // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
+    //         // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
+    //         [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
+    //         [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
+    //         [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
+    //         [QUALIFICATION_KEY] : doc.data().qualification,
+    //         [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
+    //         [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
+    //         [AGENT_KEY] : doc.data().agent,
+    //         [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
+            
+    //         [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
+    //         [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
+    //         [CHECK_GROUP_KEY] : doc.data().modeGroup,
+    //         [CHECK_ONLINE_KEY] : doc.data().modeOnline,
+    //         [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
+    //         [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
+    //         [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
+    //         [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
+    //         [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
+    //         [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
 
-          // Re-Enable img upload and save button
-          document.getElementById("tutorImgUrl").setAttribute("style", "height: 100%; width:100%; object-fit: cover; border-radius: 50%; pointer-events: auto;");
-          document.getElementById('btnUpdateProfile').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
+    //         [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
+    //         [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
+    //         [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
+    //         [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
+    //         [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
+    //         [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
+    //         [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
+    //         [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
+    //         [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
+    //         [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
+    //         [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
+    //         [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
+    //         [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
+    //         [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
+    //         [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
+    //         [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
+    //         [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
+    //         [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
+    //         [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
+    //         [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
+    //         [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
+    //         [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
+    //         [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
+    //         [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
+    //         [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
+    //         [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
+    //         [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
+    //         [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
+    //         // Create a placeholder for aWebUrl. This param can only initiated by admin
+    //         // manually through https://golearn.com.my/admin/admin-portal.html
+    //         [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
+    //         [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
+    //         [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
+    //         [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
+    //         [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
+    //         [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
+    //         [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit,
+    //         [SYSTEM_LAST_ONLINE_KEY] : doc.data()[SYSTEM_LAST_ONLINE_KEY],
+    //       }
 
-          //------ edit-profile.html specific End -------------//
+    //       // Set tutorInfoObj as sessionStorage
+    //       sessionStorage.setItem(PROFILE_TUTOR_INFO, JSON.stringify(tutorDataObj));
 
-        } else {
-          // Get document failed
-        }
-      });
+    //       // Set the public profile link.
+    //       // By default, general link were given.
+    //       document.getElementById("user").textContent = doc.data().name;
 
-    };
+    //       if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
+    //         let url = encode64(tutorId);
+    //         document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor?tid="+ url;
+    //         // document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
+    //         document.getElementById("navPublicProfile").target = "_blank";
+    //       } else{
+    //         document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
+    //         document.getElementById("navPublicProfile").target = "_blank";
+    //       }
+          
+    //       if (current_accountStatus == ACTIVE_ACCOUNT_STATUS_KEY){
 
-    // // Initialization
-    // AuthCheck();
+    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
+    //         document.getElementById("btnActivateAccount").textContent = "UPGRADE";
+    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
+    //         document.getElementById("btnActivateAccount").target = "_blank";
+    //         // Payroll
+    //         document.getElementById("navPayroll").setAttribute("style", "display: none;");
+    //       }
+    //       else if (current_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY || current_accountStatus == PREMIUM_ACCOUNT_1_ACTIVE_STATUS_KEY){
+    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
+    //         document.getElementById("btnActivateAccount").textContent = "BASIC";
+    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
+    //         document.getElementById("btnActivateAccount").target = "_blank";
+    //         // Payroll
+    //         document.getElementById("navPayroll").setAttribute("style", "display: none;");
+    //       }
+    //       else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY || current_accountStatus == PREMIUM_ACCOUNT_2_ACTIVE_STATUS_KEY){
+    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
+    //         document.getElementById("btnActivateAccount").textContent = "ENTERPRISE";
+    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
+    //         document.getElementById("btnActivateAccount").target = "_blank";
+    //         // Payroll
+    //         document.getElementById("navPayroll").setAttribute("style", "display: inline;");
+    //       }
+    //       else if (current_accountStatus == PREMIUM_ACCOUNT_3_STATUS_KEY || current_accountStatus == PREMIUM_ACCOUNT_3_ACTIVE_STATUS_KEY){
+    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
+    //         document.getElementById("btnActivateAccount").textContent = "ORGANIZATION";
+    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
+    //         document.getElementById("btnActivateAccount").target = "_blank";
+    //         // Payroll
+    //         document.getElementById("navPayroll").setAttribute("style", "display: inline;");
+    //       }
+    //       else if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
+    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
+    //         document.getElementById("btnActivateAccount").textContent = "UPGRADE";
+    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
+    //         document.getElementById("btnActivateAccount").target = "_blank";
+    //         // Payroll
+    //         document.getElementById("navPayroll").setAttribute("style", "display: none;" );
+    //       }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white; background: red;" );
+    //         document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
+    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
+    //         document.getElementById("btnActivateAccount").target = "_blank";
+    //         // Payroll
+    //         document.getElementById("navPayroll").setAttribute("style", "display: none;");
+    //         // Public profile link is disabled for suspended user
+    //         document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
+    //       }else {
+    //         let activationNavItem = document.querySelector('#activationNavItem');
+    //         // activationNavItem.parentNode.removeChild(activationNavItem);
+    //         let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
+    //         // console.log(activationNavItemIsExist)
+    //         // Remove NavItem if exist
+    //         if (activationNavItemIsExist){
+    //           activationNavItem.parentNode.removeChild(activationNavItem);
+    //         }else{
+    //           // Do nothing
+    //         }
+    //         // Payroll
+    //         document.getElementById("navPayroll").setAttribute("style", "display: none;");
 
-    // // Page Specific Initialization
-    // function loadPageInitFunc(){
+    //       }
 
-    //   updatePageView();
-    // }
+    //       //------ edit-profile.html specific Start -------------//
+    //       document.getElementById("tutorImgUrl").src = current_imgUri;
+    //       imgUrl_temp = current_imgUri;
+    //       document.getElementById("name").value = doc.data().name;
+    //       document.getElementById("email").value = doc.data().email;
+    //       document.getElementById("phone").value = doc.data().phone;
+    //       document.getElementById("age").value = doc.data().age;
+    //       document.getElementById("address1").value = doc.data().address1;
+    //       document.getElementById("address2").value = doc.data().address2;
+    //       document.getElementById("addressPostCode").value = doc.data().addressPostCode;
+    //       document.getElementById("addressState").value = doc.data().addressState;
 
-    // function updatePageView(){
+    //       if (doc.data().gender == 0){ // Male
+    //         document.getElementById("radio-male").checked = true;
+    //       }else if (doc.data().gender == 1 ){
+    //         document.getElementById("radio-female").checked = true
+    //       }else{
+    //         document.getElementById("radio-male").checked = true;
+    //       }
 
-    //   document.getElementById("tutorImgUrl").src = current_imgUri;
-    //   imgUrl_temp = current_imgUri;
-    //   document.getElementById("name").value = current_name;
-    //   document.getElementById("email").value = current_email;
-    //   document.getElementById("phone").value = current_phone;
-    //   document.getElementById("age").value = current_age;
-    //   document.getElementById("address1").value = current_address1;
-    //   document.getElementById("address2").value = current_address2;
-    //   document.getElementById("addressPostCode").value = current_addressPostCode;
-    //   document.getElementById("addressState").value = current_addressState;
+    //       // Re-Enable img upload and save button
+    //       document.getElementById("tutorImgUrl").setAttribute("style", "height: 100%; width:100%; object-fit: cover; border-radius: 50%; pointer-events: auto;");
+    //       document.getElementById('btnUpdateProfile').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
 
-    //   if (current_gender == 0){ // Male
-    //     document.getElementById("radio-male").checked = true;
-    //   }else if (current_gender == 1 ){
-    //     document.getElementById("radio-female").checked = true
-    //   }else{
-    //     document.getElementById("radio-male").checked = true;
-    //   }
+    //       //------ edit-profile.html specific End -------------//
 
-    //   // Re-Enable img upload and save button
-    //   document.getElementById("tutorImgUrl").setAttribute("style", "height: 100%; width:100%; object-fit: cover; border-radius: 50%; pointer-events: auto;");
-    //   document.getElementById('btnUpdateProfile').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
-    // }
+    //       // Get the ori copy of subject and area list.
+    //       if (isFirstTimeLoad){
+    //         oriName = doc.data().name;
+    //         isFirstTimeLoad = false;
+    //       }
+
+    //     } else {
+    //       // Get document failed
+    //     }
+    //   });
+
+    // };
 
   </script>
 
@@ -955,8 +862,6 @@
     // Img specific param
     var imgFile, type, size, width, height;// name, imgFile is a jSON obj
 
-    //, name_temp, email_temp, phone_temp, address1_temp, address2_temp, addressPostCode_temp, addressState_temp, age_temp, gender_temp;
-
 		$( document ).ready(function() {
 
 			// Update Profile
@@ -965,6 +870,8 @@
 			});
       $('#btnUpdateProfileModalUpdate').on('click', function (e) {
 
+        document.getElementById("btnUpdateProfile").setAttribute('disabled', true);
+        document.getElementById("btnUpdateProfile").textContent = 'Updating ...';
         // Step 1: Upload image and get the imgUrl.
         // uploadImage(imgFile, type, size, width, height);
 
@@ -984,7 +891,9 @@
         // console.log("imgUrl: "+ imgUrl_temp);
 
         var docRef = db.collection("Tutor").doc(tutorId);
-        var docRefWithMerge = docRef.set({
+        // console.log(document.getElementById("name").value == oriName);
+
+        let data = {
           [NAME_KEY]: document.getElementById("name").value,
           [EMAIL_KEY]: document.getElementById("email").value,
           [PHONE_KEY]: document.getElementById("phone").value,
@@ -992,63 +901,132 @@
           [ADDRESS_2_KEY]: document.getElementById("address2").value,
           [ADDRESS_POSTCODE_KEY]: document.getElementById("addressPostCode").value,
           [ADDRESS_STATE_KEY]: document.getElementById("addressState").value,
-          [IMAGE_KEY]: imgUrl_temp,
+          // [IMAGE_KEY]: imgUrl_temp,
           [AGE_KEY]: parseInt(document.getElementById("age").value, 10),
           [GENDER_KEY]: gender_temp
-        }, { merge: true });
-
-        // Update all active course
-        let final_address = document.getElementById("address1").value + ", " +
-          document.getElementById("address2").value + ", " + 
-          document.getElementById("addressPostCode").value + ", " +
-          document.getElementById("addressState").value;
-
-        var allActiveCourseData = {
-          [NAME_KEY]: document.getElementById("name").value,
-          [EMAIL_KEY]: document.getElementById("email").value,
-          [PHONE_KEY]: document.getElementById("phone").value,
-          [ADDRESS_KEY]: final_address,
-          [AGE_KEY]: parseInt(document.getElementById("age").value, 10),
-          [GENDER_KEY]: gender_temp,
-          [IMAGE_KEY]: imgUrl_temp,
         }
-        // Update the profile pic, name, & etc of all the active courses..
-        updateInfoInAllActiveCourse(allActiveCourseData);
-        // TODO: Use promise to Update all courses under tutor profile
-        // updateInfoInTutorCourse(allActiveCourseData);
+        // console.log(data);
 
-        // Update metadata and sitemaps
-        // Update meta data of user's public profile
-        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || 
-          current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-          // Do nothing if the account is new, deactivated or suspended
+        docRef
+        .update(data, { merge: true })
+        .then(() => {
 
-        }else {
+          let tutorRef = db.collectionGroup('p_tutor').where('tutorId', '==', tutorId).get();
 
-
-          // Check if aWebUrl Exist or not. Update only if it exists.
-          if (current_aweburl == null || current_aweburl == ""  ){
-            // Do nothing
-          }else{
-
-            let detail_temp =""
-            if (currentYearsExperience == 0 || currentYearsExperience == null)
-              detail_temp = gender_string_temp + " | " + document.getElementById("age").value;
-            else if (currentYearsExperience == 1)
-              detail_temp = gender_string_temp + " | " + document.getElementById("age").value + " |  1 year of experience";
-            else
-              detail_temp = gender_string_temp + " | " + document.getElementById("age").value + " | "+ currentYearsExperience + " years of experience";
-            
-            updateMetaData(current_aweburl, document.getElementById("name").value, detail_temp, imgUrl_temp);
-            updateSitemap(current_aweburl);
+          // Update the name if changes made
+          if (document.getElementById("name").value != oriName ){
+            // updateLatestRsScoreSingle(tutorId)
+            return Promise.resolve(tutorRef);
+          }else {
+            return null;
           }
+        })
+        .then((snapshots) => {
+          // console.log('Layer 4: Collection Group to Get all Tutor Path')
+          // This stage get all Tutor Path using Collection Group
+          const promisesLayer4 = [];
+
+          if (snapshots != null && snapshots.length != 0){
+
+            // Looping each snapshots. By default, there's only single snaphot in snapshots array.
+            snapshots.forEach((doc) => {
+
+              // console.log(doc.data())
+
+              if (doc.exists){
+
+                // console.log(doc.ref.path);
+
+                let data = {
+                  [PUBLIC_NAME]: document.getElementById("name").value,
+                  [PUBLIC_IMG_URL]: current_imgUri
+                }
+
+                // console.log("Doc exist");
+                // console.log(data)
+
+                let docRef = db.doc(doc.ref.path).update(data);
+
+                promisesLayer4.push(docRef);
+              }
+              else {
+                console.log("Doc does not exist");
+              }
+
+            })
+          }
+          else {
+            // console.log('No Snapshots')
+          }
+
+          return Promise.all(promisesLayer4);
+        })
+        .then(() => {
+          // Reload & update the page
+
+          return Promise.resolve(loadUserInfo(tutorId)); // tutor-core.js
+
+        }).then(() => {
+          document.getElementById("btnUpdateProfile").removeAttribute('disabled');
+          document.getElementById("btnUpdateProfile").textContent = 'UPDATE PROFILE';
+
+          func.showNotification('top','center', 'success', 'check_circle', "Your profile is updated.");
+
+          isFirstTimeLoad = true; // Reactivate the load
+
+        });
+
+        // // Update all active course
+        // let final_address = document.getElementById("address1").value + ", " +
+        //   document.getElementById("address2").value + ", " + 
+        //   document.getElementById("addressPostCode").value + ", " +
+        //   document.getElementById("addressState").value;
+
+        // var allActiveCourseData = {
+        //   [NAME_KEY]: document.getElementById("name").value,
+        //   [EMAIL_KEY]: document.getElementById("email").value,
+        //   [PHONE_KEY]: document.getElementById("phone").value,
+        //   [ADDRESS_KEY]: final_address,
+        //   [AGE_KEY]: parseInt(document.getElementById("age").value, 10),
+        //   [GENDER_KEY]: gender_temp,
+        //   [IMAGE_KEY]: imgUrl_temp,
+        // }
+        // // Update the profile pic, name, & etc of all the active courses..
+        // updateInfoInAllActiveCourse(allActiveCourseData);
+        // // TODO: Use promise to Update all courses under tutor profile
+        // // updateInfoInTutorCourse(allActiveCourseData);
+
+        // // Update metadata and sitemaps
+        // // Update meta data of user's public profile
+        // if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || 
+        //   current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
+        //   // Do nothing if the account is new, deactivated or suspended
+
+        // }else {
+
+
+        //   // Check if aWebUrl Exist or not. Update only if it exists.
+        //   if (current_aweburl == null || current_aweburl == ""  ){
+        //     // Do nothing
+        //   }else{
+
+        //     let detail_temp =""
+        //     if (currentYearsExperience == 0 || currentYearsExperience == null)
+        //       detail_temp = gender_string_temp + " | " + document.getElementById("age").value;
+        //     else if (currentYearsExperience == 1)
+        //       detail_temp = gender_string_temp + " | " + document.getElementById("age").value + " |  1 year of experience";
+        //     else
+        //       detail_temp = gender_string_temp + " | " + document.getElementById("age").value + " | "+ currentYearsExperience + " years of experience";
+            
+        //     updateMetaData(current_aweburl, document.getElementById("name").value, detail_temp, imgUrl_temp);
+        //     updateSitemap(current_aweburl);
+        //   }
           
         
-        }
+        // }
 
         $('#updateProfileModal').modal('hide');
-        
-        func.showNotification('top','center', 'success', 'check_circle', "Your profile is updated.");
+
       });
 
       $('#btnUpdateProfileModalClose1').on('click', function (e) {
@@ -1207,52 +1185,61 @@
           () => {
             // Upload completed successfully, now we can get the download URL
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+
               imgUrl_temp = downloadURL;
 
 
               // Once uploaded, update the new url
               var docRef = db.collection("Tutor").doc(tutorId);
-              var docRefWithMerge = docRef.set({
+              let data = {
                 [IMAGE_KEY]: imgUrl_temp
-              }, { merge: true });
-
-
-              var allActiveCourseData = {
-                [IMAGE_KEY]: imgUrl_temp,
               }
-              // Update the profile pic, name, & etc of all the active courses..
-              updateInfoInAllActiveCourse(allActiveCourseData);
-              // TODO: Use promise to Update all courses under tutor profile
-              // updateInfoInTutorCourse(allActiveCourseData);
 
-              // Update metadata and sitemaps
-              // Update meta data of user's public profile
-              if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || 
-                current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-                // Do nothing if the account is new, deactivated or suspended
-                func.showNotification('top','center', 'success', 'check_circle', "Your profile picture is updated. Please activate your account." );
+              console.log(data)
+              docRef.update(data, { merge: true });
 
-              }else {
-                // Check if aWebUrl Exist or not. Update only if it exists.
-                if (current_aweburl == null || current_aweburl == ""  ){
-                  // Do nothing
-                }else{
-                  let detail_temp =""
-                  if (currentYearsExperience == 0 || currentYearsExperience == null)
-                    detail_temp = current_gender + " | " + current_age;
-                  else if (currentYearsExperience == 1)
-                    detail_temp = current_gender + " | " + current_age + " |  1 year of experience";
-                  else
-                    detail_temp = current_gender + " | " + current_age + " | "+ currentYearsExperience + " years of experience";
+              return Promise.resolve(docRef);
+
+              // var allActiveCourseData = {
+              //   [IMAGE_KEY]: imgUrl_temp,
+              // }
+              // // Update the profile pic, name, & etc of all the active courses..
+              // updateInfoInAllActiveCourse(allActiveCourseData);
+              // // TODO: Use promise to Update all courses under tutor profile
+              // // updateInfoInTutorCourse(allActiveCourseData);
+
+              // // Update metadata and sitemaps
+              // // Update meta data of user's public profile
+              // if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || 
+              //   current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+              //   // Do nothing if the account is new, deactivated or suspended
+              //   func.showNotification('top','center', 'success', 'check_circle', "Your profile picture is updated. Please activate your account." );
+
+              // }else {
+              //   // Check if aWebUrl Exist or not. Update only if it exists.
+              //   if (current_aweburl == null || current_aweburl == ""  ){
+              //     // Do nothing
+              //   }else{
+              //     let detail_temp =""
+              //     if (currentYearsExperience == 0 || currentYearsExperience == null)
+              //       detail_temp = current_gender + " | " + current_age;
+              //     else if (currentYearsExperience == 1)
+              //       detail_temp = current_gender + " | " + current_age + " |  1 year of experience";
+              //     else
+              //       detail_temp = current_gender + " | " + current_age + " | "+ currentYearsExperience + " years of experience";
                   
-                  console.log("detail: "+ detail_temp+ "   aweburl: "+current_aweburl);
-                  updateMetaData(current_aweburl, current_name, detail_temp, imgUrl_temp);
-                }
-                func.showNotification('top','center', 'success', 'check_circle', "Your profile picture is updated.");
-              }
+              //     console.log("detail: "+ detail_temp+ "   aweburl: "+current_aweburl);
+              //     updateMetaData(current_aweburl, current_name, detail_temp, imgUrl_temp);
+              //   }
+              //   func.showNotification('top','center', 'success', 'check_circle', "Your profile picture is updated.");
+              // }
+
+              
+
+            }).then(() => {
+              func.showNotification('top','center', 'success', 'check_circle', "Your profile picture is updated.");
 
               $('#uploadModal').modal('hide');
-
             });
           }
         );

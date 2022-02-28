@@ -40,11 +40,14 @@ function loadTutorInfoObj(tutorId){
     current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
     current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "https://app.golearn.com.my/assets/img/hello.gif" : tutorInfoObj.imgUrl;
     current_accountStatus = tutorInfoObj.accountStatus; // bool
-    current_address1= (tutorInfoObj.address1 == null || tutorInfoObj.address1 == "")? '' : tutorInfoObj.address1 + ', ';
-    current_address2= (tutorInfoObj.address2 == null || tutorInfoObj.address2 == "")? '' : tutorInfoObj.address2 + ', '; 
-    current_addressPostCode= (tutorInfoObj.addressPostCode == null || tutorInfoObj.addressPostCode == "")? '' : tutorInfoObj.addressPostCode + ', ';
+    current_address1= (tutorInfoObj.address1 == null || tutorInfoObj.address1 == "")? '' : tutorInfoObj.address1;
+    current_address2= (tutorInfoObj.address2 == null || tutorInfoObj.address2 == "")? '' : tutorInfoObj.address2; 
+    current_addressPostCode= (tutorInfoObj.addressPostCode == null || tutorInfoObj.addressPostCode == "")? '' : tutorInfoObj.addressPostCode;
     current_addressState= (tutorInfoObj.addressState == null || tutorInfoObj.addressState == "")? '' : tutorInfoObj.addressState;
-    current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
+    let current_address1_temp= (tutorInfoObj.address1 == null || tutorInfoObj.address1 == "")? '' : tutorInfoObj.address1 + ', ';
+    let current_address2_temp= (tutorInfoObj.address2 == null || tutorInfoObj.address2 == "")? '' : tutorInfoObj.address2 + ', '; 
+    let current_addressPostCode_temp= (tutorInfoObj.addressPostCode == null || tutorInfoObj.addressPostCode == "")? '' : tutorInfoObj.addressPostCode + ', ';
+    current_address = current_address1_temp + current_address2_temp + current_addressPostCode_temp + current_addressState;
     currentYearsExperience = tutorInfoObj.yearsExperience; // number
     currentTutoringExperience = tutorInfoObj.tutoringExperience;
     currentTutoringApproach = tutorInfoObj.tutoringApproach;
@@ -137,11 +140,11 @@ function loadTutorInfoObj(tutorId){
         // This function will be declared separately in each page
         loadPageInitFunc(); 
 
-        // Last Online
+        // Update Last Online
         let docLastOnlineRef = db.collection("Tutor").doc(tutorId);
-        docLastOnlineRef.set({
+        docLastOnlineRef.update({
           [SYSTEM_LAST_ONLINE_KEY] : new Date() //firebase.firestore.Timestamp.fromDate(new Date())
-          },{ merge: true }
+          }
         );
 
 
@@ -168,11 +171,14 @@ function loadUserInfo(tutorId){
       current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "https://app.golearn.com.my/assets/img/hello.gif" : doc.data().imgUrl;
       current_accountStatus = doc.data().accountStatus;
-      current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
-      current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
-      current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
+      current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1;
+      current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2; 
+      current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode;
       current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
-      current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
+      let current_address1_temp= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
+      let current_address2_temp= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
+      let current_addressPostCode_temp= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
+      current_address = current_address1_temp + current_address2_temp + current_addressPostCode_temp + current_addressState;
       currentYearsExperience = doc.data().yearsExperience; // number
       currentTutoringExperience = doc.data().tutoringExperience;
       currentTutoringApproach = doc.data().tutoringApproach;
@@ -315,13 +321,12 @@ function loadUserInfo(tutorId){
       // This function will be declared separately in each page
       loadPageInitFunc(); 
 
-      // Last Online
+      // Update Last Online
       let docLastOnlineRef = db.collection("Tutor").doc(tutorId);
-      docLastOnlineRef.set({
+      docLastOnlineRef.update({
         [SYSTEM_LAST_ONLINE_KEY] : new Date() //firebase.firestore.Timestamp.fromDate(new Date())
-        },{ merge: true }
+        }
       );
-
 
     } 
     
@@ -361,7 +366,7 @@ function updateGeneralView(){
     // Payroll
     document.getElementById("navPayroll").setAttribute("style", "display: none;");
   }
-  else if (current_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY){
+  else if (current_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY || current_accountStatus == PREMIUM_ACCOUNT_1_ACTIVE_STATUS_KEY){
     document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
     document.getElementById("btnActivateAccount").textContent = "BASIC";
     document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
@@ -369,7 +374,7 @@ function updateGeneralView(){
     // Payroll
     document.getElementById("navPayroll").setAttribute("style", "display: none;");
   }
-  else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY){
+  else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY || current_accountStatus == PREMIUM_ACCOUNT_2_ACTIVE_STATUS_KEY){
     document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
     document.getElementById("btnActivateAccount").textContent = "ENTERPRISE";
     document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";
@@ -377,7 +382,7 @@ function updateGeneralView(){
     // Payroll
     document.getElementById("navPayroll").setAttribute("style", "display: inline;");
   }
-  else if (current_accountStatus == PREMIUM_ACCOUNT_3_STATUS_KEY){
+  else if (current_accountStatus == PREMIUM_ACCOUNT_3_STATUS_KEY || current_accountStatus == PREMIUM_ACCOUNT_3_ACTIVE_STATUS_KEY){
     document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
     document.getElementById("btnActivateAccount").textContent = "ORGANIZATION";
     document.getElementById("btnActivateAccount").href = "https://golearn.com.my/pricing/";

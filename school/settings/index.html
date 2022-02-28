@@ -324,7 +324,7 @@
                 <!-- <a href="./" class="btn btn-outline-primary btn-round" id="btnBack"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a> -->
               <!-- </div> -->
               <div class="p-2">
-                <a href="javascript:;" class="btn btn-primary btn-round" id="btnSave" data-toggle="modal" data-target="#saveModal" style="background-color: grey; pointer-events: none;"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</a>
+                <button class="btn btn-primary btn-round" id="btnSave" data-toggle="modal" data-target="#saveModal" style="background-color: grey; pointer-events: none;"><i class="material-icons" style="color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;">save</i> Save</button>
               </div>
 
             </div>
@@ -353,239 +353,6 @@
                   <div class="row">
                     <div class="col-12">
                       <form class="multitabs-form__form">
-
-                        <!-- Profile form panel-->
-                        <!-- <div id="tabProfile" class="multitabs-form__panel shadow p-4 rounded bg-transparent js-active" data-animation="scaleIn" style="margin: 0 !important; padding: 0!important">
-                          <h4 class="multitabs-form__title">Profile</h4>
-                          <div class="multitabs-form__content">
-                            <div class="row">
-                              <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                  <div class="card-header card-header-warning card-header-icon">
-                                    <div class="card-icon">
-                                      <i class="material-icons">edit_calendar</i>
-                                    </div>
-                                    <p class="card-category">Somewhere between 3 and 4 years? Round off.</p>
-                                    <h3 class="card-title" id="main_subject_sentence">
-                                      Years of Teaching Experience
-                                    </h3>  
-                                  </div>
-                                  <div class="card-body" style="text-align: left;">
-                                    <div class="form-group">
-                                      <input type="number" class="form-control" id="yearsExperience" placeholder="Enter a number..."  disabled>
-                                    </div>
-                                  </div>
-
-                                  <div class="card-footer">
-                                    <div class="stats">
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="card card-stats">
-                                  <div class="card-header card-header-info card-header-icon">
-                                    <div class="card-icon">
-                                      <i class="material-icons">settings_applications</i>
-                                    </div>
-                                    <p class="card-category">Places you conduct your lesson. </p>
-                                    <h3 class="card-title">Tutoring Mode</h3>
-                                  </div>
-
-                                  <div class="card-body" style="text-align: left;">
-                                    <table class="table">
-                                      <tbody>
-                                        <tr>
-                                          <td>
-                                            <div class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" id="modeHomeTutorToStudent" disabled>
-                                                <span class="form-check-sign">
-                                                  <span class="check"></span>
-                                                </span>
-                                              </label>
-                                            </div>
-                                          </td>
-                                          <td>Home Tuition - Tutor to Student's Place</td>
-                                        </tr>
-                                        <tr>
-                                          <td>
-                                            <div class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" id="modeHomeStudentToTutor" disabled>
-                                                <span class="form-check-sign">
-                                                  <span class="check"></span>
-                                                </span>
-                                              </label>
-                                            </div>
-                                          </td>
-                                          <td>Home Tuition - Student to Tutor's Place</td>
-                                        </tr>
-                                        <tr>
-                                          <td>
-                                            <div class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" id="modeGroup" disabled>
-                                                <span class="form-check-sign">
-                                                  <span class="check"></span>
-                                                </span>
-                                              </label>
-                                            </div>
-                                          </td>
-                                          <td>Group Class</td>
-                                        </tr>
-                                        <tr>
-                                          <td>
-                                            <div class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" id="modeOnline" disabled> 
-                                                <span class="form-check-sign">
-                                                  <span class="check"></span>
-                                                </span>
-                                              </label>
-                                            </div>
-                                          </td>
-                                          <td>Online Private Tuition</td>
-                                        </tr>
-                                        <tr>
-                                          <td>
-                                            <div class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" id="modeOnlineGroup" disabled> 
-                                                <span class="form-check-sign">
-                                                  <span class="check"></span>
-                                                </span>
-                                              </label>
-                                            </div>
-                                          </td>
-                                          <td>Online Small Group Class</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-
-                                  <div class="card-footer">
-                                    <div class="stats">
-                                    </div>
-                                  </div>
-                                </div>
-                                </div>
-                              </div>
-
-                              <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                  <div class="card-header card-header-danger card-header-icon">
-                                    <div class="card-icon">
-                                      <i class="material-icons">school</i>
-                                    </div>
-                                    <p class="card-category">One or two relevant academic qualifications is just nice.</p>
-                                    <h3 class="card-title" id="main_subject_sentence">
-                                      Academic Qualifications
-                                    </h3>  
-                                  </div>
-                                  <div class="card-body" style="text-align: left;">
-                                    <div class="form-group">
-                                      <textarea class="form-control" id="qualification" rows="4" placeholder="Write something..." disabled></textarea>
-                                    </div>
-
-                                  </div>
-
-                                  <div class="card-footer">
-                                    <div class="stats">
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="card card-stats">
-                                  <div class="card-header card-header-success card-header-icon">
-                                    <div class="card-icon">
-                                      <i class="material-icons">translate</i>
-                                    </div>
-                                    <p class="card-category">Language(s) used in your lesson.</p>
-                                    <h3 class="card-title">Teaching Language</h3>
-                                  </div>
-
-                                  <div class="card-body" style="text-align: left;">
-                                    <table class="table">
-                                      <tbody>
-                                        <tr>
-                                          <td>
-                                            <div class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" id="lanEng"  disabled>
-                                                <span class="form-check-sign">
-                                                  <span class="check"></span>
-                                                </span>
-                                              </label>
-                                            </div>
-                                          </td>
-                                          <td>English</td>
-                                        </tr>
-                                        <tr>
-                                          <td>
-                                            <div class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" id="lanBm" disabled>
-                                                <span class="form-check-sign">
-                                                  <span class="check"></span>
-                                                </span>
-                                              </label>
-                                            </div>
-                                          </td>
-                                          <td>Bahasa Melayu</td>
-                                        </tr>
-                                        <tr>
-                                          <td>
-                                            <div class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" id="lanBc" disabled>
-                                                <span class="form-check-sign">
-                                                  <span class="check"></span>
-                                                </span>
-                                              </label>
-                                            </div>
-                                          </td>
-                                          <td>Mandarin</td>
-                                        </tr>
-                                        <tr>
-                                          <td>
-                                            <div class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" id="lanBt" disabled>
-                                                <span class="form-check-sign">
-                                                  <span class="check"></span>
-                                                </span>
-                                              </label>
-                                            </div>
-                                          </td>
-                                          <td>Bahasa Tamil</td>
-                                        </tr>
-                                        <tr>
-                                          <td>
-                                            <div class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" id="lanOther" disabled>
-                                                <span class="form-check-sign">
-                                                  <span class="check"></span>
-                                                </span>
-                                              </label>
-                                            </div>
-                                          </td>
-                                          <td>Subject languge (Spanish, ...)</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-
-                                  <div class="card-footer">
-                                    <div class="stats">
-                                    </div>
-                                  </div>
-                                  </div>
-                                </div>
-
-                              </div>
-
-                            </div>
-
-                          </div>
-                        </div> -->
 
                         <!-- Basic Details form panel-->
                         <div id="tabBasic"  class="multitabs-form__panel shadow p-4 rounded bg-transparent js-active" data-animation="scaleIn" style="margin: 0 !important; padding: 0!important">
@@ -848,14 +615,9 @@
                         <div id="tabDescription"  class="multitabs-form__panel shadow p-4 rounded bg-transparent" data-animation="scaleIn" style="margin: 0 !important; padding: 0!important">
                           <h4 class="multitabs-form__title">Description</h4>
                           <div class="multitabs-form__content">
-
                             <!-- Main content -->
                             <div class="row">
-
-                              
                               <div class="col-lg-12 col-md-12">
-
-                                
                                 <!-- Teaching Approach -->
                                 <div class="card card-stats">
                                   <div class="card-header card-header-success card-header-icon">
@@ -880,7 +642,6 @@
                                   </div>
                                 </div>
 
-                                          
                                 <!-- Teaching Experience -->
                                 <div class="card card-stats">
                                   <div class="card-header card-header-warning card-header-icon">
@@ -907,13 +668,7 @@
                                 </div>
                               </div>
 
-                              <!-- Update button -->
-                              <!-- <div class="col-lg-12 col-md-12 col-sm-12">
-                                <a href="javascript:;" class="btn btn-lg btn-primary btn-round" id="btnUpdate"  style="background-color: grey; pointer-events: none;">Update Description</a>
-                              </div> -->
-
                             </div>
-
                           </div>
                         </div>
 
@@ -931,81 +686,76 @@
                                   <p class="card-category">Let your future clients know your availability.</p>
                                   </div>
                                   <div class="card-body">
-                                    <!-- <div class="container"> -->
-                                      <div class="row">
-                                        <!-- <div class="overflow-auto">...</div> -->
-                                        <!-- col-sm-12 -->
-                                        <div class="col-sm-12" id="time-slot-block"  style="padding: 0.1rem; margin: 0;">
-                                          <div class="table-responsive" >
-                  
-                               
-                                            <table class="table table-borderless table-sm" id="time-slot-table" style="overflow-x: auto;">
-                                              <thead>
-                                                <tr class="time-slot-table-thead-tr">
-                                                  <!-- class="time-slot-table-thead-tr-th_null" -->
-                                                  <th scope="col" style="background: #d6d6d6;"></th> 
-                                                  <th scope="col" class="time-slot-table-thead-tr-th" >8am - 12pm</th>
-                                                  <th scope="col" class="time-slot-table-thead-tr-th_shaded">12pm - 3pm</th>
-                                                  <th scope="col" class="time-slot-table-thead-tr-th" >3pm - 6pm</th>
-                                                  <th scope="col" class="time-slot-table-thead-tr-th_shaded">6pm onward</th>
-                                                </tr>
-                                              </thead>
-                                              <tbody>
-                                                <tr class="time-slot-table-tbody-item-row">
-                                                  <th scope="row" class="time-slot-table-first-col">Mon</th>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9; " id="mon8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tMon8am"  data-datetime="Monday, 8am - 12pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="mon12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tMon12pm" data-datetime="Monday, 12pm - 3pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="mon3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tMon3pm" data-datetime="Monday, 3pm - 6pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="mon6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tMon6pm" data-datetime="Monday, 6pm onward">Closed</td>
-                                                </tr>
-                                                <tr class="time-slot-table-tbody-item-row">
-                                                  <th scope="row" class="time-slot-table-first-col-shaded">Tue</th>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="tue8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tTue8am" data-datetime="Tuesday, 8am - 12pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="tue12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tTue12pm" data-datetime="Tuesday, 12pm - 3pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="tue3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tTue3pm" data-datetime="Tuesday, 3pm - 6pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="tue6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tTue6pm" data-datetime="Tuesday, 6pm onward">Closed</td>
-                                                </tr>
-                                                <tr class="time-slot-table-tbody-item-row">
-                                                  <th scope="row" class="time-slot-table-first-col">Wed</th>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="wed8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tWed8am" data-datetime="Wednesday, 8am - 12pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="wed12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tWed12pm" data-datetime="Wednesday, 12pm - 3pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="wed3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tWed3pm" data-datetime="Wednesday, 3pm - 6pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="wed6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tWed6pm" data-datetime="Wednesday, 6pm onward">Closed</td>
-                                                </tr>
-                                                <tr class="time-slot-table-tbody-item-row">
-                                                  <th scope="row" class="time-slot-table-first-col-shaded">Thu</th>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="thu8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tThu8am" data-datetime="Thursday, 8am - 12pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="thu12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tThu12pm" data-datetime="Thursday, 12pm - 3pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="thu3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tThu3pm" data-datetime="Thursday, 3pm - 6pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="thu6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tThu6pm" data-datetime="Thursday, 6pm onward">Closed</td>
-                                                </tr>
-                                                <tr class="time-slot-table-tbody-item-row">
-                                                  <th scope="row" class="time-slot-table-first-col">Fri</th>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="fri8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tFri8am" data-datetime="Friday, 8am - 12pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="fri12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tFri12pm" data-datetime="Friday, 12pm - 3pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="fri3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tFri3pm" data-datetime="Friday, 3pm - 6pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="fri6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tFri6pm" data-datetime="Friday, 6pm onward">Closed</td>
-                                                </tr>
-                                                <tr class="time-slot-table-tbody-item-row">
-                                                  <th scope="row" class="time-slot-table-first-col-shaded">Sat</th>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="sat8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tSat8am" data-datetime="Saturday, 8am - 12pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="sat12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSat12pm" data-datetime="Saturday, 12pm - 3pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="sat3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSat3pm" data-datetime="Saturday, 3pm - 6pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="sat6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSat6pm" data-datetime="Saturday, 6pm onward">Closed</td>
-                                                </tr>
-                                                <tr class="time-slot-table-tbody-item-row">
-                                                  <th scope="row" class="time-slot-table-first-col">Sun</th>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="sun8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tSun8am" data-datetime="Sunday, 8am - 12pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="sun12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSun12pm" data-datetime="Sunday, 12pm - 3pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="sun3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSun3pm" data-datetime="Sunday, 3pm - 6pm">Closed</td>
-                                                  <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="sun6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSun6pm" data-datetime="Sunday, 6pm onward">Closed</td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </div>
+                                    <div class="row">
+                                      <div class="col-12" id="time-slot-block"  style="padding: 0.1rem; margin: 0;">
+                                        <div class="table-responsive" >
+                
+                                          <table class="table table-borderless table-sm" id="time-slot-table" style="overflow-x: auto;">
+                                            <thead>
+                                              <tr class="time-slot-table-thead-tr">
+                                                <!-- class="time-slot-table-thead-tr-th_null" -->
+                                                <th scope="col" style="background: #d6d6d6;"></th> 
+                                                <th scope="col" class="time-slot-table-thead-tr-th" >8am - 12pm</th>
+                                                <th scope="col" class="time-slot-table-thead-tr-th_shaded">12pm - 3pm</th>
+                                                <th scope="col" class="time-slot-table-thead-tr-th" >3pm - 6pm</th>
+                                                <th scope="col" class="time-slot-table-thead-tr-th_shaded">6pm onward</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr class="time-slot-table-tbody-item-row">
+                                                <th scope="row" class="time-slot-table-first-col">Mon</th>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9; " id="mon8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tMon8am"  data-datetime="Monday, 8am - 12pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="mon12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tMon12pm" data-datetime="Monday, 12pm - 3pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="mon3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tMon3pm" data-datetime="Monday, 3pm - 6pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="mon6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tMon6pm" data-datetime="Monday, 6pm onward">Closed</td>
+                                              </tr>
+                                              <tr class="time-slot-table-tbody-item-row">
+                                                <th scope="row" class="time-slot-table-first-col-shaded">Tue</th>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="tue8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tTue8am" data-datetime="Tuesday, 8am - 12pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="tue12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tTue12pm" data-datetime="Tuesday, 12pm - 3pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="tue3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tTue3pm" data-datetime="Tuesday, 3pm - 6pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="tue6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tTue6pm" data-datetime="Tuesday, 6pm onward">Closed</td>
+                                              </tr>
+                                              <tr class="time-slot-table-tbody-item-row">
+                                                <th scope="row" class="time-slot-table-first-col">Wed</th>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="wed8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tWed8am" data-datetime="Wednesday, 8am - 12pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="wed12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tWed12pm" data-datetime="Wednesday, 12pm - 3pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="wed3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tWed3pm" data-datetime="Wednesday, 3pm - 6pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="wed6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tWed6pm" data-datetime="Wednesday, 6pm onward">Closed</td>
+                                              </tr>
+                                              <tr class="time-slot-table-tbody-item-row">
+                                                <th scope="row" class="time-slot-table-first-col-shaded">Thu</th>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="thu8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tThu8am" data-datetime="Thursday, 8am - 12pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="thu12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tThu12pm" data-datetime="Thursday, 12pm - 3pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="thu3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tThu3pm" data-datetime="Thursday, 3pm - 6pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="thu6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tThu6pm" data-datetime="Thursday, 6pm onward">Closed</td>
+                                              </tr>
+                                              <tr class="time-slot-table-tbody-item-row">
+                                                <th scope="row" class="time-slot-table-first-col">Fri</th>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="fri8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tFri8am" data-datetime="Friday, 8am - 12pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="fri12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tFri12pm" data-datetime="Friday, 12pm - 3pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="fri3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tFri3pm" data-datetime="Friday, 3pm - 6pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="fri6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tFri6pm" data-datetime="Friday, 6pm onward">Closed</td>
+                                              </tr>
+                                              <tr class="time-slot-table-tbody-item-row">
+                                                <th scope="row" class="time-slot-table-first-col-shaded">Sat</th>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="sat8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tSat8am" data-datetime="Saturday, 8am - 12pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="sat12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSat12pm" data-datetime="Saturday, 12pm - 3pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="sat3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSat3pm" data-datetime="Saturday, 3pm - 6pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="sat6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSat6pm" data-datetime="Saturday, 6pm onward">Closed</td>
+                                              </tr>
+                                              <tr class="time-slot-table-tbody-item-row">
+                                                <th scope="row" class="time-slot-table-first-col">Sun</th>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="sun8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tSun8am" data-datetime="Sunday, 8am - 12pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="sun12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSun12pm" data-datetime="Sunday, 12pm - 3pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="sun3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSun3pm" data-datetime="Sunday, 3pm - 6pm">Closed</td>
+                                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="sun6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSun6pm" data-datetime="Sunday, 6pm onward">Closed</td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
                                         </div>
                                       </div>
-                                    <!-- </div> -->
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -1021,13 +771,7 @@
                           <div class="multitabs-form__content">
                       
                             <!-- Main content -->
-                            <div class="row" id="desciption-row">
-
-                              <!-- Update button -->
-                              <!-- <div class="col-lg-12 col-md-12 col-sm-12"> -->
-                                <!-- <a href="javascript:;" class="btn btn-lg btn-primary btn-round" id="btnUpdate" style="background-color: grey; pointer-events: none;" >Update Preferred Subject</a> -->
-                              <!-- </div> -->
-                              
+                            <div class="row">
 
                               <!-- Total 160 subjects, 65 / pane -->
                               <!-- Pane 1 - UPSR(12), PT3(19), SPM(38) Total: 69 -->
@@ -4597,10 +4341,20 @@
     var preferredSubjectList_temp = [];
     var preferredAreaList_temp = [];
 
+    var isFirstTimeLoad = true;
+    var oriPreferredSubjectList = [];
+    var oriPreferredAreaList = [];
+    var oriTutoringApproach = '';
+    var oriModeHomeTutorToStudent = false;
+    var oriModeHomeStudentToTutor = false;
+    var oriModeGroup = false;
+    var oriModeOnline = false;
+    var oriModeOnlineGroup = false;
+
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
-
+    
     // // Set the nav name and global var, if user already login and have session Storage 
     // var tutorInfoObj = null;
     // if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
@@ -4788,25 +4542,6 @@
     function updatePageContent(){
 
       //------ Basic Details -------------//
-  //     var tutorId; // For tutor-portal
-  // var userId; // for client
-  // var current_name, current_email, current_phone, current_age, current_gender, current_imgUri, current_nric,
-  //   current_address1, current_address2, current_addressPostCode, current_addressState,
-  //   current_rating, current_ratingTimes, current_ratingFinal, current_profileStatus,
-  //   current_token, current_agent, current_accountStatus;
-  // var current_address; // Combining Addr1,2,postcode & state
-  // var currentYearsExperience, currentTutoringExperience, currentTutoringApproach, currentQualification, 
-  //   current_preferedAreaList, current_preferedSubjectList;
-  // // Depreciated
-  // // var current_chk_homeTutor, current_chk_privateTutor, current_chk_groupTutor, current_chk_onlineTutor;
-  // var isModeHomeStudentToTutor, isModeHomeTutorToStudent, isModeGroup, isModeOnline, isModeOnlineGroup;
-  // var isLanEng, isLanBm, isLanBc, isLanBt, isLanOther;
-  // var current_chk_homeStudentToTutor, current_chk_homeTutorToStudent, current_chk_group, current_chk_online, current_chk_onlineGroup;
-
-  // var current_aweburl, current_aPremiumSubjectLimit, current_aPremiumConnectLimit, current_aTotalSubjectLimit, 
-  //   current_aTotalConnectLimit, current_aPreferredSubjectLimit, current_aPreferredAreaLimit;
-  // var current_uLastOnline;
-
       document.getElementById("modeHomeTutorToStudent").checked = isModeHomeTutorToStudent;
       document.getElementById("modeHomeStudentToTutor").checked = isModeHomeStudentToTutor;
       document.getElementById("modeGroup").checked = isModeGroup;
@@ -4832,7 +4567,6 @@
       document.getElementById('tutoringExperience').removeAttribute('disabled');
       document.getElementById('tutoringExperience').setAttribute('style','pointer-events: auto; ');
 
-
       // ------ Schedule -------------//
       initSchedule();
 
@@ -4844,8 +4578,23 @@
       // ------ Preferred Area -------------//
       preferredAreaList_temp = current_preferedAreaList;
       // console.log(preferredAreaList_temp)
-
       loadPreferredArea();
+
+      // Get the ori copy of subject and area list.
+      if (isFirstTimeLoad){
+        oriPreferredSubjectList = current_preferedSubjectList;
+        oriPreferredAreaList = current_preferedAreaList;
+        oriTutoringApproach = currentTutoringApproach;
+
+        oriModeHomeTutorToStudent = isModeHomeTutorToStudent;
+        oriModeHomeStudentToTutor = isModeHomeStudentToTutor;
+        oriModeGroup = isModeGroup;
+        oriModeOnline = isModeOnline;
+        oriModeOnlineGroup = isModeOnlineGroup;
+
+        isFirstTimeLoad = false;
+      }
+      // console.log(oriPreferredSubjectList, oriPreferredAreaList, isFirstTimeLoad)
 
       //------ Save Button -------------//
       document.getElementById('btnSave').removeAttribute('disabled');
@@ -5741,7 +5490,1242 @@
 
     }
 
+
+    // Run indexing to public > v1 > ... 
+    async function topFunction(tutor_Id, publicTutoringApproach, teachingMode, areaList, subjectList) {
+
+      await runIndexingSingle(tutor_Id, publicTutoringApproach, teachingMode, areaList, subjectList);
+
+      console.log('runIndexingSingle completed')
+
+    }
+    
+    // Index tutor from Tutor > {tutorId} to public > v1 > ...
+    // Update the RS Score to all tutor document in path ending ...> p_tutor > {tutorId}
+    async function runIndexingSingle(tutor_Id, publicTutoringApproach, teachingMode, areaList, subjectList){
+
+      var prefferedArea = areaList == null ? [] : areaList;
+      var prefferedSubject = subjectList == null ? [] : subjectList;
+
+      // var teachingMode = [false, false];
+
+      // var current_name = '';
+      // var current_imgUri = '';
+      // var current_accountStatus = '';
+      // var current_ratingTimes = 0; 
+      // var current_ratingFinal = 0;
+
+      var tutorIdRsScoreObj = {};
+
+      // Layer2.1
+      var pathArr = [];
+      var pathRetainBoolArr = [];
+      
+      let docRef = db.collection('Tutor').doc(tutor_Id).get();
+
+      let arrayOfLast6Month = getLast6Months(new Date(new Date().getFullYear(), new Date().getMonth())); // Get last 6 month date in YY8[01 - 12]
+
+      // console.log(arrayOfLast6Month)
+
+      let impDocRef1 = db.collection('track').doc('v1').collection('sum_imp').doc(arrayOfLast6Month[0] +'_' + tutor_Id).get();
+      let impDocRef2 = db.collection('track').doc('v1').collection('sum_imp').doc(arrayOfLast6Month[1] +'_' + tutor_Id).get();
+      let impDocRef3 = db.collection('track').doc('v1').collection('sum_imp').doc(arrayOfLast6Month[2] +'_' + tutor_Id).get();
+      let impDocRef4 = db.collection('track').doc('v1').collection('sum_imp').doc(arrayOfLast6Month[3] +'_' + tutor_Id).get();
+      let impDocRef5 = db.collection('track').doc('v1').collection('sum_imp').doc(arrayOfLast6Month[4] +'_' + tutor_Id).get();
+      let impDocRef6 = db.collection('track').doc('v1').collection('sum_imp').doc(arrayOfLast6Month[5] +'_' + tutor_Id).get();
+
+      let clkDocRef1 = db.collection('track').doc('v1').collection('sum_clk').doc(arrayOfLast6Month[0] +'_' + tutor_Id).get();
+      let clkDocRef2 = db.collection('track').doc('v1').collection('sum_clk').doc(arrayOfLast6Month[1] +'_' + tutor_Id).get();
+      let clkDocRef3 = db.collection('track').doc('v1').collection('sum_clk').doc(arrayOfLast6Month[2] +'_' + tutor_Id).get();
+      let clkDocRef4 = db.collection('track').doc('v1').collection('sum_clk').doc(arrayOfLast6Month[3] +'_' + tutor_Id).get();
+      let clkDocRef5 = db.collection('track').doc('v1').collection('sum_clk').doc(arrayOfLast6Month[4] +'_' + tutor_Id).get();
+      let clkDocRef6 = db.collection('track').doc('v1').collection('sum_clk').doc(arrayOfLast6Month[5] +'_' + tutor_Id).get();
+
+
+
+      const promise = Promise.all([docRef, impDocRef1, impDocRef2, impDocRef3, impDocRef4, impDocRef5, impDocRef6, clkDocRef1, clkDocRef2, clkDocRef3, clkDocRef4, clkDocRef5, clkDocRef6 ])
+      // Layer 1
+      .then((docs) => {
+
+        // console.log('Layer 1: Tutor Data collection & RS Score Calculation Start')
+        // console.log(docs[0].data());
+        // console.log(docs[1].data());
+        // console.log(docs[2].data());
+        // console.log(docs[3].data());
+        // console.log(docs[4].data());
+        // console.log(docs[5].data());
+        // console.log(docs[6].data());
+        // console.log(docs[7].data());
+        // console.log(docs[8].data());
+        // console.log(docs[9].data());
+        // console.log(docs[10].data());
+        // console.log(docs[11].data());
+        // console.log(docs[12].data());
+
+        let sumImp1 = docs[1].data() == null ? 0 : docs[1].data().sum;
+        let sumImp2 = docs[2].data() == null ? 0 : docs[2].data().sum;
+        let sumImp3 = docs[3].data() == null ? 0 : docs[3].data().sum;
+        let sumImp4 = docs[4].data() == null ? 0 : docs[4].data().sum;
+        let sumImp5 = docs[5].data() == null ? 0 : docs[5].data().sum;
+        let sumImp6 = docs[6].data() == null ? 0 : docs[6].data().sum;
+        let totalImp = sumImp1 + sumImp2 + sumImp3 + sumImp4 + sumImp5 + sumImp6;
+        
+        let sumClk1 = docs[7].data() == null ? 0 : docs[7].data().sum;
+        let sumClk2 = docs[8].data() == null ? 0 : docs[8].data().sum;
+        let sumClk3 = docs[9].data() == null ? 0 : docs[9].data().sum;
+        let sumClk4 = docs[10].data() == null ? 0 : docs[10].data().sum;
+        let sumClk5 = docs[11].data() == null ? 0 : docs[11].data().sum;
+        let sumClk6 = docs[12].data() == null ? 0 : docs[12].data().sum;
+        let totalClk = sumClk1 + sumClk2 + sumClk3 + sumClk4 + sumClk5 + sumClk6;
+
+        let CTR = isNaN(totalClk / totalImp) ? 0 : totalClk / totalImp;
+
+        if (docs[0].exists){
+          // Relevance Score, RS = 0.5(CTR + k) + 0.3(PS) + 0.2(Rating)
+          let rsScore_PsAndRating = isNaN(getRsScore_PsAndRating(docs[0])) ? 0 : getRsScore_PsAndRating(docs[0]);
+          let rsScore = 0.5 * CTR + rsScore_PsAndRating;
+
+          // Add the TutorId & corresponding Rs Score to global json obj
+          tutorIdRsScoreObj[tutor_Id] = rsScore;
+
+          // Store vars
+          // current_name = (docs[0].data().name == null || docs[0].data().name == "")? "New Tutor" : docs[0].data().name;
+          // current_imgUri = (docs[0].data().imgUrl == null || docs[0].data().imgUrl == "")? "https://app.golearn.com.my/assets/img/hello.gif" : docs[0].data().imgUrl;
+          // current_accountStatus = docs[0].data().accountStatus;
+          // current_ratingTimes = docs[0].data()[RATING_TIMES_KEY] == null ? 0 : docs[0].data()[RATING_TIMES_KEY]; 
+          // current_ratingFinal = docs[0].data()[RATING_FINAL_KEY] == null ? 0 : docs[0].data()[RATING_TIMES_KEY];
+
+          // prefferedArea = docs[0].data()[PREFERED_AREA_LIST_KEY] == null ? [] : docs[0].data()[PREFERED_AREA_LIST_KEY];
+          // prefferedSubject = docs[0].data()[PREFERED_SUBJECT_LIST_KEY] == null ? [] : docs[0].data()[PREFERED_SUBJECT_LIST_KEY];
+  
+          // let physicaMode = isModeHomeStudentToTutor || isModeHomeTutorToStudent || isModeGroup
+          // teachingMode[0] = physicaMode == null ? false : physicaMode;
+          // let onlineMode = isModeOnline || isModeOnlineGroup;
+          // teachingMode[1] = onlineMode == null ? false : onlineMode;
+
+        }else {
+          console.log('Tutor Document does not exist.')
+          // logNewText('Tutor document does not exist: '+ tutor_Id);
+          // console.log(docRef.path)
+          // console.log(tutor_Id, totalClk,totalImp,  CTR);
+
+        }
+
+        return null;
+        // return Promise.all(promisesLayer3);
+      })
+      // Layer 2: Collection Group to Get all Tutor Path
+      .then(() => {
+
+        // console.log('Layer 2: Collection Group to Get all Tutor Path Start')
+
+        // This stage update the RS score to respective tutor's doc
+
+        const promisesLayer2 = [];
+
+        for (var key of Object.keys(tutorIdRsScoreObj)) {
+          // console.log(key)
+          // console.log(tutorIdRsScoreObj[key])
+
+          var tutorRef = db.collectionGroup('p_tutor').where('tutorId', '==', key).get();
+          promisesLayer2.push(tutorRef)
+
+        }
+
+ 
+        return Promise.all(promisesLayer2);
+      })
+      // Layer 2.1: Get the docs that does not fulfill the Preffered Area & Subject list
+      .then((snapshots) => {
+        // console.log('Layer 2.1: Get the docs that does not fulfill the Preffered Area & Subject list')
+        // pathArr = ['path1', 'path2', 'path3']
+        // pathRetainBoolArr = [true, false, false]
+
+        if (snapshots != null && snapshots.length != 0){
+
+          snapshots.forEach((snapshot) => {
+
+            if (snapshot != null && snapshot.length != 0){
+
+              // Create array of doc path
+              snapshot.forEach((doc) => {
+                pathArr.push(doc.ref.path);
+              });
+
+              // HACK
+              // prefferedSubject = ['upsr-priBt', 'camPri-camPriMusic', 'uecJun-uecJunChi', 'engExam-toefl', 'kindergarten-kinBm'];
+              // prefferedSubject = []
+              // prefferedArea = ['sg-sgBgi', 'sg-sgBntg', 'pn-pnBPulau', 'kl-klAmpg', 'jh-jhBIndah'] ;
+              // prefferedArea = [];
+
+              pathArr.forEach((path, index) => {
+
+                pathRetainBoolArr[index] = false; // init the path at index to false, which mean do not remove
+
+                // console.log(doc.data());
+                // console.log(doc.ref.path);
+                let refComponent = path.split('/')
+                // console.log(refComponent);
+
+                if (refComponent.includes('default')){
+                  pathRetainBoolArr[index] = true;  // Always keep this path
+                  return;
+                }
+
+                if (teachingMode[0] && !teachingMode[1]){ // Physical only
+
+                  // Physical: Loop through all area
+                  if (prefferedArea.length != 0) {
+
+
+                    // --------- Update All Area + Subject (4)(8)--------- //
+                    prefferedArea.forEach((area) => {
+
+                      let areaInfo = area.split('-');
+                      let infoState = areaInfo[0]
+                      let infoArea = areaInfo[1]
+                      // console.log(areaInfo);
+
+                      // Loop through all subject
+                      if (prefferedSubject.length != 0) {
+
+                        prefferedSubject.forEach((subject) => {
+
+                          let subjectInfo = subject.split('-');
+                          let infoLevel = subjectInfo[0]
+                          let infoSubject = subjectInfo[1]
+                          // console.log(areaInfo, subjectInfo);
+
+                          if (refComponent.includes(infoState) && refComponent.includes(infoArea) && refComponent.includes(infoLevel) && refComponent.includes(infoSubject)){
+                            // Set to false to retain the path
+                            pathRetainBoolArr[index] = true;
+                          }else {
+                            // pathRetainBoolArr[index] = true;
+                          }
+
+                        });
+                      }
+                      // Subject is empty: Remove all entries
+                      else {
+                        pathRetainBoolArr[index] = false;
+                      }
+
+                    });
+                  // Area is empty
+                  }
+                  else {
+                    pathRetainBoolArr[index] = false;
+                  }
+
+                }
+                else if (!teachingMode[0] && teachingMode[1]){ // Online only
+                  // --------- Update Online Only (2) --------- //
+                  // Loop through all subject
+                  if (prefferedSubject.length != 0) {
+
+                    prefferedSubject.forEach((subject) => {
+
+                      let subjectInfo = subject.split('-');
+                      let infoLevel = subjectInfo[0]
+                      let infoSubject = subjectInfo[1]
+                      // console.log(areaInfo, subjectInfo);
+
+                      if (refComponent.includes('all', 5) && refComponent.includes('all', 7) && refComponent.includes(infoLevel) && refComponent.includes(infoSubject)){
+                        // Set to false to retain the path
+                        pathRetainBoolArr[index] = true;
+                      }else {
+                        // pathRetainBoolArr[index] = true;
+                      }
+
+
+                    });
+                  }
+                  // Subject is empty
+                  else {
+                    pathRetainBoolArr[index] = false;
+                  }
+
+                }
+                else { // Physical + Online or Not filling the mode
+                  // Physical + Online: Loop through all area
+                  if (prefferedArea.length != 0) {
+
+                    // --------- Update All Area + Subject (4)(8)--------- //
+                    prefferedArea.forEach((area) => {
+
+                      let areaInfo = area.split('-');
+                      let infoState = areaInfo[0]
+                      let infoArea = areaInfo[1]
+                      // console.log(areaInfo);
+
+                      // Loop through all subject
+                      if (prefferedSubject.length != 0) {
+
+                        prefferedSubject.forEach((subject) => {
+
+                          let subjectInfo = subject.split('-');
+                          let infoLevel = subjectInfo[0]
+                          let infoSubject = subjectInfo[1]
+
+                          if (refComponent.includes(infoState) && refComponent.includes(infoArea) && refComponent.includes(infoLevel) && refComponent.includes(infoSubject)){
+                            // Set to false to retain the path
+                            pathRetainBoolArr[index] = true;
+                          }else {
+                            // pathRetainBoolArr[index] = true;
+                          }
+
+                        });
+
+                      }
+                      // Subject is empty
+                      else {
+                        pathRetainBoolArr[index] = false;
+                      }
+
+                    });
+
+                    // --------- Update Online Only (2) --------- //
+                    // Loop through all subject
+                    if (prefferedSubject.length != 0) {
+
+                      prefferedSubject.forEach((subject) => {
+
+                        let subjectInfo = subject.split('-');
+                        let infoLevel = subjectInfo[0]
+                        let infoSubject = subjectInfo[1]
+                        // console.log(areaInfo, subjectInfo);
+
+                        if (refComponent.includes('all', 5) && refComponent.includes('all', 7) && refComponent.includes(infoLevel) && refComponent.includes(infoSubject)){
+                          // Set to false to retain the path
+                          pathRetainBoolArr[index] = true;
+                        }else {
+                          // pathRetainBoolArr[index] = true;
+                        }
+                      });
+                    }
+                    // Area & Subject is empty
+                    else {
+                      pathRetainBoolArr[index] = false;
+                    }
+                  }
+
+                  // Online Only: Area is empty
+                  else {
+
+                    // --------- Update Online Only (2) --------- //
+                    // Loop through all subject
+                    if (prefferedSubject.length != 0) {
+
+                      prefferedSubject.forEach((subject) => {
+
+                        let subjectInfo = subject.split('-');
+                        let infoLevel = subjectInfo[0]
+                        let infoSubject = subjectInfo[1]
+
+                        // console.log(areaInfo, subjectInfo);
+
+                        if (refComponent.includes('all', 5) && refComponent.includes('all', 7) && refComponent.includes(infoLevel) && refComponent.includes(infoSubject)){
+                          // Set to false to retain the path
+                          pathRetainBoolArr[index] = true;
+                        }else {
+                          // pathRetainBoolArr[index] = true;
+                        }
+                      });
+                    }
+                    // Area & Subject is empty
+                    else {
+                      pathRetainBoolArr[index] = false;
+                    }
+
+                  }
+
+                }
+                  
+              })
+              // console.log(pathArr)
+              // console.log(pathRetainBoolArr)
+            }else {
+              console.log('No documents found in p_tutor')
+            }
+
+          });
+
+        }else {
+          console.log('No snapshot found in snapshots')
+        }
+
+      })
+      // Layer 2.2: Remove the docs that does not fulfill the Preffered Area & Subject list
+      .then(() => {
+        // console.log('Layer 2.2: Remove the docs that does not fulfill the Preffered Area & Subject list');
+        const promisesLayer2_2 = [];
+
+        // console.log(pathArr)
+        // console.log(pathRetainBoolArr)
+
+
+        if (pathArr != null && pathArr.length != 0){
+          pathArr.forEach((path, index) => {
+
+            if (!pathRetainBoolArr[index]){
+
+              let docRef = db.doc(path).delete();
+              promisesLayer2_2.push(docRef)
+
+              // console.log('To be deleted: ', path);
+            }
+
+          });
+        }else {
+          // console.log('No document to be deleted ');
+        }
+
+
+        return Promise.all(promisesLayer2_2)
+
+      })
+      // Layer 3: Write Public > v1 > ... Paths
+      .then(()=>{
+
+        // console.log('Layer 3: Write Public > v1 > ... Paths Start')
+
+        // This stage  write tutor data & RS score to respective tutor's doc
+
+        const promisesLayer3 = [];
+
+        // console.log(tutorIdRsScoreObj)
+
+        for (var key of Object.keys(tutorIdRsScoreObj)) {
+          // console.log(key, tutorIdRsScoreObj[key])
+          // console.log(prefferedArea, prefferedSubject, teachingMode);
+
+          // 1. Default: Start with Premium, then Relevance Score
+          // // public/v1/tutor/v1/default/{docId}
+          // Equivalent to 
+          // // public/v1/tutor/v1/state/all/area/all/level/all/subject/all/tutor/{docId}
+          // 2. Search Level-Subject Only. ONLINE 
+          // // public/v1/tutor/v1/state/all/area/all/level/[levelId]/subject/[subjectId]/tutor/{docId}
+          // 3. Search Level Only. ONLINE (Not important)
+          // // public/v1/tutor/v1/state/all/area/all/level/[levelId]/subject/all/tutor/{docId}
+          // 4.  Search Level-Subject + State-Area
+          // /public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/ [levelId]/subject/[subjectId]/tutor/{docId}
+          // 5. Search Level-subject with State (Not important)
+          // // public/v1/tutor/v1/state/[stateId]/area/all/level/[levelId]/subject/[subjectId] /tutor/{docId}
+          // 6. Search Level with State + Area (Not important)
+          // // public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/[levelId]/subject/all/tutor/{docId}
+          // 7. Search Level with State (Not important)
+          // // public/v1/tutor/v1/state/[stateId]/area/all/level/[levelId]/subject/all/tutor/{docId}
+          // 8. Search State-Area Only (Not important)
+          // // public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/all/subject/all/tutor/{docId}
+          // 9. Search State Only (Not important)
+          // // public/v1/tutor/v1/state/[stateId]/area/all/level/all/subject/all/tutor/{docId}
+
+          var data = {
+            [PUBLIC_ID]: 'id',
+            [PUBLIC_TUTOR_ID]: tutor_Id, // from input, similar to global var
+            [PUBLIC_NAME]: current_name, // global var
+            // [PUBLIC_AGE]: id,
+            [PUBLIC_IMG_URL]: current_imgUri, // global var
+            [PUBLIC_TUTORING_APPROACH]: publicTutoringApproach, // from input, local
+            // [PUBLIC_PREFERED_AREA_LIST]: id,
+            [PUBLIC_RATING_TIMES]: (current_ratingTimes == null) ? 0 : current_ratingTimes, // global var
+            [PUBLIC_RATING_FINAL]: (current_ratingFinal == null) ? 0 : current_ratingFinal, // global var
+            [PUBLIC_MODE]: teachingMode, // from input local
+            [PUBLIC_ACCOUNT_STATUS]: current_accountStatus, // global var
+            [PUBLIC_RS_SCORE]: tutorIdRsScoreObj[key], // local
+            [PUBLIC_LAST_UPDATE]: new Date(),
+          }
+
+          // console.log(data)
+
+          if (teachingMode[0] && !teachingMode[1]){ // Physical only
+
+
+            // Physical: Loop through all area
+            if (prefferedArea.length != 0) {
+
+              var stateArry = [];
+              var levelArry = [];
+
+              // --------- Update All Area + Subject (4)(8)--------- //
+              prefferedArea.forEach((area) => {
+
+                let areaInfo = area.split('-');
+                let infoState = areaInfo[0]
+                let infoArea = areaInfo[1]
+                stateArry.push(infoState);
+                // console.log(areaInfo);
+
+                // Loop through all subject
+                if (prefferedSubject.length != 0) {
+
+                  prefferedSubject.forEach((subject) => {
+
+                    let subjectInfo = subject.split('-');
+                    let infoLevel = subjectInfo[0]
+                    let infoSubject = subjectInfo[1]
+                    levelArry.push(infoLevel);
+                    // console.log(areaInfo, subjectInfo);
+
+                    // 4.  Search Level-Subject + State-Area
+                    // /public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/[levelId]/subject/[subjectId]/p_tutor/{docId}
+                    let docRef4 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                    .collection('state').doc(infoState).collection('area').doc(infoArea)
+                    .collection('level').doc(infoLevel).collection('subject').doc(infoSubject)
+                    .collection('p_tutor').doc(tutorId);
+
+                    data[PUBLIC_ID] = docRef4.id;
+
+                    let docRef4Promise = docRef4.set(data, {merge: true});
+                    promisesLayer3.push(docRef4Promise);
+                    
+                  });
+                }
+                // Subject is empty
+                else {
+
+                }
+
+              });
+            
+            }
+
+
+            // ------- Update Default (1) -------- //
+      
+            // 1. Default: Start with Premium, then Relevance Score
+            // // public/v1/tutor/v1/default/all/p_tutor/{docId}
+            // Equivalent to 
+            // // public/v1/tutor/v1/state/all/area/all/level/all/subject/all/p_tutor/{docId}
+            let docRef1 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+            .collection('default').doc('all').collection('p_tutor').doc(tutorId);
+
+            data[PUBLIC_ID] = docRef1.id;
+
+            let docRef1Promise = docRef1.set(data, {merge: true});
+            promisesLayer3.push(docRef1Promise);
+
+
+          }
+          else if (!teachingMode[0] && teachingMode[1]){ // Online only
+            
+            // --------- Update Online Only (2) --------- //
+            // Loop through all subject
+            if (prefferedSubject.length != 0) {
+
+              prefferedSubject.forEach((subject) => {
+
+                let subjectInfo = subject.split('-');
+                let infoLevel = subjectInfo[0]
+                let infoSubject = subjectInfo[1]
+                // console.log(areaInfo, subjectInfo);
+
+                // 2. Search Level-Subject Only. ONLINE 
+                // // public/v1/tutor/v1/state/all/area/all/level/[levelId]/subject/[subjectId]/p_tutor/{docId}
+                let docRef2 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                .collection('state').doc('all').collection('area').doc('all')
+                .collection('level').doc(infoLevel).collection('subject').doc(infoSubject)
+                .collection('p_tutor').doc(tutorId);
+
+                data[PUBLIC_ID] = docRef2.id;
+
+                let docRef2Promise = docRef2.set(data, {merge: true});
+                promisesLayer3.push(docRef2Promise);
+              });
+            }
+            // Area & Subject is empty
+            else {
+
+            }
+
+            // ------- Update Default (1) -------- //
+      
+            // 1. Default: Start with Premium, then Relevance Score
+            // // public/v1/tutor/v1/default/all/p_tutor/{docId}
+            // Equivalent to 
+            // // public/v1/tutor/v1/state/all/area/all/level/all/subject/all/p_tutor/{docId}
+            let docRef1 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+            .collection('default').doc('all').collection('p_tutor').doc(tutorId);
+
+            data[PUBLIC_ID] = docRef1.id;
+
+            let docRef1Promise = docRef1.set(data, {merge: true});
+            promisesLayer3.push(docRef1Promise);
+
+
+          }
+          else { // Physical + Online or Not filling the mode
+
+            // Physical + Online: Loop through all area
+            if (prefferedArea.length != 0) {
+
+              var stateArry = [];
+              var levelArry = [];
+              // --------- Update All Area + Subject (4)(8)--------- //
+              prefferedArea.forEach((area) => {
+
+                let areaInfo = area.split('-');
+                let infoState = areaInfo[0]
+                let infoArea = areaInfo[1]
+                stateArry.push(infoState);
+                // console.log(areaInfo);
+
+                // Loop through all subject
+                if (prefferedSubject.length != 0) {
+
+                  prefferedSubject.forEach((subject) => {
+
+                    let subjectInfo = subject.split('-');
+                    let infoLevel = subjectInfo[0]
+                    let infoSubject = subjectInfo[1]
+                    levelArry.push(infoLevel);
+                    // console.log(areaInfo, subjectInfo);
+
+                    // 4.  Search Level-Subject + State-Area
+                    // /public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/[levelId]/subject/[subjectId]/p_tutor/{docId}
+                    let docRef4 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                    .collection('state').doc(infoState).collection('area').doc(infoArea)
+                    .collection('level').doc(infoLevel).collection('subject').doc(infoSubject)
+                    .collection('p_tutor').doc(tutorId);
+
+                    data[PUBLIC_ID] = docRef4.id;
+
+                    let docRef4Promise = docRef4.set(data, {merge: true});
+                    promisesLayer3.push(docRef4Promise);
+                    
+                  });
+                }
+                // Subject is empty
+                else {
+
+                }
+
+                // // 8. Search State-Area Only (Not important)
+                // // // public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/all/subject/all/tutor/{docId}
+                // let docRef8 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                // .collection('state').doc(infoState).collection('area').doc(infoArea)
+                // .collection('level').doc('all').collection('subject').doc('all')
+                // .collection('tutor').doc();
+
+                // data[PUBLIC_ID] = docRef8.id;
+
+                // let docRef8Promise = docRef8.set(data);
+                // promisesLayer3.push(docRef8Promise);
+
+              });
+
+              // TODO: DISABLED TO SAVE DOCUMENTS
+              // var uniqStateArr = stateArry.reduce((a,b) => 
+              //   {
+              //     if (a.indexOf(b) < 0 ) a.push(b);
+              //     return a;
+              //   },[]);
+              // let uniqLevelArr = levelArry.reduce((a,b) => 
+              // {
+              //   if (a.indexOf(b) < 0 ) a.push(b);
+              //   return a;
+              // },[]);
+
+              // // --------- Update State Only (5)(7)(9)--------- //
+              // uniqStateArr.forEach((state) => {
+
+              //   // Loop through all subject
+              //   if (prefferedSubject.length != 0) {
+
+              //     prefferedSubject.forEach((subject) => {
+
+              //       let subjectInfo = subject.split('-');
+              //       let infoLevel = subjectInfo[0]
+              //       let infoSubject = subjectInfo[1]
+              //       // console.log(areaInfo, subjectInfo);
+
+              //       // 5. Search Level-subject with State (Not important)
+              //       // // public/v1/tutor/v1/state/[stateId]/area/all/level/[levelId]/subject/[subjectId] /tutor/{docId}
+              //       let docRef4 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+              //       .collection('state').doc(state).collection('area').doc('all')
+              //       .collection('level').doc(infoLevel).collection('subject').doc(infoSubject)
+              //       .collection('tutor').doc();
+
+              //       data[PUBLIC_ID] = docRef4.id;
+
+              //       let docRef4Promise = docRef4.set(data);
+
+              //       promisesLayer3.push(docRef4Promise);
+                    
+              //     });
+              //   }
+              //   // Subject is empty
+              //   else {
+
+              //   }
+
+              //   uniqLevelArr.forEach((level) => {
+              //     // 7. Search Level with State (Not important)
+              //     // // public/v1/tutor/v1/state/[stateId]/area/all/level/[levelId]/subject/all/tutor/{docId}
+              //     let docRef7 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+              //     .collection('state').doc(state).collection('area').doc('all')
+              //     .collection('level').doc(level).collection('subject').doc('all')
+              //     .collection('tutor').doc();
+
+              //     data[PUBLIC_ID] = docRef7.id;
+
+              //     let docRef7Promise = docRef7.set(data);
+
+              //     promisesLayer3.push(docRef7Promise);
+
+              //   });
+
+              //   // 9. Search State Only (Not important)
+              //   // // public/v1/tutor/v1/state/[stateId]/area/all/level/all/subject/all/tutor/{docId}
+              //   let docRef9 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+              //   .collection('state').doc(state).collection('area').doc('all')
+              //   .collection('level').doc('all').collection('subject').doc('all')
+              //   .collection('tutor').doc();
+
+              //   data[PUBLIC_ID] = docRef9.id;
+
+              //   let docRef9Promise = docRef9.set(data);
+
+              //   promisesLayer3.push(docRef9Promise);
+              // })
+
+              // // --------- Update Level Only (3)(6)--------- //
+
+              // uniqLevelArr.forEach((level) => {
+              //   // 3. Search Level Only. ONLINE (Not important)
+              //   // // public/v1/tutor/v1/state/all/area/all/level/[levelId]/subject/all/tutor/{docId}
+              //   let docRef3 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+              //   .collection('state').doc('all').collection('area').doc('all')
+              //   .collection('level').doc(level).collection('subject').doc('all')
+              //   .collection('tutor').doc();
+
+              //   data[PUBLIC_ID] = docRef3.id;
+
+              //   let docRef3Promise = docRef3.set(data);
+
+              //   promisesLayer3.push(docRef3Promise);
+
+
+              //   // 6. Search Level with State + Area (Not important)
+              //   // // public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/[levelId]/subject/all/tutor/{docId}
+              //   if (prefferedArea.length != 0) {
+  
+              //     prefferedArea.forEach((area) => {
+              //       let areaInfo = area.split('-');
+              //       let infoState = areaInfo[0]
+              //       let infoArea = areaInfo[1]
+
+              //       let docRef6 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+              //       .collection('state').doc(infoState).collection('area').doc(infoArea)
+              //       .collection('level').doc(level).collection('subject').doc('all')
+              //       .collection('tutor').doc();
+
+              //       data[PUBLIC_ID] = docRef6.id;
+
+              //       let docRef6Promise = docRef6.set(data);
+
+              //       promisesLayer3.push(docRef6Promise);
+              //     });
+
+              //   }
+              //   else {
+
+              //   }
+
+
+
+              // });
+
+  
+              // --------- Update Online Only (2) --------- //
+              // Loop through all subject
+              if (prefferedSubject.length != 0) {
+
+                prefferedSubject.forEach((subject) => {
+
+                  let subjectInfo = subject.split('-');
+                  let infoLevel = subjectInfo[0]
+                  let infoSubject = subjectInfo[1]
+                  // console.log(areaInfo, subjectInfo);
+
+                  // 2. Search Level-Subject Only. ONLINE 
+                  // // public/v1/tutor/v1/state/all/area/all/level/[levelId]/subject/[subjectId]/p_tutor/{docId}
+                  let docRef2 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                  .collection('state').doc('all').collection('area').doc('all')
+                  .collection('level').doc(infoLevel).collection('subject').doc(infoSubject)
+                  .collection('p_tutor').doc(tutorId);
+
+                  data[PUBLIC_ID] = docRef2.id;
+
+                  let docRef2Promise = docRef2.set(data, {merge: true});
+                  promisesLayer3.push(docRef2Promise);
+                  
+                });
+              }
+              // Area & Subject is empty
+              else {
+
+              }
+            }
+
+            // Online Only: Area is empty
+            else {
+
+              var levelArry = [];
+
+              // --------- Update Online Only (2) --------- //
+              // Loop through all subject
+              if (prefferedSubject.length != 0) {
+
+                prefferedSubject.forEach((subject) => {
+
+                  let subjectInfo = subject.split('-');
+                  let infoLevel = subjectInfo[0]
+                  let infoSubject = subjectInfo[1]
+                  // console.log(areaInfo, subjectInfo);
+
+                  // 2. Search Level-Subject Only. ONLINE 
+                  // // public/v1/tutor/v1/state/all/area/all/level/[levelId]/subject/[subjectId]/p_tutor/{docId}
+                  let docRef2 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                  .collection('state').doc('all').collection('area').doc('all')
+                  .collection('level').doc(infoLevel).collection('subject').doc(infoSubject)
+                  .collection('p_tutor').doc(tutorId);
+
+                  data[PUBLIC_ID] = docRef2.id;
+
+                  let docRef2Promise = docRef2.set(data, {merge: true});
+                  promisesLayer3.push(docRef2Promise);
+                });
+              }
+              // Area & Subject is empty
+              else {
+
+              }
+
+              // --------- Update Level Only (3) --------- //
+
+              // var uniqLevelArr = levelArry.reduce((a,b) => 
+              //   {
+              //     if (a.indexOf(b) < 0 ) a.push(b);
+              //     return a;
+              //   },[]);
+
+              // uniqLevelArr.forEach((level) => {
+              //   // 3. Search Level Only. ONLINE (Not important)
+              //   // // public/v1/tutor/v1/state/all/area/all/level/[levelId]/subject/all/tutor/{docId}
+              //   let docRef10 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+              //   .collection('state').doc('all').collection('area').doc('all')
+              //   .collection('level').doc(level).collection('subject').doc('all')
+              //   .collection('tutor').doc();
+
+              //   data[PUBLIC_ID] = docRef10.id;
+
+              //   let docRef10Promise = docRef10.set(data);
+                
+
+              //   promisesLayer3.push(docRef10Promise);
+              // });
+
+            }
+            
+
+            // ------- Update Default (1) -------- //
+      
+            // 1. Default: Start with Premium, then Relevance Score
+            // // public/v1/tutor/v1/default/all/p_tutor/{docId}
+            // Equivalent to 
+            // // public/v1/tutor/v1/state/all/area/all/level/all/subject/all/p_tutor/{docId}
+            let docRef1 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+            .collection('default').doc('all').collection('p_tutor').doc(tutorId);
+
+            data[PUBLIC_ID] = docRef1.id;
+
+            let docRef1Promise = docRef1.set(data, {merge: true});
+            promisesLayer3.push(docRef1Promise);
+
+          }
+            
+
+        }
+
+        console.log(promisesLayer3)
+        return Promise.all(promisesLayer3);
+
+      })
+      // Layer 4 : NULL
+      .then(() => {
+
+      })
+
+      await promise;
+
+    }
+
+
+    // Update the RS Score & Tutoring approach to all tutor document in path ending ...> p_tutor > {tutorId}
+    // NOTE: Run this when tutor made NO CHANGES to Prefered Area and Subject. This can save some reads, write & deletes
+    async function updateLatestRsScoreSingle(tutorId, publicTutoringApproach, teachingMode){
+
+      var tutorIdRsScoreObj = {};
+      
+      let docRef = db.collection('Tutor').doc(tutorId).get();
+      let arrayOfLast6Month = getLast6Months(new Date(new Date().getFullYear(), new Date().getMonth())); // Get last 6 month date in YY8[01 - 12]
+      // console.log(arrayOfLast6Month)
+
+      let impDocRef1 = db.collection('track').doc('v1').collection('sum_imp').doc(arrayOfLast6Month[0] +'_' + tutorId).get();
+      let impDocRef2 = db.collection('track').doc('v1').collection('sum_imp').doc(arrayOfLast6Month[1] +'_' + tutorId).get();
+      let impDocRef3 = db.collection('track').doc('v1').collection('sum_imp').doc(arrayOfLast6Month[2] +'_' + tutorId).get();
+      let impDocRef4 = db.collection('track').doc('v1').collection('sum_imp').doc(arrayOfLast6Month[3] +'_' + tutorId).get();
+      let impDocRef5 = db.collection('track').doc('v1').collection('sum_imp').doc(arrayOfLast6Month[4] +'_' + tutorId).get();
+      let impDocRef6 = db.collection('track').doc('v1').collection('sum_imp').doc(arrayOfLast6Month[5] +'_' + tutorId).get();
+
+      let clkDocRef1 = db.collection('track').doc('v1').collection('sum_clk').doc(arrayOfLast6Month[0] +'_' + tutorId).get();
+      let clkDocRef2 = db.collection('track').doc('v1').collection('sum_clk').doc(arrayOfLast6Month[1] +'_' + tutorId).get();
+      let clkDocRef3 = db.collection('track').doc('v1').collection('sum_clk').doc(arrayOfLast6Month[2] +'_' + tutorId).get();
+      let clkDocRef4 = db.collection('track').doc('v1').collection('sum_clk').doc(arrayOfLast6Month[3] +'_' + tutorId).get();
+      let clkDocRef5 = db.collection('track').doc('v1').collection('sum_clk').doc(arrayOfLast6Month[4] +'_' + tutorId).get();
+      let clkDocRef6 = db.collection('track').doc('v1').collection('sum_clk').doc(arrayOfLast6Month[5] +'_' + tutorId).get();
+
+
+
+      const promise = Promise.all([docRef, impDocRef1, impDocRef2, impDocRef3, impDocRef4, impDocRef5, impDocRef6, clkDocRef1, clkDocRef2, clkDocRef3, clkDocRef4, clkDocRef5, clkDocRef6 ])
+      // Layer 2: RS Score Calculation Start
+      .then((docs) => {
+
+        // console.log('Layer 2: RS Score Calculation Start')
+
+        // console.log(docs[0].data());
+        // console.log(docs[1].data());
+        // console.log(docs[2].data());
+        // console.log(docs[3].data());
+        // console.log(docs[4].data());
+        // console.log(docs[5].data());
+        // console.log(docs[6].data());
+        // console.log(docs[7].data());
+        // console.log(docs[8].data());
+        // console.log(docs[9].data());
+        // console.log(docs[10].data());
+        // console.log(docs[11].data());
+        // console.log(docs[12].data());
+
+        let sumImp1 = docs[1].data() == null ? 0 : docs[1].data().sum;
+        let sumImp2 = docs[2].data() == null ? 0 : docs[2].data().sum;
+        let sumImp3 = docs[3].data() == null ? 0 : docs[3].data().sum;
+        let sumImp4 = docs[4].data() == null ? 0 : docs[4].data().sum;
+        let sumImp5 = docs[5].data() == null ? 0 : docs[5].data().sum;
+        let sumImp6 = docs[6].data() == null ? 0 : docs[6].data().sum;
+        let totalImp = sumImp1 + sumImp2 + sumImp3 + sumImp4 + sumImp5 + sumImp6;
+        
+        let sumClk1 = docs[7].data() == null ? 0 : docs[7].data().sum;
+        let sumClk2 = docs[8].data() == null ? 0 : docs[8].data().sum;
+        let sumClk3 = docs[9].data() == null ? 0 : docs[9].data().sum;
+        let sumClk4 = docs[10].data() == null ? 0 : docs[10].data().sum;
+        let sumClk5 = docs[11].data() == null ? 0 : docs[11].data().sum;
+        let sumClk6 = docs[12].data() == null ? 0 : docs[12].data().sum;
+        let totalClk = sumClk1 + sumClk2 + sumClk3 + sumClk4 + sumClk5 + sumClk6;
+
+        let CTR = isNaN(totalClk / totalImp) ? 0 : totalClk / totalImp;
+
+        if (docs[0].exists){
+          // Relevance Score, RS = 0.5(CTR + k) + 0.3(PS) + 0.2(Rating)
+          let rsScore_PsAndRating = getRsScore_PsAndRating(docs[0]);
+          let rsScore = 0.5 * CTR + rsScore_PsAndRating;
+
+          // console.log(tutorId, totalClk,totalImp,  CTR, rsScore_PsAndRating, rsScore);
+
+          // Add the TutorId & corresponding Rs Score to global json obj
+          tutorIdRsScoreObj[tutorId] = rsScore;
+
+        }else {
+          console.log('Tutor Document does not exist.')
+
+        }
+
+        return null;
+        // return Promise.all(promisesLayer3);
+      })
+      // Layer 3 : Collection Group to Get all Tutor Path
+      .then(() => {
+
+        // console.log('Layer 3: Collection Group to Get all Tutor Path Start')
+
+        // This stage update the RS score to respective tutor's doc
+
+        const promisesLayer3 = [];
+
+        console.log(tutorIdRsScoreObj)
+
+        for (var key of Object.keys(tutorIdRsScoreObj)) {
+          console.log(key, tutorIdRsScoreObj[key])
+
+          var tutorRef = db.collectionGroup('p_tutor').where('tutorId', '==', key).get();
+
+          promisesLayer3.push(tutorRef)
+
+        }
+        return Promise.all(promisesLayer3);
+
+      })
+      // Layer 4 : Update RS Score & Tutoring Approach
+      .then((snapshots) => {
+        // console.log('Layer 4: Update RS Score & Tutoring Approach Start')
+        // This stage update the RS score to respective tutor's doc
+
+        const promisesLayer4 = [];
+        if (snapshots != null && snapshots.length != 0){
+
+          // Looping each snapshots. By default, there's only single snaphot in snapshots array.
+          snapshots.forEach((snapshot) => {
+
+            if (snapshot != null && snapshot.length != 0){
+
+              // Looping each document
+              snapshot.forEach((doc) => {
+
+                if (doc.exists){
+
+                  // console.log(doc.ref.path);
+
+                  data = {
+                    [PUBLIC_RS_SCORE]: tutorIdRsScoreObj[doc.data().tutorId],
+                    [PUBLIC_TUTORING_APPROACH]: publicTutoringApproach,
+                    [PUBLIC_MODE]: teachingMode,
+                  }
+                  // console.log("Doc exist");
+                  // console.log(data)
+
+                  let docRef = db.doc(doc.ref.path).update(data);
+
+                  promisesLayer4.push(docRef);
+                }
+                else {
+                  console.log("Doc does not exist");
+                }
+                
+              });
+
+            }
+            else {
+              // console.log("Snapshot does not exist");
+            }
+            
+          })
+        }
+        else {
+          // console.log('No Snapshots')
+        }
+
+        return Promise.all(promisesLayer4);
+      })
+      
+      await promise;
+    }
+
+    // Calculate PS and Rating Score.
+    function getRsScore_PsAndRating(doc) {
+      // Relevance Score, RS = 0.5(CTR + k) + 0.3(PS) + 0.2(Rating)
+
+      // Calculate Profile Score, PS
+      let checker = 0; // max = 7
+      if (doc.data()[IMAGE_KEY] != null && doc.data()[IMAGE_KEY] != "" && doc.data()[IMAGE_KEY] != "https://app.golearn.com.my/assets/img/hello.gif"){
+        checker = checker + 1;
+      }
+      if (doc.data()[YEARS_EXPERIENCE_KEY] != null && doc.data()[YEARS_EXPERIENCE_KEY] != ""){
+        checker = checker + 1;
+      }
+      if (doc.data()[QUALIFICATION_KEY] != null && doc.data()[QUALIFICATION_KEY] != ""){
+        checker = checker + 1;
+      }
+      if (doc.data()[TUTORING_APPROACH_KEY] != null && doc.data()[TUTORING_APPROACH_KEY] != ""){
+        checker = checker + 1;
+      }
+      if (doc.data()[TUTORING_EXPERIENCE_KEY] != null && doc.data()[TUTORING_EXPERIENCE_KEY] != ""){
+        checker = checker + 1;
+      }
+      if (doc.data()[PREFERED_SUBJECT_LIST_KEY] != null && doc.data()[PREFERED_SUBJECT_LIST_KEY] != "" && doc.data()[PREFERED_SUBJECT_LIST_KEY].length > 0){
+        checker = checker + 1;
+      }
+      if (doc.data()[PREFERED_AREA_LIST_KEY] != null && doc.data()[PREFERED_AREA_LIST_KEY] != "" && doc.data()[PREFERED_AREA_LIST_KEY].length > 0){
+        checker = checker + 1;
+      }
+
+      // Get the percentage of completion. 7 is just the number of criteria contested
+      let PS = checker / 7 * 0.3;
+
+      // Calculate Rating
+      let Rating = doc.data()[RATING_FINAL_KEY] / 5 * 0.2;
+
+      return PS + Rating;
+
+    }
+
+    function getSubString(inString, stringLength) {
+      let inStringLength = inString.length;
+      if (inStringLength > stringLength){
+        let revealedApproachTextIndex = stringLength;
+        for (i=0; i<50; i++){ // Allow up to 50 chars joined with the last char. 
+          if (inString[stringLength + i] == " " || inString[stringLength + i] == "-"
+          || inString[stringLength + i] == "/" || inString[stringLength + i] == ":"){
+            // Right at the end of a word. Do nothing
+            break;
+          }else {
+            revealedApproachTextIndex = revealedApproachTextIndex + 1;
+          }
+        }
+        return inString.substring(0, revealedApproachTextIndex);
+      }else {
+        return inString;
+      }
+      // console.log(inString);
+    }
+
+    
+    // ---------- Utility Func. to to get DocId format ---------------//
+    // Required by topFunction, runIndexingSingle & updateLatestRsScoreSingle.
+
+    const dayOfYear = date =>
+      Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+
+    const isLeapYear = year => new Date(year, 1, 29).getMonth() === 1;
+
+    function getYesterdayDate(date) {
+      // Get date format in YYDDD.
+      // YY - Last 2 digit of year, i.e 2025 -> 25
+      // DDD - Day of the year - 000 - 366
+      var yesterday = new Date(date.getTime() - 24*60*60*1000);
+      
+      var YYDDD='';
+
+      if (date.getDate() == 1 && date.getMonth() == 0){
+        // For first day of the year, get the last day of previous year.
+        if (isLeapYear(date.getFullYear()-1))
+          // Return 366 if leap year
+          YYDDD = (date.getFullYear() - 1).toString().substr(2)+'366';
+        else 
+          YYDDD = (date.getFullYear() - 1).toString().substr(2)+'365';
+      }else {
+        YYDDD = date.getFullYear().toString().substr(2)+''+ pad(dayOfYear(yesterday), 3);
+      }
+      
+      // console.log(isLeapYear(2022))
+      return YYDDD
+  
+    }
+    
+    // console.log(getyesterdayDate(new Date(2021, 11, 31)));
+
+    function getCurrentMonth(date) {
+      // Get date format in YYDDD.
+      // YY - Last 2 digit of year, i.e 2025 -> 25
+      // DDD - Month -> 801 - 812
+      
+      var YYDDD='';
+      var datePos = 0;
+
+      // console.log(date.getMonth());
+      // console.log(pad(date.getMonth(), 2));
+
+      if (date.getDate() == 1 && date.getMonth() == 0){
+        // For first day of the year, get the last month (december) of previous year.
+        YYDDD = (date.getFullYear() - 1).toString().substr(2)+'812';
+        datePos = 31; // Last day of December is always 31
+      }
+      else if( date.getDate() == 1){
+
+        // For first day of each month, get the last month
+
+        YYDDD = date.getFullYear().toString().substr(2)+'8'+  pad(date.getMonth(), 2);
+
+        date.setDate(0); // Get the last day of previous month
+
+        datePos = date.getDate();
+
+      }
+      else{
+        YYDDD = date.getFullYear().toString().substr(2)+'8'+  pad(date.getMonth() + 1, 2) ;
+
+        datePos = date.getDate();
+
+      }
+      
+      return {YYDDD, datePos}
+  
+    }
+
+    // console.log(getCurrentMonth(new Date(2020, 6, 1)));
+    function getLast6Months(d) {
+      // Get date format in YYDDD for last 6 months, including current month
+      // YY - Last 2 digit of year, i.e 2025 -> 25
+      // DDD - Month -> 801 - 812
+      // input date = new Date(2025,2). Do not put days info
+      // return array of YYDDD
+      
+      var YYDDD=[];
+      var d1 = d, d2 = d, d3 = d, d4 = d, d5 = d;
+
+      dCurrent =  new Date(d);
+      d1 = new Date(d.setMonth(d.getMonth() - 1));
+      d2 = new Date(d.setMonth(d.getMonth() - 1));
+      d3 = new Date(d.setMonth(d.getMonth() - 1));
+      d4 = new Date(d.setMonth(d.getMonth() - 1));
+      d5 = new Date(d.setMonth(d.getMonth() - 1));
+
+      // console.log(d1);
+      // console.log(d2);
+      // console.log(d3);
+      // console.log(d4);
+      // console.log(d5);
+
+      [dCurrent,d1,d2,d3,d4,d5].forEach((item) => {
+
+        YYDDD.push(item.getFullYear().toString().substr(2)+'8'+  pad(item.getMonth() + 1, 2));
+
+      })
+
+      
+      return YYDDD
+  
+    }
+
+    function pad(num, size) {
+      var s = "000" + num;
+      return s.substr(s.length-size);
+    }
+   
+    // Warn if overriding existing method
+    if(Array.prototype.equals)
+        console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.");
+    // attach the .equals method to Array's prototype to call it on any array
+    Array.prototype.equals = function (array) {
+        // if the other array is a falsy value, return
+        if (!array)
+            return false;
+
+        // compare lengths - can save a lot of time 
+        if (this.length != array.length)
+            return false;
+
+        for (var i = 0, l=this.length; i < l; i++) {
+            // Check if we have nested arrays
+            if (this[i] instanceof Array && array[i] instanceof Array) {
+                // recurse into the nested arrays
+                if (!this[i].equals(array[i]))
+                    return false;       
+            }           
+            else if (this[i] != array[i]) { 
+                // Warning - two different object instances will never be equal: {x:20} != {x:20}
+                return false;   
+            }           
+        }       
+        return true;
+    }
+    // Hide method from for-in loops
+    Object.defineProperty(Array.prototype, "equals", {enumerable: false});
+
+    // ---------- Utility Func. to to get DocId format End---------------//
+
   </script>
+
   <script>
     // Global var
     var KEY = ""; // Extract info from data-* attributes
@@ -5965,7 +6949,6 @@
 			  $('#timeSlotModal').modal('hide');
 		  });
 
-
       // Clear key and fields in modal when modal dismiss
       $('#timeSlotModal').on('hide.bs.modal', function (event) {
         KEY = ""; 
@@ -5978,18 +6961,35 @@
         // console.log(KEY);
       });
 
-
-
       // Save info
       // $('#btnSave').on('click', function (e) {
       //    $('#saveModal').modal('show');
       // });
 
       $('#btnSaveModalUpdate').on('click', function (e) {
+        // Actions:
+        // 1. Update to Tutor > {tutorId}
+        // 2. (Condition) Update to public > v1 > tutor > ...
+        const promiseArray = [];
+        document.getElementById('btnSave').setAttribute('disabled', true);
+        document.getElementById('btnSave').innerHTML = "<i class='material-icons' style='color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;'>save</i> Saving ...";
+
+        // 1. Update to Tutor > {tutorId}
+        var tutoringApproach_temp = document.getElementById("tutoringApproach").value;
+        var isModeHomeTutorToStudent_temp = (document.getElementById("modeHomeTutorToStudent").checked)? true : false;
+        var isModeHomeStudentToTutor_temp = (document.getElementById("modeHomeStudentToTutor").checked)? true : false;
+        var isModeGroup_temp = (document.getElementById("modeGroup").checked)? true : false;
+        var isModeOnline_temp = (document.getElementById("modeOnline").checked)? true : false;
+        var isModeOnlineGroup_temp = (document.getElementById("modeOnlineGroup").checked)? true : false;
+        var teachingMode = [false, false];
+        let physicaMode = isModeHomeTutorToStudent_temp || isModeHomeTutorToStudent_temp || isModeGroup_temp
+        teachingMode[0] = physicaMode == null ? false : physicaMode;
+        let onlineMode = isModeOnline_temp || isModeOnlineGroup_temp;
+        teachingMode[1] = onlineMode == null ? false : onlineMode;
 
         var docRef = db.collection("Tutor").doc(tutorId);
 
-        data ={
+        var data ={
           [CHECK_HOME_TUTOR_TO_STUDENT_KEY]: (document.getElementById("modeHomeTutorToStudent").checked)? true : false,
           [CHECK_HOME_STUDENT_TO_TUTOR_KEY]: (document.getElementById("modeHomeStudentToTutor").checked)? true : false,
           [CHECK_GROUP_KEY]: (document.getElementById("modeGroup").checked)? true : false,
@@ -6003,25 +7003,78 @@
           [CHECK_TEACHING_LANGUAGE_OTHER_KEY]: (document.getElementById("lanOther").checked)? true : false,
           [YEARS_EXPERIENCE_KEY]: document.getElementById("yearsExperience").value,
           [TUTORING_EXPERIENCE_KEY]: document.getElementById("tutoringExperience").value,
-          [TUTORING_APPROACH_KEY]: document.getElementById("tutoringApproach").value,
+          [TUTORING_APPROACH_KEY]: tutoringApproach_temp,
           [QUALIFICATION_KEY]: document.getElementById("qualification").value,
           [PREFERED_SUBJECT_LIST_KEY]: preferredSubjectList_temp,
           [PREFERED_AREA_LIST_KEY]: preferredAreaList_temp
         }
 
-        console.log(data)
-        docRef.set(data, { merge: true })
-        .then(()=>{
-          // window.location = "./"
+        // console.log(data)
 
-          // Reload & update the page
+        // docRef.set(data, { merge: true })
+        // .then(() => {
+        //   // window.location = "./"
+        //   // Reload & update the page
+        //   loadUserInfo(tutorId); // tutor-core.js
+        //   func.showNotification('top','center', 'success', 'check_circle', "Information updated.");
+        // });
+
+        var docRefPromise = docRef.set(data, { merge: true });
+        promiseArray.push(docRefPromise);
+
+        // 2. (Condition) Update to public > v1 > tutor > ...
+
+        // console.log(preferredAreaList_temp, oriPreferredAreaList)
+        // console.log(preferredAreaList_temp.equals(oriPreferredAreaList))
+        // console.log(preferredAreaList_temp.sort(), oriPreferredAreaList.sort())
+        // console.log(preferredSubjectList_temp.sort(), oriPreferredSubjectList.sort())
+        // console.log(preferredAreaList_temp.equals(oriPreferredAreaList), preferredSubjectList_temp.equals(oriPreferredSubjectList), document.getElementById("tutoringApproach").value == oriTutoringApproach)
+        
+        // Compare the very first part of the original and updated tutoring approach.
+        let approachChanged =  getSubString(tutoringApproach_temp, 80) !=  getSubString(oriTutoringApproach, 80);
+
+        // Compare the original and updated teaching mode
+        let oriTeachingMode = [false, false];
+        let oriPhysicaMode = oriModeHomeTutorToStudent || oriModeHomeStudentToTutor || oriModeGroup
+        oriTeachingMode[0] = physicaMode == null ? false : oriPhysicaMode;
+        let oriOnlineMode = oriModeOnline || oriModeOnlineGroup;
+        oriTeachingMode[1] = oriOnlineMode == null ? false : oriOnlineMode;
+        let oriModeChanged = !oriTeachingMode.equals(teachingMode);
+
+        // Get the first 80 or full words char.
+        var publicTutoringApproach = getSubString(tutoringApproach_temp, 80);
+        // console.log(publicTutoringApproach)
+
+        if (preferredAreaList_temp.equals(oriPreferredAreaList) && preferredSubjectList_temp.equals(oriPreferredSubjectList) && !approachChanged && !oriModeChanged) {
+          // Do nothing. No changes to the Teaching Mode Tutoring Approach, Subject List and Area List
+        }
+        else if (preferredAreaList_temp.equals(oriPreferredAreaList) && preferredSubjectList_temp.equals(oriPreferredSubjectList) && approachChanged && !oriModeChanged){
+          // No changes to the Teaching Mode, Subject List and Area List. ONLY changes to the Tutoring Approach.
+          // Update tutor in public > v1 > ...
+          // Teaching Approach ( Max 80 or full words)
+          promiseArray.push(updateLatestRsScoreSingle(tutorId, publicTutoringApproach, teachingMode));
+
+        }else if (!preferredAreaList_temp.equals(oriPreferredAreaList) || !preferredSubjectList_temp.equals(oriPreferredSubjectList) || oriModeChanged){
+          // Teaching Mode, Subject and Area list changed. Redo indexing.
+          promiseArray.push(topFunction(tutorId, publicTutoringApproach, teachingMode, preferredAreaList_temp, preferredSubjectList_temp));
+        }
+
+
+        const promiseAll = Promise.all(promiseArray);
+
+        promiseAll.then(()=> {
+
+          document.getElementById('btnSave').removeAttribute('disabled');
+          document.getElementById('btnSave').innerHTML = "<i class='material-icons' style='color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;'>save</i> Save";
+
           loadUserInfo(tutorId); // tutor-core.js
           func.showNotification('top','center', 'success', 'check_circle', "Information updated.");
 
-        });
+          isFirstTimeLoad = true; // Reactivate the load
+
+        })
 
         $('#updateBasicDetailsModal').modal('hide');
-
 
       });
 
