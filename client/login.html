@@ -225,7 +225,7 @@
                       <!-- <div class="input-group-prepend">
                         <div class="input-group-text"><i class="material-icons">email</i></div>
                       </div> -->
-                      <a href="#" class="btn btn-primary btn-round" id="btnLogin">Confirm and Login</a>
+                      <button type="button" class="btn btn-primary btn-round" id="btnLogin">Confirm and Login</button>
                     </div>
                   </div>
                 </div>
@@ -489,6 +489,8 @@
 
       $('#btnLogin').on('click', function(){
 
+        document.getElementById("btnLogin").setAttribute("disabled", true);
+        document.getElementById("btnLogin").textContent = 'Please wait. Logging In ... ';
         codeverify();
       });
 

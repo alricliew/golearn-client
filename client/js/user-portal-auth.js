@@ -71,6 +71,9 @@ function codeverify() {
 
     let code=document.getElementById('verificationCode').value;
     coderesult.confirm(code).then(function (result) {
+        document.getElementById("btnLogin").setAttribute("disabled", true);
+        document.getElementById("btnLogin").textContent = 'Please wait. Almost there ... ';
+
         // alert("Successfully registered");
         let user=result.user;
 
@@ -117,12 +120,17 @@ function codeverify() {
               db.collection("Users").doc(userId)
                 .set(docData, {merge: true})
                 .then(() => {
-                    window.location.href = './'
-                    // console.log("Document successfully written!");
+                  document.getElementById("btnLogin").removeAttribute("disabled");
+                  document.getElementById("btnLogin").textContent = 'Confirm And Login';
+
+                  window.location.href = './'
+                  // console.log("Document successfully written!");
                 })
                 .catch((error) => {
-                    func.showNotification('top','center', 'danger', 'error_outline', "Registration failed. Please try again" );
-                    // console.error("Error writing document: ", error);
+                  document.getElementById("btnLogin").removeAttribute("disabled");
+                  document.getElementById("btnLogin").textContent = 'Confirm And Login';
+                  func.showNotification('top','center', 'danger', 'error_outline', "Registration failed. Please try again" );
+                  // console.error("Error writing document: ", error);
                 });
 
             }
@@ -133,6 +141,9 @@ function codeverify() {
     .catch(function (error) {
         // alert(error.message);
         // alert("Phone Verification Failed. Please make sure you enter a valid 6-digit verification code." +  error.message);
+        document.getElementById("btnLogin").removeAttribute("disabled");
+        document.getElementById("btnLogin").textContent = 'Confirm And Login';
+        
         func.showNotification('top','center', 'danger', 'error_outline', "Phone Verification Failed. Please make sure you enter a valid 6-digit verification code." );
 
         console.log("Phone Verification Failed. Please make sure you enter a valid 6-digit verification code."+  error.message);
