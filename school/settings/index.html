@@ -5492,17 +5492,17 @@
 
 
     // Run indexing to public > v1 > ... 
-    async function topFunction(tutor_Id, publicTutoringApproach, teachingMode, areaList, subjectList) {
+    async function topFunction(tutor_Id, publicTutoringApproach, teachingMode, profileLevel, areaList, subjectList) {
 
-      await runIndexingSingle(tutor_Id, publicTutoringApproach, teachingMode, areaList, subjectList);
+      await runIndexingSingle(tutor_Id, publicTutoringApproach, teachingMode, profileLevel, areaList, subjectList);
 
-      console.log('runIndexingSingle completed')
+      // console.log('runIndexingSingle completed')
 
     }
     
     // Index tutor from Tutor > {tutorId} to public > v1 > ...
     // Update the RS Score to all tutor document in path ending ...> p_tutor > {tutorId}
-    async function runIndexingSingle(tutor_Id, publicTutoringApproach, teachingMode, areaList, subjectList){
+    async function runIndexingSingle(tutor_Id, publicTutoringApproach, teachingMode, profileLevel, areaList, subjectList){
 
       var prefferedArea = areaList == null ? [] : areaList;
       var prefferedSubject = subjectList == null ? [] : subjectList;
@@ -5924,13 +5924,13 @@
             [PUBLIC_ID]: 'id',
             [PUBLIC_TUTOR_ID]: tutor_Id, // from input, similar to global var
             [PUBLIC_NAME]: current_name, // global var
-            // [PUBLIC_AGE]: id,
             [PUBLIC_IMG_URL]: current_imgUri, // global var
             [PUBLIC_TUTORING_APPROACH]: publicTutoringApproach, // from input, local
-            // [PUBLIC_PREFERED_AREA_LIST]: id,
+            [PUBLIC_PREFERED_AREA_LIST]: prefferedArea,
             [PUBLIC_RATING_TIMES]: (current_ratingTimes == null) ? 0 : current_ratingTimes, // global var
             [PUBLIC_RATING_FINAL]: (current_ratingFinal == null) ? 0 : current_ratingFinal, // global var
-            [PUBLIC_MODE]: teachingMode, // from input local
+            [PUBLIC_MODE]: teachingMode, // from input, local
+            [PUBLIC_PROFILE_LEVEL]: profileLevel, // from input, local
             [PUBLIC_ACCOUNT_STATUS]: current_accountStatus, // global var
             [PUBLIC_RS_SCORE]: tutorIdRsScoreObj[key], // local
             [PUBLIC_LAST_UPDATE]: new Date(),
@@ -6364,7 +6364,7 @@
 
     // Update the RS Score & Tutoring approach to all tutor document in path ending ...> p_tutor > {tutorId}
     // NOTE: Run this when tutor made NO CHANGES to Prefered Area and Subject. This can save some reads, write & deletes
-    async function updateLatestRsScoreSingle(tutorId, publicTutoringApproach, teachingMode){
+    async function updateLatestRsScoreSingle(tutorId, publicTutoringApproach, teachingMode, profileLevel){
 
       var tutorIdRsScoreObj = {};
       
@@ -6466,7 +6466,7 @@
         return Promise.all(promisesLayer3);
 
       })
-      // Layer 4 : Update RS Score & Tutoring Approach
+      // Layer 4 : Update RS Score, Tutoring Approach, Teaching Mode & Profile Level
       .then((snapshots) => {
         // console.log('Layer 4: Update RS Score & Tutoring Approach Start')
         // This stage update the RS score to respective tutor's doc
@@ -6490,6 +6490,7 @@
                     [PUBLIC_RS_SCORE]: tutorIdRsScoreObj[doc.data().tutorId],
                     [PUBLIC_TUTORING_APPROACH]: publicTutoringApproach,
                     [PUBLIC_MODE]: teachingMode,
+                    [PUBLIC_PROFILE_LEVEL]: profileLevel,
                   }
                   // console.log("Doc exist");
                   // console.log(data)
@@ -6577,6 +6578,47 @@
         return inString;
       }
       // console.log(inString);
+    }
+
+    // Calculate profile level
+    function checkProfileLevel(imgUri, qualification, approach, experience, preferedSubjectList, preferedAreaList, ratingTimes, accountStatus) {
+
+      // Level 1: New Tutor
+      let lvl1Checker = 0; // max = 4
+      if (imgUri != null && imgUri != "" && imgUri != "https://app.golearn.com.my/assets/img/hello.gif"){
+        lvl1Checker = lvl1Checker + 1;
+      }
+      if (qualification != null && qualification != ""){
+        lvl1Checker = lvl1Checker + 1;
+      }
+      if (approach != null && experience != null && approach != "" && experience != ""){
+        lvl1Checker = lvl1Checker + 1;
+      }
+      if (preferedSubjectList != null && preferedSubjectList != "" && preferedSubjectList.length > 0 &&
+      preferedAreaList != null && preferedAreaList != "" && preferedAreaList.length > 0){
+        lvl1Checker = lvl1Checker + 1;
+      }
+
+      // Level 2: Experienced Tutor
+      let lvl2Checker = 0; // max = 3
+      if (ratingTimes == null || ratingTimes == "" || ratingTimes == 0){
+      }else if (ratingTimes > 0 && ratingTimes < 5){
+      }else if (ratingTimes >= 5){
+        lvl2Checker = lvl2Checker + 1;
+      }else {
+      }
+
+      let statusArr = [PREMIUM_ACCOUNT_1_STATUS_KEY, PREMIUM_ACCOUNT_2_STATUS_KEY, PREMIUM_ACCOUNT_3_STATUS_KEY, PREMIUM_ACCOUNT_1_ACTIVE_STATUS_KEY, PREMIUM_ACCOUNT_2_ACTIVE_STATUS_KEY, PREMIUM_ACCOUNT_3_ACTIVE_STATUS_KEY];
+      if (statusArr.indexOf(accountStatus) > -1){
+        return PUBLIC_PROFILE_LEVEL_PREMIUM;
+      }else if (lvl1Checker == 4 && lvl2Checker == 1){
+        return PUBLIC_PROFILE_LEVEL_PRO; 
+      }else if (lvl1Checker == 4){
+        return PUBLIC_PROFILE_LEVEL_EXPERIENCED;
+      }else{
+        return PUBLIC_PROFILE_LEVEL_NEW;
+      }
+      
     }
 
     
@@ -6975,7 +7017,9 @@
         document.getElementById('btnSave').innerHTML = "<i class='material-icons' style='color: #ffffff; margin-right: 0.5em; padding-bottom: 0.2em;'>save</i> Saving ...";
 
         // 1. Update to Tutor > {tutorId}
+        var tutoringExperience_temp = document.getElementById("tutoringExperience").value;
         var tutoringApproach_temp = document.getElementById("tutoringApproach").value;
+        var qualification_temp = document.getElementById("qualification").value;
         var isModeHomeTutorToStudent_temp = (document.getElementById("modeHomeTutorToStudent").checked)? true : false;
         var isModeHomeStudentToTutor_temp = (document.getElementById("modeHomeStudentToTutor").checked)? true : false;
         var isModeGroup_temp = (document.getElementById("modeGroup").checked)? true : false;
@@ -7002,9 +7046,9 @@
           [CHECK_TEACHING_LANGUAGE_BT_KEY]: (document.getElementById("lanBt").checked)? true : false,
           [CHECK_TEACHING_LANGUAGE_OTHER_KEY]: (document.getElementById("lanOther").checked)? true : false,
           [YEARS_EXPERIENCE_KEY]: document.getElementById("yearsExperience").value,
-          [TUTORING_EXPERIENCE_KEY]: document.getElementById("tutoringExperience").value,
+          [TUTORING_EXPERIENCE_KEY]: tutoringExperience_temp,
           [TUTORING_APPROACH_KEY]: tutoringApproach_temp,
-          [QUALIFICATION_KEY]: document.getElementById("qualification").value,
+          [QUALIFICATION_KEY]: qualification_temp,
           [PREFERED_SUBJECT_LIST_KEY]: preferredSubjectList_temp,
           [PREFERED_AREA_LIST_KEY]: preferredAreaList_temp
         }
@@ -7041,6 +7085,10 @@
         oriTeachingMode[1] = oriOnlineMode == null ? false : oriOnlineMode;
         let oriModeChanged = !oriTeachingMode.equals(teachingMode);
 
+        // Get Profile Level
+        let profileLevel = checkProfileLevel(current_imgUri, qualification_temp, tutoringApproach_temp, tutoringExperience_temp, 
+          preferredSubjectList_temp, preferredAreaList_temp, current_ratingTimes, current_accountStatus);
+
         // Get the first 80 or full words char.
         var publicTutoringApproach = getSubString(tutoringApproach_temp, 80);
         // console.log(publicTutoringApproach)
@@ -7052,11 +7100,11 @@
           // No changes to the Teaching Mode, Subject List and Area List. ONLY changes to the Tutoring Approach.
           // Update tutor in public > v1 > ...
           // Teaching Approach ( Max 80 or full words)
-          promiseArray.push(updateLatestRsScoreSingle(tutorId, publicTutoringApproach, teachingMode));
+          promiseArray.push(updateLatestRsScoreSingle(tutorId, publicTutoringApproach, teachingMode, profileLevel));
 
         }else if (!preferredAreaList_temp.equals(oriPreferredAreaList) || !preferredSubjectList_temp.equals(oriPreferredSubjectList) || oriModeChanged){
           // Teaching Mode, Subject and Area list changed. Redo indexing.
-          promiseArray.push(topFunction(tutorId, publicTutoringApproach, teachingMode, preferredAreaList_temp, preferredSubjectList_temp));
+          promiseArray.push(topFunction(tutorId, publicTutoringApproach, teachingMode, profileLevel, preferredAreaList_temp, preferredSubjectList_temp));
         }
 
 

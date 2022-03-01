@@ -1353,7 +1353,7 @@
       let lvl2Checker = 0; // max = 3
       if (current_ratingTimes == null || current_ratingTimes == "" || current_ratingTimes == 0){
         document.getElementById("lvl2ReviewTxt").textContent = "0/5 Reviews";
-      }else if (current_ratingTimes > 0 || current_ratingTimes < 5){
+      }else if (current_ratingTimes > 0 && current_ratingTimes < 5){
         document.getElementById("lvl2ReviewTxt").textContent = current_ratingTimes + "/5 Reviews";
       }else if (current_ratingTimes >= 5){
         document.getElementById("lvl2Review").style.color = "green";

@@ -459,12 +459,14 @@ function codeverify() {
         [PUBLIC_TUTOR_ID]: tutorId,
         [PUBLIC_NAME]: 'New Tutor',
         [PUBLIC_IMG_URL]: '',
-        [PUBLIC_TUTORING_APPROACH]: '', // from input, local
-        [PUBLIC_RATING_TIMES]: 0, // global var
-        [PUBLIC_RATING_FINAL]: 0, // global var
-        [PUBLIC_MODE]: [false, false], // from input local
-        [PUBLIC_ACCOUNT_STATUS]: DEACTIVATED_ACCOUNT_STATUS_KEY, // global var
-        [PUBLIC_RS_SCORE]: 0, // local
+        [PUBLIC_TUTORING_APPROACH]: '', 
+        [PUBLIC_PREFERED_AREA_LIST]: [],
+        [PUBLIC_RATING_TIMES]: 0,
+        [PUBLIC_RATING_FINAL]: 0,
+        [PUBLIC_MODE]: [false, false],
+        [PUBLIC_PROFILE_LEVEL]: PUBLIC_PROFILE_LEVEL_NEW,
+        [PUBLIC_ACCOUNT_STATUS]: DEACTIVATED_ACCOUNT_STATUS_KEY,
+        [PUBLIC_RS_SCORE]: 0,
         [PUBLIC_LAST_UPDATE]: new Date(),
       }
 
