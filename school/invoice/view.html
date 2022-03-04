@@ -1245,7 +1245,7 @@
         // console.log(currentInvoiceObj);
         invId = currentInvoiceObj[INV_ID]
         
-        console.log(currentInvoiceObj)
+        // console.log(currentInvoiceObj)
         updatePageContent(currentInvoiceObj);
 
       }
@@ -1901,12 +1901,10 @@
       // document.getElementById('previewSubtotalItem').textContent='';
       document.getElementById('previewGrandTotal').textContent='';
 
-
       // Get the inv data
       // let invData = getAllItems2();
-      console.log('invData')
-      console.log(invData)
-
+      // console.log('invData')
+      // console.log(invData)
 
       // Step 2: Print Items & Additional Items
       let itemStartIndex= invData.indexOf('ITEMLIST');
@@ -1930,11 +1928,9 @@
       });
       // console.log(itemIndexArr)
 
-
-
       // console.log(itemList)
       // console.log(itemIndex)
-      console.log(additionalItem)
+      // console.log(additionalItem)
       // console.log(total)
 
       // Loop through each 'ITEM' index
@@ -2734,7 +2730,8 @@
 
             });
 
-          }).catch((error) => {
+          })
+          .catch((error) => {
               console.log("Error getting document:", error);
           });
 

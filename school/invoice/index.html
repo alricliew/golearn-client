@@ -821,7 +821,6 @@
         }
         
         latestInvoiceDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
-        console.log(querySnapshot.docs.length)
         // Handle Lesson Load more btn
         if (querySnapshot.empty){
           invoiceLoadmore.removeEventListener('click', invoiceLoadmoreHandleClick );

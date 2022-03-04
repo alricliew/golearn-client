@@ -403,28 +403,6 @@
       <!-- End Navbar -->
 
 			<!-- Modal Start -->
-      <!-- Save Invoice modal -->
-      <div class="row">
-        <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="saveLabel">Save Draft and Proceed</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnSaveModalClose1">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" id="saveModalBody">
-                Are you sure you want to continue?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSaveModalClose2">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSaveModalUpdate">Save</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Delete Student modal -->
       <div class="row">
@@ -444,7 +422,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Not Now</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnDelModalUpdate">Confirm</button>
+                <button type="button" class="btn btn-primary" id="btnDelModalUpdate">Confirm</button>
               </div>
             </div>
           </div>
@@ -467,7 +445,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSaveModalClose2">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSaveModalUpdate">Save</button>
+                <button type="button" class="btn btn-primary" id="btnSaveModalUpdate">Save</button>
               </div>
             </div>
           </div>
@@ -1586,7 +1564,6 @@
         // Step 1: We need the first item to create the class placeholder.
         let firstItem = itemSingleList[0];
         let firstComponent = firstItem.split(";; ");
-        console.log(firstComponent);
         addItem(className, refId, firstComponent[0], firstComponent[1], firstComponent[2], refId, cat, tag);
 
         // Initialized subtotal with the amount of the first item
@@ -4103,6 +4080,9 @@
     //-------- Save and Create Invoice-----------------/
     
     function UpdateInvoice() {
+      document.getElementById('btnSaveModalUpdate').setAttribute('disabled', true);
+      document.getElementById('btnSaveModalUpdate').textContent = 'Checking. Please wait ...';
+
       var invDocRef = db.collection("Financial")
           .doc("v1")
           .collection("Invoice")
@@ -4199,7 +4179,7 @@
       if (currentInvoiceObj[INV_INV_STATUS] === INV_STATUS_NEW || currentInvoiceObj[INV_INV_STATUS] === INV_STATUS_PAID){
 
         // Get the documents with the similar invoice id, and 
-        // remove the corresponding id in REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR.
+        // Remove the corresponding id in REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR.
         // Update the doc with new value
         var reportDocRef = db.collection("Report")
           .doc("v1")
@@ -4214,7 +4194,7 @@
             //   { "name": "<className> / tag", "refId":"<classId1>/uncategorized"  , "type": "cat / tag / org"  , "total": 100 },
 
             // get all the data in json array
-            let docItemJsonList = [];
+            // var promiseRevDocUpdate = [];
             querySnapshot.forEach((doc) => {
               let docItemJson = {};
 
@@ -4226,7 +4206,8 @@
 
               // console.log("invDocIdArr Ori")
               // console.log(invDocIdArr)
-              
+
+              // Remove the invId from the REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR
               let i = invDocIdArr.length
               while (i--) {
                 if (invDocIdArr[i] === invId) {
@@ -4234,20 +4215,7 @@
                   invDocTotalArr.splice(i, 1);
                 }
               }
-              // Remove the invId from the REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR
-              // for (i = 0; i < doc.data()[REV_DOC_ID_ARR].length; i++){
-              //   invDocIdIndex = invDocIdArr.indexOf(invId);
-              //   // invDocIdArr = doc.data()[REV_DOC_ID_ARR];
-              //   // invDocTotalArr = doc.data()[REV_DOC_TOTAL_ARR]
-              //   // console.log(i)
-              //   console.log("arra: "+invDocIdArr+ " invDocIdIndex: "+invDocIdIndex)
-              //   if (invDocIdIndex > -1) {
-              //     invDocIdArr = invDocIdArr.splice(invDocIdIndex, 1);
-              //     invDocTotalArr = invDocTotalArr.splice(invDocIdIndex, 1);
-              //   }
-              //   console.log("arra: "+invDocIdArr);
-              // }
-
+              // Get the new total after removing the inv id
               let newTotal = invDocTotalArr.reduce((a, b) => a + b, 0);
 
               // Construct the new data
@@ -4270,26 +4238,49 @@
                 .doc("v1")
                 .collection("Revenue")
                 .doc(doc.id);
+
               batch.set(revenueDocRef, revData, { merge: true });
-
-
+              
             });
 
+            // Button Update
+            document.getElementById('btnSaveModalUpdate').setAttribute('disabled', true);
+            document.getElementById('btnSaveModalUpdate').textContent = 'Confirming. Please wait ...'
+
+          }).then(() => {
+            
             // Commit the batch
-            batch.commit().then(() => {
-              // window.location.href='./view.html'
-              // $('#loadingModal').modal('hide');
+            var batchPromise = batch.commit();
+            // .then(() => {
+            //   // window.location.href='./view.html'
+            //   // $('#loadingModal').modal('hide');
 
-              // TODO:  
-              // Step 1: Get the ID of revDoc based on issuedDate, refId
-              // Step 2: Update the revDoc.
+            //   // TODO:  
+            //   // Step 1: Get the ID of revDoc based on issuedDate, refId
+            //   // Step 2: Update the revDoc.
 
-              updateRevenueDoc(reportList, invId);
+            //   // updateRevenueDoc(reportList, invId);
 
+            // });
 
-            });
+            return Promise.resolve(batchPromise);
 
-          }).catch((error) => {
+          }).then(() => {
+
+            document.getElementById('btnSaveModalUpdate').setAttribute('disabled', true);
+            document.getElementById('btnSaveModalUpdate').textContent = 'Saving. Please wait ...'
+            // Run update Revenue doc
+            return  Promise.resolve(updateRevenueDoc(reportList, invId));
+
+          }).then(() => {
+
+            document.getElementById('btnSaveModalUpdate').setAttribute('disabled', true);
+            document.getElementById('btnSaveModalUpdate').textContent = 'Almost there. Please wait ...'
+
+            // Reloading
+            return Promise.resolve(reload());
+          })
+          .catch((error) => {
               console.log("Error getting document:", error);
           });
 
@@ -4304,24 +4295,9 @@
         });
       }
 
-      // Older 
-      // docRef.set(data, { merge: true })
-      // .then(() => {
-      //   // 
-
-      //   transDocRef.set(transData, { merge: true })
-      //   .then(() => {
-
-      //     reload();
-          
-          
-      //   });
-
-      // });
-
     }
   
-    function updateRevenueDoc(reportList, invDocId){
+    async function updateRevenueDoc(reportList, invDocId){
   
       console.log("UpdateRevenueDoc ... ")
       // Step 1: Get the ID of revDoc based on issuedDate, refId
@@ -4426,9 +4402,7 @@
           });
 
           // Commit the batch
-          batchUpdate.commit().then(() => {
-
-          });
+          batchUpdate.commit();
 
           console.log("Step  2.2 Create a new reportDoc for each item in differenceList")
           // Step 2.2 Create a new reportDoc for each item in differenceList
@@ -4475,7 +4449,6 @@
                   // if (differenceList)
                     // reportDocRef.set(revData, { merge: true });
 
-                  
 
                 } 
                 else{
@@ -4496,7 +4469,7 @@
           console.log("Step  2.2: Commit new document ")
           // Create new document
           batchUpdateNew.commit().then(() => {
-            reload();
+            // reload();
           });
 
         }).catch((error) => {
@@ -4750,7 +4723,7 @@
       //   { "name": "<className1> / tagname1" , "refId": "<classId1> / uncategorized"   , "type": "cat / tag / org"   , "total": 100 },
       //   { "name": "Std 6 Math"    , "refId": "pdiejsawafasw"   , "type": "cat"   , "total": 300 },
       //   { "name": "Uncategorized" , "refId": "uncategorized"   , "type": "cat"   , "total": 300 },
-      //   { "name": "Tax"           , "refId": "tax"             , "type": "cat"   , "total": 20.352s },
+      //   { "name": "Tax"           , "refId": "tax"             , "type": "cat"   , "total": 20.352 },
       //   { "name": "Others"        , "refId": "other"           , "type": "cat"   , "total": 100 },
 
       //   { "name": "selangor"      , "refId": ""                , "type": "tag"   , "total": 300 },
@@ -5059,7 +5032,7 @@
 
     
     // Reload the data again 
-    function reload(){
+    async function reload(){
 
       var invdocRef = db.collection("Financial")
         .doc("v1")
@@ -5097,7 +5070,7 @@
             }
 
             // Hide loading modal
-            $('#loadingModal').modal('hide');
+            // $('#loadingModal').modal('hide');
             window.location.href='./view.html'
 
 
@@ -5353,42 +5326,36 @@
       
       // Save and Proceed - Save btn clicked
       $('#btnSaveModalUpdate').on('click', function (event) {
-        $('#loadingModal').modal('show');
+        // $('#loadingModal').modal('show');
         // Validate fields in editClientModal modal
         let accordionFieldsValid =  validateForm('accordionExample');
         
         UpdateInvoice();
       });
 
-
-      // // Save and Proceed - Save btn clicked
-      // $('#btnSaveModalUpdate').on('click', function (event) {
-      //   $('#loadingModal').modal('show');
-      //   // Validate fields in editClientModal modal
-      //   let accordionFieldsValid =  validateForm('accordionExample');
-        
-      //   CreateInvoice();
-      // });
-
-      
+  
       // Delete Invoice Modal
       $('#btnDelModalUpdate').on('click', function (e) {
 
-        $('#loadingModal').modal('show');
+        // $('#loadingModal').modal('show');
+        document.getElementById('btnDelModalUpdate').setAttribute('disabled', true);
+        document.getElementById('btnDelModalUpdate').textContent = 'Preparing. Please wait ...'
 
 
-        var docRef = db.collection("Financial")
+        var batch = db.batch();
+
+        var invDocRef = db.collection("Financial")
           .doc("v1")
           .collection("Invoice")
           .doc(invId);
 
-        var data = {
+        var invData = {
           [INV_DATE_DEL]:  new Date(),
           [INV_STATUS]: false,
         }
 
-        console.log("*Invoice Data...")
-        console.log(data)
+        // console.log("*Invoice Data...")
+        // console.log(invData)
 
         var transDocRef = db.collection("Financial")
             .doc("v1")
@@ -5400,22 +5367,110 @@
           [TRANS_STATUS]: false,
         }
 
-        console.log("Transaction Data...")
-        console.log(transData)
+        // console.log("Transaction Data...")
+        // console.log(transData)
 
-        docRef.set(data, { merge: true })
-        .then(() => {
-          // 
+        // Set the value of 'Invoice'
+        batch.set(invDocRef, invData, { merge: true });
 
-          transDocRef.set(transData, { merge: true })
+        // Set the value of 'Transaction'
+        batch.set(transDocRef, transData, { merge: true });
+
+        // Get the Report documents with the similar invoice id, and 
+        // remove the corresponding id in REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR.
+        // Update the doc with new value
+        let reportDocRef = db.collection("Report")
+          .doc("v1")
+          .collection("Revenue")
+          .where(REV_DOC_ID_ARR, "array-contains", invId)
+          .where(REV_STATUS, "==", true);
+
+        reportDocRef
+          .get()
+          .then((querySnapshot) => {
+            //   { "name": "<className> / tag", "refId":"<classId1>/uncategorized"  , "type": "cat / tag / org"  , "total": 100 },
+
+            const promiseRevDocUpdate = [];
+            // get all the data in json array
+            querySnapshot.forEach((doc) => {
+              let docItemJson = {};
+
+              // console.log("Rev Doc: " , doc.id,  doc.data()[REV_TYPE] , doc.data()[REV_MONTH])
+              // console.log('Before: ',  doc.data()[REV_TOTAL], doc.data()[REV_DOC_ID_ARR], doc.data()[REV_DOC_TOTAL_ARR]);
+
+              // Remove the invId from the REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR
+              let invDocIdIndex = doc.data()[REV_DOC_ID_ARR].indexOf(invId);
+              let invDocIdArr = doc.data()[REV_DOC_ID_ARR];
+              let invDocTotalArr = doc.data()[REV_DOC_TOTAL_ARR];
+
+              invDocIdArr.splice(invDocIdIndex, 1);
+              invDocTotalArr.splice(invDocIdIndex, 1);
+
+              // console.log('After: ', invDocTotalArr.reduce((a, b) => a + b, 0), invDocIdArr, invDocTotalArr);
+              // Construct the new data
+              let revData ={
+                // [REV_ID]: ,
+                // [REV_ADMIN_ID]: ,
+                // [REV_NAME]: document.getElementById("invBizDetails").textContent,                
+                // [REV_REF_ID]: document.getElementById("invClientName").textContent,
+                // [REV_TYPE]: ,
+                // [REV_MONTH]: document.getElementById("invTitle").value,
+                [REV_TOTAL]: invDocTotalArr.reduce((a, b) => a + b, 0), // Sum up the new total
+                [REV_DOC_ID_ARR]: invDocIdArr,
+                [REV_DOC_TOTAL_ARR]: invDocTotalArr,
+                [REV_DATE_EDIT]: new Date(),
+                // [REV_STATUS]: true
+              }
+
+              // Update it through batch 
+              let revenueDocRef = db.collection("Report")
+                .doc("v1")
+                .collection("Revenue")
+                .doc(doc.id);
+
+              revenueDocRef.set(revData, { merge: true });
+              // batch.set(revenueDocRef, revData, { merge: true });
+
+              promiseRevDocUpdate.push(revenueDocRef)
+   
+            })
+           
+            return Promise.all(promiseRevDocUpdate)
+
+          })
           .then(() => {
+            // Commit the batch
+            // console.log('Commit the inv and trans batch')
+            document.getElementById('btnDelModalUpdate').setAttribute('disabled', true);
+            document.getElementById('btnDelModalUpdate').textContent = 'Deleting. Please wait ...'
 
-            $('#loadingModal').modal('hide');
-            window.location = './'
- 
+            const promiseBatchCommit = batch.commit();
+            return Promise.resolve(promiseBatchCommit)
+          })
+          .then(() => {
+            // console.log('Redirect to home page')
+            func.showNotification('top','center', 'success', 'check_circle', "Item Deleted. Redirect to home page" );
+             $('#loadingModal').modal('hide');
+             window.location = './'
+          })
+          .catch((error) => {
+            console.log("Error getting document:", error);
           });
 
-        });
+        
+        // Update the data
+        // invDocRef.set(invData, { merge: true })
+        // .then(() => {
+  
+        //   transDocRef.set(transData, { merge: true })
+        //   .then(() => {
+
+        //     $('#loadingModal').modal('hide');
+        //     window.location = './'
+ 
+        //   });
+
+        // });
 
       
       });
@@ -5695,66 +5750,6 @@
 
   }
  
-
-  arry = ['b', 'a','a','a', 'c'];
-  console.log('')
-  console.log('')  
-  console.log('')
-  // index = arry.indexOf("a");
-  // console.log(arry.indexOf("a"))
-
-  let i = arry.length
-  while (i--) {
-    if (arry[i] === 'a') {
-      arry.splice(i, 1);
-    }
-  }
-
-  console.log(arry)
-
-  // console.log(arry.length)
-  // let index = null;
-  // while (arry.indexOf("a") > -1){
-  //   index = arry.indexOf("a");
-  //   // invDocIdArr = doc.data()[REV_DOC_ID_ARR];
-  //   // invDocTotalArr = doc.data()[REV_DOC_TOTAL_ARR]
-  //   console.log(index)
-  //   console.log(arry)
-  //   // console.log("arra: "+invDocIdArr+ " invDocIdIndex: "+invDocIdIndex)
-  //   if (index > -1) {
-  //     arry = arry.splice(index, 1);
-      
-  //   }else {
-  //     break;
-  //   }
-  // }
-
-
-  // for (i = 0; i < arry.length; i++){
-  //   index = arry.indexOf("a");
-  //   // invDocIdArr = doc.data()[REV_DOC_ID_ARR];
-  //   // invDocTotalArr = doc.data()[REV_DOC_TOTAL_ARR]
-  //   console.log(i)
-  //   console.log("index: "+index)
-  //   console.log(arry)
-  //   // console.log("arra: "+invDocIdArr+ " invDocIdIndex: "+invDocIdIndex)
-  //   if (index > -1) {
-  //     arry.splice(index, 1);
-  //     // break;
-  //   }
-  //   console.log(arry)
-  // }
-
-  // console.log(arry)
-
-  // let array = [1,2,'deleted',4,5,'deleted',6,7]
-  // let newarr = arry.filter(a => a !== 'a')
-
-    // console.log(newarr)
-
-  console.log('')
-  console.log('')  
-  console.log('')
   </script>
 
   
