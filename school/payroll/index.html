@@ -1102,8 +1102,8 @@
         } 
         else {
           querySnapshot.forEach((doc) => {
-            console.log("Payroll found");
-            console.log(doc.data());
+            // console.log("Payroll found");
+            // console.log(doc.data());
 
             renderPayroll(doc);
             
@@ -1129,7 +1129,9 @@
       let payroll_a = document.createElement('a');
       payroll_a.setAttribute('href', 'javascript:;');
       payroll_a.setAttribute('style', 'margin-right:1rem; font-size:14px');
-      payroll_a.setAttribute('onclick', 'loadPayslipFixed('+doc.data()[PAYROLL_DATE_START].seconds +', '+ doc.data()[PAYROLL_DATE_END].seconds+');');
+      // payroll_a.setAttribute('onclick', 'loadPayslipFixed('+doc.data()[PAYROLL_DATE_START].seconds +', '+ doc.data()[PAYROLL_DATE_END].seconds+');');
+      payroll_a.setAttribute('onclick', 'loadPayslipFixedBasedOnPayroll("'+doc.data()[PAYROLL_ID] +'");');
+
       payroll_a.textContent = doc.data()[PAYROLL_NAME]+" ("+doc.data()[PAYROLL_DOC_ID_ARR].length+")";;
 
       const payrollList = document.getElementById("payrollList");
@@ -1140,7 +1142,91 @@
 
     }
 
+    // Load payslip payroll
+    function loadPayslipFixedBasedOnPayroll(payrollId){
 
+      document.getElementById("card-load").style.display = "";
+
+      loadmore.style.visibility='hidden';
+      // Note: start/end is in seconds
+      // console.log(payrollId)
+
+      // Reload the payslip views
+      let studentItemList = document.getElementById('card-main').querySelectorAll('div.card-student-item');
+      // console.log(studentItemList);
+      studentItemList.forEach((row, index)=> {
+        row.remove();
+      })
+      
+      // Reset the latestInvoiceDoc
+      latestInvoiceDoc = null;
+
+      let docRef = db.collection("Financial")
+          .doc("v1")
+          .collection("Payroll")
+          .doc(payrollId)
+          // .where(PAY_PAYROLL_ID, "==", payrollId)
+          // .orderBy(TRANS_DATE, 'desc');
+          // .startAfter(latestInvoiceDoc || today)
+          // .limit(20);
+
+      docRef
+      .get()
+      .then((doc) => {
+
+        const promiseAll = [];
+
+        // console.log(doc.data())
+
+        if (doc.exists){
+
+          doc.data()[PAYROLL_DOC_ID_ARR].forEach((payslipId) => {
+
+            let transDocRef = db.collection("Financial")
+            .doc("v1")
+            .collection("Transaction")
+            .where(TRANS_DOC_ID, '==', payslipId)
+            .limit(1);
+
+            let transPromise = transDocRef.get();
+
+            promiseAll.push(transPromise);
+          })
+
+        }
+        
+
+        return Promise.all(promiseAll)
+      })
+      .then((snapshots) => {
+        
+        document.getElementById("card-load").style.display = "none";
+
+        if (snapshots != null && snapshots.size != 0){
+
+          snapshots.forEach((snapshot) => {
+
+            if (snapshot != null && snapshot.size != 0 ){
+              snapshot.forEach((doc) => {
+                // console.log(doc.id);
+                renderTransDoc(doc);
+              })
+            }
+          })
+        }else {
+          document.getElementById("noDataPlaceholder").style.display = '';
+
+        }
+
+      })
+      .catch((err) => {
+        document.getElementById("noDataPlaceholder").style.display = '';
+        console.log(err);
+      });
+
+    }
+
+    
     // Load payslip based on selected date range
     function loadPayslipFixed(start, end){
 
@@ -1216,6 +1302,7 @@
           .where(TRANS_SENDER_ID, "==", tutorId)
           .where(TRANS_TYPE, "==", TRANS_TYPE_PAY)
           .where(TRANS_STATUS, "==", true)
+          .orderBy(TRANS_DOC_STATUS, 'asc')
           .orderBy(TRANS_DATE, 'desc')
           .startAfter(latestInvoiceDoc || today)
           .limit(25);
