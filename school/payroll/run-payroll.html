@@ -2098,8 +2098,7 @@
             }
           }, cb);
 
-          cb(start, end);
-
+          cb(startDate_temp, endDate_temp);
 
           // Enable Step 2
           enableStep2();
@@ -2325,6 +2324,10 @@
           epf: epf,
           socso: socso,
           payStatus: PAY_STATUS_NEW,
+          title: 'Payslip For The Month Of '+ payrollDateMonth,
+          payNo: '-',
+          date: payrollDate,
+          
         }
 
         // Generate placeholder new employee
@@ -2684,7 +2687,19 @@
             acNo: doc.data()[PAY_RECEIVER_AC_NO],
             epf: doc.data()[PAY_RECEIVER_EPF],
             socso: doc.data()[PAY_RECEIVER_SOCSO],
-            payStatus: doc.data()[PAY_PAY_STATUS]
+            payStatus: doc.data()[PAY_PAY_STATUS],
+            title: doc.data()[PAY_TITLE],
+            payNo:doc.data()[PAY_NUMBER],
+            date: convertDate(doc.data()[PAY_DATE].toDate()),
+          }
+
+          // Convert firebase timestamp to DD/MM/YYY
+          function convertDate(inputFormat) {
+            function pad(s) { return (s < 10) ? '0' + s : s; }
+
+            var d = new Date(inputFormat)
+
+            return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/')
           }
 
           // Generate placeholder for each active tutor. If exist, ignore.
@@ -2883,6 +2898,7 @@
 
         querySnapshot.forEach((doc) => {
 
+
           // Create data modal for Tutor Module
           let payslipData = {
             tutorId: doc.data()[TUTOR_TUTOR_ID],
@@ -2893,6 +2909,9 @@
             epf: doc.data()[TUTOR_EPF],
             socso: doc.data()[TUTOR_SOCSO],
             payStatus: PAY_STATUS_NEW,
+            title: 'Payslip For The Month Of '+ payrollDateMonth,
+            payNo: '-',
+            date: payrollDate,
           }
 
           // Generate placeholder for each active tutor. If exist, ignore.
@@ -3990,7 +4009,8 @@
       titleSpan.textContent = 'Payslip Title';
       titleSpan.setAttribute('style', 'font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;');
       let titleP = document.createElement('p');
-      titleP.textContent = 'Payslip For The Month Of ' + payrollDateMonth;
+      // titleP.textContent = 'Payslip For The Month Of ' + payrollDateMonth;
+      titleP.textContent = payslipData.title;
       titleP.setAttribute('name', 'title')
       let titleDiv = document.createElement('div');
       titleDiv.className = 'col-md-12';
@@ -4004,7 +4024,8 @@
       refNoSpan.textContent = 'Payslip No';
       refNoSpan.setAttribute('style', 'font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;');
       let refNoP = document.createElement('p');
-      refNoP.textContent = '-';
+      // refNoP.textContent = '-';
+      refNoP.textContent =  payslipData.payNo;
       refNoP.setAttribute('name', 'refNo')
       let refNoDiv = document.createElement('div');
       refNoDiv.className = 'col-md-12';
@@ -4018,7 +4039,8 @@
       dateSpan.textContent = 'Date';
       dateSpan.setAttribute('style', 'font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;');
       let dateP = document.createElement('p');
-      dateP.textContent = payrollDate;
+      // dateP.textContent = payrollDate;
+      dateP.textContent =  payslipData.date;
       dateP.setAttribute('name', 'date')
       let dateDiv = document.createElement('div');
       dateDiv.className = 'col-md-12';
@@ -6619,16 +6641,24 @@
       let payDocId = '';
       let transDocId = '';
 
+      // Local var to indicate if Create New Payslip(create) or Updated an existing payslip(update)
+      let updateType = '';
+
       let payslipDocRef = db.collection("Financial")
         .doc("v1")
         .collection("Payslip")
         .where(PAY_PAYROLL_ID, "==", payrollId)
         .where(PAY_RECEIVER_ID, "==", cardId);
 
-
       payslipDocRef
       .get()
       .then((querySnapshot) => {
+
+        // Update button status
+        document.getElementById('btnConfirmEmployeeModalUpdate').setAttribute('disabled', true);
+        document.getElementById('btnConfirmEmployeeModalUpdate').textContent = "Almost done. Please wait ..."
+
+        const promiseAll = []; 
 
         let payrollDocRef = db.collection("Financial")
           .doc("v1")
@@ -6738,29 +6768,32 @@
           console.log(payrollData);
 
           // Create Payslip
-          payslipDocRef1.set(data, { merge: true })
-          .then(() => {
+          // payslipDocRef1.set(data, { merge: true })
+          // .then(() => {
             
-            // Create Transaction
-            transDocRef.set(transData, { merge: true })
-            .then(() => {
+          //   // Create Transaction
+          //   transDocRef.set(transData, { merge: true })
+          //   .then(() => {
 
-              // Update Payroll
-              payrollDocRef.set(payrollData, { merge: true })
-              .then(() => {
-                func.showNotification('top','center', 'success', 'check_circle', "Created new payslip." );
-                SetPayslipUpdateStatus(true, cardId);
-              });
+          //     // Update Payroll
+          //     payrollDocRef.set(payrollData, { merge: true })
+          //     .then(() => {
+          //       func.showNotification('top','center', 'success', 'check_circle', "Created new payslip." );
+          //       SetPayslipUpdateStatus(true, cardId);
+          //     });
               
-            });
+          //   });
 
             
-          });
-          
+          // });
 
+          promiseAll.push(payslipDocRef1.set(data, { merge: true }));
+          promiseAll.push(transDocRef.set(transData, { merge: true }));
+          promiseAll.push(payrollDocRef.set(payrollData, { merge: true }));
+          
+          updateType = 'create';
         } 
-        else 
-        {
+        else {
           querySnapshot.forEach((doc) => {
 
             console.log("Payslip found, update exisiting payslip.");
@@ -6876,32 +6909,60 @@
             console.log("Payroll Data...")
             console.log(payrollData);
 
-            // Update Payslip
-            payslipDocRef1.set(data, { merge: true })
-            .then(() => {
-              
-              // Create Transaction
-              transDocRef.set(transData, { merge: true })
-              .then(() => {
-
-                // Update Payroll
-                payrollDocRef.set(payrollData, { merge: true })
-                .then(() => {
-                  func.showNotification('top','center', 'success', 'check_circle', "Updated payslip." );
-                  SetPayslipUpdateStatus(true, cardId);
-                });
-                
-              });
-
-              
-            });
-
-
             
+            // Update Payslip
+            // payslipDocRef1.set(data, { merge: true })
+            // .then(() => {
+              
+            //   // Create Transaction
+            //   transDocRef.set(transData, { merge: true })
+            //   .then(() => {
+
+            //     // Update Payroll
+            //     payrollDocRef.set(payrollData, { merge: true })
+            //     .then(() => {
+            //       func.showNotification('top','center', 'success', 'check_circle', "Updated payslip." );
+            //       SetPayslipUpdateStatus(true, cardId);
+            //     });
+                
+            //   });
+
+              
+            // });
+
+            promiseAll.push(payslipDocRef1.set(data, { merge: true }));
+            promiseAll.push(transDocRef.set(transData, { merge: true }));
+            promiseAll.push(payrollDocRef.set(payrollData, { merge: true }));
+
+            updateType = 'update';
           });
         }
+
+        return Promise.all(promiseAll);
+
  
-      }).catch((error) => {
+      })
+      .then(() => {
+
+        // Notification
+        if (updateType == 'create'){
+          func.showNotification('top','center', 'success', 'check_circle', "Created new payslip." );
+        } else if (updateType == 'update'){
+          func.showNotification('top','center', 'success', 'check_circle', "Updated payslip." );
+        }
+        
+        // Update button status
+        document.getElementById('btnConfirmEmployeeModalUpdate').removeAttribute('disabled');
+        document.getElementById('btnConfirmEmployeeModalUpdate').textContent = "Confirm";
+
+        // Hide the model
+        $('#confirmEmployeeModal').modal('hide');
+
+        // Set the card status back to done.
+        SetPayslipUpdateStatus(true, cardId);
+
+      })
+      .catch((error) => {
           console.log("Error getting document:", error);
       });
       
@@ -7279,10 +7340,14 @@
           epf: inCustomEPF,
           socso: inCustomSocso,
           payStatus: PAY_STATUS_NEW,
+          title: 'Payslip For The Month Of '+ payrollDateMonth,
+          payNo: '-',
+          date: payrollDate,
         }
 
         // Generate placeholder new employee
         renderActiveTutorPlaceholder(payslipData);
+          
         // Generate simple empty payslip
         renderTableTemplate(inCustomEmployeeId);
 
@@ -7357,6 +7422,17 @@
         document.getElementById("editPayslipEmployeeTitle").value = title;
         document.getElementById("editPayslipEmployeeRefNo").value = refNo;
         document.getElementById("editPayslipEmployeeDate").value = date;
+
+        // Re-init daterangepicker
+        $('#editPayslipEmployeeDate').daterangepicker({
+          singleDatePicker: true,
+          showDropdowns: true,
+          locale: {
+            format: 'DD/MM/YYYY'
+          },
+        }, function(start, end, label) {
+        });
+
         document.getElementById("editPayslipEmployeeName").value = name;
         document.getElementById("editPayslipEmployeePosition").value = position;
         document.getElementById("editPayslipEmployeeEPF").value = epf;
@@ -7692,6 +7768,9 @@
         // removeElementBasedOnId(EMPLOYEE_CARD_ID);
         // alert('Created Payslip for this Teacher')
 
+        document.getElementById('btnConfirmEmployeeModalUpdate').setAttribute('disabled', true);
+        document.getElementById('btnConfirmEmployeeModalUpdate').textContent = "Updating. Please wait ..."
+
         CreatePayslip(EMPLOYEE_CARD_ID);
 
       });
@@ -7790,8 +7869,6 @@
         payrollDate = start.format('DD/MM/YYYY');
         payrollDateMonth = start.format('MMMM YYYY');
 
-        
-
     }
 
     $('input[name="daterange"]').daterangepicker({
@@ -7824,6 +7901,8 @@
         format: 'DD/MM/YYYY'
       },
     }, function(start, end, label) {
+
+      // Substitue the default payroll date(start date of the payroll period) to a newer value
       payrollDate = start.format('DD/MM/YYYY');
       payrollDateMonth = start.format('MMMM YYYY');
       // var years = moment().diff(start, 'years');
