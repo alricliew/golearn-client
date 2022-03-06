@@ -1073,8 +1073,7 @@
         cell2.innerHTML = rid;
         let invUrl_a = document.createElement('a');
         let encodeId = encode64(rid);
-        invUrl_a.href = 'http://127.0.0.1:8080/school/invoice/create-invoice.html?cid=' +encodeId ;
-        
+        invUrl_a.href = 'https://app.golearn.com.my/school/invoice/create-invoice.html?cid=' +encodeId ;
         invUrl_a.textContent = 'Create New';
         invUrl_a.setAttribute('class', 'btn btn-primary btn-sm btn-round');
         invUrl_a.setAttribute('target', '_blank');
