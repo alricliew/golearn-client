@@ -612,6 +612,12 @@
       // Clear invoice view
       clearInvoice();
 
+      // Clear noDataPlaceholder
+      document.getElementById("noDataPlaceholder").style.display = 'none';
+
+      // Show loading
+      document.getElementById("card-load").style.display = "";
+
       // Add back he loadmore click handler
       sortInvoiceLoadmore.addEventListener('click', sortInvoiceLoadmoreHandleClick );
 
@@ -647,8 +653,8 @@
 
         document.getElementById("card-load").style.display = "none";
         
-        if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0) && latestInvoiceDoc == null){
-          document.getElementById("noDataPlaceholder").style.display = 'initial';
+        if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0)){
+          document.getElementById("noDataPlaceholder").style.display = '';
         }
 
         // Session Storage data
@@ -696,6 +702,10 @@
     }
 
     function sortLoadMore() {
+
+      // Show loading
+      document.getElementById("card-load").style.display = "";
+
       let statusArr = [];
       if (draft) statusArr.push(TRANS_INV_STATUS_DRAFT);
       if (unpaid) statusArr.push(TRANS_INV_STATUS_NEW);
@@ -722,7 +732,7 @@
         document.getElementById("card-load").style.display = "none";
         
         if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0) && latestInvoiceDoc == null){
-          document.getElementById("noDataPlaceholder").style.display = 'initial';
+          document.getElementById("noDataPlaceholder").style.display = '';
         }
 
         // Session Storage data
