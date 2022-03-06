@@ -1226,57 +1226,12 @@
 
     var allItemsArr = [];
 
-		// var db = firebase.firestore();
-		// db.settings({ timestampsInSnapshots: true });
-
-
     var batch = db.batch();
     var batchUpdate = db.batch();
 
-    // // Set the nav name and global var, if user already login and have session Storage 
-    // var tutorInfoObj = null;
-    // if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
-    //   // Do nothing
-    // }
-    // else{
-    //   // Set the nav user name
-    //   tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
-    //   document.getElementById("user").textContent = tutorInfoObj.name;
-
-    //   current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
-    //   // current_email, 
-    //   // current_phone, 
-    //   current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
-    //   current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
-    //   current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
-    //   current_accountStatus = tutorInfoObj.accountStatus; // bool
-    //   currentYearsExperience = tutorInfoObj.yearsExperience; // number
-    //   currentTutoringExperience = tutorInfoObj.tutoringExperience;
-    //   currentTutoringApproach = tutorInfoObj.tutoringApproach;
-    //   currentQualification= tutorInfoObj.qualification;
-      
-    //   current_aweburl = tutorInfoObj.aWebUrl
-
-    // }
-
-		// firebase.auth().onAuthStateChanged(function(user){
-      
-		// 	if(!user){
-    //     // Return to login if user does not exist.
-		// 		window.location.href = "../login.html"
-		// 	}else{
-    //     // if the displayName is null, it means user register using Phone
-    //     if (firebase.auth().currentUser.displayName == null ){
-    //         tutorId = firebase.auth().currentUser.phoneNumber;
-    //     }else{
-    //       tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-    //     }
-    //     loadUserInfo(tutorId);
-    //     loadUserSettings(tutorId);
-
-
-		// 	}
-		// });
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var clientId = url.searchParams.get("cid");
 
     // Initialization
     AuthCheck();
@@ -1284,17 +1239,33 @@
     // Page Specific Initialization
     function loadPageInitFunc(){
       
-      // $('#loadingModal').modal('show');
-
       // Load Tutor Settings
       loadUserSettings();
 
-            
       // Enable Add Student Modal
       document.getElementById("invAllStudentLink").setAttribute('data-target', '#addStudentModal');
       
       // Enable Save Inv Modal
       document.getElementById("btnSave").removeAttribute('disabled');
+
+      // Auto Assign Client if available 
+      if (clientId == null || clientId == ""){
+        // console.log('Null or empty cid ' )
+      }
+      else {
+
+        try {
+          let decodeId = decode64(clientId);
+          // console.log(decodeId);
+          autoAssignClient(decodeId);
+
+        }
+        catch(err) {
+          console.log('Error: ' + err)
+          window.location = "./";
+        }
+      }
+
     }
 
     // Load Tutor Settings
@@ -1425,6 +1396,67 @@
       
     }
 
+    // Auto Assign Clients
+    function autoAssignClient(decodeId) {
+
+      $('#editClientModal').modal('show');
+
+      // Disable Buttons first 
+      document.getElementById("inClientName").setAttribute('readonly', true);
+      document.getElementById("inClientContact").setAttribute('readonly', true); 
+      document.getElementById("btnEditClientModalUpdate").setAttribute('disabled', true); 
+      document.getElementById("btnEditClientModalUpdate").textContent = "Loading. Please wait..."; 
+
+      let clientDocRef = db.collection("Class")
+        .doc("v1")
+        .collection("Student")
+        .where(STU_ADMIN_ID, "==", tutorId)
+        .where(STU_GUR_ID, "==", decodeId)
+        .where(STU_STATUS_ADMIN, "==", true)
+        .limit(1);
+
+      clientDocRef.get()
+      .then((querySnapshot) => {
+
+        if (querySnapshot != null && querySnapshot.docs.length > 0) {
+
+          querySnapshot.forEach((doc) => {
+
+            ID = decodeId;
+            NAME = doc.data()[STU_GUR_NAME];
+            PHONE = doc.data()[STU_GUR_PHONE];
+            EMAIL = doc.data()[STU_GUR_EMAIL];
+            ADDRESS = doc.data()[STU_GUR_ADDR];
+
+            // Load Desription 
+            document.getElementById("inClientId").setAttribute('value', ID);
+            document.getElementById("inClientName").value = NAME;
+            document.getElementById("inClientContact").value = PHONE;
+            intlTelInput(document.getElementById("inClientContact"));
+            
+            document.getElementById("inClientEmail").value = EMAIL;
+            document.getElementById("inClientAddr").value = ADDRESS;
+
+            // Disable Buttons first 
+            document.getElementById("inClientName").removeAttribute('readonly');
+            document.getElementById("inClientContact").setAttribute('readonly', true); 
+            document.getElementById("btnEditClientModalUpdate").removeAttribute('disabled'); 
+            document.getElementById("btnEditClientModalUpdate").textContent = "Confirm"; 
+
+          });
+        } else {
+          console.log('Client Not Found')
+        }
+    
+      })
+      .then(() => {
+        
+      })
+      
+
+
+    }
+
 
     //---------- Init All Admin's Student details ----------//
     // Lesson Load More Button - Init
@@ -1546,185 +1578,8 @@
       add_student_modal_container.appendChild(stuDetail_div)
     }
 
-    // Tutor Specific
-    function loadUserInfo(tutorId){
-      // Tutor Id must be a phone with +60, no spacing or other chars
-      var docRef = db.collection("Tutor").doc(tutorId);
-      
-
-      // docRef.get().then((doc) => {
-      docRef.onSnapshot((doc) => {
-
-        if (doc.exists) {
-          // console.log("Document data:", doc.data());
-
-          current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
-          // current_email, 
-          // current_phone, 
-          current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
-          current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
-          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
-          current_accountStatus = doc.data().accountStatus; 
-          currentYearsExperience = doc.data().yearsExperience; // number
-          currentTutoringExperience = doc.data().tutoringExperience;
-          currentTutoringApproach = doc.data().tutoringApproach;
-          currentQualification= doc.data().qualification;
-          current_mon_8am = doc.data().tMon8am;
-          current_mon_12pm= doc.data().tMon12pm; 
-          current_mon_3pm = doc.data().tMon3pm;  
-          current_mon_6pm = doc.data().tMon6pm;  
-          current_tue_8am = doc.data().tTue8am;  
-          current_tue_12pm= doc.data().tTue12pm;  
-          current_tue_3pm = doc.data().tTue3pm;  
-          current_tue_6pm = doc.data().tTue6pm;  
-          current_wed_8am = doc.data().tWed8am;  
-          current_wed_12pm= doc.data().tWed12pm;  
-          current_wed_3pm = doc.data().tWed3pm;  
-          current_wed_6pm = doc.data().tWed6pm;  
-          current_thu_8am = doc.data().tThu8am;  
-          current_thu_12pm= doc.data().tThu12pm;  
-          current_thu_3pm = doc.data().tThu3pm;  
-          current_thu_6pm = doc.data().tThu6pm;  
-          current_fri_8am = doc.data().tFri8am;  
-          current_fri_12pm= doc.data().tFri12pm;  
-          current_fri_3pm = doc.data().tFri3pm;  
-          current_fri_6pm = doc.data().tFri6pm; 
-          current_sat_8am = doc.data().tSat8am;  
-          current_sat_12pm= doc.data().tSat12pm;  
-          current_sat_3pm = doc.data().tSat3pm;  
-          current_sat_6pm = doc.data().tSat6pm;  
-          current_sun_8am = doc.data().tSun8am;  
-          current_sun_12pm= doc.data().tSun12pm;  
-          current_sun_3pm = doc.data().tSun3pm;  
-          current_sun_6pm = doc.data().tSun6pm; 
-
-          // Store data to sessionStorage
-          var tutorDataObj = {
-            [NAME_KEY] : doc.data().name,
-            [EMAIL_KEY] : doc.data().email,
-            [PHONE_KEY] : doc.data().phone,
-            [AGE_KEY] : doc.data().age,
-            [GENDER_KEY] : doc.data().gender,
-            [ADDRESS_1_KEY] :doc.data().address1,
-            [ADDRESS_2_KEY] :doc.data().address2,
-            [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
-            [ADDRESS_STATE_KEY] :doc.data().addressState,
-            [IMAGE_KEY] : doc.data().imgUrl,
-            // [NRIC_KEY] : doc.data().name,
-            [RATING_KEY] : doc.data().rating,
-            [RATING_TIMES_KEY] : doc.data().ratingTimes,
-            [RATING_FINAL_KEY] : doc.data().ratingFinal,
-            [PROFILE_STATUS_KEY] : doc.data().profileStatus,
-            // [CHECK_HOMETUTOR_KEY] : doc.data().name,
-            // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
-            // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
-            // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
-            [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
-            [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
-            [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
-            [QUALIFICATION_KEY] : doc.data().qualification,
-            [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
-            [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
-            [AGENT_KEY] : doc.data().agent,
-            [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
-            
-            [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
-            [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
-            [CHECK_GROUP_KEY] : doc.data().modeGroup,
-            [CHECK_ONLINE_KEY] : doc.data().modeOnline,
-            [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
-            [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
-            [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
-            [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
-            [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
-            [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
-
-            [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
-            [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
-            [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
-            [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
-            [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
-            [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
-            [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
-            [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
-            [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
-            [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
-            [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
-            [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
-            [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
-            [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
-            [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
-            [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
-            [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
-            [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
-            [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
-            [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
-            [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
-            [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
-            [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
-            [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
-            [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
-            [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
-            [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
-            [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
-            // Create a placeholder for aWebUrl. This param can only initiated by admin
-            // manually through https://golearn.com.my/admin/admin-portal.html
-            [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
-            [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
-            [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
-            [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
-            [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
-            [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
-            [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
-          }
-
-          // Set tutorInfoObj as sessionStorage
-          sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
-
-          // Set the nav user name and public profile link
-          document.getElementById("user").textContent = doc.data().name;
-
-          if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
-            document.getElementById("navPublicProfile").href = "#"  ;
-            document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
-          } else{
-            document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
-            document.getElementById("navPublicProfile").target = "_blank";
-          }
-          
-          if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-            document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
-            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
-            document.getElementById("btnActivateAccount").target = "_blank";
-          }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-            document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
-            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
-            document.getElementById("btnActivateAccount").target = "_blank";
-          }else {
-            let activationNavItem = document.querySelector('#activationNavItem');
-            let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
-            // console.log(activationNavItemIsExist)
-            // Remove NavItem if exist
-            if (activationNavItemIsExist){
-              activationNavItem.parentNode.removeChild(activationNavItem);
-            }else{
-              // Do nothing
-            }
-          }
-        } else {
-           // Do nothing 
-        }
-      });
-
-    };
-
     // Load client's active classes
     function loadAllClientClassInfo(clientId){
-
-      // Clear the preview
-      // clearItems();
 
       // Clear the existing invoice tables
       clearItems();
@@ -4790,11 +4645,22 @@
       });
 
       $('#inClientContact').on('change', function(){
-        if( $(this).val().length === 0 || !itiPhone.isValidNumber()|| $('#inClientName').val().length === 0) {
+
+        // Enable or disable btnEditClientModalUpdate Button
+        if( $(this).val().length === 0 || !itiPhone.isValidNumber() || $('#inClientName').val().length === 0) {
           $('#btnEditClientModalUpdate').prop('disabled', true);
-        }else{
+        } 
+        else{
           $('#btnEditClientModalUpdate').prop('disabled', false);
         }
+
+        // Set inClientId (do not depend on client name)
+        if( $(this).val().length === 0 || !itiPhone.isValidNumber()) {
+        } 
+        else{
+          document.getElementById("inClientId").setAttribute('value', itiPhone.getNumber() );
+        }
+
       });
 
 
@@ -4814,6 +4680,9 @@
         // Init Phone Message
         document.getElementById("valid-msg").className = 'hide';
         document.getElementById("error-msg").className = 'hide';
+
+        // Button
+        document.getElementById("btnEditClientModalUpdate").textContent = "Confirm"; 
         
       });
 
@@ -4857,7 +4726,6 @@
         
 		  });
       
-
       // Save and Proceed - Save btn clicked
       $('#btnSaveModalUpdate').on('click', function (event) {
         $('#loadingModal').modal('show');
@@ -4883,39 +4751,6 @@
       let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
       return newHeight;
     }
-
-    // let textarea = document.querySelector(".resize-ta");
-    // textarea.addEventListener("keyup", () => {
-    //   textarea.style.height = calcHeight(textarea.value) + "px";
-    // });
-
-	  function editClassFunction(elem){
-      // Get attribute and 
-      if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_ALL_DOCS_KEY)) == null ){
-        console.log("Error: Impossible to reach this state");
-        // Because this func only trigger when there's active class loaded
-        return;
-      }else{
-
-        let classObj = null;
-        let allClassList = null;
-
-        // Set the fields
-        allClassList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_ALL_DOCS_KEY));
-        // allClassList = classObj[SESSION_STORAGE_ALL_DOCS_KEY];
-        allClassList.forEach((item) => {
-          if (item.id === elem.getAttribute('data-id')){
-            sessionStorage.setItem(SESSION_STORAGE_CLASS_CURRENT_DOC_KEY, JSON.stringify(item));
-            sessionStorage.setItem(SESSION_STORAGE_CLASS_LOAD_KEY, true);
-          }
-          // window.location = './edit-class.html?id='+elem.getAttribute('data-id');
-          window.location = './edit-class.html?id=';
-
-          // console.log(item);
-        });
-        
-      }
-		}
 
   </script>
 

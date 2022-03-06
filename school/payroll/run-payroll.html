@@ -6966,11 +6966,6 @@
           console.log("Error getting document:", error);
       });
       
-
-
-      
-
-
     }
 
     // Remove tutor's payslip, transaction and payroll
@@ -7862,6 +7857,7 @@
         // $('input[name="daterange"]').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
         // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         // console.log(new Date(start), new Date(end), label);
+
         payrollStart = new Date(start);
         payrollEnd = new Date(end);
         payrollName = start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY');
@@ -7887,8 +7883,6 @@
           'Next Month': [moment().add(1, 'month').startOf('month'), moment().add(1, 'month').endOf('month')]
         }
     }, cb);
-
-
     
     cb(start, end);
 
