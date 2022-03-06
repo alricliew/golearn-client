@@ -610,8 +610,8 @@ const TRANS_STATUS = "status";
 //  Invoice
 const INV_ID = "id";
 const INV_TRANS_ID = "transId";
-const INV_SENDER_ID = "idS"; // main
-const INV_RECEIVER_ID = "idR";
+const INV_SENDER_ID = "idS"; // PK
+const INV_RECEIVER_ID = "idR"; // PK
 const INV_SENDER_NAME = "nameS";
 const INV_SENDER_DETAILS = "descS";
 const INV_SENDER_IMG_URL = "logoUrl";
@@ -719,6 +719,22 @@ const NUM_TYPE = "type";
     const NUM_TYPE_PROFILE_VIEW = "profile_view";
 const NUM_VALUE = "value";
 const NUM_DATE_EDIT = "dateEdit";
+
+// Report (Invoice Check)
+const INV_CHECK_ID = "id";
+const INV_CHECK_ADMIN_ID = "adminId"; // PK
+const INV_CHECK_MONTH = "month"; // Format: YYYYMM
+const INV_CHECK_INV_ID_ARR = "invIdArr";
+const INV_CHECK_INV_NO_ARR = "invNoArr";
+const INV_CHECK_INV_RECEIVER_ID_ARR = "invRIdArr";
+const INV_CHECK_INV_RECEIVER_NAME_ARR = "invRNameArr";
+const INV_CHECK_INV_STATUS_ARR = "invStatusArr";
+const INV_CHECK_INV_TOTAL_ARR = "invTotalsArr";
+const INV_CHECK_GUR_ID_ARR = "gurIdArr";
+const INV_CHECK_GUR_NAME_ARR = "gurNameArr";
+// const INV_CHECK_STU_ID_ARR = "stuIdArr";
+// const INV_CHECK_STU_NAME_ARR = "stuNameArr";
+const INV_CHECK_DATE_EDIT = "dateEdit";
 
 //  Review (Review > v1 > Review)
 const REVIEW_ID = "id";
