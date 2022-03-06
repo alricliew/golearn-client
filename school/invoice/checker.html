@@ -732,7 +732,7 @@
             .where(INV_ISSUE_DATE, ">=", new Date(startDate))
             .where(INV_ISSUE_DATE, "<=", new Date(endDate))
             .where(INV_STATUS, "==", true)
-            .limit(5)
+            // .limit(5)
             .get();
 
           promiseAll.push(invDocRef);
@@ -744,7 +744,7 @@
             .where(STU_ADMIN_ID, "==", tutorId)
             .where(STU_STATUS_ADMIN, "==", true)
             .orderBy(STU_GUR_NAME, 'asc')
-            .limit(5)
+            // .limit(5)
             .get();
 
           promiseAll.push(clientDocRef);
@@ -1255,7 +1255,7 @@
           .where(INV_ISSUE_DATE, ">=", new Date(startDate))
           .where(INV_ISSUE_DATE, "<=", new Date(endDate))
           .where(INV_STATUS, "==", true)
-          .limit(5)
+          // .limit(5)
           .get();
 
         // Get all the parents & student 
@@ -1265,7 +1265,7 @@
           .where(STU_ADMIN_ID, "==", tutorId)
           .where(STU_STATUS_ADMIN, "==", true)
           .orderBy(STU_GUR_NAME, 'asc')
-          .limit(5)
+          // .limit(5)
           .get();
 
           
