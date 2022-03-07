@@ -869,18 +869,14 @@
           document.getElementById("noDataPlaceholder2").style.display = 'none';
 
         document.getElementById("matchedInvNo").textContent = invIdArr_list1.length;
-        document.getElementById("clientNo").textContent = uniqGurIdArr_list2.length;
+        document.getElementById("clientNo").textContent = uniqGurIdArr.length;
         document.getElementById("unmatchedInvNo").textContent = invIdArr_list3.length;
 
         // Render views
-
         // renderList1(invIdArr, invRIdArr, invRefNoArr, invRNameArr, invStatusArr, invTotalsArr, list1);
         renderList1_1(invIdArr_list1, invRIdArr_list1, invRefNoArr_list1, invRNameArr_list1, invStatusArr_list1, invTotalsArr_list1);
-
         // renderList2(uniqGurIdArr, uniqGurName, list2);
-
         renderList2_1(uniqGurIdArr_list2, uniqGurNameArr_list2);
-
         // renderList3(invIdArr, invRIdArr, invRefNoArr, invRNameArr, invStatusArr, invTotalsArr, list3);
         renderList3_1(invIdArr_list3, invRIdArr_list3, invRefNoArr_list3, invRNameArr_list3, invStatusArr_list3, invTotalsArr_list3);
 
@@ -1399,7 +1395,7 @@
           document.getElementById("noDataPlaceholder2").style.display = 'none';
 
         document.getElementById("matchedInvNo").textContent = invIdArr_list1.length;
-        document.getElementById("clientNo").textContent = uniqGurIdArr_list2.length;
+        document.getElementById("clientNo").textContent = uniqGurIdArr.length;
         document.getElementById("unmatchedInvNo").textContent = invIdArr_list3.length;
 
         // Render views
