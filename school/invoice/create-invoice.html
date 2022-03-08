@@ -34,9 +34,8 @@
   <!-- Date Picker -->
   <link href="../../assets/css/mc-calendar.min.css" rel="stylesheet"/>
   <link href="../../assets/css/intlTelInput.css" rel="stylesheet" >
-  <!-- Rich Text Editor Init -->
-  <!-- <script src="https://cdn.tiny.cloud/1/5dm77axvxwkliu22hg2ejlaqh4s246uo83bz98ogo4c3yeev/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
- 
+  <!-- Tag input -->
+  <link href="../../assets/css/tagsinput.css" rel="stylesheet" type="text/css">
   <!-- TinyMce -->
   <script src="../../assets/js/plugins/tinymce/tinymce.min.js" type="text/javascript"></script>
   <!-- Tinymce init -->
@@ -243,7 +242,7 @@
 
 <body>
 
-  <div class="wrapper ">
+  <div class="wrapper">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../../assets/img/sidebar-3.jpg">
       <div class="logo">
         <a href="../" class="simple-text logo-mini" style="padding: 0.5rem">
@@ -412,6 +411,168 @@
       <!-- End Navbar -->
 
 			<!-- Modal Start -->
+      <!-- Edit Item's Title and Tag -->
+      <div class="row">
+        <div class="modal fade" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="editItemModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editItemModalTitle">Edit Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnEditItemModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="editItemModalBody">
+
+                <div id="inItemId" value=""></div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Item Title* <span id="countName" style="color: grey; margin-left: 1rem;">0/40</span></span> 
+                      <input type="text" class="form-control" id="inItemTitle" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
+                    </div>
+                  </div>
+        
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Category</span>
+                      <span class="tooltiptext-trigger">? 
+                        <span class="tooltiptext-general">
+                          <h6>Category</h6>
+                          <p>Assign a category to this item. A non-class item will be categorized as 'Uncategorized' by default.</p>
+                        </span> 
+                      </span>                  
+                      <span style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0; margin-left: 5px;">
+                        <a href="javascript:;" data-target="#addCategoryModal" data-toggle="modal" data-dismiss="modal">Create New</a>
+                      </span>
+
+                      <select class="form-control" name="tutor_course[]" id="category_drop" data-compulsory="false" oninput="this.className = 'form-control'">
+                        <!-- <option value="uncategorized">Uncategorized</option> -->
+                        <!-- <option value="1" >Pre-School</option>
+                        <option value="2" >Lower Primary (Tahun 1-3)</option>
+                        <option value="3" >Upper Primary (UPSR)</option>
+                        <option value="4" >Form 1-3 (PT3)</option>
+                        <option value="5" >Form 4-5 (SPM)</option>
+                        <option value="6" >Primary (International Syllabus)</option>
+                        <option value="7" >Lower Secondary (International Syllabus)</option>
+                        <option value="8" >Year 10-11 (IGCSE)</option>
+                        <option value="9" >Others</option> -->
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+
+                    <div class="form-group">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Tag</span>
+                      <span class="tooltiptext-trigger">? 
+                        <span class="tooltiptext-general">
+                          <h6>Tag</h6>
+                          <p>Assign up to 5 tag keywords to identify this item, and receive better breakdowns in your analysis reports.</p>
+                        </span> 
+                      </span>
+                      <input type="text" class="form-control" id="inItemTag" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
+                    </div>
+
+                  </div>
+
+      
+                </div>
+   
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnEditItemModalClose2">Not Now</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnEditItemModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Category Modal -->
+      <div class="row">
+        <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalTitle">Create New Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnAddCategoryModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="addCategoryModalBody">
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Name* <span id="countCatName" style="color: grey; margin-left: 1rem;">0/40</span></span> 
+                      <input type="text" class="form-control" id="inCategoryName" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Slug <span id="countCatSlug" style="color: grey; margin-left: 1rem;">0/40</span></span> 
+                      <span class="tooltiptext-trigger">? 
+                        <span class="tooltiptext-general">
+                          <h6>Slug</h6>
+                          <p>The "slug" is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</p>
+                        </span> 
+                      </span>
+                      <input type="text" class="form-control" id="inCategorySlug" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Description</span> 
+                      <textarea class="form-control" maxlength="250" rows="4"  id="inCategoryDesc" data-compulsory="false"></textarea>
+                    </div>
+                  </div>
+                </div>
+   
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnAddCategoryModalClose2">Cancel</button>
+                <button type="button" class="btn btn-primary" id="btnAddCategoryModalUpdate" data-toggle="modal" data-target="#categoryCreateConfirmModal" disabled>Create</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Confirm modal -->
+      <div class="row">
+        <div class="modal fade" id="categoryCreateConfirmModal" tabindex="-1" role="dialog" aria-labelledby="categoryCreateConfirmModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Are you sure you want to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Not Now</button>
+                <button type="button" class="btn btn-primary" id="btnCategoryCreateConfirmModalUpdate">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Save Invoice modal -->
       <div class="row">
@@ -838,7 +999,7 @@
                         </div> -->
 
                         <!-- Uncategorized, Untagged item -->
-                        <div class="row table-item-top" name="uncategorized">
+                        <!-- <div class="row table-item-top" name="uncategorized">
                           <div class="col-md-12 table-item">
                             <span class="" style="font-size: small; font-weight: 300; color: gray; margin-bottom: 0;">New Item</span>
                             <table name="table_uncategorized" class="table-light table-sm" cellspacing="0" width="100%"  style="border-bottom: solid thin #eeeeee;">
@@ -877,7 +1038,55 @@
                               </tbody>
                             </table>
                           </div>
-                        </div>
+                        </div> -->
+
+                        <!-- New Design -->
+                        <!-- <div class="row table-item-top" name="uncategorized">
+                          <div class="col-md-12 table-item">
+                            <span class="" style="font-size: small; font-weight: 300; color: gray; margin-bottom: 0;">New Design </span>
+                            <span>                  
+                              <a href="javascript:;" data-toggle="modal" data-target="#editItemModal" data-edititemtitle="New Design" data-edititemrefid="uncategorized" data-edititemcat="Uncategorized" data-edititemtag="selangor_kl, ksie, aksjdak,2342">
+                                <i class="fas fa-pen"></i>
+                              </a>
+                            </span>
+                            <table name="table_uncategorized" class="table-light table-sm" cellspacing="0" width="100%"  style="border-bottom: solid thin #eeeeee;">
+                              <thead style="visibility: collapse;">
+                                <tr>
+                                  <td class="th-item"></td>
+                                  <td class="th-quantity"></td>
+                                  <td class="th-price"></td>
+                                  <td class="th-amount"></td>
+                                  <td class="th-action"></td>
+                                  <td class="th-hidden" name="refId">uncategorized</td>
+                                  <td class="th-hidden" name="cat">Uncategorized</td>
+                                  <td class="th-hidden" name="tag"></td>
+                                  <td class="th-hidden" name="name">New Design</td>
+                                </tr>
+                              </thead>
+                              <tbody name="body_uncategorized" >
+                                <tr class="item">
+                                  <td><input type="text" class="form-control" placeholder=" Enter item and description" oninput="printPreview();"></td>
+                                  <td><input type="number" class="form-control" value="-" oninput="calculateAmount2(); printPreview();"></td>
+                                  <td><input type="number" class="form-control" value="-" oninput="calculateAmount2(); printPreview();"></td>
+                                  <td class="td-amount"></td>
+                                  <td><i class="fas fa-minus-circle" style="color: red; cursor: pointer;" onclick="removeItem(this); printPreview(); //calculateAmount(); "></i></td>
+                                  <td class="td-hidden" name="amount">2325.034</td>
+                                </tr>
+                                <tr class="subtotal">
+                                  <td>
+                                    <a class="addrow" href="javascript:;" id="addRow" onclick="addRow(this);">Add new row</a>
+                                  </td>
+                                  <td></td>
+                                  <td class="td-subtotal">Subtotal</td>
+                                  <td class="td-subtotal" id="subtotalItem_aaa"></td>
+                                  <td></td>
+                                  <td class="td-hidden" name="subtotal">7675.096324</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div> -->
+
 
 
                         <!-- Additional Items Start here -->
@@ -1209,13 +1418,12 @@
   <script src="../../assets/js/mc-calendar.min.js" type="text/javascript"></script>
   <!-- International Telephone Input -->
   <script src="../../assets/js/plugins/intlTelInput/intlTelInput.js"></script>
-
+  <!-- pdf  -->
   <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script> 
-  
-
-
-  <!-- <script src="../../assets/js/html2canvas.min.js" type="text/javascript"></script> -->
-
+  <!-- Tag input -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+  <script src="../../assets/js/tagsinput.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"  crossorigin="anonymous"></script> -->
 
 
 	<script>
@@ -1241,6 +1449,9 @@
       
       // Load Tutor Settings
       loadUserSettings();
+
+      // Add a new item by default
+      addItem("New Item", 'new', 1, 0,  'uncategorized', 'Uncategorized', []);
 
       // Enable Add Student Modal
       document.getElementById("invAllStudentLink").setAttribute('data-target', '#addStudentModal');
@@ -1739,16 +1950,17 @@
     function renderAllInvoiceItems2(doc, clientId){
       // className = className 
       // classId = classId / 'new' for New Item - use to differentiate invoice item
+      // classQuantity = quantity (default: 1). For new item, assign '-'
+      // classFee = class fee
       // refId = cat id - made up of classId / 'new' - used to classify class.
       // cat = cat name - made up of classId / 'uncategorized' / 'tax' / 'other'
       // tag = tag name - separated by comma ', '
-      // classQuantity = quantity (default: 1). For new item, assign '-'
-      // classFee = class fee
+
       if (doc.data()[CLASS_FEES_TYPE_KEY] === FEES_TYPE_PER_MONTH_KEY){
-        addItem(doc.data()[CLASS_NAME], doc.data()[CLASS_ID], 1, doc.data()[CLASS_FEES_KEY], doc.data()[CLASS_ID], doc.data()[CLASS_ID], doc.data()[CLASS_TAG],  );
+        addItem(doc.data()[CLASS_NAME], doc.data()[CLASS_ID], 1, doc.data()[CLASS_FEES_KEY], doc.data()[CLASS_ID], doc.data()[CLASS_ID], doc.data()[CLASS_TAG] );
 
       }else{
-        addItem(doc.data()[CLASS_NAME], doc.data()[CLASS_ID], '-', '-', doc.data()[CLASS_ID], doc.data()[CLASS_ID], doc.data()[CLASS_TAG], );
+        addItem(doc.data()[CLASS_NAME], doc.data()[CLASS_ID], '-', '-', doc.data()[CLASS_ID], doc.data()[CLASS_ID], doc.data()[CLASS_TAG]);
 
       }
       
@@ -2041,8 +2253,8 @@
       // [0]: ITEMLIST
       // [1]: ITEM
       // [2]: <name, item display name>
-      // [3]: <refId - usually [classId] / new>
-      // [4]: <cat - usually [classId] / uncategorized>
+      // [3]: <refId - usually [classId] / uncategorized / <predefined category slug>>
+      // [4]: <cat - usually [classId] / Uncategorized / <predefined category name> >
       // [5]: <tag, deliminator - ','>
       // [6]: [desc, quantity, price, amount] - deliminator = ';; '
       // [7]: ...
@@ -2944,8 +3156,20 @@
       let table_top = document.getElementById("table-top");
 
       let btn_a = document.createElement('div');
+
+      let uuid = create_UUID();
+
       // <div class="row table-item-top" name="uncategorized">
       //   <div class="col-md-12 table-item">
+      //     <span class="table-title" style="font-size: small; font-weight: 300; color: gray; margin-bottom: 0;">New Design</span>
+      //     <span class="table-tag">area_subangjaya</span>
+      //     <span class="table-tag">area_kl</span>
+      //     <span class="table-cat">Deposit</span>
+      //     <span>
+      //       <a href="javascript:;" data-toggle="modal" data-target="#editItemModal" data-edititemtitle="New Design" data-edititemrefid="uncategorized" data-edititemcat="Uncategorized" data-edititemtag="selangor_kl, ksie, aksjdak,2342">
+      //         <i class="fas fa-pen" style="margin-left: 8px;"></i>
+      //       </a>
+      //     </span>
       //     <table name="table_uncategorized" class="table-light table-sm" cellspacing="0" width="100%">
       //       <thead style="visibility: collapse;">
       //         <tr>
@@ -2985,7 +3209,7 @@
 
       let table= document.createElement("table");
       table.className = "table-light table-sm";
-      table.setAttribute("name", "table_uncategorized");
+      table.setAttribute("name","" );
       table.setAttribute("cellspacing", "0");
       table.setAttribute("width", "100%");
       table.setAttribute("style", "border-bottom: solid thin #eeeeee;");
@@ -3072,13 +3296,24 @@
       // Create Title
       let classNameSpan = document.createElement('span');
       classNameSpan.className = "table-title";
-      // classNameSpan.setAttribute('style', "font-size: small; font-weight: 300; color: gray; margin: 0 0.5rem auto auto;");
       classNameSpan.textContent = className;
 
       // table item top
       let tableItemCol = document.createElement('div');
       tableItemCol.className = "col-md-12 table-item";
       tableItemCol.appendChild(classNameSpan);
+
+      // Attach Category for Non-class item
+      if ((cat  === refId  || cat == "") && cat != 'Uncategorized'){
+        // Class Item
+      }else {
+        // New Item
+        let catSpan = document.createElement('span');
+        catSpan.className = "table-cat";
+        catSpan.textContent = cat;
+        tableItemCol.appendChild(catSpan);
+      }
+
       // Attach Tags
       if (tag == null || tag == '' || tag.length == 0){
 
@@ -3091,11 +3326,28 @@
         });
       }
 
+      // Attach Edit button
+      let edit_a =  document.createElement('a');
+      edit_a.innerHTML = "<i class='fas fa-pen' style='margin-left: 8px'></i>";
+      edit_a.name = "btnEdit";
+      edit_a.href = "javascript:;";
+      edit_a.setAttribute('data-toggle', 'modal');
+      edit_a.setAttribute('data-target', '#editItemModal');
+      edit_a.setAttribute('data-edititemid', uuid);
+      // edit_a.setAttribute('data-edititemtitle', className);
+      // edit_a.setAttribute('data-edititemrefid', refId);
+      // edit_a.setAttribute('data-edititemcat', cat);
+      // edit_a.setAttribute('data-edititemtag', tag);
+      let editSpan = document.createElement('span');
+      editSpan.appendChild(edit_a);
+      editSpan.className = "table-edit-btn";
+      tableItemCol.appendChild(editSpan);
+
       tableItemCol.appendChild(table);
 
       let tableItemTopRow = document.createElement('div');
       tableItemTopRow.className = "row table-item-top";
-      tableItemTopRow.setAttribute("name", classId);
+      tableItemTopRow.setAttribute("name", uuid);
       tableItemTopRow.appendChild(tableItemCol);
 
       // Insert the row at the second last item, before additional items table. +1 because the first item is dedicated for table header. 
@@ -3604,7 +3856,6 @@
       // Get all items, subtotal, additional items and grand total
       let allItemsArr = getAllItems2();
       // console.log("allItemsArr")
-      // console.log(allItemsArr)
 
       // Get Total
       let subTotal = calculateSubtotal2();
@@ -3706,7 +3957,7 @@
             querySnapshot.forEach((doc) => {
               let docItemJson = {};
 
-              console.log(doc.data());
+              // console.log(doc.data());
 
               // Remove the invId from the REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR
               let invDocIdIndex = doc.data()[REV_DOC_ID_ARR].indexOf(invDocId);
@@ -3768,6 +4019,7 @@
           window.location.href='./view.html'
           // $('#loadingModal').modal('hide');
         });
+
       }
 
       // OLDER
@@ -3834,7 +4086,7 @@
 
           // Step 2.1 Update the existed reportDoc in batch 
           querySnapshot.forEach((doc) => {
-            console.log(doc.data());
+            // console.log(doc.data());
 
             // Check if the ID in local invoice items match with the one in revenueDoc.
             // If match create a new data and push to new batch for update. 
@@ -3972,6 +4224,7 @@
       //   { "name": "<className1> / tagname1" , "refId": "<classId1> / uncategorized"   , "type": "cat / tag / org"   , "total": 100 },
       //   { "name": "Std 6 Math"    , "refId": "pdiejsawafasw"   , "type": "cat"   , "total": 300 },
       //   { "name": "Uncategorized" , "refId": "uncategorized"   , "type": "cat"   , "total": 300 },
+      //   { "name": "Deposit 1"     , "refId": "deposit_1"       , "type": "cat"   , "total": 20 }, // New Item, with a category
       //   { "name": "Tax"           , "refId": "tax"             , "type": "cat"   , "total": 20.352s },
       //   { "name": "Others"        , "refId": "other"           , "type": "cat"   , "total": 100 },
 
@@ -4052,6 +4305,7 @@
           //   "total": subTotal 
           // };
         }
+        
         ReportList.push(itemCatJson);
 
         let itemTagJson = {};
@@ -4189,6 +4443,7 @@
       //   { "name": "<className1> / tagname1" , "refId": "<classId1> / uncategorized"   , "type": "cat / tag / org"   , "total": 100 },
       //   { "name": "Std 6 Math"    , "refId": "pdiejsawafasw"   , "type": "cat"   , "total": 300 },
       //   { "name": "Uncategorized" , "refId": "uncategorized"   , "type": "cat"   , "total": 300 },
+      //   { "name": "Deposit 1"     , "refId": "deposit_1"       , "type": "cat"   , "total": 20 }, // New Item, with a category
       //   { "name": "Tax"           , "refId": "tax"             , "type": "cat"   , "total": 20.352s },
       //   { "name": "Others"        , "refId": "other"           , "type": "cat"   , "total": 100 },
 
@@ -4242,9 +4497,8 @@
         let subtotalItem = 0;
         let component = [];
         itemSingleList.forEach((item, index) => {
-
           component = item.split(";; ")
-          subtotalItem = isNaN(component[1] * component[2]) ? subtotalItem+ 0 : subtotalItem + component[1] * component[2];
+          subtotalItem = isNaN(component[1] * component[2]) ? subtotalItem + 0 : subtotalItem + component[1] * component[2];
 
         });
 
@@ -4253,29 +4507,47 @@
         let refId = itemList.slice(item + 2, item + 3)[0];
         let cat = itemList.slice(item + 3, item + 4)[0];
         let tag_temp = itemList.slice(item + 4, item + 5)[0];
-        console.log(className, refId, cat, tag_temp)
+        // console.log(className, refId, cat, tag_temp)
         // let tag = (tag_temp == null || tag_temp == "") ? "" : tag_temp;
         let tagArray = (tag_temp == null || tag_temp == "") ? [] : tag_temp.split(",");
         
         let itemCatJson = {};
-        if (refId === 'uncategorized') // New item
-        itemCatJson = { 
-            "name": className, //"Uncategorized", 
-            "refId": refId, 
-            "type": "cat", 
-            "total": subtotalItem 
-          };
-        else if (refId != 'tax' && refId != 'other')
+
+        if ( cat  === refId  ||  cat == "" ){
+          // Class Item
           itemCatJson = { 
             "name": className, 
             "refId": refId, 
             "type": "cat", 
             "total": subtotalItem 
           };
-        else{
-          // Not suppose to have tax or other category here. They will be done later
-          // Do nothing
+        }else {
+          // New Item with 'Uncategorized' or unique category
+          itemCatJson = { 
+            "name": cat, 
+            "refId": refId, 
+            "type": "cat", 
+            "total": subtotalItem 
+          };
         }
+        // if (refId === 'uncategorized') // New item
+        // itemCatJson = { 
+        //     "name": className, //"Uncategorized", 
+        //     "refId": refId, 
+        //     "type": "cat", 
+        //     "total": subtotalItem 
+        //   };
+        // else if (refId != 'tax' && refId != 'other')
+        //   itemCatJson = { 
+        //     "name": className, 
+        //     "refId": refId, 
+        //     "type": "cat", 
+        //     "total": subtotalItem 
+        //   };
+        // else{
+        //   // Not suppose to have tax or other category here. They will be done later
+        //   // Do nothing
+        // }
 
         ReportList.push(itemCatJson);
 
@@ -4297,9 +4569,14 @@
         }
         
         subTotal = subTotal + subtotalItem;
+
+        console.log(ReportList);
+
+
         
       });
 
+      
       // console.log(ReportList);
 
       // Get Additional Items
@@ -4371,8 +4648,8 @@
       ReportList.push(addItemTaxJson)
 
 
+      console.log('row ReportList: ');
       console.log(ReportList);
-
       // Ref: https://www.codegrepper.com/code-examples/javascript/pick+the+duplicate+objects+from+json+array+javascript
       var ids = [];
       var clean = [];
@@ -4391,8 +4668,11 @@
           }
       });
 
-      console.log(ids)
-      console.log(clean)
+      // console.log(ids)
+      // console.log(clean)
+      console.log('clean ReportList: ');
+      console.log(clean);
+
 
       return clean;
     }
@@ -4489,6 +4769,17 @@
       return time.join (''); // return adjusted time or original string
     }
 
+    // Generate uuid
+    function create_UUID(){
+      var dt = new Date().getTime();
+      var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = (dt + Math.random()*16)%16 | 0;
+          dt = Math.floor(dt/16);
+          return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+      });
+      return uuid;
+    }
+  
   </script>
 
   <script>
@@ -4500,24 +4791,26 @@
 		$( document ).ready(function() {
 
       // Active Register Class Modal
-      $('#loadingModal').modal({
-        backdrop:'static',
-        keyboard:false,
-        show: false
-      });
-      // $('#loadingModal').modal('show');
+      // $('#loadingModal').modal({
+      //   backdrop:'static',
+      //   keyboard:false,
+      //   show: false
+      // });
 
       // Invoice Body specific
       $('#addItem').on( 'click', function () {
         // className = className 
         // classId = classId / 'new' for New Item - use to differentiate invoice item
+        // classQuantity = quantity (default: 1). For new item, assign '-'
+        // classFee = class fee
         // refId = cat id - made up of classId / 'new' - used to classify class.
         // cat = cat name - made up of classId / 'uncategorized' / 'tax' / 'other'
         // tag = tag name - separated by comma ', '
-        // classQuantity = quantity (default: 1). For new item, assign '-'
-        // classFee = class fee
 
-        addItem("New Item", 'new', 1, 0,  'uncategorized', '', []);
+
+        // className, classId, classQuantity, classFee, refId, cat, tag
+
+        addItem("New Item", 'new', 1, 0,  'uncategorized', 'Uncategorized', []);
       });
 
       $('#addAdditionalRow').on( 'click', function () {
@@ -4726,6 +5019,391 @@
         
 		  });
       
+      var EDIT_ITEM_ID = '';
+      var EDIT_ITEM_TITLE = '';
+      var EDIT_ITEM_REF_ID = '';
+      var EDIT_ITEM_CATEGORY = '';
+      var EDIT_ITEM_TAG = '';
+
+      // Edit Item Modal
+      $('#editItemModal').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget) // Button/Components that triggered the modal
+        
+        EDIT_ITEM_ID = button.data('edititemid') // Item Id 
+        // EDIT_ITEM_TITLE = button.data('edititemtitle') // Item Title
+        // EDIT_ITEM_REF_ID = button.data('edititemrefid') // Item RefId
+        // EDIT_ITEM_CATEGORY = button.data('edititemcat') // Item Cat
+        // EDIT_ITEM_TAG = button.data('edititemtag') // Item Tag
+
+        var itemSelected = document.getElementsByName(EDIT_ITEM_ID)[0];
+        EDIT_ITEM_REF_ID = itemSelected.querySelector('td[class=th-hidden][name=refId]').textContent;
+        EDIT_ITEM_CATEGORY = itemSelected.querySelector('td[class=th-hidden][name=cat]').textContent;
+        EDIT_ITEM_TAG = itemSelected.querySelector('td[class=th-hidden][name=tag]').textContent;
+        EDIT_ITEM_TITLE = itemSelected.querySelector('td[class=th-hidden][name=name]').textContent;
+        // console.log(EDIT_ITEM_ID);
+        // console.log(EDIT_ITEM_TITLE);
+        // console.log(EDIT_ITEM_REF_ID);
+        // console.log(EDIT_ITEM_CATEGORY);
+        // console.log(EDIT_ITEM_TAG);
+
+        // Load Item Details
+        document.getElementById("inItemId").setAttribute('value', EDIT_ITEM_ID);
+
+        document.getElementById("inItemTitle").value = EDIT_ITEM_TITLE;
+
+        let category_select = document.getElementById("category_drop"); 
+        let el = document.createElement("option");
+
+        // For Class item, both cat and refId is set to classId. For newer version, cat was set to "".
+        // For Non-class item, always have 'uncategorized', or other category slug
+        if ((EDIT_ITEM_CATEGORY  === EDIT_ITEM_REF_ID   || EDIT_ITEM_CATEGORY == "") && EDIT_ITEM_CATEGORY != 'Uncategorized'){
+          category_select.setAttribute('disabled', true);
+
+          el.textContent = EDIT_ITEM_TITLE;
+          el.value = EDIT_ITEM_REF_ID;
+          
+        }else {
+          category_select.removeAttribute('disabled');
+          el.textContent = EDIT_ITEM_CATEGORY;
+          el.value = EDIT_ITEM_REF_ID;
+        }
+        category_select.appendChild(el);
+
+        // Always add 'Uncategorized' as option if the exisitng category is not 'Uncategorized'
+        if (EDIT_ITEM_CATEGORY != 'Uncategorized') {
+          let el2 = document.createElement("option");
+          el2.textContent = 'Uncategorized';
+          el2.value = 'uncategorized';
+          category_select.appendChild(el2);
+        }
+
+
+        // document.getElementById("inItemTag").value = EDIT_ITEM_TAG;
+        let tagList = EDIT_ITEM_TAG.split(',')
+        tagList.forEach((item) => {
+          $('#inItemTag').tagsinput('add', item, {preventPost: true});
+        })
+
+        // Load & populate all category
+        var docRef = db.collection("Settings")
+          .doc("v1")
+          .collection("category")
+          .doc(tutorId)
+
+        docRef.get().then((doc) => {
+
+          if (doc.exists){
+            // console.log(doc.data());
+
+            // ------Pupulate Category Dropdown ------- //
+            let categoryArr= doc.data()[SET_CAT_NAME_ARR]
+            let categoryIdArr= doc.data()[SET_CAT_ID_ARR]
+
+            categoryArr.forEach((category, index) => {
+
+              let el = document.createElement("option");
+              el.textContent = category;
+              el.value = categoryIdArr[index];
+
+              // Update State
+              if (categoryIdArr[index] === EDIT_ITEM_REF_ID) {
+                el.selected = true;
+              }
+              category_select.appendChild(el);
+            })
+            
+
+          }else {
+            console.log('No settings document found')
+          }
+
+          
+        })
+
+      
+      });
+      
+      // Clear all values
+      $('#editItemModal').on('hide.bs.modal', function (event) {
+        EDIT_ITEM_ID = "";
+        EDIT_ITEM_TITLE = "";
+        EDIT_ITEM_REF_ID = "";
+        EDIT_ITEM_CATEGORY = "";
+        EDIT_ITEM_TAG = "";
+
+        document.getElementById("inItemId").setAttribute('value', "");
+        document.getElementById("inItemTitle").value = "";
+
+        // Clear all options
+        let optionList = document.getElementById("category_drop").querySelectorAll('option');
+        optionList.forEach((row) => {
+          row.remove();
+        })
+      
+        $('#inItemTag').tagsinput('removeAll');
+        document.getElementById("inItemTag").value = "";
+
+      });
+      
+      // Update the selected item
+      $('#btnEditItemModalUpdate').on('click', function (e) {
+
+        let itemId = document.getElementById("inItemId").getAttribute('value')
+        // console.log(itemId);
+        let itemTitle = document.getElementById("inItemTitle").value;
+        // console.log(itemTitle);
+        let itemCategorySlug = $('#category_drop').val()
+        // console.log(itemCategorySlug);
+        let select_category = document.getElementById("category_drop")
+        let itemCategory = select_category.options[select_category.selectedIndex].text
+        // console.log(itemCategory);
+        // console.log(document.getElementById("inItemTag").value);
+
+        let itemTag = $("#inItemTag").val();
+        // console.log(itemTag)
+
+        var itemSelected = document.getElementsByName(itemId)[0];
+
+        if (itemSelected != null) {
+          // Clear all tags
+          itemSelected.querySelectorAll('span[class=table-tag]').forEach((tagRow) => {
+            tagRow.remove();
+          });
+
+          // Clear all categories
+          itemSelected.querySelectorAll('span[class=table-cat]').forEach((catRow) => {
+            catRow.remove();
+          });
+
+          // Assign Values
+          itemSelected.querySelector('span[class=table-title]').textContent = itemTitle;
+
+          itemSelected.querySelector('td[class=th-hidden][name=refId]').textContent = itemCategorySlug;
+          itemSelected.querySelector('td[class=th-hidden][name=cat]').textContent = itemCategory;
+          itemSelected.querySelector('td[class=th-hidden][name=tag]').textContent = itemTag;
+          itemSelected.querySelector('td[class=th-hidden][name=name]').textContent = itemTitle;
+
+          let btnEditItem = itemSelected.querySelector('a[name=btnEdit]');
+          btnEditItem.setAttribute('data-edititemtitle', itemTitle);
+          btnEditItem.setAttribute('data-edititemrefid', itemCategorySlug);
+          btnEditItem.setAttribute('data-edititemcat', itemCategory);
+          btnEditItem.setAttribute('data-edititemtag', itemTag);
+
+          let tableItem = itemSelected.querySelector('.table-item')
+
+          // Attach Tag
+          if (itemTag == null || itemTag == ""){
+            // Empty tag, do nothing
+          }else {
+            let itemTagList = itemTag.split(',');
+            itemTagList.forEach((tag) => {
+
+              let tagSpan = document.createElement('span');
+              tagSpan.className = "table-tag";
+              tagSpan.textContent = tag;
+              tableItem.insertBefore(tagSpan, tableItem.children[1]);
+            })
+          }
+
+          // Attach Category
+          if ((itemCategory  === itemCategorySlug   || itemCategory == "") && itemCategory != 'uncategorized'){
+            // Class item
+          }else {
+            // Non Class Item
+            let catSpan = document.createElement('span');
+            catSpan.className = "table-cat";
+            catSpan.textContent = itemCategory;
+            tableItem.insertBefore(catSpan, tableItem.children[1]);  
+          }
+
+        }
+        else 
+        {
+          // Do nothing
+          console.log("No such item.")
+        }
+
+		  });
+      
+      // Create New Category Confirm
+      $('#btnCategoryCreateConfirmModalUpdate').on('click', function (e) {
+        let inCategoryName = document.getElementById("inCategoryName").value;
+        let inCategorySlug = document.getElementById("inCategorySlug").value;
+        let inCategoryDesc = document.getElementById("inCategoryDesc").value;
+
+        console.log(inCategoryName, inCategorySlug, inCategoryDesc);
+
+        var promiseAll = [];
+
+        // Create a new category
+        var setDocRef = db.collection("Settings")
+            .doc("v1")
+            .collection("category")
+            .doc(tutorId)
+            .get();
+
+        promiseAll.push(setDocRef);
+
+        var singleSetdocRef = db.collection("Settings")
+          .doc("v1")
+          .collection("category_single")
+          .where(SET_CAT_SINGLE_TUTOR_ID, "==", tutorId)
+          .get();
+
+        promiseAll.push(singleSetdocRef);
+
+        Promise.all(promiseAll)
+        .then((snapshots) => {
+          var promiseLayer1 = [];
+          var nameArr = [];
+          var idArr = [];
+          var slugArr = [];
+
+          var categorySettingExist = false;
+          var categoryExist = false;
+
+          // Check if Setting > v1 > category > <tutorId> exists
+          if (snapshots != null && snapshots[0] != null ){
+          
+            if (snapshots[0].exists) {
+              console.log(snapshots[0].data());
+              
+              categorySettingExist = true;
+              nameArr = snapshots[0].data()[SET_CAT_NAME_ARR];
+              idArr = snapshots[0].data()[SET_CAT_ID_ARR];
+              slugArr = snapshots[0].data()[SET_CAT_SLUG_ARR];
+
+            }else {
+              
+              console.log("Setting > v1 > category > <tutorId> does not")
+
+            }
+          }else {
+            console.log("snapshots[0] is null")
+          }
+
+          // Check if Setting > v1 > category_single > <categoryDocId> exists
+          if (snapshots != null && snapshots[1] != null && snapshots[1].size != 0){
+            
+            snapshots[1].forEach((doc) => {
+
+              console.log(doc.data())
+
+              if(doc.data()[SET_CAT_SINGLE_NAME] == inCategoryName){
+                // Exist. Ignore
+                categoryExist = true;
+              }
+
+            });
+          }
+          else {
+            console.log("Setting > v1 > category_single > <categoryDocId> does not")
+          }
+
+          // Update the settings
+          // If the category does not exist, update/create the existing settings
+          if (!categoryExist){
+
+            var newCatSingleDocRef = db.collection("Settings")
+              .doc("v1")
+              .collection("category_single")
+              .doc();
+                  
+            let categorySingleId = newCatSingleDocRef.id
+            let data_single = {
+              [SET_CAT_SINGLE_ID] : categorySingleId,
+              [SET_CAT_SINGLE_TUTOR_ID] : tutorId,
+              [SET_CAT_SINGLE_NAME] : inCategoryName,
+              [SET_CAT_SINGLE_SLUG] : inCategorySlug,
+              [SET_CAT_SINGLE_DESC] : inCategoryDesc,
+              [SET_CAT_SINGLE_DATE_EDIT] : new Date(),
+            }
+            console.log('category_single')
+            console.log(data_single)
+            promiseLayer1.push(newCatSingleDocRef.set(data_single, {merge : true}))
+
+
+            var newCatDocRef = db.collection("Settings")
+            .doc("v1")
+            .collection("category")
+            .doc(tutorId);
+
+            nameArr.push(inCategoryName);
+            idArr.push(categorySingleId);
+            slugArr.push(inCategorySlug);   
+            let data_all = {
+              [SET_CAT_ID] : newCatDocRef.id,
+              [SET_CAT_TUTOR_ID] : tutorId,
+              [SET_CAT_NAME_ARR] : nameArr,
+              [SET_CAT_ID_ARR] : idArr,
+              [SET_CAT_SLUG_ARR] : slugArr,
+              [SET_CAT_DATE_EDIT] : new Date(),
+            } 
+            console.log('data_all')
+            console.log(data_all)
+            promiseLayer1.push(newCatDocRef.set(data_all, {merge : true}))
+
+            return Promise.all(promiseLayer1);
+
+          }
+          else {
+            console.log("Category already exists. Ignore")
+
+            return null;
+          }
+
+          
+
+        })
+        .then((snapshot) => {
+
+          if (snapshot == null){
+            func.showNotification('top','center', 'warning', 'error_outline', inCategoryName + " already exists" );
+
+          }else {
+            func.showNotification('top','center', 'success', 'check_circle', inCategoryName + " is successfully created!" );
+          }
+
+          // Hide the modals
+          $('#categoryCreateConfirmModal').modal('hide');
+          $('#addCategoryModal').modal('hide');
+
+        })
+        .catch((error) => {
+          func.showNotification('top','center', 'danger', 'error_outline', "Error happened. Please try again." );
+
+          console.log("Transaction failed: ", error);
+        });
+
+		  });
+
+
+      // Clear New Category Add Value
+      $('#addCategoryModal').on('hide.bs.modal', function (event) {
+        document.getElementById("inCategoryName").value = "";
+        document.getElementById("inCategorySlug").value = "";
+        document.getElementById("inCategoryDesc").value = "";
+        document.getElementById("countCatName").textContent = '0/40';
+        document.getElementById("countCatSlug").textContent = '0/40';
+        document.getElementById("btnAddCategoryModalUpdate").setAttribute("disabled", true);
+      })
+
+      $('#inCategoryName').on('input', function(event){        
+        document.getElementById("countCatName").textContent = this.value.length + '/40'
+        if (this.value.length > 0){
+          document.getElementById("btnAddCategoryModalUpdate").removeAttribute("disabled");
+        }
+        else{
+          document.getElementById("btnAddCategoryModalUpdate").setAttribute("disabled", true);
+        }
+      });
+
+      $('#inCategorySlug').on('input', function(event){        
+        document.getElementById("countCatSlug").textContent = this.value.length + '/40'
+      });
+
+      
       // Save and Proceed - Save btn clicked
       $('#btnSaveModalUpdate').on('click', function (event) {
         $('#loadingModal').modal('show');
@@ -4736,7 +5414,6 @@
       });
 
 		});
-
 
 
   </script>
@@ -5000,7 +5677,51 @@
   }
  
   </script>
+  <!-- Tag input  -->
+  <script>
 
+    var substringMatcher = function(strs) {
+      return function findMatches(q, cb) {
+        var matches, substringRegex;
+
+        // an array that will be populated with substring matches
+        matches = [];
+
+        // regex used to determine if a string contains the substring `q`
+        substrRegex = new RegExp(q, 'i');
+
+        // iterate through the pool of strings and for any string that
+        // contains the substring `q`, add it to the `matches` array
+        $.each(strs, function(i, str) {
+          if (substrRegex.test(str)) {
+            matches.push(str);
+          }
+        });
+
+        cb(matches);
+      };
+    };
+
+    // reference:
+    // http://twitter.github.io/typeahead.js/examples/
+    // http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/
+    $('#inItemTag').tagsinput({
+      allowDuplicates: false,
+      trimValue: true,
+      maxTags: 5,
+      maxChars: 20,
+      typeaheadjs: {
+        name: 'citynames',
+        // displayKey: 'name',
+        // valueKey: 'name',
+        source: substringMatcher(ClassTag) // ClassTag in const.js
+        // name: 'cities',
+        // source: states2.ttAdapter()
+        // source :  ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado']
+      },
+    });
+
+  </script>
   
 
 </body>

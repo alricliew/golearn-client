@@ -797,6 +797,22 @@ const PUBLIC_PROFILE_LEVEL = "pl";
 const PUBLIC_RS_SCORE = "rs";
 const PUBLIC_LAST_UPDATE = "lastUpdate";
 
+// Setting (/Settings/v1/category)
+const SET_CAT_ID = 'id';
+const SET_CAT_TUTOR_ID = "tutorId";
+const SET_CAT_NAME_ARR = 'nameArr';
+const SET_CAT_ID_ARR = 'idArr';
+const SET_CAT_SLUG_ARR = 'slugArr';
+    const SET_CAT_SLUG_UNCATEGORIZED = "uncategorized";
+const SET_CAT_DATE_EDIT = "dateEdit";
+
+// Setting (/Settings/v1/category_single)
+const SET_CAT_SINGLE_ID = 'id';
+const SET_CAT_SINGLE_TUTOR_ID = "tutorId";
+const SET_CAT_SINGLE_NAME = 'name';
+const SET_CAT_SINGLE_SLUG = 'slug';
+const SET_CAT_SINGLE_DESC = 'desc';
+const SET_CAT_SINGLE_DATE_EDIT = "dateEdit";
 
 // -------------- Session Storage Key Start -------------- //
 // CLIENT: Profile Obj
