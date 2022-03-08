@@ -758,7 +758,17 @@ td input[type="number"] {
   font-weight: 300;
   color: white;
   margin: 0 0 0 2px;
-  background-color: #2e74b6;
+  background-color: rgba(46, 116, 182, 0.7);
+  border-radius: 6px;
+  padding: 2px 6px 2px 6px;
+}
+
+.table-cat {
+  font-size: small;
+  font-weight: 300;
+  color: white;
+  margin: 0 0 0 2px;
+  background-color: #ceb6e6;
   border-radius: 6px;
   padding: 2px 6px 2px 6px;
 }
