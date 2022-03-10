@@ -1451,7 +1451,8 @@
       loadUserSettings();
 
       // Add a new item by default
-      addItem("New Item", 'new', 1, 0,  'uncategorized', 'Uncategorized', []);
+      let uuid = create_UUID();
+      addItem("New Item", uuid, 1, 0,  'uncategorized', 'Uncategorized', []);
 
       // Enable Add Student Modal
       document.getElementById("invAllStudentLink").setAttribute('data-target', '#addStudentModal');
@@ -3142,7 +3143,7 @@
     // Add an item
     function addItem(className, classId, classQuantity, classFee, refId, cat, tag){
       // className = className 
-      // classId = classId / 'new' for New Item - use to differentiate invoice item
+      // classId = classId / uuid for New Item - use to differentiate invoice item
       // refId = cat id - made up of classId / 'new' - used to classify class.
       // cat = cat name - made up of classId / 'uncategorized' / 'tax' / 'other'
       // tag = tag name - separated by comma ', '
@@ -3156,8 +3157,6 @@
       let table_top = document.getElementById("table-top");
 
       let btn_a = document.createElement('div');
-
-      let uuid = create_UUID();
 
       // <div class="row table-item-top" name="uncategorized">
       //   <div class="col-md-12 table-item">
@@ -3333,7 +3332,7 @@
       edit_a.href = "javascript:;";
       edit_a.setAttribute('data-toggle', 'modal');
       edit_a.setAttribute('data-target', '#editItemModal');
-      edit_a.setAttribute('data-edititemid', uuid);
+      edit_a.setAttribute('data-edititemid', classId);
       // edit_a.setAttribute('data-edititemtitle', className);
       // edit_a.setAttribute('data-edititemrefid', refId);
       // edit_a.setAttribute('data-edititemcat', cat);
@@ -3347,7 +3346,7 @@
 
       let tableItemTopRow = document.createElement('div');
       tableItemTopRow.className = "row table-item-top";
-      tableItemTopRow.setAttribute("name", uuid);
+      tableItemTopRow.setAttribute("name", classId);
       tableItemTopRow.appendChild(tableItemCol);
 
       // Insert the row at the second last item, before additional items table. +1 because the first item is dedicated for table header. 
@@ -4810,7 +4809,10 @@
 
         // className, classId, classQuantity, classFee, refId, cat, tag
 
-        addItem("New Item", 'new', 1, 0,  'uncategorized', 'Uncategorized', []);
+        let uuid = create_UUID();
+
+        addItem("New Item", uuid, 1, 0,  'uncategorized', 'Uncategorized', []);
+        // addItem("New Item", 'new', 1, 0,  'uncategorized', 'Uncategorized', []);
       });
 
       $('#addAdditionalRow').on( 'click', function () {
