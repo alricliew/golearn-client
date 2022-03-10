@@ -408,6 +408,9 @@ const CLASS_MATERIAL_URL = "urlMaterial"; // GClass
 const CLASS_STUDENT_AUTO_JOIN_ENABLE = "perStuAutoJoinEn";
 const CLASS_TUTOR_ADD_EDIT_LESSON_ENABLE = "perTAddLesEn";
 const CLASS_TUTOR_REMOVE_LESSON_ENABLE = "perTDelLesEn";
+const CLASS_LABEL_ENABLE = "labelEn";
+const CLASS_LABEL_COLOR = "labelColor";
+const CLASS_LABEL_TEXT = "labelText";
 
 const CLASS_DATE_ADD = "dateAdd";
 const CLASS_DATE_EDIT = "dateEdit";

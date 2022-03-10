@@ -31,6 +31,7 @@
   <!-- Tutor Portal specific CSS -->
   <link href="../../assets/css/tutor-portal.css" rel="stylesheet"/>
 
+  <!-- Loading -->
   <style>
 
     .br {
@@ -89,7 +90,51 @@
       }
     }
   </style>
-
+  <!-- Ribbon -->
+  <!-- https://freefrontend.com/css-ribbons/ -->
+  <style>
+    .ribbon {
+      font-size: small;
+      position: absolute;
+      /* right: var(--right, 10px); */
+      /* top: var(--top, -3px); */
+      left: var(--left, -3px);
+      top: var(--top, 5px);
+      filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.2));
+    }
+    .ribbon > .content {
+      color: white;
+      font-size: 1rem;
+      text-align: center;
+      font-weight: 400;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 8px 2px 4px;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 0 100%);
+      width: var(--width, 32px);
+      min-height: var(--height, 32px);
+      transition: clip-path 1s, padding 1s, background 1s;
+    }
+    .ribbon.slant-up > .content {
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), 50% calc(100% - 6px), 0 100%);
+    }
+    .ribbon.slant-down > .content {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 6px), 0 calc(100% - 12px));
+    }
+    /* .ribbon.down > .content {
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), 50% 100%, 0 calc(100% - 8px));
+    } */
+    .ribbon.up > .content {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+    }
+    .ribbon.check > .content {
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), 40% 100%, 0 calc(100% - 12px));
+    }
+    .ribbon.down > .content {
+      /* clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), 50% 100%, 0 calc(100% - 8px)); */
+      clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%)
+    }
+    
+  </style>
 </head>
 
 <body>
@@ -570,6 +615,9 @@
 
             <!-- <div class="col-md-12 card-v1">
               <div class="row ">
+                <div class="ribbon down">
+                  <div class="content"></div>
+                </div>
                 <div class="col-md-11">
                   <div class="row" style="margin-bottom: 8px;">
                     <div class="col-md-4">
@@ -710,204 +758,6 @@
     var docsObj = [];
 
     const btnAddClass = document.getElementById("btnAddClass");
-		// var db = firebase.firestore();
-		// db.settings({ timestampsInSnapshots: true });
-
-    // // Init session storage
-    // sessionStorage.setItem(SESSION_STORAGE_CLASS_ALL_DOCS_KEY, null);
-    // sessionStorage.setItem(SESSION_STORAGE_CLASS_CURRENT_DOC_KEY, null);
-    // sessionStorage.setItem(SESSION_STORAGE_CLASS_CURRENT_DOC_ID_KEY, null);
-    // sessionStorage.setItem(SESSION_STORAGE_CLASS_LOAD_KEY, false);
-
-    // // Set the nav name and global var, if user already login and have session Storage 
-    // var tutorInfoObj = null;
-    // if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
-    //   // Do nothing
-    // }else{
-    //   // Set the nav user name
-    //   tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
-    //   document.getElementById("user").textContent = tutorInfoObj.name;
-
-    //   current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
-    //   // current_email, 
-    //   // current_phone, 
-    //   current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
-    //   current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
-    //   current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
-    //   current_accountStatus = tutorInfoObj.accountStatus; // bool
-    //   currentYearsExperience = tutorInfoObj.yearsExperience; // number
-    //   currentTutoringExperience = tutorInfoObj.tutoringExperience;
-    //   currentTutoringApproach = tutorInfoObj.tutoringApproach;
-    //   currentQualification= tutorInfoObj.qualification;
-      
-    //   current_aweburl = tutorInfoObj.aWebUrl
-
-    //   // updatePageView(current_accountStatus);
-    // }
-
-		// firebase.auth().onAuthStateChanged(function(user){
-      
-		// 	if(!user){
-    //     // Return to login if user does not exist.
-		// 		window.location.href = "./login.html"
-		// 	}else{
-    //     // if the displayName is null, it means user register using Phone
-    //     if (firebase.auth().currentUser.displayName == null ){
-    //         tutorId = firebase.auth().currentUser.phoneNumber;
-    //     }else
-    //         tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-        
-    //     loadAllClassInfo();
-    //     loadUserInfo(tutorId);
-          
-		// 	}
-		// });
-
-    // // Tutor Specific
-    // function loadUserInfo(tutorId){
-    //   // Tutor Id must be a phone with +60, no spacing or other chars
-    //   var docRef = db.collection("Tutor").doc(tutorId);
-
-    //   // docRef.get().then((doc) => {
-    //   docRef.onSnapshot((doc) => {
-
-    //     if (doc.exists) {
-    //       // console.log("Document data:", doc.data());
-
-    //       current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
-    //       // current_email, 
-    //       current_phone = doc.data().phone;
-    //       current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
-    //       current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
-    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
-    //       current_accountStatus = doc.data().accountStatus; 
-    //       currentYearsExperience = doc.data().yearsExperience; // number
-    //       currentTutoringExperience = doc.data().tutoringExperience;
-    //       currentTutoringApproach = doc.data().tutoringApproach;
-    //       currentQualification= doc.data().qualification;
-         
-    //       // Store data to sessionStorage
-    //       var tutorDataObj = {
-    //         [NAME_KEY] : doc.data().name,
-    //         [EMAIL_KEY] : doc.data().email,
-    //         [PHONE_KEY] : doc.data().phone,
-    //         [AGE_KEY] : doc.data().age,
-    //         [GENDER_KEY] : doc.data().gender,
-    //         [ADDRESS_1_KEY] :doc.data().address1,
-    //         [ADDRESS_2_KEY] :doc.data().address2,
-    //         [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
-    //         [ADDRESS_STATE_KEY] :doc.data().addressState,
-    //         [IMAGE_KEY] : doc.data().imgUrl,
-    //         // [NRIC_KEY] : doc.data().name,
-    //         [RATING_KEY] : doc.data().rating,
-    //         [RATING_TIMES_KEY] : doc.data().ratingTimes,
-    //         [RATING_FINAL_KEY] : doc.data().ratingFinal,
-    //         [PROFILE_STATUS_KEY] : doc.data().profileStatus,
-    //         // [CHECK_HOMETUTOR_KEY] : doc.data().name,
-    //         // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
-    //         // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
-    //         // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
-    //         [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
-    //         [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
-    //         [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
-    //         [QUALIFICATION_KEY] : doc.data().qualification,
-    //         [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
-    //         [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
-    //         [AGENT_KEY] : doc.data().agent,
-    //         [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
-            
-    //         [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
-    //         [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
-    //         [CHECK_GROUP_KEY] : doc.data().modeGroup,
-    //         [CHECK_ONLINE_KEY] : doc.data().modeOnline,
-    //         [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
-    //         [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
-    //         [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
-    //         [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
-    //         [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
-    //         [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
-    //         [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
-    //         [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
-    //         [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
-    //         [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
-    //         [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
-    //         [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
-    //         [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
-    //         [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
-    //         [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
-    //         [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
-    //         [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
-    //         [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
-    //         [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
-    //         [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
-    //         [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
-    //         [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
-    //         [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
-    //         [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
-    //         [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
-    //         [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
-    //         [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
-    //         [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
-    //         [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
-    //         [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
-    //         [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
-    //         [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
-    //         [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
-    //         [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
-    //         // Create a placeholder for aWebUrl. This param can only initiated by admin
-    //         // manually through https://golearn.com.my/admin/admin-portal.html
-    //         [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
-    //         [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
-    //         [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
-    //         [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
-    //         [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
-    //         [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
-    //         [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
-    //       }
-
-    //       // Set tutorInfoObj as sessionStorage
-    //       sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
-
-    //       // Set the nav user name and public profile link
-    //       document.getElementById("user").textContent = doc.data().name;
-
-    //       if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
-    //         document.getElementById("navPublicProfile").href = "#"  ;
-    //         document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
-    //       } else{
-    //         document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
-    //         document.getElementById("navPublicProfile").target = "_blank";
-    //       }
-          
-    //       if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-    //         document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
-    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
-    //         document.getElementById("btnActivateAccount").target = "_blank";
-    //       }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-    //         document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
-    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
-    //         document.getElementById("btnActivateAccount").target = "_blank";
-    //       }else {
-    //         let activationNavItem = document.querySelector('#activationNavItem');
-    //         let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
-    //         // Remove NavItem if exist
-    //         if (activationNavItemIsExist){
-    //           activationNavItem.parentNode.removeChild(activationNavItem);
-    //         }else{
-    //           // Do nothing
-    //         }
-    //       }
-
-
-    //     } else {
-            
-    //     }
-    //   });
-
-    // };
-
     
     //---------- Load all class details ----------//
     // Lesson Load More Button - Init
@@ -1072,6 +922,9 @@
     function renderAllActiveClasses3(doc, courseId, renderNull){
       // <div class="col-md-12 card-v1">
       //   <div class="row ">
+      //     <div class="ribbon down">
+      //       <div class="content">OK</div>
+      //     </div>
       //     <div class="col-md-11">
       //       <div class="row" style="margin-bottom: 8px;">
       //         <div class="col-md-5">
@@ -1228,7 +1081,7 @@
       // detail_div.appendChild(status_div);
       let detail_top_div = document.createElement('div');
       detail_top_div.className = "col-md-11";
-      detail_top_div.setAttribute("style","margin-bottom: 12px;");
+      detail_top_div.setAttribute("style","margin-bottom: 0px;");
       detail_top_div.setAttribute("onclick","editClassFunction(this)");
       detail_top_div.setAttribute("data-id", doc.data().id);
       detail_top_div.appendChild(detail_div);
@@ -1294,11 +1147,23 @@
       }
       btn_div.appendChild(btn_announcement);
 
+      // Ribbon 
+      let contentDiv = document.createElement('div');
+      contentDiv.className = "content";
+      contentDiv.textContent = doc.data()[CLASS_LABEL_TEXT];
+      contentDiv.style.background = doc.data()[CLASS_LABEL_COLOR];
+      let ribbonDiv = document.createElement('div');
+      ribbonDiv.className = "ribbon down";
+      ribbonDiv.appendChild(contentDiv);
+                
       // Student Top
       let card_div = document.createElement('div');
       card_div.className = "row"
       card_div.appendChild(detail_top_div);
       card_div.appendChild(btn_div);
+      if (doc.data()[CLASS_LABEL_ENABLE])
+        card_div.appendChild(ribbonDiv);
+
 
       // card temp
       // let cardTemp = document.createElement('div');

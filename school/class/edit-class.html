@@ -37,7 +37,62 @@
   <link href="../../assets/css/bootstrap-clockpicker.min.css" rel="stylesheet" type="text/css">
   <!-- Tag input -->
   <link href="../../assets/css/tagsinput.css" rel="stylesheet" type="text/css">
-
+  <!-- Color Picker -->
+  <link href="../../assets/css/coloris.min.css" rel="stylesheet" type="text/css">
+  <!-- Ribbon -->
+  <style>
+    .full .clr-field button {
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+    }
+  </style>
+  <!-- Ribbon -->
+  <!-- https://freefrontend.com/css-ribbons/ -->
+  <style>
+    .ribbon {
+      font-size: small;
+      position: absolute;
+      /* right: var(--right, 10px); */
+      /* top: var(--top, -3px); */
+      left: var(--left, -3px);
+      top: var(--top, 5px);
+      filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.2));
+    }
+    .ribbon > .content {
+      color: white;
+      font-size: 1rem;
+      text-align: center;
+      font-weight: 400;
+      /* background: var(--color, #FA8072) linear-gradient(45deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.25) 100%); */
+      background:  rgba(0, 0, 0, 0.2);
+      padding: 8px 2px 4px;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 0 100%);
+      width: var(--width, 32px);
+      min-height: var(--height, 32px);
+      transition: clip-path 1s, padding 1s, background 1s;
+    }
+    .ribbon.slant-up > .content {
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), 50% calc(100% - 6px), 0 100%);
+    }
+    .ribbon.slant-down > .content {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 6px), 0 calc(100% - 12px));
+    }
+    /* .ribbon.down > .content {
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), 50% 100%, 0 calc(100% - 8px));
+    } */
+    .ribbon.up > .content {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+    }
+    .ribbon.check > .content {
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), 40% 100%, 0 calc(100% - 12px));
+    }
+    .ribbon.down > .content {
+      /* clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), 50% 100%, 0 calc(100% - 8px)); */
+      clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%)
+    }
+    
+  </style>
 </head>
 
 <body>
@@ -920,7 +975,10 @@
                     <button class="multitabs-form__progress-btn" type="button" title="Students">Students</button>
                     <button class="multitabs-form__progress-btn" type="button" title="Teacher">Teacher</button>
                     <button class="multitabs-form__progress-btn" type="button" title="Fee">Fee</button>
-                    <button class="multitabs-form__progress-btn" type="button" title="Advanced Settings" id="advancedSettingsTab">Advanced <span class='card-class-status-label'>Admin</span></button>
+                    <!-- <button class="multitabs-form__progress-btn" type="button" title="Advanced Settings" id="advancedSettingsTab">Advanced <span class='card-class-status-label'>Admin</span></button> -->
+                    <button class="multitabs-form__progress-btn" type="button" title="Advanced Settings" id="advancedSettingsTab" >Advanced</button>
+                    <button class="multitabs-form__progress-btn" type="button" title="Public" id="publicTab" style="display: none;">Public</button>
+
                     
                   </div>
                 </div>
@@ -932,7 +990,7 @@
               <div class="row">
                 <div class="col-12">
                   <form class="multitabs-form__form">
-                    <!--Lessons form panel-->        
+                    <!--Lessons panel-->        
                     <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
                       <h4 class="multitabs-form__title">Lessons 
                         <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddLesson" data-toggle="modal" data-target="#addLessonModal" data-button-text="Add" data-title="Add New Lesson"><i class="material-icons" style="color: #2e74b6;">add</i></a> 
@@ -1044,7 +1102,7 @@
 
                       </div>
                     </div>
-                    <!--General form panel-->
+                    <!--General panel-->
                     <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                       <h4 class="multitabs-form__title">General Info</h4>
                       <div class="multitabs-form__content">
@@ -1135,7 +1193,7 @@
                         </div>
                       </div>
                     </div>
-                    <!--Time Slot form panel-->
+                    <!--Time Slot panel-->
                     <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                       <h4 class="multitabs-form__title">Class Schedule</h4>
                       <div class="multitabs-form__content">
@@ -1208,7 +1266,7 @@
                         </div>
                       </div>
                     </div>
-                    <!--Students form panel-->
+                    <!--Students panel-->
                     <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                       <h4 class="multitabs-form__title">Students 
                         <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddStudent" data-toggle="modal" data-target="#addStudentModal" data-button-text="Add" data-title="Add New Student"  onclick="appendModal('addStudentModal')"><i class="material-icons" style="color: #2e74b6;">add</i></a> 
@@ -1294,7 +1352,7 @@
 
                       </div>
                     </div>
-                    <!--Teacher form panel-->
+                    <!--Teacher panel-->
                     <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                       <h4 class="multitabs-form__title">Teachers</h4>
                       <div class="multitabs-form__content">
@@ -1351,7 +1409,7 @@
                         </div>
                       </div>
                     </div>
-                    <!--Fee form panel-->
+                    <!--Fee panel-->
                     <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                       <h4 class="multitabs-form__title">Tutoring Fee</h4>
                       <div class="multitabs-form__content">
@@ -1390,13 +1448,13 @@
                         </div>
                       </div>
                     </div>
-                    <!--Advanced form panel-->
+                    <!--Advanced panel-->
                     <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                       <h4 class="multitabs-form__title">Advanced Settings</h4>
                       <div class="multitabs-form__content">
     
                         <!-- Type -->
-                        <div class="row" style="display: none">
+                        <div class="row" style="display: none;">
                           <div class="col-sm-12 text-left">
                             <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-top: 1.0rem;">Class Type</span> 
                             <span class="tooltiptext-trigger">? 
@@ -1408,7 +1466,7 @@
                           </div>
                         </div>
 
-                        <div class="form-group" style="display: none">
+                        <div class="form-group"  style="display: none;">
                           <div class="form-check form-check-radio form-check-inline">
                             <label class="form-check-label">
                               <input class="form-check-input" type="radio" name="classTypeRadios" id="classTypeRadioPrivate" value="option1" data-compulsory="false" checked>
@@ -1428,75 +1486,6 @@
                             </label>
                           </div>
                         </div>
-
-                        <!-- Level and Subject  -->
-                        <div class="row" style="margin: 0.5rem 0 0 0.5rem;  display: flex;" id="levelSubjectTop">
-                          <div class="col-md-6">
-                              <!-- Education Level -->
-                            <div class="form-group" >
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Education Level*</span> 
-                              <select class="form-control" name="tutor_course[]" id="level_drop" data-compulsory="false" oninput="this.className = 'form-control'">
-                                <option value="">Select education level</option>
-                                <!-- <option value="1" >Pre-School</option>
-                                <option value="2" >Lower Primary (Tahun 1-3)</option>
-                                <option value="3" >Upper Primary (UPSR)</option>
-                                <option value="4" >Form 1-3 (PT3)</option>
-                                <option value="5" >Form 4-5 (SPM)</option>
-                                <option value="6" >Primary (International Syllabus)</option>
-                                <option value="7" >Lower Secondary (International Syllabus)</option>
-                                <option value="8" >Year 10-11 (IGCSE)</option>
-                                <option value="9" >Others</option> -->
-                              </select>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <!-- Subjects -->
-                            <div class="form-group">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Subject*</span>
-                              <select class="form-control" name="tutor_course[]" id="subject_drop" data-compulsory="false" oninput="this.className = 'form-control'">
-                                <option value="">Select subject</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-        
-                        <!-- Online Only  -->
-                        <div class="row" style="margin: 0.5rem 0 0 1.5rem; display: flex;" id="onlineOnlyTop">
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" id="onlineonly_check" data-compulsory="false">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                              Online Only?
-                            </label>
-                          </div>
-                        </div>
-
-  
-        
-                        <!-- Area and State -->   
-                        <div class="row" style="margin: 0.5rem 0 1.5rem 0.5rem; display: flex;" id="areaStateTop">
-                          <div class="col-md-6">
-                              <!-- State -->
-                            <div class="form-group">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;">State</span> 
-                              <select class="form-control" name="tutor_course[]" id="state_drop" data-compulsory="false">
-                                <option value="">Select state</option>
-                  
-                              </select>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <!-- Area -->
-                            <div class="form-group">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Area</span>
-                              <select class="form-control" name="tutor_course[]" id="area_drop" data-compulsory="false">
-                                <option value="">Select area</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>           
 
                         <!-- Spacer  -->
                         <!-- <div style="margin-top: 2rem;"></div> -->
@@ -1535,7 +1524,6 @@
                             Allow students to join class through invitation link.
                           </label>
                         </div>
-
                         <!-- Invite Link: Show when above is checked -->
                         <div class="form-group"  style="padding: 0.5rem; margin-top: 1rem; display: none; " id="inAutoJoinLinkTop">
                           <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Copy Student Registration Link:</span> 
@@ -1567,23 +1555,37 @@
                             Authorize teachers to remove lessons. 
                           </label>
                         </div>
-
+                        <div class="form-check" style="margin-top: 1.0rem;">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" id="tAddRibbonEn">
+                            <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                            Add A Ribbon 
+                          </label>
+                        </div>
+                        <!-- Ribbon: Show when above is checked -->
+                        <div class="row" id="inRibbonSettings" style="display: none; padding: 0.5rem; margin-top: 0.5rem;">
+               
+                          <div class="col-md-4 full">
+                            <p class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Pick A Color</p> 
+                            <input type="text" class="coloris" value="#e76f51" id="inLabelColor">
+                
+                            <p class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0; margin-top: 0.5rem;">Content (Max 2 Chars / 1 Emoji ❤️)</p> 
+                            <input type="text" class="form-control" id="inLabelText" data-compulsory="false" maxlength="2">
+                          </div>
+                          <div class="col-md-8">
+               
+                            <div class="card"  style="height: 70px; width: 200px">
+                              <div class="ribbon down">
+                                <div class="content" id="inLabelSample"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+           
                         <!-- Spacer  -->
                         <div style="margin-top: 2rem;"></div>
-
-                        
-                      <!-- <div id="the-basics">
-                        <input class="typeahead" type="text" placeholder="States of USA">
-                      </div>
-
-                      
-                      <div id="bloodhound">
-                        <input class="typeahead" type="text" placeholder="States of USA">
-                      </div>
-
-                      <div id="prefetch">
-                        <input class="typeahead" type="text" placeholder="Countries">
-                      </div> -->
                                                 
                         <!-- Class Tag -->
                         <div class="form-group" style="margin-top: 0rem;">
@@ -1737,6 +1739,89 @@
                         </div>
                       </div>
                     </div>
+                    <!--Public panel-->
+                    <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                      <h4 class="multitabs-form__title">Public</h4>
+                      <div class="multitabs-form__content">
+
+                        <!-- Level and Subject  -->
+                        <div class="row" style="margin: 0.5rem 0 0 0;  display: flex;" id="levelSubjectTop">
+                          <div class="col-md-6" style="padding-left: 0;">
+                              <!-- Education Level -->
+                            <div class="form-group" >
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Education Level*</span> 
+                              <select class="form-control" name="tutor_course[]" id="level_drop" data-compulsory="false" oninput="this.className = 'form-control'">
+                                <option value="">Select education level</option>
+                                <!-- <option value="1" >Pre-School</option>
+                                <option value="2" >Lower Primary (Tahun 1-3)</option>
+                                <option value="3" >Upper Primary (UPSR)</option>
+                                <option value="4" >Form 1-3 (PT3)</option>
+                                <option value="5" >Form 4-5 (SPM)</option>
+                                <option value="6" >Primary (International Syllabus)</option>
+                                <option value="7" >Lower Secondary (International Syllabus)</option>
+                                <option value="8" >Year 10-11 (IGCSE)</option>
+                                <option value="9" >Others</option> -->
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6" style="padding-left: 0;">
+                            <!-- Subjects -->
+                            <div class="form-group">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Subject*</span>
+                              <select class="form-control" name="tutor_course[]" id="subject_drop" data-compulsory="false" oninput="this.className = 'form-control'">
+                                <option value="">Select subject</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+        
+                        <!-- Online Only  -->
+                        <div class="row" style="margin: 0.5rem 0 0 0; display: flex;" id="onlineOnlyTop">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="onlineonly_check" data-compulsory="false">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Online Only?
+                            </label>
+                          </div>
+                        </div>
+    
+                        <!-- Area and State -->   
+                        <div class="row" style="margin: 0.5rem 0 1.5rem 0; display: flex;" id="areaStateTop">
+                          <div class="col-md-6" style="padding-left: 0;">
+                              <!-- State -->
+                            <div class="form-group">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;">State</span> 
+                              <select class="form-control" name="tutor_course[]" id="state_drop" data-compulsory="false">
+                                <option value="">Select state</option>
+                  
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6" style="padding-left: 0;" >
+                            <!-- Area -->
+                            <div class="form-group">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Area</span>
+                              <select class="form-control" name="tutor_course[]" id="area_drop" data-compulsory="false">
+                                <option value="">Select area</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>   
+                        
+
+                        <div class="row">
+                          <button class="btn btn-primary" type="button">Submit for Review</button>
+                        </div>
+                        <div class="button-row d-flex mt-4">
+                          <!-- <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button> -->
+                          <!-- <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button> -->
+                        </div>
+                      </div>
+                    </div>
+
                   </form>
                 </div>
               </div>
@@ -1837,7 +1922,8 @@
   <script src="../../assets/js/tagsinput.js"></script>
   <!-- Generate pdf -->
   <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script> 
-
+  <!-- Color Picker -->
+  <script src="../../assets/js/coloris.min.js" type="text/javascript"></script>
   <script>
    
     var latestLessonDoc = null;// Store last document - Used for Lesson Load More btn
@@ -1893,7 +1979,6 @@
 
         if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_NON_ADMIN_KEY))){
           disableAllEditsForNonAdmin();
-
         }
 
       }
@@ -2034,7 +2119,6 @@
 
       // Admin Panel
       document.getElementById("inStudentLimit").value = currentClassObj[CLASS_STUDENT_LIMIT];
-
       document.getElementById("onlineonly_check").checked = currentClassObj[ONLINE_KEY];
       if (currentClassObj[ONLINE_KEY]){
         document.getElementById("state_drop").disabled=true;
@@ -2054,6 +2138,11 @@
       document.getElementById("classStatusRadioInactive").checked = currentClassObj[CLASS_STATUS] === CLASS_STATUS_INACTIVE ;
       document.getElementById("classTypeRadioPrivate").checked = currentClassObj[CLASS_TYPE] === CLASS_TYPE_PRIVATE ;
       document.getElementById("classTypeRadioPublic").checked = currentClassObj[CLASS_TYPE] === CLASS_TYPE_PUBLIC;
+      if (currentClassObj[CLASS_TYPE] === CLASS_TYPE_PUBLIC){
+        document.getElementById("publicTab").style.display = 'flex';
+      }else {
+        document.getElementById("publicTab").style.display = 'none';
+      }      
 
       if (currentClassObj[CLASS_TYPE] === CLASS_TYPE_PUBLIC){
         document.getElementById("levelSubjectTop").style.display = 'flex';
@@ -2080,25 +2169,36 @@
       document.getElementById("tAddEditLessonEn").checked = currentClassObj[CLASS_TUTOR_ADD_EDIT_LESSON_ENABLE];
       document.getElementById("tDelLessonEn").checked = currentClassObj[CLASS_TUTOR_REMOVE_LESSON_ENABLE];
       document.getElementById("inAutoJoinLink").value = 'https://app.golearn.com.my/client/online-registration.html?aid='+uriAdminId+'&cid='+uriClassId;
-
       if (currentClassObj[CLASS_STUDENT_AUTO_JOIN_ENABLE]){
         document.getElementById("inAutoJoinLinkTop").style.display = 'initial';
-
         document.getElementById("btnAutoJoinLink2").className = "btn btn-success";
         document.getElementById("btnAutoJoinLink2").style.pointerEvents= 'auto';
         document.getElementById("inAutoJoinLink2").value = 'https://app.golearn.com.my/client/online-registration.html?aid='+uriAdminId+'&cid='+uriClassId;
-
       }else{
         document.getElementById("inAutoJoinLinkTop").style.display = 'none';
-
         document.getElementById("btnAutoJoinLink2").className = "btn btn-default";
         document.getElementById("btnAutoJoinLink2").style.pointerEvents= 'none';
         document.getElementById("inAutoJoinLink2").value = 'https://app.golearn.com.my/client/online-registration.html?aid='+uriAdminId+'&cid='+uriClassId;
-
+      }
+      
+      if (currentClassObj[CLASS_LABEL_ENABLE] == null || !currentClassObj[CLASS_LABEL_ENABLE]){
+        document.getElementById("inRibbonSettings").style.display = "none";
+        document.getElementById("tAddRibbonEn").checked = false;
+        document.getElementById("inLabelColor").value = currentClassObj[CLASS_LABEL_COLOR];
+        document.getElementById("inLabelText").value = currentClassObj[CLASS_LABEL_TEXT] == null ? "" : currentClassObj[CLASS_LABEL_TEXT];
+        document.getElementById("inLabelSample").style.background = currentClassObj[CLASS_LABEL_COLOR] == null ? "rgba(0, 0, 0, 0.2)" : currentClassObj[CLASS_LABEL_COLOR];
+        document.getElementById("inLabelSample").textContent = currentClassObj[CLASS_LABEL_TEXT] == null ? "" : currentClassObj[CLASS_LABEL_TEXT];
+      }
+      else {
+        document.getElementById("inRibbonSettings").style.display = "";
+        document.getElementById("tAddRibbonEn").checked = currentClassObj[CLASS_LABEL_ENABLE];
+        document.getElementById("inLabelColor").value = currentClassObj[CLASS_LABEL_COLOR];
+        document.getElementById("inLabelText").value = currentClassObj[CLASS_LABEL_TEXT];
+        document.getElementById("inLabelSample").style.background =  currentClassObj[CLASS_LABEL_COLOR] == null ? "rgba(0, 0, 0, 0.2)" : currentClassObj[CLASS_LABEL_COLOR];
+        document.getElementById("inLabelSample").textContent = currentClassObj[CLASS_LABEL_TEXT];
       }
 
-
-      btnAutoJoinLink2
+      
       // Check if class status
       if (currentClassObj[CLASS_STATUS] === CLASS_STATUS_INACTIVE){
         disableAllEdits();
@@ -2484,6 +2584,9 @@
         [CLASS_STUDENT_AUTO_JOIN_ENABLE]: (document.getElementById("stuAutoJoinEn").checked)? true : false,
         [CLASS_TUTOR_ADD_EDIT_LESSON_ENABLE]: (document.getElementById("tAddEditLessonEn").checked)? true : false,
         [CLASS_TUTOR_REMOVE_LESSON_ENABLE]: (document.getElementById("tDelLessonEn").checked)? true : false,
+        [CLASS_LABEL_ENABLE]: (document.getElementById("tAddRibbonEn").checked)? true : false,
+        [CLASS_LABEL_COLOR]: document.getElementById("inLabelColor").value,
+        [CLASS_LABEL_TEXT]: document.getElementById("inLabelText").value,
 
         // [CLASS_DATE_ADD]: '',
         [CLASS_DATE_EDIT]: new Date(),
@@ -2799,7 +2902,7 @@
       // This function deals with validation of the form fields with data-compulsory = 'true'
       var x, y, i, valid = true;
       x = document.getElementById("timeSlotTop");
-      console.log(x)
+      // console.log(x)
       // y = x[activePanelNum].getElementsByTagName("input") && x[activePanelNum].querySelectorAll('[type="text"]');
       y =x.querySelectorAll('[data-compulsory="true"]');
 
@@ -4490,11 +4593,15 @@
       let uriAdminId = encodeURIComponent(currentClassObj[CLASS_ADMIN_ID]);
       let uriClassId = encodeURIComponent(currentClassObj[CLASS_ID]);
       document.getElementById("inAutoJoinLink").value = 'https://app.golearn.com.my/client/online-registration.html?aid='+uriAdminId+'&cid='+uriClassId;
-
-      document.getElementById("classTag").removeAttribute("disabled");
+      document.getElementById("tAddRibbonEn").removeAttribute("disabled");
+      if (document.getElementById("tAddRibbonEn").checked){
+        document.getElementById("inRibbonSettings").style.display = '';
+      }
 
       document.getElementById("tAddEditLessonEn").removeAttribute("disabled");
       document.getElementById("tDelLessonEn").removeAttribute("disabled");
+
+      document.getElementById("classTag").removeAttribute("disabled");
 
     }
 
@@ -4590,13 +4697,13 @@
       // document.getElementById("btnCopyAutoJoinLink").setAttribute("disabled", true);
       document.getElementById("btnCopyAutoJoinLink").setAttribute("onclick", "");
       document.getElementById("inAutoJoinLink").value = 'No link';
-      
-      document.getElementById("classTag").setAttribute("disabled", true);
-
+      document.getElementById("tAddRibbonEn").setAttribute("disabled", true);
+      document.getElementById("inRibbonSettings").style.display = 'none';
 
       document.getElementById("tAddEditLessonEn").setAttribute("disabled", true);
       document.getElementById("tDelLessonEn").setAttribute("disabled", true);
 
+      document.getElementById("classTag").setAttribute("disabled", true);
 
     }
 
@@ -4627,6 +4734,7 @@
     
       // Common settings
       document.getElementById("advancedSettingsTab").style.display = 'none';
+      document.getElementById("publicTab").style.display = 'none';
 
       // General Panel
       // document.getElementById("inClassAnnouncement").setAttribute("readonly", true);
@@ -4939,9 +5047,7 @@
       gStateName = currentClassObj[CLASS_STATE_KEY];
       gArea = currentClassObj[CLASS_AREA_ID_KEY];
       gAreaName = currentClassObj[CLASS_AREA_KEY];
-
       imgUrl_temp = currentClassObj[CLASS_IMG_URL];
-
       classTag = currentClassObj[CLASS_TAG];
       
       // ------ Tag Start ------- //
@@ -5048,15 +5154,15 @@
         gOnlineOnly = onlineonly_check.checked;
         // If the checkbox is checked, display the output text
         if (onlineonly_check.checked == true){
-            document.getElementById("state_drop").disabled=true;
-            document.getElementById("area_drop").disabled=true;
-            document.getElementById("state_drop").style.backgroundColor = "#e9ecef" ;
-            document.getElementById("area_drop").style.backgroundColor="#e9ecef" ;
+          document.getElementById("state_drop").disabled=true;
+          document.getElementById("area_drop").disabled=true;
+          document.getElementById("state_drop").style.backgroundColor = "#e9ecef" ;
+          document.getElementById("area_drop").style.backgroundColor="#e9ecef" ;
         } else {
-            document.getElementById("state_drop").disabled=false;
-            document.getElementById("area_drop").disabled=false;
-            document.getElementById("state_drop").style.backgroundColor = "#fff" ;
-            document.getElementById("area_drop").style.backgroundColor="#fff" ;
+          document.getElementById("state_drop").disabled=false;
+          document.getElementById("area_drop").disabled=false;
+          document.getElementById("state_drop").style.backgroundColor = "#fff" ;
+          document.getElementById("area_drop").style.backgroundColor="#fff" ;
         }
         // checkSelection(onlineonly_check.checked);
        });
@@ -5569,10 +5675,19 @@
           document.getElementById("levelSubjectTop").style.display = 'flex';
           document.getElementById("onlineOnlyTop").style.display = 'flex';
           document.getElementById("areaStateTop").style.display = 'flex';
+          document.getElementById("publicTab").style.display = 'flex';
+          
+          // Go To Public Tab
+          //set all steps before clicked (and clicked too) to active
+          setActiveStep(7);
+          //open active panel
+          setActivePanel(7);
+
         }else{
           document.getElementById("levelSubjectTop").style.display = 'none';
           document.getElementById("onlineOnlyTop").style.display = 'none';
           document.getElementById("areaStateTop").style.display = 'none';
+          document.getElementById("publicTab").style.display = 'none';
         }
       });
       
@@ -5581,10 +5696,12 @@
           document.getElementById("levelSubjectTop").style.display = 'none';
           document.getElementById("onlineOnlyTop").style.display = 'none';
           document.getElementById("areaStateTop").style.display = 'none';
+          document.getElementById("publicTab").style.display = 'none';
         }else{
           document.getElementById("levelSubjectTop").style.display = 'flex';
           document.getElementById("onlineOnlyTop").style.display = 'flex';
           document.getElementById("areaStateTop").style.display = 'flex';
+          document.getElementById("publicTab").style.display = 'flex';
         }
       });
 
@@ -5604,13 +5721,11 @@
       $('#stuAutoJoinEn').on('change', function (event) {
         if (this.checked){
           document.getElementById("inAutoJoinLinkTop").style.display = 'initial';
-
           document.getElementById("btnAutoJoinLink2").className = "btn btn-success";
           document.getElementById("btnAutoJoinLink2").style.pointerEvents= 'auto';
 
         }else{
           document.getElementById("inAutoJoinLinkTop").style.display = 'none';
-
           document.getElementById("btnAutoJoinLink2").className = "btn btn-default";
           document.getElementById("btnAutoJoinLink2").style.pointerEvents= 'none';
         }
@@ -5639,6 +5754,26 @@
         getAllTimeSlots();
         UpdateClass(currentClassObj[CLASS_ID]);
       });
+
+      // Ribbon 
+      $('#inLabelColor').on('blur', function (event) {
+        let color = $('#inLabelColor').val()
+        document.getElementById("inLabelSample").style.background = color;
+      });
+       
+      $('#inLabelText').on('blur', function (event) {
+        let color = $('#inLabelText').val()
+        document.getElementById("inLabelSample").textContent = $(this).val();
+      });
+
+      $('#tAddRibbonEn').on('change', function (event) {
+        if (this.checked){
+          document.getElementById("inRibbonSettings").style.display = '';
+        }else{
+          document.getElementById("inRibbonSettings").style.display = 'none';
+        }
+      });
+
 
     });
 
@@ -6889,6 +7024,25 @@
     },
   });
 
+  </script>
+  <!-- Coloris -->
+  <script>
+    Coloris({
+      el: '.coloris',
+      swatches: [
+        '#264653',
+        '#2a9d8f',
+        '#e9c46a',
+        '#f4a261',
+        '#e76f51',
+        '#d62828',
+        '#023e8a',
+        '#0077b6',
+        '#0096c7',
+        '#00b4d8',
+        '#48cae4'
+      ]
+    });
   </script>
 </body>
 
