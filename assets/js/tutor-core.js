@@ -347,6 +347,7 @@ function updateGeneralView(){
   // By default, general link were given.
   let url = encode64(tutorId);
   document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/?tid="+ url;
+  document.getElementById("navPublicProfile").target = "_blank";
   // if (current_aweburl == null || current_aweburl == ""){
   //   let url = encode64(tutorId);
   //   document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/?tid="+ url;
