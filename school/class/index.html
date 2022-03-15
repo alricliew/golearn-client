@@ -877,9 +877,8 @@
             btnAddClass.style.pointerEvents = "auto";
             btnAddClass.setAttribute("onclick", "window.location = './add-class.html';");       
           }
-
         }
-        else if (current_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY){
+        else if (current_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY || current_accountStatus == PREMIUM_ACCOUNT_1_ACTIVE_STATUS_KEY){
           if (adminClassNum >= ClassNum_Premium1){
             btnAddClass.className = "btn btn-default btn-round";
             btnAddClass.style.pointerEvents = "auto";
@@ -891,8 +890,8 @@
             btnAddClass.setAttribute("onclick", "window.location = './add-class.html';");
           }
         }
-        else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY| 
-          current_accountStatus == PREMIUM_ACCOUNT_3_STATUS_KEY){
+        else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY || current_accountStatus == PREMIUM_ACCOUNT_2_ACTIVE_STATUS_KEY || 
+          current_accountStatus == PREMIUM_ACCOUNT_3_STATUS_KEY || current_accountStatus == PREMIUM_ACCOUNT_3_ACTIVE_STATUS_KEY){
           // Note: ClassNum_Premium2 = ClassNum_Premium3
           if (adminClassNum >= ClassNum_Premium2){
             btnAddClass.className = "btn btn-default btn-round";

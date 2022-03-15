@@ -345,17 +345,18 @@ function updateGeneralView(){
     
   // Set the public profile link.
   // By default, general link were given.
-  if (current_aweburl == null || current_aweburl == ""){
-    let url = encode64(tutorId);
-    document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/?tid="+ url;
-    // document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
-    document.getElementById("navPublicProfile").target = "_blank";
-  } 
-  // aWebUrl assigned to the account. Swicth to that new links
-  else{
-    document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+current_aweburl;
-    document.getElementById("navPublicProfile").target = "_blank";
-  }
+  let url = encode64(tutorId);
+  document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/?tid="+ url;
+  // if (current_aweburl == null || current_aweburl == ""){
+  //   let url = encode64(tutorId);
+  //   document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/?tid="+ url;
+  //   document.getElementById("navPublicProfile").target = "_blank";
+  // } 
+  // // aWebUrl assigned to the account. Swicth to that new links
+  // else{
+  //   document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+current_aweburl;
+  //   document.getElementById("navPublicProfile").target = "_blank";
+  // }
   
   // Set badge and sidebar based on account status.
   if (current_accountStatus == ACTIVE_ACCOUNT_STATUS_KEY){

@@ -867,7 +867,7 @@
             btnAddTeacher.setAttribute("data-target", "#addTutorModal");       
           }
         }
-        else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY){
+        else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY  || current_accountStatus == PREMIUM_ACCOUNT_2_ACTIVE_STATUS_KEY){
           if (adminTeacherNum >= TeacherNum_Premium2){
             btnAddTeacher.className = "btn btn-default btn-round";
             btnAddTeacher.style.pointerEvents = "auto";
@@ -880,7 +880,7 @@
             btnAddTeacher.setAttribute("data-target", "#addTutorModal");       
           }
         }
-        else if (current_accountStatus == PREMIUM_ACCOUNT_3_STATUS_KEY){
+        else if (current_accountStatus == PREMIUM_ACCOUNT_3_STATUS_KEY || current_accountStatus == PREMIUM_ACCOUNT_3_ACTIVE_STATUS_KEY){
           if (adminTeacherNum >= TeacherNum_Premium3){
             btnAddTeacher.className = "btn btn-default btn-round";
             btnAddTeacher.style.pointerEvents = "auto";
