@@ -2040,7 +2040,8 @@
       if (currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][0] == null || currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][0] == ""){
         // Someone removed the first Day of Week. So do nothing here
       }else {
-        $('#inDayOfWeek1').find('option[value='+currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][0]+']').attr('selected','selected');
+        // $('#inDayOfWeek1').find('option[value='+currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][0]+']').attr('selected','selected');
+        document.getElementById('inDayOfWeek1').value = currentClassObj[CLASS_TIMESLOT_DAY_OF_WEEK_ARR][0];
       }
       document.getElementById("inStartTime1").value = currentClassObj[CLASS_TIMESLOT_START_ARR][0];
       document.getElementById("inEndTime1").value = currentClassObj[CLASS_TIMESLOT_END_ARR][0];
