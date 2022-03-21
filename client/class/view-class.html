@@ -177,91 +177,6 @@
       <!-- End Navbar -->
 
 			<!-- Modal Start -->
-
-      <!-- Add Lesson Modal -->
-      <div class="row">
-        <div class="modal fade" id="addLessonModal" tabindex="-1" role="dialog" aria-labelledby="addLessonModalLabel" aria-hidden="true">
-          <div class="modal-dialog  modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="addLessonModalLabel">Add Lesson</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Date</span> 
-                      <div class="input-group" data-placement="bottom" data-align="top" data-autoclose="true" style="margin-top: 0.3rem;">
-                        <input id="datepicker" class="form-control" type="text" data-compulsory="true" oninput="this.className = 'form-control'" style="cursor:pointer;" readonly>
-                        <!-- <span class="d-flex align-items-center input-group-addon">
-                          <i class="fas fa-calendar-alt fa-fw" id="datepicker_btn"></i>
-                        </span>  -->
-                      </div>
-
-                    </div>
-                  </div>
-
-                  <div class="col-md-3">
-                    <div class="form-group"  >
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Start Time</span> 
-                      <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true" style="margin-top: 0.3rem;">
-                        <input id="addLessonStart" type="text" class="form-control" data-compulsory="true" oninput="this.className = 'form-control'" style="cursor:pointer;" readonly>
-                        <!-- <span class="d-flex align-items-center input-group-addon" >
-                          <span class="material-icons">
-                            more_time
-                          </span>
-                        </span> -->
-                      </div>  
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">End Time</span> 
-                      <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true" style="margin-top: 0.3rem;">
-                        <input id="addLessonEnd" type="text" class="form-control" data-compulsory="true" oninput="this.className = 'form-control'" style="cursor:pointer;" readonly>
-                        <!-- <span class="d-flex align-items-center input-group-addon">
-                          <span class="material-icons">
-                            more_time
-                          </span>
-                        </span> -->
-                      </div>  
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group" >
-                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Lesson Description</span> 
-                  <textarea class="form-control" maxlength="255" rows="3" id="addLessonDesc" placeholder="Write something ..."></textarea>
-                </div>
-
-
-                <div class="form-group" >
-                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Feedback</span> 
-                  <textarea class="form-control" maxlength="255" rows="3" id="addLessonFeedback" placeholder="Write something ..."></textarea>
-                </div>
-
-
-                <div class="form-group" >
-                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Lesson Performance</span> 
-                  <input id="addLessonRate" type="text" class="rating" data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="lg" required title="">                
-                </div>
-
-                <div class="clearfix"></div>
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddLessonModalUpdate" disabled>Add</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-      </div>
-
       <!-- Edit Lesson Modal -->
       <div class="row">
         <div class="modal fade" id="editLessonModal" tabindex="-1" role="dialog" aria-labelledby="editLessonModalLabel" aria-hidden="true">
@@ -318,313 +233,6 @@
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnEditLessonModalUpdate">Update</button> -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Remove Lesson modal -->
-      <div class="row">
-        <div class="modal fade" id="delLessonModal" tabindex="-1" role="dialog" aria-labelledby="delLessonModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="delLessonLabel">Delete This Lesson</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnDelLessonModalClose1">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" id="delLessonModalBody">
-                <div id="deleteLessonId" value=""></div>
-                Are you sure you want to continue?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnDelLessonModalClose2">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnDelLessonModalUpdate">Confirm</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- List / Load Admin's Students Modal -->
-      <div class="row">
-        <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel" aria-hidden="true">
-          <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="addStudentModalLabel">Add Student</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12" id="loadAdminStudentTop">
-                          
-                    <div class="container" id="add-student-modal-container">
-                      <!-- Student header -->
-                      <div class="row lesson-header">
-                        <div class="col-md-3">
-                          <p>Student Name</p>
-                        </div>
-                        <div class="col-md-3">
-                          <p>Gender</p>
-                        </div>
-                        <div class="col-md-3">
-                          <p>Guardian Name</p>
-                        </div>
-                        <div class="col-md-3">
-                          <p>Action</p> 
-                        </div>
-                      </div>
-
-                      <!-- Student List Start -->
-                      
-                    </div>
-        
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12 align-content-center">
-                    <button type="button" class="btn btn-outline-primary btn-sm btn-round" id="btnAddAdminStudentModalLoadMore" >Load More</button>
-                  </div>
-                </div>
-
-              </div>
-              <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-success" data-dismiss="modal" id="" >Add New Teacher</button> -->
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddStudentModalUpdate" >Add</button> -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Edit Student Modal  -->
-      <div class="row">
-        <div class="modal fade" id="editStudentModal" tabindex="-1" role="dialog" aria-labelledby="editStudentModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="editStudentLabel">View Student</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnEditStudentModalClose1">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" id="editStudentModalBody">
-                <div id="editStudentId" value=""></div>
-                <div id="editStudentEnrollmentStatus" value=""></div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Student Name</span> 
-                      <input id="stuName" type="text" class="form-control" readonly>                
-                    </div>
-                  </div>
-
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Student Phone</span> 
-                      <input id="stuPhone" type="text" class="form-control" readonly>                
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Student Email</span> 
-                      <input id="stuEmail" type="text" class="form-control" readonly>                
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Student Gender</span> 
-                      <div class="form-check form-check-radio">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="radio" name="stuGenderRadio" id="stuGenderMale" value="option1" disabled>
-                            Male
-                          <span class="circle">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                      <div class="form-check form-check-radio">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="radio" name="stuGenderRadio" id="stuGenderFemale" value="option2" disabled>
-                            Female
-                          <span class="circle">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Guardian Name</span> 
-                      <input id="gurName" type="text" class="form-control" readonly>                
-                    </div>
-                  </div>
-
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Guardian Phone</span> 
-                      <input id="gurPhone" type="text" class="form-control" readonly>                
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Guardian Email</span> 
-                      <input id="gurEmail" type="text" class="form-control" readonly>                
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group" >
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Address</span> 
-                      <textarea class="form-control" id="gurAddr" rows="2" readonly></textarea>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group" >
-                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Feedback / Comment</span> 
-                      <textarea class="form-control" id="stuFeedback" rows="4"></textarea>
-                    </div>
-                  </div>
-                </div>
-
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnEditStudentModalClose2">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnEditStudentModalUpdate">Confirm</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Delete Student modal -->
-      <div class="row">
-        <div class="modal fade" id="delStudentModal" tabindex="-1" role="dialog" aria-labelledby="delStudentModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="delStudentLabel">Removing This Student</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnDelStudentModalClose1">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" id="delStudentModalBody">
-                <div id="deleteStudentClassId" value=""></div>
-                <div id="deleteStudentName" value=""></div>
-                <div id="deleteStudentId" value=""></div>
-                <div id="deleteGuardianId" value=""></div>
-                Are you sure you want to continue?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnDelStudentModalClose2">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnDelStudentModalUpdate">Delete</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Add Teacher Modal -->
-      <div class="row">
-        <div class="modal fade" id="addTeacherModal" tabindex="-1" role="dialog" aria-labelledby="addTeacherModalLabel" aria-hidden="true">
-          <div class="modal-dialog  modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="addTeacherModalLabel">Add Teacher</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Phone*</label>
-                  <input class="form-control" id="addTeacherModalEmail" placeholder="" type="tel"></input>
-                </div>
-
-                <div class="form-group">
-                  <label class="bmd-label-floating">Name*</label>
-                  <input class="form-control" id="addTeacherModalName" placeholder=""></input>
-                </div>
-
-                <!-- <h5 >Gender</h5> -->
-                <!-- <form> -->
-                  <div class="form-group">
-                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Gender</span> 
-                    <div class="form-check form-check-radio form-check-inline">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="addTeacherModalRadio-male" value="option1" >
-                        Male
-                        <span class="circle">
-                          <span class="check"></span>
-                        </span>
-                      </label>
-                    </div>
-                    <div class="form-check form-check-radio form-check-inline">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="addTeacherModalRadio-female" value="option2">
-                        Female
-                        <span class="circle">
-                          <span class="check"></span>
-                        </span>
-                      </label>
-                    </div>
-                  </div>
-       
-                <!-- </form> -->
-
-                <!-- <h5 >Email</h5> -->
-                <div class="form-group">
-                  <label class="bmd-label-floating">Email</label>
-                  <input class="form-control" id="addTeacherModalEmail" placeholder=""></input>
-                </div>
-                
-                <!-- <h5 >Address</h5> -->
-                <div class="form-group">
-                  <label class="bmd-label-floating">Address</label>
-                  <textarea class="form-control" id="addTeacherModalAddress" rows="4"></textarea>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddTeacherModalUpdate" >Add</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Save Data modal -->
-      <div class="row">
-        <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="saveLabel">Save</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnSaveModalClose1">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" id="saveModalBody">
-                Are you sure you want to continue?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSaveModalClose2">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSaveModalUpdate">Save</button>
               </div>
             </div>
           </div>
@@ -692,7 +300,6 @@
                     <!--Lessons form panel-->        
                     <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn" >
                       <h4 class="multitabs-form__title">Lessons 
-                        <!-- <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddLesson" data-toggle="modal" data-target="#addLessonModal" data-button-text="Add" data-title="Add New Lesson"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">add</i></a>  -->
                         <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestLessonDoc=null; removeElementsByClass('row lesson-wrapper'); LoadLessonInfo();"><i class="fas fa-redo fa-fw" style="color: #2e74b6;"></i></a>
                         <a class="btn btn-sm btn-outline-primary btn-round" onclick="generatePDFeKoopmans('lessonTop')"><i class="fas fa-file-download fa-fw" style="color: #2e74b6; font-size: 0.8rem;"></i></a>
 
@@ -700,11 +307,6 @@
                       <div class="multitabs-form__content">
 
                         <div class="col-md-12" id="lessonTop" style="padding: 0; margin-top: 1rem;">
-                          <!-- <div class="container" style="padding: 0rem 0rem 0rem 0rem; ">
-                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: auto 1rem 0 auto;">Class Details</span> 
-                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddLesson" data-toggle="modal" data-target="#addLessonModal" data-button-text="Add" data-title="Add New Lesson"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">add</i></a>
-                          </div> -->
-                          <!-- <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Details</span>  -->
 
                           <div class="container" id="lesson-container">
                             <!-- Lesson header -->
@@ -798,7 +400,7 @@
                         <div class="col-md-12">
                           <!-- Icon -->
                           <div class="form-group">
-                            <div style="height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%; cursor: pointer;">
+                            <div style="height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
                               <img id="tutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
                             </div>
                           </div>
@@ -814,7 +416,13 @@
 
                           <p id="inVenue" style="font-size: 14px; font-weight: 300; color: gray; margin-bottom: 12px;"></p>
 
-                          <p id="inTeacher" style="font-size: 14px; font-weight: 300; color: gray; margin-bottom: 12px;"></p>
+                          <p style="font-size: 14px; font-weight: 300; color: gray; margin-bottom: 12px;">
+                            <i class="fas fa-chalkboard-teacher fa-fw" style="margin-right:0.8rem"></i> Teacher(s)
+                          </p>
+                          <div id="inTeacher1" class="d-flex align-item-center" style="font-size: 14px; font-weight: 300; color: gray;"></div>
+
+                          <div id="inTeacher2" class="d-flex align-item-center" style="font-size: 14px; font-weight: 300; color: gray; display: none;"></div>
+
 
                           <p id="inTuitionFee" style="font-size: 14px; font-weight: 300; color: gray; margin-bottom: 12px;"></p>
 
@@ -841,7 +449,7 @@
                             <textarea class="form-control" maxlength="250" rows="3"  id="inVenue" data-compulsory="false" readonly></textarea>
                           </div> -->
 
-                          <div id="inUrlClassBlock" style="margin-bottom: 12px;">
+                          <div class="form-group" id="inUrlClassBlock" style="margin-bottom: 12px;">
                             <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Link</span>
                             <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
                               <span class="tooltiptext-general" style="left: 10%;">
@@ -854,20 +462,12 @@
                                 <img id='inUrlClassIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
                               </div>
                               <div class="mr-auto p-2" style="white-space: wrap; overflow: hidden; padding: 0!important;">
-                                <a href="#" id="inUrlClass" style="font-size: 12px；"></a>
+                                <a href="#" id="inUrlClass" style="font-size: small;"></a>
                               </div>
                             </div>
-                            <!-- <div class="input-group">
-                              <span class="d-flex align-items-center input-group-addon" id="inUrlClassIconWrapper" style="margin-right: 0.5em; cursor: pointer;" onclick="RedirectTo('')">
-                                <img id='inUrlClassIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
-                              </span>
-          
-                              <a href="#" id="inUrlClass" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"></a>
-                            </div> -->
                           </div>
 
-
-                          <div id="inUrlGroupBlock" style="margin-bottom: 12px;">
+                          <div class="form-group" id="inUrlGroupBlock" style="margin-bottom: 12px;">
                             <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Chat Group Link</span> 
                             <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
                               <span class="tooltiptext-general" style="left: 10%;">
@@ -880,12 +480,12 @@
                                 <img id='inUrlGroupIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
                               </div>
                               <div class="mr-auto p-2" style="white-space: wrap; overflow: hidden; padding: 0!important;">
-                                <a href="#" id="inUrlGroup" style="font-size: 12px；"></a>
+                                <a href="#" id="inUrlGroup" style="font-size: small;"></a>
                               </div>
                             </div>
                           </div>
 
-                          <div id="inUrlMaterialBlock" style="margin-bottom: 12px;">
+                          <div class="form-group" id="inUrlMaterialBlock" style="margin-bottom: 12px;">
                             <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Lesson Material Link </span>
                             <span class="tooltiptext-trigger" style="background-color: #2e74b6; padding: 0.2em 0.5em 0.2em 0.5em; color: white; border-radius: 20%; font-size: x-small; cursor: pointer;">? 
                               <span class="tooltiptext-general" style="left: 10%;">
@@ -893,13 +493,12 @@
                                 <p style="margin: 0; color: grey; line-height: 1.6; font-size: small;">Link to material that will be used for the class. I.e Google Classroom, Drive, or other storage places.</p>
                               </span> 
                             </span>
-  
                             <div class="d-flex align-items-center">
                               <div class="p-2" id="inUrlMaterialIconWrapper" style="margin-right: 0.5em; cursor: pointer; padding: 0!important;" onclick="RedirectTo('')">
                                 <img id='inUrlMaterialIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
                               </div>
                               <div class="mr-auto p-2" style="white-space: wrap; overflow: hidden; padding: 0!important;">
-                                <a href="#" id="inUrlMaterial" style="font-size: 12px；"></a>
+                                <a href="#" id="inUrlMaterial" style="font-size: small;"></a>
                               </div>
                             </div>
                           </div>
@@ -912,7 +511,6 @@
                     <!--Students form panel-->
                     <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                       <h4 class="multitabs-form__title">Students 
-                        <!-- <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddStudent" data-toggle="modal" data-target="#addStudentModal" data-button-text="Add" data-title="Add New Student"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">add</i></a>  -->
                         <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestStuDoc=null; removeElementsByClass('row student-wrapper'); loadAllStudents();"><i class="fas fa-redo fa-fw" style="color: #2e74b6;"></i></a>
                       </h4>
                       <div class="multitabs-form__content">
@@ -1102,7 +700,7 @@
                         <div class="form-group" >
                           <div class="form-check form-check-radio form-check-inline">
                             <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="exampleRadios" id="feeTypePerMonthRadio" value="option1" data-compulsory="false"  onclick="return false;">
+                              <input class="form-check-input" type="radio" name="exampleRadios" id="feeTypePerMonthRadio" value="option1" data-compulsory="false"  onclick="">
                               Per Month
                               <span class="circle">
                                 <span class="check"></span>
@@ -1111,7 +709,7 @@
                           </div>
                           <div class="form-check form-check-radio form-check-inline">
                             <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="exampleRadios" id="feeTypePerHourRadio" value="option2" data-compulsory="false" onclick="return false;">
+                              <input class="form-check-input" type="radio" name="exampleRadios" id="feeTypePerHourRadio" value="option2" data-compulsory="false" onclick="">
                               Per Hour
                               <span class="circle">
                                 <span class="check"></span>
@@ -1425,8 +1023,8 @@
 
 
       document.getElementById("inUrlClass").textContent = currentClassObj[CLASS_CLASS_URL];
+      document.getElementById("inUrlClass").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_CLASS_URL]+"')");
       document.getElementById("inUrlClass").src = currentClassObj[CLASS_CLASS_URL];
-
       if (isValidHttpUrl(currentClassObj[CLASS_CLASS_URL])){
         let uri = checkDomainNameException(currentClassObj[CLASS_CLASS_URL])
         document.getElementById("inUrlClassIcon").src = uri;
@@ -1442,6 +1040,7 @@
       }
 
       document.getElementById("inUrlGroup").textContent = currentClassObj[CLASS_CHAT_GROUP_URL];
+      document.getElementById("inUrlGroup").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_CHAT_GROUP_URL]+"')");
       document.getElementById("inUrlGroup").src = currentClassObj[CLASS_CHAT_GROUP_URL];
       if (isValidHttpUrl(currentClassObj[CLASS_CHAT_GROUP_URL])){
         let uri = checkDomainNameException(currentClassObj[CLASS_CHAT_GROUP_URL])
@@ -1454,6 +1053,7 @@
       }
 
       document.getElementById("inUrlMaterial").textContent = currentClassObj[CLASS_MATERIAL_URL];
+      document.getElementById("inUrlMaterial").setAttribute("onclick", "RedirectTo('"+currentClassObj[CLASS_MATERIAL_URL]+"')");
       document.getElementById("inUrlMaterial").src = currentClassObj[CLASS_MATERIAL_URL];
       if (isValidHttpUrl(currentClassObj[CLASS_MATERIAL_URL])){
         let uri = checkDomainNameException(currentClassObj[CLASS_MATERIAL_URL])
@@ -1533,14 +1133,94 @@
       tutor2Name = currentClassObj[CLASS_TUTOR_NAME_ARR][1];
       tutor2Phone = currentClassObj[CLASS_TUTOR_PHONE_ARR][1];
 
-      let inTeacher = "";
-      if (currentClassObj[CLASS_TUTOR_NAME_ARR][1] == null || currentClassObj[CLASS_TUTOR_NAME_ARR][1] == ""){
-        inTeacher= currentClassObj[CLASS_TUTOR_NAME_ARR][0];
-      }else {
-        inTeacher= currentClassObj[CLASS_TUTOR_NAME_ARR][0] + ", " +  currentClassObj[CLASS_TUTOR_NAME_ARR][1];
+      // Tutor Panel
+      
+      let inTeacher1Logo = document.createElement('i');
+      inTeacher1Logo.setAttribute("style", "margin-right:0.8rem");
+      inTeacher1Logo.className = "fas fa-chalkboard-teacher fa-fw";
+      let inTeacher1LogoSpan = document.createElement('span');
+      inTeacher1LogoSpan.appendChild(inTeacher1Logo);
+      let inTeacher1Img = document.createElement('img');
+      inTeacher1Img.setAttribute("style", "height: 100%;width: 100%; object-fit: cover;" );
+      let inTeacher1ImgSpan = document.createElement('span');
+      inTeacher1ImgSpan.setAttribute("style", "height: 25px;width: 25px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;")
+      let inTeacher1NameSpan = document.createElement('span');
+      inTeacher1NameSpan.setAttribute("style", "padding-left: 8px;")
+      
+      if (currentClassObj[CLASS_TUTOR_NAME_ARR][0] != null && currentClassObj[CLASS_TUTOR_NAME_ARR][0] != ""){
+
+        let tutor1ImgUrlInvalid = tutorImgUrlChecker(currentClassObj[CLASS_TUTOR_IMG_URL_ARR][0]);
+        // Check if img is valid. If no, create a 2 chars avatar
+        if (currentClassObj[CLASS_TUTOR_IMG_URL_ARR][0] == null || currentClassObj[CLASS_TUTOR_IMG_URL_ARR][0] == "" || tutor1ImgUrlInvalid){
+          let AvatarText = currentClassObj[CLASS_TUTOR_NAME_ARR][0][0] + currentClassObj[CLASS_TUTOR_NAME_ARR][0][1];
+          inTeacher1Img.setAttribute("src", generateAvatar(AvatarText, "#eaeaea", "#a8a8a8", "100px"));
+        }else {
+          inTeacher1Img.setAttribute("src", currentClassObj[CLASS_TUTOR_IMG_URL_ARR][0]);
+        }
+        inTeacher1ImgSpan.appendChild(inTeacher1Img)
+        inTeacher1NameSpan.textContent = currentClassObj[CLASS_TUTOR_NAME_ARR][0];
+
+        let inTeacher1ImgDiv = document.createElement("div")
+        inTeacher1ImgDiv.className = "p-2 flex-grow-1";
+        inTeacher1ImgDiv.setAttribute("style", "padding: 0 0.1rem!important")
+        inTeacher1ImgDiv.appendChild(inTeacher1ImgSpan);
+
+        let inTeacher1NameDiv = document.createElement("div")
+        inTeacher1NameDiv.className = "p-2";
+        inTeacher1NameDiv.setAttribute("style", "padding: 0 0.1rem !important");
+        inTeacher1NameDiv.appendChild(inTeacher1NameSpan);
+        // document.getElementById("inTeacher1").appendChild(inTeacher1LogoSpan)
+        document.getElementById("inTeacher1").appendChild(inTeacher1ImgDiv)
+        document.getElementById("inTeacher1").appendChild(inTeacher1NameDiv)
+        document.getElementById("inTeacher1").style.display = "";
       }
-      let inTeacherFinal = "<i class='fas fa-chalkboard-teacher fa-fw' style='margin-right:0.8rem'></i>" + inTeacher;
-      document.getElementById("inTeacher").innerHTML = inTeacherFinal;
+      else {
+        document.getElementById("inTeacher1").style.display = "none";
+      }
+
+      let inTeacher2Logo = document.createElement('i');
+      inTeacher2Logo.setAttribute("style", "margin-right:0.8rem");
+      inTeacher2Logo.className = "fas fa-chalkboard-teacher fa-fw";
+      let inTeacher2Img = document.createElement('img');
+      inTeacher2Img.setAttribute("style", "height: 100%;width: 100%; object-fit: cover;" );
+      let inTeacher2ImgSpan = document.createElement('span');
+      // inTeacher2ImgSpan.className = "p-2 flex-grow-1";
+      inTeacher2ImgSpan.setAttribute("style", "height: 25px; width: 25px; display: inline-block; overflow: hidden; border-radius: 50%;")
+      let inTeacher2NameSpan = document.createElement('span');
+      inTeacher2NameSpan.setAttribute("style", "padding-left: 8px;  display: inline-block;")
+
+      if (currentClassObj[CLASS_TUTOR_NAME_ARR][1] != null && currentClassObj[CLASS_TUTOR_NAME_ARR][1] != ""){
+
+        let tutor2ImgUrlInvalid = tutorImgUrlChecker(currentClassObj[CLASS_TUTOR_IMG_URL_ARR][1]);
+        // Check if img is valid. If no, create a 2 chars avatar
+        if (currentClassObj[CLASS_TUTOR_IMG_URL_ARR][1] == null || currentClassObj[CLASS_TUTOR_IMG_URL_ARR][1] == "" || tutor2ImgUrlInvalid){
+          let AvatarText = currentClassObj[CLASS_TUTOR_NAME_ARR][1][0] + currentClassObj[CLASS_TUTOR_NAME_ARR][1][1];
+          inTeacher2Img.setAttribute("src", generateAvatar(AvatarText, "#eaeaea", "#a8a8a8", "100px"));
+        }else {
+          inTeacher2Img.setAttribute("src", currentClassObj[CLASS_TUTOR_IMG_URL_ARR][1]);
+        }
+
+        // inTeacher2Img.setAttribute("src", currentClassObj[CLASS_TUTOR_IMG_URL_ARR][1]);
+        inTeacher2ImgSpan.appendChild(inTeacher2Img)
+        inTeacher2NameSpan.textContent = currentClassObj[CLASS_TUTOR_NAME_ARR][1];
+        
+        let inTeacher2ImgDiv = document.createElement("div")
+        inTeacher2ImgDiv.className = "p-2 flex-grow-1";
+        inTeacher2ImgDiv.setAttribute("style", "padding: 0 0.1rem!important")
+        inTeacher2ImgDiv.appendChild(inTeacher2ImgSpan)
+        let inTeacher2NameDiv = document.createElement("div")
+        inTeacher2NameDiv.className = "p-2";
+        inTeacher2NameDiv.setAttribute("style", "padding: 0 0.1rem !important");
+        inTeacher2NameDiv.appendChild(inTeacher2NameSpan);
+
+        // document.getElementById("inTeacher2").appendChild(inTeacher2Logo)
+        document.getElementById("inTeacher2").appendChild(inTeacher2ImgDiv)
+        document.getElementById("inTeacher2").appendChild(inTeacher2NameDiv)
+        document.getElementById("inTeacher2").style.display = "";
+      }
+      else {
+        document.getElementById("inTeacher2").style.display = "none";
+      }
 
       // Fee Panel
       // document.getElementById("inFee").value = currentClassObj[FEES_KEY];
@@ -1630,82 +1310,6 @@
       loadAllStudents();
     }
     stuLoadmore.addEventListener('click', stuLoadMoreHandleClick );
-
-		// firebase.auth().onAuthStateChanged(function(user){
-      
-		// 	if(!user){
-    //     // Return to login if user does not exist.
-		// 		window.location.href = "./login.html"
-		// 	}else{
-    //     // if the displayName is null, it means user register using Phone
-    //     if (firebase.auth().currentUser.displayName == null ){
-    //         userId = firebase.auth().currentUser.phoneNumber;
-    //     }else
-    //         userId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-
-    //     loadUserInfo(userId);
-
-		// 	}
-		// });
-
-
-    //---------- Init All Admin's Student details ----------//
-    // Lesson Load More Button - Init
-    const stuAdminLoadmore = document.querySelector('#btnAddAdminStudentModalLoadMore');
-    stuAdminLoadmore.style.visibility='hidden';
-
-    const stuAdminLoadMoreHandleClick = () =>{
-      loadAllAdminStudents();
-    }
-    stuAdminLoadmore.addEventListener('click', stuAdminLoadMoreHandleClick );
-
-
-    // // User Specific
-    // function loadUserInfo(userId){
-    //   // Tutor Id must be a phone with +60, no spacing or other chars
-    //   var docRef = db.collection("Users").doc(userId);
-      
-    //   // docRef.get().then((doc) => {
-    //   docRef.onSnapshot((doc) => {
-    //     if (doc.exists) {
-    //       // console.log("Document data:", doc.data());
-    //       current_name = (doc.data().name == null || doc.data().name == "")? "New User" : doc.data().name;
-    //       current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email;
-    //       current_phone = (doc.data().phone == null || doc.data().phone == "")? "" : doc.data().phone; 
-    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/empty-photo.png" : doc.data().imgUrl;
-    //       current_address1= (doc.data().address1 == null || doc.data().address1 == "")? '' : doc.data().address1 + ', ';
-    //       current_address2= (doc.data().address2 == null || doc.data().address2 == "")? '' : doc.data().address2 + ', '; 
-    //       current_addressPostCode= (doc.data().addressPostCode == null || doc.data().addressPostCode == "")? '' : doc.data().addressPostCode + ', ';
-    //       current_addressState= (doc.data().addressState == null || doc.data().addressState == "")? '' : doc.data().addressState;
-    //       current_address = current_address1 + current_address2 + current_addressPostCode + current_addressState;
-
-    //       // Store data to sessionStorage
-    //       // var tutorDataObj = {
-    //       //   [NAME_KEY] : doc.data().name,
-    //       //   [EMAIL_KEY] : doc.data().email,
-    //       //   [PHONE_KEY] : doc.data().phone,
-    //       //   [ADDRESS_1_KEY] :doc.data().address1,
-    //       //   [ADDRESS_2_KEY] :doc.data().address2,
-    //       //   [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
-    //       //   [ADDRESS_STATE_KEY] :doc.data().addressState,
-    //       //   [IMAGE_KEY] : doc.data().imgUrl,
-    //       //   [PROFILE_STATUS_KEY] : doc.data().profileStatus,
-    //       // }
-
-    //       // Set tutorInfoObj as sessionStorage
-    //       // sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
-
-    //       // Set the nav user name and public profile link
-    //       document.getElementById("user").textContent = doc.data().name;
-    //     } 
-    //     else {
-    //       console.log("No user! Redirecting to login");
-    //       window.location = "login.html"
-          
-    //     }
-    //   });
-    // };
-
 
     // Add Time Slot
     function addTimeSlot(dayOfWeekVal, startTime, endTime){
@@ -2050,8 +1654,6 @@
       btn_a.setAttribute('id', "btnRemoveTimeSlot");
       btn_a.setAttribute('href', "#");
       btn_a.setAttribute('style', "margin-top: 1rem;");
-      btn_a.setAttribute('data-toggle', 'modal');
-      btn_a.setAttribute('data-target', '#delLessonModal');
       btn_a.setAttribute('data-id', doc.data().id);
       btn_a.setAttribute('data-lessondate', doc.data().lesDate.toDate().toLocaleDateString("en-GB"));
       
@@ -2537,8 +2139,6 @@
       del_btn.className = "btn btn-sm btn-outline-danger btn-round";
       del_btn.innerHTML = blogsHtml_btn;
       del_btn.setAttribute('type','button')
-      del_btn.setAttribute('data-toggle','modal');
-      del_btn.setAttribute('data-target','#delStudentModal');
       del_btn.setAttribute('data-id', doc.data()[CLASS_STUDENT_ID]);
       del_btn.setAttribute('data-stuname', doc.data()[CLASS_STUDENT_STU_NAME]);
       del_btn.setAttribute('data-stuid', doc.data()[CLASS_STUDENT_STU_ID]);
@@ -3379,6 +2979,37 @@
       html2pdf().set(opt).from(report).save();
     }
 
+    // This function check the validity of imgUrl. Return true when invalid.
+    function tutorImgUrlChecker(imgUrl){
+      let isHelloGifExist = false ;
+      let helloGifArr =  imgUrl.match(/hello.gif/gi)
+      if ( helloGifArr != null) {
+        if (helloGifArr.length > 0){
+          isHelloGifExist = true;
+        }
+      }
+      let isEmptyPhotoPngExist = false;
+      let emptyPhotoPngArr = imgUrl.match(/empty-photo.png/gi)
+      if ( emptyPhotoPngArr != null) {
+        if (emptyPhotoPngArr.length > 0){
+          isEmptyPhotoPngExist = true;
+        }
+      }
+      let isGeneratedAvatar = false; 
+      let generatedAvatarArr = imgUrl.match(/data:image\/png;base64,/gi)
+      if ( generatedAvatarArr != null) {
+        if (generatedAvatarArr.length > 0){
+          isGeneratedAvatar = true;
+        }
+      }
+
+      if (isHelloGifExist || isEmptyPhotoPngExist || isGeneratedAvatar)
+        return true;
+      else
+        return false;
+    }
+
+
   </script>
 
   <!-- Script -->
@@ -3641,51 +3272,6 @@
         initTimePicker()
       });
 
-      // Add / Edit Lesson Modal
-      $('#addLessonModal').on('show.bs.modal', function (event) {
-        // var button = $(event.relatedTarget) // Button that triggered the modal
-        // KEY = button.data('key') // Extract info from data-* attributes
-        // DATETIME = button.data('datetime') // Extract info from data-* attributes
-
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        // var modal = $(this)
-        // modal.find('.modal-title').text(DATETIME)
-        // modal.find('.modal-body input').val(KEY);
-
-      });
-
-      // Add Lesson Modal: Add new lesson
-      $('#btnAddLessonModalUpdate').on('click', function (event) {
-        let validateField = ValidateFields('addLessonModal');
-        if (validateField){
-          let newLessonId = UploadToDBLesson();
-
-          $('#addLessonModal').modal('hide');
-
-          // if (newLessonId === null || newLessonId ===''){
-          //   alert('Error: Add lesson failed. Please try again.')
-          // }else{
-          //   // addLesson('NEW', null, newLessonId);
-          // }
-          
-         
-        }else{
-          // Do nothing
-        }
-      });
-
-      // Add Lesson Modal: Clear fields
-      $('#addLessonModal').on('hide.bs.modal', function (event) {
-        document.getElementById('datepicker').value = '';
-        document.getElementById('addLessonStart').value = '';
-        document.getElementById('addLessonEnd').value = '';
-        document.getElementById('addLessonDesc').value = '';
-        document.getElementById('addLessonFeedback').value = '';
-        $('#addLessonRate').rating('reset').val();
-        $('#btnAddLessonModalUpdate').prop('disabled', true); 
-      });
-
       $('#datepicker').on('change', function(){
         // console.log($(this).val().length)
         if( $(this).val().length === 0 || $('#addLessonStart').val().length === 0 || $('#addLessonEnd').val().length === 0) {
@@ -3800,161 +3386,6 @@
       $('#editLessonRate').on('change', function(){
         // $('#addLessonModal').modal('hide');
       })
-
-      // Show Remove Lesson Modal
-      $('#delLessonModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        CURRENT_LESSON_ID = button.data('id') // Extract info from data-* attributes
-        CURRENT_LESSON_DATE = button.data('lessondate') // Extract info from data-* attributes
-
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('Deleting lesson on '+ CURRENT_LESSON_DATE)
-        document.getElementById("deleteLessonId").setAttribute('value', CURRENT_LESSON_ID);
-
-      });
-
-      // Remove Lesson from class
-      $('#btnDelLessonModalUpdate').on('click', function (event) {
-        let lessonId =  document.getElementById("deleteLessonId").getAttribute('value');
-        RemoveLesson();
-
-      });
-
-      // Remove Lesson Modal: Clear key and fields in modal when modal dismiss
-      $('#delLessonModal').on('hide.bs.modal', function (event) {
-        CURRENT_LESSON_ID = "";
-        CURRENT_LESSON_DATE = "";
-      });
-
-
-      // Load all Admin Students
-      $('#addStudentModal').on('show.bs.modal', function (event) {
-        latestAdminStuDoc = null;
-        loadAllAdminStudents();
-      });
-
-      // Remove all Admin Students when the Add Student Modal close
-      $('#addStudentModal').on('hidden.bs.modal', function (event) {
-        // NOTE: div:gt(4) - get the 5th div child in the parent node.
-        $('#add-student-modal-container div:gt(4)').remove();
-
-      });
-
-     // Remove Student from class Modal show
-     $('#delStudentModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        STUDENT_CLASS_ID = button.data('id') // Extract info from data-* attributes
-        STUDENT_ID = button.data('stuid') // Extract info from data-* attributes
-        STUDENT_NAME = button.data('stuname') // Extract info from data-* attributes
-        GUARDIAN_ID = button.data('gurid') // Extract info from data-* attributes
-
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('Deleting '+ STUDENT_NAME)
-        document.getElementById("deleteStudentClassId").setAttribute('value', STUDENT_CLASS_ID);
-        document.getElementById("deleteStudentName").setAttribute('value', STUDENT_NAME);
-        document.getElementById("deleteStudentId").setAttribute('value', STUDENT_ID);
-        document.getElementById("deleteGuardianId").setAttribute('value', GUARDIAN_ID);
-
-      });
-
-     // Remove Student from class
-     $('#btnDelStudentModalUpdate').on('click', function (event) {
-        let studentClassId =  document.getElementById("deleteStudentClassId").getAttribute('value');
-        let studentName =  document.getElementById("deleteStudentName").getAttribute('value');
-        let studentId =  document.getElementById("deleteStudentId").getAttribute('value');
-        let guardianId =  document.getElementById("deleteGuardianId").getAttribute('value');
-        console.log(studentClassId, studentName, studentId, guardianId );
-        removeStudent(studentClassId, studentName, studentId, guardianId );
-
-      });
-
-     // Remove Student Modal: Clear key and fields in modal when modal dismiss
-     $('#delStudentModal').on('hide.bs.modal', function (event) {
-        STUDENT_ID = "";
-        STUDENT_NAME = "";
-      });
-
-
-
-     // Edit Students
-     $('#editStudentModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        STUDENT_ID = button.data('id') // Extract info from data-* attributes
-        STUDENT_NAME = button.data('stuname') // Extract info from data-* attributes
-        STUDENT_ENROLLMENT_STATUS = button.data('enrollmentstatus')
-
-        console.log(STUDENT_ID);
-        console.log(STUDENT_NAME);
-        console.log(STUDENT_ENROLLMENT_STATUS);
-        console.log(allClassStuDoc);
-
-
-        // Find the right students from allClassStuDoc based on the student id
-        let selectedClassStuDoc = null;
-
-        allClassStuDoc.forEach((doc) => {
-          console.log(doc);
-          if (STUDENT_ID === doc.id){
-            selectedClassStuDoc = doc;
-          }
-        });
-
-        document.getElementById("editStudentId").setAttribute('value', STUDENT_ID);
-        document.getElementById("editStudentEnrollmentStatus").setAttribute('value', STUDENT_ENROLLMENT_STATUS);
-
-        document.getElementById("stuName").value = selectedClassStuDoc.stuName;
-        document.getElementById("stuPhone").value = selectedClassStuDoc.stuPhone;
-        document.getElementById("stuEmail").value = selectedClassStuDoc.stuEmail; 
-        document.getElementById("stuGenderMale").checked = selectedClassStuDoc.stuGender === 0 ? true : false;
-        document.getElementById("stuGenderFemale").checked = selectedClassStuDoc.stuGender === 1 ? true : false;
-        document.getElementById("gurName").value = selectedClassStuDoc.gurName;
-        document.getElementById("gurPhone").value = selectedClassStuDoc.gurPhone;
-        document.getElementById("gurEmail").value = selectedClassStuDoc.gurEmail;
-        document.getElementById("gurAddr").value = selectedClassStuDoc.gurAddr;
-        document.getElementById("stuFeedback").value = selectedClassStuDoc.feedback;
-
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        
-        if (STUDENT_ENROLLMENT_STATUS === CLASS_STUDENT_ENROLLMENT_STATUS_PENDING){
-          modal.find('.modal-title').text('New Student: '+STUDENT_NAME)
-          document.getElementById("btnEditStudentModalUpdate").setAttribute('class', 'btn btn-warning');
-          document.getElementById("btnEditStudentModalUpdate").textContent = 'Approve New Student'
-        }else if (STUDENT_ENROLLMENT_STATUS === CLASS_STUDENT_ENROLLMENT_STATUS_ACTIVE){
-          modal.find('.modal-title').text(STUDENT_NAME)
-          document.getElementById("btnEditStudentModalUpdate").setAttribute('class', 'btn btn-primary');
-          document.getElementById("btnEditStudentModalUpdate").textContent = 'Update'
-        }else{
-          modal.find('.modal-title').text(STUDENT_NAME)
-          document.getElementById("btnEditStudentModalUpdate").setAttribute('class', 'btn btn-primary');
-          document.getElementById("btnEditStudentModalUpdate").textContent = 'Update'
-        }
-
-
-      });
-
-      // Update Student's Feedback from class
-      $('#btnEditStudentModalUpdate').on('click', function (event) {
-        let studentId =  document.getElementById("editStudentId").getAttribute('value');
-        let studentFeedback =  document.getElementById("stuFeedback").value;
-        let studenEnrollmentStatus=  document.getElementById("editStudentEnrollmentStatus").value;
-
-        // console.log()
-        updateStudent(studentId, studentFeedback, studenEnrollmentStatus);
-
-      });
-
-      // Remove Student Modal: Clear key and fields in modal when modal dismiss
-      $('#editStudentModal').on('hide.bs.modal', function (event) {
-        STUDENT_ID = "";
-        STUDENT_NAME = "";
-      });
-
 
       $('#btnSignOutModalUpdate').on('click', function (e) {
         firebase.auth().signOut().then(() => {
@@ -4324,52 +3755,6 @@
         }
       }
     };
-
-    // const addLessonModalDatePicker = MCDatepicker.create({
-    //   el: '#datepicker',
-    //   bodyType: 'inline',
-    //   dateFormat: 'dd/mm/yyyy', //dateFormat: 'dddd, dd mmmm yyyy', 
-    //   selectedDate: new Date(),
-    //   firstWeekday: 1,
-    //   minDate: new Date(2020, 0, 1),
-
-    //   theme: calendarTheme
-    // });
-    // const editLessonModalDatePicker = MCDatepicker.create({
-    //   el: '#editLessonDatepicker',
-    //   bodyType: 'inline',
-    //   dateFormat: 'dd/mm/yyyy',
-    //   selectedDate: new Date(),
-    //   firstWeekday: 1,
-    //   minDate: new Date(2020, 0, 1),
-    //   theme: calendarTheme
-    // });
-
-    // const datepickerBTN = document.querySelector('#datepicker_btn');
-    // datepickerBTN.onclick = () => {
-    //   firstDatePicker.open();
-    // };
-
-    // Close the datepicker if we clicked on other components
-    // document.querySelector('#addLessonModal').addEventListener('click', e => {
-    //   const eventTarget = e.target;
-    //   if (!(eventTarget.id == "datepicker"))// || eventTarget.id == "datepicker_btn"))
-    //   {
-    //     addLessonModalDatePicker.close();
-    //   }
-    //   else{
-    //   }
-    // });
-    // Close the datepicker if we clicked on other components
-    // document.querySelector('#editLessonModal').addEventListener('click', e => {
-    //   const eventTarget = e.target;
-    //   if (!(eventTarget.id == "editLessonDatepicker"))// || eventTarget.id == "datepicker_btn"))
-    //   {
-    //     editLessonModalDatePicker.close();
-    //   }
-    //   else{
-    //   }
-    // });
 
   </script>
 
