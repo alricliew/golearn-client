@@ -3593,9 +3593,7 @@
       // Print Items
       // Print Additional Items
       additionalItem.forEach((item) => {
-        console.log(item)
         let component = item.split(";; ")
-
         let additionalSelector = component[0];
         let additionalItem = component[1];
         let additionalItemValue = component[2];
@@ -3605,11 +3603,9 @@
           // Do nothing
         }
         else if (additionalSelector === 'Discount ( - )'){
-          console.log(additionalItem, amount);
           printAdditionalItem(additionalItem, amount);
         }
         else if (additionalSelector === 'Tax Rate (%)'){
-          console.log(additionalItem+' ('+additionalItemValue +'%)', amount);
           printAdditionalItem(additionalItem+' ('+additionalItemValue +'%)', amount);
         }
         else 

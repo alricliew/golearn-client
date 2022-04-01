@@ -537,7 +537,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="saveLabel">Approve Invoice</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnApproveDraftModalCancel1">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -545,8 +545,8 @@
                 Are you sure you want to continue?
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnApproveDraftModalUpdate">Approve</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnApproveDraftModalCancel2">Cancel</button>
+                <button type="button" class="btn btn-primary" id="btnApproveDraftModalUpdate">Approve</button>
               </div>
             </div>
           </div>
@@ -881,7 +881,7 @@
                     </div>
 
                     <div class="col-md-6 text-right">
-                      <a href="javascript:;" class="btn btn-outline-primary btn-round" data-toggle='modal' data-target='#approveDraftModal' style="background-color: #2e74b6; color:white; text-transform: none;" id="btnApproveDraft">Approve Draft</a>
+                      <button class="btn btn-outline-primary btn-round" style="background-color: #2e74b6; color:white; text-transform: none;" id="btnApproveDraft">Approve Draft</button>
                       <a href="javascript:;" class="btn btn-outline-primary btn-round" style="text-transform: none;" id="btnEditInvoice">Edit Invoice</a>
     
                     </div>
@@ -1655,8 +1655,6 @@
       previewItemBody.appendChild(tr);
     }
 
-
-
     // Print Preview
     function printPreview(invData){
 
@@ -1741,9 +1739,8 @@
       // Print Items
       // Print Additional Items
       additionalItem.forEach((item) => {
-        console.log(item)
-        let component = item.split(";; ")
 
+        let component = item.split(";; ")
         let additionalSelector = component[0];
         let additionalItem = component[1];
         let additionalItemValue = component[2];
@@ -1753,11 +1750,9 @@
           // Do nothing
         }
         else if (additionalSelector === 'Discount ( - )'){
-          console.log(additionalItem, amount);
           printAdditionalItem(additionalItem, amount);
         }
         else if (additionalSelector === 'Tax Rate (%)'){
-          console.log(additionalItem+' ('+additionalItemValue +'%)', amount);
           printAdditionalItem(additionalItem+' ('+additionalItemValue +'%)', amount);
         }
         else 
@@ -1847,8 +1842,6 @@
       wrapper.setAttribute("style", "padding: 0.5rem; ")
       wrapper.appendChild(cln);
 
-
-
       var opt = {
         margin:       0,
         filename:     'invoice.pdf',
@@ -1871,7 +1864,7 @@
       .get()
       .then((doc) => {
         // Hide loading modal
-        $('#loadingModal').modal('hide');
+        // $('#loadingModal').modal('hide');
 
         if (doc.exists) {
           // console.log(doc.data())
@@ -2391,8 +2384,26 @@
       });
 
       // Approve Draft
+      // data-toggle='modal' data-target='#approveDraftModal' 
+      $('#btnApproveDraft').on('click', function (event) {
+        $('#approveDraftModal').modal({
+          backdrop:'static',
+          keyboard:false
+        });
+        $('#approveDraftModal').modal('show')
+      });
+      $('#btnApproveDraftModalCancel1').on('click', function (event) {
+        $('#approveDraftModal').modal('hide')
+      });
+      $('#btnApproveDraftModalCancel2').on('click', function (event) {
+        $('#approveDraftModal').modal('hide')
+      });
+
       $('#btnApproveDraftModalUpdate').on('click', function (event) {
-        
+        var month; // month of current invoice in YYYYMM
+        document.getElementById('btnApproveDraftModalUpdate').setAttribute("disabled", "true");
+        document.getElementById('btnApproveDraftModalUpdate').textContent = "Approving. Please wait ...";
+
         var invDocRef = db.collection("Financial")
           .doc("v1")
           .collection("Invoice")
@@ -2408,27 +2419,15 @@
           [INV_DATE_EDIT]: new Date()
         }
 
-        console.log("*Invoice Data...")
-        console.log(invData)
-
-        // invDocRef.set(invData, { merge: true })
-        // .then(() => {
-        //   // reload views
-        //   reload();
-        // });
+        // console.log("*Invoice Data...")
+        // console.log(invData)
 
         var transData = {
           [TRANS_DOC_STATUS]: TRANS_INV_STATUS_NEW,
           [TRANS_DATE_EDIT]: new Date()
         }
-        console.log("Transaction Data...")
-        console.log(transData)
-
-       // transDocRef.set(transData, { merge: true })
-        // .then(() => {
-        //   // window.location.href='./'
-        //   func.showNotification('top','center', 'success', 'check_circle', "Invoice approved" );
-        // });
+        // console.log("Transaction Data...")
+        // console.log(transData)
 
         // Set the value of 'Invoice'
         batch.set(invDocRef, invData, { merge: true });
@@ -2436,12 +2435,7 @@
         // Set the value of 'Transaction'
         batch.set(transDocRef, transData, { merge: true });
 
-        // batch.commit().then(() => {
-        //   reload();
-        //   // window.location.href='./view.html'
-        //   // $('#loadingModal').modal('hide');
-        // });
-
+        // Get the report list
         let reportList = getReportList2(currentInvoiceObj[INV_ITEMS_ARR]);
 
         // Get the Report documents with the similar invoice id, and 
@@ -2455,62 +2449,279 @@
 
         reportDocRef
           .get()
+          // Get All invoice. This step is UNUSED because when the time approve, there should not be any report created yet.
+          // In case yes, we want to remove them, so we can later add it back.
           .then((querySnapshot) => {
             //   { "name": "<className> / tag", "refId":"<classId1>/uncategorized"  , "type": "cat / tag / org"  , "total": 100 },
 
             // get all the data in json array
             let docItemJsonList = [];
-            querySnapshot.forEach((doc) => {
-              let docItemJson = {};
 
-              console.log(doc.data());
+            if (querySnapshot.size > 0){
 
-              // Remove the invId from the REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR
-              let invDocIdIndex = doc.data()[REV_DOC_ID_ARR].indexOf(invId);
-              let invDocIdArr = doc.data()[REV_DOC_ID_ARR];
-              let invDocTotalArr = doc.data()[REV_DOC_TOTAL_ARR];
+              querySnapshot.forEach((doc) => {
+                let docItemJson = {};
 
-              invDocIdArr.splice(invDocIdIndex, 1);
-              invDocTotalArr.splice(invDocIdIndex, 1);
+                console.log(doc.data());
 
-              // Construct the new data
-              let revData ={
-                // [REV_ID]: ,
-                // [REV_ADMIN_ID]: ,
-                // [REV_NAME]: document.getElementById("invBizDetails").textContent,                
-                // [REV_REF_ID]: document.getElementById("invClientName").textContent,
-                // [REV_TYPE]: ,
-                // [REV_MONTH]: document.getElementById("invTitle").value,
-                // [REV_TOTAL]: document.getElementById("invNum").value,
-                [REV_DOC_ID_ARR]: invDocIdArr,
-                [REV_DOC_TOTAL_ARR]: invDocTotalArr,
-                [REV_DATE_EDIT]: new Date(),
-                // [REV_STATUS]: true
-              }
+                // Remove the invId from the REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR
+                let invDocIdIndex = doc.data()[REV_DOC_ID_ARR].indexOf(invId);
+                let invDocIdArr = doc.data()[REV_DOC_ID_ARR];
+                let invDocTotalArr = doc.data()[REV_DOC_TOTAL_ARR];
 
-              // Update it through batch 
-              let revenueDocRef = db.collection("Report")
-                .doc("v1")
-                .collection("Revenue")
-                .doc(doc.id);
-              batch.set(revenueDocRef, revData, { merge: true });
+                invDocIdArr.splice(invDocIdIndex, 1);
+                invDocTotalArr.splice(invDocIdIndex, 1);
+
+                // Construct the new data
+                let revData ={
+                  // [REV_ID]: ,
+                  // [REV_ADMIN_ID]: ,
+                  // [REV_NAME]: document.getElementById("invBizDetails").textContent,                
+                  // [REV_REF_ID]: document.getElementById("invClientName").textContent,
+                  // [REV_TYPE]: ,
+                  // [REV_MONTH]: document.getElementById("invTitle").value,
+                  // [REV_TOTAL]: document.getElementById("invNum").value,
+                  [REV_DOC_ID_ARR]: invDocIdArr,
+                  [REV_DOC_TOTAL_ARR]: invDocTotalArr,
+                  [REV_DATE_EDIT]: new Date(),
+                  // [REV_STATUS]: true
+                }
+
+                // Update it through batch 
+                let revenueDocRef = db.collection("Report")
+                  .doc("v1")
+                  .collection("Revenue")
+                  .doc(doc.id);
+                batch.set(revenueDocRef, revData, { merge: true });
 
 
-            });
+              });
+
+
+
+            }else {
+              console.log('No report found')
+            }
+
+            return Promise.resolve(batch.commit());
 
             // Commit the batch
-            batch.commit().then(() => {
-              // window.location.href='./view.html'
-              // $('#loadingModal').modal('hide');
+            // batch.commit().then(() => {
+            //   // TODO:  
+            //   // Step 1: Get the ID of revDoc based on issuedDate, refId
+            //   // Step 2: Update the revDoc.
+            //   func.showNotification('top','center', 'success', 'check_circle', "Invoice approved" );
+            //   updateRevenueDoc(reportList, invId);
 
-              // TODO:  
-              // Step 1: Get the ID of revDoc based on issuedDate, refId
-              // Step 2: Update the revDoc.
-              func.showNotification('top','center', 'success', 'check_circle', "Invoice approved" );
-              updateRevenueDoc(reportList, invId);
+            // });
 
+          })
+
+          // ----- NEWLY ADDED ------- //
+          // Update Revenue =  Get all the revDoc based on 'month'
+          .then(() => {
+
+            // Step 1: Get all the revDoc based on 'month'
+            let issuedDate = new Date(currentInvoiceObj[INV_ISSUE_DATE].seconds*1000).toLocaleDateString("en-GB");
+            let issuedDateComponent = issuedDate.split('/');
+            month = parseInt(issuedDateComponent[2]+""+issuedDateComponent[1]);
+            // console.log(issuedDate)
+            console.log("Step 1: Get all the revDoc based on 'month' ")
+            console.log(month)
+      
+            let revenueDocList = []
+            let reportDocRef = db.collection("Report")
+              .doc("v1")
+              .collection("Revenue")
+              // .where(REV_REF_ID, "==", item.refId)
+              .where(REV_ADMIN_ID, "==", tutorId)
+              .where(REV_MONTH, "==", month)// YYYYMM
+              // .limit(1); 
+
+            return Promise.resolve(reportDocRef.get())
+            
+              
+          })
+          // Update Revenue - Compare the array of refId from revenueDoc in firestore to refId in reportlist in current inv
+          // Get the difference. 
+          .then((querySnapshot) => {
+            document.getElementById('btnApproveDraftModalUpdate').setAttribute("disabled", "true");
+            document.getElementById('btnApproveDraftModalUpdate').textContent = "Finalizing ...";
+
+            const promiseArr = [];
+            // Step 1: Compare the array of refId from revenueDoc in firestore to refId in reportlist in current inv
+            // Get the difference. 
+
+            // Example:
+            // arr1 =["1","2","3","4","5","6"]; // new Array 
+            // arr2 = ["3","4","5" ,"7"]; // Array from db
+            // Ref: https://stackoverflow.com/questions/1187518/how-to-get-the-difference-between-two-arrays-in-javascript
+            // let difference = arr1.filter(x => !arr2.includes(x));
+            // console.log(difference); // => [1, 2, 6]
+            let refIdRevenueDocList = [];
+
+            querySnapshot.forEach((doc) => {
+              refIdRevenueDocList.push(doc.data()[REV_REF_ID]);
+            });
+            console.log('refIdRevenueDocList', refIdRevenueDocList);
+
+            let refIdReportList = [];
+            reportList.forEach((item) => {
+              refIdReportList.push(item.refId);
+            })
+            console.log('refIdReportList', refIdReportList);
+
+            let differenceList = refIdReportList.filter(x => !refIdRevenueDocList.includes(x));
+            console.log('differenceList', differenceList);
+
+            console.log("Step  2.1 Update the existed reportDoc in batch")
+            // Step 2.1 Update the existed reportDoc in batch 
+            querySnapshot.forEach((doc) => {
+              console.log(doc.data());
+
+              // Check if the ID in local invoice items match with the one in revenueDoc.
+              // If match create a new data and push to new batch for update. 
+              // reportList json format:
+              // { 
+              //   "name": "<className1> / tagname1", 
+              //   "refId": "<classId1> / uncategorized", 
+              //   "type": "cat / tag / org",
+              //   "total": 100 
+              // }
+              reportList.forEach((item) => {
+
+                if (item.refId === doc.data()[REV_REF_ID]){
+
+                  let newInvDocIdArr = doc.data()[REV_DOC_ID_ARR];
+                  newInvDocIdArr.push(invId);
+                  let newInvDocTotalArr = doc.data()[REV_DOC_TOTAL_ARR];
+                  newInvDocTotalArr.push(item.total);
+                  
+                  let newTotal = newInvDocTotalArr.reduce((a, b) => a + b, 0);
+
+                  // Get all the revDoc based on 'month'
+                  let reportDocRef = db.collection("Report")
+                    .doc("v1")
+                    .collection("Revenue")
+                    .doc(doc.data()[REV_ID]);
+
+                  // Construct the new data
+                  let revData ={
+                    // [REV_ID]: ,
+                    // [REV_ADMIN_ID]: ,
+                    [REV_NAME]: item.name,   // Class name may changed             
+                    // [REV_REF_ID]: item.refId,
+                    // [REV_TYPE]: item.type,
+                    // [REV_MONTH]: ,
+                    [REV_TOTAL]: newTotal,
+                    [REV_DOC_ID_ARR]: newInvDocIdArr,
+                    [REV_DOC_TOTAL_ARR]: newInvDocTotalArr,
+                    [REV_DATE_EDIT]: new Date(),
+                    [REV_STATUS]: true
+                  }
+
+                  promiseArr.push(reportDocRef.set(revData, { merge: true }))
+
+                  // batchUpdate.set(reportDocRef, revData, { merge: true });
+
+                } else{
+                  // Do nothing
+                }
+
+              });
 
             });
+
+            // // Commit the batch
+            // batchUpdate.commit().then(() => {
+
+            // });
+
+            console.log("Step  2.2 Create a new reportDoc for each item in differenceList")
+            // Step 2.2 Create a new reportDoc for each item in differenceList
+            if (differenceList.length>0){
+              differenceList.forEach((diffItem, diffIndex) => {
+
+                // console.log("diffIndex: " + diffIndex )
+                reportList.forEach((item, index) => {
+                  
+                  if (item.refId === diffItem){
+
+                    // console.log("reportindex: " + index);
+                    
+                    let newInvDocIdArr = [];
+                    newInvDocIdArr.push(invId);
+                    let newInvDocTotalArr = [];
+                    newInvDocTotalArr.push(item.total);
+                    
+                    let newTotal = newInvDocTotalArr.reduce((a, b) => a + b, 0);
+
+                    // Get all the revDoc based on 'month'
+                    let reportDocRef = db.collection("Report")
+                      .doc("v1")
+                      .collection("Revenue")
+                      .doc();
+
+                    console.log("Updating: " + item.refId + "  - "+ reportDocRef.id);
+                    // Construct the new data
+                    let revData ={
+                      [REV_ID]: reportDocRef.id,
+                      [REV_ADMIN_ID]: tutorId,
+                      [REV_NAME]: item.name,             
+                      [REV_REF_ID]: item.refId,
+                      [REV_TYPE]: item.type,
+                      [REV_MONTH]: month,
+                      [REV_TOTAL]: newTotal,
+                      [REV_DOC_ID_ARR]: newInvDocIdArr,
+                      [REV_DOC_TOTAL_ARR]: newInvDocTotalArr,
+                      [REV_DATE_EDIT]: new Date(),
+                      [REV_STATUS]: true
+                    }
+
+                    // batchUpdateNew.set(reportDocRef, revData);
+                    promiseArr.push(reportDocRef.set(revData, { merge: true }))
+
+                  } 
+                  else{
+                    // Do nothing
+                  }
+
+
+                });
+
+
+              })
+            }
+            else {
+              // Do nothing
+              console.log("Step  2.2: empty differenceList ")
+            }
+
+            // console.log("Step  2.2: Commit new document ")
+            // // Create new document
+            // batchUpdateNew.commit().then(() => {
+            //   reload();
+            // });
+
+            return Promise.all(promiseArr);
+
+          })
+          // Reload
+          .then(() => {
+            document.getElementById('btnApproveDraftModalUpdate').setAttribute("disabled", "true");
+            document.getElementById('btnApproveDraftModalUpdate').textContent = "Almost there ...";
+
+            return Promise.resolve(reload());
+          })
+          // Complete
+          .then(() => {
+            document.getElementById('btnApproveDraftModalUpdate').removeAttribute("disabled");
+            document.getElementById('btnApproveDraftModalUpdate').textContent = "Approve";
+
+            
+            $('#approveDraftModal').modal('hide');
+
+            func.showNotification('top','center', 'success', 'check_circle', "Invoice approved" );
 
           })
           .catch((error) => {
