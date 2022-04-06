@@ -4176,7 +4176,7 @@
           .then((querySnapshot) => {
             //   { "name": "<className> / tag", "refId":"<classId1>/uncategorized"  , "type": "cat / tag / org"  , "total": 100 },
 
-            // Get all the data in json array
+            // Fet all the data in json array
             querySnapshot.forEach((doc) => {
               let docItemJson = {};
 
@@ -4489,6 +4489,7 @@
         .doc("v1")
         .collection("Revenue")
         // .where(REV_REF_ID, "==", item.refId)
+        .where(REV_ADMIN_ID, "==", tutorId)
         .where(REV_MONTH, "==", month)// YYYYMM
         // .limit(1); 
 

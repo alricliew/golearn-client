@@ -722,7 +722,7 @@
         .startAfter(latestInvoiceDoc)
         .limit(25);
 
-        sortInvDocRef
+      sortInvDocRef
       .get()
       .then((querySnapshot) => {
 
@@ -787,14 +787,15 @@
       let today = new Date(2100, 12, 31);// Set a big date
 
       let docRef = db.collection("Financial")
-          .doc("v1")
-          .collection("Transaction")
-          .where(TRANS_VIEWER_ARR, "array-contains", tutorId)
-          .where(TRANS_TYPE, "==", TRANS_TYPE_INV)
-          .where(TRANS_STATUS, "==", true)
-          .orderBy(TRANS_DATE, 'desc')
-          .startAfter(latestInvoiceDoc || today)
-          .limit(25);
+        .doc("v1")
+        .collection("Transaction")
+        // .where(TRANS_VIEWER_ARR, "array-contains", tutorId)
+        .where(TRANS_SENDER_ID, "==", tutorId)
+        .where(TRANS_TYPE, "==", TRANS_TYPE_INV)
+        .where(TRANS_STATUS, "==", true)
+        .orderBy(TRANS_DATE, 'desc')
+        .startAfter(latestInvoiceDoc || today)
+        .limit(25);
 
       docRef
       .get()
