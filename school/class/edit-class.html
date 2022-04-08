@@ -984,848 +984,848 @@
                 </div>
               </div>
 
-            <!--multitabs-form-->
-            <div class="multitabs-form">
-              <!--form panels-->
-              <div class="row">
-                <div class="col-12">
-                  <form class="multitabs-form__form">
-                    <!--Lessons panel-->        
-                    <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
-                      <h4 class="multitabs-form__title">Lessons 
-                        <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddLesson" data-toggle="modal" data-target="#addLessonModal" data-button-text="Add" data-title="Add New Lesson"><i class="material-icons" style="color: #2e74b6;">add</i></a> 
-                        <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestLessonDoc=null; removeElementsByClass('row lesson-wrapper'); LoadLessonInfo();"><i class="material-icons" style="color: #2e74b6;">refresh</i></a>
-                        <a class="btn btn-sm btn-outline-primary btn-round" onclick="generatePDFeKoopmans('lessonTop')"><i class="fas fa-file-download fa-fw" style="color: #2e74b6; font-size: 0.8rem;"></i></a>
+              <!--multitabs-form-->
+              <div class="multitabs-form">
+                <!--form panels-->
+                <div class="row">
+                  <div class="col-12">
+                    <form class="multitabs-form__form">
+                      <!--Lessons panel-->        
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
+                        <h4 class="multitabs-form__title">Lessons 
+                          <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddLesson" data-toggle="modal" data-target="#addLessonModal" data-button-text="Add" data-title="Add New Lesson"><i class="material-icons" style="color: #2e74b6;">add</i></a> 
+                          <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestLessonDoc=null; removeElementsByClass('row lesson-wrapper'); LoadLessonInfo();"><i class="material-icons" style="color: #2e74b6;">refresh</i></a>
+                          <a class="btn btn-sm btn-outline-primary btn-round" onclick="generatePDFeKoopmans('lessonTop')"><i class="fas fa-file-download fa-fw" style="color: #2e74b6; font-size: 0.8rem;"></i></a>
 
-                      </h4>
-                      <div class="multitabs-form__content">
+                        </h4>
+                        <div class="multitabs-form__content">
 
-                        <div class="col-md-12" id="lessonTop" style="padding: 0; margin-top: 1rem;">
-                          <!-- <div class="container" style="padding: 0rem 0rem 0rem 0rem; ">
-                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: auto 1rem 0 auto;">Class Details</span> 
-                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddLesson" data-toggle="modal" data-target="#addLessonModal" data-button-text="Add" data-title="Add New Lesson"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">add</i></a>
-                          </div> -->
-                          <!-- <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Details</span>  -->
+                          <div class="col-md-12" id="lessonTop" style="padding: 0; margin-top: 1rem;">
+                            <!-- <div class="container" style="padding: 0rem 0rem 0rem 0rem; ">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: auto 1rem 0 auto;">Class Details</span> 
+                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddLesson" data-toggle="modal" data-target="#addLessonModal" data-button-text="Add" data-title="Add New Lesson"><i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">add</i></a>
+                            </div> -->
+                            <!-- <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Details</span>  -->
 
-                          <div class="container" id="lesson-container">
-                            <!-- Lesson header -->
-                            <div class="row lesson-header">
-                              <div class="col-md-11">
-                                <div class="row">
-                                  <div class="col-md-4">
-                                    <div class="row">
-                                      <div class="col-md-4 ">
-                                        <p>Date</p> 
+                            <div class="container" id="lesson-container">
+                              <!-- Lesson header -->
+                              <div class="row lesson-header">
+                                <div class="col-md-11">
+                                  <div class="row">
+                                    <div class="col-md-4">
+                                      <div class="row">
+                                        <div class="col-md-4 ">
+                                          <p>Date</p> 
+                                        </div>
+                                        <div class="col-md-8">
+                                          <p>Time</p> 
+                                        </div>
+                                        <!-- <div class="col-4">
+                                          <p>End Time</p> 
+                                        </div> -->
                                       </div>
-                                      <div class="col-md-8">
-                                        <p>Time</p> 
-                                      </div>
-                                      <!-- <div class="col-4">
-                                        <p>End Time</p> 
+                                    </div>
+                                    <div class="col-md-4">
+                                      <p>Class Notes</p> 
+                                    </div>
+                                    <div class="col-md-4">
+                                      <p>Teacher's Feedback</p> 
+                                      <!-- <div class="row" style="padding:0; margin: 0;">
+                                        <div class="col-8" style="padding:0; margin: 0;">
+                                          <p>Teacher's Feedback</p> 
+                                        </div>
+                                        <div class="col-4" style="padding-right:0; margin-right: 0;">
+                                          <p>Score</p> 
+                                        </div>
                                       </div> -->
                                     </div>
                                   </div>
-                                  <div class="col-md-4">
-                                    <p>Class Notes</p> 
-                                  </div>
-                                  <div class="col-md-4">
-                                    <p>Teacher's Feedback</p> 
-                                    <!-- <div class="row" style="padding:0; margin: 0;">
-                                      <div class="col-8" style="padding:0; margin: 0;">
-                                        <p>Teacher's Feedback</p> 
-                                      </div>
-                                      <div class="col-4" style="padding-right:0; margin-right: 0;">
-                                        <p>Score</p> 
-                                      </div>
-                                    </div> -->
-                                  </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                  <p>Action</p> 
                                 </div>
                               </div>
 
-                              <div class="col-md-1">
-                                <p>Action</p> 
+                              <!-- No data placeholder -->
+                              <div class="row" style="display: none;" id="lessonNoDataPlaceholder">
+                                <div class="col-md-12 text-center">
+                                  No lesson
+                                </div>
                               </div>
-                            </div>
 
-                            <!-- No data placeholder -->
-                            <div class="row" style="display: none;" id="lessonNoDataPlaceholder">
-                              <div class="col-md-12 text-center">
-                                No lesson
-                              </div>
-                            </div>
-
-                            <!-- Add new lesson here .... -->
-                            <!-- Lesson List Start -->
-                            <!-- <div class="row lesson-wrapper">
-                              <div class="col-md-11" >
-                                <div class="row">
-                                  <div class="col-md-4 lesson-active" data-toggle="modal" data-target="#editLessonModal">
-                                    <div class="row">
-                                      <div class="col-4" >
-                                          <p class="lesson-item">12/6/2022</p>
-                                      </div>
-                                      <div class="col-4">
-                                          <p class="lesson-item">11:12</p>
-                                      </div>
-                                      <div class="col-4">
-                                          <p class="lesson-item">11:12</p>
+                              <!-- Add new lesson here .... -->
+                              <!-- Lesson List Start -->
+                              <!-- <div class="row lesson-wrapper">
+                                <div class="col-md-11" >
+                                  <div class="row">
+                                    <div class="col-md-4 lesson-active" data-toggle="modal" data-target="#editLessonModal">
+                                      <div class="row">
+                                        <div class="col-4" >
+                                            <p class="lesson-item">12/6/2022</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="lesson-item">11:12</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="lesson-item">11:12</p>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="col-md-4 lesson-active" data-toggle="modal" data-target="#editLessonModal">
-                                      <p class="lesson-item">Announcement Text Here a a a a a a a a Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here</p>
-                                  </div>
-                                  <div class="col-md-4 lesson-active" data-toggle="modal" data-target="#editLessonModal">
-                                    <div class="row" style="padding:0; margin: 0;">
-                                      <div class="col-md-8" style="padding:0;">
-                                        <p class="lesson-item">Feedback Text Here a a a a a aa  a a a adsa a adsa as ada as da a sadas asda  </p>
-                                      </div>
-                                      <div class="col-md-4" style="padding-right:0;">
-                                        <span class="d-flex flex-wrap align-content-center" style="margin-top: 1rem;">5<i class="material-icons">star</i></span> 
+                                    <div class="col-md-4 lesson-active" data-toggle="modal" data-target="#editLessonModal">
+                                        <p class="lesson-item">Announcement Text Here a a a a a a a a Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here Announcement Text Here</p>
+                                    </div>
+                                    <div class="col-md-4 lesson-active" data-toggle="modal" data-target="#editLessonModal">
+                                      <div class="row" style="padding:0; margin: 0;">
+                                        <div class="col-md-8" style="padding:0;">
+                                          <p class="lesson-item">Feedback Text Here a a a a a aa  a a a adsa a adsa as ada as da a sadas asda  </p>
+                                        </div>
+                                        <div class="col-md-4" style="padding-right:0;">
+                                          <span class="d-flex flex-wrap align-content-center" style="margin-top: 1rem;">5<i class="material-icons">star</i></span> 
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
 
-                              <div class="col-md-1">
-                                <a href="#" class="btn btn-sm btn-outline-danger btn-round" id="btnRemoveTimeSlot" data-toggle="modal" data-target="#delLessonModal" data-id="lessonId" style="margin-top: 1rem;"><i class="material-icons" style="color: red;">remove</i></a>
-                              </div>
-                            </div> -->
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12" >
-                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnLessonLoadMore">Load More <i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">expand_more</i></a> 
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-                    <!--General panel-->
-                    <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                      <h4 class="multitabs-form__title">General Info</h4>
-                      <div class="multitabs-form__content">
-                        <div class="col-md-12">
-                          <!-- Announcement -->
-                          <div class="form-group" style="margin-top: 1.5rem;" >
-                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Announcement</span> 
-                            <textarea class="form-control" maxlength="511" rows="3" id="inClassAnnouncement" data-compulsory="false" placeholder="Write something ..."></textarea>
-                          </div>
-
-                          <div class="form-group" style="margin-top: 2rem;">
-                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Name* <span id="countClassName" style="color: grey; margin-left: 1rem;">0/40</span></span> 
-                            <input type="text" class="form-control" id="inClassName" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
-                          </div>
-
-
-                          <div class="form-group" style="margin-top: 2rem;">
-                            <p class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 1rem;">Class Icon</p> 
-                            <div style="height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%; cursor: pointer;">
-                              <img id="tutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
-                            </div>
-                            <input type="file" id="select_image" name="image" style="display:none" accept="image/x-png,image/jpeg"> </input>
-                          </div>
-
-                          <div class="form-group" style="margin-top: 1.5rem;" >
-                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Description <span id="countClassDesc" style="color: grey; margin-left: 1rem;">0/400</span></span> 
-                            <textarea class="form-control" maxlength="400" rows="4" id="inClassDesc" data-compulsory="false"></textarea>
-                          </div>
-          
-                          <div class="form-group" style="margin-top: 2rem;">
-                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Venue <span id="countClassVenue" style="color: grey; margin-left: 1rem;">0/250</span></span> 
-                            <textarea class="form-control" maxlength="250" rows="3"  id="inVenue" data-compulsory="false"></textarea>
-                          </div>
-
-                          <div class="form-group" style="margin-top: 2rem;">
-                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Link</span>
-                            <span class="tooltiptext-trigger">? 
-                              <span class="tooltiptext-general">
-                                <h6>Class Link</h6>
-                                <p>Link to the platform where this class will be conducted. I.e Google Meet, Zoom or other platforms.</p>
-                              </span> 
-                            </span>
-                            <div class="input-group">
-                              <span class="d-flex align-items-center input-group-addon" id="inUrlClassIconWrapper" style="margin-right: 0.5em; cursor: pointer;" onclick="RedirectTo('')">
-                                <img id='inUrlClassIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
-                              </span>
-                              <input type="text" class="form-control" id="inUrlClass" data-compulsory="true" oninput="this.className = 'form-control'">
-                            </div>
-                          </div>
-
-
-                          <div class="form-group" style="margin-top: 2rem;">
-                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Chat Group Link</span> 
-                            <span class="tooltiptext-trigger">? 
-                              <span class="tooltiptext-general">
-                                <h6>Chat Group Link</h6>
-                                <p>Link to this class chat group. I.e Whatsapp, Telegram, Facebook group or other groups.</p>
-                              </span> 
-                            </span>
-                            <div class="input-group">
-                              <span class="d-flex align-items-center input-group-addon" id="inUrlGroupIconWrapper" style="margin-right: 0.5em; cursor: pointer;" onclick="RedirectTo('')">
-                                <img id='inUrlGroupIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
-                              </span>
-                              <input type="text" class="form-control" id="inUrlGroup" data-compulsory="true" oninput="this.className = 'form-control'" >
-                            </div>
-                          </div>
-
-                          <div class="form-group" style="margin-top: 2rem;">
-                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Lesson Material Link </span>
-                            <span class="tooltiptext-trigger">? 
-                              <span class="tooltiptext-general">
-                                <h6>Lesson Material Link</h6>
-                                <p>Link to material that will be used for the class. I.e Google Classroom, Drive, or other storage places.</p>
-                              </span> 
-                            </span>
-                            <div class="input-group">
-                              <span class="d-flex align-items-center input-group-addon" id="inUrlMaterialIconWrapper" style="margin-right: 0.5em; cursor: pointer;" onclick="RedirectTo('')">
-                                <img id='inUrlMaterialIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
-                              </span>
-                              <input type="text" class="form-control" id="inUrlMaterial" data-compulsory="true" oninput="this.className = 'form-control'">
-                            </div>
-                          </div>
-
-                        </div>
-
-                        <div class="button-row d-flex mt-4">
-                          <!-- <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button> -->
-                        </div>
-                      </div>
-                    </div>
-                    <!--Time Slot panel-->
-                    <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                      <h4 class="multitabs-form__title">Class Schedule</h4>
-                      <div class="multitabs-form__content">
-                        <div class="col-md-12" id="timeSlotTop">
-                        
-                          <div class="container" id="timeSlot-container">
-                            <div class="row" style="padding: 0rem 3rem 0rem 0rem; border: solid #2e74b6; border-width: thin; margin-top: 1rem;" id="timeSlot-1">
-                              
-                              <div class="col-md-5">
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Day of Week*</span> 
-                                  <select class="form-control" name="tutor_course[]" id="inDayOfWeek1" data-compulsory="true" oninput="this.className = 'form-control'">
-                                    <option value="">Select Day Of Week</option>
-                                    <option value="mon">Monday</option>
-                                    <option value="tue">Tuesday</option>
-                                    <option value="wed">Wednesday</option>
-                                    <option value="thu">Thursday</option>
-                                    <option value="fri">Friday</option>
-                                    <option value="sat">Saturday</option>
-                                    <option value="sun">Sunday</option>
-                                  </select>
+                                <div class="col-md-1">
+                                  <a href="#" class="btn btn-sm btn-outline-danger btn-round" id="btnRemoveTimeSlot" data-toggle="modal" data-target="#delLessonModal" data-id="lessonId" style="margin-top: 1rem;"><i class="material-icons" style="color: red;">remove</i></a>
                                 </div>
-
-                                <!-- <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray;margin-bottom: 0;">Day of Week*</span> 
-                                  <input type="text" class="form-control" id="DayOfWeek1">
-                                </div> -->
-                              </div>
-                              <div class="col-md-3">
-                                <div class="form-group"  >
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Start Time*</span> 
-                                  <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true" style="margin-top: 0.3rem;">
-                                    <input id="inStartTime1" type="text" class="form-control" value="" data-compulsory="true" oninput="this.className = 'form-control'" style="cursor: not-allowed; pointer-events: none;">
-                                    <span class="d-flex align-items-center input-group-addon">
-                                      <span class="material-icons">
-                                        more_time
-                                      </span>
-                                    </span>
-                                  </div>  
-                                </div>
-                              </div>
-                              <div class="col-md-3">
-                                <div class="form-group">
-                                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">End Time*</span> 
-                                  <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true" style="margin-top: 0.3rem;">
-                                    <input id="inEndTime1" type="text" class="form-control" value="" data-compulsory="true" oninput="this.className = 'form-control'" style="cursor: not-allowed; pointer-events: none;">
-                                    <span class="d-flex align-items-center input-group-addon">
-                                      <span class="material-icons">
-                                        more_time
-                                      </span>
-                                    </span>
-                                  </div>  
-                                </div>
-                              </div>
-                              <!-- <div class="col-md-1 d-flex align-items-center">
-                                <a href="#" class="btn btn-sm btn-outline-danger btn-round" id="btnRemoveTimeSlot"><i class="material-icons" style="color: red;">remove</i></a>
                               </div> -->
                             </div>
-
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12" >
+                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnLessonLoadMore">Load More <i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">expand_more</i></a> 
+                            </div>
                           </div>
 
-                          <div class="col-lg-4 col-md-4 col-sm-4">
-                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTimeSlot"><i class="material-icons" style="color: #2e74b6;">add</i></a>
-                          </div>
-                        </div>
-
-                        <div class="button-row d-flex mt-4">
-                          <!-- <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button> -->
-                          <!-- <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button> -->
                         </div>
                       </div>
-                    </div>
-                    <!--Students panel-->
-                    <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                      <h4 class="multitabs-form__title">Students 
-                        <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddStudent" data-toggle="modal" data-target="#addStudentModal" data-button-text="Add" data-title="Add New Student"  onclick="appendModal('addStudentModal')"><i class="material-icons" style="color: #2e74b6;">add</i></a> 
-                        <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestStuDoc=null; removeElementsByClass('row student-wrapper'); loadAllStudents();"><i class="material-icons" style="color: #2e74b6;">refresh</i></a>
-                      </h4>
-                      <div class="multitabs-form__content">
-                        <div class="col-md-12" style="padding: 0; margin-top: 1rem;">
-                        
-                          <div class="container" id="students-container">
-                            <!-- Student header -->
-                            <div class="row lesson-header">
-                              <div class="col-md-11" >
-                                <div class="row" >
-                                  <div class="col-md-3">
-                                    <p>Student Name</p>
+                      <!--General panel-->
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                        <h4 class="multitabs-form__title">General Info</h4>
+                        <div class="multitabs-form__content">
+                          <div class="col-md-12">
+                            <!-- Announcement -->
+                            <div class="form-group" style="margin-top: 1.5rem;" >
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Announcement</span> 
+                              <textarea class="form-control" maxlength="511" rows="3" id="inClassAnnouncement" data-compulsory="false" placeholder="Write something ..."></textarea>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 2rem;">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Name* <span id="countClassName" style="color: grey; margin-left: 1rem;">0/40</span></span> 
+                              <input type="text" class="form-control" id="inClassName" data-compulsory="true" oninput="this.className = 'form-control'"  maxlength="40">
+                            </div>
+
+
+                            <div class="form-group" style="margin-top: 2rem;">
+                              <p class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 1rem;">Class Icon</p> 
+                              <div style="height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%; cursor: pointer;">
+                                <img id="tutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+                              </div>
+                              <input type="file" id="select_image" name="image" style="display:none" accept="image/x-png,image/jpeg"> </input>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 1.5rem;" >
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Description <span id="countClassDesc" style="color: grey; margin-left: 1rem;">0/400</span></span> 
+                              <textarea class="form-control" maxlength="400" rows="4" id="inClassDesc" data-compulsory="false"></textarea>
+                            </div>
+            
+                            <div class="form-group" style="margin-top: 2rem;">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Venue <span id="countClassVenue" style="color: grey; margin-left: 1rem;">0/250</span></span> 
+                              <textarea class="form-control" maxlength="250" rows="3"  id="inVenue" data-compulsory="false"></textarea>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 2rem;">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Class Link</span>
+                              <span class="tooltiptext-trigger">? 
+                                <span class="tooltiptext-general">
+                                  <h6>Class Link</h6>
+                                  <p>Link to the platform where this class will be conducted. I.e Google Meet, Zoom or other platforms.</p>
+                                </span> 
+                              </span>
+                              <div class="input-group">
+                                <span class="d-flex align-items-center input-group-addon" id="inUrlClassIconWrapper" style="margin-right: 0.5em; cursor: pointer;" onclick="RedirectTo('')">
+                                  <img id='inUrlClassIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
+                                </span>
+                                <input type="text" class="form-control" id="inUrlClass" data-compulsory="true" oninput="this.className = 'form-control'">
+                              </div>
+                            </div>
+
+
+                            <div class="form-group" style="margin-top: 2rem;">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Chat Group Link</span> 
+                              <span class="tooltiptext-trigger">? 
+                                <span class="tooltiptext-general">
+                                  <h6>Chat Group Link</h6>
+                                  <p>Link to this class chat group. I.e Whatsapp, Telegram, Facebook group or other groups.</p>
+                                </span> 
+                              </span>
+                              <div class="input-group">
+                                <span class="d-flex align-items-center input-group-addon" id="inUrlGroupIconWrapper" style="margin-right: 0.5em; cursor: pointer;" onclick="RedirectTo('')">
+                                  <img id='inUrlGroupIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
+                                </span>
+                                <input type="text" class="form-control" id="inUrlGroup" data-compulsory="true" oninput="this.className = 'form-control'" >
+                              </div>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 2rem;">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Lesson Material Link </span>
+                              <span class="tooltiptext-trigger">? 
+                                <span class="tooltiptext-general">
+                                  <h6>Lesson Material Link</h6>
+                                  <p>Link to material that will be used for the class. I.e Google Classroom, Drive, or other storage places.</p>
+                                </span> 
+                              </span>
+                              <div class="input-group">
+                                <span class="d-flex align-items-center input-group-addon" id="inUrlMaterialIconWrapper" style="margin-right: 0.5em; cursor: pointer;" onclick="RedirectTo('')">
+                                  <img id='inUrlMaterialIcon' height="24" width="24" src="http://www.google.com/s2/favicons?domain=https://golearn.com.my/"/>
+                                </span>
+                                <input type="text" class="form-control" id="inUrlMaterial" data-compulsory="true" oninput="this.className = 'form-control'">
+                              </div>
+                            </div>
+
+                          </div>
+
+                          <div class="button-row d-flex mt-4">
+                            <!-- <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button> -->
+                          </div>
+                        </div>
+                      </div>
+                      <!--Time Slot panel-->
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                        <h4 class="multitabs-form__title">Class Schedule</h4>
+                        <div class="multitabs-form__content">
+                          <div class="col-md-12" id="timeSlotTop">
+                          
+                            <div class="container" id="timeSlot-container">
+                              <div class="row" style="padding: 0rem 3rem 0rem 0rem; border: solid #2e74b6; border-width: thin; margin-top: 1rem;" id="timeSlot-1">
+                                
+                                <div class="col-md-5">
+                                  <div class="form-group">
+                                    <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Day of Week*</span> 
+                                    <select class="form-control" name="tutor_course[]" id="inDayOfWeek1" data-compulsory="true" oninput="this.className = 'form-control'">
+                                      <option value="">Select Day Of Week</option>
+                                      <option value="mon">Monday</option>
+                                      <option value="tue">Tuesday</option>
+                                      <option value="wed">Wednesday</option>
+                                      <option value="thu">Thursday</option>
+                                      <option value="fri">Friday</option>
+                                      <option value="sat">Saturday</option>
+                                      <option value="sun">Sunday</option>
+                                    </select>
                                   </div>
-                                  <div class="col-md-1">
-                                    <p>Gender</p>
-                                  </div>
-                                  <div class="col-md-3">
-                                    <p>Guardian Name</p>
-                                  </div>
-                                  <div class="col-md-2">
-                                    <p>Guardian Phone</p>
-                                  </div>
-                                  <div class="col-md-1">
-                                    <p>Status</p>
-                                  </div>
-                                  <div class="col-md-2">
-                                    <p>Date Joined</p>
+
+                                  <!-- <div class="form-group">
+                                    <span class="" style="font-size: smaller; font-weight: 300; color: gray;margin-bottom: 0;">Day of Week*</span> 
+                                    <input type="text" class="form-control" id="DayOfWeek1">
+                                  </div> -->
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="form-group"  >
+                                    <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Start Time*</span> 
+                                    <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true" style="margin-top: 0.3rem;">
+                                      <input id="inStartTime1" type="text" class="form-control" value="" data-compulsory="true" oninput="this.className = 'form-control'" style="cursor: not-allowed; pointer-events: none;">
+                                      <span class="d-flex align-items-center input-group-addon">
+                                        <span class="material-icons">
+                                          more_time
+                                        </span>
+                                      </span>
+                                    </div>  
                                   </div>
                                 </div>
+                                <div class="col-md-3">
+                                  <div class="form-group">
+                                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">End Time*</span> 
+                                    <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true" style="margin-top: 0.3rem;">
+                                      <input id="inEndTime1" type="text" class="form-control" value="" data-compulsory="true" oninput="this.className = 'form-control'" style="cursor: not-allowed; pointer-events: none;">
+                                      <span class="d-flex align-items-center input-group-addon">
+                                        <span class="material-icons">
+                                          more_time
+                                        </span>
+                                      </span>
+                                    </div>  
+                                  </div>
+                                </div>
+                                <!-- <div class="col-md-1 d-flex align-items-center">
+                                  <a href="#" class="btn btn-sm btn-outline-danger btn-round" id="btnRemoveTimeSlot"><i class="material-icons" style="color: red;">remove</i></a>
+                                </div> -->
                               </div>
-                              <div class="col-md-1">
-                                <p>Action</p> 
-                              </div>
+
                             </div>
 
-                            <!-- No data placeholder -->
-                            <div class="row" style="display: none;" id="studentNoDataPlaceholder">
-                              <div class="col-md-12 text-center">
-                                No student
-                              </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTimeSlot"><i class="material-icons" style="color: #2e74b6;">add</i></a>
                             </div>
+                          </div>
 
-                            <!-- Student List Start -->
-                            <!-- <div class="row lesson-wrapper">
-                              <div class="col-md-11" >
-                                <div class="row" >
-                                  <div class="col-md-3">
-                                    <p class="lesson-item" style="margin-bottom: 0;">Student Name</p>
+                          <div class="button-row d-flex mt-4">
+                            <!-- <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button> -->
+                            <!-- <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button> -->
+                          </div>
+                        </div>
+                      </div>
+                      <!--Students panel-->
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                        <h4 class="multitabs-form__title">Students 
+                          <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddStudent" data-toggle="modal" data-target="#addStudentModal" data-button-text="Add" data-title="Add New Student"  onclick="appendModal('addStudentModal')"><i class="material-icons" style="color: #2e74b6;">add</i></a> 
+                          <a class="btn btn-sm btn-outline-primary btn-round" onclick="latestStuDoc=null; removeElementsByClass('row student-wrapper'); loadAllStudents();"><i class="material-icons" style="color: #2e74b6;">refresh</i></a>
+                        </h4>
+                        <div class="multitabs-form__content">
+                          <div class="col-md-12" style="padding: 0; margin-top: 1rem;">
+                          
+                            <div class="container" id="students-container">
+                              <!-- Student header -->
+                              <div class="row lesson-header">
+                                <div class="col-md-11" >
+                                  <div class="row" >
+                                    <div class="col-md-3">
+                                      <p>Student Name</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                      <p>Gender</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <p>Guardian Name</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <p>Guardian Phone</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                      <p>Status</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <p>Date Joined</p>
+                                    </div>
                                   </div>
-                                  <div class="col-md-1">
-                                    <p class="lesson-item">Gender</p>
-                                  </div>
-                                  <div class="col-md-3">
-                                    <p class="lesson-item">Guardian</p>
-                                  </div>
-                                  <div class="col-md-2">
-                                    <p class="lesson-item">Contact No.</p>
-                                  </div>
-                                  <div class="col-md-1">
-                                    <p class="lesson-item card-student-status-label pending" >Pending</p>
-                                  </div>
-                                  <div class="col-md-2">
-                                    <p class="lesson-item">Date Joined</p>
-                                  </div>
+                                </div>
+                                <div class="col-md-1">
+                                  <p>Action</p> 
                                 </div>
                               </div>
 
-                              <div class="col-md-1">
-                                <a href="#" class="btn btn-sm btn-outline-danger btn-round" id="btnRemoveTimeSlot" data-toggle="modal" data-target="#delLessonModal" data-id="lessonId"><i class="material-icons" style="color: red;">remove</i></a>
+                              <!-- No data placeholder -->
+                              <div class="row" style="display: none;" id="studentNoDataPlaceholder">
+                                <div class="col-md-12 text-center">
+                                  No student
+                                </div>
                               </div>
-                            </div> -->
-                          </div>
-                        </div>
 
-                        <div class="row">
-                          <div class="col-md-12" >
-                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnStudentLoadMore">Load More <i class="material-icons" style="color: #2e74b6;">expand_more</i></a> 
-                          </div>
-                        </div>
+                              <!-- Student List Start -->
+                              <!-- <div class="row lesson-wrapper">
+                                <div class="col-md-11" >
+                                  <div class="row" >
+                                    <div class="col-md-3">
+                                      <p class="lesson-item" style="margin-bottom: 0;">Student Name</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                      <p class="lesson-item">Gender</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <p class="lesson-item">Guardian</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <p class="lesson-item">Contact No.</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                      <p class="lesson-item card-student-status-label pending" >Pending</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <p class="lesson-item">Date Joined</p>
+                                    </div>
+                                  </div>
+                                </div>
 
-                      </div>
-                    </div>
-                    <!--Teacher panel-->
-                    <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                      <h4 class="multitabs-form__title">Teachers</h4>
-                      <div class="multitabs-form__content">
-                        <!-- Teacher 1  -->
-                        <div class="row" style="margin-top: 1.0rem;">
-                          <div class="col-md-1">
-                            <div style="height: 50px; width: 50px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%; margin-top: 1.5rem;">
-                              <img id="inTutor1ImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+                                <div class="col-md-1">
+                                  <a href="#" class="btn btn-sm btn-outline-danger btn-round" id="btnRemoveTimeSlot" data-toggle="modal" data-target="#delLessonModal" data-id="lessonId"><i class="material-icons" style="color: red;">remove</i></a>
+                                </div>
+                              </div> -->
                             </div>
                           </div>
-                          <div class="col-md-5">
-                            <div class="form-group">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Teacher 1's Name*</span> 
-                              <input type="text" class="form-control" style="background-color: #e9ecef;" disabled  id="inTutor1Name" data-tutor1id="bobo">
+
+                          <div class="row">
+                            <div class="col-md-12" >
+                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnStudentLoadMore">Load More <i class="material-icons" style="color: #2e74b6;">expand_more</i></a> 
                             </div>
                           </div>
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Teacher 1's Phone*</span> 
-                              <input type="text" class="form-control" style="background-color: #e9ecef;" disabled  id="inTutor1Phone">
-                            </div>
-                          </div>
-                          <div class="col-md-2 d-flex align-items-center">
-                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher1" data-toggle="modal" data-target="#myTeacherModal" data-num='1' onclick="appendModal('myTeacherModal')" href="javascript:;" style="pointer-events:none; background-color: #e9ecef;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
-                          </div>
-                        </div>
-                        <!-- Teacher 2  -->
-                        <div class="row" style="margin-top: 1.0rem;">
-                          <div class="col-md-1">
-                            <div style="height: 50px; width: 50px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%; margin-top: 1.5rem;">
-                              <img id="inTutor2ImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
-                            </div>
-                          </div>
-                          <div class="col-md-5">
-                            <div class="form-group">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Teacher 2's Name</span> 
-                              <input type="text" class="form-control" style="background-color: #e9ecef;" disabled id="inTutor2Name" data-tutor2id="bobo2">
-                            </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="form-group" >
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Teacher 2's Phone</span> 
-                              <input type="text" class="form-control" style="background-color: #e9ecef;" disabled id="inTutor2Phone">
-                            </div>
-                          </div>
-                          <div class="col-md-2 d-flex align-items-center">
-                            <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher2" data-toggle="" data-target="#myTeacherModal" data-num='2' onclick="appendModal('myTeacherModal')" href="javascript:;" style="pointer-events:none; background-color: #e9ecef;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
-                            <a class="btn btn-sm btn-outline-danger btn-round" id="btnDelTeacher2" data-toggle="modal" data-target="#delTutor2Modal" href="javascript:;" ><i class="material-icons" style="color: red;">remove</i></a>
-                          </div>
-                        </div>
-                        <div class="button-row d-flex mt-4">
-                          <!-- <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button> -->
-                          <!-- <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button> -->
+
                         </div>
                       </div>
-                    </div>
-                    <!--Fee panel-->
-                    <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                      <h4 class="multitabs-form__title">Tutoring Fee</h4>
-                      <div class="multitabs-form__content">
-  
-                        <div class="form-group" style="margin-top: 2rem;">
-                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Fee* (RM)</span> 
-                          <input type="number" step=".01" pattern="^\d*(\.\d{0,2})?$" class="form-control" id="inFee" data-compulsory="true" oninput="this.className = 'form-control'">
-                        </div>
-
-                        <div style="margin-top: 1.0rem;"></div>
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;" >Fee Type</span> 
-                        <div class="form-group" >
-                          <div class="form-check form-check-radio form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="exampleRadios" id="feeTypePerMonthRadio" value="option1" data-compulsory="false">
-                              Per Month
-                              <span class="circle">
-                                <span class="check"></span>
-                              </span>
-                            </label>
+                      <!--Teacher panel-->
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                        <h4 class="multitabs-form__title">Teachers</h4>
+                        <div class="multitabs-form__content">
+                          <!-- Teacher 1  -->
+                          <div class="row" style="margin-top: 1.0rem;">
+                            <div class="col-md-1">
+                              <div style="height: 50px; width: 50px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%; margin-top: 1.5rem;">
+                                <img id="inTutor1ImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+                              </div>
+                            </div>
+                            <div class="col-md-5">
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Teacher 1's Name*</span> 
+                                <input type="text" class="form-control" style="background-color: #e9ecef;" disabled  id="inTutor1Name" data-tutor1id="bobo">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Teacher 1's Phone*</span> 
+                                <input type="text" class="form-control" style="background-color: #e9ecef;" disabled  id="inTutor1Phone">
+                              </div>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-center">
+                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher1" data-toggle="modal" data-target="#myTeacherModal" data-num='1' onclick="appendModal('myTeacherModal')" href="javascript:;" style="pointer-events:none; background-color: #e9ecef;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
+                            </div>
                           </div>
-                          <div class="form-check form-check-radio form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="exampleRadios" id="feeTypePerHourRadio" value="option2" data-compulsory="false">
-                              Per Hour
-                              <span class="circle">
-                                <span class="check"></span>
-                              </span>
-                            </label>
+                          <!-- Teacher 2  -->
+                          <div class="row" style="margin-top: 1.0rem;">
+                            <div class="col-md-1">
+                              <div style="height: 50px; width: 50px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%; margin-top: 1.5rem;">
+                                <img id="inTutor2ImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+                              </div>
+                            </div>
+                            <div class="col-md-5">
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Teacher 2's Name</span> 
+                                <input type="text" class="form-control" style="background-color: #e9ecef;" disabled id="inTutor2Name" data-tutor2id="bobo2">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group" >
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Teacher 2's Phone</span> 
+                                <input type="text" class="form-control" style="background-color: #e9ecef;" disabled id="inTutor2Phone">
+                              </div>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-center">
+                              <a class="btn btn-sm btn-outline-primary btn-round" id="btnAddTeacher2" data-toggle="" data-target="#myTeacherModal" data-num='2' onclick="appendModal('myTeacherModal')" href="javascript:;" style="pointer-events:none; background-color: #e9ecef;"><i class="material-icons" style="color: #2e74b6;">add</i></a>
+                              <a class="btn btn-sm btn-outline-danger btn-round" id="btnDelTeacher2" data-toggle="modal" data-target="#delTutor2Modal" href="javascript:;" ><i class="material-icons" style="color: red;">remove</i></a>
+                            </div>
                           </div>
-                        </div>
-                        
-                        <div class="button-row d-flex mt-4">
-                          <!-- <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button> -->
-                          <!-- <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button> -->
+                          <div class="button-row d-flex mt-4">
+                            <!-- <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button> -->
+                            <!-- <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button> -->
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <!--Advanced panel-->
-                    <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                      <h4 class="multitabs-form__title">Advanced Settings</h4>
-                      <div class="multitabs-form__content">
+                      <!--Fee panel-->
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                        <h4 class="multitabs-form__title">Tutoring Fee</h4>
+                        <div class="multitabs-form__content">
     
-                        <!-- Type -->
-                        <div class="row" style="display: none;">
-                          <div class="col-sm-12 text-left">
-                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-top: 1.0rem;">Class Type</span> 
-                            <span class="tooltiptext-trigger">? 
-                              <span class="tooltiptext-general">
-                                <h6>Class Type</h6>
-                                <p>Set to <strong style="color: #2e74b6;">Public</strong> to be discovered by other. </p>
-                              </span> 
-                            </span>
+                          <div class="form-group" style="margin-top: 2rem;">
+                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Fee* (RM)</span> 
+                            <input type="number" step=".01" pattern="^\d*(\.\d{0,2})?$" class="form-control" id="inFee" data-compulsory="true" oninput="this.className = 'form-control'">
                           </div>
-                        </div>
 
-                        <div class="form-group"  style="display: none;">
-                          <div class="form-check form-check-radio form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="classTypeRadios" id="classTypeRadioPrivate" value="option1" data-compulsory="false" checked>
-                              Private
-                              <span class="circle">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                          <div class="form-check form-check-radio form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="classTypeRadios" id="classTypeRadioPublic" value="option2" data-compulsory="false">
-                              Public
-                              <span class="circle">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </div>
-
-                        <!-- Spacer  -->
-                        <!-- <div style="margin-top: 2rem;"></div> -->
-
-                        <!-- Student Limit -->
-                        <div class="form-group" style="margin-top: 0rem;">
-                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Student Limit</span> 
-                          <input type="number" class="form-control" id="inStudentLimit" data-compulsory="true" oninput="this.className = 'form-control'; checkStudentLimit();">
-                        </div>
-
-                        <!-- First Class Date -->
-                        <div class="form-group" style="margin-top: 0rem;">
-                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">First Lesson Date</span> 
-                          <span class="tooltiptext-trigger">? 
-                            <span class="tooltiptext-general">
-                              <h6>First Lesson Date</h6>
-                              <p>Set the first lesson date. Useful for custom payment cycle. Default: The date this class is created.</p>
-                            </span> 
-                          </span>
-                          <input id="firstClassDatePicker" class="form-control" type="text" data-compulsory="false" oninput="this.className = 'form-control'" style="cursor:pointer;" readonly>
-
-                          <!-- <input type="number" class="form-control" value="20" style="background-color: #e9ecef;" disabled id="inStudentLimit" data-compulsory="true" oninput="this.className = 'form-control'"> -->
-                        </div>
-        
-                        <!-- Spacer  -->
-                        <div style="margin-top: 1.5rem;"></div>
-        
-                        <!-- Permission -->
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Special Permissions</span> 
-                        <div class="form-check" style="margin-top: 1.0rem;">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="stuAutoJoinEn" checked>
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                            Allow students to join class through invitation link.
-                          </label>
-                        </div>
-                        <!-- Invite Link: Show when above is checked -->
-                        <div class="form-group"  style="padding: 0.5rem; margin-top: 1rem; display: none; " id="inAutoJoinLinkTop">
-                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Copy Student Registration Link:</span> 
-                          <div class="input-group">
-                            <span class="d-flex align-items-center input-group-addon" id="btnCopyAutoJoinLink" style="margin-right: 0.5em; cursor: pointer;" onclick="copyText('inAutoJoinLink')">
-                              <span class="material-icons">
-                                content_copy
-                              </span>
-                            </span>
-                            <input type="text" value='' class="form-control" style="background-color: #e9ecef; pointer-events: none;" id="inAutoJoinLink">
-                          </div>
-                        </div>
-
-                        <div class="form-check" style="margin-top: 1.0rem;">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="tAddEditLessonEn">
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                            Authorize teachers to create and edit lessons. 
-                          </label>
-                        </div>
-                        <div class="form-check" style="margin-top: 1.0rem;">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="tDelLessonEn">
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                            Authorize teachers to remove lessons. 
-                          </label>
-                        </div>
-                        <div class="form-check" style="margin-top: 1.0rem;">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="tAddRibbonEn">
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                            Add A Ribbon 
-                          </label>
-                        </div>
-                        <!-- Ribbon: Show when above is checked -->
-                        <div class="row" id="inRibbonSettings" style="display: none; padding: 0.5rem; margin-top: 0.5rem;">
-               
-                          <div class="col-md-4 full">
-                            <p class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Pick A Color</p> 
-                            <input type="text" class="coloris" value="#e76f51" id="inLabelColor">
-                
-                            <p class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0; margin-top: 0.5rem;">Content (Max 2 Chars / 1 Emoji ❤️)</p> 
-                            <input type="text" class="form-control" id="inLabelText" data-compulsory="false" maxlength="2">
-                          </div>
-                          <div class="col-md-8">
-               
-                            <div class="card"  style="height: 70px; width: 200px">
-                              <div class="ribbon down">
-                                <div class="content" id="inLabelSample"></div>
-                              </div>
+                          <div style="margin-top: 1.0rem;"></div>
+                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;" >Fee Type</span> 
+                          <div class="form-group" >
+                            <div class="form-check form-check-radio form-check-inline">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="feeTypePerMonthRadio" value="option1" data-compulsory="false">
+                                Per Month
+                                <span class="circle">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                            <div class="form-check form-check-radio form-check-inline">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="feeTypePerHourRadio" value="option2" data-compulsory="false">
+                                Per Hour
+                                <span class="circle">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
                             </div>
                           </div>
-                        </div>
-           
-                        <!-- Spacer  -->
-                        <div style="margin-top: 2rem;"></div>
-                                                
-                        <!-- Class Tag -->
-                        <div class="form-group" style="margin-top: 0rem;">
-                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Tag</span>
-                          <span class="tooltiptext-trigger">? 
-                            <span class="tooltiptext-general">
-                              <h6>Tag</h6>
-                              <p>Assign up to 5 tag keywords to identify this class, and receive better breakdowns in your analysis reports.</p>
-                            </span> 
-                          </span>
-                          <input type="text" id="classTag" data-role="tagsinput" class="form-control">
-                        </div>
-
-                        <!-- Status -->
-                        <div class="row">
-                          <div class="col-sm-12 text-left">
-                            <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Class Status</span> 
-                            <span class="tooltiptext-trigger">? 
-                              <span class="tooltiptext-general">
-                                <h6>Class Status</h6>
-                                <p>Set to <strong style="color: #2e74b6;">Inactive</strong> to pause the class new intake, hide from the public, and disallow edits to the class.</p>
-                              </span> 
-                            </span>
+                          
+                          <div class="button-row d-flex mt-4">
+                            <!-- <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button> -->
+                            <!-- <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button> -->
                           </div>
-                        </div>
-
-                        <div class="form-group">
-                          <div class="form-check form-check-radio form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="classStatus" id="classStatusRadioActive" value="optionActive" data-compulsory="false" checked>
-                              Active
-                              <span class="circle">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                          <div class="form-check form-check-radio form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="classStatus" id="classStatusRadioInactive" value="optionInactive" data-compulsory="false">
-                              Inactive
-                              <span class="circle">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </div>
-
-                        <!-- Delete Class -->
-                        <div class="row">
-                          <div class="col-sm-12 text-left">
-                            <span class="" style="font-size: smaller; font-weight: 400; color: grey;">Delete This Class</span> 
-                            <span class="tooltiptext-trigger" style="background-color: red; padding: 0.2em 0.6em 0.2em 0.6em;">!
-                              <span class="tooltiptext-general" style="border: thin solid red;">
-                                <h6 style="color: red;">Delete This Class</h6>
-                                <p>This action cannot be <strong style="color: red;">undone</strong>. This will permanently delete the class details, lesson histories, assigned teachers, and remove all enrolled students.</p>
-                              </span> 
-                            </span>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12" >
-                            <a class="btn btn-sm btn-outline-danger btn-round" id="btnDelClass" style="color: red; background-color: white;" data-toggle='modal' data-target='#delClassModal'>Delete Class <i class="fas fa-exclamation-triangle" style="color: red;"></i></a> 
-                          </div>
-                        </div>
-      
-                        <!-- <div class="form-check" style="margin-top: 1.0rem;">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="t1AddEditStuEn" checked disabled>
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                            Teacher 1 Add / Edit Student
-                          </label>
-                        </div>
-                        <div class="form-check" style="margin-top: 1.0rem;">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="t1DelStuEn" checked disabled>
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                            Teacher 1 Remove Student 
-                          </label>
-                        </div>
-                        <div class="form-check" style="margin-top: 1.0rem;">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="t1AddEditLessonEn"checked disabled>
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                            Teacher 1 Add / Edit Lesson Details 
-                          </label>
-                        </div>
-                        <div class="form-check" style="margin-top: 1.0rem;">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="t1DelLessonEn"checked disabled>
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                            Teacher 1 Remove Lesson Details
-                          </label>
-                        </div>
-                        <div class="form-check" style="margin-top: 1.0rem;">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="t2AddEditStuEn" disabled>
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                            Teacher 2 Add / Edit Student
-                          </label>
-                        </div>
-                        <div class="form-check" style="margin-top: 1.0rem;">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="t2DelStuEn" disabled>
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                            Teacher 2 Remove Student 
-                          </label>
-                        </div>
-                        <div class="form-check" style="margin-top: 1.0rem;">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="t2AddEditLessonEn" disabled>
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                            Teacher 2 Add / Edit Lesson Details 
-                          </label>
-                        </div>
-                        <div class="form-check" style="margin-top: 1.0rem;">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="t2DelLessonEn" disabled>
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                            Teacher 2 Remove Lesson Details
-                          </label>
-                        </div>
-                        <div class="form-check" style="margin-top: 1.0rem;">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="stuAutoJoinEn" disabled>
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                            Auto Enrolment through Invitation Link
-                          </label>
-                        </div> -->
-
-                        <div class="button-row d-flex mt-4">
-                          <!-- <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button> -->
-                          <!-- <button class="btn btn-success ml-auto js-btn-send" type="button" title="Send">Create Class</button> -->
                         </div>
                       </div>
-                    </div>
-                    <!--Public panel-->
-                    <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                      <h4 class="multitabs-form__title">Public</h4>
-                      <div class="multitabs-form__content">
+                      <!--Advanced panel-->
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                        <h4 class="multitabs-form__title">Advanced Settings</h4>
+                        <div class="multitabs-form__content">
+      
+                          <!-- Type -->
+                          <div class="row" style="display: none;">
+                            <div class="col-sm-12 text-left">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-top: 1.0rem;">Class Type</span> 
+                              <span class="tooltiptext-trigger">? 
+                                <span class="tooltiptext-general">
+                                  <h6>Class Type</h6>
+                                  <p>Set to <strong style="color: #2e74b6;">Public</strong> to be discovered by other. </p>
+                                </span> 
+                              </span>
+                            </div>
+                          </div>
 
-                        <!-- Level and Subject  -->
-                        <div class="row" style="margin: 0.5rem 0 0 0;  display: flex;" id="levelSubjectTop">
-                          <div class="col-md-6" style="padding-left: 0;">
-                              <!-- Education Level -->
-                            <div class="form-group" >
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Education Level*</span> 
-                              <select class="form-control" name="tutor_course[]" id="level_drop" data-compulsory="false" oninput="this.className = 'form-control'">
-                                <option value="">Select education level</option>
-                                <!-- <option value="1" >Pre-School</option>
-                                <option value="2" >Lower Primary (Tahun 1-3)</option>
-                                <option value="3" >Upper Primary (UPSR)</option>
-                                <option value="4" >Form 1-3 (PT3)</option>
-                                <option value="5" >Form 4-5 (SPM)</option>
-                                <option value="6" >Primary (International Syllabus)</option>
-                                <option value="7" >Lower Secondary (International Syllabus)</option>
-                                <option value="8" >Year 10-11 (IGCSE)</option>
-                                <option value="9" >Others</option> -->
-                              </select>
+                          <div class="form-group"  style="display: none;">
+                            <div class="form-check form-check-radio form-check-inline">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="classTypeRadios" id="classTypeRadioPrivate" value="option1" data-compulsory="false" checked>
+                                Private
+                                <span class="circle">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                            <div class="form-check form-check-radio form-check-inline">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="classTypeRadios" id="classTypeRadioPublic" value="option2" data-compulsory="false">
+                                Public
+                                <span class="circle">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
                             </div>
                           </div>
-                          <div class="col-md-6" style="padding-left: 0;">
-                            <!-- Subjects -->
-                            <div class="form-group">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Subject*</span>
-                              <select class="form-control" name="tutor_course[]" id="subject_drop" data-compulsory="false" oninput="this.className = 'form-control'">
-                                <option value="">Select subject</option>
-                              </select>
-                            </div>
+
+                          <!-- Spacer  -->
+                          <!-- <div style="margin-top: 2rem;"></div> -->
+
+                          <!-- Student Limit -->
+                          <div class="form-group" style="margin-top: 0rem;">
+                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Student Limit</span> 
+                            <input type="number" class="form-control" id="inStudentLimit" data-compulsory="true" oninput="this.className = 'form-control'; checkStudentLimit();">
                           </div>
-                        </div>
-        
-                        <!-- Online Only  -->
-                        <div class="row" style="margin: 0.5rem 0 0 0; display: flex;" id="onlineOnlyTop">
-                          <div class="form-check">
+
+                          <!-- First Class Date -->
+                          <div class="form-group" style="margin-top: 0rem;">
+                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">First Lesson Date</span> 
+                            <span class="tooltiptext-trigger">? 
+                              <span class="tooltiptext-general">
+                                <h6>First Lesson Date</h6>
+                                <p>Set the first lesson date. Useful for custom payment cycle. Default: The date this class is created.</p>
+                              </span> 
+                            </span>
+                            <input id="firstClassDatePicker" class="form-control" type="text" data-compulsory="false" oninput="this.className = 'form-control'" style="cursor:pointer;" readonly>
+
+                            <!-- <input type="number" class="form-control" value="20" style="background-color: #e9ecef;" disabled id="inStudentLimit" data-compulsory="true" oninput="this.className = 'form-control'"> -->
+                          </div>
+          
+                          <!-- Spacer  -->
+                          <div style="margin-top: 1.5rem;"></div>
+          
+                          <!-- Permission -->
+                          <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Special Permissions</span> 
+                          <div class="form-check" style="margin-top: 1.0rem;">
                             <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" id="onlineonly_check" data-compulsory="false">
+                              <input class="form-check-input" type="checkbox" value="" id="stuAutoJoinEn" checked>
                               <span class="form-check-sign">
                                 <span class="check"></span>
                               </span>
-                              Online Only?
+                              Allow students to join class through invitation link.
                             </label>
                           </div>
-                        </div>
-    
-                        <!-- Area and State -->   
-                        <div class="row" style="margin: 0.5rem 0 1.5rem 0; display: flex;" id="areaStateTop">
-                          <div class="col-md-6" style="padding-left: 0;">
-                              <!-- State -->
-                            <div class="form-group">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;">State</span> 
-                              <select class="form-control" name="tutor_course[]" id="state_drop" data-compulsory="false">
-                                <option value="">Select state</option>
-                  
-                              </select>
+                          <!-- Invite Link: Show when above is checked -->
+                          <div class="form-group"  style="padding: 0.5rem; margin-top: 1rem; display: none; " id="inAutoJoinLinkTop">
+                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Copy Student Registration Link:</span> 
+                            <div class="input-group">
+                              <span class="d-flex align-items-center input-group-addon" id="btnCopyAutoJoinLink" style="margin-right: 0.5em; cursor: pointer;" onclick="copyText('inAutoJoinLink')">
+                                <span class="material-icons">
+                                  content_copy
+                                </span>
+                              </span>
+                              <input type="text" value='' class="form-control" style="background-color: #e9ecef; pointer-events: none;" id="inAutoJoinLink">
                             </div>
                           </div>
-                          <div class="col-md-6" style="padding-left: 0;" >
-                            <!-- Area -->
-                            <div class="form-group">
-                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Area</span>
-                              <select class="form-control" name="tutor_course[]" id="area_drop" data-compulsory="false">
-                                <option value="">Select area</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>   
-                        
 
-                        <div class="row">
-                          <button class="btn btn-primary" type="button">Submit for Review</button>
-                        </div>
-                        <div class="button-row d-flex mt-4">
-                          <!-- <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button> -->
-                          <!-- <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button> -->
+                          <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="tAddEditLessonEn">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Authorize teachers to create and edit lessons. 
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="tDelLessonEn">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Authorize teachers to remove lessons. 
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="tAddRibbonEn">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Add A Ribbon 
+                            </label>
+                          </div>
+                          <!-- Ribbon: Show when above is checked -->
+                          <div class="row" id="inRibbonSettings" style="display: none; padding: 0.5rem; margin-top: 0.5rem;">
+                
+                            <div class="col-md-4 full">
+                              <p class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Pick A Color</p> 
+                              <input type="text" class="coloris" value="#e76f51" id="inLabelColor">
+                  
+                              <p class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0; margin-top: 0.5rem;">Content (Max 2 Chars / 1 Emoji ❤️)</p> 
+                              <input type="text" class="form-control" id="inLabelText" data-compulsory="false" maxlength="2">
+                            </div>
+                            <div class="col-md-8">
+                
+                              <div class="card"  style="height: 70px; width: 200px">
+                                <div class="ribbon down">
+                                  <div class="content" id="inLabelSample"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+            
+                          <!-- Spacer  -->
+                          <div style="margin-top: 2rem;"></div>
+                                                  
+                          <!-- Class Tag -->
+                          <div class="form-group" style="margin-top: 0rem;">
+                            <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Tag</span>
+                            <span class="tooltiptext-trigger">? 
+                              <span class="tooltiptext-general">
+                                <h6>Tag</h6>
+                                <p>Assign up to 5 tag keywords to identify this class, and receive better breakdowns in your analysis reports.</p>
+                              </span> 
+                            </span>
+                            <input type="text" id="classTag" data-role="tagsinput" class="form-control">
+                          </div>
+
+                          <!-- Status -->
+                          <div class="row">
+                            <div class="col-sm-12 text-left">
+                              <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Class Status</span> 
+                              <span class="tooltiptext-trigger">? 
+                                <span class="tooltiptext-general">
+                                  <h6>Class Status</h6>
+                                  <p>Set to <strong style="color: #2e74b6;">Inactive</strong> to pause the class new intake, hide from the public, and disallow edits to the class.</p>
+                                </span> 
+                              </span>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="form-check form-check-radio form-check-inline">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="classStatus" id="classStatusRadioActive" value="optionActive" data-compulsory="false" checked>
+                                Active
+                                <span class="circle">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                            <div class="form-check form-check-radio form-check-inline">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="classStatus" id="classStatusRadioInactive" value="optionInactive" data-compulsory="false">
+                                Inactive
+                                <span class="circle">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <!-- Delete Class -->
+                          <div class="row">
+                            <div class="col-sm-12 text-left">
+                              <span class="" style="font-size: smaller; font-weight: 400; color: grey;">Delete This Class</span> 
+                              <span class="tooltiptext-trigger" style="background-color: red; padding: 0.2em 0.6em 0.2em 0.6em;">!
+                                <span class="tooltiptext-general" style="border: thin solid red;">
+                                  <h6 style="color: red;">Delete This Class</h6>
+                                  <p>This action cannot be <strong style="color: red;">undone</strong>. This will permanently delete the class details, lesson histories, assigned teachers, and remove all enrolled students.</p>
+                                </span> 
+                              </span>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12" >
+                              <a class="btn btn-sm btn-outline-danger btn-round" id="btnDelClass" style="color: red; background-color: white;" data-toggle='modal' data-target='#delClassModal'>Delete Class <i class="fas fa-exclamation-triangle" style="color: red;"></i></a> 
+                            </div>
+                          </div>
+        
+                          <!-- <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="t1AddEditStuEn" checked disabled>
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Teacher 1 Add / Edit Student
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="t1DelStuEn" checked disabled>
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Teacher 1 Remove Student 
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="t1AddEditLessonEn"checked disabled>
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Teacher 1 Add / Edit Lesson Details 
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="t1DelLessonEn"checked disabled>
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Teacher 1 Remove Lesson Details
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="t2AddEditStuEn" disabled>
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Teacher 2 Add / Edit Student
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="t2DelStuEn" disabled>
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Teacher 2 Remove Student 
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="t2AddEditLessonEn" disabled>
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Teacher 2 Add / Edit Lesson Details 
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="t2DelLessonEn" disabled>
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Teacher 2 Remove Lesson Details
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-top: 1.0rem;">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" id="stuAutoJoinEn" disabled>
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                              Auto Enrolment through Invitation Link
+                            </label>
+                          </div> -->
+
+                          <div class="button-row d-flex mt-4">
+                            <!-- <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button> -->
+                            <!-- <button class="btn btn-success ml-auto js-btn-send" type="button" title="Send">Create Class</button> -->
+                          </div>
                         </div>
                       </div>
-                    </div>
+                      <!--Public panel-->
+                      <div class="multitabs-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                        <h4 class="multitabs-form__title">Public</h4>
+                        <div class="multitabs-form__content">
 
-                  </form>
+                          <!-- Level and Subject  -->
+                          <div class="row" style="margin: 0.5rem 0 0 0;  display: flex;" id="levelSubjectTop">
+                            <div class="col-md-6" style="padding-left: 0;">
+                                <!-- Education Level -->
+                              <div class="form-group" >
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Education Level*</span> 
+                                <select class="form-control" name="tutor_course[]" id="level_drop" data-compulsory="false" oninput="this.className = 'form-control'">
+                                  <option value="">Select education level</option>
+                                  <!-- <option value="1" >Pre-School</option>
+                                  <option value="2" >Lower Primary (Tahun 1-3)</option>
+                                  <option value="3" >Upper Primary (UPSR)</option>
+                                  <option value="4" >Form 1-3 (PT3)</option>
+                                  <option value="5" >Form 4-5 (SPM)</option>
+                                  <option value="6" >Primary (International Syllabus)</option>
+                                  <option value="7" >Lower Secondary (International Syllabus)</option>
+                                  <option value="8" >Year 10-11 (IGCSE)</option>
+                                  <option value="9" >Others</option> -->
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-6" style="padding-left: 0;">
+                              <!-- Subjects -->
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Subject*</span>
+                                <select class="form-control" name="tutor_course[]" id="subject_drop" data-compulsory="false" oninput="this.className = 'form-control'">
+                                  <option value="">Select subject</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+          
+                          <!-- Online Only  -->
+                          <div class="row" style="margin: 0.5rem 0 0 0; display: flex;" id="onlineOnlyTop">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" value="" id="onlineonly_check" data-compulsory="false">
+                                <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                                Online Only?
+                              </label>
+                            </div>
+                          </div>
+      
+                          <!-- Area and State -->   
+                          <div class="row" style="margin: 0.5rem 0 1.5rem 0; display: flex;" id="areaStateTop">
+                            <div class="col-md-6" style="padding-left: 0;">
+                                <!-- State -->
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray;">State</span> 
+                                <select class="form-control" name="tutor_course[]" id="state_drop" data-compulsory="false">
+                                  <option value="">Select state</option>
+                    
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-6" style="padding-left: 0;" >
+                              <!-- Area -->
+                              <div class="form-group">
+                                <span class="" style="font-size: smaller; font-weight: 300; color: gray;" >Area</span>
+                                <select class="form-control" name="tutor_course[]" id="area_drop" data-compulsory="false">
+                                  <option value="">Select area</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>   
+                          
+
+                          <div class="row">
+                            <button class="btn btn-primary" type="button">Submit for Review</button>
+                          </div>
+                          <div class="button-row d-flex mt-4">
+                            <!-- <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button> -->
+                            <!-- <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button> -->
+                          </div>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
                 </div>
               </div>
-            </div>
 
             </div>
           </div>
