@@ -65,7 +65,7 @@ function phoneAuth() {
     document.getElementById("btnVerify").disabled = true;
     console.log("Phone Verification Failed Error Code: "+ error);
     // func.showNotification('top','center', 'danger', 'error_outline', "Phone Verification Failed. Please make sure you enter a valid phone number." );
-    func.showNotification('top','center', 'danger', 'error_outline', "Phone verification failed. "+ error );
+    func.showNotification('top','center', 'danger', 'error_outline', "Phone verification failed. "+ error.message );
 
   });
 }
@@ -492,7 +492,7 @@ function codeverify() {
   .catch(function (error) {
     // alert(error.message);
     // alert("Phone Verification Failed. Please make sure you enter a valid 6-digit verification code." +  error.message);
-    func.showNotification('top','center', 'danger', 'error_outline', "Phone Verification Failed. Please make sure you enter a valid 6-digit verification code.");
+    func.showNotification('top','center', 'danger', 'error_outline', "Phone Verification Failed. "+ error.message);
 
     document.getElementById("btnLogin").removeAttribute("disabled");
     document.getElementById("btnLogin").textContent = 'Confirm And Login';
