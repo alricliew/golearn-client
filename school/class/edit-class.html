@@ -1969,8 +1969,8 @@
       }else{
         // Set the fields
         currentClassObj = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_CURRENT_DOC_KEY));
-        console.log("currentClassObj");
-        console.log(currentClassObj);
+        // console.log("currentClassObj");
+        // console.log(currentClassObj);
         updatePageContent(currentClassObj);
 
         // If user is NOT the admin of this class, disable non admin edits
@@ -3597,8 +3597,10 @@
         });
  
         latestStuDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
-        console.log("allClassStuDoc")
-        console.log(allClassStuDoc)
+
+        // console.log("allClassStuDoc")
+        // console.log(allClassStuDoc)
+
         // Handle Lesson Load more btn
         if (querySnapshot.empty){
           stuLoadmore.removeEventListener('click', stuLoadMoreHandleClick );
@@ -3719,23 +3721,16 @@
 
     // Add the student admin/tutor selected in Add Student Modal to Class_Student module
     function AddNewStudentsToDB(id){
-
       // id is the docId of a student in Student Module
       let selectedStuModuleDoc = null;
-
       allStuModuleDoc.forEach((doc) => {
-        // console.log(doc);
-        if (id === doc.id){
-          selectedStuModuleDoc = doc;
-        }
-
+        if (id === doc.id) selectedStuModuleDoc = doc;
       });
 
       var docRef = db.collection("Class")
           .doc("v1")
           .collection("Class_Student")
           .doc();
-
       let data = {
         [CLASS_STUDENT_ID]: docRef.id,
         [CLASS_STUDENT_CLASS_ID]: currentClassObj[CLASS_ID],
@@ -3758,19 +3753,16 @@
         [CLASS_STUDENT_GUR_PHONE]: selectedStuModuleDoc.gurPhone,
         [CLASS_STUDENT_GUR_EMAIL]: selectedStuModuleDoc.gurEmail,
         [CLASS_STUDENT_GUR_ADDR]: selectedStuModuleDoc.gurAddr,
-
       }  
 
-      console.log('Class_Student Sub Module Data:')
-      console.log(data)
+      // console.log('Class_Student Sub Module Data:')
+      // console.log(data)
       var docRefWithMerge = docRef.set(data , { merge: true })
       .then(() => {
         func.showNotification('top','center', 'success', 'check_circle', "Successfully added a new student: " + selectedStuModuleDoc.childName );
         // Add studentId and gurId from Student Module to class's viewerId array in Class Module
         addStudentIdToClassDB(selectedStuModuleDoc[STU_GUR_ID], selectedStuModuleDoc[STU_CHILD_ID], selectedStuModuleDoc[STU_CHILD_NAME]);
 
-        
-        // window.location.reload(true); 
         // Reset the paginnation cursor, remove all student-wrapper & reload the lessons
         latestStuDoc = null;
         document.getElementById("studentNoDataPlaceholder").style.display = 'none';
@@ -3806,8 +3798,8 @@
         [CLASS_DATE_EDIT]: new Date(),
         [CLASS_EDIT_MSG]: childName + ' joined.',
       }
-      console.log('StudentID Array Data');
-      console.log(data);
+      // console.log('StudentID Array Data');
+      // console.log(data);
       docRef.set( data, { merge: true })
       .then(() => {
         reload();
@@ -3886,16 +3878,15 @@
           .collection("Class_Student")
           .doc(studentClassId);
 
-      let data = {
-        [CLASS_STUDENT_STATUS]: false,
-        [CLASS_STUDENT_DATE_DEL]: new Date(),
-      }  
-
+      // let data = {
+      //   [CLASS_STUDENT_STATUS]: false,
+      //   [CLASS_STUDENT_DATE_DEL]: new Date(),
+      // } 
       // console.log('Delete Student Class_Student Sub Module: '+ studentId)
       // console.log(data)
       
       docRef.delete().then(() => {
-        console.log("Document successfully deleted!");
+        // console.log("Document successfully deleted!");
         delStudentIdFromClassDB(guardianId, studentId, studentName);
 
       }).catch((error) => {
@@ -3908,7 +3899,6 @@
     var allStuModuleDoc = []; // Reset all students doc
     function loadAllAdminStudents(){
 
-      allStuModuleDoc = []; // Init All Students Doc array
       // STUDENT Module
       let docRef = db.collection("Class")
           .doc("v1")
@@ -3941,15 +3931,16 @@
 
             if (stuClassDepIdModArray.includes(doc.data()[STU_DEPENDENT_ID]) ){
               // Do not render
+              renderAllAdminStudents(doc, true);
+
             }else {
               renderAllAdminStudents(doc);
             }
           }
           
         });
-        
-        console.log("allStuModuleDoc")
-        console.log(allStuModuleDoc)
+        // console.log("allStuModuleDoc")
+        // console.log(allStuModuleDoc)
 
         latestAdminStuDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
         // console.log(querySnapshot.docs.length)
@@ -3972,7 +3963,7 @@
     }
 
     // Render all admin's students in Add Student Modal
-    function renderAllAdminStudents(doc){
+    function renderAllAdminStudents(doc, isExist = false){
   
       let stuName_p = document.createElement('p');
       stuName_p.className = "student-item";
@@ -4001,6 +3992,9 @@
       sel_btn.setAttribute('data-dismiss','modal');
       sel_btn.setAttribute('type','button')
       sel_btn.setAttribute('onclick',"AddNewStudentsToDB('"+doc.data().id+"')");
+      if (isExist){
+        sel_btn.setAttribute('disabled',true);
+      }
       let sel_div = document.createElement('div');
       sel_div.className = "col-md-3";
       sel_div.appendChild(sel_btn);
@@ -4836,7 +4830,7 @@
       .then((doc) => {
 
         if (doc.exists) {
-          console.log("Reload document");
+          // console.log("Reload document");
           // console.log(doc.data());
 
           sessionStorage.setItem(SESSION_STORAGE_CLASS_CURRENT_DOC_KEY, JSON.stringify(doc.data()));
@@ -5497,6 +5491,7 @@
       // Load all Admin Students
       $('#addStudentModal').on('show.bs.modal', function (event) {
         latestAdminStuDoc = null;
+        allStuModuleDoc = []; // Init All Students Doc array
         loadAllAdminStudents();
       });
 
@@ -5504,6 +5499,9 @@
       $('#addStudentModal').on('hidden.bs.modal', function (event) {
         // NOTE: div:gt(4) - get the 5th div child in the parent node.
         $('#add-student-modal-container div:gt(4)').remove();
+
+        // Clear All Students Doc array
+        allStuModuleDoc = []; 
 
       });
 
@@ -5532,7 +5530,7 @@
         let studentName =  document.getElementById("deleteStudentName").getAttribute('value');
         let studentId =  document.getElementById("deleteStudentId").getAttribute('value');
         let guardianId =  document.getElementById("deleteGuardianId").getAttribute('value');
-        console.log(studentClassId, studentName, studentId, guardianId );
+        // console.log(studentClassId, studentName, studentId, guardianId );
         removeStudent(studentClassId, studentName, studentId, guardianId );
 
       });
@@ -5543,20 +5541,16 @@
         STUDENT_NAME = "";
       });
 
-
-
      // Edit Students
      $('#editStudentModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         CLASS_STUDENT_DOC_ID = button.data('id') // CLASS_STUDENT_ID
         STUDENT_NAME = button.data('stuname') // CLASS_STUDENT_STU_NAME
         STUDENT_ENROLLMENT_STATUS = button.data('enrollmentstatus') // CLASS_STUDENT_ENROLLMENT_STATUS
-
-        console.log(CLASS_STUDENT_DOC_ID);
-        console.log(STUDENT_NAME);
-        console.log(STUDENT_ENROLLMENT_STATUS);
-        console.log(allClassStuDoc);
-
+        // console.log(CLASS_STUDENT_DOC_ID);
+        // console.log(STUDENT_NAME);
+        // console.log(STUDENT_ENROLLMENT_STATUS);
+        // console.log(allClassStuDoc);
 
         // Find the right students from allClassStuDoc based on the student id
         let selectedClassStuDoc = null;
@@ -5572,7 +5566,6 @@
         document.getElementById("editStudentId").setAttribute('value', selectedClassStuDoc[CLASS_STUDENT_STU_ID]);
         document.getElementById("editGuardianId").setAttribute('value', selectedClassStuDoc[CLASS_STUDENT_GUR_ID]);
         document.getElementById("editStudentEnrollmentStatus").setAttribute('value', STUDENT_ENROLLMENT_STATUS);
-
         document.getElementById("stuName").value = selectedClassStuDoc[CLASS_STUDENT_STU_NAME];
         document.getElementById("stuPhone").value = selectedClassStuDoc[CLASS_STUDENT_STU_PHONE];
         document.getElementById("stuEmail").value = selectedClassStuDoc[CLASS_STUDENT_STU_EMAIL];
@@ -5602,7 +5595,6 @@
           document.getElementById("btnEditStudentModalUpdate").textContent = 'Update'
         }
 
-
       });
 
       // Update Student's Feedback from class
@@ -5614,7 +5606,6 @@
         let studentFeedback =  document.getElementById("stuFeedback").value;
         let studenEnrollmentStatus=  document.getElementById("editStudentEnrollmentStatus").getAttribute('value');
 
-        // console.log()
         updateStudent(classStudentDocId, studentId, guardianId, studentName, studentFeedback, studenEnrollmentStatus);
 
       });
@@ -5653,7 +5644,6 @@
         // Specific to myself
         const btnSelectMyself = document.getElementById('btnSelectMyself');
         btnSelectMyself.setAttribute('onclick', "AddNewTutorToDB("+ tutorBtnNum+", '"+ tutorId+"', `"+current_name+"`, '"+current_phone+"', `"+current_imgUri+"`)");
-
 
       });
       
@@ -5744,11 +5734,8 @@
 
       // Advanced panel: Delete Class btn clicked
       $('#btnDelClassModalUpdate').on('click', function (event) {
-        // alert('Deleted Class');
         DeleteClass(currentClassObj[CLASS_ID]);
-
       });
-
 
       // Update data - Save btn clicked
       $('#btnSaveModalUpdate').on('click', function (event) {
@@ -5775,12 +5762,10 @@
         }
       });
 
-
     });
 
   </script>
   
- 
   <!-- Multiform-specific script -->
   <script>
     //DOM elements
@@ -5795,7 +5780,6 @@
       stepPrevBtnClass: 'js-btn-prev',
       stepNextBtnClass: 'js-btn-next',
       stepSendBtnClass: 'js-btn-send' };
-
 
     //remove class from a set of items
     const removeClasses = (elemSet, className) => {
