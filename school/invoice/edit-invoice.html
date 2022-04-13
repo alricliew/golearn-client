@@ -4262,12 +4262,10 @@
           .then(() => {
 
             // Step 1: Get all the revDoc based on 'month'
-            let issuedDate = new Date(currentInvoiceObj[INV_ISSUE_DATE].seconds*1000).toLocaleDateString("en-GB");
+            let issuedDate = document.getElementById("invIssueDate").value;
             let issuedDateComponent = issuedDate.split('/');
             month = parseInt(issuedDateComponent[2]+""+issuedDateComponent[1]);
-            // console.log(issuedDate)
             console.log("Step 1: Get all the revDoc based on 'month' ")
-            console.log(month)
       
             let revenueDocList = []
             let reportDocRef = db.collection("Report")
@@ -4317,7 +4315,7 @@
             console.log("Step  2.1 Update the existed reportDoc in batch")
             // Step 2.1 Update the existed reportDoc in batch 
             querySnapshot.forEach((doc) => {
-              console.log(doc.data());
+              // console.log(doc.data());
 
               // Check if the ID in local invoice items match with the one in revenueDoc.
               // If match create a new data and push to new batch for update. 
@@ -4360,7 +4358,7 @@
                     [REV_STATUS]: true
                   }
 
-                  promiseArr.push(reportDocRef.set(revData, { merge: true }))
+                  promiseArr.push(reportDocRef.update(revData))
 
                   // batchUpdate.set(reportDocRef, revData, { merge: true });
 
@@ -4465,8 +4463,6 @@
         // Commit the batch
         batch.commit().then(() => {
           reload();
-          // window.location.href='./view.html'
-          // $('#loadingModal').modal('hide');
         });
       }
 
