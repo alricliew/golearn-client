@@ -2073,7 +2073,7 @@
           payrollTotal = doc.data()[PAYROLL_TOTAL];
 
           // Load the payslip of each tutor. 
-          loadPayroll(payrollId);
+          loadAllPayslips(payrollId);
 
           // console.log(payrollStart.toDate(), payrollEnd.toDate())
           let startDate_temp = moment(payrollStart.toDate());
@@ -2645,7 +2645,7 @@
             payrollTotal = doc.data()[PAYROLL_TOTAL];
 
             // Load the payslip of each tutor. 
-            loadPayroll(payrollId);
+            loadAllPayslips(payrollId);
 
             // Enable Step 2
             enableStep2();
@@ -2660,8 +2660,8 @@
 
     }
 
-    // Payroll found. Load payroll details
-    function loadPayroll(payrollId){
+    // Payroll found. Load payslips in a payroll.
+    function loadAllPayslips(payrollId){
 
       var docRef = db.collection("Financial")
           .doc("v1")
@@ -6843,7 +6843,7 @@
               // [PAY_DATE_ADD]: new Date(),
               [PAY_DATE_EDIT]: new Date(),
               // [PAY_DATE_DEL]: '',
-              // [PAY_STATUS]: true,
+              [PAY_STATUS]: true, // Some payslips maybe deleted, when updating these payslips, set True to make them visible again.
 
               // Payroll Info
               // [PAY_PAYROLL_ID]: payrollId,
@@ -6870,7 +6870,7 @@
               [TRANS_TITLE]: title,
               [TRANS_TOTAL]: netPay,
               [TRANS_DATE_EDIT]: new Date(),
-              // [TRANS_STATUS]: true,
+              [TRANS_STATUS]: true, // Some payslips maybe deleted, when updating these payslips, set True to make them visible again.
             }
 
             console.log("Transaction Data...")
@@ -6878,7 +6878,6 @@
 
             // Get the index of the payslip doc no.
             let payslipDocIndex = payrollDocIdArr.indexOf(payDocId);
-
             // Remove the item and it's total in arrays
             if (payslipDocIndex > -1) {
               payrollDocIdArr.splice(payslipDocIndex, 1);
