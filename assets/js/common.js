@@ -124,11 +124,21 @@ const CHECK_HOME_STUDENT_TO_TUTOR_KEY = "modeHomeStudentToTutor";
 const CHECK_GROUP_KEY = "modeGroup";
 const CHECK_ONLINE_KEY = "modeOnline";
 const CHECK_ONLINE_GROUP_KEY = "modeOnlineGroup";
+    const MODE_HOME_TUTOR_TO_STUDENT = "modeHomeTutorToStudent";
+    const MODE_HOME_STUDENT_TO_TUTOR = "modeHomeStudentToTutor"
+    const MODE_GROUP = "modeGroup"
+    const MODE_ONLINE = "modeOnline"
+    const MODE_ONLINE_GROUP = "modeOnlineGroup"
 const CHECK_TEACHING_LANGUAGE_ENGLISH_KEY = "lanEng";
 const CHECK_TEACHING_LANGUAGE_BM_KEY = "lanBm";
 const CHECK_TEACHING_LANGUAGE_BC_KEY = "lanBc";
 const CHECK_TEACHING_LANGUAGE_BT_KEY = "lanBt";
 const CHECK_TEACHING_LANGUAGE_OTHER_KEY = "lanOther";
+    const LAN_ENGLISH = "lanEng";
+    const LAN_BM = "lanBm"
+    const LAN_BC = "lanBc"
+    const LAN_BT = "lanBt"
+    const LAN_OTHER = "lanOther"
 // NEW FEATURE 2.0 End
 const YEARS_EXPERIENCE_KEY="yearsExperience";
 const TUTORING_EXPERIENCE_KEY="tutoringExperience";
@@ -816,6 +826,49 @@ const SET_CAT_SINGLE_NAME = 'name';
 const SET_CAT_SINGLE_SLUG = 'slug';
 const SET_CAT_SINGLE_DESC = 'desc';
 const SET_CAT_SINGLE_DATE_EDIT = "dateEdit";
+
+// Course (/course/v1/course)
+const COURSE_ID = 'id';
+const COURSE_ADMIN_ID = "aid";
+const COURSE_CLASS_ID = "cid";
+const COURSE_CONTENT_ID = "contentId";
+const COURSE_URL = "url";
+const COURSE_NAME = 'name';
+const COURSE_DESC = 'desc';
+const COURSE_VENUE = 'venue';
+const COURSE_TIMESLOT_DAY_OF_WEEK_ARR = "timeDayOfWeek";
+const COURSE_TIMESLOT_START_ARR = "timeStart";
+const COURSE_TIMESLOT_END_ARR = "timeEnd";
+const COURSE_OBJ_ARR = "obj";
+const COURSE_MODE_ARR = "mode"; // [MODE_<X>]
+const COURSE_LAN_ARR = "lan"; //[LAN_<X>]
+const COURSE_INCLUDE = "include";
+const COURSE_FEE = "fee";
+const COURSE_FEE_TYPE = "feeType";
+const COURSE_FEE_DESC = "feeDesc";
+const COURSE_RATE = "rate";
+const COURSE_RATE_TIMES = "rateTimes";
+const COURSE_RATE_FINAL = "rateFinal";
+const COURSE_CAT_ID = "cat";
+const COURSE_SUB_ID = "sub";
+const COURSE_STATE_ID = "state";
+const COURSE_AREA_ID = "area";
+const COURSE_DATE_CREATE = "dateC";
+const COURSE_DATE_UPDATE = "dateU";
+const COURSE_STATUS = "status";
+    const COURSE_STATUS_DRAFT = "draft";
+    const COURSE_STATUS_REVIEW = "review";
+    const COURSE_STATUS_ACTIVE = "active";
+    const COURSE_STATUS_INACTIVE = "inactive";
+    const COURSE_STATUS_SUSPENDED = "suspended";
+
+// Course (/course/v1/content)
+const COURSE_CONTENT_UID = 'id';
+const COURSE_CONTENT_ADMIN_ID = "aid";
+const COURSE_CONTENT_COURSE_ID = "cid";
+const COURSE_CONTENT_CLASS_ID = "classId";
+const COURSE_CONTENT_ITEM = "item";
+const COURSE_CONTENT_DATE_UPDATE = "dateU";
 
 // -------------- Session Storage Key Start -------------- //
 // CLIENT: Profile Obj
