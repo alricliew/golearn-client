@@ -5492,6 +5492,7 @@
       $('#addStudentModal').on('show.bs.modal', function (event) {
         latestAdminStuDoc = null;
         allStuModuleDoc = []; // Init All Students Doc array
+        stuAdminLoadmore.addEventListener('click', stuAdminLoadMoreHandleClick );
         loadAllAdminStudents();
       });
 

@@ -1685,7 +1685,6 @@
     var allParentListDoc = []; // Get all the unique parents
     function loadAllAdminStudents(){
 
-      allStuModuleDoc = []; // Init All Students Doc array
       // STUDENT Module
       let docRef = db.collection("Class")
           .doc("v1")
@@ -4582,9 +4581,9 @@
       let totalText = '';
 
       additionalItem.forEach((item) => {
-        console.log("")
-        console.log(item)
-        console.log("")
+        // console.log("")
+        // console.log(item)
+        // console.log("")
         let component = item.split(";; ")
 
         let additionalSelector = component[0];
@@ -4886,6 +4885,8 @@
       // Load all Admin Students
       $('#addStudentModal').on('show.bs.modal', function (event) {
         latestAdminStuDoc = null;
+        allStuModuleDoc = []; // Init All Students Doc array
+        stuAdminLoadmore.addEventListener('click', stuAdminLoadMoreHandleClick );
         loadAllAdminStudents();
       });
 
@@ -4893,6 +4894,7 @@
       $('#addStudentModal').on('hidden.bs.modal', function (event) {
         // NOTE: div:gt(4) - get the 5th div child in the parent node.
         $('#add-student-modal-container div:gt(4)').remove();
+        allStuModuleDoc = []; // Init All Students Doc array
 
       });
 
