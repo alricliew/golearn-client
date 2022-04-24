@@ -1004,13 +1004,10 @@
         //   // Do nothing if the account is new, deactivated or suspended
 
         // }else {
-
-
         //   // Check if aWebUrl Exist or not. Update only if it exists.
         //   if (current_aweburl == null || current_aweburl == ""  ){
         //     // Do nothing
         //   }else{
-
         //     let detail_temp =""
         //     if (currentYearsExperience == 0 || currentYearsExperience == null)
         //       detail_temp = gender_string_temp + " | " + document.getElementById("age").value;
@@ -1235,9 +1232,8 @@
               //   func.showNotification('top','center', 'success', 'check_circle', "Your profile picture is updated.");
               // }
 
-              
-
-            }).then(() => {
+            })
+            .then(() => {
               func.showNotification('top','center', 'success', 'check_circle', "Your profile picture is updated.");
 
               $('#uploadModal').modal('hide');
