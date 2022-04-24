@@ -29,7 +29,47 @@
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
   <script src="../../assets/js/firebase.js"></script>
+  <!-- Screen Loading -->
+  <style>
+    @keyframes load {
+      50% {
+        transform: translateY(1.5em);
+      }
+    }
+    .loading {
+      /* margin: 4em auto; */
+      position: absolute;
+      /* width: 5em; */
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.137);
 
+    }
+    .loading > div, .loading:before, .loading:after {
+      animation: load 1.2s ease-in-out infinite;
+      background-color: rgb(211, 211, 211);
+      border-radius: 50%;
+      content: '';
+      height: 1em;
+      width: 1em;
+    }
+    .loading > div {
+      animation-delay: 0.2s;
+      left: 0;
+      position: absolute;
+    }
+    .loading:before {
+      left: -2em;
+      position: absolute;
+    }
+    .loading:after {
+      animation-delay: 0.4s;
+      left: 2em;
+      position: absolute;
+    }
+  </style>
 </head>
 
 <body>
@@ -203,6 +243,10 @@
       <!-- End Navbar -->
 
 			<!-- Modal Start -->
+      <!-- Loading Screen -->
+      <div class="loading" id="loadingScreen">
+        <div></div>
+      </div>
 
       <!-- Sign-out modal -->
       <div class="row">
@@ -661,236 +705,6 @@
     // Store last document - Used for payroll
     var latestInvoiceDoc = null;
 
-
-		// var db = firebase.firestore();
-		// db.settings({ timestampsInSnapshots: true });
-
-    // // Set the nav name and global var, if user already login and have session Storage 
-    // var tutorInfoObj = null;
-    // if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
-    //   // Do nothing
-    // }
-    // else{
-    //   // Set the nav user name
-    //   tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
-    //   document.getElementById("user").textContent = tutorInfoObj.name;
-
-    //   current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
-    //   // current_email, 
-    //   // current_phone, 
-    //   current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
-    //   current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
-    //   current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
-    //   current_accountStatus = tutorInfoObj.accountStatus; // bool
-    //   currentYearsExperience = tutorInfoObj.yearsExperience; // number
-    //   currentTutoringExperience = tutorInfoObj.tutoringExperience;
-    //   currentTutoringApproach = tutorInfoObj.tutoringApproach;
-    //   currentQualification= tutorInfoObj.qualification;
-      
-    //   current_aweburl = tutorInfoObj.aWebUrl
-
-    //   // updatePageView(current_accountStatus);
-    // }
-
-		// firebase.auth().onAuthStateChanged(function(user){
-      
-		// 	if(!user){
-    //     // Return to login if user does not exist.
-		// 		window.location.href = "../login.html"
-		// 	}else{
-    //     // if the displayName is null, it means user register using Phone
-    //     if (firebase.auth().currentUser.displayName == null ){
-    //         tutorId = firebase.auth().currentUser.phoneNumber;
-    //     }else{
-    //       tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-    //     }
-    //     loadUserInfo(tutorId)
-          
-    //     // loadAllOrgRevenue();
-
-    //     let fullYear = new Date().getFullYear();
-
-    //     initDropdownMenu(fullYear);
-
-    //     loadData(fullYear)
-    //     // loadAllCatRevenue(fullYear);
-
-		// 	}
-		// });
-
-    // // Tutor Specific
-    // function loadUserInfo(tutorId){
-    //   // Tutor Id must be a phone with +60, no spacing or other chars
-    //   var docRef = db.collection("Tutor").doc(tutorId);
-      
-
-    //   // docRef.get().then((doc) => {
-    //   docRef.onSnapshot((doc) => {
-
-    //     if (doc.exists) {
-    //       // console.log("Document data:", doc.data());
-
-    //       current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
-    //       // current_email, 
-    //       // current_phone, 
-    //       current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
-    //       current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
-    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
-    //       current_accountStatus = doc.data().accountStatus; 
-    //       currentYearsExperience = doc.data().yearsExperience; // number
-    //       currentTutoringExperience = doc.data().tutoringExperience;
-    //       currentTutoringApproach = doc.data().tutoringApproach;
-    //       currentQualification= doc.data().qualification;
-    //       current_mon_8am = doc.data().tMon8am;
-    //       current_mon_12pm= doc.data().tMon12pm; 
-    //       current_mon_3pm = doc.data().tMon3pm;  
-    //       current_mon_6pm = doc.data().tMon6pm;  
-    //       current_tue_8am = doc.data().tTue8am;  
-    //       current_tue_12pm= doc.data().tTue12pm;  
-    //       current_tue_3pm = doc.data().tTue3pm;  
-    //       current_tue_6pm = doc.data().tTue6pm;  
-    //       current_wed_8am = doc.data().tWed8am;  
-    //       current_wed_12pm= doc.data().tWed12pm;  
-    //       current_wed_3pm = doc.data().tWed3pm;  
-    //       current_wed_6pm = doc.data().tWed6pm;  
-    //       current_thu_8am = doc.data().tThu8am;  
-    //       current_thu_12pm= doc.data().tThu12pm;  
-    //       current_thu_3pm = doc.data().tThu3pm;  
-    //       current_thu_6pm = doc.data().tThu6pm;  
-    //       current_fri_8am = doc.data().tFri8am;  
-    //       current_fri_12pm= doc.data().tFri12pm;  
-    //       current_fri_3pm = doc.data().tFri3pm;  
-    //       current_fri_6pm = doc.data().tFri6pm; 
-    //       current_sat_8am = doc.data().tSat8am;  
-    //       current_sat_12pm= doc.data().tSat12pm;  
-    //       current_sat_3pm = doc.data().tSat3pm;  
-    //       current_sat_6pm = doc.data().tSat6pm;  
-    //       current_sun_8am = doc.data().tSun8am;  
-    //       current_sun_12pm= doc.data().tSun12pm;  
-    //       current_sun_3pm = doc.data().tSun3pm;  
-    //       current_sun_6pm = doc.data().tSun6pm; 
-
-    //       // Store data to sessionStorage
-    //       var tutorDataObj = {
-    //         [NAME_KEY] : doc.data().name,
-    //         [EMAIL_KEY] : doc.data().email,
-    //         [PHONE_KEY] : doc.data().phone,
-    //         [AGE_KEY] : doc.data().age,
-    //         [GENDER_KEY] : doc.data().gender,
-    //         [ADDRESS_1_KEY] :doc.data().address1,
-    //         [ADDRESS_2_KEY] :doc.data().address2,
-    //         [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
-    //         [ADDRESS_STATE_KEY] :doc.data().addressState,
-    //         [IMAGE_KEY] : doc.data().imgUrl,
-    //         // [NRIC_KEY] : doc.data().name,
-    //         [RATING_KEY] : doc.data().rating,
-    //         [RATING_TIMES_KEY] : doc.data().ratingTimes,
-    //         [RATING_FINAL_KEY] : doc.data().ratingFinal,
-    //         [PROFILE_STATUS_KEY] : doc.data().profileStatus,
-    //         // [CHECK_HOMETUTOR_KEY] : doc.data().name,
-    //         // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
-    //         // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
-    //         // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
-    //         [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
-    //         [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
-    //         [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
-    //         [QUALIFICATION_KEY] : doc.data().qualification,
-    //         [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
-    //         [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
-    //         [AGENT_KEY] : doc.data().agent,
-    //         [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
-            
-    //         [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
-    //         [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
-    //         [CHECK_GROUP_KEY] : doc.data().modeGroup,
-    //         [CHECK_ONLINE_KEY] : doc.data().modeOnline,
-    //         [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
-    //         [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
-    //         [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
-    //         [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
-    //         [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
-    //         [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
-
-    //         [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
-    //         [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
-    //         [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
-    //         [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
-    //         [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
-    //         [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
-    //         [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
-    //         [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
-    //         [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
-    //         [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
-    //         [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
-    //         [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
-    //         [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
-    //         [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
-    //         [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
-    //         [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
-    //         [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
-    //         [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
-    //         [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
-    //         [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
-    //         [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
-    //         [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
-    //         [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
-    //         [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
-    //         [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
-    //         [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
-    //         [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
-    //         [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
-    //         // Create a placeholder for aWebUrl. This param can only initiated by admin
-    //         // manually through https://golearn.com.my/admin/admin-portal.html
-    //         [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
-    //         [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
-    //         [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
-    //         [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
-    //         [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
-    //         [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
-    //         [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
-    //       }
-
-    //       // Set tutorInfoObj as sessionStorage
-    //       sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
-
-    //       // Set the nav user name and public profile link
-    //       document.getElementById("user").textContent = doc.data().name;
-
-    //       if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
-    //         document.getElementById("navPublicProfile").href = "#"  ;
-    //         document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
-    //       } else{
-    //         document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
-    //         document.getElementById("navPublicProfile").target = "_blank";
-    //       }
-          
-    //       if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-    //         document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
-    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
-    //         document.getElementById("btnActivateAccount").target = "_blank";
-    //       }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-    //         document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
-    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
-    //         document.getElementById("btnActivateAccount").target = "_blank";
-    //       }else {
-    //         let activationNavItem = document.querySelector('#activationNavItem');
-    //         let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
-    //         // Remove NavItem if exist
-    //         if (activationNavItemIsExist){
-    //           activationNavItem.parentNode.removeChild(activationNavItem);
-    //         }else{
-    //           // Do nothing
-    //         }
-    //       }
-    //     } else {
-    //        // Do nothing 
-    //     }
-    //   });
-
-    // };
-
     // Check if user logged on
     AuthCheck();
 
@@ -1020,11 +834,12 @@
           // .limit(1);
 
 
+      let monthlyRevenue = [];
 
       docRef
       .get()
       .then((querySnapshot) => {
-        let monthlyRevenue = [];
+        
         clearCatTable();
 
         if(querySnapshot.empty) {
@@ -1104,10 +919,21 @@
 
         }
 
+        document.getElementById("loadingScreen").style.display = "none";
+
+      })
+      // Update to Org Revenue
+      .then(() => {
         // Save the monthly revenue report.
         // console.log("monthlyRevenue")
         // console.log(monthlyRevenue)
-        updateOrgRevenue(monthlyRevenue, fullYear);
+        
+
+        if (monthlyRevenue.length == null || monthlyRevenue.reduce((a, b) => a + b, 0) == 0 || monthlyRevenue.length == 0){
+          // If no monthly revenue, do nothing
+        }else {
+          updateOrgRevenue(monthlyRevenue, fullYear);
+        }
 
       });
 
@@ -1430,7 +1256,7 @@
         .where(REV_TYPE, "==", REV_TYPE_ORG)
         .where(REV_MONTH, "==", fullYear+"99")
         .where(REV_STATUS, "==", true)
-        .limit(1)
+        // .limit(1)
 
 
       docRef
@@ -1467,66 +1293,108 @@
         else {
           // console.log("Data found Update: ");
           
-          querySnapshot.forEach((doc) => {
+          // For some reasons, there are more than 1 similar org revenue doc, perform a full sanity check
+          if (querySnapshot.docs.length > 1){
+            console.log("More than 1 org revenue docs found. Perform a full sanity check");
+            // Remove all revenue doc and reload the page to trigger the creation again.
+            let orgRevenueIdArr = []
+            querySnapshot.forEach((doc) => {
+              orgRevenueIdArr.push(doc.id);
+            });
 
-            // console.log(doc.data());
+            sanityCheckOrgRevenue(orgRevenueIdArr);
 
-            let orgRevDocRef = db.collection("Report")
-              .doc("v1")
-              .collection("Revenue")
-              .doc(doc.data()[REV_ID]);
+          }
+          else {
+            // Update org revenue
+            querySnapshot.forEach((doc) => {
+
+              let orgRevDocRef = db.collection("Report")
+                .doc("v1")
+                .collection("Revenue")
+                .doc(doc.data()[REV_ID]);
+                
+              let annualTotal = monthlyRevenue.reduce((a, b) => a + b, 0);
+
+              orgRevData ={
+                // [REV_ID]: orgRevDocRef.id,
+                // [REV_ADMIN_ID]: tutorId,
+                // [REV_NAME]: fullYear+' Annual Revenue',
+                // [REV_REF_ID]: '',
+                // [REV_TYPE]: REV_TYPE_ORG,
+                // [REV_MONTH]: fullYear+"99",
+                [REV_TOTAL]: annualTotal,
+                // [REV_DOC_ID_ARR]: MyMonthAbr, 
+                [REV_DOC_TOTAL_ARR]: monthlyRevenue,
+                [REV_DATE_EDIT]: new Date(),
+                // [REV_STATUS]: true,
+              }
+
+              // console.log(orgRevData)
+              orgRevDocRef.set(orgRevData, { merge: true });
+
+            });
+
+
+          }
+          
+          // querySnapshot.forEach((doc) => {
+
+          //   console.log(doc.data());
+
+          //   let orgRevDocRef = db.collection("Report")
+          //     .doc("v1")
+          //     .collection("Revenue")
+          //     .doc(doc.data()[REV_ID]);
               
-            let annualTotal = monthlyRevenue.reduce((a, b) => a + b, 0);
+          //   let annualTotal = monthlyRevenue.reduce((a, b) => a + b, 0);
 
-            orgRevData ={
-              // [REV_ID]: orgRevDocRef.id,
-              // [REV_ADMIN_ID]: tutorId,
-              // [REV_NAME]: fullYear+' Annual Revenue',
-              // [REV_REF_ID]: '',
-              // [REV_TYPE]: REV_TYPE_ORG,
-              // [REV_MONTH]: fullYear+"99",
-              [REV_TOTAL]: annualTotal,
-              // [REV_DOC_ID_ARR]: MyMonthAbr, 
-              [REV_DOC_TOTAL_ARR]: monthlyRevenue,
-              [REV_DATE_EDIT]: new Date(),
-              // [REV_STATUS]: true,
-            }
+          //   orgRevData ={
+          //     // [REV_ID]: orgRevDocRef.id,
+          //     // [REV_ADMIN_ID]: tutorId,
+          //     // [REV_NAME]: fullYear+' Annual Revenue',
+          //     // [REV_REF_ID]: '',
+          //     // [REV_TYPE]: REV_TYPE_ORG,
+          //     // [REV_MONTH]: fullYear+"99",
+          //     [REV_TOTAL]: annualTotal,
+          //     // [REV_DOC_ID_ARR]: MyMonthAbr, 
+          //     [REV_DOC_TOTAL_ARR]: monthlyRevenue,
+          //     [REV_DATE_EDIT]: new Date(),
+          //     // [REV_STATUS]: true,
+          //   }
 
-            // console.log(orgRevData)
-            orgRevDocRef.set(orgRevData, { merge: true });
+          //   // console.log(orgRevData)
+          //   orgRevDocRef.set(orgRevData, { merge: true });
 
-          });
-
+          // });
 
         }
 
 
       });
 
+    }
 
-      // let month = new Date().getMonth();
-      // console.log(fullYear)
+    // Run sanity check on revenue Org
+    function sanityCheckOrgRevenue(orgRevenueIdArr){
 
-      // let startMonth = parseInt(""+fullYear+"00");
-      // let endMonth = parseInt(""+fullYear+"12");
-      // let docRef = db.collection("Report")
-      //     .doc("v1")
-      //     .collection("Revenue")
-      //     .doc();
+      console.log(orgRevenueIdArr)
 
-      // docData ={
-      //   [REV_ID]: 'as',
-      //   [REV_ADMIN_ID]: 'as',
-      //   [REV_NAME]: 'as',
-      //   [REV_REF_ID]: 'as',
-      //   [REV_TYPE]: 'as',
-      //   [REV_MONTH]: 'as',
-      //   [REV_TOTAL]: 'as',
-      //   [REV_DOC_ID_ARR]: 'as',
-      //   [REV_DOC_TOTAL_ARR]: 'as',
-      //   [REV_DATE_EDIT]: 'as',
-      //   [REV_STATUS]: 'as',
-      // }
+      var batch = db.batch();
+
+      orgRevenueIdArr.forEach((id) => {
+        let docRef = db.collection("Report")
+          .doc("v1")
+          .collection("Revenue")
+          .doc(id)
+        batch.delete(docRef);
+
+      });
+
+      batch.commit().then(() =>{
+        window.location.reload();
+      });
+      
     }
 
     // Load all tag revenue
