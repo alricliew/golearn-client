@@ -1768,7 +1768,6 @@
     var allParentListDoc = []; // Get all the unique parents
     function loadAllAdminStudents(){
 
-      allStuModuleDoc = []; // Init All Students Doc array
       // STUDENT Module
       let docRef = db.collection("Class")
           .doc("v1")
@@ -1787,7 +1786,7 @@
           allStuModuleDoc.push(doc.data());
           // console.log(doc.data());
           renderAllAdminGuardian(doc);
-          
+    
         });
         
         console.log("allStuModuleDoc")
@@ -2245,8 +2244,8 @@
 
       let item = document.getElementById('table-top').querySelectorAll("div[name='"+classId+"']");
       const itemBody =item[0].getElementsByTagName('tbody')[0];
-      console.log('item')
-      console.log(item)
+      // console.log('item')
+      // console.log(item)
       // console.log(itemBody)
       // const itemBody = document.getElementById('itemBody');
       itemBody.insertBefore(tr, itemBody.children[1])
@@ -3827,7 +3826,7 @@
       // Print Items
       // Print Additional Items
       additionalItem.forEach((item) => {
-        console.log(item)
+        // console.log(item)
         let component = item.split(";; ")
 
         let additionalSelector = component[0];
@@ -4070,6 +4069,7 @@
           .collection("Invoice")
           .doc(invId);
 
+      console.log(invId);
       // Issue date
       let issueDate = document.getElementById("invIssueDate").value;
       issueDate = issueDate.split("/");
@@ -4215,6 +4215,8 @@
                 // [REV_STATUS]: true
               }
 
+              // console.log(revData)
+
               // Update it through batch 
               let revenueDocRef = db.collection("Report")
                 .doc("v1")
@@ -4265,7 +4267,9 @@
             let issuedDate = document.getElementById("invIssueDate").value;
             let issuedDateComponent = issuedDate.split('/');
             month = parseInt(issuedDateComponent[2]+""+issuedDateComponent[1]);
+            // console.log(issuedDate)
             console.log("Step 1: Get all the revDoc based on 'month' ")
+            // console.log(month)
       
             let revenueDocList = []
             let reportDocRef = db.collection("Report")
@@ -4357,6 +4361,8 @@
                     [REV_DATE_EDIT]: new Date(),
                     [REV_STATUS]: true
                   }
+
+                  console.log(revData)
 
                   promiseArr.push(reportDocRef.update(revData))
 
@@ -4462,7 +4468,9 @@
       else {
         // Commit the batch
         batch.commit().then(() => {
+
           reload();
+   
         });
       }
 
@@ -5021,9 +5029,9 @@
       let totalText = '';
 
       additionalItem.forEach((item) => {
-        console.log("")
-        console.log(item)
-        console.log("")
+        // console.log("")
+        // console.log(item)
+        // console.log("")
         let component = item.split(";; ")
 
         let additionalSelector = component[0];
@@ -5399,6 +5407,8 @@
       // Load all Admin Students
       $('#addStudentModal').on('show.bs.modal', function (event) {
         latestAdminStuDoc = null;
+        allStuModuleDoc = []; // Init All Students Doc array
+        stuAdminLoadmore.addEventListener('click', stuAdminLoadMoreHandleClick );
         loadAllAdminStudents();
       });
 
@@ -5406,6 +5416,8 @@
       $('#addStudentModal').on('hidden.bs.modal', function (event) {
         // NOTE: div:gt(4) - get the 5th div child in the parent node.
         $('#add-student-modal-container div:gt(4)').remove();
+
+        allStuModuleDoc = []; // Init All Students Doc array
 
       });
 
