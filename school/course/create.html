@@ -1054,7 +1054,7 @@
         .orderBy(CLASS_STATUS, 'asc')
         .orderBy(CLASS_NAME, 'asc')
         .startAfter(latestClassDoc)
-        .limit(1);
+        .limit(25);
       
       // var allCourseDocRef = db.collection("course")
       //   .doc("v1")
@@ -1124,7 +1124,7 @@
         if (snapshots[0].empty){
           classAdminLoadmore.removeEventListener('click', classAdminLoadmoreHandleClick );
         }
-        if (snapshots[0].docs.length == 1){
+        if (snapshots[0].docs.length == 25){
           classAdminLoadmore.style.visibility='visible';
         }else{
           classAdminLoadmore.style.visibility='hidden';
