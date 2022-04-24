@@ -32,7 +32,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
   <script src="../assets/js/firebase.js"></script>
 
-<style>
+  <style>
     .multisteps-form__progress {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
@@ -177,6 +177,149 @@
     }
   </style>
 
+  <!-- Shimmering -->
+  <style>
+    .card-shimmer-wrapper {
+      width: 0px;
+      animation: fullView 0.5s forwards cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    }
+
+    .br {
+      border-radius: 8px;
+    }
+
+    .w30 {
+      width: 30%;
+    }
+
+    .w50 {
+      width: 50%;
+    }
+
+    .w80 {
+      width: 80%;
+    }
+
+    .profilePic {
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+    }
+
+    .comment {
+      height: 10px;
+      background: #777;
+      margin-top: 15px;
+    }
+
+    @keyframes fullView {
+      100% {
+        width: 100%;
+      }
+    }
+
+    .animate {
+      animation: shimmer 2s infinite linear;
+      background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+      background-size: 1000px 100%;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -1000px 0;
+      }
+
+      100% {
+        background-position: 1000px 0;
+      }
+    }
+
+  </style>
+  <!-- Tooltips -->
+  <style>
+    .tooltip.show {
+      opacity: 1;
+    }
+
+    .tooltip-inner {
+      color: #32CD32;
+      background-color: #f2fff2;
+      /* box-shadow: 0px 0px 4px black; */
+      opacity: 1 !important;
+      border: solid 2px #32CD32;
+      border-radius: 30px;
+    }
+
+    .tooltip.bs-tooltip-right .arrow:before {
+      border-right-color: #32CD32 !important;
+    }
+
+    .tooltip.bs-tooltip-left .arrow:before {
+    border-left-color: #32CD32 !important;
+    }
+
+    .tooltip.bs-tooltip-bottom .arrow:before {
+    border-bottom-color: #32CD32 !important;
+    }
+
+    .tooltip.bs-tooltip-top .arrow:before {
+    border-top-color: #32CD32 !important;
+    }
+  </style>
+  <!-- notification -->
+  <style>
+    .notification-stand-alone {
+      position: absolute;
+      top: 5px;
+      border: 1px solid #fff;
+      right: -22px;
+      font-size: 9px;
+      background: #f44336;
+      color: #ffffff;
+      min-width: 20px;
+      padding: 0px 5px;
+      height: 20px;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 19px;
+      vertical-align: middle;
+      display: block;
+    }
+    .request-label{
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      font-size: 9px;
+      font-weight: 400;
+      background: #c1e1d2;
+      color: #21896c;
+      min-width: 20px;
+      padding: 0px 10px;
+      height: 20px;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 19px;
+      vertical-align: middle;
+      display: block;
+    }
+    .edit-label{
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      /* font-size: 9px; */
+      font-weight: 400;
+      /* background: #c1e1d2; */
+      /* color: #21896c; */
+      min-width: 20px;
+      padding: 0px 10px;
+      height: 20px;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 19px;
+      vertical-align: middle;
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
@@ -283,7 +426,10 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Dashboard</a>
+            <a class="navbar-brand" href="javascript:;">Dashboard
+              <!-- <span class="notification-stand-alone" style="display: '';" id="noticationRequest">5</span> -->
+
+            </a>
           </div>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -374,12 +520,12 @@
                     <div class="card card-profile">
                       <div class="card-avatar" style="height: 150px; width: 150px;">
                         <a href="javascript:;">
-                          <img class="img" id="tutorImgUrl" style="height: 100%; width:100%; object-fit: cover; border-radius: 50%" src="../assets/img/empty-photo.png" />
+                          <img class="img" id="tutorImgUrlPreview" style="height: 100%; width:100%; object-fit: cover; border-radius: 50%" src="../assets/img/empty-photo.png" />
                         </a>
                       </div>
                       <div class="card-body">
                         <h6 class="card-category text-gray" id="tutorGenderAgeYearsExperience">Male | 2 years old</h6>
-                        <h4 class="card-title" id="tutorName"  style="font-size: 1.5rem;">Boo Boo</h4>
+                        <h4 class="card-title" id="tutorNamePreview"  style="font-size: 1.5rem;">Boo Boo</h4>
               
                         <h5 class="card-category" style="font-size: 0.9rem; font-weight: 600; color: #474747;" >Education</h5>
                         <p class="card-description" id="tutorEducation">
@@ -387,13 +533,13 @@
                         </p>
                         <h5 class="card-category" style="font-size: 0.9rem; font-weight: 600; color: #474747;" >Tutoring Approach</h5>
               
-                        <p class="card-description" id="tutorTutoringApproach"> 
+                        <p class="card-description" id="tutorTutoringApproachPreview"> 
                           I am passionate about teaching and love little teddies.
                         </p>
       
                         <h5 class="card-category" style="font-size: 0.9rem; font-weight: 600; color: #474747;" >Teaching Experience</h5>
               
-                        <p class="card-description" id="tutorTutoringExperience">
+                        <p class="card-description" id="tutorTutoringExperiencePreview">
                           I have 9 months of teaching experience. Hire me starting from 2 cans of honey 🍯🍯.
                         </p>
       
@@ -511,51 +657,166 @@
           
           <!-- Profile Section -->
           <div class="row">
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-body">
-                  <h3>
-                    Share Your Profile
-                  </h3>
-                  <div class="row">
-                    <div class="col-md-12" style="margin-top: 0.5rem;">
-                      <span style="font-weight: 400;"> Share this link with your contacts.</span> 
 
-                      <div class="row" style="padding: 1rem 1.5rem; background: #f6f6f6; border-radius: 12px; margin-bottom: 1rem; margin-top: 1rem;" >
-                        <div class="col-lg-10 col-md-9" style="padding: 0!important;">
-                          <textarea type="text" class="form-control" id="tutorLink" style="background: transparent; word-break: break-all; resize: none;" rows="2" ></textarea>
-                        </div>
-                        <div class="col-lg-2 col-md-3 text-center" style="padding: 0!important;">
-                          <a href="javascript:;" class="btn btn-primary btn-round btn-sm" style="margin: 0;" onclick="copyText('tutorLink')">Copy Link</a>
-                        </div>
-                      </div>
+            <!-- LEFT -->
+            <div class="col-md-4">
+              
+              <!-- Profile -->
+              <div class="row">
+                    
+                <div class="col-md-12" id="tutorNull">
+
+                  <div class="card card-profile" >
+                    <div class="card-avatar" style="height: 150px; width: 150px;" >
+                      <a href="javascript:;" style="cursor: default;">
+                        <img class="img" id="tutorImgUrl" style="height: 100%; width:100%; object-fit: cover; border-radius: 50%" src="../assets/img/empty-photo.png" />
+                      </a>
+                      <a href="edit-profile.html"  class="edit-label">
+                        <i class="fas fa-pen"></i>
+                      </a>
                     </div>
+                    <div class="card-body">
+                      <div class="row">
+         
+                        <div class="col-md-12 text-center">
 
-                    <div class="col-md-12" style="margin-top: 0.5rem;">
-                      <span style="font-weight: 400; margin-top: 1rem;">Share with your friends, family and future students.</span> 
+          
+                          <p style="font-weight: 400; color: #424242; margin-bottom: 0.2rem;" id="tutorAgeGender"></p>
+                          <p style="font-weight: bold; margin-bottom: 0.2rem;" id="ratingBlock"> 
+                            <i class='fas fa-star' style='color: #ff9529;'></i> <span id="ratingBlockVal"></span>
+                            <span style="font-size: small; font-weight: 300; color: #686868;" id="ratingBlockReview"></span>
+                          </p>
 
-                      <div class="row justify-content-around" style="padding: 1rem 1.5rem; background: #f6f6f6; border-radius: 12px; margin-bottom: 2rem; margin-top: 1rem;" >
-                        <!-- <div class="row "> -->
-                          <a id="btnFbShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Facebook"><i class="fab fa-facebook-f fa-lg" style="color: #4267B2;"></i></a>
-                          <a id="btnTelegramShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Telegram"><i class="fab fa-telegram-plane fa-lg" style="color: #0088CC;"></i></a>
-                          <a id="btnWhatsappShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on WhatsApp"><i class="fab fa-whatsapp fa-lg" style="color: #128C7E;"></i></a>
-                          <a id="btnTwitterShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Twitter"><i class="fab fa-twitter fa-lg" style="color: #1DA1F2;"></i></a>
-                          <a id="btnLinkedInShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on LinkedIn"><i class="fab fa-linkedin fa-lg" style="color: #0e76a8;"></i></a>
-                        <!-- </div> -->
+
+                          <div class="comment br animate loading" style="width: 150px; height: 25px; margin-top:0px; display: inline-block;"></div>
+                          <div class="comment br animate loading" style="display: block;"></div>
+                          <div class="comment br animate loading" style="width: 120px; height: 30px; display: inline-block;"></div>
+                          <div class="comment br animate loading" style="display: block;"></div>
+                          <div class="comment br animate loading" style="display: block;"></div>
+                          <div class="comment br animate loading" style="display: block;"></div>
+
+
+                          <h2 class="" style="color: #424242; margin-bottom: 0.2rem;" id="tutorName"></h2>
+                        
+                          <p class="tutor-profile-education" id="education"></p>
+                          <p class="tutor-profile-area" id="area"></p>
+            
+                          <p style="color: #424242;font-weight:700; margin-bottom: 0.2rem;" id="teachingApproachTitle">
+                            My Approach
+                            <a href="settings/"  class="" style="margin-left: 8px;">
+                              <i class="fas fa-pen"></i>
+                            </a>
+                          </p>
+     
+                          <div class="comment br animate loading" style="display: block;"></div>
+                          <div class="comment br animate loading" style="display: block;"></div>
+                          <div class="comment br animate w50 loading" style="display: block;"></div>
+
+                          <p id="teachingApproach">
+                            <span id="revealedApproach"></span>
+                            <span id="dotsApproach"  style="display: none;">...</span>
+                            <span id="moreApproach" style="display: none;">
+                            </span>
+                            <span id="readMoreApproach" style="display: none;">
+                              <a href="javascript:;" onclick="ReadMoreApproach()" id="btnReadMoreApproach" style="font-weight: 500; color: #2e74b6;">Read more</a>
+                            </span>
+                          </p>
+                
+                          <p style="color: #424242;font-weight:700; margin-bottom: 0.2rem;" id="teachingExpTitle">
+                            Teaching Experience
+                            <a href="settings/"  class="" style="margin-left: 8px;">
+                              <i class="fas fa-pen"></i>
+                            </a>
+                          </p>
+                          <div class="comment br animate loading" style="display: block;"></div>
+                          <div class="comment br animate loading" style="display: block;"></div>
+                          <div class="comment br animate w50 loading" style="display: block;"></div>
+                          <p id="teachingExp">
+                            <span id="revealedExp"></span>
+                            <span id="dotsExp" style="display: none;">...</span>
+                            <span id="moreExp" style="display: none;">
+                            </span>
+                            <span id="readMoreExp"  style="display: none;">
+                              <a href="javascript:;" onclick="ReadMoreExp()" id="btnReadMoreExp" style="font-weight: 500; color: #2e74b6;">Read more</a>
+                            </span>
+                          </p>
+
+                        </div>
+          
                       </div>
-
-                      <span style="font-weight: 400; margin-top: 1rem;">Ask for reviews to improve your profile and be better positioned in the search results!</span> 
-                      <a href="javascript:;" class="btn btn-primary btn-round btn-sm" data-toggle="modal" data-target="#linkShareModal">Get Review Link</a>
-
+    
                     </div>
+    
                   </div>
-
+    
                 </div>
               </div>
 
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card" style="margin-top: 0rem; ">
+                    <div class="card-body">
+        
+                      <div style="display: inline-block; margin-top: 1rem;">
+                        <h4 style="color: #2e74b6;">
+                          My Public Profile
+                        </h4>
+                      </div>
+            
+                      <!-- <div class="align-middle"  style="display: inline-block; margin-left: 8px; padding-bottom: 10px!important;  cursor: pointer;" id="shareProfilePublicUrl" onclick="window.open()">
+                        <div class="align-middle" style="height: 30px; width: 30px; display: inline-flex;">
+                          <img style=" width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 2px solid white;" class="tutor-profile-image" id="shareProfileImgUrl" src="https://golearn.com.my/assets/img/empty-photo.png">
+                        </div>
+                
+                        <p class="align-middle" style="font-weight: bold; display: inline; " id="ratingBlock"> 
+                          <i class='fas fa-star' style='color: #ff9529;'></i> <span id="ratingBlockVal"></span>
+                          <span style="font-size: small; font-weight: 300; color: #686868;" id="ratingBlockReview"></span>
+                        </p>
+                      </div> -->
+    
+    
+                      <div class="row">
+                        <div class="col-md-12" style="margin-top: 0;">
+                          <!-- <span style="font-weight: 400;"> Share this link with your contacts.</span>  -->
+    
+                          <div class="row" style="padding: 0.5rem 1rem; background: #f6f6f6; border-radius: 12px; margin-bottom: 1rem;" >
+                            <div class="col-md-9">
+                              <textarea type="text" class="form-control" id="tutorLink" style="background: transparent; word-break: break-all; resize: none;" rows="2" ></textarea>
+                            </div>
+                            <div class="col-md-3 text-center">
+                              <a href="javascript:;" class="btn btn-primary btn-round btn-sm" style="margin: 0;" onclick="copyText('tutorLink')">Copy</a>
+                            </div>
+                          </div>
+                        </div>
+    
+                        <div class="col-md-12" style="margin-top: 0.5rem;">
+                          <span style="font-weight: 400; margin-top: 1rem;">Share with your friends, family and future students.</span> 
+    
+                          <div class="row justify-content-around" style="padding: 1rem 1rem; background: #f6f6f6; border-radius: 12px; margin-bottom: 2rem; margin-top: 1rem;" >
+                              <a id="btnFbShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Facebook"><i class="fab fa-facebook-f fa-lg" style="color: #4267B2;"></i></a>
+                              <a id="btnTelegramShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Telegram"><i class="fab fa-telegram-plane fa-lg" style="color: #0088CC;"></i></a>
+                              <a id="btnWhatsappShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on WhatsApp"><i class="fab fa-whatsapp fa-lg" style="color: #128C7E;"></i></a>
+                              <a id="btnTwitterShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on Twitter"><i class="fab fa-twitter fa-lg" style="color: #1DA1F2;"></i></a>
+                              <a id="btnLinkedInShare" rel="nofollow noopener noreferrer" href="#" target="_blank" title="Click to share on LinkedIn"><i class="fab fa-linkedin fa-lg" style="color: #0e76a8;"></i></a>
+                          </div>
+    
+                          <span style="font-weight: 400; margin-top: 1rem;">Gain more <i class='fas fa-star' style='color: #ff9529;'></i> to improve your profile and be better positioned in the search results!</span> 
+                          <a href="javascript:;" class="btn btn-primary btn-round btn-sm" data-toggle="modal" data-target="#linkShareModal">Get Review Link</a>
+    
+                        </div>
+                      </div>
+    
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+
             </div>
 
-            <div class="col-md-6">
+            <!-- RIGHT -->
+            <div class="col-md-8">
+              <!-- Level up -->
               <div class="card">
                 <div class="card-body"  style="background: linear-gradient(23deg,
                 #2b35b8,
@@ -613,7 +874,8 @@
                           </div>
                           <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn" >
                             <h5 class="multisteps-form__title" style="color: #2e74b6; font-weight: 400;"><img style="height: 30px; width:30px;" src="../assets/img/badge-premium.png"/> Premium </h5>
-                            <div class="multisteps-form__content">
+                            <!-- <p style="margin-bottom: 4px;">Welcome Premium Tutor! </p> -->
+                            <div class="multisteps-form__content" >
                               <p style="margin-bottom: 4px;">Welcome Premium Tutor! </p>
                               <p>
                                 <span><i class="fas fa-eye fa-fw" style="color:green; font-size: small;"></i></span> x12 Visibility<br>
@@ -629,8 +891,115 @@
                   </div>
                 </div>
               </div>
+
+              <!-- Request -->
+              <div class="row" >
+                <div class="col-md-12" >
+
+                  <div >
+                    <h3>
+                      My Requests
+                      <span class="tooltiptext-trigger" style="font-size: 15px;">? 
+                        <span class="tooltiptext-general" style="left: 20%; bottom:95%; width: 230px">
+                          <h6>My Requests</h6>
+                          <p style="font-weight: 300;">All inquiries for your tuition offering will appear here. Promote your profile to get more requests! All unread tuition requests will be published to the public after 24 hours. </p>
+                        </span> 
+
+                    </h3>
+
+                  </div>
+
+                  <div class="row" id="requestBody">
+
+                    <div class="col-md-12" id="noRequestPlaceholder" style="display: none;">
+                      <p>No request found!</p>
+                    </div>
+
+                    <!-- <div class="col-md-12" style="padding-left: 5px; padding-right: 5px; padding-bottom: 5px;">
+
+                      <div class="review-card bg-white" style="border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); cursor: default;">
+
+                        <span class="request-label">New <i class="fas fa-circle"></i></span>
+
+                        <div class="row" style="margin-left: 12px; margin-right: 12px; display: inline-flex;">
+                          <div style="height: 30px;width: 30px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
+                            <img style="height: 100%;width: 100%; object-fit: cover;" src="data:image/png;base64,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">
+                          </div>
+                          <p class="align-self-center" style="font-weight: 400; margin-left: 12px; margin-bottom: 0;">Alric Liew </p>
+
+                          <p class="align-self-center" style="margin-left: 12px;  margin-bottom: 0;">  Parent  &middot; <span style="font-weight: 400; cursor: pointer; color: #2e74b6;" onclick="viewPhone(this, '+601111111111', 'requestid');">Show Phone</span></p>
+
+                        </div>
+
+                        <div class="row" style="margin: 8px 12px 8px 12px;">
+                          <p style="margin: 0;">New inquiry: Teacher give me good advice, i can understand fully, thanks 😁</p>
+                        </div>
+
+                        <div class="row" style="margin: 8px 12px 0 12px;">
+                          <p style="margin: 0; font-style: italic; font-size: small;">Sent from 
+                            <a href="https://golearn.com.my/" target="_blank">profile</a> </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12" style="padding-left: 5px; padding-right: 5px; padding-bottom: 5px;">
+                      <div class="review-card bg-white" style="border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); cursor: default;">
+                        <div class="row" style="margin-left: 12px; margin-right: 12px; display: inline-flex;">
+                          <div style="height: 30px;width: 30px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
+                            <img style="height: 100%;width: 100%; object-fit: cover;" src="data:image/png;base64,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">
+                          </div>
+                          <p class="align-self-center" style="font-weight: 400; margin-left: 12px; margin-bottom: 0;">Ammy </p>
+
+                          <p class="align-self-center" style="margin-left: 12px;  margin-bottom: 0;">  Student  &middot; <span style="font-weight: 400; cursor: pointer; color: #2e74b6;" onclick="viewPhone(this, '+6018462717');">Show Phone</span></p>
+
+                        </div>
+
+                        <div class="row" style="margin: 8px 12px 8px 12px;">
+                          <p style="margin: 0;">New inquiry.</p>
+                        </div>
+
+                        <div class="row" style="margin: 8px 12px 0 12px;">
+                          <p style="margin: 0; font-style: italic; font-size: small;">
+                            Sent from 
+                            <a href="https://golearn.com.my/" target="_blank">PT3 Math Lesson (RM30 /hr)</a> 
+                          </p>
+                        </div>
+                      </div>
+                    </div> -->
+
+
+                  </div>
+
+                  <!-- Loading block -->
+                  <div class="row" id="card-load">
+                    <div class="col-md-12" style="padding-left: 5px; padding-right: 5px;">
+                      <div class="card br"  style="padding: 12px 20px; margin-top: 0.2rem; border-radius: 12px;">
+                        <div class="card-shimmer-wrapper">
+                          <div class="comment br animate"></div>
+                          <div class="comment br animate"></div>
+                          <div class="comment br animate w50"></div>
+                        </div>
+                      </div>
+                    </div>
+          
+                  </div>
+  
+
+                  <div class="row">
+                    <div class="col-md-12" >
+                      <a class="btn btn-sm btn-outline-primary btn-round" id="btnRequestLoadMore" style="visibility: hidden;">Load More <i class="material-icons" style="color: #2e74b6; padding-bottom: 0.2em;">expand_more</i></a> 
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
             </div>
+
           </div>
+
+
 
           <div class="row">
 
@@ -774,7 +1143,7 @@
                   </h3> 
                 </div> -->
                 <div class="card-footer">
-                  <a href="javascript:;" data-toggle="modal" data-target="#viewProfileModal" class="btn btn-primary btn-round btn-sm" style="margin: 0; padding-top: 0.2rem; padding-bottom: 0.2rem;">Preview</a>
+                  <a href="javascript:;" data-toggle="modal" data-target="#viewProfileModal" class="btn btn-primary btn-round btn-sm" style="margin: 0; padding-top: 0.2rem; padding-bottom: 0.2rem; display: none;">Preview</a>
                   <span class="tooltiptext-trigger"  style="background-color: transparent; color: #2e74b6; font-weight: bold; font-size: small;">? 
                     <span class="tooltiptext-general" style="left: 40%; bottom: 30%; width: 200px;">
                       <h6 >Profile</h6>
@@ -879,60 +1248,6 @@
               </div>
             </div>
 
-            <!-- <div class="col-md-4">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                <h4 class="card-title">My Time Slot</h4>
-                <p class="card-category">Let your future clients know your availability.</p>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-
-                      <div class="col-sm-12">
-
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div> -->
- 
-            <!-- Profile -->
-            <!-- <div class="col-md-4" id="tutorNull">
-
-              <div class="card card-profile">
-                <div class="card-avatar" style="height: 150px; width: 150px;">
-                  <a href="javascript:;">
-                    <img class="img" id="tutorImgUrl" style="height: 100%; width:100%; object-fit: cover; border-radius: 50%" src="../assets/img/empty-photo.png" />
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray" id="tutorGenderAgeYearsExperience">Male | 2 years old</h6>
-                  <h4 class="card-title" id="tutorName"  style="font-size: 1.5rem;">Boo Boo</h4>
-        
-                  <h5 class="card-category" style="font-size: 0.9rem; font-weight: 600; color: #474747;" >Education</h5>
-                  <p class="card-description" id="tutorEducation">
-                    University of Bear
-                  </p>
-                  <h5 class="card-category" style="font-size: 0.9rem; font-weight: 600; color: #474747;" >Tutoring Approach</h5>
-        
-                  <p class="card-description" id="tutorTutoringApproach"> 
-                    I am passionate about teaching and love little teddies.
-                  </p>
-
-                  <h5 class="card-category" style="font-size: 0.9rem; font-weight: 600; color: #474747;" >Teaching Experience</h5>
-        
-                  <p class="card-description" id="tutorTutoringExperience">
-                    I have 9 months of teaching experience. Hire me starting from 2 cans of honey 🍯🍯.
-                  </p>
-
-                  <a href="javascript:;" class="btn btn-primary btn-round" id="btnIWantThisTutor"  style="background-color: grey; pointer-events: none;">I want this tutor !</a>
-                </div>
-                <button>👆 This is what your profile looks like to parents.</button>
-
-              </div>
-
-            </div> -->
-
           </div>
 
 		    </div>
@@ -987,956 +1302,8 @@
   <!-- Tutor Core -->
   <script src="../assets/js/tutor-core.js" type="text/javascript"></script>
 
-  <script>
-
-    // // Global Variables
-    // var tutorId;
-    // var current_name, current_email, current_phone, current_age, current_gender, current_imgUri, current_nric,
-    //   current_address1, current_address2, current_addressPostCode, current_addressState,
-    //   current_rating, current_ratingTimes, current_ratingFinal, current_profileStatus,
-    //   current_token, current_agent, current_accountStatus;
-    // var currentYearsExperience, currentTutoringExperience, currentTutoringApproach, currentQualification, 
-    //   current_preferedAreaList, current_preferedSubjectList;
-    // // Depreciated
-    // // var current_chk_homeTutor, current_chk_privateTutor, current_chk_groupTutor, current_chk_onlineTutor;
-    // var isModeHomeStudentToTutor, isModeHomeTutorToStudent, isModeGroup, isModeOnline, isModeOnlineGroup;
-    // var isLanEng, isLanBm, isLanBc, isLanBt, isLanOther;
-    // var current_chk_homeStudentToTutor, current_chk_homeTutorToStudent, current_chk_group, current_chk_online, current_chk_onlineGroup;
-    // var current_mon_8am, current_mon_12pm, current_mon_3pm, current_mon_6pm, 
-    //   current_tue_8am, current_tue_12pm, current_tue_3pm, current_tue_6pm, 
-    //   current_wed_8am, current_wed_12pm, current_wed_3pm, current_wed_6pm, 
-    //   current_thu_8am, current_thu_12pm, current_thu_3pm, current_thu_6pm, 
-    //   current_fri_8am, current_fri_12pm, current_fri_3pm, current_fri_6pm,
-    //   current_sat_8am, current_sat_12pm, current_sat_3pm, current_sat_6pm, 
-    //   current_sun_8am, current_sun_12pm, current_sun_3pm, current_sun_6pm;
-    // var current_aweburl, current_aPremiumSubjectLimit, current_aPremiumConnectLimit, current_aTotalSubjectLimit, 
-    //  current_aTotalConnectLimit, current_aPreferredSubjectLimit, current_aPreferredAreaLimit;
-
-		// var db = firebase.firestore();
-		// db.settings({ timestampsInSnapshots: true });
-
-
-    // // Set the nav name and global var, if user already login and have session Storage 
-    // var tutorInfoObj = null;
-    // console.log("tutorId during Init");
-    // console.log(tutorId);
-    
-    // function loadTutorInfoObj(){
-      
-    //   if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
-    //     // Do nothing
-    //     console.log("Null tutorInfoObj: Run_loadUserInfo ");
-    //     loadUserInfo(tutorId);
-        
-    //   }
-    //   else{
-    //     // Set the nav user name
-    //     tutorInfoObj = JSON.parse(sessionStorage.getItem(PROFILE_TUTOR_INFO));
-    //     document.getElementById("user").textContent = tutorInfoObj.name;
-
-    //     current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
-    //     current_email = (tutorInfoObj.email == null || tutorInfoObj.email == "")? "" : tutorInfoObj.email; 
-    //     current_phone = (tutorInfoObj.phone == null || tutorInfoObj.phone == "")? "New Tutor" : tutorInfoObj.phone; 
-    //     current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
-    //     current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
-    //     current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
-    //     current_accountStatus = tutorInfoObj.accountStatus; // bool
-    //     currentYearsExperience = tutorInfoObj.yearsExperience; // number
-    //     currentTutoringExperience = tutorInfoObj.tutoringExperience;
-    //     currentTutoringApproach = tutorInfoObj.tutoringApproach;
-    //     currentQualification = tutorInfoObj.qualification;
-    //     current_preferedAreaList = tutorInfoObj.preferedAreaList;
-    //     current_preferedSubjectList = tutorInfoObj.preferedSubjectList;
-    //     current_mon_8am = tutorInfoObj.tMon8am;
-    //     current_mon_12pm= tutorInfoObj.tMon12pm; 
-    //     current_mon_3pm = tutorInfoObj.tMon3pm;  
-    //     current_mon_6pm = tutorInfoObj.tMon6pm;  
-    //     current_tue_8am = tutorInfoObj.tTue8am;  
-    //     current_tue_12pm= tutorInfoObj.tTue12pm;  
-    //     current_tue_3pm = tutorInfoObj.tTue3pm;  
-    //     current_tue_6pm = tutorInfoObj.tTue6pm;  
-    //     current_wed_8am = tutorInfoObj.tWed8am;  
-    //     current_wed_12pm= tutorInfoObj.tWed12pm;  
-    //     current_wed_3pm = tutorInfoObj.tWed3pm;  
-    //     current_wed_6pm = tutorInfoObj.tWed6pm;  
-    //     current_thu_8am = tutorInfoObj.tThu8am;  
-    //     current_thu_12pm= tutorInfoObj.tThu12pm;  
-    //     current_thu_3pm = tutorInfoObj.tThu3pm;  
-    //     current_thu_6pm = tutorInfoObj.tThu6pm;  
-    //     current_fri_8am = tutorInfoObj.tFri8am;  
-    //     current_fri_12pm= tutorInfoObj.tFri12pm;  
-    //     current_fri_3pm = tutorInfoObj.tFri3pm;  
-    //     current_fri_6pm = tutorInfoObj.tFri6pm; 
-    //     current_sat_8am = tutorInfoObj.tSat8am;  
-    //     current_sat_12pm= tutorInfoObj.tSat12pm;  
-    //     current_sat_3pm = tutorInfoObj.tSat3pm;  
-    //     current_sat_6pm = tutorInfoObj.tSat6pm;  
-    //     current_sun_8am = tutorInfoObj.tSun8am;  
-    //     current_sun_12pm= tutorInfoObj.tSun12pm;  
-    //     current_sun_3pm = tutorInfoObj.tSun3pm;  
-    //     current_sun_6pm = tutorInfoObj.tSun6pm;
-    //     current_aweburl = tutorInfoObj.aWebUrl;
-    //     current_aPremiumSubjectLimit = tutorInfoObj.aPremiumSubjectLimit; 
-    //     current_aPremiumConnectLimit = tutorInfoObj.aPremiumConnectLimit; 
-    //     current_aTotalSubjectLimit = tutorInfoObj.aTotalSubjectLimit;
-    //     current_aTotalConnectLimit = tutorInfoObj.aTotalConnectLimit; 
-    //     current_aPreferredSubjectLimit = tutorInfoObj.aPreferredSubjectLimit;
-    //     current_aPreferredAreaLimit = tutorInfoObj.aPreferredAreaLimit;
-
-    //     loadPageInitFunc();
-
-    //     updateGeneralView();
-
-    //   }
-    // }
-
-
-		// firebase.auth().onAuthStateChanged(function(user){
-      
-		// 	if(!user){
-    //     // Return to login if user does not exist.
-		// 		window.location.href = "../"
-		// 	}else{
-    //     // if the displayName is null, it means user register using Phone
-    //     if (firebase.auth().currentUser.displayName == null ){
-    //         tutorId = firebase.auth().currentUser.phoneNumber;
-    //     }else
-    //         tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-
-
-    //     console.log("running loadTutorInfoObj")
-
-    //     loadTutorInfoObj();
-
-    //     // loadUserInfo(tutorId);
-
-    //     // loadGeneralNum();
-
-    //     // loadAllOrgRevenue();
-
-    //   }
-		// });
-
-    // // Tutor Specific
-    // function loadUserInfo(tutorId){
-    //   // Tutor Id must be a phone with +60, no spacing or other chars
-    //   var docRef = db.collection("Tutor").doc(tutorId);
-      
-    //   docRef.get().then((doc) => {
-    //   // docRef.onSnapshot((doc) => {
-    //     if (doc.exists) {
-    //       current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
-    //       current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email; 
-    //       current_phone = (doc.data().phone == null || doc.data().phone == "")? "New Tutor" : doc.data().phone; 
-    //       current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
-    //       current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
-    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
-    //       current_accountStatus = doc.data().accountStatus; 
-    //       currentYearsExperience = doc.data().yearsExperience; // number
-    //       currentTutoringExperience = doc.data().tutoringExperience;
-    //       currentTutoringApproach = doc.data().tutoringApproach;
-    //       currentQualification= doc.data().qualification;
-    //       current_preferedSubjectList = doc.data()[PREFERED_SUBJECT_LIST_KEY]; 
-    //       current_preferedAreaList = doc.data()[PREFERED_AREA_LIST_KEY]; 
-    //       current_mon_8am = doc.data().tMon8am;
-    //       current_mon_12pm= doc.data().tMon12pm; 
-    //       current_mon_3pm = doc.data().tMon3pm;  
-    //       current_mon_6pm = doc.data().tMon6pm;  
-    //       current_tue_8am = doc.data().tTue8am;  
-    //       current_tue_12pm= doc.data().tTue12pm;  
-    //       current_tue_3pm = doc.data().tTue3pm;  
-    //       current_tue_6pm = doc.data().tTue6pm;  
-    //       current_wed_8am = doc.data().tWed8am;  
-    //       current_wed_12pm= doc.data().tWed12pm;  
-    //       current_wed_3pm = doc.data().tWed3pm;  
-    //       current_wed_6pm = doc.data().tWed6pm;  
-    //       current_thu_8am = doc.data().tThu8am;  
-    //       current_thu_12pm= doc.data().tThu12pm;  
-    //       current_thu_3pm = doc.data().tThu3pm;  
-    //       current_thu_6pm = doc.data().tThu6pm;  
-    //       current_fri_8am = doc.data().tFri8am;  
-    //       current_fri_12pm= doc.data().tFri12pm;  
-    //       current_fri_3pm = doc.data().tFri3pm;  
-    //       current_fri_6pm = doc.data().tFri6pm; 
-    //       current_sat_8am = doc.data().tSat8am;  
-    //       current_sat_12pm= doc.data().tSat12pm;  
-    //       current_sat_3pm = doc.data().tSat3pm;  
-    //       current_sat_6pm = doc.data().tSat6pm;  
-    //       current_sun_8am = doc.data().tSun8am;  
-    //       current_sun_12pm= doc.data().tSun12pm;  
-    //       current_sun_3pm = doc.data().tSun3pm;  
-    //       current_sun_6pm = doc.data().tSun6pm; 
-    //       current_aPremiumSubjectLimit = tutorInfoObj.aPremiumSubjectLimit; 
-    //       current_aPremiumConnectLimit = tutorInfoObj.aPremiumConnectLimit; 
-    //       current_aTotalSubjectLimit = tutorInfoObj.aTotalSubjectLimit;
-    //       current_aTotalConnectLimit = tutorInfoObj.aTotalConnectLimit; 
-    //       current_aPreferredSubjectLimit = tutorInfoObj.aPreferredSubjectLimit;
-    //       current_aPreferredAreaLimit = tutorInfoObj.aPreferredAreaLimit;
-
-    //       // Store data to sessionStorage
-    //       var tutorDataObj = {
-    //         [NAME_KEY] : doc.data().name,
-    //         [EMAIL_KEY] : doc.data().email,
-    //         [PHONE_KEY] : doc.data().phone,
-    //         [AGE_KEY] : doc.data().age,
-    //         [GENDER_KEY] : doc.data().gender,
-    //         [ADDRESS_1_KEY] :doc.data().address1,
-    //         [ADDRESS_2_KEY] :doc.data().address2,
-    //         [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
-    //         [ADDRESS_STATE_KEY] :doc.data().addressState,
-    //         [IMAGE_KEY] : doc.data().imgUrl,
-    //         // [NRIC_KEY] : doc.data().name,
-    //         [RATING_KEY] : doc.data().rating,
-    //         [RATING_TIMES_KEY] : doc.data().ratingTimes,
-    //         [RATING_FINAL_KEY] : doc.data().ratingFinal,
-    //         [PROFILE_STATUS_KEY] : doc.data().profileStatus,
-    //         // [CHECK_HOMETUTOR_KEY] : doc.data().name,
-    //         // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
-    //         // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
-    //         // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
-    //         [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
-    //         [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
-    //         [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
-    //         [QUALIFICATION_KEY] : doc.data().qualification,
-    //         [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
-    //         [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
-    //         [AGENT_KEY] : doc.data().agent,
-    //         [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
-            
-    //         [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
-    //         [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
-    //         [CHECK_GROUP_KEY] : doc.data().modeGroup,
-    //         [CHECK_ONLINE_KEY] : doc.data().modeOnline,
-    //         [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
-    //         [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
-    //         [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
-    //         [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
-    //         [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
-    //         [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
-
-    //         [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
-    //         [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
-    //         [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
-    //         [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
-    //         [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
-    //         [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
-    //         [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
-    //         [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
-    //         [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
-    //         [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
-    //         [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
-    //         [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
-    //         [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
-    //         [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
-    //         [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
-    //         [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
-    //         [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
-    //         [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
-    //         [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
-    //         [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
-    //         [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
-    //         [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
-    //         [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
-    //         [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
-    //         [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
-    //         [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
-    //         [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
-    //         [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
-    //         // Create a placeholder for aWebUrl. This param can only initiated by admin
-    //         // manually through https://golearn.com.my/admin/admin-portal.html
-    //         [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
-    //         [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
-    //         [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
-    //         [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
-    //         [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
-    //         [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
-    //         [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
-    //       }
-
-    //       // Set tutorInfoObj as sessionStorage
-    //       sessionStorage.setItem(PROFILE_TUTOR_INFO, JSON.stringify(tutorDataObj));
-
-
-    //       loadPageInitFunc();
-
-    //       updateGeneralView();
-
-    //       // index.html specific
-
-    //       // updatePageView();
-
-    //     } 
-        
-    //     else {
-    //       window.location = "../"
-    //       // console.log("No tutor!");
-    //       // document.getElementById("tutorImgUrl").src = "../assets/img/hello.gif";
-    //       // document.getElementById("tutorName").textContent = "Boo Boo";
-    //       // document.getElementById("tutorTutoringApproach").textContent = "I am passionate about teaching and love little teddies.";
-    //       // document.getElementById("tutorTutoringExperience").textContent = " I have 9 months of teaching experience. Hire me starting from 2 cans of honey 🍯🍯.";
-    //       // document.getElementById("tutorEducation").textContent = "University of Bear";
-    //       // document.getElementById("tutorGenderAgeYearsExperience").textContent = "Male | 2 years old";
-    //     }
-    //   });
-
-
-    //   var docRefDate = db.collection("Tutor").doc(tutorId);
-
-    //   docRefDate.get().then((doc) => {
-    //       if (doc.exists) {
-    //           // console.log("Document data:", doc.data());
-    //         // Update last online 
-    //         let docRef = db.collection("Tutor").doc(tutorId);
-    //         let docRefWithMerge = docRef.set({
-    //           [SYSTEM_LAST_ONLINE_KEY] : firebase.firestore.Timestamp.fromDate(new Date())
-    //           }, { merge: true });
-              
-    //       } else {
-    //           // doc.data() will be undefined in this case
-    //           console.log("No such document!");
-    //       }
-    //   }).catch((error) => {
-    //       console.log("Error getting document:", error);
-    //   });
-
-    // }
-
-    var lvl2ClassNum, lvl2StudentNum = 0;
-
-    // Check if user logged on
-    AuthCheck();
-
-    // Page Specific Initialization
-    function loadPageInitFunc(){
-
-      // Update page view
-      updatePageView();
-
-      // Update general statistic
-      loadGeneralNum();
-
-      // Load revenue chart
-      loadAllOrgRevenue();
-
-      // Update Level
-      updateProfileLevel();
-
-    }
-
-    function updateProfileLevel() {
-
-      // Level 1: New Tutor
-      let lvl1Checker = 0; // max = 4
-      if (current_imgUri != null && current_imgUri != "" && current_imgUri != "https://app.golearn.com.my/assets/img/hello.gif"){
-        document.getElementById("lvl1Pic").style.color = "green";
-        document.getElementById("lvl1Pic").className = "fas fa-check-circle fa-fw";
-        lvl1Checker = lvl1Checker + 1;
-      }
-      if (currentQualification != null && currentQualification != ""){
-        document.getElementById("lvl1Qualification").style.color = "green";
-        document.getElementById("lvl1Qualification").className = "fas fa-check-circle fa-fw";
-        lvl1Checker = lvl1Checker + 1;
-      }
-      if (currentTutoringApproach != null && currentTutoringExperience != null && currentTutoringApproach != "" && currentTutoringExperience != ""){
-        document.getElementById("lvl1ApproachExp").style.color = "green";
-        document.getElementById("lvl1ApproachExp").className = "fas fa-check-circle fa-fw";
-        lvl1Checker = lvl1Checker + 1;
-      }
-      if (current_preferedSubjectList != null && current_preferedSubjectList != "" && current_preferedSubjectList.length > 0 &&
-      current_preferedAreaList != null && current_preferedAreaList != "" && current_preferedAreaList.length > 0){
-        document.getElementById("lvl1SubjectArea").style.color = "green";
-        document.getElementById("lvl1SubjectArea").className = "fas fa-check-circle fa-fw";
-        lvl1Checker = lvl1Checker + 1;
-      }
-
-      // Level 2: Experienced Tutor
-      let lvl2Checker = 0; // max = 3
-      if (current_ratingTimes == null || current_ratingTimes == "" || current_ratingTimes == 0){
-        document.getElementById("lvl2ReviewTxt").textContent = "0/5 Reviews";
-      }else if (current_ratingTimes > 0 && current_ratingTimes < 5){
-        document.getElementById("lvl2ReviewTxt").textContent = current_ratingTimes + "/5 Reviews";
-      }else if (current_ratingTimes >= 5){
-        document.getElementById("lvl2Review").style.color = "green";
-        document.getElementById("lvl2Review").className = "fas fa-check-circle fa-fw";
-        document.getElementById("lvl2ReviewTxt").textContent = "5/5 Reviews";
-        lvl2Checker = lvl2Checker + 1;
-      }else {
-        document.getElementById("lvl2ReviewTxt").textContent = "0/5 Reviews";
-      }
-
-      // if (lvl2ClassNum > 0){
-      //   lvl2Checker = lvl2Checker + 1;
-      //   document.getElementById("lvl2Class").style.color = "green";
-      //   document.getElementById("lvl2Class").className = "fas fa-check-circle fa-fw";
-      //   document.getElementById("lvl2ClassTxt").textContent = 1;
-      // }
-
-      // if (lvl2StudentNum > 0){
-      //   lvl2Checker = lvl2Checker + 1;
-      //   document.getElementById("lvl2Student").style.color = "green";
-      //   document.getElementById("lvl2Student").className = "fas fa-check-circle fa-fw";
-      //   document.getElementById("lvl2StudentTxt").textContent = 1;
-      // }
-
-      let statusArr = [PREMIUM_ACCOUNT_1_STATUS_KEY, PREMIUM_ACCOUNT_2_STATUS_KEY, PREMIUM_ACCOUNT_3_STATUS_KEY, PREMIUM_ACCOUNT_1_ACTIVE_STATUS_KEY, PREMIUM_ACCOUNT_2_ACTIVE_STATUS_KEY, PREMIUM_ACCOUNT_3_ACTIVE_STATUS_KEY];
-      if (statusArr.indexOf(current_accountStatus) > -1){
-        setActiveStep(3);
-        setActivePanel(3); 
-      }else if (lvl1Checker == 4 && lvl2Checker == 1){
-        setActiveStep(2);
-        setActivePanel(2); 
-      }else if (lvl1Checker == 4){
-        setActiveStep(1);
-        setActivePanel(1); 
-      }else{
-        // Stay at step 1
-      }
-
-      // console.log(lvl1Checker, lvl2Checker, current_accountStatus);
-
-    }
-
-    // Load the student number
-    function loadGeneralNum(){
-      let docRef = db.collection("Report")
-          .doc("v1")
-          .collection("General")
-          .where(NUM_ADMIN_ID, "==", tutorId)
-
-      docRef
-      .get()
-      .then((querySnapshot) => {
-
-        if(querySnapshot.empty) {
-          // console.log("Empty ");
-          clearDashboard();
-        } 
-        else {
-          querySnapshot.forEach((doc) => {
-            // console.log(doc.data());
-            updateDashboard(doc);
-          });
-
-        }
-      });
-
-      
-    }
-
-    // Update dashboard view
-    function updateDashboard(doc){
-      let type = doc.data()[NUM_TYPE];
-      let value = doc.data()[NUM_VALUE];
-      let lastEdit = doc.data()[NUM_DATE_EDIT].toDate().toLocaleDateString("en-GB");
-
-      if (type === NUM_TYPE_STUDENT){
-        document.getElementById("studentNum").textContent = value;
-        document.getElementById("studentLastEdit").textContent = lastEdit;
-        lvl2StudentNum = value;
-        updateProfileLevel();
-      }
-      else if (type === NUM_TYPE_TEACHER){
-        document.getElementById("tutorNum").textContent = value;
-        document.getElementById("tutorLastEdit").textContent = lastEdit;
-      }
-      else if (type === NUM_TYPE_CLASS){
-        document.getElementById("classNum").textContent = value;
-        document.getElementById("classLastEdit").textContent = lastEdit;
-        lvl2ClassNum = value;
-        updateProfileLevel();
-      }
-      else if (type === NUM_TYPE_PUBLIC_COURSE){
-        document.getElementById("profileViewNum").textContent = value;
-      }
-      else if (type === NUM_TYPE_PROFILE_VIEW){
-        document.getElementById("publicCourseNum").textContent = value;
-      }
-      else{
-        // Do nothing
-      }
-      
-    }
-
-    // reset dashboard view
-    function clearDashboard(){
-       
-      document.getElementById("studentNum").textContent = 0;
-      document.getElementById("classNum").textContent = 0;
-      document.getElementById("tutorNum").textContent = 0;
-      document.getElementById("profileViewNum").textContent = 0;
-      document.getElementById("publicCourseNum").textContent = 0;
-
-    }
-
-
-    // Load all organization level revenue
-    function loadAllOrgRevenue(){
-      let fullYear = new Date().getFullYear();
-      let month = new Date().getMonth();
-      // console.log(month);
-
-      let docRef = db.collection("Report")
-          .doc("v1")
-          .collection("Revenue")
-          .where(REV_ADMIN_ID, "==", tutorId)
-          .where(REV_TYPE, "==", REV_TYPE_ORG)
-          .where(REV_MONTH, "==", fullYear+"99")
-          .where(REV_STATUS, "==", true)
-
-      docRef
-      .get()
-      .then((querySnapshot) => {
-
-        if(querySnapshot.empty) {
-          // console.log("Empty ");
-        } 
-        else {
-          querySnapshot.forEach((doc) => {
-            // console.log("Revenue Report found");
-            // console.log(doc.data());
-
-            let monthRevenueList = doc.data()[REV_DOC_TOTAL_ARR];
-
-            // monthRevenueList.forEach((item) =>{
-              // addData(monthlyRevenueChart, '', item);
-            // });
-            addData(monthlyRevenueChart, '', monthRevenueList);
-
-            let thisMonthRevenue = 0;
-            let lastMonthRevenue = 0;
-            let revenueGrowth = 0;
-            // console.log('month: '+month);
-            // console.log(monthRevenueList[month])
-            // console.log(monthRevenueList[month-1])
-            if (month > 0 ){
-              thisMonthRevenue = monthRevenueList[month];
-              lastMonthRevenue = monthRevenueList[month - 1];
-              revenueGrowth = (thisMonthRevenue -  lastMonthRevenue) / lastMonthRevenue * 100;
-            }else{
-              revenueGrowth = 0;
-            }
-            // console.log(revenueGrowth);
-            
-            if (revenueGrowth>= 0){
-              document.getElementById('monthRevenueText').innerHTML = "<span class='text-success'><i class='fa fa-long-arrow-up'></i> "+parseFloat(revenueGrowth.toFixed(1))+"%  </span> increase in this month sales.";
-            }else if(revenueGrowth < 0) {
-              document.getElementById('monthRevenueText').innerHTML = "<span class='text-danger'><i class='fa fa-long-arrow-down'></i> "+parseFloat(revenueGrowth.toFixed(1))+"%  </span> decrease in this month sales.";
-            }else {
-              // revenueGrowth = nan or other unexpected value 
-              document.getElementById('monthRevenueText').innerHTML = "<span class='text-success'><i class='fa fa-long-arrow-up'></i> 0%  </span> increase in this month sales.";
-            }
-
-            document.getElementById('monthRevenueLastUpdate').innerHTML = "<i class='material-icons'>access_time</i> Updated "+doc.data()[REV_DATE_EDIT].toDate().toLocaleDateString("en-GB");;
-
-          });
-        }
-
-      });
-
-    }
-
-    // Push data to chart
-    function updateData(chart, label, data) {
-      
-      chart.data.labels.push(label);
-      chart.data.datasets.forEach((dataset) => {
-        // console.log(dataset.data);
-
-        // console.log(data.datasets[0].data);
-        dataset.data.push(data);
-      });
-      chart.update();
-    }
-
-    function addData(chart, label, data) {
-      
-      chart.data.labels.push(label);
-      chart.data.datasets.forEach((dataset) => {
-        // console.log(dataset.data);
-        // console.log(data.datasets[0].data);
-        dataset.data = data;
-      });
-      chart.update();
-    }
-
-    // Update Page Specific View
-    function updatePageView(){
-
-      // Update sharing button
-      let url = encode64(tutorId);
-      let url_string = "https://golearn.com.my/tutor?tid="+ url;
-      let textMessage = "Hi. "+ current_name +" is now teaching and giving private classes on GoLearn. Your recommendation would helpful to " +current_name+ " and future students."
-      let textMessageWithUrl = "Hi. "+ current_name +" is now teaching and giving private classes on GoLearn. Your recommendation would helpful to " +current_name+ " and future students. Link: " +url_string;
-
-      document.getElementById("btnFbShare").href = "https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url_string)+"&quote="+textMessage;
-      document.getElementById("btnTwitterShare").href = "http://www.twitter.com/share?url="+ encodeURIComponent(url_string)+"&text=" + textMessage;
-      document.getElementById("btnWhatsappShare").href = "https://wa.me/?text="+ textMessageWithUrl;
-      document.getElementById("btnTelegramShare").href = "https://telegram.me/share/url?url="+ url_string+"&text=" + textMessage;
-      document.getElementById("btnLinkedInShare").href = "https://www.linkedin.com/shareArticle?mini=true&url="+ encodeURIComponent(url_string)+"&summary=" +textMessage +"&source=golearn.com.my";
-
-      document.getElementById("tutorLink").value = "https://golearn.com.my/tutor/?tid="+ url;
-      document.getElementById("tutorReviewLink").value = "https://app.golearn.com.my/c/r/review.html?tid="+ url;
-
-      // Create Tutor Public profile
-      if (current_name != "New Tutor"){
-        let detail =""
-        if (currentYearsExperience == 0 || currentYearsExperience == null)
-          detail = current_gender + " | " + current_age;
-        else if (currentYearsExperience == 1)
-          detail = current_gender + " | " + current_age + " |  1 year of experience";
-        else
-          detail = current_gender + " | " + current_age + " | "+ currentYearsExperience + " years of experience";
-        
-        document.getElementById("tutorImgUrl").src = current_imgUri;
-        document.getElementById("tutorName").textContent = current_name;
-        document.getElementById("tutorTutoringApproach").textContent = currentTutoringApproach ;
-        document.getElementById("tutorTutoringExperience").textContent = currentTutoringExperience;
-        document.getElementById("tutorEducation").textContent = currentQualification;
-        document.getElementById("tutorGenderAgeYearsExperience").textContent = detail;
-      }else{
-        // This is only for the very first time login
-        document.getElementById("tutorImgUrl").src = "https://app.golearn.com.my/assets/img/hello.gif";
-        document.getElementById("tutorName").textContent = "Boo Boo";
-        document.getElementById("tutorTutoringApproach").textContent = "I am passionate about teaching and love little teddies.";
-        document.getElementById("tutorTutoringExperience").textContent = " I have 9 months of teaching experience. Hire me starting from 2 cans of honey 🍯🍯.";
-        document.getElementById("tutorEducation").textContent = "University of Bear";
-        document.getElementById("tutorGenderAgeYearsExperience").textContent = "Male | 2 years old";
-      }
-      
-      // Enable the dummy profile
-      document.getElementById('btnIWantThisTutor').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
-
-      // Update Dashboard > Profile
-      let checker = 0; // max = 7
-      if (current_imgUri != null && current_imgUri != "" && current_imgUri != "https://app.golearn.com.my/assets/img/hello.gif"){
-        document.getElementById("profilePic").style.color = "green";
-        document.getElementById("profilePic").className = "fas fa-check-circle fa-fw";
-        checker = checker + 1;
-      }
-      if (currentYearsExperience != null && currentYearsExperience != ""){
-        document.getElementById("profileBasic").style.color = "green";
-        document.getElementById("profileBasic").className = "fas fa-check-circle fa-fw";
-        checker = checker + 1;
-      }
-      if (currentQualification != null && currentQualification != ""){
-        document.getElementById("profileQualification").style.color = "green";
-        document.getElementById("profileQualification").className = "fas fa-check-circle fa-fw";
-        checker = checker + 1;
-      }
-      if (currentTutoringApproach != null && currentTutoringApproach != ""){
-        document.getElementById("profileApproach").style.color = "green";
-        document.getElementById("profileApproach").className = "fas fa-check-circle fa-fw";
-        checker = checker + 1;
-      }
-      if (currentTutoringExperience != null && currentTutoringExperience != ""){
-        document.getElementById("profileExp").style.color = "green";
-        document.getElementById("profileExp").className = "fas fa-check-circle fa-fw";
-        checker = checker + 1;
-      }
-      console.log()
-      if (current_preferedSubjectList != null && current_preferedSubjectList != "" && current_preferedSubjectList.length > 0){
-        document.getElementById("profileSubject").style.color = "green";
-        document.getElementById("profileSubject").className = "fas fa-check-circle fa-fw";
-        checker = checker + 1;
-      }
-      if (current_preferedAreaList != null && current_preferedAreaList != "" && current_preferedAreaList.length > 0){
-        document.getElementById("profileArea").style.color = "green";
-        document.getElementById("profileArea").className = "fas fa-check-circle fa-fw";
-        checker = checker + 1;
-      }
-
-      // Get the percentage of completion. 7 is just the number of criteria contested
-      let percentage = checker / 7 * 100;
-      document.getElementById("profilePercentageNum").textContent = parseInt(percentage) + "%";
-
-
-    }
-
-    // Reload student number
-    function reloadStudentNum(){
-      $('#loadingModal').modal('show'); 
-
-      var docRef = db.collection("Class")
-          .doc("v1")
-          .collection("Student")
-          .where(STU_ADMIN_ID, "==", tutorId)
-          .where(STU_STATUS_ADMIN, "==", true);
-
-      docRef
-      .get()
-      .then((querySnapshot) => {
-
-        if(querySnapshot.empty) {
-          // console.log("Empty ");
-          resetNum(0, NUM_TYPE_STUDENT);
-        } 
-        else {
-          console.log("Found ");
-          querySnapshot.forEach((doc) => {
-
-            console.log(doc.data());
-            // updateDashboard(doc);
-          });
-
-          let stuNum = querySnapshot.docs.length;
-          // console.log(stuNum)
-          resetNum(stuNum, NUM_TYPE_STUDENT);
-        }
-
-      });
-
-    }
-
-    // Reload class number
-    function reloadClassNum(){
-      $('#loadingModal').modal('show'); 
-
-      var docRef = db.collection("Class")
-          .doc("v1")
-          .collection("Class")
-          .where(CLASS_ADMIN_ID, "==", tutorId)
-          .where(STATUS_KEY, "==", true);
-
-      docRef
-      .get()
-      .then((querySnapshot) => {
-
-        if(querySnapshot.empty) {
-          // console.log("Empty ");
-          resetNum(0, NUM_TYPE_CLASS);
-        } 
-        else {
-          console.log("Found ");
-          querySnapshot.forEach((doc) => {
-
-            console.log(doc.data());
-            // updateDashboard(doc);
-          });
-
-          let classNum = querySnapshot.docs.length;
-          console.log(classNum)
-          resetNum(classNum, NUM_TYPE_CLASS);
-        }
-
-      });
-
-    }
-
-    // Reload teacer number
-    function reloadTutorNum(){
-      $('#loadingModal').modal('show'); 
-
-      var docRef = db.collection("Class")
-          .doc("v1")
-          .collection("Tutor")
-          .where(TUTOR_ADMIN_ID, "==", tutorId)
-          .where(TUTOR_STATUS_ADMIN, "in", [TUTOR_STATUS_TYPE_ACTIVE, TUTOR_STATUS_TYPE_PASSIVE]);
-
-      docRef
-      .get()
-      .then((querySnapshot) => {
-
-        if(querySnapshot.empty) {
-          // console.log("Empty ");
-          resetNum(0, NUM_TYPE_TEACHER);
-        } 
-        else {
-          console.log("Found ");
-          querySnapshot.forEach((doc) => {
-            console.log(doc.data());
-          });
-
-          let tutorNum = querySnapshot.docs.length;
-          console.log(tutorNum)
-          resetNum(tutorNum, NUM_TYPE_TEACHER);
-        }
-
-      });
-
-    }
-
-    // Report: Update Student Number
-    function resetNum(value, type){
-  
-      let docRef = db.collection("Report")
-        .doc("v1")
-        .collection("General")
-        .where(NUM_ADMIN_ID, "==", tutorId)
-        .where(NUM_TYPE, "==", type)
-        .limit(1);
-
-
-      docRef
-      .get()
-      .then((querySnapshot) => {
-
-        if(querySnapshot.empty) {
-          console.log("Empty. create new doc ");
-          let reportDocRef = db.collection("Report")
-            .doc("v1")
-            .collection("General")
-            .doc();
-            
-          reportData ={
-            [NUM_ID]: reportDocRef.id,
-            [NUM_ADMIN_ID]: tutorId,
-            [NUM_TYPE]: type,
-            [NUM_VALUE]: (value == null || value == "" || value == 0 || isNaN(value)) ? 0 : parseInt(value),
-            [NUM_DATE_EDIT]: new Date(),
-          }
-
-          console.log(reportData)
-          reportDocRef
-            .set(reportData, { merge: true })
-            .then(() => {
-              // $('#loadingModal').modal('hide');
-              window.location.href='./';
-            });
-
-        } 
-        else {
-          // console.log("Data found Update: ");
-          
-          querySnapshot.forEach((doc) => {
-
-            console.log(doc.data());
-
-            let reportDocRef = db.collection("Report")
-              .doc("v1")
-              .collection("General")
-              .doc(doc.data()[NUM_ID]);
-              
-
-            reportData ={
-              // [NUM_ID]: reportDocRef.id,
-              // [NUM_ADMIN_ID]: tutorId,
-              // [NUM_TYPE]: ,
-              [NUM_VALUE]: (value == null || value == "" || value == 0 || isNaN(value)) ? 0 : parseInt(value),
-              [NUM_DATE_EDIT]: new Date(),
-            }
-
-            console.log(reportData)
-            reportDocRef
-              .set(reportData, { merge: true })
-              .then(() => {
-                // window.location.href='./';
-                $('#loadingModal').modal("hide");
-                window.location.reload()
-              });
-
-          });
-
-
-        }
-
-
-      });
-
-    }
-
-    // // Sign out
-    // function signOutFunction(){
-    //   $('#signOutModal').modal('show');
-    //   $("#signOutModal").appendTo("body");
-    // }
-
-    // Copy a text based on element ID
-    function copyText(targetElemId){
-      /* Get the text field */
-      let copyText = document.getElementById(targetElemId);
-      // console.log(copyText)
-      // console.log(copyText.select())
-      /* Select the text field */
-      copyText.focus();
-      copyText.select();
-      copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-      /* Copy the text inside the text field */
-      navigator.clipboard.writeText(copyText.value);
-
-      func.showNotification('top','center', 'success', 'check_circle', "Link copied.");
-      /* Alert the copied text */
-      // alert("Copied the text: " + copyText.value);
-    }
-
-  </script>
-
-  <script>
-		$( document ).ready(function() {
-
-      $('#btnIWantThisTutor').on('click', function (e) {
-        $('#activationModal').modal('show');
-        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-          document.getElementById("activationModalLabel").textContent = "Activate your Account Now. It's free!"
-          document.getElementById("activationModalBody").textContent = "You are just 1 step away from getting access to unlimited tuition jobs, free personal tutor profile, professional looks and many more features!"
-          document.getElementById("btnActivationModalUpdate").textContent = "Join Us";
-        }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-          document.getElementById("activationModalLabel").textContent = "Your Account is Suspended"
-          document.getElementById("activationModalBody").textContent = "Please contact us fix this."
-          document.getElementById("btnActivationModalUpdate").textContent = "Contact Us"
-        }else {
-          document.getElementById("activationModalLabel").textContent = "Ready to Grow your Tutoring Career?"
-          document.getElementById("activationModalBody").textContent = "Upgrade to Pro to enjoy more premium subjects and priorities. From part time tutors to full time tutors, private educators and education centers, there’s always a GoLearn Pro plan for you."
-          document.getElementById("btnActivationModalUpdate").textContent = "Upgrade"
-        }
-
-      });
-
-      $('#btnActivationModalUpdate').on('click', function (e) {
-        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-          window.location = "https://golearn.com.my/join-us/";
-        }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-          window.location = "https://golearn.com.my/contact-us/";
-        }else {
-          window.location = "https://golearn.com.my/pricing/";
-        }
-        // Do something
-        $('#activationModal').modal('hide');
-      });
-
-      // $('#btnActivationModalClose1').on('click', function (e) {
-      //   $('#activationModal').modal('hide');
-      // });
-      // $('#btnActivationModalClose2').on('click', function (e) {
-      //   $('#activationModal').modal('hide');
-      // });
-
-			// Sign-out
-			// $("#btn-logout").click(function(){
-        // $('#signOutModal').modal('show');
-			// });
-      $('#btnSignOutModalUpdate').on('click', function (e) {
-      
-        firebase.auth().signOut().then(() => {
-          // Sign-out successful.
-          }).catch((error) => {
-            window.alert("Logging out failed");
-            func.showNotification('top','center', 'danger', 'error_outline', "Logging out failed." );
-          });
-        // Do something
-        // $('#signOutModal').modal('hide');
-      });
-
-      // $('#btnSignOutModalClose1').on('click', function (e) {
-      //   $('#signOutModal').modal('hide');
-      // });
-      // $('#btnSignOutModalClose2').on('click', function (e) {
-      //   $('#signOutModal').modal('hide');
-      // });
-
-      // Active Register Class Modal
-      $('#loadingModal').modal({
-        backdrop:'static',
-        keyboard:false,
-        show: false
-      });
-
-    });
-
-  </script>
-
-  <!-- Chart -->
-  <script>
+   <!-- Chart -->
+   <script>
 
     // Monthly Revenue
     const month = MyMonthAbr;
@@ -2210,6 +1577,1227 @@
 
   </script>
 
+  <script>
+
+    var lvl2ClassNum, lvl2StudentNum = 0;
+
+    const tutorImgUrl = document.getElementById("tutorImgUrl");
+    const tutorAgeGender = document.getElementById("tutorAgeGender");
+    const education = document.getElementById("education");
+    const area = document.getElementById("area");
+    const ratingBlockVal = document.getElementById("ratingBlockVal");
+    const ratingBlockReview = document.getElementById("ratingBlockReview");
+    const tutorName = document.getElementById("tutorName");
+    const teachingApproach  = document.getElementById("teachingApproach");
+    const teachingExp = document.getElementById("teachingExp");
+    const teachingApproachTitle  = document.getElementById("teachingApproachTitle");
+    const teachingExpTitle = document.getElementById("teachingExpTitle");
+
+
+    // Check if user logged on
+    AuthCheck();
+
+    // Page Specific Initialization
+    function loadPageInitFunc(){
+
+      // Update page view
+      updatePageView();
+
+      // Update general view
+      updateGeneralView1();
+
+      // Disable loading
+      disableLoading();
+
+      // Update general statistic
+      loadGeneralNum();
+
+      // Load revenue chart
+      loadAllOrgRevenue();
+
+      // Update Level
+      updateProfileLevel();
+
+      // Load request
+      loadRequest();
+
+    }
+
+    // Request Load More - Init
+    const loadmore = document.querySelector('#btnRequestLoadMore');
+    loadmore.style.visibility='hidden';
+    const loadmoreHandleClick = () =>{
+      loadRequest();
+    }
+    loadmore.addEventListener('click', loadmoreHandleClick );
+
+    // Load requests
+    var latestRequestDoc = null;
+    function loadRequest(){
+      let today = new Date(2100, 12, 31);// Set a big date
+
+      document.getElementById("card-load").style.display = "";
+
+      let docRef = db.collection("request")
+        .doc("v1")
+        .collection("all")
+        .where(REQUEST_ADMIN_ID, "==", tutorId)
+        .where(REQUEST_STATUS, "==", true)
+        .orderBy(REQUEST_DATE_SENT, 'desc')
+        .startAfter(latestRequestDoc || today)
+        .limit(5);
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+        document.getElementById("card-load").style.display = "none";
+        if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0) && latestRequestDoc == null){
+          document.getElementById("noRequestPlaceholder").style.display = 'initial';
+        }else{
+          document.getElementById("noRequestPlaceholder").style.display = 'none';
+        }
+
+        // Session Storage data
+        let docsObj = [];
+
+        var renderedCount = 0;
+        querySnapshot.forEach((doc) => {
+
+          // docsObj.push(doc.data());
+
+
+          const currentDate = new Date();
+          const timestamp = currentDate.getTime();
+          // console.log("Now: "+timestamp);
+          let timeDiff = (timestamp-doc.data()[REQUEST_DATE_SENT].toMillis())/1000/60/60;
+
+          // 1440 = 60D x 24 hr
+          if (timeDiff < 1440){
+            renderedCount = renderedCount + 1;
+            renderRequest(doc);
+          }
+          // console.log(doc.data())
+        });
+
+        latestRequestDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+        // console.log(querySnapshot.docs.length)
+        // Handle Lesson Load more btn
+        if (querySnapshot.empty){
+          loadmore.removeEventListener('click', loadmoreHandleClick );
+        }
+
+        if (querySnapshot.docs.length == 5 && renderedCount == 5){
+          // Meaning all items is rendered and load more is valid
+          loadmore.style.visibility='visible';
+        }else if (querySnapshot.docs.length == 5 && renderedCount < 5){
+          // load more is not valid because not all item rendered
+          loadmore.style.visibility='hidden';
+        }
+        else{
+          loadmore.style.visibility='hidden';
+        }
+
+      });
+
+
+    }
+
+    function renderRequest(doc){
+      // <div class="col-md-12" style="padding-left: 5px; padding-right: 5px; padding-bottom: 5px;">
+      //   <div class="review-card bg-white" style="border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); cursor: default;">
+      //     <span class="request-label">New <i class="fas fa-circle"></i></span>
+      //     <div class="row" style="margin-left: 12px; margin-right: 12px; display: inline-flex;">
+      //       <div style="height: 30px;width: 30px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
+      //         <img style="height: 100%;width: 100%; object-fit: cover;" src="data:image/png;base64,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">
+      //       </div>
+      //       <p class="align-self-center" style="font-weight: 400; margin-left: 12px; margin-bottom: 0;">Alric Liew </p>
+      //       <p class="align-self-center" style="margin-left: 12px;  margin-bottom: 0;">  Parent  &middot; <span style="font-weight: 400; cursor: pointer; color: #2e74b6;" onclick="viewPhone(this, '+601111111111', 'requestid');">Show Phone</span></p>
+      //     </div>
+
+      //     <div class="row" style="margin: 8px 12px 8px 12px;">
+      //       <p style="margin: 0;">New inquiry: Teacher give me good advice, i can understand fully, thanks 😁</p>
+      //     </div>
+
+      //     <div class="row" style="margin: 8px 12px 0 12px;">
+      //       <p style="margin: 0; font-style: italic; font-size: small;">Sent from 
+      //         <a href="https://golearn.com.my/" target="_blank">profile</a> </p>
+      //     </div>
+      //   </div>
+      // </div>
+
+      // Label
+      let label_span = document.createElement('span');
+      label_span.className = "request-label"
+      label_span.innerHTML = `New <i class="fas fa-circle"></i>`;
+
+      // Name 
+      let AvatarText = doc.data()[REQUEST_REQUESTER_NAME][0] + doc.data()[REQUEST_REQUESTER_NAME][1];
+      let imgUrl = generateAvatar(AvatarText, "#8c8c8c", "#eaeaea", "100px");
+      let imgHtml = "<img style='height: 100%;width: 100%; object-fit: cover;' src='"+imgUrl+"'>";
+
+      let img_div = document.createElement('div');
+      img_div.setAttribute("style","height: 30px;width: 30px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;");
+      img_div.innerHTML = imgHtml;
+
+      let nameP = document.createElement('p');
+      nameP.className = "align-self-center";
+      nameP.setAttribute("style", "font-weight: 400; margin-left: 12px; margin-bottom: 0;");
+      if (doc.data()[REQUEST_REQUESTER_NAME] == null || doc.data()[REQUEST_REQUESTER_NAME] == ""){
+        nameP.textContent = "Unknown user";
+      }else {
+        nameP.textContent = doc.data()[REQUEST_REQUESTER_NAME];
+      }
+
+      let person = (doc.data()[REQUEST_REQUESTER_PERSON] === REQUEST_REQUESTER_PERSON_PARENT) ? 'Parents' : 'Student';
+      let detailP = document.createElement('p');
+      detailP.className = "align-self-center";
+      detailP.setAttribute("style", "margin-left: 12px; margin-bottom: 0; font-size: small;");
+      if (doc.data()[REQUEST_DATE_READ] == null || doc.data()[REQUEST_DATE_READ] == ""){
+        detailP.innerHTML = person + ` &middot; <span style="font-weight: 400; cursor: pointer; color: #2e74b6;" onclick="viewPhone(this, '`+doc.data()[REQUEST_REQUESTER_PHONE]+`', '`+doc.data()[REQUEST_ID]+`');">Show Phone</span>`;
+
+      }else {
+        detailP.innerHTML = person + ` &middot; `+doc.data()[REQUEST_REQUESTER_PHONE];
+      }
+
+      name_div_top = document.createElement('div');
+      name_div_top.className = "row";
+      name_div_top.setAttribute("style", "margin-left: 12px; margin-right: 12px; display: inline-flex;");
+      name_div_top.appendChild(img_div);
+      name_div_top.appendChild(nameP);
+      name_div_top.appendChild(detailP);
+
+      // Message
+      let mssg_html = `<p style="margin: 0;">`+doc.data()[REQUEST_REQUESTER_MESSAGE]+`</p>`;
+      mssg_div = document.createElement('div');
+      mssg_div.className = "row";
+      mssg_div.setAttribute("style", "margin: 8px 12px 8px 12px;");
+      mssg_div.innerHTML = mssg_html;
+
+      // Sent from 
+  
+      let sent_html = "";
+      if (doc.data()[REQUEST_TYPE] === REQUEST_TYPE_TUTOR) {
+        let url = encode64(tutorId);
+        let url_string = "https://golearn.com.my/tutor?tid="+ url;
+        sent_html = doc.data()[REQUEST_DATE_SENT].toDate().toLocaleDateString('en-GB') + ` Sent from <a href="`+url_string+`" target="_blank">profile</a>`
+      } 
+      else if (doc.data()[REQUEST_TYPE] === REQUEST_TYPE_COURSE){
+        let url = doc.data()[REQUEST_URL];
+        let feeType = (doc.data()[REQUEST_TARGET_FEE_TYPE] === FEES_TYPE_PER_HOUR_KEY) ? '/hr' : '/mth';
+        sent_html = doc.data()[REQUEST_DATE_SENT].toDate().toLocaleDateString('en-GB') + ` Sent from <a href="`+url+`" target="_blank">`+doc.data()[REQUEST_TARGET_NAME]+ " (RM" + doc.data()[REQUEST_TARGET_FEE] + feeType+`)</a>`
+      }
+      let sent_p = document.createElement('p');
+      sent_p.setAttribute("style", "margin: 0; font-style: italic; font-size: small;");
+      sent_p.innerHTML = sent_html;
+      sent_div_top = document.createElement('div');
+      sent_div_top.className = "row";
+      sent_div_top.setAttribute("style", "margin: 8px 12px 0 12px;");
+      sent_div_top.appendChild(sent_p);
+
+      // Card
+      let card_div = document.createElement('div');
+      card_div.className = "review-card bg-white"
+      card_div.setAttribute("style", "border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); cursor: default;")
+
+      if (doc.data()[REQUEST_DATE_READ] == null || doc.data()[REQUEST_DATE_READ] == ""){
+        card_div.appendChild(label_span);
+      }
+
+      card_div.appendChild(name_div_top);
+
+      if (doc.data()[REQUEST_REQUESTER_MESSAGE] == null || doc.data()[REQUEST_REQUESTER_MESSAGE] == ""){
+        
+      }else {
+        card_div.appendChild(mssg_div);
+      }
+
+      if (sent_html != ""){
+        card_div.appendChild(sent_div_top);
+      }
+  
+      // Card top
+      let card_top_div = document.createElement('div');
+      card_top_div.className = "col-md-12"
+      card_top_div.setAttribute("style", "padding-left: 5px; padding-right: 5px;padding-bottom: 5px;")
+      card_top_div.appendChild(card_div);
+
+      const requestBody = document.getElementById("requestBody");
+      requestBody.appendChild(card_top_div);
+
+    }
+
+    function updateProfileLevel() {
+
+      // Level 1: New Tutor
+      let lvl1Checker = 0; // max = 4
+      if (current_imgUri != null && current_imgUri != "" && current_imgUri != "https://app.golearn.com.my/assets/img/hello.gif"){
+        document.getElementById("lvl1Pic").style.color = "green";
+        document.getElementById("lvl1Pic").className = "fas fa-check-circle fa-fw";
+        lvl1Checker = lvl1Checker + 1;
+      }
+      if (currentQualification != null && currentQualification != ""){
+        document.getElementById("lvl1Qualification").style.color = "green";
+        document.getElementById("lvl1Qualification").className = "fas fa-check-circle fa-fw";
+        lvl1Checker = lvl1Checker + 1;
+      }
+      if (currentTutoringApproach != null && currentTutoringExperience != null && currentTutoringApproach != "" && currentTutoringExperience != ""){
+        document.getElementById("lvl1ApproachExp").style.color = "green";
+        document.getElementById("lvl1ApproachExp").className = "fas fa-check-circle fa-fw";
+        lvl1Checker = lvl1Checker + 1;
+      }
+      if (current_preferedSubjectList != null && current_preferedSubjectList != "" && current_preferedSubjectList.length > 0 &&
+      current_preferedAreaList != null && current_preferedAreaList != "" && current_preferedAreaList.length > 0){
+        document.getElementById("lvl1SubjectArea").style.color = "green";
+        document.getElementById("lvl1SubjectArea").className = "fas fa-check-circle fa-fw";
+        lvl1Checker = lvl1Checker + 1;
+      }
+
+      // Level 2: Experienced Tutor
+      let lvl2Checker = 0; // max = 3
+      if (current_ratingTimes == null || current_ratingTimes == "" || current_ratingTimes == 0){
+        document.getElementById("lvl2ReviewTxt").textContent = "0/5 Reviews";
+      }else if (current_ratingTimes > 0 && current_ratingTimes < 5){
+        document.getElementById("lvl2ReviewTxt").textContent = current_ratingTimes + "/5 Reviews";
+      }else if (current_ratingTimes >= 5){
+        document.getElementById("lvl2Review").style.color = "green";
+        document.getElementById("lvl2Review").className = "fas fa-check-circle fa-fw";
+        document.getElementById("lvl2ReviewTxt").textContent = "5/5 Reviews";
+        lvl2Checker = lvl2Checker + 1;
+      }else {
+        document.getElementById("lvl2ReviewTxt").textContent = "0/5 Reviews";
+      }
+
+      // if (lvl2ClassNum > 0){
+      //   lvl2Checker = lvl2Checker + 1;
+      //   document.getElementById("lvl2Class").style.color = "green";
+      //   document.getElementById("lvl2Class").className = "fas fa-check-circle fa-fw";
+      //   document.getElementById("lvl2ClassTxt").textContent = 1;
+      // }
+
+      // if (lvl2StudentNum > 0){
+      //   lvl2Checker = lvl2Checker + 1;
+      //   document.getElementById("lvl2Student").style.color = "green";
+      //   document.getElementById("lvl2Student").className = "fas fa-check-circle fa-fw";
+      //   document.getElementById("lvl2StudentTxt").textContent = 1;
+      // }
+
+      let statusArr = [PREMIUM_ACCOUNT_1_STATUS_KEY, PREMIUM_ACCOUNT_2_STATUS_KEY, PREMIUM_ACCOUNT_3_STATUS_KEY, PREMIUM_ACCOUNT_1_ACTIVE_STATUS_KEY, PREMIUM_ACCOUNT_2_ACTIVE_STATUS_KEY, PREMIUM_ACCOUNT_3_ACTIVE_STATUS_KEY];
+      if (statusArr.indexOf(current_accountStatus) > -1){
+        setActiveStep(3);
+        setActivePanel(3); 
+      }else if (lvl1Checker == 4 && lvl2Checker == 1){
+        setActiveStep(2);
+        setActivePanel(2); 
+      }else if (lvl1Checker == 4){
+        setActiveStep(1);
+        setActivePanel(1); 
+      }else{
+        // Stay at step 1
+      }
+
+      // console.log(lvl1Checker, lvl2Checker, current_accountStatus);
+
+    }
+
+    // Load the student number
+    function loadGeneralNum(){
+      let docRef = db.collection("Report")
+          .doc("v1")
+          .collection("General")
+          .where(NUM_ADMIN_ID, "==", tutorId)
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        if(querySnapshot.empty) {
+          // console.log("Empty ");
+          clearDashboard();
+        } 
+        else {
+          querySnapshot.forEach((doc) => {
+            // console.log(doc.data());
+            updateDashboard(doc);
+          });
+
+        }
+      });
+
+      
+    }
+
+    // Update dashboard view
+    function updateDashboard(doc){
+      let type = doc.data()[NUM_TYPE];
+      let value = doc.data()[NUM_VALUE];
+      let lastEdit = doc.data()[NUM_DATE_EDIT].toDate().toLocaleDateString("en-GB");
+
+      if (type === NUM_TYPE_STUDENT){
+        document.getElementById("studentNum").textContent = value;
+        document.getElementById("studentLastEdit").textContent = lastEdit;
+        lvl2StudentNum = value;
+        updateProfileLevel();
+      }
+      else if (type === NUM_TYPE_TEACHER){
+        document.getElementById("tutorNum").textContent = value;
+        document.getElementById("tutorLastEdit").textContent = lastEdit;
+      }
+      else if (type === NUM_TYPE_CLASS){
+        document.getElementById("classNum").textContent = value;
+        document.getElementById("classLastEdit").textContent = lastEdit;
+        lvl2ClassNum = value;
+        updateProfileLevel();
+      }
+      else if (type === NUM_TYPE_PUBLIC_COURSE){
+        document.getElementById("profileViewNum").textContent = value;
+      }
+      else if (type === NUM_TYPE_PROFILE_VIEW){
+        document.getElementById("publicCourseNum").textContent = value;
+      }
+      else{
+        // Do nothing
+      }
+      
+    }
+
+    // reset dashboard view
+    function clearDashboard(){
+       
+      document.getElementById("studentNum").textContent = 0;
+      document.getElementById("classNum").textContent = 0;
+      document.getElementById("tutorNum").textContent = 0;
+      document.getElementById("profileViewNum").textContent = 0;
+      document.getElementById("publicCourseNum").textContent = 0;
+
+    }
+
+
+    // Load all organization level revenue
+    function loadAllOrgRevenue(){
+      let fullYear = new Date().getFullYear();
+      let month = new Date().getMonth();
+      // console.log(month);
+
+      let docRef = db.collection("Report")
+          .doc("v1")
+          .collection("Revenue")
+          .where(REV_ADMIN_ID, "==", tutorId)
+          .where(REV_TYPE, "==", REV_TYPE_ORG)
+          .where(REV_MONTH, "==", fullYear+"99")
+          .where(REV_STATUS, "==", true)
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        if(querySnapshot.empty) {
+          console.log("Empty ");
+        } 
+        else {
+          querySnapshot.forEach((doc) => {
+
+            let monthRevenueList = doc.data()[REV_DOC_TOTAL_ARR];
+
+            // monthRevenueList.forEach((item) =>{
+              // addData(monthlyRevenueChart, '', item);
+            // });
+            addData(monthlyRevenueChart, '', monthRevenueList);
+
+            let thisMonthRevenue = 0;
+            let lastMonthRevenue = 0;
+            let revenueGrowth = 0;
+            // console.log('month: '+month);
+            // console.log(monthRevenueList[month])
+            // console.log(monthRevenueList[month-1])
+            if (month > 0 ){
+              thisMonthRevenue = monthRevenueList[month];
+              lastMonthRevenue = monthRevenueList[month - 1];
+              revenueGrowth = (thisMonthRevenue -  lastMonthRevenue) / lastMonthRevenue * 100;
+            }else{
+              revenueGrowth = 0;
+            }
+            // console.log(revenueGrowth);
+            
+            if (revenueGrowth>= 0){
+              document.getElementById('monthRevenueText').innerHTML = "<span class='text-success'><i class='fa fa-long-arrow-up'></i> "+parseFloat(revenueGrowth.toFixed(1))+"%  </span> increase in this month sales.";
+            }else if(revenueGrowth < 0) {
+              document.getElementById('monthRevenueText').innerHTML = "<span class='text-danger'><i class='fa fa-long-arrow-down'></i> "+parseFloat(revenueGrowth.toFixed(1))+"%  </span> decrease in this month sales.";
+            }else {
+              // revenueGrowth = nan or other unexpected value 
+              document.getElementById('monthRevenueText').innerHTML = "<span class='text-success'><i class='fa fa-long-arrow-up'></i> 0%  </span> increase in this month sales.";
+            }
+
+            document.getElementById('monthRevenueLastUpdate').innerHTML = "<i class='material-icons'>access_time</i> Updated "+doc.data()[REV_DATE_EDIT].toDate().toLocaleDateString("en-GB");;
+
+          });
+        }
+
+      });
+
+    }
+
+    // Push data to chart
+    function updateData(chart, label, data) {
+      
+      chart.data.labels.push(label);
+      chart.data.datasets.forEach((dataset) => {
+        // console.log(dataset.data);
+
+        // console.log(data.datasets[0].data);
+        dataset.data.push(data);
+      });
+      chart.update();
+    }
+
+    function addData(chart, label, data) {
+      
+      chart.data.labels.push(label);
+      chart.data.datasets.forEach((dataset) => {
+        // console.log(dataset.data);
+        // console.log(data.datasets[0].data);
+        dataset.data = data;
+      });
+      chart.update();
+    }
+
+    // Update Page Specific View
+    function updatePageView(){
+
+      // Update sharing button
+      let url = encode64(tutorId);
+      let url_string = "https://golearn.com.my/tutor?tid="+ url;
+      let textMessage = "Hi. "+ current_name +" is now teaching and giving private classes on GoLearn. Your recommendation would helpful to " +current_name+ " and future students."
+      let textMessageWithUrl = "Hi. "+ current_name +" is now teaching and giving private classes on GoLearn. Your recommendation would helpful to " +current_name+ " and future students. Link: " +url_string;
+
+      document.getElementById("btnFbShare").href = "https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url_string)+"&quote="+textMessage;
+      document.getElementById("btnTwitterShare").href = "http://www.twitter.com/share?url="+ encodeURIComponent(url_string)+"&text=" + textMessage;
+      document.getElementById("btnWhatsappShare").href = "https://wa.me/?text="+ textMessageWithUrl;
+      document.getElementById("btnTelegramShare").href = "https://telegram.me/share/url?url="+ url_string+"&text=" + textMessage;
+      document.getElementById("btnLinkedInShare").href = "https://www.linkedin.com/shareArticle?mini=true&url="+ encodeURIComponent(url_string)+"&summary=" +textMessage +"&source=golearn.com.my";
+
+      document.getElementById("tutorLink").value = "https://golearn.com.my/tutor/?tid="+ url;
+      document.getElementById("tutorReviewLink").value = "https://app.golearn.com.my/c/r/review.html?tid="+ url;
+
+      // Update main content
+      let isHelloGifExist = false;
+      let helloGifArr = current_imgUri.match(/hello.gif/gi)
+      if (helloGifArr != null) {
+        if (helloGifArr.length > 0) {
+          isHelloGifExist = true;
+        }
+      }
+
+      let isEmptyPhotoPngExist;
+      let emptyPhotoPngArr = current_imgUri.match(/empty-photo.png/gi)
+      if (emptyPhotoPngArr != null) {
+        if (emptyPhotoPngArr.length > 0) {
+          isEmptyPhotoPngExist = true;
+        }
+      }
+
+      // Check if img is valid. If no, create a 2 chars avatar
+      if (current_imgUri == null || current_imgUri == ""
+        || current_imgUri == "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"
+        || isHelloGifExist || isEmptyPhotoPngExist) {
+        let AvatarText = current_name[0] + current_name[1];
+        tutorImgUrl.src = generateAvatar(AvatarText, "#eaeaea", "#f6f6f6", "100px");
+      }
+      else {
+        tutorImgUrl.src = current_imgUri;
+      }
+      
+      // Enable the dummy profile
+      document.getElementById('btnIWantThisTutor').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
+
+      // Update Dashboard > Profile
+      let checker = 0; // max = 7
+      if (current_imgUri != null && current_imgUri != "" && current_imgUri != "https://app.golearn.com.my/assets/img/hello.gif"){
+        document.getElementById("profilePic").style.color = "green";
+        document.getElementById("profilePic").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+      if (currentYearsExperience != null && currentYearsExperience != ""){
+        document.getElementById("profileBasic").style.color = "green";
+        document.getElementById("profileBasic").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+      if (currentQualification != null && currentQualification != ""){
+        document.getElementById("profileQualification").style.color = "green";
+        document.getElementById("profileQualification").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+      if (currentTutoringApproach != null && currentTutoringApproach != ""){
+        document.getElementById("profileApproach").style.color = "green";
+        document.getElementById("profileApproach").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+      if (currentTutoringExperience != null && currentTutoringExperience != ""){
+        document.getElementById("profileExp").style.color = "green";
+        document.getElementById("profileExp").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+      if (current_preferedSubjectList != null && current_preferedSubjectList != "" && current_preferedSubjectList.length > 0){
+        document.getElementById("profileSubject").style.color = "green";
+        document.getElementById("profileSubject").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+      if (current_preferedAreaList != null && current_preferedAreaList != "" && current_preferedAreaList.length > 0){
+        document.getElementById("profileArea").style.color = "green";
+        document.getElementById("profileArea").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+
+      // Get the percentage of completion. 7 is just the number of criteria contested
+      let percentage = checker / 7 * 100;
+      document.getElementById("profilePercentageNum").textContent = parseInt(percentage) + "%";
+
+
+    }
+
+    // Update the page view
+    function updateGeneralView1(){
+
+      tutorAgeGender.innerHTML = current_age + " &middot; " + current_gender;
+
+      // Default to 1 year of experience
+      let yearOfExp_temp = "1 year of experience";
+      if (currentYearsExperience == null || currentYearsExperience == "")
+        yearOfExp_temp = "1 year of experience"
+      else if (currentYearsExperience > 1)
+        yearOfExp_temp = currentYearsExperience + " years of experience"
+      else 
+        yearOfExp_temp = currentYearsExperience + " year of experience"
+      // yearOfExp.textContent = yearOfExp_temp;
+
+      // Area
+      if (current_preferedAreaList == null || current_preferedAreaList.length == 0){
+        area.textContent = "No area information.";
+      }
+      else{
+        let areaText = ""
+        // Get all the area 
+        current_preferedAreaList.forEach((areaItem, index) => {
+          let areaComponent = areaItem.split('-');
+          // console.log(areaComponent)
+          // console.log(index)
+
+          // Compatible with older version
+          let existState = MYAllStateId.indexOf(areaComponent[0])
+
+          // Check if the state here belongs newer ID or still use the older version, a full state name
+          if (MYAllStateId.includes(areaComponent[0])){
+            // NEWER VERSION
+            // console.log("Newer version of AREA")
+            areaText = areaText + getCityNameBasedOnCityIdAndStateId2( areaComponent[0],  areaComponent[1]);
+
+            // If last index, ignore ", "
+            if (current_preferedAreaList.length != index + 1){
+              areaText  += ", ";
+            }
+          }else {
+            // console.log("Older version of AREA")
+            areaText = areaText + areaComponent[1];
+            // If last index, ignore ", "
+            if (current_preferedAreaList.length != index + 1){
+              areaText  += ", ";
+            }
+          }
+
+        });
+        area.textContent = areaText;
+      }
+      
+      // Education
+      education.textContent = currentQualification;
+
+      // Reviews & Rating
+      let ratingBlockVal_temp = "";
+      if (current_ratingFinal == null || current_ratingFinal == "" 
+        || current_ratingFinal <= 0 || current_ratingFinal > 5 ){
+
+        ratingBlockVal_temp = ""
+
+      }
+      else 
+        ratingBlockVal_temp = parseFloat(current_ratingFinal).toFixed(1);
+      ratingBlockVal.textContent = ratingBlockVal_temp;
+
+      let ratingBlockReviewTimes_temp = "";
+      if (current_ratingTimes == null || current_ratingTimes == "" || current_ratingTimes == 0 )
+        ratingBlockReviewTimes_temp = ""
+      else if (current_ratingTimes == 1)
+        ratingBlockReviewTimes_temp = "(1 review)"
+      else 
+      ratingBlockReviewTimes_temp = "("+current_ratingTimes+" reviews)"
+      ratingBlockReview.textContent = ratingBlockReviewTimes_temp; 
+
+      // Tutor name
+      let verified = verifiedCheck(current_accountStatus);
+      let verifiedBadgeHtml = " <span class='d-inline-block' tabindex='0' data-toggle='tooltip' data-placement='top' title='Profile Verified' style='font-size: 30px'><i class='far fa-check-circle fa-sm' style='color: #32CD32;'></i></span>"
+      
+      let profileLevel = checkProfileLevel();
+      let experiencedTutorBadgeHtml = "<span class='d-inline-block' tabindex='0' data-toggle='tooltip' data-placement='top' title='Experienced Tutor'><img style='height: 32px; width:32px;' src='../assets/img/badge-experienced.png'/></span>";
+      let proTutorBadgeHtml = "<span class='d-inline-block' tabindex='0' data-toggle='tooltip' data-placement='top' title='Pro Tutor'><img style='height: 32px; width:32px;' src='../assets/img/badge-pro.png'/></span>";
+      let premiumTutorBadgeHtml = "<span class='d-inline-block' tabindex='0' data-toggle='tooltip' data-placement='top' title='Featured'><img style='height: 32px; width:32px;' src='../assets/img/badge-premium.png'/></span>";
+
+      let tutorName_html = current_name;
+
+      if (verified){
+        tutorName_html =  tutorName_html + verifiedBadgeHtml;
+        if (profileLevel === 'premium'){
+          tutorName_html = tutorName_html + premiumTutorBadgeHtml;
+        }else if(profileLevel === 'pro'){
+          tutorName_html = tutorName_html + proTutorBadgeHtml;
+        }else if(profileLevel === 'experienced'){
+          tutorName_html = tutorName_html + experiencedTutorBadgeHtml;
+        }else{
+          // do nothing
+        }
+      }
+      else {
+        if (profileLevel === 'premium'){
+          tutorName_html = tutorName_html + premiumTutorBadgeHtml;
+        }else if(profileLevel === 'pro'){
+          tutorName_html = tutorName_html + proTutorBadgeHtml;
+        }else if(profileLevel === 'experienced'){
+          tutorName_html = tutorName_html + experiencedTutorBadgeHtml;
+        }else{
+          // do nothing
+        }
+      }
+      tutorName.innerHTML = tutorName_html;
+
+      // Teaching Approach ( Max 160 to show Readmore)
+      let approachLength = currentTutoringApproach.length
+      // console.log(approachLength)
+      if (approachLength > 160){
+        // <p id="teachingExp">
+        //   <span id="revealedExp">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas vitae scel</span>
+        //   <span id="dotsExp">...</span>
+        //   <span id="moreExp" style="display: none;">erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa.
+        //       Fusce luctus vestibulum augue ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis 
+        //       imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus 
+        //       pulvinar nibh tempor porta.
+        //   </span>
+        //   <span id="readMoreExp">
+        //     <a href="javascript:;" onclick="ReadMoreExp()" id="btnReadMoreExp" style="font-weight: 500; color: #2e74b6;">Read more</a>
+        //   </span>
+        // </p>
+        let revealedApproachTextIndex = 160;
+        for (i=0; i<50; i++){
+          if (currentTutoringApproach[160 + i] == " " || currentTutoringApproach[160 + i] == "-"
+          || currentTutoringApproach[160 + i] == "/" || currentTutoringApproach[160 + i] == ":"){
+            // Right at the end of a word. Do nothing
+            break;
+          }else {
+            revealedApproachTextIndex = revealedApproachTextIndex + 1;
+          }
+        }
+
+        // Get the text
+        let revealedText = currentTutoringApproach.substring(0, revealedApproachTextIndex);
+        let moreApproachText = currentTutoringApproach.substring(revealedApproachTextIndex, approachLength);
+        // console.log(revealedText)
+        // console.log(revealedText, moreApproachText)
+        // console.log(revealedText.length)
+        document.getElementById("revealedApproach").textContent = revealedText;
+        document.getElementById("dotsApproach").setAttribute("style", "")
+        document.getElementById("moreApproach").textContent = moreApproachText;
+        // document.getElementById("moreApproach").setAttribute("style", "")
+        document.getElementById("readMoreApproach").setAttribute("style", "")
+      }
+      else {
+        document.getElementById("revealedApproach").textContent = currentTutoringApproach;
+        document.getElementById("dotsApproach").setAttribute("style", "display: none;")
+        document.getElementById("moreApproach").setAttribute("style", "display: none;")
+        document.getElementById("readMoreApproach").setAttribute("style", "display: none;")
+      }
+
+      // Teaching Experience ( Max 160 to show Readmore)
+      let expLength = currentTutoringExperience.length
+      // console.log(expLength)
+      if (expLength > 160){
+        let revealedApproachTextIndex = 160;
+        for (i=0; i<50; i++){
+          if (currentTutoringExperience[160 + i] == " " || currentTutoringExperience[160 + i] == "-"
+          || currentTutoringExperience[160 + i] == "/" || currentTutoringExperience[160 + i] == ":"){
+            // Right at the end of a word. Do nothing
+            break;
+          }else {
+            revealedApproachTextIndex = revealedApproachTextIndex + 1;
+          }
+        }
+
+        // Get the text
+        let revealedText = currentTutoringExperience.substring(0, revealedApproachTextIndex);
+        let moreExpText = currentTutoringExperience.substring(revealedApproachTextIndex, expLength);
+        document.getElementById("revealedExp").textContent = revealedText;
+        document.getElementById("dotsExp").setAttribute("style", "")
+        document.getElementById("moreExp").textContent = moreExpText;
+        // document.getElementById("moreExp").setAttribute("style", "")
+        document.getElementById("readMoreExp").setAttribute("style", "")
+
+      }
+      else {
+        document.getElementById("revealedExp").textContent = currentTutoringExperience;
+        document.getElementById("dotsExp").setAttribute("style", "display: none;")
+        document.getElementById("moreExp").setAttribute("style", "display: none;")
+        document.getElementById("readMoreExp").setAttribute("style", "display: none;")
+      }
+
+    }
+
+    // Account Status Checker
+    function verifiedCheck(accountStatus) {
+      if (accountStatus == ACTIVE_ACCOUNT_STATUS_KEY || accountStatus == PREMIUM_ACCOUNT_1_ACTIVE_STATUS_KEY || 
+        accountStatus == PREMIUM_ACCOUNT_2_ACTIVE_STATUS_KEY || accountStatus == PREMIUM_ACCOUNT_3_ACTIVE_STATUS_KEY){
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+      
+    function checkProfileLevel() {
+
+      // Level 1: New Tutor
+      let lvl1Checker = 0; // max = 4
+      if (current_imgUri != null && current_imgUri != "" && current_imgUri != "https://app.golearn.com.my/assets/img/hello.gif"){
+        lvl1Checker = lvl1Checker + 1;
+      }
+      if (currentQualification != null && currentQualification != ""){
+        lvl1Checker = lvl1Checker + 1;
+      }
+      if (currentTutoringApproach != null && currentTutoringExperience != null && currentTutoringApproach != "" && currentTutoringExperience != ""){
+        lvl1Checker = lvl1Checker + 1;
+      }
+      if (current_preferedSubjectList != null && current_preferedSubjectList != "" && current_preferedSubjectList.length > 0 &&
+      current_preferedAreaList != null && current_preferedAreaList != "" && current_preferedAreaList.length > 0){
+        lvl1Checker = lvl1Checker + 1;
+      }
+
+      // Level 2: Experienced Tutor
+      let lvl2Checker = 0; // max = 3
+      if (current_ratingTimes == null || current_ratingTimes == "" || current_ratingTimes == 0){
+      }else if (current_ratingTimes > 0 || current_ratingTimes < 5){
+      }else if (current_ratingTimes >= 5){
+        lvl2Checker = lvl2Checker + 1;
+      }else {
+      }
+
+      let statusArr = [PREMIUM_ACCOUNT_1_STATUS_KEY, PREMIUM_ACCOUNT_2_STATUS_KEY, PREMIUM_ACCOUNT_3_STATUS_KEY, PREMIUM_ACCOUNT_1_ACTIVE_STATUS_KEY, PREMIUM_ACCOUNT_2_ACTIVE_STATUS_KEY, PREMIUM_ACCOUNT_3_ACTIVE_STATUS_KEY];
+      if (statusArr.indexOf(current_accountStatus) > -1){
+        return 'premium';
+      }else if (lvl1Checker == 4 && lvl2Checker == 1){
+        return 'pro'; 
+      }else if (lvl1Checker == 4){
+        return "experienced";
+      }else{
+        return 'new';
+      }
+      // console.log(lvl1Checker, lvl2Checker, current_accountStatus);
+    }
+      
+  // Read more handling
+    function ReadMoreApproach() {
+      let dots = document.getElementById("dotsApproach");
+      let moreText = document.getElementById("moreApproach");
+      let btnText = document.getElementById("btnReadMoreApproach");
+
+      if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Read more";
+        moreText.style.display = "none";
+      } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "Read less";
+        moreText.style.display = "inline";
+      }
+    }
+
+    function ReadMoreExp() {
+      let dots = document.getElementById("dotsExp");
+      let moreText = document.getElementById("moreExp");
+      let btnText = document.getElementById("btnReadMoreExp");
+
+      if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Read more";
+        moreText.style.display = "none";
+      } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "Read less";
+        moreText.style.display = "inline";
+      }
+    }
+
+
+      
+    // Reload student number
+    function reloadStudentNum(){
+      $('#loadingModal').modal('show'); 
+
+      var docRef = db.collection("Class")
+          .doc("v1")
+          .collection("Student")
+          .where(STU_ADMIN_ID, "==", tutorId)
+          .where(STU_STATUS_ADMIN, "==", true);
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        if(querySnapshot.empty) {
+          // console.log("Empty ");
+          resetNum(0, NUM_TYPE_STUDENT);
+        } 
+        else {
+          console.log("Found ");
+          querySnapshot.forEach((doc) => {
+
+            console.log(doc.data());
+            // updateDashboard(doc);
+          });
+
+          let stuNum = querySnapshot.docs.length;
+          // console.log(stuNum)
+          resetNum(stuNum, NUM_TYPE_STUDENT);
+        }
+
+      });
+
+    }
+
+    // Reload class number
+    function reloadClassNum(){
+      $('#loadingModal').modal('show'); 
+
+      var docRef = db.collection("Class")
+          .doc("v1")
+          .collection("Class")
+          .where(CLASS_ADMIN_ID, "==", tutorId)
+          .where(STATUS_KEY, "==", true);
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        if(querySnapshot.empty) {
+          // console.log("Empty ");
+          resetNum(0, NUM_TYPE_CLASS);
+        } 
+        else {
+          console.log("Found ");
+          querySnapshot.forEach((doc) => {
+
+            console.log(doc.data());
+            // updateDashboard(doc);
+          });
+
+          let classNum = querySnapshot.docs.length;
+          console.log(classNum)
+          resetNum(classNum, NUM_TYPE_CLASS);
+        }
+
+      });
+
+    }
+
+    // Reload teacer number
+    function reloadTutorNum(){
+      $('#loadingModal').modal('show'); 
+
+      var docRef = db.collection("Class")
+          .doc("v1")
+          .collection("Tutor")
+          .where(TUTOR_ADMIN_ID, "==", tutorId)
+          .where(TUTOR_STATUS_ADMIN, "in", [TUTOR_STATUS_TYPE_ACTIVE, TUTOR_STATUS_TYPE_PASSIVE]);
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        if(querySnapshot.empty) {
+          // console.log("Empty ");
+          resetNum(0, NUM_TYPE_TEACHER);
+        } 
+        else {
+          console.log("Found ");
+          querySnapshot.forEach((doc) => {
+            console.log(doc.data());
+          });
+
+          let tutorNum = querySnapshot.docs.length;
+          console.log(tutorNum)
+          resetNum(tutorNum, NUM_TYPE_TEACHER);
+        }
+
+      });
+
+    }
+
+    // Report: Update Student Number
+    function resetNum(value, type){
+  
+      let docRef = db.collection("Report")
+        .doc("v1")
+        .collection("General")
+        .where(NUM_ADMIN_ID, "==", tutorId)
+        .where(NUM_TYPE, "==", type)
+        .limit(1);
+
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        if(querySnapshot.empty) {
+          console.log("Empty. create new doc ");
+          let reportDocRef = db.collection("Report")
+            .doc("v1")
+            .collection("General")
+            .doc();
+            
+          reportData ={
+            [NUM_ID]: reportDocRef.id,
+            [NUM_ADMIN_ID]: tutorId,
+            [NUM_TYPE]: type,
+            [NUM_VALUE]: (value == null || value == "" || value == 0 || isNaN(value)) ? 0 : parseInt(value),
+            [NUM_DATE_EDIT]: new Date(),
+          }
+
+          console.log(reportData)
+          reportDocRef
+            .set(reportData, { merge: true })
+            .then(() => {
+              // $('#loadingModal').modal('hide');
+              window.location.href='./';
+            });
+
+        } 
+        else {
+          // console.log("Data found Update: ");
+          
+          querySnapshot.forEach((doc) => {
+
+            console.log(doc.data());
+
+            let reportDocRef = db.collection("Report")
+              .doc("v1")
+              .collection("General")
+              .doc(doc.data()[NUM_ID]);
+              
+
+            reportData ={
+              // [NUM_ID]: reportDocRef.id,
+              // [NUM_ADMIN_ID]: tutorId,
+              // [NUM_TYPE]: ,
+              [NUM_VALUE]: (value == null || value == "" || value == 0 || isNaN(value)) ? 0 : parseInt(value),
+              [NUM_DATE_EDIT]: new Date(),
+            }
+
+            console.log(reportData)
+            reportDocRef
+              .set(reportData, { merge: true })
+              .then(() => {
+                // window.location.href='./';
+                $('#loadingModal').modal("hide");
+                window.location.reload()
+              });
+
+          });
+
+
+        }
+
+
+      });
+
+    }
+
+    // // Sign out
+    // function signOutFunction(){
+    //   $('#signOutModal').modal('show');
+    //   $("#signOutModal").appendTo("body");
+    // }
+
+    // Copy a text based on element ID
+    function copyText(targetElemId){
+      /* Get the text field */
+      let copyText = document.getElementById(targetElemId);
+      // console.log(copyText)
+      // console.log(copyText.select())
+      /* Select the text field */
+      copyText.focus();
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the text field */
+      navigator.clipboard.writeText(copyText.value);
+
+      func.showNotification('top','center', 'success', 'check_circle', "Link copied.");
+      /* Alert the copied text */
+      // alert("Copied the text: " + copyText.value);
+    }
+
+
+    // Disable loading screen 
+    function disableLoading() {
+      let tutor_upper_block_loading = document.getElementsByTagName('body')[0].querySelectorAll(".loading")
+      // console.log(tutor_upper_block_loading);
+      tutor_upper_block_loading.forEach(function (row) {
+        row.setAttribute("style", "display: none;")
+      });
+
+    }
+
+    // Generate a 2 char avatar
+    function generateAvatar(text, foregroundColor, backgroundColor, fontSize) {
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+
+      canvas.width = 200;
+      canvas.height = 200;
+
+      // Draw background
+      context.fillStyle = backgroundColor;
+      context.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Draw text
+      context.font = "bold " + fontSize + " Arial";
+      context.fillStyle = foregroundColor;
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.fillText(text, canvas.width / 2, canvas.height / 2);
+
+      return canvas.toDataURL("image/png");
+    }
+
+    // Request - Review phone number
+    function viewPhone(ele, phone, requestId){
+
+      ele.textContent = phone;
+      ele.removeAttribute('style');
+      ele.removeAttribute('onclick');
+
+      // Remove unread lable
+      let reviewCardEle = ele.parentNode.parentNode.parentNode;
+      
+      reviewCardEle.querySelector('.request-label').remove();
+      console.log(reviewCardEle)
+      updateReadStatus(requestId);
+
+    }
+
+    function updateReadStatus(requestId){
+      
+      var docRef = db.collection("request")
+          .doc("v1")
+          .collection("all")
+          .doc(requestId);
+
+      db.runTransaction((transaction) => {
+        return transaction.get(docRef).then((doc) => {
+            if (!doc.exists) {
+                throw "Document does not exist!";
+            }
+
+            var data = {
+              [REQUEST_DATE_READ] : new Date(),
+            }
+
+            transaction.update(docRef, data);
+            
+        });
+      }).then(() => {
+
+        console.log("Update done ");
+
+      }).catch((err) => {
+        // This will be an "population is too big" error.
+        console.error(err);
+      });
+
+
+    }
+
+  </script>
+
+  <script>
+		$( document ).ready(function() {
+
+      $('#btnIWantThisTutor').on('click', function (e) {
+        $('#activationModal').modal('show');
+        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
+          document.getElementById("activationModalLabel").textContent = "Activate your Account Now. It's free!"
+          document.getElementById("activationModalBody").textContent = "You are just 1 step away from getting access to unlimited tuition jobs, free personal tutor profile, professional looks and many more features!"
+          document.getElementById("btnActivationModalUpdate").textContent = "Join Us";
+        }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+          document.getElementById("activationModalLabel").textContent = "Your Account is Suspended"
+          document.getElementById("activationModalBody").textContent = "Please contact us fix this."
+          document.getElementById("btnActivationModalUpdate").textContent = "Contact Us"
+        }else {
+          document.getElementById("activationModalLabel").textContent = "Ready to Grow your Tutoring Career?"
+          document.getElementById("activationModalBody").textContent = "Upgrade to Pro to enjoy more premium subjects and priorities. From part time tutors to full time tutors, private educators and education centers, there’s always a GoLearn Pro plan for you."
+          document.getElementById("btnActivationModalUpdate").textContent = "Upgrade"
+        }
+
+      });
+
+      $('#btnActivationModalUpdate').on('click', function (e) {
+        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
+          window.location = "https://golearn.com.my/join-us/";
+        }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+          window.location = "https://golearn.com.my/contact-us/";
+        }else {
+          window.location = "https://golearn.com.my/pricing/";
+        }
+        // Do something
+        $('#activationModal').modal('hide');
+      });
+
+      // $('#btnActivationModalClose1').on('click', function (e) {
+      //   $('#activationModal').modal('hide');
+      // });
+      // $('#btnActivationModalClose2').on('click', function (e) {
+      //   $('#activationModal').modal('hide');
+      // });
+
+			// Sign-out
+			// $("#btn-logout").click(function(){
+        // $('#signOutModal').modal('show');
+			// });
+      $('#btnSignOutModalUpdate').on('click', function (e) {
+      
+        firebase.auth().signOut().then(() => {
+          // Sign-out successful.
+          }).catch((error) => {
+            window.alert("Logging out failed");
+            func.showNotification('top','center', 'danger', 'error_outline', "Logging out failed." );
+          });
+        // Do something
+        // $('#signOutModal').modal('hide');
+      });
+
+      // $('#btnSignOutModalClose1').on('click', function (e) {
+      //   $('#signOutModal').modal('hide');
+      // });
+      // $('#btnSignOutModalClose2').on('click', function (e) {
+      //   $('#signOutModal').modal('hide');
+      // });
+
+      // Active Register Class Modal
+      $('#loadingModal').modal({
+        backdrop:'static',
+        keyboard:false,
+        show: false
+      });
+
+    });
+
+  </script>
+
+ 
 </body>
 
 </html>
