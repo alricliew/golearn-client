@@ -861,6 +861,7 @@ const COURSE_STATUS = "status";
     const COURSE_STATUS_ACTIVE = "active";
     const COURSE_STATUS_INACTIVE = "inactive";
     const COURSE_STATUS_SUSPENDED = "suspended";
+const COURSE_STATUS_MESSAGE = "statusMssg";
 
 // Course (/course/v1/content)
 const COURSE_CONTENT_UID = 'id';
@@ -869,6 +870,33 @@ const COURSE_CONTENT_COURSE_ID = "cid";
 const COURSE_CONTENT_CLASS_ID = "classId";
 const COURSE_CONTENT_ITEM = "item";
 const COURSE_CONTENT_DATE_UPDATE = "dateU";
+
+// Request (/request/v1/all)
+const REQUEST_ID = 'id';
+const REQUEST_ADMIN_ID = 'adminId';
+const REQUEST_REQUESTER_NAME = 'name';
+const REQUEST_REQUESTER_PHONE = 'phone';
+const REQUEST_REQUESTER_EMAIL = 'email';
+const REQUEST_REQUESTER_PERSON = 'person';
+    const REQUEST_REQUESTER_PERSON_PARENT = 'parent';
+    const REQUEST_REQUESTER_PERSON_STUDENT = 'student';
+const REQUEST_REQUESTER_MESSAGE = 'message';
+const REQUEST_TYPE = 'type';
+    const REQUEST_TYPE_COURSE = 'course';
+    const REQUEST_TYPE_TUTOR = 'tutor';
+const REQUEST_URL = 'url';
+const REQUEST_TARGET_ID = 'targetId';
+const REQUEST_TARGET_NAME = 'targetName';
+const REQUEST_TARGET_FEE = 'fee';
+const REQUEST_TARGET_FEE_TYPE = 'feetype';
+const REQUEST_CAT_ARR = 'catArr';
+const REQUEST_SUB_ARR = 'subArr';
+const REQUEST_AREA = 'area';
+const REQUEST_STATE = 'state';
+const REQUEST_DATE_SENT = 'dateSend';
+const REQUEST_DATE_READ = 'dateRead';
+const REQUEST_DATE_READ_ADMIN = 'dateReadAdmin';
+const REQUEST_STATUS = 'status';
 
 // -------------- Session Storage Key Start -------------- //
 // CLIENT: Profile Obj

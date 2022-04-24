@@ -21,6 +21,322 @@
   <script src="../../assets/js/firebase.js"></script>
   <!-- Tutor Portal specific CSS -->
   <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
+  <!-- <link href="../../assets/css/multitabform.css" rel="stylesheet" /> -->
+
+
+  <!-- Course Card -->
+  <style>
+    /* Course Specific */
+    .card-public-course {
+      margin-top: 1rem;
+      border-radius: 4px;
+      background: #fff;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+      transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+        0.3s box-shadow,
+        0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+      padding: 14px 24px 14px 24px;
+      cursor: pointer;
+    }
+
+    .card-public-course:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .card-cambridge {
+      background-image: url(../../assets/img/card-course-cambridge.png);
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-size: 50px;
+    }
+
+    .card-kpm {
+      background-image: url("../../assets/img/card-course-kpm.png");
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-size: 50px;
+    }
+
+    .card-uec {
+      background-image: url("../../assets/img/card-course-uec.png");
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-size: 50px;
+    }
+
+    .card-pearson {
+      background-image: url("../../assets/img/card-course-pearson.png");
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-size: 50px;
+    }
+
+    .card-ib {
+      background-image: url("../../assets/img/card-course-ib.png");
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-size: 50px;
+    }
+    .card-language-and-english-exam {
+      background-image: url("../../assets/img/card-course-language-and-english.png");
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-size: 50px;
+    }
+
+    .card-music {
+      background-image: url("../../assets/img/card-course-music.png");
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-size: 50px;
+    }
+
+    .card-computer-programming {
+      background-image: url("../../assets/img/card-course-programming.png");
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-size: 50px;
+    }
+
+  </style>
+
+  <!-- multitabform -->
+  <style>
+    .multitabs-form__progress {
+      display: flexbox;
+      justify-content: flex-start;
+      /* grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); */
+      background-color: transparent;
+      border-radius: 6px;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06); */
+    }
+
+    .multitabs-form__progress-btn {
+      transition-property: all;
+      transition-duration: 0.15s;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+      position: relative;
+      padding: 1.0rem 1.4rem 1.0rem 1.4rem;
+      margin: 1.0rem 0rem 1.0rem 0rem;
+      color: rgba(87, 87, 87, 0.9);
+      text-indent: 0px;
+      font-size: 18px;
+      border: none;
+      border-radius: 4px;
+      background-color: transparent;
+      outline: none !important;
+      cursor: pointer;
+    }
+    @media (min-width: 500px) {
+      .multitabs-form__progress-btn {
+        text-indent: 0px;
+      }
+    }
+    .multitabs-form__progress-btn:before {
+      /* position: absolute; */
+      /* top: 0; */
+      /* left: 50%; */
+      /* display: block; */
+      /* width: 13px; */
+      /* height: 13px; */
+      content: "";
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      transition: all 0.15s linear 0s,
+        -webkit-transform 0.15s cubic-bezier(0.05, 1.09, 0.16, 1.4) 0s;
+      transition: all 0.15s linear 0s,
+        transform 0.15s cubic-bezier(0.05, 1.09, 0.16, 1.4) 0s;
+      transition: all 0.15s linear 0s,
+        transform 0.15s cubic-bezier(0.05, 1.09, 0.16, 1.4) 0s,
+        -webkit-transform 0.15s cubic-bezier(0.05, 1.09, 0.16, 1.4) 0s;
+      /* border: 2px solid currentColor; */
+      /* border-radius: 50%; */
+      background-color: #fff;
+      box-sizing: border-box;
+      z-index: 3;
+    }
+    /* .multitabs-form__progress-btn:after {
+      position: absolute;
+      top: 5px;
+      left: calc(-50% - 13px / 2);
+      transition-property: all;
+      transition-duration: 0.15s;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+      display: block;
+      width: 100%;
+      height: 2px;
+      content: "";
+      background-color: currentColor;
+      z-index: 1;
+    } */
+    .multitabs-form__progress-btn:first-child:after {
+      display: none;
+    }
+    .multitabs-form__progress-btn.js-active {
+      background-color: rgba(202, 202, 202, 0.3);
+      color: rgb(0, 0, 0);
+    }
+    .multitabs-form__progress-btn.js-active:before {
+      -webkit-transform: translateX(-50%) scale(1.2);
+      transform: translateX(-50%) scale(1.2);
+      background-color: currentColor;
+    }
+
+    .multitabs-form__form {
+      position: relative;
+    }
+
+    .multitabs-form__panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      opacity: 0;
+      visibility: hidden;
+    }
+    .multitabs-form__panel.js-active {
+      height: auto;
+      opacity: 1;
+      visibility: visible;
+    }
+    .multitabs-form__panel[data-animation="scaleOut"] {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+    .multitabs-form__panel[data-animation="scaleOut"].js-active {
+      transition-property: all;
+      transition-duration: 0.2s;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+    .multitabs-form__panel[data-animation="slideHorz"] {
+      left: 50px;
+    }
+    .multitabs-form__panel[data-animation="slideHorz"].js-active {
+      transition-property: all;
+      transition-duration: 0.25s;
+      transition-timing-function: cubic-bezier(0.2, 1.13, 0.38, 1.43);
+      transition-delay: 0s;
+      left: 0;
+    }
+    .multitabs-form__panel[data-animation="slideVert"] {
+      top: 30px;
+    }
+    .multitabs-form__panel[data-animation="slideVert"].js-active {
+      transition-property: all;
+      transition-duration: 0.2s;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+      top: 0;
+    }
+    .multitabs-form__panel[data-animation="fadeIn"].js-active {
+      transition-property: all;
+      transition-duration: 0.3s;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+    }
+    .multitabs-form__panel[data-animation="scaleIn"] {
+      -webkit-transform: scale(0.9);
+      transform: scale(0.9);
+    }
+    .multitabs-form__panel[data-animation="scaleIn"].js-active {
+      transition-property: all;
+      transition-duration: 0.2s;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+  </style>
+
+  <!-- notification -->
+  <style>
+    .notification {
+      position: absolute;
+      top: 5px;
+      border: 1px solid #fff;
+      right: 10px;
+      font-size: 9px;
+      background: #f44336;
+      color: #ffffff;
+      min-width: 20px;
+      padding: 0px 5px;
+      height: 20px;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 19px;
+      vertical-align: middle;
+      display: block;
+    }
+  </style>
+
+  <!-- Shimmering -->
+  <style>
+    .card-shimmer-wrapper {
+      width: 0px;
+      animation: fullView 0.5s forwards cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    }
+
+    .br {
+      border-radius: 8px;
+    }
+
+    .w30 {
+      width: 30%;
+    }
+
+    .w50 {
+      width: 50%;
+    }
+
+    .w80 {
+      width: 80%;
+    }
+
+    .profilePic {
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+    }
+
+    .comment {
+      height: 10px;
+      background: #777;
+      margin-top: 15px;
+    }
+
+    @keyframes fullView {
+      100% {
+        width: 100%;
+      }
+    }
+
+    .animate {
+      animation: shimmer 2s infinite linear;
+      background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+      background-size: 1000px 100%;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -1000px 0;
+      }
+
+      100% {
+        background-position: 1000px 0;
+      }
+    }
+
+  </style>
+
 </head>
 
 <body>
@@ -286,88 +602,124 @@
         <div class="container-fluid">
           <!-- your content here -->
 
-    
-          <!-- Invalid screen -->
-          <div class="row">
-            <div class="col-md-12 text-center" id="invalid-screen" style="position: absolute; top: 40%; margin-top: -50px;">
-              <h3>Coming Soon 2022</h3>
-              <p>We are launching a new tuition marketplace for you to list your education services for <strong>FREE</strong></p>
-              <p style="font-size: small; font-style: italic;">If you already created your public courses, no worry, you wouldn't lose them.</p>
-            </div>
-          </div>
-
-
           <!-- Main content -->
-          <div class="row" style="display: none;">
-            <!-- Update button -->
-            <div class="col-md-6">
-              <a href="javascript:;" class="btn btn-lg btn-primary btn-round" id="btnAddCourse" style="background-color: grey; pointer-events: none; ">Add New Course <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a>
-            </div>
+          <div class="row">
+            <div class="col-md-12">
+              <!-- <h3>All Courses</h3> -->
 
-          </div>
+              <!-- All Courses -->
+              <div class="row" id="card-all-courses"> 
 
-          
-          <!-- All Courses -->
-          <div class="row" id="card-all-courses" style="display: none;"> 
-            <!-- <div class="col-md-4">
-              <div class="card-course card-1 "id="spm-bm" data-toggle="modal" data-target="#editCourseModal" data-key="tMon8am">
-                <h3>SPM Bahasa Malaysia <span class="card-course-online-label">ONLINE</span></h3>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >paid</i> Fee:  <span id="main_fees_sentence"></span></p>
-                </a>
-    
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >schedule</i> Duration: <span id="main_duration"></span> </p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >date_range</i> Class per week: <span id="main_classPerWeek"></span></p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >description</i> Description</p>
-                </a>
-                <p>A curated set of ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
+                <div class="col-md-3" style="padding-left: 8px; padding-right: 8px;">
+                  <div class="card-public-course text-center" style="padding: 3rem 1rem;" onclick="window.location = './create.html'">
+                    <h4>
+                      <i class="fas fa-plus" style="margin-right: 8px"></i>
+                      Add a new course
+                    </h4>
+                  </div>
+
+                </div>
+
+                <!-- <div class="col-md-4" style="padding-left: 8px; padding-right: 8px;">
+                  <div class="card-public-course card-cambridge">
+
+                    <div class="row" >
+
+                      <div class="col-md-12">
+                        <h6 style="float:right; position: relative; color: red; background-color: #ffcccb; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;">PAUSED <i class="fas fa-circle"></i></h6>
+                        <h6 style="float:right; color: #2e74b6; background-color: #ccdbf3; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;">Draft <i class="fas fa-circle"></i></h6>
+                        <h6 style="float:right; color: #21896c; background-color: #c1e1d2; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;">LIVE <i class="fas fa-circle"></i></h6>
+
+                        <h6 style="color: rgb(46, 116, 182);font-size: 10px;" name="subject" >Cambridge Primary Year Program-Mathematics Course A/B Albito</h6>
+
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h4 style="margin: 0;">SPM Bahasa Malaysia for Kids Under 12 Years Old</h4>
+                      </div>   
+                      <div class="col-md-12">
+                        <h5 style="font-weight: bold; margin: 0;">RM50<span style="font-size: small;">/hour</span></h5>
+                      </div>          
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-md-12">
+                        <span class="tooltiptext-trigger" style="background-color: red; padding: 0.2em 0.6em 0.2em 0.6em; font-size: 12px;">
+                          <span style="font-weight: bold;">!</span>
+                          <span class="tooltiptext-general" style="border: thin solid red; left: 20%; width: 200px;">
+                            <h6 style="color: red;">Things to Improve!</h6>
+                            <p style="font-weight: 300;">
+                              <span><i class="fas fa-check-circle fa-fw" id="profilePic" style="color: green; font-size: small;" aria-hidden="true"></i></span> Upload a profile picture
+                            </p>
+                            <p style="font-weight: 300;">
+                              <span><i class="fas fa-check-circle fa-fw" id="profilePic" style="color: green; font-size: small;" aria-hidden="true"></i></span> Upload a profile picture
+                            </p>
+                          </span> 
+                        </span>
+                      </div>
+                    </div>
+            
+                  </div>
+                </div> -->
+                
+                <!-- Loading block -->
+                <div class="col-md-3" style="padding-left: 8px; padding-right: 8px;" id="card-load0">
+                  <div class=" card-public-course br"  style="padding: 12px 20px; border-radius: 5px; background-color: white;">
+                    <div class="card-shimmer-wrapper">
+                      <div class="comment br animate"></div>
+                      <div class="comment br animate"></div>
+                      <div class="comment br animate w80"></div>
+                      <div class="comment br animate w30"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3" style="padding-left: 8px; padding-right: 8px;" id="card-load1">
+                  <div class=" card-public-course br"  style="padding: 12px 20px; border-radius: 5px; background-color: white;">
+                    <div class="card-shimmer-wrapper">
+                      <div class="comment br animate"></div>
+                      <div class="comment br animate"></div>
+                      <div class="comment br animate w80"></div>
+                      <div class="comment br animate w30"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3" style="padding-left: 8px; padding-right: 8px;" id="card-load2">
+                  <div class=" card-public-course br"  style="padding: 12px 20px; border-radius: 5px; background-color: white;">
+                    <div class="card-shimmer-wrapper">
+                      <div class="comment br animate"></div>
+                      <div class="comment br animate"></div>
+                      <div class="comment br animate w80"></div>
+                      <div class="comment br animate w30"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3" style="padding-left: 8px; padding-right: 8px;" id="card-load3">
+                  <div class=" card-public-course br"  style="padding: 12px 20px; border-radius: 5px; background-color: white;">
+                    <div class="card-shimmer-wrapper">
+                      <div class="comment br animate"></div>
+                      <div class="comment br animate"></div>
+                      <div class="comment br animate w80"></div>
+                      <div class="comment br animate w30"></div>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="col-md-3" style="padding-left: 8px; padding-right: 8px; visibility: hidden;" id="btnLoadMore">
+                  <div class="card-public-course text-center" style="padding: 3rem 1rem;">
+                    <h4>
+                      <i class="fas fa-sync-alt" style="margin-right: 8px"></i>
+                      Load more
+                    </h4>
+                  </div>
+
+                </div>
+
               </div>
             </div>
-
-            <div class="col-md-4">
-              <div class="card-course card-2">
-                <h3>Cambridge Lower Secondary English <span class="card-course-online-label">ONLINE</span></h3>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >paid</i> Fee:  <span id="main_fees_sentence"></span></p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >schedule</i> Duration: <span id="main_duration"></span> </p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >date_range</i> Class per week: <span id="main_classPerWeek"></span></p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >description</i> Description</p>
-                </a>
-                <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="card-course card-3">
-                <h3>Primary Mandarin</h3>
-
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >paid</i> Fee:  <span id="main_fees_sentence"></span></p>
-                </a>
-    
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >schedule</i> Duration: <span id="main_duration"></span> </p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >date_range</i> Class per week: <span id="main_classPerWeek"></span></p>
-                </a>
-                <a class="card-course-item-wrapper">			
-                  <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >description</i> Description</p>
-                </a>
-                <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
-              </div>
-            </div> -->
           </div>
 
         </div>
@@ -375,15 +727,15 @@
 
       <footer class="footer">
         <div class="container-fluid">
-          <nav class="float-left">
-          <ul>
-            <li>
-            <a href="https://golearn.com.my/join-us" target="_blank">
-              Visit GoLearn Tutor
-            </a>
-            </li>
-          </ul>
-          </nav>
+          <!-- <nav class="float-left">
+            <ul>
+              <li>
+              <a href="https://golearn.com.my/join-us" target="_blank">
+                Visit GoLearn Tutor
+              </a>
+              </li>
+            </ul>
+          </nav> -->
           <!-- <div class="copyright float-right">
             &copy;
             <script>
@@ -450,334 +802,85 @@
   <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
    
 	<script>
-     
     // Course-specific var
     var allCourseSize;
-		// var db = firebase.firestore();
-		// db.settings({ timestampsInSnapshots: true });
-
-    // // Set the nav name and global var, if user already login and have session Storage 
-    // var tutorInfoObj = null;
-    // if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
-    //   // Do nothing
-    // }else{
-    //   // Set the nav user name
-    //   tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
-    //   document.getElementById("user").textContent = tutorInfoObj.name;
-
-    //   current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
-    //   // current_email, 
-    //   // current_phone, 
-    //   current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
-    //   current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
-    //   current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
-    //   current_accountStatus = tutorInfoObj.accountStatus; // bool
-    //   currentYearsExperience = tutorInfoObj.yearsExperience; // number
-    //   currentTutoringExperience = tutorInfoObj.tutoringExperience;
-    //   currentTutoringApproach = tutorInfoObj.tutoringApproach;
-    //   currentQualification= tutorInfoObj.qualification;
-    //   current_mon_8am = tutorInfoObj.tMon8am;
-    //   current_mon_12pm= tutorInfoObj.tMon12pm; 
-    //   current_mon_3pm = tutorInfoObj.tMon3pm;  
-    //   current_mon_6pm = tutorInfoObj.tMon6pm;  
-    //   current_tue_8am = tutorInfoObj.tTue8am;  
-    //   current_tue_12pm= tutorInfoObj.tTue12pm;  
-    //   current_tue_3pm = tutorInfoObj.tTue3pm;  
-    //   current_tue_6pm = tutorInfoObj.tTue6pm;  
-    //   current_wed_8am = tutorInfoObj.tWed8am;  
-    //   current_wed_12pm= tutorInfoObj.tWed12pm;  
-    //   current_wed_3pm = tutorInfoObj.tWed3pm;  
-    //   current_wed_6pm = tutorInfoObj.tWed6pm;  
-    //   current_thu_8am = tutorInfoObj.tThu8am;  
-    //   current_thu_12pm= tutorInfoObj.tThu12pm;  
-    //   current_thu_3pm = tutorInfoObj.tThu3pm;  
-    //   current_thu_6pm = tutorInfoObj.tThu6pm;  
-    //   current_fri_8am = tutorInfoObj.tFri8am;  
-    //   current_fri_12pm= tutorInfoObj.tFri12pm;  
-    //   current_fri_3pm = tutorInfoObj.tFri3pm;  
-    //   current_fri_6pm = tutorInfoObj.tFri6pm; 
-    //   current_sat_8am = tutorInfoObj.tSat8am;  
-    //   current_sat_12pm= tutorInfoObj.tSat12pm;  
-    //   current_sat_3pm = tutorInfoObj.tSat3pm;  
-    //   current_sat_6pm = tutorInfoObj.tSat6pm;  
-    //   current_sun_8am = tutorInfoObj.tSun8am;  
-    //   current_sun_12pm= tutorInfoObj.tSun12pm;  
-    //   current_sun_3pm = tutorInfoObj.tSun3pm;  
-    //   current_sun_6pm = tutorInfoObj.tSun6pm;
-    //   current_aweburl = tutorInfoObj.aWebUrl
-
-    //   // updatePageView(current_accountStatus);
-    // }
-
-		// firebase.auth().onAuthStateChanged(function(user){
-      
-		// 	if(!user){
-    //     // Return to login if user does not exist.
-		// 		window.location.href = "login.html"
-		// 	}else{
-    //     // if the displayName is null, it means user register using Phone
-    //     if (firebase.auth().currentUser.displayName == null ){
-    //         tutorId = firebase.auth().currentUser.phoneNumber;
-    //     }else
-    //         tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-
-
-    //     // loadAllActiveCourses(tutorId);
-
-    //     updateInfoInAllActiveCourse(tutorId)
-        
-    //     loadUserInfo(tutorId);
-        
-		// 	}
-		// });
-
-    // // Tutor Specific
-    // function loadUserInfo(tutorId){
-    //   // Tutor Id must be a phone with +60, no spacing or other chars
-    //   var docRef = db.collection("Tutor").doc(tutorId);
-      
-
-    //   // docRef.get().then((doc) => {
-    //   docRef.onSnapshot((doc) => {
-
-    //     if (doc.exists) {
-    //       // console.log("Document data:", doc.data());
-
-    //       current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
-    //       // current_email, 
-    //       // current_phone, 
-    //       current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
-    //       current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
-    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
-    //       current_accountStatus = doc.data().accountStatus; 
-    //       currentYearsExperience = doc.data().yearsExperience; // number
-    //       currentTutoringExperience = doc.data().tutoringExperience;
-    //       currentTutoringApproach = doc.data().tutoringApproach;
-    //       currentQualification= doc.data().qualification;
-    //       current_mon_8am = doc.data().tMon8am;
-    //       current_mon_12pm= doc.data().tMon12pm; 
-    //       current_mon_3pm = doc.data().tMon3pm;  
-    //       current_mon_6pm = doc.data().tMon6pm;  
-    //       current_tue_8am = doc.data().tTue8am;  
-    //       current_tue_12pm= doc.data().tTue12pm;  
-    //       current_tue_3pm = doc.data().tTue3pm;  
-    //       current_tue_6pm = doc.data().tTue6pm;  
-    //       current_wed_8am = doc.data().tWed8am;  
-    //       current_wed_12pm= doc.data().tWed12pm;  
-    //       current_wed_3pm = doc.data().tWed3pm;  
-    //       current_wed_6pm = doc.data().tWed6pm;  
-    //       current_thu_8am = doc.data().tThu8am;  
-    //       current_thu_12pm= doc.data().tThu12pm;  
-    //       current_thu_3pm = doc.data().tThu3pm;  
-    //       current_thu_6pm = doc.data().tThu6pm;  
-    //       current_fri_8am = doc.data().tFri8am;  
-    //       current_fri_12pm= doc.data().tFri12pm;  
-    //       current_fri_3pm = doc.data().tFri3pm;  
-    //       current_fri_6pm = doc.data().tFri6pm; 
-    //       current_sat_8am = doc.data().tSat8am;  
-    //       current_sat_12pm= doc.data().tSat12pm;  
-    //       current_sat_3pm = doc.data().tSat3pm;  
-    //       current_sat_6pm = doc.data().tSat6pm;  
-    //       current_sun_8am = doc.data().tSun8am;  
-    //       current_sun_12pm= doc.data().tSun12pm;  
-    //       current_sun_3pm = doc.data().tSun3pm;  
-    //       current_sun_6pm = doc.data().tSun6pm; 
-    //       current_preferedSubjectList = doc.data().preferedSubjectList;
-    //       current_preferedAreaList = doc.data().preferedAreaList;
-    //       current_aPreferredSubjectLimit = doc.data().aPreferredSubjectLimit;
-    //       current_aPreferredAreaLimit = doc.data().aPreferredAreaLimit;
-    //       current_rating = doc.data().rating;
-    //       current_ratingTimes = doc.data().ratingTimes; 
-    //       current_ratingFinal = doc.data().ratingFinal;
-    //       current_profileStatus = doc.data().profileStatus;
-    //       current_aweburl = doc.data().aWebUrl;
-    //       current_aPremiumSubjectLimit  = doc.data().aPremiumSubjectLimit; 
-    //       // current_aPremiumConnectLimit = doc.data().profileStatus; 
-    //       current_aTotalSubjectLimit = doc.data().aTotalSubjectLimit; 
-    //       // current_aTotalConnectLimit = doc.data().profileStatus; 
-
-    //       // Store data to sessionStorage
-    //       var tutorDataObj = {
-    //         [NAME_KEY] : doc.data().name,
-    //         [EMAIL_KEY] : doc.data().email,
-    //         [PHONE_KEY] : doc.data().phone,
-    //         [AGE_KEY] : doc.data().age,
-    //         [GENDER_KEY] : doc.data().gender,
-    //         [ADDRESS_1_KEY] :doc.data().address1,
-    //         [ADDRESS_2_KEY] :doc.data().address2,
-    //         [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
-    //         [ADDRESS_STATE_KEY] :doc.data().addressState,
-    //         [IMAGE_KEY] : doc.data().imgUrl,
-    //         // [NRIC_KEY] : doc.data().name,
-    //         [RATING_KEY] : doc.data().rating,
-    //         [RATING_TIMES_KEY] : doc.data().ratingTimes,
-    //         [RATING_FINAL_KEY] : doc.data().ratingFinal,
-    //         [PROFILE_STATUS_KEY] : doc.data().profileStatus,
-    //         // [CHECK_HOMETUTOR_KEY] : doc.data().name,
-    //         // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
-    //         // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
-    //         // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
-    //         [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
-    //         [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
-    //         [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
-    //         [QUALIFICATION_KEY] : doc.data().qualification,
-    //         [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
-    //         [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
-    //         [AGENT_KEY] : doc.data().agent,
-    //         [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
-            
-    //         [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
-    //         [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
-    //         [CHECK_GROUP_KEY] : doc.data().modeGroup,
-    //         [CHECK_ONLINE_KEY] : doc.data().modeOnline,
-    //         [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
-    //         [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
-    //         [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
-    //         [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
-    //         [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
-    //         [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
-
-    //         [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
-    //         [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
-    //         [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
-    //         [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
-    //         [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
-    //         [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
-    //         [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
-    //         [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
-    //         [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
-    //         [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
-    //         [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
-    //         [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
-    //         [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
-    //         [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
-    //         [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
-    //         [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
-    //         [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
-    //         [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
-    //         [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
-    //         [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
-    //         [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
-    //         [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
-    //         [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
-    //         [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
-    //         [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
-    //         [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
-    //         [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
-    //         [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
-    //         // Create a placeholder for aWebUrl. This param can only initiated by admin
-    //         // manually through https://golearn.com.my/admin/admin-portal.html
-    //         [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
-    //         [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
-    //         [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
-    //         [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
-    //         [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
-    //         [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
-    //         [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
-    //       }
-
-    //       // Set tutorInfoObj as sessionStorage
-    //       sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
-
-    //       // Set the nav user name and public profile link
-    //       document.getElementById("user").textContent = doc.data().name;
-
-    //       if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
-    //         document.getElementById("navPublicProfile").href = "#"  ;
-    //         document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
-    //       } else{
-    //         document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
-    //         document.getElementById("navPublicProfile").target = "_blank";
-    //       }
-          
-    //       if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-    //         document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
-    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
-    //         document.getElementById("btnActivateAccount").target = "_blank";
-
-    //         func.showNotification('top','center', 'danger', 'error_outline', "Activate your account to add or edit courses." );
-
-    //       }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-    //         document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
-    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
-    //         document.getElementById("btnActivateAccount").target = "_blank";
-
-    //         func.showNotification('top','center', 'danger', 'error_outline', "Activate your account to add or edit courses." );
-
-    //       }else {
-    //         let activationNavItem = document.querySelector('#activationNavItem');
-    //         let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
-    //         console.log(activationNavItemIsExist)
-    //         // Remove NavItem if exist
-    //         if (activationNavItemIsExist){
-    //           activationNavItem.parentNode.removeChild(activationNavItem);
-    //         }else{
-    //           // Do nothing
-    //         }
-
-    //       }
-
-    //     // Renable the button
-    //     document.getElementById('btnAddCourse').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
-
-    //     } else {
-    //         // Do nothing
-    //     }
-    //   });
-
-    // };
-
+    
     // Initialization
     AuthCheck();
 
     // Page Specific Initialization
     function loadPageInitFunc(){
 
-      updateInfoInAllActiveCourse(tutorId);
+      loadAllCourse(tutorId);
 
       // Renable the button
-      document.getElementById('btnAddCourse').setAttribute('style','background-color: #2e74b6; pointer-events: auto;');
+      // document.getElementById('btnAddCourse').setAttribute('style','background-color: #2e74b6; pointer-events: auto;');
 
     }
 
-    // Update all active courses
-    function updateInfoInAllActiveCourse(tutorId) {
+    // Request Load More - Init
+    const loadmore = document.querySelector('#btnLoadMore');
+    loadmore.style.visibility='hidden';
+    const loadmoreHandleClick = () =>{
+      loadAllCourse(tutorId);
+    }
+    loadmore.addEventListener('click', loadmoreHandleClick );
 
-			var allActiveCourseCol = db.collection("Tutor").doc(tutorId).collection("Courses")
-			.where("status", "==", true);
+    // Load requests
+    var latestRequestDoc = null;
+
+
+     // Update all active courses
+    function loadAllCourse(tutorId) {
+
+      document.getElementById("card-load0").style.display = "";
+      document.getElementById("card-load1").style.display = "";
+      document.getElementById("card-load2").style.display = "";
+      document.getElementById("card-load3").style.display = "";
+
+			var allActiveCourseCol = db.collection("course")
+      .doc('v1')
+      .collection("course")
+      .where(COURSE_ADMIN_ID , "==", tutorId)
+      .orderBy(COURSE_NAME, 'asc')
+      .startAfter(latestRequestDoc)
+      .limit(12);
 
 			allActiveCourseCol
 			.get()
 			.then((querySnapshot) => {
-				var courseId;
+        
+        document.getElementById("card-load0").style.display = "none";
+        document.getElementById("card-load1").style.display = "none";
+        document.getElementById("card-load2").style.display = "none";
+        document.getElementById("card-load3").style.display = "none";
 
-        allCourseSize = querySnapshot.docs.length;
+        // if (( querySnapshot.docs.length== null || querySnapshot.docs.length == 0) && latestRequestDoc == null){
+        //   document.getElementById("noRequestPlaceholder").style.display = 'initial';
+        // }else{
+        //   document.getElementById("noRequestPlaceholder").style.display = 'none';
+        // }
 
-        // Render empty placeholder card to it appear normal for less than 3 courses
-        if (querySnapshot.docs.length == 1 ){
+        querySnapshot.forEach((doc) => {
+          // console.log(doc.id);
 
-          renderAllActiveCourses(querySnapshot.docs[0], querySnapshot.docs[0].id, false);
-          // Use any snapshot so it dont break.
-          // renderAllActiveCourses(querySnapshot.docs[0], courseId, true);
-          // renderAllActiveCourses(querySnapshot.docs[0], courseId, true);
+          renderAllActiveCourses(doc, "", false);
 
-        } else if(querySnapshot.docs.length == 2){
-          renderAllActiveCourses(querySnapshot.docs[0], querySnapshot.docs[0].id, false);
-          renderAllActiveCourses(querySnapshot.docs[1], querySnapshot.docs[1].id, false);
-          // Use any snapshot so it dont break.
-          renderAllActiveCourses(querySnapshot.docs[0], courseId, true);
+        })
+
+        latestRequestDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+        
+        // Handle Lesson Load more btn
+        if (querySnapshot.empty){
+          loadmore.removeEventListener('click', loadmoreHandleClick );
+        }
+
+        if (querySnapshot.docs.length == 12){
+          loadmore.style.visibility='visible';
         }
         else{
-          querySnapshot.forEach((doc) => {
-					courseId = doc.id;
-
-          renderAllActiveCourses(doc, courseId, false);
-
-          });
+          loadmore.style.visibility='hidden';
         }
-				
 
 			}).catch((error) => {
 				console.log("Error getting documents: ", error);
@@ -786,149 +889,206 @@
     }
   
     function renderAllActiveCourses(doc, courseId, renderNull){
-    // <div class="col-md-4">
-    //   <div class="card-course card-1 data-toggle="modal" data-target="#editCourseModal" data-category="SPM" data-subject="Bahasa Malaysia" data-course-id="sadadsadas">
-    //     <h3>SPM Bahasa Malaysia <span class="card-course-online-label">ONLINE</span></h3>
-    //     <a class="card-course-item-wrapper">			
-    //       <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >paid</i> Fee:  <span id="main_fees_sentence"></span></p>
-    //     </a>
-    //     <a class="card-course-item-wrapper">			
-    //       <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >schedule</i> Duration: <span id="main_duration"></span> </p>
-    //     </a>
-    //     <a class="card-course-item-wrapper">			
-    //       <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >date_range</i> Class per week: <span id="main_classPerWeek"></span></p>
-    //     </a>
-    //     <a class="card-course-item-wrapper">			
-    //       <p class="card-course-item" ><i class="material-icons" style="color: #9DE1FF; margin-right: 0.5em;" >description</i> Description</p>
-    //     </a>
-    //     <p>A curated set of ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
-    //   </div>
-    // </div>
+      // <div class="col-md-4">
+      //   <div class="card-public-course card-cambridge">
+      //     <div class="row" >
+      //       <div class="col-md-12">
+      //         <h6 style="float:right; position: relative; color: red; background-color: #ffcccb; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;">PAUSED <i class="fas fa-circle"></i></h6>
+      //         <h6 style="float:right; color: rgb(46, 116, 182); background-color: #ccdbf3; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;"">LIVE <i class="fas fa-circle"></i></h6>
 
-      // Reference: https://codepen.io/Corsurath/pen/abbxNpj
+      //         <h6 style="color: rgb(46, 116, 182);font-size: 10px;" name="subject" >Cambridge Primary Year Program-Mathematics Course A/B Albito</h6>
+      //       </div>
+      //     </div>
+      //     <div class="row">
+            // <div class="col-md-12">
+            //   <h4 style="margin: 0;">SPM Bahasa Malaysia for Kids Under 12 Years Old</h4>
+            // </div>   
+            // <div class="col-md-12">
+            //   <h5 style="font-weight: bold; margin: 0;">RM50<span style="font-size: small;">/hour</span></h5>
+            // </div>           
+      //     </div>
+      //     <div class="row">
+      //       <div class="col-md-12">
+      //         <span class="tooltiptext-trigger" style="background-color: red; padding: 0.2em 0.6em 0.2em 0.6em; font-size: 12px;">
+      //           <span style="font-weight: bold;">!</span>
+      //           <span class="tooltiptext-general" style="border: thin solid red; left: 20%; width: 200px;">
+      //             <h6 style="color: red;">Things to Improve!</h6>
+                    // <p style="font-weight: 300;">
+                    //   <span><i class="fas fa-check-circle fa-fw" id="profilePic" style="color: green; font-size: small;" aria-hidden="true"></i></span> Upload a profile picture
+                    // </p>
+      //           </span> 
+      //         </span>
+      //       </div>
+      //     </div>
+      //   </div>
+      // </div>
+
+      // Status
+
+      // let status_html = `<h6 style="float:right; color: #2e74b6; background-color: #ccdbf3; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;">Draft <i class="fas fa-circle"></i></h6>`
+      let status_h6 = document.createElement('h6');
+
+      if (doc.data()[COURSE_STATUS] === COURSE_STATUS_DRAFT){
+        // status_html = `<h6 style="float:right; color: #2e74b6; background-color: #ccdbf3; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;">DRAFT <i class="fas fa-circle"></i></h6>`
+        status_h6.setAttribute("style", "float:right; color: #2e74b6; background-color: #ccdbf3; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;");
+        status_h6.innerHTML = `DRAFT <i class="fas fa-circle"></i>`;
+
+      }
+      else if (doc.data()[COURSE_STATUS] === COURSE_STATUS_REVIEW){
+        // status_html = `<h6 style="float:right; color: #fe994a; background-color: #ffefd8; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;">In Review <i class="fas fa-circle"></i></h6>`
+        status_h6.setAttribute("style", "float:right; color: #fe994a; background-color: #ffefd8; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;");
+        status_h6.innerHTML = `In Review <i class="fas fa-circle"></i>`;
+      }
+      else if (doc.data()[COURSE_STATUS] === COURSE_STATUS_ACTIVE){
+        // status_html = `<h6 style="float:right; color: #21896c; background-color: #c1e1d2; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;">LIVE <i class="fas fa-circle"></i></h6>`
+        status_h6.setAttribute("style", "float:right; color: #21896c; background-color: #c1e1d2; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;");
+        status_h6.innerHTML = `LIVE <i class="fas fa-circle"></i>`;
+      }
+      else if (doc.data()[COURSE_STATUS] === COURSE_STATUS_INACTIVE){
+        // status_html = `<h6 style="float:right; color: red; background-color: #ffcccb; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;">PAUSED <i class="fas fa-circle"></i></h6>`
+        status_h6.setAttribute("style", "float:right; color: red; background-color: #ffcccb; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;");
+        status_h6.innerHTML = `PAUSED <i class="fas fa-circle"></i>`;
+      }
+      else if (doc.data()[COURSE_STATUS] === COURSE_STATUS_SUSPENDED){
+        // status_html = `<h6 style="float:right; color: red; background-color: #ffcccb; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;">SUSPENDED <i class="fas fa-circle"></i></h6>`
+        status_h6.setAttribute("style", "float:right; color: red; background-color: #ffcccb; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;");
+        status_h6.innerHTML = `SUSPENDED <i class="fas fa-circle"></i>`;
+      }
+      else {
+        status_h6.setAttribute("style", "float:right; color: #2e74b6; background-color: #ccdbf3; border-radius: 20px; padding: 5px 8px 3px 8px; margin: 0; font-size: 10px;");
+        status_h6.innerHTML = `DRAFT <i class="fas fa-circle"></i>`;
+      }
+
       // subject
-      let blogsHtml_subject = '';
-      if (doc.data().online){
-        blogsHtml_subject += doc.data().category+"  "+doc.data().subject+"<span class='card-course-online-label'>ONLINE</span>";
-      }else{
-        blogsHtml_subject += doc.data().category+"  "+doc.data().subject;
-      }
-      let subject_h3 = document.createElement('h3');
-      subject_h3.innerHTML = blogsHtml_subject;
+      let category = Category[CategoryId.indexOf(doc.data()[COURSE_CAT_ID])];
+      let subject = getSubjectBasedOnCategoryIdAndSubjectId(doc.data()[COURSE_CAT_ID], doc.data()[COURSE_SUB_ID])
+      let blogsHtml_subject = category +"-"+subject;
+      let subject_h6 = document.createElement('h6');
+      subject_h6.setAttribute("style", "color: #2e74b6; font-size: 10px;");
+      subject_h6.textContent = blogsHtml_subject;
       
-      // fee
-      let blogsHtml_fee = '';
-      if (doc.data().feesType == "Per Hour"){
-        blogsHtml_fee += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >paid</i> Fee:  RM <span id='main_fees_sentence'>"+doc.data().fees+"</span> /hour";
-      }else{
-        blogsHtml_fee += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >paid</i> Fee:  RM <span id='main_fees_sentence'>"+ doc.data().fees +"</span>/month";
+      // subject + status
+      let subject_status_col = document.createElement('div');
+      subject_status_col.className = "col-md-12";
+      subject_status_col.appendChild(status_h6);
+      subject_status_col.appendChild(subject_h6);
+      let subject_status_row = document.createElement('div');
+      subject_status_row.className = "row";
+      subject_status_row.appendChild(subject_status_col);
+
+      // Course name
+      let coursename_h4 = document.createElement('h4');
+      coursename_h4.setAttribute("style", "margin: 0;");
+      coursename_h4.textContent = doc.data()[COURSE_NAME];
+      let coursename_col = document.createElement('div');
+      coursename_col.className = "col-md-12";
+      coursename_col.appendChild(coursename_h4);
+
+      // Fee
+      let fee_h5 = document.createElement('h4');
+      fee_h5.setAttribute("style", "font-weight: bold; margin: 0;");
+      if (doc.data()[COURSE_FEE_TYPE] === FEES_TYPE_PER_HOUR_KEY){
+        fee_h5.innerHTML = "RM"+doc.data()[COURSE_FEE] + `<span style="font-size: small;">/hour</span>`;
       }
-      let fee_p = document.createElement('p');
-      fee_p.className = "card-course-item";
-      fee_p.innerHTML = blogsHtml_fee;
-      let fee_a = document.createElement('a');
-      fee_a.className = "card-course-item-wrapper"
-      fee_a.appendChild(fee_p);
-
-      // duration
-      let blogsHtml_duration = '';
-      if (blogsHtml_duration > 1){
-        blogsHtml_duration += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >schedule</i> Duration: <span id='main_fees_sentence'>"+doc.data().duration+"</span> hours / lesson";
-      }else{
-        blogsHtml_duration += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >schedule</i> Duration: <span id='main_fees_sentence'>"+doc.data().duration+"</span> hour / lesson";
+      else {
+        fee_h5.innerHTML = "RM"+doc.data()[COURSE_FEE] + `<span style="font-size: small;">/month</span>`;
       }
-      let duration_p = document.createElement('p');
-      duration_p.className = "card-course-item";
-      duration_p.innerHTML = blogsHtml_duration;
-      let duration_a = document.createElement('a');
-      duration_a.className = "card-course-item-wrapper"
-      duration_a.appendChild(duration_p);
+      let fee_col = document.createElement('div');
+      fee_col.className = "col-md-12";
+      fee_col.appendChild(fee_h5);
 
-      // Class / week
-      let blogsHtml_classPerWeek = '';
-      if (doc.data().classPerWeek > 1)
-        blogsHtml_classPerWeek += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >date_range</i> Class per week: <span id='main_fees_sentence'>"+doc.data().classPerWeek+"</span> classes";
-      else
-        blogsHtml_classPerWeek += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >date_range</i> Class per week: <span id='main_fees_sentence'>"+doc.data().classPerWeek+"</span> class";
+      let coursename_fee_row = document.createElement('div');
+      coursename_fee_row.className = "row";
+      coursename_fee_row.appendChild(coursename_col);
+      coursename_fee_row.appendChild(fee_col);
 
-      let classPerWeek_p = document.createElement('p');
-      classPerWeek_p.className = "card-course-item";
-      classPerWeek_p.innerHTML = blogsHtml_classPerWeek;
-      let classPerWeek_a = document.createElement('a');
-      classPerWeek_a.className = "card-course-item-wrapper"
-      classPerWeek_a.appendChild(classPerWeek_p);
+      // Trigger
+      let trigger_upper_html = 
+      ` <div class="col-md-12">
+          <span class="tooltiptext-trigger" style="background-color: red; padding: 0.2em 0.6em 0.2em 0.6em; font-size: 12px;">
+            <span style="font-weight: bold;">!</span>
+            <span class="tooltiptext-general" style="border: thin solid red; left: 20%; width: 200px;">
+              <h6 style="color: red;">Things To Improve</h6>`;
 
-      // Description
-      let blogsHtml_description = '';
-      blogsHtml_description += "<i class='material-icons' style='color: #9DE1FF; margin-right: 0.5em;' >description</i> Description";
-      let description_p = document.createElement('p');
-      description_p.className = "card-course-item";
-      description_p.innerHTML = blogsHtml_description;
-      let description_a = document.createElement('a');
-      description_a.className = "card-course-item-wrapper"
-      description_a.appendChild(description_p);
+      let trigger_lower_html = 
+      `     </span> 
+          </span>
+        </div>`;
+
+      // Things to improve
+      let adminMessage_html = "";
+      if (doc.data()[COURSE_STATUS_MESSAGE] != null && doc.data()[COURSE_STATUS_MESSAGE] != "") {
+        adminMessage_html = `
+        <p>Special Message:</p>
+        <p style="font-style: italic;">`+doc.data()[COURSE_STATUS_MESSAGE]+`</p>
+        `
+      }
       
-      let description_content_p = document.createElement('p');
-      if (doc.data().subjectDescription == null || doc.data().subjectDescription == ""){
-        description_content_p.textContent = "No description.";
-
-      }else{
-        description_content_p.textContent = doc.data().subjectDescription;
+      let improve_html = "";
+      if (doc.data()[COURSE_CONTENT_ID] == null || doc.data()[COURSE_CONTENT_ID] == ""){
+        improve_html += `<p style="font-weight: 300;"><span><i class="fas fa-check-circle fa-fw" style="color: green; font-size: small;" aria-hidden="true"></i></span> Create content for this course</p>`
       }
+      if (doc.data()[COURSE_LAN_ARR] == null || doc.data()[COURSE_LAN_ARR].length <= 0){
+        improve_html += `<p style="font-weight: 300;"><span><i class="fas fa-check-circle fa-fw" style="color: green; font-size: small;" aria-hidden="true"></i></span> Add languague</p>`
+      }
+      if (doc.data()[COURSE_MODE_ARR] == null || doc.data()[COURSE_MODE_ARR].length <= 0){
+        improve_html += `<p style="font-weight: 300;"><span><i class="fas fa-check-circle fa-fw" style="color: green; font-size: small;" aria-hidden="true"></i></span> Add teaching mode</p>`
+      }
+      if (doc.data()[COURSE_INCLUDE] == null || doc.data()[COURSE_INCLUDE].length <= 0){
+        improve_html += `<p style="font-weight: 300;"><span><i class="fas fa-check-circle fa-fw" style="color: green; font-size: small;" aria-hidden="true"></i></span> Add promotion to make your course looks attractive</p>`
+      }
+      // if (doc.data()[COURSE_CLASS_ID] == null || doc.data()[COURSE_CLASS_ID] == ""){
+      //   improve_html += `<p style="font-weight: 300;"><span><i class="fas fa-check-circle fa-fw" style="color: green; font-size: small;" aria-hidden="true"></i></span> Link to a class</p>`
+      // }
+      let thingsToImprove_row = document.createElement('div');
+      thingsToImprove_row.className = "row"; 
+      thingsToImprove_row.innerHTML = trigger_upper_html + adminMessage_html+ improve_html + trigger_lower_html;
 
       // Card top
       let card_div = document.createElement('div');
-      if (doc.data().categoryId == "recep" || doc.data().categoryId == "camPri" ||
-      doc.data().categoryId == "camLowerSec" || doc.data().categoryId == "igcse" ||
-      doc.data().categoryId == "alevel"){
-        card_div.className = "card-course card-cambridge";
-      }else if(doc.data().categoryId == "ibEyp" || doc.data().categoryId == "ibPyp" ||
-      doc.data().categoryId == "ibMyp" || doc.data().categoryId == "ibDiploma"){
-        card_div.className = "card-course card-ib";
-      }else if(doc.data().categoryId == "kindergarten" || doc.data().categoryId == "upsr" ||
-      doc.data().categoryId == "pt3" || doc.data().categoryId == "spm" || 
-      doc.data().categoryId == "stpm"){
-        card_div.className = "card-course card-kpm";
-      }else if(doc.data().categoryId == "uecJun" || doc.data().categoryId == "uecSen"){
-        card_div.className = "card-course card-uec";
-      }else if(doc.data().categoryId == "engExam" || doc.data().categoryId == "adultLanguage"){
-        card_div.className = "card-course card-language-and-english-exam";
-      }else if(doc.data().categoryId == "music"){
-        card_div.className = "card-course card-music";
-      }else if(doc.data().categoryId == "computer"){
-        card_div.className = "card-course card-computer-programming";
+      if (doc.data()[COURSE_CAT_ID] == "recep" || doc.data()[COURSE_CAT_ID] == "camPri" ||
+      doc.data()[COURSE_CAT_ID] == "camLowerSec" || doc.data()[COURSE_CAT_ID] == "igcse" ||
+      doc.data()[COURSE_CAT_ID] == "alevel"){
+        card_div.className = "card-public-course card-cambridge";
+      }else if(doc.data()[COURSE_CAT_ID] == "ibEyp" || doc.data()[COURSE_CAT_ID] == "ibPyp" ||
+      doc.data()[COURSE_CAT_ID] == "ibMyp" || doc.data()[COURSE_CAT_ID] == "ibDiploma"){
+        card_div.className = "card-public-course card-ib";
+      }else if(doc.data()[COURSE_CAT_ID] == "kindergarten" || doc.data()[COURSE_CAT_ID] == "upsr" ||
+      doc.data()[COURSE_CAT_ID] == "pt3" || doc.data()[COURSE_CAT_ID] == "spm" || 
+      doc.data()[COURSE_CAT_ID] == "stpm"){
+        card_div.className = "card-public-course card-kpm";
+      }else if(doc.data()[COURSE_CAT_ID] == "uecJun" || doc.data()[COURSE_CAT_ID] == "uecSen"){
+        card_div.className = "card-public-course card-uec";
+      }else if(doc.data()[COURSE_CAT_ID] == "engExam" || doc.data()[COURSE_CAT_ID] == "adultLanguage"){
+        card_div.className = "card-public-course card-language-and-english-exam";
+      }else if(doc.data()[COURSE_CAT_ID] == "music"){
+        card_div.className = "card-public-course card-music";
+      }else if(doc.data()[COURSE_CAT_ID] == "computer"){
+        card_div.className = "card-public-course card-computer-programming";
       }else{
-        card_div.className = "card-course card-language-and-english-exam";
+        card_div.className = "card-public-course card-language-and-english-exam";
       }
-      
-      // card_div.setAttribute("data-toggle","modal");
-      // card_div.setAttribute("data-target","#editCourseModal");
-      card_div.setAttribute("data-category",doc.data().category);
-      card_div.setAttribute("data-category-id",doc.data().categoryId);
-      card_div.setAttribute("data-subject", doc.data().subject);
-      card_div.setAttribute("data-subject-id", doc.data().subjectId);
-      card_div.setAttribute("data-online", doc.data().online);
-      card_div.setAttribute("data-course-id",courseId);
-      card_div.setAttribute("onclick","editCourseFunction(this)");
-      card_div.appendChild(subject_h3);
-      card_div.appendChild(fee_a);
-      card_div.appendChild(duration_a);
-      card_div.appendChild(classPerWeek_a);
-      card_div.appendChild(description_a);
-      card_div.appendChild(description_content_p);
+
+      card_div.setAttribute("onclick","editCourseFunction('"+doc.data()[COURSE_ID]+"', event)");
+      card_div.appendChild(subject_status_row);
+      card_div.appendChild(coursename_fee_row);
+      if (improve_html != ""){
+        card_div.appendChild(thingsToImprove_row);
+      }
 
 
       let card_top = document.createElement('div');
-      card_top.className = "col-md-4 col-lg-4 col-sm-4";
+      card_top.className = "col-md-3";
+      card_top.setAttribute("style", "padding-left: 8px; padding-right: 8px;");
+      card_top.appendChild(card_div);
 
-      // If the course size is less than 2, we need to render empty placeholder so bootstrap looks good.
-      if (renderNull){
-        // render nothing
-      }else{
-        card_top.appendChild(card_div);
-      }
-      const card_all_courses = document.getElementById("card-all-courses");
-      card_all_courses.appendChild(card_top);
+      // const card_all_courses = document.getElementById("card-all-courses");
+            // card_all_courses.insertBefore(card_top, card_all_courses.children[1]);
+
+      const card_load = document.getElementById("card-load0");
+      card_load.insertAdjacentElement("beforebegin", card_top);
+
+      // card_all_courses.appendChild(card_top);
 
     }
 
@@ -958,32 +1118,24 @@
   </script>
   
   <script>
-	  function editCourseFunction(elem){
-      console.log(elem.id);
+	  function editCourseFunction(courseId, event){
 
-      // Get attribute
-      console.log(elem.getAttribute('data-category-id'));
-      console.log(elem.getAttribute('data-subject-id'));
-      console.log(elem.getAttribute('data-course-id'));
+      let url = "./manage.html?id="+courseId;
 
-      // Store data to sessionStorage
-      var courseDataObj = {
-        [CATEGORY_KEY] : elem.getAttribute('data-category'),
-        [CATEGORY_ID_KEY] : elem.getAttribute('data-category-id'),
-        [SUBJECT_KEY] : elem.getAttribute('data-subject'),
-        [SUBJECT_ID_KEY] : elem.getAttribute('data-subject-id'),
-        [ONLINE_KEY] : elem.getAttribute('data-online'),
-        [COURSE_ID_KEY] : elem.getAttribute('data-course-id')
+      if (event.ctrlKey) {
+        window.open(url).focus();
+      } 
+      else if (event.shiftKey) {
+        window.open(url).focus();
       }
-
-      // Set courseDataObj as sessionStorage
-      sessionStorage.setItem("courseDataObj", JSON.stringify(courseDataObj));
-
-      window.location = './edit-course.html';
+      else {
+        window.open(url, '_self')
+      }
 		}
 
   </script>
-  
+
+
 </body>
 
 </html>
