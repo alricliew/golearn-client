@@ -6762,7 +6762,7 @@
             [PAYROLL_DOC_ID_ARR]: payrollDocIdArr,
             [PAYROLL_DOC_TOTAL_ARR]: payrollDocTotalArr,
             [PAYROLL_TOTAL]: payrollTotal,
-            // [PAYROLL_STATUS]: true,
+            // [PAYROLL_STATUS]: true, 
           }
           console.log("Payroll Data...")
           console.log(payrollData);
@@ -7558,6 +7558,7 @@
       $('#myTeacherModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         latestAdminTutorDoc = null;
+        tutorAdminLoadmore.addEventListener('click', tutorAdminLoadMoreHandleClick );
         loadAllAdminTeachers();
 
         // Specific to myself
