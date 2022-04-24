@@ -486,32 +486,6 @@
         <div class="container-fluid">
           <!-- your content here -->
 
-          <!-- Main content -->
-          <div class="row  d-flex" id="desciption-row" >
-            <!-- button -->
-            <div class="p-2">
-              <!-- <a href="settings.html" class="btn btn-outline-primary btn-round" id="btnBack"><i class="fas fa-cog" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;"></i> Financial Settings</a> -->
-            </div>
-
-            <div class="ml-auto p-2">
-
-              <!-- <div class="btn-group">
-                <button class="btn btn-primary btn-round" type="button">
-                  Create
-                </button>
-                <button type="button" class="btn btn-primary btn-round dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="../invoice/create-invoice.html">Create Invoice</a>
-                  <a class="dropdown-item" href="../payroll/run-payroll.html">Run Payroll</a>
-                </div>
-              </div> -->
-
-            </div>
-
-          </div>
-
 
           <div class="container-fluid" >
 
@@ -629,32 +603,6 @@
   <script src="../../assets/js/plugins/sweetalert2.js"></script>
   <!-- Forms Validations Plugin -->
   <script src="../../assets/js/plugins/jquery.validate.min.js"></script>
-  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-  <!-- <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script> -->
-  <!-- 	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-  <!-- <script src="assets/js/plugins/bootstrap-selectpicker.js"></script> -->
-  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-  <!-- <script src="assets/js/plugins/bootstrap-datetimepicker.min.js"></script> -->
-  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
-  <!-- <script src="assets/js/plugins/jquery.dataTables.min.js"></script> -->
-  <!-- 	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-  <!-- <script src="assets/js/plugins/bootstrap-tagsinput.js"></script> -->
-  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-  <!-- <script src="assets/js/plugins/jasny-bootstrap.min.js"></script> -->
-  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-  <!-- <script src="assets/js/plugins/fullcalendar.min.js"></script> -->
-  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-  <!-- <script src="assets/js/plugins/jquery-jvectormap.js"></script> -->
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <!-- <script src="assets/js/plugins/nouislider.min.js"></script> -->
-  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> -->
-  <!-- Library for adding dinamically elements -->
-  <!-- <script src="assets/js/plugins/arrive.min.js"></script> -->
-  <!--  Google Maps Plugin    -->
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
-  <!-- Chartist JS -->
-  <!-- <script src="assets/js/plugins/chartist.min.js"></script> -->
   <!--  Notifications Plugin    -->
   <script src="../../assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
@@ -684,229 +632,6 @@
     sessionStorage.setItem(SESSION_STORAGE_SALARY_ALL_DOCS_KEY, null);
     sessionStorage.setItem(SESSION_STORAGE_SALARY_CURRENT_DOC_KEY, null);
 
-		// var db = firebase.firestore();
-		// db.settings({ timestampsInSnapshots: true });
-
-    // // Set the nav name and global var, if user already login and have session Storage 
-    // var tutorInfoObj = null;
-    // if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
-    //   // Do nothing
-    // }
-    // else{
-    //   // Set the nav user name
-    //   tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
-    //   document.getElementById("user").textContent = tutorInfoObj.name;
-
-    //   current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
-    //   // current_email, 
-    //   // current_phone, 
-    //   current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
-    //   current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
-    //   current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
-    //   current_accountStatus = tutorInfoObj.accountStatus; // bool
-    //   currentYearsExperience = tutorInfoObj.yearsExperience; // number
-    //   currentTutoringExperience = tutorInfoObj.tutoringExperience;
-    //   currentTutoringApproach = tutorInfoObj.tutoringApproach;
-    //   currentQualification= tutorInfoObj.qualification;
-      
-    //   current_aweburl = tutorInfoObj.aWebUrl
-
-    //   // updatePageView(current_accountStatus);
-    // }
-
-		// firebase.auth().onAuthStateChanged(function(user){
-      
-		// 	if(!user){
-    //     // Return to login if user does not exist.
-		// 		window.location.href = "../login.html"
-		// 	}else{
-    //     // if the displayName is null, it means user register using Phone
-    //     if (firebase.auth().currentUser.displayName == null ){
-    //         tutorId = firebase.auth().currentUser.phoneNumber;
-    //     }else{
-    //       tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-    //     }
-    //     loadUserInfo(tutorId)
-          
-    //     loadAllTransDoc();
-
-		// 	}
-		// });
-
-    // // Tutor Specific
-    // function loadUserInfo(tutorId){
-    //   // Tutor Id must be a phone with +60, no spacing or other chars
-    //   var docRef = db.collection("Tutor").doc(tutorId);
-      
-
-    //   // docRef.get().then((doc) => {
-    //   docRef.onSnapshot((doc) => {
-
-    //     if (doc.exists) {
-    //       // console.log("Document data:", doc.data());
-
-    //       current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
-    //       // current_email, 
-    //       // current_phone, 
-    //       current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
-    //       current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
-    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
-    //       current_accountStatus = doc.data().accountStatus; 
-    //       currentYearsExperience = doc.data().yearsExperience; // number
-    //       currentTutoringExperience = doc.data().tutoringExperience;
-    //       currentTutoringApproach = doc.data().tutoringApproach;
-    //       currentQualification= doc.data().qualification;
-    //       current_mon_8am = doc.data().tMon8am;
-    //       current_mon_12pm= doc.data().tMon12pm; 
-    //       current_mon_3pm = doc.data().tMon3pm;  
-    //       current_mon_6pm = doc.data().tMon6pm;  
-    //       current_tue_8am = doc.data().tTue8am;  
-    //       current_tue_12pm= doc.data().tTue12pm;  
-    //       current_tue_3pm = doc.data().tTue3pm;  
-    //       current_tue_6pm = doc.data().tTue6pm;  
-    //       current_wed_8am = doc.data().tWed8am;  
-    //       current_wed_12pm= doc.data().tWed12pm;  
-    //       current_wed_3pm = doc.data().tWed3pm;  
-    //       current_wed_6pm = doc.data().tWed6pm;  
-    //       current_thu_8am = doc.data().tThu8am;  
-    //       current_thu_12pm= doc.data().tThu12pm;  
-    //       current_thu_3pm = doc.data().tThu3pm;  
-    //       current_thu_6pm = doc.data().tThu6pm;  
-    //       current_fri_8am = doc.data().tFri8am;  
-    //       current_fri_12pm= doc.data().tFri12pm;  
-    //       current_fri_3pm = doc.data().tFri3pm;  
-    //       current_fri_6pm = doc.data().tFri6pm; 
-    //       current_sat_8am = doc.data().tSat8am;  
-    //       current_sat_12pm= doc.data().tSat12pm;  
-    //       current_sat_3pm = doc.data().tSat3pm;  
-    //       current_sat_6pm = doc.data().tSat6pm;  
-    //       current_sun_8am = doc.data().tSun8am;  
-    //       current_sun_12pm= doc.data().tSun12pm;  
-    //       current_sun_3pm = doc.data().tSun3pm;  
-    //       current_sun_6pm = doc.data().tSun6pm; 
-
-    //       // Store data to sessionStorage
-    //       var tutorDataObj = {
-    //         [NAME_KEY] : doc.data().name,
-    //         [EMAIL_KEY] : doc.data().email,
-    //         [PHONE_KEY] : doc.data().phone,
-    //         [AGE_KEY] : doc.data().age,
-    //         [GENDER_KEY] : doc.data().gender,
-    //         [ADDRESS_1_KEY] :doc.data().address1,
-    //         [ADDRESS_2_KEY] :doc.data().address2,
-    //         [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
-    //         [ADDRESS_STATE_KEY] :doc.data().addressState,
-    //         [IMAGE_KEY] : doc.data().imgUrl,
-    //         // [NRIC_KEY] : doc.data().name,
-    //         [RATING_KEY] : doc.data().rating,
-    //         [RATING_TIMES_KEY] : doc.data().ratingTimes,
-    //         [RATING_FINAL_KEY] : doc.data().ratingFinal,
-    //         [PROFILE_STATUS_KEY] : doc.data().profileStatus,
-    //         // [CHECK_HOMETUTOR_KEY] : doc.data().name,
-    //         // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
-    //         // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
-    //         // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
-    //         [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
-    //         [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
-    //         [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
-    //         [QUALIFICATION_KEY] : doc.data().qualification,
-    //         [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
-    //         [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
-    //         [AGENT_KEY] : doc.data().agent,
-    //         [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
-            
-    //         [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
-    //         [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
-    //         [CHECK_GROUP_KEY] : doc.data().modeGroup,
-    //         [CHECK_ONLINE_KEY] : doc.data().modeOnline,
-    //         [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
-    //         [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
-    //         [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
-    //         [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
-    //         [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
-    //         [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
-
-    //         [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
-    //         [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
-    //         [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
-    //         [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
-    //         [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
-    //         [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
-    //         [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
-    //         [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
-    //         [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
-    //         [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
-    //         [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
-    //         [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
-    //         [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
-    //         [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
-    //         [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
-    //         [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
-    //         [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
-    //         [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
-    //         [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
-    //         [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
-    //         [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
-    //         [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
-    //         [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
-    //         [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
-    //         [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
-    //         [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
-    //         [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
-    //         [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
-    //         // Create a placeholder for aWebUrl. This param can only initiated by admin
-    //         // manually through https://golearn.com.my/admin/admin-portal.html
-    //         [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
-    //         [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
-    //         [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
-    //         [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
-    //         [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
-    //         [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
-    //         [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
-    //       }
-
-    //       // Set tutorInfoObj as sessionStorage
-    //       sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
-
-    //       // Set the nav user name and public profile link
-    //       document.getElementById("user").textContent = doc.data().name;
-
-    //       if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
-    //         document.getElementById("navPublicProfile").href = "#"  ;
-    //         document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
-    //       } else{
-    //         document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
-    //         document.getElementById("navPublicProfile").target = "_blank";
-    //       }
-          
-    //       if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-    //         document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
-    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
-    //         document.getElementById("btnActivateAccount").target = "_blank";
-    //       }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-    //         document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
-    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
-    //         document.getElementById("btnActivateAccount").target = "_blank";
-    //       }else {
-    //         let activationNavItem = document.querySelector('#activationNavItem');
-    //         let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
-    //         console.log(activationNavItemIsExist)
-    //         // Remove NavItem if exist
-    //         if (activationNavItemIsExist){
-    //           activationNavItem.parentNode.removeChild(activationNavItem);
-    //         }else{
-    //           // Do nothing
-    //         }
-    //       }
-    //     } else {
-    //        // Do nothing 
-    //     }
-    //   });
-
-    // };
-
     // Initialization
     AuthCheck();
 
@@ -914,7 +639,6 @@
     function loadPageInitFunc(){
       // Load salary
       loadAllTransDoc();
-        
     }
     
     // Invoice Load More Button - Init
@@ -1060,9 +784,6 @@
       desc_div.appendChild(desc_p);
       desc_div.appendChild(clientName_p);
 
-
-
-
       // Amount
       let total_p = document.createElement('p');
       total_p.textContent = 'RM'+ parseFloat(doc.data()[TRANS_TOTAL]).toFixed(2);
@@ -1071,7 +792,6 @@
       let total_div = document.createElement('div');
       total_div.className = "col-md-2";
       total_div.appendChild(total_p);
-
 
       // Status
       let status_p = document.createElement('p');
@@ -1110,7 +830,6 @@
       status_div.className = "col-md-1";
       status_div.appendChild(status_p);
 
-
       // Student Detail 
       let detail_div = document.createElement('div');
       detail_div.className = 'row';
@@ -1146,7 +865,6 @@
       btn_edit.setAttribute("data-payid", doc.data()[TRANS_DOC_ID]);
       btn_edit.setAttribute("data-name", doc.data()[TRANS_RECEIVER_NAME]);
       btn_edit.setAttribute("data-status", doc.data()[TRANS_DOC_STATUS]);
-
 
       //Del btn
       let blogsHtml_btn = '';
@@ -1246,21 +964,17 @@
           if (epf == null || epf == ''){
             document.getElementById("previewEpf").style.display = 'none';
             document.getElementById("previewEpfTitle").style.display = 'none';
-
           }else{
             document.getElementById("previewEpf").style.display = '';
             document.getElementById("previewEpfTitle").style.display = '';
-
           }
 
           if (socso == null || socso == ''){
             document.getElementById("previewSocso").style.display = 'none';
             document.getElementById("previewSocsoTitle").style.display = 'none';
-
           }else{
             document.getElementById("previewSocso").style.display = '';
             document.getElementById("previewSocsoTitle").style.display = '';
-
           }
           document.getElementById("previewEpf").textContent = epf;
           document.getElementById("previewSocso").textContent = socso;
@@ -1270,7 +984,6 @@
         } 
         else {
           func.showNotification('top','center', 'danger', 'error_outline', "Payslip loading error. Please try again. If this error still exists, try to remove and add back the payslip in the respective payroll process." );
-
         }
 
       }).catch((error) => {
@@ -2153,7 +1866,6 @@
 
       html2pdf().set(opt).from(element).save();
     }
-
 
 	  function viewTutorFunction(elem){
       // Get attribute and 
