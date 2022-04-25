@@ -2513,7 +2513,7 @@
       // Preview
       document.getElementById("btnPreview").removeAttribute("disabled");
       if (doc.data()[COURSE_URL] == null || doc.data()[COURSE_URL] == ""){
-        let url = "https://app.golearn.com.my/course/?cid="+doc.data()[COURSE_CLASS_ID]+"&tid="+encode64(tutorId)+"&action=preview";
+        let url = "https://app.golearn.com.my/course/?cid="+doc.data()[COURSE_ID]+"&tid="+encode64(tutorId)+"&action=preview";
         document.getElementById("btnPreview").setAttribute('onclick', "window.open('"+url+"')");
         document.getElementById("btnPreview").textContent = "Preview";
       }else {
