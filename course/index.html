@@ -1834,7 +1834,6 @@
     const teachingExpTitle = document.getElementById("teachingExpTitle");
     const teachingLan = document.getElementById("teachingLan");
     const moreLessonHeader = document.getElementById("moreLessonHeader");
-    const ratingBlockAtRecommendation = document.getElementById("ratingBlockAtRecommendation");
     const aboutTutorHeader = document.getElementById("aboutTutorHeader");
 
     // Init Tutor Phone
@@ -1924,6 +1923,10 @@
 
             // Content specific
             if (snapshot[0] == null ){
+              // No content
+              document.getElementById("noContent").style.display = "";
+            }
+            else if (snapshot[0].data()[COURSE_CONTENT_ITEM].length <= 1){
               // No content
               document.getElementById("noContent").style.display = "";
             }
@@ -2926,8 +2929,6 @@
 
         ratingBlockVal_temp = ""
 
-        // Hide review info at Recommendation
-        ratingBlockAtRecommendation.setAttribute("style", "display: none;")
       }
       else
         ratingBlockVal_temp = parseFloat(current_ratingFinal).toFixed(1);
