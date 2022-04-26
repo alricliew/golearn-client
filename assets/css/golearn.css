@@ -39,6 +39,7 @@ body {
 .navbar .nav-item .nav-link-button:hover {
   background: white;
   border: solid #2e74b6;
+  border-width: 2px;
   color: #2e74b6;
   text-decoration: none;
 }
