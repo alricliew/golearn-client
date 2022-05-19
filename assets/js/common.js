@@ -322,13 +322,14 @@ const TIME_SLOT_DESCRIPTION_KEY = "timeSlotDescription";
 const TIME_SLOT_STATUS_KEY = "timeSlotStatus";
 // Commission Policy
 const COMMISSION_POLICY_KEY = "comPol";
-    // Values of COMMISSION_POLICY_KEY
+    const COMMISSION_POLICY_NO_COMMISSION_KEY = "noCom";
     const COMMISSION_POLICY_10_KEY = "10pc";
     const COMMISSION_POLICY_20_KEY = "20pc";
     const COMMISSION_POLICY_30_KEY = "30pc";
     const COMMISSION_POLICY_40_KEY = "40pc";
     const COMMISSION_POLICY_50_KEY = "50pc";
     const COMMISSION_POLICY_2622181614_KEY = "2622181614pc";
+    const COMMISSION_POLICY_PROGRESSIVE_INCREMENT_PLAN_KEY = "proIncPlan";
 
 // Tutor Request Form Specific (used in JobRequests modal)
 const CLIENT_TYPE_KEY = "cType";
@@ -897,6 +898,95 @@ const REQUEST_DATE_SENT = 'dateSend';
 const REQUEST_DATE_READ = 'dateRead';
 const REQUEST_DATE_READ_ADMIN = 'dateReadAdmin';
 const REQUEST_STATUS = 'status';
+
+// Request (/request/v1/admin)
+const REQ_ADMIN_ID = 'id';
+const REQ_ADMIN_NAME = 'name';
+const REQ_ADMIN_PHONE = 'phone';
+const REQ_ADMIN_EMAIL = 'email';
+const REQ_ADMIN_PERSON = 'person';
+    const REQ_ADMIN_PERSON_PARENT = 'parent';
+    const REQ_ADMIN_PERSON_STUDENT = 'student';
+const REQ_ADMIN_STU_GENDER = 'stuGender';
+const REQ_ADMIN_SCHOOL = 'school';
+const REQ_ADMIN_SUBJECT = 'subject';
+const REQ_ADMIN_MODE = 'mode';
+const REQ_ADMIN_PLACE = 'place';
+const REQ_ADMIN_BUDGET = 'budget';
+const REQ_ADMIN_DURATION = 'duration';
+const REQ_ADMIN_LESS_PER_WEEK = 'lessPerWeek';
+const REQ_ADMIN_DAY_OF_WEEK = 'dayOfWeek';
+const REQ_ADMIN_TIME = 'timeSlot';
+const REQ_ADMIN_TUTOR_GENDER = 'tutorGender';
+const REQ_ADMIN_MESSAGE = 'message';
+const REQ_ADMIN_SURVEY_01 = 'sur01';
+const REQ_ADMIN_URL = 'url';
+
+const REQ_ADMIN_JOB_ID = 'jobId';
+const REQ_ADMIN_JOB_REF_NO = 'jobRef';
+const REQ_ADMIN_JOB_STATUS = 'jobStatus';
+
+const REQ_ADMIN_REMARK = 'remark';
+const REQ_ADMIN_ONLINE = 'online';
+const REQ_ADMIN_CAT_ARR = 'catArr';
+const REQ_ADMIN_SUB_ARR = 'subArr';
+const REQ_ADMIN_AREA = 'area';
+const REQ_ADMIN_STATE = 'state';
+const REQ_ADMIN_REQ_STATUS = 'reqStatus';
+    const REQ_ADMIN_REQ_STATUS_NEW= 'new';
+    const REQ_ADMIN_REQ_STATUS_NO_RESPONSE= 'noRes';
+    const REQ_ADMIN_REQ_STATUS_TOO_EXPENSIVE= 'expensive';
+    const REQ_ADMIN_REQ_STATUS_OTHER_OFFER= 'otherOffer';
+    const REQ_ADMIN_REQ_STATUS_JOB_IN_PROGRESS ='progress';
+    const REQ_ADMIN_REQ_STATUS_JOB_SENT ='sent';
+    const REQ_ADMIN_REQ_STATUS_JOB_NO_RESPONSE ='jobNoRes';
+    const REQ_ADMIN_REQ_STATUS_JOB_REJECT ='rejectAllTutors';
+    const REQ_ADMIN_REQ_STATUS_JOB_STOP_AFTER_TRIAL ='stopAfterTrial';
+    const REQ_ADMIN_REQ_STATUS_JOB_NO_TUTOR ='noTutor';
+    const REQ_ADMIN_REQ_STATUS_JOB_TIME ='timeXMatch';
+    const REQ_ADMIN_REQ_STATUS_SUCCESS= 'success';
+const REQ_ADMIN_DATE_SEND = 'dateSend';
+const REQ_ADMIN_DATE_READ = 'dateRead';
+const REQ_ADMIN_OWNER = 'owner';
+const REQ_ADMIN_STATUS = 'status';
+
+// Jobs/v1/job
+const JOB_ID = "id";
+const JOB_REQ_ID = "reqId";
+const JOB_REF_NO = "jobRef";
+const JOB_NAME = "name"
+const JOB_CLIENT_ID = "clientId"
+const JOB_EMAIL = "email"
+const JOB_PHONE = "phone"
+const JOB_PLACE = "place"
+const JOB_MODE = "mode"
+const JOB_DURATION = 'duration';
+const JOB_LESS_PER_WEEK = 'lessPerWeek';
+const JOB_DAY_OF_WEEK = 'dayOfWeek';
+const JOB_TIME = 'timeSlot';
+const JOB_ONLINE = 'online';
+const JOB_CAT_ARR = 'catArr';
+const JOB_SUB_ARR = 'subArr';
+const JOB_AREA = 'area';
+const JOB_STATE = 'state';
+
+const JOB_DETAIL = 'jobDetail';
+const JOB_COMMISSION_POLICY = "comPol";
+const JOB_FEE = "fees";
+const JOB_FEE_TYPE = "feeType";
+
+const JOB_APPLICANT_ID_ARR = "applicantIdArr";
+const JOB_APPLICANT_NAME_ARR = "applicantNameArr";
+const JOB_TUTOR_ID_ARR = "tutorIdArr";
+const JOB_TUTOR_NAME_ARR = "tutorNameArr";
+const JOB_MATCHED_TUTOR_ID = "matchedIdArr";
+const JOB_MATCHED_TUTOR_NAME = "matchedNameArr";
+const JOB_JOB_STATUS = "jobStatus";
+// Equalvalent to 'progress', 'jobNoRes', 'rejectAllTutors', 'stopAfterTrial', 'noTutor', 'timeXMatch', 'success';
+const JOB_DATE_CREATE = "dateCreated";
+const JOB_DATE_CLOSE = "dateClosed";
+const JOB_OWNER = 'owner';
+const JOB_STATUS = 'status';
 
 // -------------- Session Storage Key Start -------------- //
 // CLIENT: Profile Obj

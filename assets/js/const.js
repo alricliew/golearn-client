@@ -612,18 +612,48 @@ const SubjectIdCambridgeSecondary = ["camSecEng", "camSecMath", "camSecScience",
         "camSecMandarin", "camSecArt", "camSecIct", "camSecMusic", "camSecDrama"]; // 10
 const SubjectRestrictedIdCambridgeSecondary = ["camSecEng", "camSecMath", "camSecScience",
         "camSecMalay", "camSecMandarin"]; // 5
-const SubjectIGCSE = ["First Language English", "Second Language English", "Mathematics",
-        "Chemistry", "Biology", "Physics", "Combined Science", "Bahasa Melayu", "Additional Mathematics",
-        "Accounting", "Art", "Business Studies", "Computer Science", "Design and Technology", "Drama",
-        "Economics", "English literature", "Geography", "History", "Global Perspectives",
-        "ICT", "Music" ];
-// const SubjectIdIGCSE = ["firstEnglish", "secondEnglish", "bm", "math","addmath",
-//         "che", "bio", "phy", "combinedScience", "accounting","business","eco"];
-const SubjectIdIGCSE = ["igcseFirstEnglish", "igcseSecondEnglish", "igcseMath",
-        "igcseChe", "igcseBio", "igcsePhy", "igcseCombinedScience","igcseBm", "igcseAddmath",
-        "igcseAccounting","igcseArt" ,"igcseBusiness", "igcseCS","igcseDesignTech", "igcseDrama",
-        "igcseEco", "igcseEngLit","igcseGeo","igcseHis","igcseGloPer",
-        "igcseICT", "igcseMusic" ];
+// const SubjectIGCSE = ["First Language English", "Second Language English", "Mathematics",
+//         "Chemistry", "Biology", "Physics", "Combined Science", "Bahasa Melayu", "Additional Mathematics",
+//         "Accounting", "Art", "Business Studies", "Computer Science", "Design and Technology", "Drama",
+//         "Economics", "English literature", "Geography", "History", "Global Perspectives",
+//         "ICT", "Music" ];
+const SubjectIGCSE = ["Accounting", "Afrikaans - Second Language", "Agriculture", "Arabic - First Language",
+    "Arabic - Foreign Language", "Art & Design", "Bahasa Indonesia", "Biology", "Business Studies", "Chemistry",
+    "Chinese - First Language", "Chinese - Second Language", "Chinese (Mandarin) - Foreign Language", 
+    "Computer Science", "Design & Technology", "Development Studies", "Drama", "Economics", 
+    "English - First Language", "English - First Language (US)", "English - Literature (US)", "English - Literature in English", 
+    "English (as an Additional Language)", "English as a Second Language", "Enterprise", "Environmental Management", "Food & Nutrition",
+    "French - First Language", "French - Foreign Language", "Geography", "German - First Language",
+    "German - Foreign Language", "Global Perspectives", "Hindi as a Second Language", "History", "History - American (US)", 
+    "Information & Communication Technology", "IsiZulu as a Second Language", "Islamiyat","Italian - Foreign Language",
+    "Japanese - Foreign Language","Latin", "Malay - First Language", "Malay - Foreign Language",
+    "Marine Science","Mathematics" ,"Mathematics - Additional", "Mathematics - International","Mathematics (US)", "Music",
+    "Pakistan Studies", "Physical Education","Physical Science","Physics","Portuguese - First Language",
+    "Religious Studies","Sanskrit" ,"Science - Combined", "Sciences - Co-ordinated","Sociology", "Spanish - First Language",
+    "Spanish - Foreign Language", "Spanish - Literature","Swahili","Thai - First Language", "Travel & Tourism",
+    "Turkish - First Language","Urdu as a Second Language" ,"World Literature"
+];
+// const SubjectIdIGCSE = ["igcseFirstEnglish", "igcseSecondEnglish", "igcseMath",
+//         "igcseChe", "igcseBio", "igcsePhy", "igcseCombinedScience","igcseBm", "igcseAddmath",
+//         "igcseAccounting","igcseArt" ,"igcseBusiness", "igcseCS","igcseDesignTech", "igcseDrama",
+//         "igcseEco", "igcseEngLit","igcseGeo","igcseHis","igcseGloPer",
+//         "igcseICT", "igcseMusic" ];
+const SubjectIdIGCSE = ["igcseAccounting", "igcseAfrikaansSecondLan", "igcseAgri",
+    "igcseArabicForeignLan", "igcseArt", "igcseBIndon", "igcseBio", "igcseBusiness", "igcseChe",
+    "igcseChineseFirstLan", "igcseChineseSecondLan", "igcseChineseForeignLan", 
+    "igcseCS", "igcseDesignTech", "igcseDevStu", "igcseDrama", "igcseEco",
+    "igcseFirstEnglish", "igcseFirstEngUs", "igcseEngLitUs", "igcseEngLit",
+    "igcseEngAddLan", "igcseSecondEnglish", "igcseEnt", "igcseEnvMan", "igcseFoodNut",
+    "igcseFrenchFirstLan", "igcseFrenchForeignLan", "igcseGeo", "igcseGermanFirstLan",
+    "igcseGermanForeignLan", "igcseGloPer", "igcseHindiSecondLan", "igcseHis", "igcseHisUs",
+    "igcseICT", "igcseIsiZuluSecondLan", "igcseIslam", "igcseItalianForeignLan",
+    "igcseJapForeignLan", "igcseLatin", "igcseBm", "igcseBmForeignLan",
+    "igcseMarine", "igcseMath", "igcseAddmath", "igcseIntMath", "igcseMathUs", "igcseMusic",
+    "igcsePakStu", "igcsePhyEdu", "igcsePhySc", "igcsePhy", "igcsePorFirstLan", 
+    "igcseRelStu", "igcseSans", "igcseCombinedScience", "igcseCoorSc", "igcseSocio", "igcseSpanFirstLan",
+    "igcseSpanForeignLan", "igcseSpanLit", "igcseSwahili", "igcseThaiFirstLan", "igcseTravel",
+    "igcseTurFirstLan", "igcseUrduSecondLan", "igcseWorldLit"
+];
 const SubjectRestrictedIdIGCSE = ["igcseFirstEnglish", "igcseSecondEnglish", "igcseMath",
         "igcseChe", "igcseBio", "igcsePhy", "igcseCombinedScience","igcseBm", "igcseAddmath",
         "igcseAccounting" ,"igcseBusiness", "igcseCS","igcseDesignTech",
@@ -1249,6 +1279,9 @@ function getRestrictedSubjectForEachCategoryBasedOnId( categoryId, subjectId){
     }
 }
 
+const MyTime = ["8am - 12pm","12pm - 3pm","3pm - 6pm","6pm Onwards"];
+const MyTimeId = ["8to12","12to3","3to6","6onwards"];
+
 const MyDayOfWeek = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 const MyDayOfWeekAbr = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 const MyDayOfWeekId = ["mon","tue","wed","thu","fri","sat","sun"];
@@ -1256,7 +1289,6 @@ const MyDayOfWeekId = ["mon","tue","wed","thu","fri","sat","sun"];
 const MyMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const MyMonthAbr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const MyMonthId = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-
 
 // Typeahead
 const ClassTag = [
