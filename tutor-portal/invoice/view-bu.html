@@ -810,171 +810,117 @@
             </div>
           </div>
 
-          <!-- Preview -->
-          <div class="row">
-            <div class="col-md-12" style="overflow-x:auto; padding: 1rem;" >
-              <page size="A4" id="invTemplate" style="position: relative;">
-
-                <div class="card-body" >
-                  <div class="row">
-                    <div class="col-4 text-center">
-    
-                      <div class="form-group">
-                        <!-- <canvas id="myCanvas" style="height: 150px;width: 225px; object-fit: cover;" ></canvas> -->
-                        <div style="height: 115px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
-                          <img id="previewTutorImgUrl" style="height: 100%; width: auto; " src="../../assets/img/empty-photo.png" crossorigin="anonymous" alt = ""/>
-                          <!-- <canvas id="myCanvas" ></canvas> -->
-                        </div>
-                      </div>
-                    </div>
-    
-                    <div class="col-2">
-                      <!--  Do nothing -->
-                    </div>
-    
-                    <div class="col-6 text-right">
-                      <h4 style="font-size: xx-large;margin-top: 1rem;">INVOICE</h4> 
-                      <h5 id="previewInvTitle"  style="font-weight: 500;"></h5>
-                      <h4 id="previewInvBizName" style="font-weight: 500;">Your Name</h4>
-                      <h6 id="previewInvBizDetails" style="text-transform: none; font-weight: 300;"></p>
-                    </div>
-    
-                  </div>
-                
-                </div>
-    
-                <hr style="margin: 0rem">
-                <!-- style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;" -->
-                <div class="card-body" style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;"> 
-                  <div class="row">
-                    <div class="col-4">
-                      <h6>Billed To:</h6>
-                      <h4 id="previewInvClientName" style="font-weight: 500;"></h4>
-                      <h6 id="previewInvClientDetails"  style="text-transform: none; font-weight: 300;"></h6>
-                    </div>
-    
-                    <div class="col-3"></div>
-                    <div class="col-5">
-                      <div class="row">
-                        <div class="col-6 text-right" style="padding-right: 0;">
-                          <h6>Invoice No</h6>
-                          <h6>Invoice Date</h6>
-                          <h6 style="color: red;">Payment Due</h6>
-                          <h6>Status</h6>
-                          
-                          <!-- <p style="margin: 0.3rem; font-weight: bold;">Invoice No</p>                            
-                          <p style="margin: 0.3rem; font-weight: bold;">Invoice Date</p>                           
-                          <p style="margin: 0.3rem; font-weight: bold;">Payment Due</p>                            
-                          <p style="margin: 0.3rem; font-weight: bold;">Status</p> -->
-                        </div>
-                        <div class="col-6 text-left">
-                          <h6 id="previewInvNum" style="font-weight: normal;"> - </h6>
-                          <h6 id="previewInvIssueDate"> - </h6>
-                          <h6 id="previewInvPaymentDue" style="color: red;"> - </h6>
-                          <h6 id="previewInvStatus"> New </h6>
-                          <!-- <p style="margin: 0.3rem;">0100010101</p>  
-                          <p style="margin: 0.3rem;">Status</p>  
-                          <p style="margin: 0.3rem;">Status</p>  
-                          <p style="margin: 0.3rem;">Status</p>   -->
-                         </div>
-                      </div>
-                    </div>
-                  </div>
-    
-                  <div style="margin-top: 1rem;"></div>
-                  
-                  <div class="row">
-                    <div class="col-12"  style="overflow-x:auto;">
-                      <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
-                      <table id="tablePreview" class="table-light table-sm" cellspacing="0" width="100%" >
-                        <thead style="background-color: grey; color: white;">
-                          <tr>
-                            <th style="min-width: 200px; font-size: small;">Items</th>
-                            <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity</th>
-                            <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Price</th>
-                            <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
-                          </tr>
-                        </thead>
-                        <tbody id="previewItemBody">
-
-                          <!-- <tr class="item">
-                            <td style="font-size: small;">Primary class</td>
-                            <td style="text-align: right; font-size: small;">1</td>
-                            <td style="text-align: right; font-size: small;">25</td>
-                            <td style="text-align: right; font-size: small;">RM25.00</td>
-                          </tr>
-                          <tr class="item">
-                            <td style="font-size: small;"> - Lesson 1</td>
-                            <td style="text-align: right; font-size: small;">1</td>
-                            <td style="text-align: right; font-size: small;">25</td>
-                            <td style="text-align: right; font-size: small;">RM25.00</td>
-                          </tr>
-
-                          <tr class="subtotal" style="border-bottom: solid #eeeeee thin;">
-                            <td></td>
-                            <td></td>
-                            <td style="text-align: right; font-weight: 500; font-size: small;">Subtotal</td>
-                            <td style="text-align: right; font-weight: 500; font-size: small;" id="previewSubtotalItem">RM50.00</td>
-                          </tr>
-                          <tr class="item">
-                            <td style="font-size: small;">Primary class</td>
-                            <td style="text-align: right; font-size: small;">1</td>
-                            <td style="text-align: right; font-size: small;">25</td>
-                            <td style="text-align: right; font-size: small;">RM25.00</td>
-                          </tr>
-                          <tr class="subtotal" id='previewItemSubtotal' style="border-bottom: solid #eeeeee thin;">
-                            <td></td>
-                            <td></td>
-                            <td style="text-align: right; font-weight: 500; font-size: small;">Subtotal</td>
-                            <td style="text-align: right; font-weight: 500; font-size: small;" id="previewSubtotalItem">RM50.00</td>
-                          </tr> -->
-                        </tbody>
-                      </table>
-    
-                      <table id="tableAdditionalItemPreview" class="table-light table-sm" cellspacing="0" width="100%">
-                        <thead style="visibility: collapse;">
-                          <tr>
-                            <th style="min-width: 200px;">Items</th>
-                            <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
-                            <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
-                            <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
-                          </tr>
-                        </thead>
-                        <tbody id="previewAdditionalItemBody">
-                          <!-- <tr class="additional">
-                            <td></td>
-                            <td></td>
-                            <td style="text-align: right; font-size: small;">Tax(20%)</td>
-                            <td style="text-align: right; font-size: small;">RM203.00</td>
-                          </tr> -->
-                        </tbody>
-                      </table>
-                    </div>
-    
-                    <div class="col-12">
-                      <h4 style="text-align: right; font-weight: 500;">Total <span style="margin-left: 2rem;" id="previewGrandTotal">RM0.00</span></h4>
-                    </div>
-    
-                    <div class="col-12">
-                      <!-- <p><strong>Solution with JS (only deals with line breaks): </strong> <textarea class="textarea resize-ta"></textarea></p> -->
-    
-                      <!-- <div class="form-group"> -->
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Notes</span>
-                        <span  id="previewInvNotes"></span>
-                        <!-- <textarea class="form-control" maxlength="250" rows='3' oninput="console.log(this.scrollHeight); this.style.height = (this.scrollHeight) + 'px';// this.setAttribute('rows', 12)" style="height: 4300px; max-height: max-content; overflow: hidden;" id="previewInvNotes" data-compulsory="false" placeholder="Enter notes that are visible to your client. (e.g payment guidelines) " ></textarea> -->
-    
-                      <!-- </div> -->
+          <page size="A4" id="invTemplate" style="position: relative;">
+            <div class="card-body" >
+              <div class="row">
+                <div class="col-4 text-center">
+                  <div class="form-group">
+                    <div style="height: 115px;width: auto; display: inline-block; position: relative; overflow: hidden; cursor: pointer;">
+                      <img id="previewTutorImgUrl" style="height: 100%; width: auto; " src="../../assets/img/empty-photo.png" crossorigin="anonymous" alt = ""/>
                     </div>
                   </div>
                 </div>
-                
-                <div class="card-body" id="preview-footer" style="padding-top: 0; margin-top: 0; position: absolute; bottom: 0; width: 100%;">
-                  <p id="previewInvFooterNotes" ></p>
+
+                <div class="col-2">
+                  <!--  Do nothing -->
                 </div>
-    
-              </page>
+
+                <div class="col-6 text-right">
+                  <h4 style="font-size: xx-large;margin-top: 1rem;">INVOICE</h4> 
+                  <h5 id="previewInvTitle"  style="font-weight: 500;"></h5>
+                  <h4 id="previewInvBizName" style="font-weight: 500;">Your Name</h4>
+                  <h6 id="previewInvBizDetails" style="text-transform: none; font-weight: 300;"></p>
+                </div>
+
+              </div>
+            
             </div>
-          </div>
+
+            <hr style="margin: 0rem">
+
+            <div class="card-body" style="position: relative; bottom: 35px; width: 100%; margin-top: 2rem;"> 
+              <div class="row">
+                <div class="col-4">
+                  <h6>Billed To:</h6>
+                  <h4 id="previewInvClientName" style="font-weight: 500;"></h4>
+                  <h6 id="previewInvClientDetails"  style="text-transform: none; font-weight: 300;"></h6>
+                </div>
+
+                <div class="col-3"></div>
+                <div class="col-5">
+                  <div class="row">
+                    <div class="col-6 text-right" style="padding-right: 0;">
+                      <h6>Invoice No</h6>
+                      <h6>Invoice Date</h6>
+                      <h6 style="color: red;">Payment Due</h6>
+                      <h6>Status</h6>
+                    </div>
+                    <div class="col-6 text-left">
+                      <h6 id="previewInvNum" style="font-weight: normal;"> - </h6>
+                      <h6 id="previewInvIssueDate"> - </h6>
+                      <h6 id="previewInvPaymentDue" style="color: red;"> - </h6>
+                      <h6 id="previewInvStatus"> New </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top: 1rem;"></div>
+              
+              <div class="row">
+                <div class="col-12"  style="overflow-x:auto;">
+                  <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
+                  <table id="tablePreview" class="table-light table-sm" cellspacing="0" width="100%" >
+                    <thead style="background-color: grey; color: white;">
+                      <tr>
+                        <th style="min-width: 200px; font-size: small;">Items</th>
+                        <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Quantity</th>
+                        <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Price</th>
+                        <th style="width: 100px; min-width: 100px;text-align: right; font-size: small;">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody id="previewItemBody">
+                      <tr class="subtotal" id='previewItemSubtotal'>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right; font-weight: 500; font-size: small;">Subtotal</td>
+                        <td style="text-align: right; font-weight: 500; font-size: small;" id="previewSubtotalItem"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <table id="tableAdditionalItemPreview" class="table-light table-sm" cellspacing="0" width="100%">
+                    <thead style="visibility: collapse;">
+                      <tr>
+                        <th style="min-width: 200px;">Items</th>
+                        <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
+                        <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
+                        <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody id="previewAdditionalItemBody">
+                      <tr class="additional">
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right; font-size: small;"></td>
+                        <td style="text-align: right; font-size: small;"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-12">
+                  <h4 style="text-align: right; font-weight: 500;">Total <span style="margin-left: 2rem;" id="previewGrandTotal">RM0.00</span></h4>
+                </div>
+                <div class="col-12">
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin: 0;">Notes</span>
+                  <span id="previewInvNotes"></span>
+                </div>
+              </div>
+            </div>
+            <div class="card-body" id="preview-footer" style="padding-top: 0; margin-top: 0; position: absolute; bottom: 0; width: 100%;">
+              <p id="previewInvFooterNotes" ></p>
+            </div>
+          </page>
         </div>
 
         <footer class="footer">
@@ -1232,9 +1178,6 @@
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
-    var batch = db.batch();
-    var batchUpdate = db.batch();
-    var batchUpdateNew = db.batch();
     // Check the current Invoice in session Storage - Valid only if user come from class.html
     var currentInvoiceObj = null;
     getInvoiceObject()
@@ -1254,7 +1197,6 @@
         // console.log(currentInvoiceObj);
         invId = currentInvoiceObj[INV_ID]
         
-        console.log(currentInvoiceObj)
         updatePageContent(currentInvoiceObj);
 
       }
@@ -1644,7 +1586,7 @@
     };
 
     // Print Preview
-    function printPreview2(invItems){
+    function printPreview(invItems){
 
       // init the preview template size 
       document.getElementById('invTemplate').style.height = 'auto';
@@ -1827,195 +1769,6 @@
       previewAdditionalItemBody.appendChild(tr);
     }
 
-    // Print Subtotal 
-    function printItemSubtotal(amount){
-      // <td></td>
-      // <td></td>
-      // <td style="text-align: right; font-weight: 500; font-size: small;">Subtotal</td>
-      // <td style="text-align: right; font-weight: 500; font-size: small;" id="previewSubtotalItem">RM50.00</td>
-
-      let td1 = document.createElement('td');
- 
-      let td2 = document.createElement('td');
- 
-      let td3 = document.createElement('td');
-      td3.setAttribute('style', "text-align: right; font-weight: 500; font-size: small;");
-      td3.textContent = 'Subtotal'
-
-      let td4 = document.createElement('td');
-      td4.setAttribute('style', "text-align: right; font-weight: 500; font-size: small;");
-      let amountText = (amount >= 0) ? 'RM'+amount.toFixed(2) : '- RM'+ Math.abs(amount).toFixed(2)
-      td4.textContent = amountText;
-
-      // Tr top
-      let tr = document.createElement('tr');
-      tr.className = 'subtotal';
-      tr.setAttribute("style", "border-bottom: solid #eeeeee thin;");
-      tr.appendChild(td1);
-      tr.appendChild(td2);
-      tr.appendChild(td3);
-      tr.appendChild(td4);
-
-      const previewItemBody = document.getElementById('previewItemBody');
-      previewItemBody.appendChild(tr);
-    }
-
-
-
-    // Print Preview
-    function printPreview(invData){
-
-      // init the preview template size 
-      document.getElementById('invTemplate').style.height = 'auto';
-
-      // clear all spaces details in preview
-      // let totalPreviewItem = tablePreview.querySelectorAll('.item').length;
-      // console.log('totalPreviewItem ' + totalPreviewItem);
-      tablePreview.querySelectorAll('.item').forEach(function (row, index) {
-        row.remove();
-      });
-
-      tablePreview.querySelectorAll('.subtotal').forEach(function (row, index) {
-        row.remove();
-      });
-
-      // let totalAdditionalItemPreview = tableAdditionalItemPreview.querySelectorAll('.additional').length;
-      // console.log('totalPreviewItem ' + totalPreviewItem);
-      tableAdditionalItemPreview.querySelectorAll('.additional').forEach(function (row, index) {
-        row.remove();
-      });
-
-      // document.getElementById('previewSubtotalItem').textContent='';
-      document.getElementById('previewGrandTotal').textContent='';
-
-
-      // Get the inv data
-      // let invData = getAllItems2();
-      console.log('invData')
-      console.log(invData)
-
-
-      // Step 2: Print Items & Additional Items
-      let itemStartIndex= invData.indexOf('ITEMLIST');
-      let itemIndex= invData.indexOf('ITEM');
-      let additionalItemStartIndex= invData.indexOf('ADDITIONAL_ITEM');
-      let totalStartIndex= invData.indexOf('TOTAL');
-
-      // console.log(itemStartIndex, additionalItemStartIndex, subtotalStartIndex, totalStartIndex)
-
-      // let type = payslipDataArr[0];
-      let itemList = invData.slice(itemStartIndex+1, additionalItemStartIndex); //+1 to ignore the first indentifier, ITEMLIST
-      // let subTotal = payslipDataArr[subtotalStartIndex+1];
-      let additionalItem = invData.slice(additionalItemStartIndex+1, totalStartIndex); //+1 to ignore the first indentifier
-      let total = invData[totalStartIndex+1];
-
-      var itemIndexArr = [];
-      itemList.filter(function(item, index) {
-      if(item === 'ITEM'){
-        itemIndexArr.push(index)
-      }
-      });
-      // console.log(itemIndexArr)
-
-
-
-      // console.log(itemList)
-      // console.log(itemIndex)
-      console.log(additionalItem)
-      // console.log(total)
-
-      // Loop through each 'ITEM' index
-      itemIndexArr.forEach((item, index) => {
-        // Get the printable row. Skip the unused rows.
-        // +1 is the header identifier, 'ITEM'
-        // +4 is the name, refId, cat and tag rows
-        let itemSingleList = itemList.slice(item + 1 + 4, itemIndexArr[index+1]);
-        // console.log(itemSingleList);
-
-        let subtotalItem = 0;
-        let component = [];
-        itemSingleList.forEach((item, index) => {
-
-          component = item.split(";; ")
-          printItem(component[0], component[1], component[2], component[3]);
-
-          subtotalItem = isNaN(component[1] * component[2]) ? subtotalItem+ 0 : subtotalItem + component[1] * component[2];
-
-        });
-
-        printItemSubtotal(subtotalItem);
-        
-      })
-
-      // Print Items
-      // Print Additional Items
-      additionalItem.forEach((item) => {
-        console.log(item)
-        let component = item.split(";; ")
-
-        let additionalSelector = component[0];
-        let additionalItem = component[1];
-        let additionalItemValue = component[2];
-        let amount = component[3];
-        
-        if (additionalSelector === 'Select one'){
-          // Do nothing
-        }
-        else if (additionalSelector === 'Discount ( - )'){
-          console.log(additionalItem, amount);
-          printAdditionalItem(additionalItem, amount);
-        }
-        else if (additionalSelector === 'Tax Rate (%)'){
-          console.log(additionalItem+' ('+additionalItemValue +'%)', amount);
-          printAdditionalItem(additionalItem+' ('+additionalItemValue +'%)', amount);
-        }
-        else 
-        {
-          // Do nothing
-        }
-      });
-
-      // Print Total
-      let totalText = '';
-      if (isNaN(total) ){
-        totalText = 'INVALID';
-        // console.log(totalText)
-        document.getElementById('previewGrandTotal').textContent = totalText;
-      }else {
-        totalText = (total >= 0) ? 'RM'+total.toFixed(2) : '- RM'+ Math.abs(total).toFixed(2)
-        // console.log(totalText)
-        document.getElementById("previewGrandTotal").textContent = totalText;
-      }
-
-      // document.getElementById('previewSubtotalItem').textContent = document.getElementById('subtotalItem').textContent;
-      // document.getElementById('previewGrandTotal').textContent = document.getElementById('grandTotal').textContent;
-
-      let bounderies = document.getElementById('invTemplate').getBoundingClientRect();
-      // console.log('item dim (h x w): '+ bounderies.height, bounderies.width );
-
-      let width = document.getElementById('invTemplate').offsetWidth;
-      let height = document.getElementById('invTemplate').offsetHeight;
-      // console.log('item dim in cm (h x w): '+ height*0.02645833, width*0.02645833 );
-
-      if ( height*0.02645833 >= 29.7 && height*0.02645833 < 59.4){
-        document.getElementById('invTemplate').style.height = '59.35cm'; // Slightly smaller than 59.4 - 2page
-      }
-      else if ( height*0.02645833 >= 59.4 && height*0.02645833 < 89.1){
-        document.getElementById('invTemplate').style.height = '89.05cm';
-      }
-      else if ( height*0.02645833 >= 89.1 && height*0.02645833 < 118.8){
-        document.getElementById('invTemplate').style.height = '118.75cm';
-      }
-      else if ( height*0.02645833 >= 118.8 && height*0.02645833 < 148.5){
-        document.getElementById('invTemplate').style.height = '148.45cm';
-      }
-      else{
-        // document.getElementById('invTemplate').style.height = 'auto';
-      }
-      
-
-    }
-
     //-------- Save and Create Invoice-----------------/
 
     function validateForm(id) {
@@ -2117,408 +1870,6 @@
   }
 
 
-    // Get json arrays of report items
-    function getReportList2(allItemsArr){
-
-      // Get the 'Revenue' array of json
-      // [
-      //   { "name": "<className1> / tagname1" , "refId": "<classId1> / uncategorized"   , "type": "cat / tag / org"   , "total": 100 },
-      //   { "name": "Std 6 Math"    , "refId": "pdiejsawafasw"   , "type": "cat"   , "total": 300 },
-      //   { "name": "Uncategorized" , "refId": "uncategorized"   , "type": "cat"   , "total": 300 },
-      //   { "name": "Tax"           , "refId": "tax"             , "type": "cat"   , "total": 20.352s },
-      //   { "name": "Others"        , "refId": "other"           , "type": "cat"   , "total": 100 },
-
-      //   { "name": "selangor"      , "refId": ""                , "type": "tag"   , "total": 300 },
-      //   { "name": "bm"            , "refId": ""                , "type": "tag"   , "total": 320 },
-      //   ...    
-      // ]
-
-      
-      // Items & Additional Items
-      let itemStartIndex= allItemsArr.indexOf('ITEMLIST');
-      // let itemIndex= allItemsArr.indexOf('ITEM');
-      let additionalItemStartIndex= allItemsArr.indexOf('ADDITIONAL_ITEM');
-      let totalStartIndex= allItemsArr.indexOf('TOTAL');
-
-      // console.log(itemStartIndex, additionalItemStartIndex, subtotalStartIndex, totalStartIndex)
-
-      // let type = payslipDataArr[0];
-      let itemList = allItemsArr.slice(itemStartIndex+1, additionalItemStartIndex); //+1 to ignore the first indentifier, ITEMLIST
-      // let subTotal = payslipDataArr[subtotalStartIndex+1];
-      let additionalItem = allItemsArr.slice(additionalItemStartIndex+1, totalStartIndex); //+1 to ignore the first indentifier
-      let total = allItemsArr[totalStartIndex+1];
-
-      var itemIndexArr = [];
-      itemList.filter(function(item, index) {
-      if(item === 'ITEM'){
-        itemIndexArr.push(index)
-      }
-      });
-      // console.log(itemIndexArr)
-      // console.log(itemList)
-      // console.log(itemIndex)
-      // console.log(additionalItem)
-      // console.log(total)
-
-      let ReportList = [];
-
-      // let title = tableItem.querySelectorAll("span[class=table-title]")[0].textContent;
-
-      let subTotal = 0; // Used to get the subtotal. 
-      // Loop through each 'ITEM' index
-      itemIndexArr.forEach((item, index) => 
-      {
-        // Calculate the subtotal of each item.
-        // Get the printable row. Skip the unused rows.
-        // +1 is the header identifier, 'ITEM'
-        // +3 is the refId, cat and tag rows
-        let itemSingleList = itemList.slice(item + 1 + 4, itemIndexArr[index+1]);
-        // console.log(itemSingleList);
-
-        let subtotalItem = 0;
-        let component = [];
-        itemSingleList.forEach((item, index) => {
-
-          component = item.split(";; ")
-          subtotalItem = isNaN(component[1] * component[2]) ? subtotalItem+ 0 : subtotalItem + component[1] * component[2];
-
-        });
-
-        // Get the refId, tag and cat
-        let className = itemList.slice(item + 1, item + 2)[0];
-        let refId = itemList.slice(item + 2, item + 3)[0];
-        let cat = itemList.slice(item + 3, item + 4)[0];
-        let tag_temp = itemList.slice(item + 4, item + 5)[0];
-        console.log(className, refId, cat, tag_temp)
-        // let tag = (tag_temp == null || tag_temp == "") ? "" : tag_temp;
-        let tagArray = (tag_temp == null || tag_temp == "") ? [] : tag_temp.split(",");
-        
-        let itemCatJson = {};
-        if (refId === 'uncategorized') // New item
-        itemCatJson = { 
-            "name": className, //"Uncategorized", 
-            "refId": refId, 
-            "type": "cat", 
-            "total": subtotalItem 
-          };
-        else if (refId != 'tax' && refId != 'other')
-          itemCatJson = { 
-            "name": className, 
-            "refId": refId, 
-            "type": "cat", 
-            "total": subtotalItem 
-          };
-        else{
-          // Not suppose to have tax or other category here. They will be done later
-          // Do nothing
-        }
-
-        ReportList.push(itemCatJson);
-
-        let itemTagJson = {};
-        if (tagArray.length >= 1){
-          tagArray.forEach((item) => {
-            itemTagJson = { 
-              "name": item, 
-              "refId": item, 
-              "type": "tag", 
-              "total": subtotalItem 
-            };
-            ReportList.push(itemTagJson)
-        
-          });
-        }
-        else {
-          // No tag found. 
-        }
-        
-        subTotal = subTotal + subtotalItem;
-        
-      });
-
-      // console.log(ReportList);
-
-      // Get Additional Items
-      let addItemOtherTotal = 0;
-      let addItemTaxTotal = 0;
-      
-      let temp_amount = 0;
-      let totalText = '';
-
-      additionalItem.forEach((item) => {
-        console.log("")
-        console.log(item)
-        console.log("")
-        let component = item.split(";; ")
-
-        let additionalSelector = component[0];
-        let additionalItem = component[1];
-        let additionalItemValue = parseFloat(component[2]);
-        let amount = component[3];
-        
-        if (additionalSelector === 'Select one'){
-          // Do nothing
-          temp_amount = 0;
-          subTotal = subTotal;
-        }
-        else if (additionalSelector === 'Discount ( - )'){
-          // console.log(additionalItem, amount);
-          temp_amount = -additionalItemValue;
-
-          addItemOtherTotal = isNaN(temp_amount) ? addItemOtherTotal + 0 : addItemOtherTotal + temp_amount;
-
-          subTotal = subTotal - additionalItemValue;
-
-        }
-        else if (additionalSelector === 'Tax Rate (%)'){
-          // console.log(additionalItem+' ('+additionalItemValue +'%)', amount);
-          temp_amount = subTotal * (additionalItemValue) / 100;
-          console.log("Tax Rate (%):");
-          console.log("temp_amount: "+ temp_amount);
-          addItemTaxTotal = isNaN(temp_amount) ? addItemTaxTotal + 0 : addItemTaxTotal + temp_amount;
-          console.log("addItemTaxTotal: "+ addItemTaxTotal);
-          subTotal = subTotal * (100 + additionalItemValue) / 100;
-          console.log("subTotal after Tax: "+ subTotal);
-        }
-        else 
-        {
-          // Do nothing
-          temp_amount = 0;
-          subTotal = subTotal;
-        }
-
-        console.log("subTotal: "+ subTotal);
-      });
-
-      let addItemOtherJson = { 
-        "name": 'Others', 
-        "refId": 'other', 
-        "type": "cat", 
-        "total": addItemOtherTotal 
-      };
-      ReportList.push(addItemOtherJson)
-
-      let addItemTaxJson = { 
-        "name": 'Tax', 
-        "refId": 'tax', 
-        "type": "cat", 
-        "total": addItemTaxTotal 
-      };
-      ReportList.push(addItemTaxJson)
-
-
-      console.log(ReportList);
-
-      // Ref: https://www.codegrepper.com/code-examples/javascript/pick+the+duplicate+objects+from+json+array+javascript
-      var ids = [];
-      var clean = [];
-
-      $.each(ReportList, function(index, value) {
-          if($.inArray(value.refId, ids) == -1)
-          {
-            ids.push(value.refId);
-            clean.push(value);
-          }else{
-            let idIndex = ids.indexOf(value.refId);
-            clean[idIndex].total = clean[idIndex].total + value.total;
-
-            // ids.push(value.id);
-            // clean.push(value);
-          }
-      });
-
-      console.log(ids)
-      console.log(clean)
-
-      return clean;
-    }
-
-
-    
-    function updateRevenueDoc(reportList, invDocId){
-  
-      console.log("UpdateRevenueDoc ... ")
-      // Step 1: Get the ID of revDoc based on issuedDate, refId
-      // Step 1: Get all the revDoc based on 'month'
-      let issuedDate = new Date(currentInvoiceObj[INV_ISSUE_DATE].seconds*1000).toLocaleDateString("en-GB");
-      let issuedDateComponent = issuedDate.split('/');
-      let month = parseInt(issuedDateComponent[2]+""+issuedDateComponent[1]);
-      // console.log(issuedDate)
-      console.log("Step 1: Get all the revDoc based on 'month'  ")
-      console.log(month)
- 
-      let revenueDocList = []
-      let reportDocRef = db.collection("Report")
-        .doc("v1")
-        .collection("Revenue")
-        // .where(REV_REF_ID, "==", item.refId)
-        .where(REV_ADMIN_ID, "==", tutorId)
-        .where(REV_MONTH, "==", month)// YYYYMM
-        // .limit(1); 
-
-      reportDocRef
-        .get()
-        .then((querySnapshot) => {
-
-          // Step 1: Compare the array of refId from revenueDoc in firestore to refId in reportlist in current inv
-          // Get the difference. 
-
-          // Example:
-          // arr1 =["1","2","3","4","5","6"]; // new Array 
-          // arr2 = ["3","4","5" ,"7"]; // Array from db
-          // Ref: https://stackoverflow.com/questions/1187518/how-to-get-the-difference-between-two-arrays-in-javascript
-          // let difference = arr1.filter(x => !arr2.includes(x));
-          // console.log(difference); // => [1, 2, 6]
-          let refIdRevenueDocList = [];
-
-          querySnapshot.forEach((doc) => {
-            refIdRevenueDocList.push(doc.data()[REV_REF_ID]);
-          });
-          console.log(refIdRevenueDocList);
-
-          let refIdReportList = [];
-          reportList.forEach((item) => {
-            refIdReportList.push(item.refId);
-          })
-          console.log(refIdReportList);
-
-          let differenceList = refIdReportList.filter(x => !refIdRevenueDocList.includes(x));
-          console.log(differenceList);
-
-          console.log("Step  2.1 Update the existed reportDoc in batc")
-          // Step 2.1 Update the existed reportDoc in batch 
-          querySnapshot.forEach((doc) => {
-            console.log(doc.data());
-
-            // Check if the ID in local invoice items match with the one in revenueDoc.
-            // If match create a new data and push to new batch for update. 
-            // reportList json format:
-            // { 
-            //   "name": "<className1> / tagname1", 
-            //   "refId": "<classId1> / uncategorized", 
-            //   "type": "cat / tag / org",
-            //   "total": 100 
-            // }
-            reportList.forEach((item) => {
-
-              if (item.refId === doc.data()[REV_REF_ID]){
-
-                let newInvDocIdArr = doc.data()[REV_DOC_ID_ARR];
-                newInvDocIdArr.push(invDocId);
-                let newInvDocTotalArr = doc.data()[REV_DOC_TOTAL_ARR];
-                newInvDocTotalArr.push(item.total);
-                
-                let newTotal = newInvDocTotalArr.reduce((a, b) => a + b, 0);
-
-                // Get all the revDoc based on 'month'
-                let reportDocRef = db.collection("Report")
-                  .doc("v1")
-                  .collection("Revenue")
-                  .doc(doc.data()[REV_ID]);
-
-                // Construct the new data
-                let revData ={
-                  // [REV_ID]: ,
-                  // [REV_ADMIN_ID]: ,
-                  [REV_NAME]: item.name,   // Class name may changed             
-                  // [REV_REF_ID]: item.refId,
-                  // [REV_TYPE]: item.type,
-                  // [REV_MONTH]: ,
-                  [REV_TOTAL]: newTotal,
-                  [REV_DOC_ID_ARR]: newInvDocIdArr,
-                  [REV_DOC_TOTAL_ARR]: newInvDocTotalArr,
-                  [REV_DATE_EDIT]: new Date(),
-                  [REV_STATUS]: true
-                }
-
-                batchUpdate.set(reportDocRef, revData, { merge: true });
-
-              } else{
-                // Do nothing
-              }
-
-            });
-
-          });
-
-          // Commit the batch
-          batchUpdate.commit().then(() => {
-
-          });
-
-          console.log("Step  2.2 Create a new reportDoc for each item in differenceList")
-          // Step 2.2 Create a new reportDoc for each item in differenceList
-          if (differenceList.length>0){
-            differenceList.forEach((diffItem, diffIndex) => {
-              console.log("diffIndex: " + diffIndex )
-              reportList.forEach((item, index) => {
-                
-                if (item.refId === diffItem){
-
-                  console.log("reportindex: " + index);
-                  
-                  let newInvDocIdArr = [];
-                  newInvDocIdArr.push(invDocId);
-                  let newInvDocTotalArr = [];
-                  newInvDocTotalArr.push(item.total);
-                  
-                  let newTotal = newInvDocTotalArr.reduce((a, b) => a + b, 0);
-
-                  // Get all the revDoc based on 'month'
-                  let reportDocRef = db.collection("Report")
-                    .doc("v1")
-                    .collection("Revenue")
-                    .doc();
-
-                  console.log("Updating: " + item.refId + "  - "+ reportDocRef.id);
-                  // Construct the new data
-                  let revData ={
-                    [REV_ID]: reportDocRef.id,
-                    [REV_ADMIN_ID]: tutorId,
-                    [REV_NAME]: item.name,             
-                    [REV_REF_ID]: item.refId,
-                    [REV_TYPE]: item.type,
-                    [REV_MONTH]: month,
-                    [REV_TOTAL]: newTotal,
-                    [REV_DOC_ID_ARR]: newInvDocIdArr,
-                    [REV_DOC_TOTAL_ARR]: newInvDocTotalArr,
-                    [REV_DATE_EDIT]: new Date(),
-                    [REV_STATUS]: true
-                  }
-
-                  batchUpdateNew.set(reportDocRef, revData);
-
-                } 
-                else{
-                  // Do nothing
-                }
-
-
-              });
-
-
-            })
-          }
-          else {
-            // Do nothing
-            console.log("Step  2.2: empthy differenceList ")
-          }
-
-          console.log("Step  2.2: Commit new document ")
-          // Create new document
-          batchUpdateNew.commit().then(() => {
-            reload();
-          });
-
-
-
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
-
-    }
-
-
     // Copy a text based on element ID
     function copyText(targetElemId){
       /* Get the text field */
@@ -2563,7 +1914,7 @@
       // Approve Draft
       $('#btnApproveDraftModalUpdate').on('click', function (event) {
         
-        var invDocRef = db.collection("Financial")
+        var invdocRef = db.collection("Financial")
           .doc("v1")
           .collection("Invoice")
           .doc(invId);
@@ -2581,11 +1932,11 @@
         console.log("*Invoice Data...")
         console.log(invData)
 
-        // invDocRef.set(invData, { merge: true })
-        // .then(() => {
-        //   // reload views
-        //   reload();
-        // });
+        invdocRef.set(invData, { merge: true })
+        .then(() => {
+          // reload views
+          reload();
+        });
 
         var transData = {
           [TRANS_DOC_STATUS]: TRANS_INV_STATUS_NEW,
@@ -2593,101 +1944,11 @@
         }
         console.log("Transaction Data...")
         console.log(transData)
-
-       // transDocRef.set(transData, { merge: true })
-        // .then(() => {
-        //   // window.location.href='./'
-        //   func.showNotification('top','center', 'success', 'check_circle', "Invoice approved" );
-        // });
-
-        // Set the value of 'Invoice'
-        batch.set(invDocRef, invData, { merge: true });
-
-        // Set the value of 'Transaction'
-        batch.set(transDocRef, transData, { merge: true });
-
-        // batch.commit().then(() => {
-        //   reload();
-        //   // window.location.href='./view.html'
-        //   // $('#loadingModal').modal('hide');
-        // });
-
-        let reportList = getReportList2(currentInvoiceObj[INV_ITEMS_ARR]);
-
-        // Get the documents with the similar invoice id, and 
-        // remove the corresponding id in REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR.
-        // Update the doc with new value
-        let reportDocRef = db.collection("Report")
-          .doc("v1")
-          .collection("Revenue")
-          .where(REV_DOC_ID_ARR, "array-contains", invId)
-          .where(REV_STATUS, "==", true);
-
-        reportDocRef
-          .get()
-          .then((querySnapshot) => {
-            //   { "name": "<className> / tag", "refId":"<classId1>/uncategorized"  , "type": "cat / tag / org"  , "total": 100 },
-
-            // get all the data in json array
-            let docItemJsonList = [];
-            querySnapshot.forEach((doc) => {
-              let docItemJson = {};
-
-              console.log(doc.data());
-
-              // Remove the invId from the REV_DOC_ID_ARR and REV_DOC_TOTAL_ARR
-              let invDocIdIndex = doc.data()[REV_DOC_ID_ARR].indexOf(invId);
-              let invDocIdArr = doc.data()[REV_DOC_ID_ARR];
-              let invDocTotalArr = doc.data()[REV_DOC_TOTAL_ARR];
-
-              invDocIdArr.splice(invDocIdIndex, 1);
-              invDocTotalArr.splice(invDocIdIndex, 1);
-
-              // Construct the new data
-              let revData ={
-                // [REV_ID]: ,
-                // [REV_ADMIN_ID]: ,
-                // [REV_NAME]: document.getElementById("invBizDetails").textContent,                
-                // [REV_REF_ID]: document.getElementById("invClientName").textContent,
-                // [REV_TYPE]: ,
-                // [REV_MONTH]: document.getElementById("invTitle").value,
-                // [REV_TOTAL]: document.getElementById("invNum").value,
-                [REV_DOC_ID_ARR]: invDocIdArr,
-                [REV_DOC_TOTAL_ARR]: invDocTotalArr,
-                [REV_DATE_EDIT]: new Date(),
-                // [REV_STATUS]: true
-              }
-
-              // Update it through batch 
-              let revenueDocRef = db.collection("Report")
-                .doc("v1")
-                .collection("Revenue")
-                .doc(doc.id);
-              batch.set(revenueDocRef, revData, { merge: true });
-
-
-            });
-
-            // Commit the batch
-            batch.commit().then(() => {
-              // window.location.href='./view.html'
-              // $('#loadingModal').modal('hide');
-
-              // TODO:  
-              // Step 1: Get the ID of revDoc based on issuedDate, refId
-              // Step 2: Update the revDoc.
-              func.showNotification('top','center', 'success', 'check_circle', "Invoice approved" );
-              updateRevenueDoc(reportList, invId);
-
-
-            });
-
-          }).catch((error) => {
-              console.log("Error getting document:", error);
-          });
-
-        
-
+        transDocRef.set(transData, { merge: true })
+        .then(() => {
+          // window.location.href='./'
+          func.showNotification('top','center', 'success', 'check_circle', "Invoice approved" );
+        });
       });
 
       // Populate record payment modal
@@ -2910,7 +2171,6 @@
     // on keyup / change flag: reset
     inputPhone.addEventListener('change', reset);
     inputPhone.addEventListener('keyup', reset);
-
   </script>
 
 </body>

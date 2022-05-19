@@ -1,0 +1,2050 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>GoLearn Tutor</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!-- Fonts and icons -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
+  <!-- Material Kit CSS -->
+  <link href="../../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <!-- Firebase Init -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+  <script src="../js/firebase.js"></script>
+  <!-- Tutor Portal specific CSS -->
+  <link href="../css/tutor-portal.css" rel="stylesheet" />
+  <!-- Date rage picker -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+  <style>
+    .table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+    }
+    .table th,
+    .table td {
+        border: 1px solid #ccc;
+    }
+    .table th,
+    .table td {
+        padding: 0.5rem;
+    }
+    .draggable {
+        cursor: move;
+        user-select: none;
+    }
+    .placeholder {
+        background-color: #edf2f7;
+        border: 2px dashed #cbd5e0;
+    }
+    .clone-list {
+        border-top: 1px solid #ccc;
+    }
+    .clone-table {
+        border-collapse: collapse;
+        border: none;
+    }
+    .clone-table th{
+        border: 1px solid #ccc;
+        border-top: none;
+        padding: 0.5rem;
+        font-size: 1.2em;
+        font-weight: 300;
+    }
+
+    .clone-table td {
+        border: 1px solid #ccc;
+        border-top: none;
+        padding: 0.5rem;
+
+        font-weight: 300;
+    }
+    .dragging {
+        background: #fff;
+        border-top: 1px solid #ccc;
+        z-index: 999;
+    }
+
+    /* page view for A4  */
+    page {
+      background: white;
+      display: block;
+      margin: 0 auto;
+      /* margin-bottom: 0.5cm; */
+      box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+    }
+    page[size="A4"] {  
+      width: 21cm;
+      height: auto; 
+      min-height: 29.65cm; 
+      /* Use a  height value slightly lower than 29.7 to avoid page break  */
+      /* height: 29.7cm;  */
+    }
+    page[size="A4"][layout="landscape"] {
+      width: 29.7cm;
+      height: 21cm;  
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-3.jpg">
+      <div class="logo">
+        <a href="../" class="simple-text logo-mini">
+			<img src="../source/logo.png" style="width: 216px; height: auto;" alt=""></img>
+          
+        </a>
+        <a href="../" class="simple-text logo-normal">
+         Welcome!
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav" style="margin-bottom: 50px;">
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Teaching</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../class/">
+              <i class="fas fa-chalkboard fa-fw nav-icon"></i>
+              <p>Classes</p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="../student/">
+              <i class="fas fa-user-graduate fa-fw nav-icon"></i>
+              <p>Students</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="../teacher/">
+              <i class="fas fa-chalkboard-teacher fa-fw nav-icon"></i>
+              <p>Teachers</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Financial</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../transaction/">
+              <i class="fas fa-wallet fa-fw nav-icon"></i>
+              <p>Transactions</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../invoice/">
+              <i class="fas fa-file-invoice-dollar fa-fw nav-icon"></i>
+              <p>Invoices</p>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="./">
+              <i class="fas fa-hand-holding-usd fa-fw nav-icon"></i>
+              <p>Payroll <span style="visibility: hidden;">PRO</span></p>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="../transaction/settings.html">
+              <i class="fab fa-expeditedssl fa-fw nav-icon"></i>
+              <p>Settings</p>
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Public</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../course.html">
+              <i class="fas fa-book-open fa-fw nav-icon"></i>
+              <p>My Public Courses</p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="../job.html">
+              <i class="fas fa-briefcase fa-fw nav-icon"></i>
+              <p>Tuition Jobs</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="../update.html">
+              <i class="fas fa-user-cog fa-fw nav-icon"></i>
+              <p>Update Information</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">Payroll <span><i class="material-icons" style="color: gray;">chevron_right</i></span> Run Payroll</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <form class="navbar-form">
+              <!-- Put empty placeholder here -->
+            </form>
+
+            <ul class="navbar-nav">
+              <li class="nav-item" id="activationNavItem">
+                <a href="#" class="btn btn-danger btn-round" style="visibility: hidden;" id="btnActivateAccount" ></a>
+              </li>
+              <li class="nav-item">
+                <a class="navbar-brand" href="javascript:;">
+                   Hi <span id="user"></span> !
+                </a> 
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i> Notifications
+                </a>
+                <!-- <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i>
+                  <span class="notification">5</span>
+                  <p class="d-lg-none d-md-block">
+                    Some Actions
+                  </p>
+                </a> -->
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+									<p style="padding: 1em;" >No notification</p>
+                  <!-- <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                  <a class="dropdown-item" href="#">Another Notification</a>
+                  <a class="dropdown-item" href="#">Another One</a> -->
+                </div>
+              </li>
+              <!-- your navbar here -->
+			  
+			  			<li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">person</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                  <a class="dropdown-item" href="../edit-profile.html">Edit Profile</a>
+                  <a id="navPublicProfile" class="dropdown-item" href="#">My Public Profile</a>
+									<a class="display:block; dropdown-item" href="../about.html">About</a>
+									<div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
+									<div class="dropdown-divider"></div>
+									<a style="font-weight: 500 ;padding: 0.5em ;text-align: center; width: 200px; background-color: #428dd4 ;display: block; color: #fff;" href="https://golearn.com.my/pricing/" target="_blank" id="btnUpgradeToPro">Upgrade to Pro</a>
+
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+
+			<!-- Modal Start -->
+
+      <!-- Main content -->
+      <div class="content">
+        <div class="container-fluid">
+          <!-- your content here -->
+
+
+          <div class="container-fluid" >
+
+            <div class="row">
+              <div class="col-md-12">
+
+
+                <!-- Step 2 -->
+                <div class="card">
+                  <div class="card-body">
+
+                    <!-- View Switcher -->
+                    <div class="row d-flex" id="desciption-row" >
+                      <div class="p-2">
+                      </div>
+                      <div class="ml-auto p-2">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" id="onlineonly_check" data-compulsory="false" onchange="showAdvancedColumns(this)">
+                            <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                            Advanced
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span>
+
+                    <!-- Simple -->
+                    <div class="row" id="viewSimple">
+                      <div class="col-12" style="overflow-x:auto;">
+    
+                        <!-- <span class="" style="font-size: x-small; font-weight: 300; color: gray; margin-bottom: 0;">Note*: Quantity - Number of hour of lessons conducted, number of classes, or relevant other items</span> -->
+
+                        <table id="tableSimple" class="table-light table-sm" cellspacing="0" width="100%">
+                          <thead  style="background-color: grey; color: white;">
+                            <tr>
+                              <th style="width: 30px; min-width: 30px;"></th>
+                              <th style="min-width: 200px;">Items</th>
+                              <!-- <th style="width: 100px; min-width: 100px;text-align: right;">Quantity*</th> -->
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
+                              <!-- <th style="width: 100px; min-width: 100px;text-align: right;">Payout (%)</th> -->
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Earning</th>
+                              <th style="width: 30px; min-width: 30px;"></th>
+                            </tr>
+                          </thead>
+                          <tbody id="itemBody">
+                            <tr class="item">
+                              <td><i class="fas fa-grip-vertical"></i></td>
+                              <td><input type="text" class="form-control" style="border: solid #2e74b6 thin;padding-left: 0.5rem;" placeholder=" Enter item and description" oninput="sync(this);//printPreview();"></td>
+                              <!-- <td name="advanced"><input type="number" class="form-control" style="border: solid #2e74b6 thin; text-align: right;" value="-" oninput="calculateAmount(); //printPreview();"></td> -->
+                              <td><input type="number" class="form-control" style="border: solid #2e74b6 thin; text-align: right;padding-left: 0.5rem;" value="-" oninput="calculateAmount();//printPreview();"></td>
+                              <!-- <td name="advanced"><input type="number" class="form-control" style="border: solid #2e74b6 thin; text-align: right;" value="-" oninput="calculateAmount();//printPreview();"></td> -->
+                              <td style="text-align: right; font-weight: 500;"></td>
+                              <td><i class="fas fa-minus-circle" style="color: red; cursor: pointer;" onclick="removeRow(this); //printPreview();"></i></td>
+                            </tr>
+                            <tr class="subtotal">
+                              <td></td>
+                              <!-- <td name="advanced"></td> -->
+                              <td></td>
+                              <!-- <td name="advanced"></td> -->
+                              <td style="text-align: right; font-weight: 500;">Subtotal</td>
+                              <td style="text-align: right; font-weight: 500;" id="subtotalItem"></td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
+    
+                        <table id="tableAdditionalItem" class="table-light table-sm" cellspacing="0" width="100%">
+                          <thead style="visibility: collapse;">
+                            <tr>
+                              <th style="min-width: 130px;"></th>
+                              <th style="width: 100px; min-width: 100px;">Items</th>
+                              <!-- <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th> -->
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Items Name</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Earning</th>
+                              <th style="width: 30px; min-width: 30px;"></th>
+    
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="additional">
+                              <!-- <td></td> -->
+                              <td style="text-align: right;">
+                                <div class="dropdown">
+                                  <a class="btn btn-primary dropdown-toggle bg-white text-dark text-right" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-transform: none; padding: 0.6rem; margin: 0;">Select one</a>
+                                  <div class="dropdown-menu" aria-labelledby="SortBy" id="sort-dropdown-menu">
+                                    <a class="dropdown-item" href="javascript:;" onclick="disabledAdditionalItem(this); //calculateAmount(); //printPreview();" style="text-transform: none;">Select one</a>
+                                    <a class="dropdown-item" href="javascript:;" onclick="enabledAdditionalItem(this, 'Discount'); //calculateAmount(); //printPreview();" style="text-transform: none;">Discount ( - )</a>
+                                    <a class="dropdown-item" href="javascript:;" onclick="enabledAdditionalItem(this, 'Tax'); //calculateAmount(); //printPreview();" style="text-transform: none;">Additional Earning ( + )</a>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <input type="text" class="form-control" style="border: solid #2e74b6 thin; text-align: right; padding-right: 1rem;" placeholder='Item' oninput='//printPreview();' readonly>
+
+                                <!-- <div class="row d-flex flex-nowrap">
+
+                                  <div class="ml-auto p-2">
+                                    <div class="dropdown">
+                                      <a class="btn btn-primary dropdown-toggle bg-white text-dark text-right" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-transform: none; padding: 0.6rem; margin: 0;">Select one</a>
+                                      <div class="dropdown-menu" aria-labelledby="SortBy" id="sort-dropdown-menu">
+                                        <a class="dropdown-item" href="javascript:;" onclick="disabledAdditionalItem(this); //calculateAmount(); //printPreview();" style="text-transform: none;">Select one</a>
+                                        <a class="dropdown-item" href="javascript:;" onclick="enabledAdditionalItem(this, 'Discount'); //calculateAmount(); //printPreview();" style="text-transform: none;">Discount ( - )</a>
+                                        <a class="dropdown-item" href="javascript:;" onclick="enabledAdditionalItem(this, 'Tax'); //calculateAmount(); //printPreview();" style="text-transform: none;">Additional Earning ( + )</a>
+                                      </div>
+                                    </div>
+
+                                  </div>
+
+                                  <div class="p-2">
+                                    <input type="text" class="form-control" style="border: solid #2e74b6 thin; text-align: right; padding-right: 1rem;" placeholder='Item' oninput='//printPreview();' readonly>
+
+                                  </div>
+                                </div> -->
+                                
+                                <!-- <div class="dropdown">
+                                  <a class="btn btn-primary dropdown-toggle bg-white text-dark text-right" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-transform: none; padding: 0.6rem; margin: 0;">Select one</a>
+                                  <div class="dropdown-menu" aria-labelledby="SortBy" id="sort-dropdown-menu">
+                                    <a class="dropdown-item" href="javascript:;" onclick="disabledAdditionalItem(this); //calculateAmount(); //printPreview();" style="text-transform: none;">Select one</a>
+                                    <a class="dropdown-item" href="javascript:;" onclick="enabledAdditionalItem(this, 'Discount'); //calculateAmount(); //printPreview();" style="text-transform: none;">Discount ( - )</a>
+                                    <a class="dropdown-item" href="javascript:;" onclick="enabledAdditionalItem(this, 'Tax'); //calculateAmount(); //printPreview();" style="text-transform: none;">Additional Earning ( + )</a>
+                                  </div>
+                                </div>
+                                <input type="text" class="form-control" style="border: solid #2e74b6 thin; text-align: right; padding-right: 1rem;" placeholder='Item' oninput='//printPreview();' readonly>
+                               -->
+                              </td>
+                              <td><input type="number" class="form-control" style="border: solid #2e74b6 thin; text-align: right;" value="0" oninput="// calculateAmount(); //printPreview();" readonly></td>
+                              <td style="text-align: right;"></td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+    
+                      <!-- <div class="col-12"> -->
+                        <!-- <h3 style="text-align: right; font-weight: 500;">Total <span style="margin-left: 2rem;" id="grandTotal">RM0.00</span></h3> -->
+                        <!-- <a href="javascript:;" class="btn btn-primary btn-round" id="addRowNormal" style="text-transform: none;">Add New Item <i class="fas fa-plus-circle" style="color: #fff; margin-left: 0.5em; padding-bottom: 0.2em;"></i></a> -->
+                        <!-- <a href="javascript:;" class="btn btn-primary btn-round" id="addAdditionalRowNormal" style="text-transform: none;">Add New Additional Item <i class="fas fa-plus-circle" style="color: #fff; margin-left: 0.5em; padding-bottom: 0.2em;"></i></a> -->
+                      <!-- </div> -->
+    
+                    </div>
+
+                    <!-- Advanced  -->
+                    <div class="row" id="viewAdv" style="visibility: visible;">
+                      <div class="col-12"  style="overflow-x:auto; ">
+ 
+    
+    
+                        <table id="tableAdv" class="table-light table-sm" cellspacing="0" width="100%">
+                          <thead  style="background-color: grey; color: white;">
+                            <tr>
+                              <th style="width: 30px; min-width: 30px;"></th>
+                              <th style="min-width: 200px;">Items</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Quantity*</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Payout (%)</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Earning</th>
+                              <th style="width: 30px; min-width: 30px;"></th>
+                            </tr>
+                          </thead>
+                          <tbody id="itemBodyAdv">
+                            <tr class="item">
+                              <td><i class="fas fa-grip-vertical"></i></td>
+                              <td><input type="text" class="form-control" style="border: solid #2e74b6 thin; padding-left: 0.5rem;" placeholder=" Enter item and description" oninput="sync(this);//printPreview();"></td>
+                              <td name="advanced"><input type="number" class="form-control" style="border: solid #2e74b6 thin; text-align: right;" value="-" oninput="calculateAmount(); //printPreview();"></td>
+                              <td><input type="number" class="form-control" style="border: solid #2e74b6 thin; text-align: right;" value="-" oninput="calculateAmount();//printPreview();"></td>
+                              <td name="advanced"><input type="number" class="form-control" style="border: solid #2e74b6 thin; text-align: right;" value="-" oninput="calculateAmount();//printPreview();"></td>
+                              <td style="text-align: right; font-weight: 500;"></td>
+                              <td><i class="fas fa-minus-circle" style="color: red; cursor: pointer;" onclick="removeRow(this); //printPreview();"></i></td>
+                            </tr>
+                            <tr class="subtotalAdv">
+                              <td></td>
+                              <td name="advanced"></td>
+                              <td></td>
+                              <td name="advanced"></td>
+                              <td style="text-align: right; font-weight: 500;">Subtotal</td>
+                              <td style="text-align: right; font-weight: 500;" id="subtotalItem"></td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
+    
+                        <table id="tableAdditionalItemAdv" class="table-light table-sm" cellspacing="0" width="100%">
+                          <thead style="visibility: collapse;">
+                            <tr>
+                              <th style="width: 30px; min-width: 30px;"></th>
+                              <th style="min-width: 200px;">Items</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Quantity</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Price</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Payout (%)</th>
+                              <th style="width: 100px; min-width: 100px;text-align: right;">Amount</th>
+                              <th style="width: 30px; min-width: 30px;"></th>
+    
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="additional">
+                              <td></td>
+                              <td></td>
+                              <td style="text-align: right;">
+                                <div class="dropdown">
+                                  <a class="btn btn-primary dropdown-toggle bg-white text-dark text-right" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-transform: none; padding: 0.6rem; margin: 0;">Select one</a>
+                                  <div class="dropdown-menu" aria-labelledby="SortBy" id="sort-dropdown-menu">
+                                    <a class="dropdown-item" href="javascript:;" onclick="disabledAdditionalItem(this); //calculateAmount(); //printPreview();" style="text-transform: none;">Select one</a>
+                                    <a class="dropdown-item" href="javascript:;" onclick="enabledAdditionalItem(this, 'Discount');// calculateAmount(); //printPreview();" style="text-transform: none;">Discount ( - )</a>
+                                    <a class="dropdown-item" href="javascript:;" onclick="enabledAdditionalItem(this, 'Tax');// calculateAmount(); //printPreview();" style="text-transform: none;">Additional Earning ( + )</a>
+                                  </div>
+                                </div>
+                              </td>
+                              <td><input type="text" class="form-control" style="border: solid #2e74b6 thin; text-align: right; padding-right: 1rem;" placeholder='Item' oninput='//printPreview();' readonly></td>
+                              <td><input type="number" class="form-control" style="border: solid #2e74b6 thin; text-align: right;" value="0" oninput="calculateAmount(); //printPreview();" readonly></td>
+                              <td style="text-align: right;"></td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+    
+                      <!-- <div class="col-12"> -->
+                        <!-- <h3 style="text-align: right; font-weight: 500;">Total <span style="margin-left: 2rem;" id="grandTotal">RM0.00</span></h3> -->
+                        <!-- <a href="javascript:;" class="btn btn-primary btn-round" id="addRowAdv" style="text-transform: none;">Add New Item <i class="fas fa-plus-circle" style="color: #fff; margin-left: 0.5em; padding-bottom: 0.2em;"></i></a> -->
+                        <!-- <a href="javascript:;" class="btn btn-primary btn-round" id="addAdditionalRowAdv" style="text-transform: none;">Add New Additional Item <i class="fas fa-plus-circle" style="color: #fff; margin-left: 0.5em; padding-bottom: 0.2em;"></i></a> -->
+                      <!-- </div> -->
+    
+                    </div>
+
+                    <div class="col-12">
+                      <h3 style="text-align: right; font-weight: 500;">Total <span style="margin-left: 2rem;" id="grandTotal">RM0.00</span></h3>
+                      <a href="javascript:;" class="btn btn-primary btn-round" id="addRowAdv" style="text-transform: none;">Add New Item <i class="fas fa-plus-circle" style="color: #fff; margin-left: 0.5em; padding-bottom: 0.2em;"></i></a>
+                      <a href="javascript:;" class="btn btn-primary btn-round" id="addAdditionalRowAdv" style="text-transform: none;">Add New Additional Item <i class="fas fa-plus-circle" style="color: #fff; margin-left: 0.5em; padding-bottom: 0.2em;"></i></a>
+                    </div>
+
+
+                  </div>
+  
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <footer class="footer">
+          <div class="container-fluid">
+            <nav class="float-left">
+            <ul>
+              <!-- <li>
+              <a href="https://golearn.com.my/join-us" target="_blank">
+                Visit GoLearn Tutor
+              </a>
+              </li> -->
+            </ul>
+            </nav>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+  <div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+      <a href="#" data-toggle="dropdown">
+				<i class="material-icons" style="font-size: 36px; padding: 0.2em; color: white;">apps</i>
+      </a>
+      <ul class="dropdown-menu">
+		    <br>
+        <li class="header-title">Get More Tuition Jobs?</li>
+        <li class="button-container">
+          <a href="https://golearn.com.my/job/" target="_blank" class="btn btn-primary btn-block">Apply Now</a>
+        </li>
+        
+        <li class="button-container">
+          <a href="https://golearn.com.my/" target="_blank" class="btn btn-default btn-block">
+            Visit our website
+          </a>
+        </li>
+       
+        <li class="header-title">Follow and Like Us!</li>
+        <li class="button-container text-center">
+			    <button id="facebook" class="btn btn-round btn-facebook" onclick="window.open('https://www.facebook.com/FindTutorInMalaysia/', '_blank');"><i class="fa fa-facebook-f"></i> &middot; facebook</button>
+          <button id="twitter"  class="btn btn-round btn-twitter" onclick="window.open('https://twitter.com/golearnmalaysia', '_blank');"><i class="fa fa-twitter"></i> &middot; twitter</button>
+          <button id="instagram"  class="btn btn-round btn-twitter" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); " onclick="window.open('https://www.instagram.com/golearn.education/', '_blank');"><i class="fa fa-instagram"></i> &middot; instagram</button>
+          <br>
+          <br>
+        </li>
+        <li class="header-title">Found a problem? </li>
+        <li class="button-container">
+          <a href="https://golearn.com.my/submit-anything-to-us/" target="_blank" class="btn btn-warning btn-block">
+            Let us know
+          </a>
+          <br>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src="../assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="../assets/js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <script src="../assets/js/plugins/jquery.validate.min.js"></script>
+  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+  <!-- <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script> -->
+  <!-- 	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <!-- <script src="assets/js/plugins/bootstrap-selectpicker.js"></script> -->
+  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+  <!-- <script src="assets/js/plugins/bootstrap-datetimepicker.min.js"></script> -->
+  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+  <!-- <script src="assets/js/plugins/jquery.dataTables.min.js"></script> -->
+  <!-- 	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+  <!-- <script src="assets/js/plugins/bootstrap-tagsinput.js"></script> -->
+  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+  <!-- <script src="assets/js/plugins/jasny-bootstrap.min.js"></script> -->
+  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+  <!-- <script src="assets/js/plugins/fullcalendar.min.js"></script> -->
+  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+  <!-- <script src="assets/js/plugins/jquery-jvectormap.js"></script> -->
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <!-- <script src="assets/js/plugins/nouislider.min.js"></script> -->
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> -->
+  <!-- Library for adding dinamically elements -->
+  <!-- <script src="assets/js/plugins/arrive.min.js"></script> -->
+  <!--  Google Maps Plugin    -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+  <!-- Chartist JS -->
+  <!-- <script src="assets/js/plugins/chartist.min.js"></script> -->
+  <!--  Notifications Plugin    -->
+  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+  <!-- Common constants -->
+  <script src="../../assets/js/common.js" type="text/javascript"></script>
+  <!-- Core Tutor Js -->
+  <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
+  <!-- Date range picker -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+	<script>
+    // Global Variables
+    var tutorId;
+    var current_name, current_email, current_phone, current_age, current_gender, current_imgUri, current_nric,
+      current_address1, current_address2, current_addressPostCode, current_addressState,
+      current_rating, current_ratingTimes, current_ratingFinal, current_profileStatus,
+      current_token, current_agent, current_accountStatus;
+    var currentYearsExperience, currentTutoringExperience, currentTutoringApproach, currentQualification, 
+      current_preferedAreaList, current_preferedSubjectList;
+    // Depreciated
+    // var current_chk_homeTutor, current_chk_privateTutor, current_chk_groupTutor, current_chk_onlineTutor;
+    var isModeHomeStudentToTutor, isModeHomeTutorToStudent, isModeGroup, isModeOnline, isModeOnlineGroup;
+    var isLanEng, isLanBm, isLanBc, isLanBt, isLanOther;
+    var current_chk_homeStudentToTutor, current_chk_homeTutorToStudent, current_chk_group, current_chk_online, current_chk_onlineGroup;
+    var current_mon_8am, current_mon_12pm, current_mon_3pm, current_mon_6pm, 
+      current_tue_8am, current_tue_12pm, current_tue_3pm, current_tue_6pm, 
+      current_wed_8am, current_wed_12pm, current_wed_3pm, current_wed_6pm, 
+      current_thu_8am, current_thu_12pm, current_thu_3pm, current_thu_6pm, 
+      current_fri_8am, current_fri_12pm, current_fri_3pm, current_fri_6pm,
+      current_sat_8am, current_sat_12pm, current_sat_3pm, current_sat_6pm, 
+      current_sun_8am, current_sun_12pm, current_sun_3pm, current_sun_6pm;
+    var current_aweburl, current_aPremiumSubjectLimit, current_aPremiumConnectLimit, current_aTotalSubjectLimit, 
+     current_aTotalConnectLimit, current_aPreferredSubjectLimit, current_aPreferredAreaLimit;
+     
+    // Course-specific var
+    var allCourseSize;
+		var db = firebase.firestore();
+		db.settings({ timestampsInSnapshots: true });
+
+    // Set the nav name and global var, if user already login and have session Storage 
+    var tutorInfoObj = null;
+    if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
+      // Do nothing
+    }
+    else{
+      // Set the nav user name
+      tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
+      document.getElementById("user").textContent = tutorInfoObj.name;
+
+      current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
+      // current_email, 
+      // current_phone, 
+      current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
+      current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
+      current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
+      current_accountStatus = tutorInfoObj.accountStatus; // bool
+      currentYearsExperience = tutorInfoObj.yearsExperience; // number
+      currentTutoringExperience = tutorInfoObj.tutoringExperience;
+      currentTutoringApproach = tutorInfoObj.tutoringApproach;
+      currentQualification= tutorInfoObj.qualification;
+      
+      current_aweburl = tutorInfoObj.aWebUrl
+
+      // updatePageView(current_accountStatus);
+    }
+
+		firebase.auth().onAuthStateChanged(function(user){
+      
+			if(!user){
+        // Return to login if user does not exist.
+				window.location.href = "../login.html"
+			}else{
+        // if the displayName is null, it means user register using Phone
+        if (firebase.auth().currentUser.displayName == null ){
+            tutorId = firebase.auth().currentUser.phoneNumber;
+        }else{
+          tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+        }
+        loadUserInfo(tutorId)
+          
+			}
+		});
+
+    // Tutor Specific
+    function loadUserInfo(tutorId){
+      // Tutor Id must be a phone with +60, no spacing or other chars
+      var docRef = db.collection("Tutor").doc(tutorId);
+      
+      // docRef.get().then((doc) => {
+      docRef.onSnapshot((doc) => {
+
+        if (doc.exists) {
+          // console.log("Document data:", doc.data());
+
+          current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
+          // current_email, 
+          // current_phone, 
+          current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
+          current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
+          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
+          current_accountStatus = doc.data().accountStatus; 
+          currentYearsExperience = doc.data().yearsExperience; // number
+          currentTutoringExperience = doc.data().tutoringExperience;
+          currentTutoringApproach = doc.data().tutoringApproach;
+          currentQualification= doc.data().qualification;
+          current_mon_8am = doc.data().tMon8am;
+          current_mon_12pm= doc.data().tMon12pm; 
+          current_mon_3pm = doc.data().tMon3pm;  
+          current_mon_6pm = doc.data().tMon6pm;  
+          current_tue_8am = doc.data().tTue8am;  
+          current_tue_12pm= doc.data().tTue12pm;  
+          current_tue_3pm = doc.data().tTue3pm;  
+          current_tue_6pm = doc.data().tTue6pm;  
+          current_wed_8am = doc.data().tWed8am;  
+          current_wed_12pm= doc.data().tWed12pm;  
+          current_wed_3pm = doc.data().tWed3pm;  
+          current_wed_6pm = doc.data().tWed6pm;  
+          current_thu_8am = doc.data().tThu8am;  
+          current_thu_12pm= doc.data().tThu12pm;  
+          current_thu_3pm = doc.data().tThu3pm;  
+          current_thu_6pm = doc.data().tThu6pm;  
+          current_fri_8am = doc.data().tFri8am;  
+          current_fri_12pm= doc.data().tFri12pm;  
+          current_fri_3pm = doc.data().tFri3pm;  
+          current_fri_6pm = doc.data().tFri6pm; 
+          current_sat_8am = doc.data().tSat8am;  
+          current_sat_12pm= doc.data().tSat12pm;  
+          current_sat_3pm = doc.data().tSat3pm;  
+          current_sat_6pm = doc.data().tSat6pm;  
+          current_sun_8am = doc.data().tSun8am;  
+          current_sun_12pm= doc.data().tSun12pm;  
+          current_sun_3pm = doc.data().tSun3pm;  
+          current_sun_6pm = doc.data().tSun6pm; 
+
+          // Store data to sessionStorage
+          var tutorDataObj = {
+            [NAME_KEY] : doc.data().name,
+            [EMAIL_KEY] : doc.data().email,
+            [PHONE_KEY] : doc.data().phone,
+            [AGE_KEY] : doc.data().age,
+            [GENDER_KEY] : doc.data().gender,
+            [ADDRESS_1_KEY] :doc.data().address1,
+            [ADDRESS_2_KEY] :doc.data().address2,
+            [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
+            [ADDRESS_STATE_KEY] :doc.data().addressState,
+            [IMAGE_KEY] : doc.data().imgUrl,
+            // [NRIC_KEY] : doc.data().name,
+            [RATING_KEY] : doc.data().rating,
+            [RATING_TIMES_KEY] : doc.data().ratingTimes,
+            [RATING_FINAL_KEY] : doc.data().ratingFinal,
+            [PROFILE_STATUS_KEY] : doc.data().profileStatus,
+            // [CHECK_HOMETUTOR_KEY] : doc.data().name,
+            // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
+            // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
+            // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
+            [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
+            [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
+            [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
+            [QUALIFICATION_KEY] : doc.data().qualification,
+            [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
+            [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
+            [AGENT_KEY] : doc.data().agent,
+            [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
+            
+            [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
+            [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
+            [CHECK_GROUP_KEY] : doc.data().modeGroup,
+            [CHECK_ONLINE_KEY] : doc.data().modeOnline,
+            [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
+            [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
+            [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
+            [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
+            [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
+            [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
+
+            [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
+            [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
+            [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
+            [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
+            [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
+            [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
+            [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
+            [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
+            [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
+            [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
+            [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
+            [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
+            [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
+            [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
+            [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
+            [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
+            [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
+            [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
+            [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
+            [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
+            [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
+            [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
+            [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
+            [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
+            [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
+            [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
+            [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
+            [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
+            // Create a placeholder for aWebUrl. This param can only initiated by admin
+            // manually through https://golearn.com.my/admin/admin-portal.html
+            [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
+            [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
+            [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
+            [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
+            [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
+            [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
+            [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
+          }
+
+          // Set tutorInfoObj as sessionStorage
+          sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
+
+          // Set the nav user name and public profile link
+          document.getElementById("user").textContent = doc.data().name;
+
+          if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
+            document.getElementById("navPublicProfile").href = "#"  ;
+            document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
+          } else{
+            document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
+            document.getElementById("navPublicProfile").target = "_blank";
+          }
+          
+          if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
+            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
+            document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
+            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
+            document.getElementById("btnActivateAccount").target = "_blank";
+          }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
+            document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
+            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
+            document.getElementById("btnActivateAccount").target = "_blank";
+          }else {
+            let activationNavItem = document.querySelector('#activationNavItem');
+            let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
+            console.log(activationNavItemIsExist)
+            // Remove NavItem if exist
+            if (activationNavItemIsExist){
+              activationNavItem.parentNode.removeChild(activationNavItem);
+            }else{
+              // Do nothing
+            }
+          }
+        } else {
+           // Do nothing 
+        }
+      });
+
+    };
+
+    //-------- Item Table Handling Start-----------------/
+    const table = document.getElementById('table');
+    // const tableAdditionalItem = document.getElementById('tableAdditionalItem');
+    let draggingEle;
+    let draggingEleAdv;
+    let draggingRowIndex;
+    let placeholder;
+    let placeholderAdv;
+    let list;
+    let listAdv;
+    let isDraggingStarted = false;
+
+    // The current position of mouse relative to the dragging element
+    let x = 0;
+    let y = 0;
+
+    // Swap two nodes
+    const swap = function (nodeA, nodeB) {
+        const parentA = nodeA.parentNode;
+        const siblingA = nodeA.nextSibling === nodeB ? nodeA : nodeA.nextSibling;
+
+        // Move `nodeA` to before the `nodeB`
+        nodeB.parentNode.insertBefore(nodeA, nodeB);
+
+        // Move `nodeB` to before the sibling of `nodeA`
+        parentA.insertBefore(nodeB, siblingA);
+    };
+
+    // Check if `nodeA` is above `nodeB`
+    const isAbove = function (nodeA, nodeB) {
+        // Get the bounding rectangle of nodes
+        const rectA = nodeA.getBoundingClientRect();
+        const rectB = nodeB.getBoundingClientRect();
+
+        return rectA.top + rectA.height / 2 < rectB.top + rectB.height / 2;
+    };
+
+    const cloneTable = function (elem) {
+      const rect = elem.getBoundingClientRect();
+      // console.log(rect)
+      const width = parseInt(window.getComputedStyle(elem).width);
+
+      list = document.createElement('div');
+      list.classList.add('clone-list');
+      list.style.position = 'fixed';
+      list.style.left = `${rect.left}px`;
+      list.style.top = `${rect.top}px`;
+      elem.parentNode.insertBefore(list, elem);
+
+      // Hide the original table
+      elem.style.visibility = 'hidden';
+
+      elem.querySelectorAll('tr').forEach(function (row) {
+        // Create a new table from given row
+        const item = document.createElement('div');
+        item.classList.add('draggable');
+
+        const newTable = document.createElement('table');
+        // newTable.setAttribute('class', 'clone-table');
+        newTable.setAttribute('class', 'table-light table-sm');
+        newTable.setAttribute('cellspacing', "0");
+        newTable.setAttribute('width',"100%");
+        newTable.style.width = `${width}px`;
+
+        const newRow = document.createElement('tr');
+        const cells = [].slice.call(row.children);
+        cells.forEach(function (cell) {
+          const newCell = cell.cloneNode(true);
+          newCell.style.width = `${parseInt(window.getComputedStyle(cell).width)}px`;
+          newRow.appendChild(newCell);
+        });
+
+        newTable.appendChild(newRow);
+        item.appendChild(newTable);
+        list.appendChild(item);
+      });
+    };
+
+    const cloneTableAdv = function (elem) {
+      const rect = elem.getBoundingClientRect();
+      // console.log(rect)
+      const width = parseInt(window.getComputedStyle(elem).width);
+
+      listAdv = document.createElement('div');
+      listAdv.classList.add('clone-list');
+      listAdv.style.position = 'fixed';
+      listAdv.style.left = `${rect.left}px`;
+      listAdv.style.top = `${rect.top}px`;
+      elem.parentNode.insertBefore(listAdv, elem);
+
+      // Hide the original table
+      elem.style.visibility = 'hidden';
+
+      elem.querySelectorAll('tr').forEach(function (row) {
+        // Create a new table from given row
+        const item = document.createElement('div');
+        item.classList.add('draggable');
+
+        const newTable = document.createElement('table');
+        // newTable.setAttribute('class', 'clone-table');
+        newTable.setAttribute('class', 'table-light table-sm');
+        newTable.setAttribute('cellspacing', "0");
+        newTable.setAttribute('width',"100%");
+        newTable.style.width = `${width}px`;
+
+        const newRow = document.createElement('tr');
+        const cells = [].slice.call(row.children);
+        cells.forEach(function (cell) {
+          const newCell = cell.cloneNode(true);
+          newCell.style.width = `${parseInt(window.getComputedStyle(cell).width)}px`;
+          newRow.appendChild(newCell);
+        });
+
+        newTable.appendChild(newRow);
+        item.appendChild(newTable);
+        listAdv.appendChild(item);
+      });
+    };
+
+
+    const mouseDownHandler = function (e) {
+        // Get the original row
+        // Layer 1
+        let originalRow = e.target.parentNode;
+        if (originalRow.nodeName.toLowerCase() === 'tr'){
+          // Correct parents node. Do nothing
+        }else {
+          // Layer 2
+          originalRow = originalRow.parentNode;
+          if (originalRow.nodeName.toLowerCase() === 'tr'){
+          // Correct parents node. Do nothing
+          }else {
+            // Layer 3
+            originalRow = originalRow.parentNode;
+            if (originalRow.nodeName.toLowerCase() === 'tr'){
+            // Correct parents node. Do nothing
+            }else {
+              // Layer 4
+              // Impossible to  reach here
+              originalRow = originalRow.parentNode;
+              if (originalRow.nodeName.toLowerCase() === 'tr'){
+              // Correct parents node. Do nothing
+              }else {
+                // Layer 5
+                // Impossible to  reach here
+                originalRow = originalRow.parentNode;
+                if (originalRow.nodeName.toLowerCase() === 'tr'){
+                  // Correct parents node. Do nothing
+                }else {
+                  // Layer 6
+                  // Impossible to  reach here
+                  originalRow = originalRow.parentNode;
+                  if (originalRow.nodeName.toLowerCase() === 'tr'){
+                    // Correct parents node. Do nothing
+                  }else {
+                    // There must be so many nested tag inside a cell. 
+                    // Technically, it is impossible to reach here. 
+                    // In case you are here, just add more layers.
+                  }
+                }
+              }
+            }
+          }
+
+        }
+
+        // console.log(originalRow);
+        // OrignalRow refers to row in the tBody. To get the id of the table, we need to move up 2 more layers.
+        let idTable = originalRow.parentNode.parentNode.id;
+        // console.log(idTable);
+        if (idTable === 'tableSimple'){
+          draggingRowIndex = [].slice.call(tableSimple.querySelectorAll('tr')).indexOf(originalRow);
+        }else{
+          draggingRowIndex = [].slice.call(tableAdv.querySelectorAll('tr')).indexOf(originalRow);
+        }
+
+        // Determine the mouse position
+        x = e.clientX;
+        y = e.clientY;
+
+        // Attach the listeners to `document`
+        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('mouseup', mouseUpHandler);
+    };
+
+    const mouseMoveHandler = function (e) {
+      if (!isDraggingStarted) {
+        isDraggingStarted = true;
+
+        cloneTable(tableSimple);
+        // cloneTable(tableAdv);
+        cloneTableAdv(tableAdv);
+        // console.log(draggingRowIndex);
+        // console.log([].slice.call(list.children));
+        draggingEle = [].slice.call(list.children)[draggingRowIndex];
+        draggingEle.classList.add('dragging');
+
+        // Let the placeholder take the height of dragging element
+        // So the next element won't move up
+        placeholder = document.createElement('div');
+        placeholder.classList.add('placeholder');
+        draggingEle.parentNode.insertBefore(placeholder, draggingEle.nextSibling);
+        placeholder.style.height = `${draggingEle.offsetHeight}px`;
+
+        // Advanced Table
+        draggingEleAdv = [].slice.call(listAdv.children)[draggingRowIndex];
+        draggingEleAdv.classList.add('dragging');
+
+        // Let the placeholder take the height of dragging element
+        // So the next element won't move up
+        placeholderAdv = document.createElement('div');
+        placeholderAdv.classList.add('placeholder');
+        draggingEleAdv.parentNode.insertBefore(placeholderAdv, draggingEleAdv.nextSibling);
+        placeholderAdv.style.height = `${draggingEleAdv.offsetHeight}px`;
+      }
+
+      // Set position for dragging element
+      draggingEle.style.position = 'fixed';
+      draggingEle.style.top = `${draggingEle.offsetTop + e.clientY - y}px`;
+      draggingEle.style.left = `${draggingEle.offsetLeft + e.clientX - x}px`;
+
+      // Set position for dragging element
+      draggingEleAdv.style.position = 'fixed';
+      draggingEleAdv.style.top = `${draggingEleAdv.offsetTop + e.clientY - y}px`;
+      draggingEleAdv.style.left = `${draggingEleAdv.offsetLeft + e.clientX - x}px`;
+      console.log(draggingEle.offsetTop, draggingEleAdv.offsetTop, e.clientY, e.clientX, y, x)
+      // console.log(draggingEle.offsetTop + e.clientY - y, draggingEle.offsetTop + e.clientX - x)
+      // console.log(draggingEleAdv.offsetTop + e.clientY - y, draggingEleAdv.offsetTop + e.clientX - x)
+
+      // Reassign the position of mouse
+      x = e.clientX;
+      y = e.clientY;
+
+      // The current order
+      // prevEle
+      // draggingEle
+      // placeholder
+      // nextEle
+      const prevEle = draggingEle.previousElementSibling;
+      const nextEle = placeholder.nextElementSibling;
+
+      const prevEleAdv = draggingEleAdv.previousElementSibling;
+      const nextEleAdv = placeholderAdv.nextElementSibling;
+
+
+      // The dragging element is above the previous element
+      // User moves the dragging element to the top
+      // We don't allow to drop above the header
+      // (which doesn't have `previousElementSibling`)
+      if (prevEle && prevEle.previousElementSibling && isAbove(draggingEle, prevEle)) {
+        // The current order    -> The new order
+        // prevEle              -> placeholder
+        // draggingEle          -> draggingEle
+        // placeholder          -> prevEle
+        swap(placeholder, draggingEle);
+        swap(placeholder, prevEle);
+        return;
+      }
+
+      // The dragging element is below the next element
+      // User moves the dragging element to the bottom
+      if (nextEle && isAbove(nextEle, draggingEle)) {
+        // The current order    -> The new order
+        // draggingEle          -> nextEle
+        // placeholder          -> placeholder
+        // nextEle              -> draggingEle
+        swap(nextEle, placeholder);
+        swap(nextEle, draggingEle);
+      }
+    
+      // Advanced Table
+      // The dragging element is above the previous element
+      // User moves the dragging element to the top
+      // We don't allow to drop above the header
+      // (which doesn't have `previousElementSibling`)
+      if (prevEleAdv && prevEleAdv.previousElementSibling && isAbove(draggingEleAdv, prevEleAdv)) {
+        // The current order    -> The new order
+        // prevEle              -> placeholder
+        // draggingEle          -> draggingEle
+        // placeholder          -> prevEle
+        swap(placeholderAdv, draggingEleAdv);
+        swap(placeholderAdv, prevEleAdv);
+        return;
+      }
+
+      // The dragging element is below the next element
+      // User moves the dragging element to the bottom
+      if (nextEleAdv && isAbove(nextEleAdv, draggingEleAdv)) {
+        // The current order    -> The new order
+        // draggingEle          -> nextEle
+        // placeholder          -> placeholder
+        // nextEleAdv              -> draggingEle
+        swap(nextEleAdv, placeholderAdv);
+        swap(nextEleAdv, draggingEleAdv);
+      }
+
+    };
+
+    const mouseUpHandler = function () {
+        // Remove the placeholder
+        placeholder && placeholder.parentNode.removeChild(placeholder);
+
+        draggingEle.classList.remove('dragging');
+        draggingEle.style.removeProperty('top');
+        draggingEle.style.removeProperty('left');
+        draggingEle.style.removeProperty('position');
+
+        placeholderAdv && placeholderAdv.parentNode.removeChild(placeholderAdv);
+
+        draggingEleAdv.classList.remove('dragging');
+        draggingEleAdv.style.removeProperty('top');
+        draggingEleAdv.style.removeProperty('left');
+        draggingEleAdv.style.removeProperty('position');
+
+        // Get the end index
+        const endRowIndex = [].slice.call(list.children).indexOf(draggingEle);
+        const endRowIndexAdv = [].slice.call(listAdv.children).indexOf(draggingEleAdv);
+
+        isDraggingStarted = false;
+
+        // Remove the `list` element
+        list.parentNode.removeChild(list);
+        listAdv.parentNode.removeChild(listAdv);
+
+        // Move the dragged row to `endRowIndex`
+        let rows = [].slice.call(tableSimple.querySelectorAll('tr'));
+        draggingRowIndex > endRowIndex
+            ? rows[endRowIndex].parentNode.insertBefore(rows[draggingRowIndex], rows[endRowIndex])
+            : rows[endRowIndex].parentNode.insertBefore(
+                  rows[draggingRowIndex],
+                  rows[endRowIndex].nextSibling
+              );
+
+        let rowsAdv = [].slice.call(tableAdv.querySelectorAll('tr'));
+        draggingRowIndex > endRowIndexAdv
+            ? rowsAdv[endRowIndexAdv].parentNode.insertBefore(rowsAdv[draggingRowIndex], rowsAdv[endRowIndexAdv])
+            : rowsAdv[endRowIndexAdv].parentNode.insertBefore(
+                  rowsAdv[draggingRowIndex],
+                  rowsAdv[endRowIndexAdv].nextSibling
+              );
+
+        // Bring back the table
+        tableSimple.style.removeProperty('visibility');
+        tableAdv.style.removeProperty('visibility');
+
+        // Remove the handlers of `mousemove` and `mouseup`
+        document.removeEventListener('mousemove', mouseMoveHandler);
+        document.removeEventListener('mouseup', mouseUpHandler);
+    };
+
+    // Run first 
+    const assignDraggable = function(){
+      table.querySelectorAll('tr').forEach(function (row, index) {
+        // Ignore the header
+        // We don't want user to change the order of header
+        if (index === 0) {
+            return;
+        }
+        // Ignore row with certain class name
+        else if(row.className != 'item'){
+          return;
+        } 
+
+        // console.log(row)
+        // console.log(row.className)
+        const firstCell = row.firstElementChild;
+        firstCell.classList.add('draggable');
+        firstCell.addEventListener('mousedown', mouseDownHandler);
+      });
+    }
+
+    // Find the parents node through while loops
+    // ref: https://www.jsdiaries.com/how-to-loop-through-parent-nodes-in-javascript/
+    const findAscendingTag = (el, tag) => {
+        while (el.parentNode) {
+          el = el.parentNode;
+          // console.log(el.tagName)
+          if (el.tagName === tag)
+            return el;
+          else{
+            
+          }
+          // return el.tagName === tag ? el : null;
+        }
+      }
+
+    // Discount Selected
+    function calculateDiscount(elem){
+      let selectedNode = elem.parentNode.parentNode.children[0];
+      selectedNode.value = elem.textContent;
+      selectedNode.textContent = elem.textContent;
+
+      var trParent = findAscendingTag(elem, "TR");
+      // TODO: Assign discount function to the cell next to this element
+      console.log(trParent);
+    }
+
+    // Tax Rate Selected
+    function calculateRate(elem){
+      let selectedNode = elem.parentNode.parentNode.children[0];
+      selectedNode.value = elem.textContent;
+      selectedNode.textContent = elem.textContent;
+
+      var trParent = findAscendingTag(elem, "TR");
+      // TODO: Assign tax rate function to the cell next to this element
+
+      // Calculate Subtotal of Item
+      let subTotal = calculateSubtotal();
+
+      // console.log(trParent);
+    }
+
+    // Calculate the amount for Normal Items based on quantity and unit price
+    function calculateAmount (){
+
+      let subTotal = calculateSubtotal();
+      let total = calculateTotal(subTotal);
+      
+    }
+
+
+    // Calculate the subtotal for all Normal Items
+    function calculateSubtotal(){
+
+      let subTotal = 0;
+      let subTotalText = ''
+      table.querySelectorAll('tr').forEach(function (row, index) {
+        
+        // Ignore the header
+        // We don't want user to change the order of header
+        if (index === 0) {
+          return;
+        }
+        // Ignore row with certain class name
+        else if(row.className != 'item'){
+          return;
+        }
+
+        // console.log(row)
+        // Calculate the subtotal amount
+        let quantity = row.children[2].getElementsByTagName("input")[0].value;
+        let price = row.children[3].getElementsByTagName("input")[0].value;
+        let payout = row.children[4].getElementsByTagName("input")[0].value;
+
+        console.log(quantity, price, payout)
+
+        // Set the value of Amount at 5th cell
+        if (isNaN(quantity) ||isNaN(price) ){
+          row.children[5].textContent = 'INVALID'; 
+        }
+        else if (quantity== '' && price== ''){
+          // If no input to quantity and value, clear the amount.
+          row.children[5].textContent = '';
+        }
+        else {
+          let amount = quantity * price;
+          subTotal += amount;
+          row.children[5].textContent= (amount >= 0) ? 'RM'+amount.toFixed(2) : '- RM'+ Math.abs(amount).toFixed(2)
+        }
+      });
+
+      if (isNaN(subTotal) ){
+        subTotalText = 'INVALID';
+        // console.log(subTotalText)
+        document.getElementById("subtotalItem").textContent = subTotalText;
+        return 0;
+      }else {
+
+        subTotalText = (subTotal >= 0) ? 'RM'+subTotal.toFixed(2) : '- RM'+ Math.abs(subTotal).toFixed(2)
+        // console.log(subTotalText)
+        document.getElementById("subtotalItem").textContent = subTotalText;
+        return subTotal;
+
+      }
+
+    }
+
+    // Calculate the subtotal for all Normal + Additional Items
+    function calculateTotal(subTotal){
+
+      let total = subTotal;
+      let temp_amount = 0;
+      let totalText = '';
+      tableAdditionalItem.querySelectorAll('tr').forEach(function (row, index) {
+        
+        // Ignore the header
+        // We don't want user to change the order of header
+        if (index === 0) {
+          return;
+        }
+        // Ignore row with certain class name
+        else if(row.className != 'additional'){
+          return;
+        }
+
+        // console.log(row)
+        // Get the Action: 2rd TF tag cell > div tag > first A tag
+        let action = row.children[1].children[0].children[0].textContent;
+
+        // Get input value
+        let input = parseFloat(row.children[3].getElementsByTagName("input")[0].value);
+
+        // console.log(action);
+        // console.log(input);
+
+        if (action === 'Discount ( - )'){
+          temp_amount = -input;
+          total = total - input;
+         
+        }else if(action === 'Tax Rate (%)'){
+          temp_amount = total * (input) / 100;
+          total = total * (100 + input) / 100;
+          
+        }else{
+          // No change
+          temp_amount = 0;
+          total = total;
+          
+        }
+        // console.log('Total: '+total);
+        // Set the value of Amount at 5th cell
+        if (isNaN(temp_amount)){
+          row.children[4].textContent = 'INVALID'; 
+        }
+        else {
+          row.children[4].textContent = (temp_amount >= 0) ? '+ RM'+temp_amount.toFixed(2) : '- RM'+ Math.abs(temp_amount).toFixed(2)
+        }
+        // if (isNaN(total)){
+        //   row.children[4].textContent = 'INVALID'; 
+        // }else {
+        //   row.children[4].textContent = (total >= 0) ? 'RM'+total.toFixed(2) : '- RM'+ Math.abs(total).toFixed(2)
+        // }
+
+      });
+
+      // Set the grand total.
+      if (isNaN(total) ){
+          totalText = 'INVALID';
+          // console.log(totalText)
+          document.getElementById("grandTotal").textContent = totalText;
+          return 0;
+        }
+      else 
+      {
+        totalText = (total >= 0) ? 'RM'+total.toFixed(2) : '- RM'+ Math.abs(total).toFixed(2)
+        // console.log(totalText)
+        document.getElementById("grandTotal").textContent = totalText;
+        return total;
+      }
+
+    }
+
+
+    // ------------- Utilities -------------// 
+    // Remove an item
+    function removeElementBasedOnId(id){
+      document.getElementById(id).remove();
+    }
+    
+    //
+    function showAdvancedColumns(elem){
+      
+      // $('#viewAdv').css('display', '');
+      // a = document.getElementById("advanced").style;
+      // console.log(a);
+      // console.log($('th[name=advanced]').css())
+      if (elem.checked){
+        // $('#viewSimple').css('display', 'none');
+        // $('#viewAdv').css('display', '');
+        $('#viewSimple').css('visibility', 'collapse');
+        $('#viewAdv').css('visibility', 'visible');
+        // $('th[name=advanced]').css('display', '');
+        // $('td[name=advanced]').css('display', '');
+      }else{
+        // $('#viewSimple').css('display', '');
+        // $('#viewAdv').css('display', 'none');
+
+        $('#viewSimple').css('visibility', 'visible');
+        $('#viewAdv').css('visibility', 'collapse');
+        // $('th[name=advanced]').css('display', 'none');
+        // $('td[name=advanced]').css('display', 'none');
+      }
+
+    }
+
+
+
+    // Enable / Disable the first additional item when 'Select One' is picked
+    function enabledAdditionalItem(elem, itemName){
+      // let selectedNode = elem.parentNode.parentNode.children[0];
+      // selectedNode.value = elem.textContent;
+      // selectedNode.textContent = elem.textContent;
+
+      // Get the TR parents node
+      var trParent = findAscendingTag(elem, "TR");
+
+      // Setup 2nd cell: dropdown menu - find the first A tag
+      trParent.children[1].getElementsByTagName("a")[0].value = elem.textContent;
+      trParent.children[1].getElementsByTagName("a")[0].textContent = elem.textContent;
+
+      // Setup 3rd cell: itemName input
+      // document.getElementById("firstAddItemName").removeAttribute("readonly");
+      trParent.children[2].getElementsByTagName("input")[0].removeAttribute("readonly");
+      // document.getElementById("firstAddItemName").value = itemName;
+      trParent.children[2].getElementsByTagName("input")[0].value = itemName;
+
+      // Setup 4th cell: itemAmount input
+      // document.getElementById("firstAddItemPrice").removeAttribute("readonly");
+      trParent.children[3].getElementsByTagName("input")[0].removeAttribute("readonly");
+    }
+    
+    
+    function disabledAdditionalItem(elem){
+      // let selectedNode = elem.parentNode.parentNode.children[0];
+      // selectedNode.value = elem.textContent;
+      // selectedNode.textContent = elem.textContent;
+
+      // Get the TR parents node
+      var trParent = findAscendingTag(elem, "TR");
+
+      // Setup 2nd cell: dropdown menu - find the first A tag
+      trParent.children[1].getElementsByTagName("a")[0].value = elem.textContent;
+      trParent.children[1].getElementsByTagName("a")[0].textContent = elem.textContent;
+
+      // Setup 3rd cell: itemName input
+      // document.getElementById("firstAddItemName").setAttribute("readonly", true);
+      trParent.children[2].getElementsByTagName("input")[0].setAttribute("readonly", true);
+      // document.getElementById("firstAddItemName").value = '';
+      trParent.children[2].getElementsByTagName("input")[0].value = '';
+
+      // Setup 4th cell: itemAmount input
+      // document.getElementById("firstAddItemPrice").setAttribute("readonly", true);
+      trParent.children[3].getElementsByTagName("input")[0].setAttribute("readonly", true);
+      // document.getElementById("firstAddItemPrice").value = 0;
+      trParent.children[3].getElementsByTagName("input")[0].value = 0;
+
+    }
+
+
+    // Add an item
+    function addRow(){
+      let draggableRowLastIndex = document.getElementById("table").querySelectorAll('.draggable').length;
+      // Create an empty <tr> element and add it to the last position of draggable items.
+      var row = table.insertRow(draggableRowLastIndex + 1);
+      // console.log(draggableRowLastIndex);
+
+      // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      cell3.setAttribute("name", "advanced");
+      var cell4 = row.insertCell(3);
+      cell4.setAttribute("name", "advanced");
+      var cell5 = row.insertCell(4);
+      cell5.setAttribute("name", "advanced");
+      var cell6 = row.insertCell(5);
+      var cell7 = row.insertCell(6);
+
+      row.className = 'item'
+      // Add some text to the new cells:
+      cell1.innerHTML = "<i class='fas fa-grip-vertical'></i>";
+      cell2.innerHTML = "<input type='text' class='form-control' style='border: solid #2e74b6 thin; padding-left: 0.5rem;' placeholder=' Enter item and description' oninput='//printPreview();'>";
+      cell3.innerHTML = "<input type='number' class='form-control' style='border: solid #2e74b6 thin; text-align: right;' value='1' oninput='calculateAmount(this); //printPreview();'>";
+      cell4.innerHTML = "<input type='number' class='form-control' style='border: solid #2e74b6 thin; text-align: right;' value='0' oninput='calculateAmount(this); //printPreview();'>";
+      cell5.innerHTML = "<input type='number' class='form-control' style='border: solid #2e74b6 thin; text-align: right;' value='0' oninput='calculateAmount(this); //printPreview();'>";
+      cell6.innerHTML = "<input type='text' class='form-control' style='border: solid #2e74b6 thin; text-align: right; padding-right: 0.5rem; ' value='0' oninput='//calculateAmount(this); printPreview();'>";
+      // cell5.setAttribute('style', 'text-align: right;');
+      cell7.innerHTML = "<i class='fas fa-minus-circle' style='color: red; cursor: pointer;' onclick='removeRow(this); //printPreview();'></i>";
+
+      assignDraggable();
+    }
+
+    // Add an additional 
+    function addAdditionalRow(){
+
+      let draggableRowLastIndex = document.getElementById("tableAdditionalItem").querySelectorAll('.additional').length;
+      // Create an empty <tr> element and add it to the last position of draggable items.
+      var row = tableAdditionalItem.insertRow(draggableRowLastIndex + 1);
+      row.className = 'additional'
+      console.log(draggableRowLastIndex);
+
+      // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
+      var cell5 = row.insertCell(4);
+      var cell6 = row.insertCell(5);
+
+      // Add some text to the new cells:
+      cell1.innerHTML = "";
+    
+      let dropdown_discount = document.createElement('a');
+      dropdown_discount.className = 'dropdown-item';
+      dropdown_discount.textContent = 'Discount ( - )';
+      dropdown_discount.setAttribute('href', 'javascript:;');
+      dropdown_discount.setAttribute('style', 'text-transform: none;');
+      dropdown_discount.setAttribute('onclick', "enabledAdditionalItem(this, 'Discount'); calculateAmount(); printPreview();");
+      let dropdown_tax = document.createElement('a');
+      dropdown_tax.className = 'dropdown-item';
+      dropdown_tax.textContent = 'Tax Rate (%)';
+      dropdown_tax.setAttribute('href', 'javascript:;');
+      dropdown_tax.setAttribute('style', 'text-transform: none;');
+      dropdown_tax.setAttribute('onclick', "enabledAdditionalItem(this, 'Tax'); calculateAmount(); printPreview();");
+      let dropdown = document.createElement('div');
+      dropdown.className = 'dropdown-menu';
+      dropdown.appendChild(dropdown_discount);
+      dropdown.appendChild(dropdown_tax);
+      let dropdown_btn = document.createElement('a');
+      dropdown_btn.className = 'btn btn-primary dropdown-toggle bg-white text-dark text-right';
+      dropdown_btn.type = 'Button';
+      dropdown_btn.textContent = 'Select one';
+      dropdown_btn.setAttribute('style', 'text-transform: none; padding: 0.6rem; margin: 0;');
+      dropdown_btn.setAttribute('data-toggle', 'dropdown');
+      dropdown_btn.setAttribute('aria-haspopup', 'true');
+      dropdown_btn.setAttribute('aria-expanded', 'false');
+      let dropdown_top = document.createElement('div');
+      dropdown_top.className = 'dropdown';
+      dropdown_top.appendChild(dropdown_btn);
+      dropdown_top.appendChild(dropdown);
+
+      cell2.setAttribute('style', "text-align: right");
+      cell2.appendChild(dropdown_top);
+
+      cell3.innerHTML = "<input type='text' class='form-control' style='border: solid #2e74b6 thin; text-align: right; padding-right: 1rem;' oninput='printPreview();'placeholder='Item' readonly>";
+
+      cell4.innerHTML = "<input type='number' class='form-control' style='border: solid #2e74b6 thin; text-align: right;' value='0' oninput='calculateAmount(); printPreview();' readonly>";
+      cell5.setAttribute('style', 'text-align: right;');
+      cell6.innerHTML = "<i class='fas fa-minus-circle' style='color: red; cursor: pointer;' onclick='removeRow(this); printPreview();'></i>";
+
+      assignDraggable();
+    }
+
+    // Remove an item
+    function removeRow2(elem){
+
+      // console.log(elem)
+      // Get the original row
+      // Layer 1
+      let originalRow = elem.parentNode;
+      if (originalRow.nodeName.toLowerCase() === 'tr'){
+        // Correct parents node. Do nothing
+      }else {
+        // Layer 2
+        originalRow = originalRow.parentNode;
+        if (originalRow.nodeName.toLowerCase() === 'tr'){
+        // Correct parents node. Do nothing
+        }else {
+          // Layer 3
+          originalRow = originalRow.parentNode;
+          if (originalRow.nodeName.toLowerCase() === 'tr'){
+          // Correct parents node. Do nothing
+          }else {
+            // Layer 4
+            // Impossible to  reach here
+            originalRow = originalRow.parentNode;
+            if (originalRow.nodeName.toLowerCase() === 'tr'){
+            // Correct parents node. Do nothing
+            }else {
+              // Layer 5
+              // Impossible to  reach here
+              originalRow = originalRow.parentNode;
+              if (originalRow.nodeName.toLowerCase() === 'tr'){
+                // Correct parents node. Do nothing
+              }else {
+                // Layer 6
+                // Impossible to  reach here
+                originalRow = originalRow.parentNode;
+                if (originalRow.nodeName.toLowerCase() === 'tr'){
+                  // Correct parents node. Do nothing
+                }else {
+                  // There must be so many nested tag inside a cell. 
+                  // Technically, it is impossible to reach here. 
+                  // In case you are here, just add more layers.
+                }
+              }
+            }
+          }
+        }
+
+      }
+
+
+      // $( "#timeSlot-"+id ).remove();
+      originalRow.parentNode.removeChild(originalRow);
+
+      // After removing item, recalculate total
+      calculateAmount();
+    }
+    
+
+    // Testing ---------
+    const tableSimple = document.getElementById('tableSimple');
+    const tableAdv = document.getElementById('tableAdv');
+
+    // Add an item
+    function addRow2(){
+      // Table simple
+      let draggableRowNormalLastIndex = document.getElementById("tableSimple").querySelectorAll('.draggable').length;
+      // Create an empty <tr> element and add it to the last position of draggable items.
+      var row = tableSimple.insertRow(draggableRowNormalLastIndex + 1);
+      // console.log(draggableRowNormalLastIndex);
+
+      // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+      var cell1 = row.insertCell(0); // Draggable
+      var cell2 = row.insertCell(1); // Item
+      var cell3 = row.insertCell(2); // Price
+      var cell4 = row.insertCell(3); // Amount
+      var cell5 = row.insertCell(4); // Delete
+
+      row.className = 'item'
+      // Add some text to the new cells:
+      cell1.innerHTML = "<i class='fas fa-grip-vertical'></i>";
+      cell2.innerHTML = "<input type='text' class='form-control' style='border: solid #2e74b6 thin; padding-left: 0.5rem;' placeholder=' Enter item and description' oninput='sync(this);//printPreview();'>";
+      // cell3.innerHTML = "<input type='number' class='form-control' style='border: solid #2e74b6 thin; text-align: right;' value='1' oninput='calculateAmount(this); //printPreview();'>";
+      // cell4.innerHTML = "<input type='number' class='form-control' style='border: solid #2e74b6 thin; text-align: right;' value='0' oninput='calculateAmount(this); //printPreview();'>";
+      cell3.innerHTML = "<input type='number' class='form-control' style='border: solid #2e74b6 thin; text-align: right;' value='0' oninput='calculateAmount(this); //printPreview();'>";
+      // cell6.innerHTML = "<input type='text' class='form-control' style='border: solid #2e74b6 thin; text-align: right; padding-right: 0.5rem; ' value='0' oninput='//calculateAmount(this); printPreview();'>";
+      cell4.setAttribute('style', 'text-align: right;');
+      cell5.innerHTML = "<i class='fas fa-minus-circle' style='color: red; cursor: pointer;' onclick='removeRow(this); //printPreview();'></i>";
+
+      assignDraggableWithElem(tableSimple);
+
+      // Table Advanced
+
+      let draggableRowLastIndex = document.getElementById("tableAdv").querySelectorAll('.draggable').length;
+      // Create an empty <tr> element and add it to the last position of draggable items.
+      var row = tableAdv.insertRow(draggableRowLastIndex + 1);
+      // console.log(draggableRowLastIndex);
+
+      // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
+      var cell5 = row.insertCell(4);
+      var cell6 = row.insertCell(5);
+      var cell7 = row.insertCell(6);
+
+      row.className = 'item'
+      // Add some text to the new cells:
+      cell1.innerHTML = "<i class='fas fa-grip-vertical'></i>";
+      cell2.innerHTML = "<input type='text' class='form-control' style='border: solid #2e74b6 thin; padding-left: 0.5rem;' placeholder=' Enter item and description' oninput='sync(this);//printPreview();'>";
+      cell3.innerHTML = "<input type='number' class='form-control' style='border: solid #2e74b6 thin; text-align: right;' value='1' oninput='calculateAmount(this); //printPreview();'>";
+      cell4.innerHTML = "<input type='number' class='form-control' style='border: solid #2e74b6 thin; text-align: right;' value='0' oninput='calculateAmount(this); //printPreview();'>";
+      cell5.innerHTML = "<input type='number' class='form-control' style='border: solid #2e74b6 thin; text-align: right;' value='0' oninput='calculateAmount(this); //printPreview();'>";
+      // cell6.innerHTML = "<input type='text' class='form-control' style='border: solid #2e74b6 thin; text-align: right; padding-right: 0.5rem; ' value='0' oninput='//calculateAmount(this); printPreview();'>";
+      cell6.setAttribute('style', 'text-align: right;');
+      cell7.innerHTML = "<i class='fas fa-minus-circle' style='color: red; cursor: pointer;' onclick='removeRow(this); //printPreview();'></i>";
+
+      assignDraggableWithElem(tableAdv);
+    }
+
+    const tableAdditionalItem = document.getElementById('tableAdditionalItem');
+    const tableAdditionalItemAdv = document.getElementById('tableAdditionalItemAdv')
+
+    // Add an item
+    function addAdditionalRow2(){
+
+      let draggableRowLastIndex = tableAdditionalItem.querySelectorAll('.additional').length;
+      let draggableRowAdvLastIndex = tableAdditionalItemAdv.querySelectorAll('.additional').length;
+
+      // Create an empty <tr> element and add it to the last position of draggable items.
+      var row = tableAdditionalItem.insertRow(draggableRowLastIndex + 1);
+      var rowAdv = tableAdditionalItemAdv.insertRow(draggableRowAdvLastIndex + 1);
+      row.className = 'additional';
+      rowAdv.className = 'additional';
+
+
+      // console.log(draggableRowLastIndex);
+
+      // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+      // var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(0);
+      var cell3 = row.insertCell(1);
+      var cell4 = row.insertCell(2);
+      var cell5 = row.insertCell(3);
+      var cell6 = row.insertCell(4);
+
+      
+      var cell1Adv = rowAdv.insertCell(0);
+      var cell2Adv = rowAdv.insertCell(1);
+      var cell3Adv = rowAdv.insertCell(2);
+      var cell4Adv = rowAdv.insertCell(3);
+      var cell5Adv = rowAdv.insertCell(4);
+      var cell6Adv = rowAdv.insertCell(5);
+      var cell7Adv = rowAdv.insertCell(6);
+
+      // Add some text to the new cells:
+      // cell1.innerHTML = "";
+      cell1Adv.innerHTML = "";
+      cell2Adv.innerHTML = "";
+    
+      let dropdown_discount = document.createElement('a');
+      dropdown_discount.className = 'dropdown-item';
+      dropdown_discount.textContent = 'Discount ( - )';
+      dropdown_discount.setAttribute('href', 'javascript:;');
+      dropdown_discount.setAttribute('style', 'text-transform: none;');
+      dropdown_discount.setAttribute('onclick', "enabledAdditionalItem(this, 'Discount'); calculateAmount(); printPreview();");
+      let dropdown_tax = document.createElement('a');
+      dropdown_tax.className = 'dropdown-item';
+      dropdown_tax.textContent = 'Tax Rate (%)';
+      dropdown_tax.setAttribute('href', 'javascript:;');
+      dropdown_tax.setAttribute('style', 'text-transform: none;');
+      dropdown_tax.setAttribute('onclick', "enabledAdditionalItem(this, 'Tax'); calculateAmount(); printPreview();");
+      let dropdown = document.createElement('div');
+      dropdown.className = 'dropdown-menu';
+      dropdown.appendChild(dropdown_discount);
+      dropdown.appendChild(dropdown_tax);
+      let dropdown_btn = document.createElement('a');
+      dropdown_btn.className = 'btn btn-primary dropdown-toggle bg-white text-dark text-right';
+      dropdown_btn.type = 'Button';
+      dropdown_btn.textContent = 'Select one';
+      dropdown_btn.setAttribute('style', 'text-transform: none; padding: 0.6rem; margin: 0;');
+      dropdown_btn.setAttribute('data-toggle', 'dropdown');
+      dropdown_btn.setAttribute('aria-haspopup', 'true');
+      dropdown_btn.setAttribute('aria-expanded', 'false');
+      let dropdown_top = document.createElement('div');
+      dropdown_top.className = 'dropdown';
+      dropdown_top.appendChild(dropdown_btn);
+      dropdown_top.appendChild(dropdown);
+
+      cell2.setAttribute('style', "text-align: right");
+      cell2.appendChild(dropdown_top);
+      var dropdown_top2 = dropdown_top.cloneNode(true);
+      cell3Adv.setAttribute('style', "text-align: right");
+      cell3Adv.appendChild(dropdown_top2);
+
+      let cell3_html = "<input type='text' class='form-control' style='border: solid #2e74b6 thin; text-align: right; padding-right: 1rem;' oninput='printPreview();'placeholder='Item' readonly>";
+      cell3.innerHTML = cell3_html;
+      cell4Adv.innerHTML = cell3_html;
+
+      let cell4_html = "<input type='number' class='form-control' style='border: solid #2e74b6 thin; text-align: right;' value='0' oninput='calculateAmount(); printPreview();' readonly>";
+      cell4.innerHTML = cell4_html;
+      cell5Adv.innerHTML = cell4_html;
+
+      cell5.setAttribute('style', 'text-align: right;');
+      cell6Adv.setAttribute('style', 'text-align: right;');
+
+      let cell6_html = "<i class='fas fa-minus-circle' style='color: red; cursor: pointer;' onclick='removeRow(this); printPreview();'></i>";
+      cell6.innerHTML = cell6_html;
+      cell7Adv.innerHTML = cell6_html;
+
+      assignDraggableWithElem(tableSimple);
+      assignDraggableWithElem(tableAdv);
+    }
+
+
+
+    // Synchronize items description between tables
+    function sync(elem){
+      // console.log(elem)
+      let inputVal = elem.value
+      console.log(elem.value)
+
+      var trParent = findAscendingTag(elem, "TR");
+      var tbodyParent = findAscendingTag(elem, "TBODY");
+
+      // Get the id of table a layer above.
+      let activeTableId = tbodyParent.parentNode.id;
+
+      // let selectedRowIndex = tbodyParent.index(trParent)
+      let selectedRowIndex = [].slice.call(tbodyParent.querySelectorAll('tr')).indexOf(trParent)
+      console.log(trParent)
+      console.log(tbodyParent)
+      // console.log([].slice.call(tbodyParent.querySelectorAll('tr')).indexOf(trParent))
+      console.log(selectedRowIndex)
+      console.log(activeTableId)
+
+      let targetTableId = (activeTableId === 'tableSimple')? 'tableAdv' : 'tableSimple';
+
+      // Get the corresponding elem in other tables
+      let targetElem = document.getElementById(targetTableId).querySelectorAll('tr[class=item]');
+      // console.log(document.getElementById(targetTableId).children[1])
+      // console.log(document.getElementById(targetTableId).children[1].querySelectorAll('tr[class=item]').length)
+      console.log(targetElem)
+
+      targetElem[selectedRowIndex].querySelectorAll('input')[0].value = inputVal;
+      
+    }
+
+
+    // Remove an item 
+    function removeRow(elem){
+
+      // Get the tr parents where the remove is clicked
+      var trParent = findAscendingTag(elem, "TR");
+
+      // Get the body ele of TR tag the remove is clicked
+      var tbodyParent = findAscendingTag(elem, "TBODY");
+
+      // Get the id of table a layer above.
+      let activeTableId = tbodyParent.parentNode.id;
+
+      // Get the index of the TR tag with 'item' class.
+      let selectedRowIndex = [].slice.call(tbodyParent.querySelectorAll('tr[class=item], tr[class=additional]')).indexOf(trParent)
+      console.log(trParent)
+      console.log(tbodyParent)
+      console.log(selectedRowIndex)
+      console.log(activeTableId)
+      console.log([].slice.call(tbodyParent.querySelectorAll('tr[class=item], tr[class=additional]')))
+      // console.log(tbodyParent.querySelectorAll('.item'))
+
+
+      // Get the existing table id and indentify the correspond table id. Same goes to tables for additional items
+      // Get the corresponding TR elem in other tables
+      // let targetTableId = (activeTableId === 'tableSimple')? 'tableAdv' : 'tableSimple';
+
+      let targetTableId='';
+      let targetElem = null;
+      if (activeTableId === 'tableSimple'){
+        targetTableId = 'tableAdv';
+        targetElem = document.getElementById(targetTableId).querySelectorAll('tr[class=item], tr[class=additional]');
+
+      }else if(activeTableId === 'tableAdv'){
+        targetTableId = 'tableSimple';
+        targetElem = document.getElementById(targetTableId).querySelectorAll('tr[class=item], tr[class=additional]');
+      }
+      else if(activeTableId === 'tableAdditionalItem'){
+        targetTableId = 'tableAdditionalItemAdv';
+        targetElem = document.getElementById(targetTableId).querySelectorAll('tr[class=item], tr[class=additional]');
+      }
+      else if(activeTableId === 'tableAdditionalItemAdv'){
+        targetTableId = 'tableAdditionalItem';
+        targetElem = document.getElementById(targetTableId).querySelectorAll('tr[class=item], tr[class=additional]');
+      }
+
+      // console.log(targetElem)
+
+      // Remove the active rows
+      trParent.remove();
+
+      // Remove the corresponding rows
+      targetElem[selectedRowIndex].remove();
+
+    }
+    
+    function assignDraggableWithElem( elem){
+      elem.querySelectorAll('tr').forEach(function (row, index) {
+        // Ignore the header
+        // We don't want user to change the order of header
+        if (index === 0) {
+            return;
+        }
+        // Ignore row with certain class name
+        else if(row.className != 'item'){
+          return;
+        } 
+
+        // console.log(row)
+        // console.log(row.className)
+        const firstCell = row.firstElementChild;
+        firstCell.classList.add('draggable');
+        firstCell.addEventListener('mousedown', mouseDownHandler);
+      });
+    }
+
+   
+    // Copy a text based on element ID
+    function copyText(targetElemId){
+      /* Get the text field */
+      let copyText = document.getElementById(targetElemId);
+      console.log(copyText)
+      console.log(copyText.select())
+      /* Select the text field */
+      copyText.focus();
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the text field */
+      navigator.clipboard.writeText(copyText.value);
+
+    }
+
+    // Sign out
+    function signOutFunction(){
+      $('#signOutModal').modal('show');
+      $("#signOutModal").appendTo("body");
+    }
+  
+  </script>
+
+  <script>
+		$( document ).ready(function() {
+
+
+      // Invoice Body specific
+      $('#addRowNormal').on( 'click', function () {
+        addRow2();
+      });
+
+      $('#addAdditionalRowNormal').on( 'click', function () {
+        addAdditionalRow2();
+      });
+
+      $('#addRowAdv').on( 'click', function () {
+        addRow2();
+      });
+
+      $('#addAdditionalRowAdv').on( 'click', function () {
+        addAdditionalRow2();
+      });
+    
+      $('#btnSignOutModalUpdate').on('click', function (e) {
+      
+        firebase.auth().signOut().then(() => {
+            // Sign-out successful.
+          }).catch((error) => {
+            // window.alert("Logging out failed");
+            func.showNotification('top','center', 'danger', 'error_outline', "Logging out failed." );
+
+          });
+        // Do something
+        $('#signOutModal').modal('hide');
+      });
+
+      $('#btnSignOutModalClose1').on('click', function (e) {
+        $('#signOutModal').modal('hide');
+      });
+      $('#btnSignOutModalClose2').on('click', function (e) {
+        $('#signOutModal').modal('hide');
+      });
+
+		});
+
+  </script>
+  
+  <!-- Table Handler -->
+  <script>
+    // https://htmldom.dev/drag-and-drop-table-row/
+    document.addEventListener('DOMContentLoaded', function () {
+      tableSimple.querySelectorAll('tr').forEach(function (row, index) {
+        // Ignore the header
+        // We don't want user to change the order of header
+        if (index === 0) {
+            return;
+        }
+        // Ignore row with certain class name
+        else if(row.className != 'item'){
+          return;
+        } 
+
+        // console.log(row)
+        // console.log(row.className)
+        const firstCell = row.firstElementChild;
+        firstCell.classList.add('draggable');
+        firstCell.addEventListener('mousedown', mouseDownHandler);
+      });
+
+      tableAdv.querySelectorAll('tr').forEach(function (row, index) {
+        // Ignore the header
+        // We don't want user to change the order of header
+        if (index === 0) {
+            return;
+        }
+        // Ignore row with certain class name
+        else if(row.className != 'item'){
+          return;
+        } 
+
+        // console.log(row)
+        // console.log(row.className)
+        const firstCell = row.firstElementChild;
+        firstCell.classList.add('draggable');
+        firstCell.addEventListener('mousedown', mouseDownHandler);
+      });
+      
+      // assignDraggable();
+      
+      assignDraggableWithElem( tableSimple);
+      assignDraggableWithElem( tableAdv);
+    });
+  
+  
+  
+  </script>
+
+  <!-- Date range picker -->
+  <script>
+    $(function() {
+      $('input[name="daterange"]').daterangepicker({
+        opens: 'left',
+        timePicker: true,
+      }, function(start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+      });
+    });
+  </script>
+ 
+</body>
+
+</html>

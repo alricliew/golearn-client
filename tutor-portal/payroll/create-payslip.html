@@ -11,58 +11,100 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
   <!-- Material Kit CSS -->
-  <link href="assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-  <link href="assets/demo/demo.css" rel="stylesheet" />
+  <link href="../../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
-  <script src="js/firebase.js"></script>
+  <script src="../js/firebase.js"></script>
+  <!-- Tutor Portal specific CSS -->
+  <link href="../css/tutor-portal.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 
 <body>
 
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/img/sidebar-3.jpg">
-      <!--
-      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-      Tip 2: you can also add an image using data-image tag
-  -->
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-3.jpg">
       <div class="logo">
-        <a href="#" class="simple-text logo-mini">
-			<img src="source/logo.png" style="width: 216px; height: auto;" alt=""></img>
+        <a href="../" class="simple-text logo-mini">
+			<img src="../source/logo.png" style="width: 216px; height: auto;" alt=""></img>
           
         </a>
-        <a href="#" class="simple-text logo-normal">
+        <a href="../" class="simple-text logo-normal">
          Welcome!
         </a>
       </div>
       <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="nav-item ">
-            <a class="nav-link" href="./">
-              <i class="material-icons">home</i>
-              <p>Home</p>
+        <ul class="nav" style="margin-bottom: 50px;">
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Teaching</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../class/">
+              <i class="fas fa-chalkboard fa-fw nav-icon"></i>
+              <p>Classes</p>
             </a>
           </li>
 		  		<li class="nav-item">
-            <a class="nav-link" href="./job.html">
-              <i class="material-icons">work_outline</i>
+            <a class="nav-link" href="../student/">
+              <i class="fas fa-user-graduate fa-fw nav-icon"></i>
+              <p>Students</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="../teacher/">
+              <i class="fas fa-chalkboard-teacher fa-fw nav-icon"></i>
+              <p>Teachers</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Financial</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../transaction/">
+              <i class="fas fa-wallet fa-fw nav-icon"></i>
+              <p>Transactions</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../invoice/">
+              <i class="fas fa-file-invoice-dollar fa-fw nav-icon"></i>
+              <p>Invoices</p>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="./">
+              <i class="fas fa-hand-holding-usd fa-fw nav-icon"></i>
+              <p>Payroll <span style="visibility: hidden;">PRO</span></p>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="../transaction/settings.html">
+              <i class="fab fa-expeditedssl fa-fw nav-icon"></i>
+              <p>Settings</p>
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Public</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../course.html">
+              <i class="fas fa-book-open fa-fw nav-icon"></i>
+              <p>My Public Courses</p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="../job.html">
+              <i class="fas fa-briefcase fa-fw nav-icon"></i>
               <p>Tuition Jobs</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./course.html">
-              <i class="material-icons">format_list_bulleted</i>
-              <p>My Courses</p>
-            </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="./update.html">
-              <i class="material-icons">note_alt</i>
+            <a class="nav-link" href="../update.html">
+              <i class="fas fa-user-cog fa-fw nav-icon"></i>
               <p>Update Information</p>
             </a>
           </li>
@@ -74,7 +116,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Update Information <span><i class="material-icons" style="color: gray;">chevron_right</i></span> Description</a>
+            <a class="navbar-brand" href="javascript:;">Payroll <span><i class="material-icons" style="color: gray;">chevron_right</i></span> Create Payslip</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -126,9 +168,9 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                  <a class="dropdown-item" href="./edit-profile.html">Edit Profile</a>
+                  <a class="dropdown-item" href="../edit-profile.html">Edit Profile</a>
                   <a id="navPublicProfile" class="dropdown-item" href="#">My Public Profile</a>
-									<a class="display:block; dropdown-item" href="./about.html">About</a>
+									<a class="display:block; dropdown-item" href="../about.html">About</a>
 									<div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
 									<div class="dropdown-divider"></div>
@@ -144,34 +186,10 @@
 
 			<!-- Modal Start -->
 
-      <!-- Update Basic Detail modal -->
-      <div class="row">
-        <div class="modal fade" id="updateBasicDetailsModal" tabindex="-1" role="dialog" aria-labelledby="updateBasicDetailsModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="updateBasicDetailsLabel">Updating Description ..</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnUpdateBasicDetailsModalClose1">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" id="signOutModalBody">
-                Are you sure you want to continue?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnUpdateBasicDetailsModalClose2">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnUpdateBasicDetailsModalUpdate">Confirm</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
       <!-- Activation modal -->
       <div class="row">
         <div class="modal fade" id="activationModal" tabindex="-1" role="dialog" aria-labelledby="activationModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="activationModalLabel">New message</h5>
@@ -190,7 +208,7 @@
         </div>
       </div>
 			
-      <!-- Sign-out modal -->
+      <!-- Sign Out modal -->
       <div class="row">
         <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="signOutModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -213,140 +231,172 @@
         </div>
       </div>
 
+      <!-- View Tutor Modal -->
+       <div class="row">
+        <div class="modal fade" id="viewTutorModal" tabindex="-1" role="dialog" aria-labelledby="viewTutorModalLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="viewTutorModalLabel">Tutor Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-4 text-center">
+                    <div style="height: 140px;width: 140px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
+                      <img id="viewTutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+                    </div>
 
+                  </div>
+
+                  <div class="col-md-8">
+                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Name</span> 
+                    <input id="viewTutorName"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Phone</span> 
+                        <input id="viewTutorPhone"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
+    
+                      </div>
+                      <div class="col-md-6">
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Email</span> 
+                        <input id="viewTutorEmail"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
+    
+                      </div>
+                    </div>
+
+   
+                    <div class="row">
+                      <div class="col-md-6">
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Gender</span> 
+                        <div class="form-group">
+                          <div class="form-check form-check-radio form-check-inline">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioMale" value="optionActive" data-compulsory="false" disabled>
+                              Male
+                              <span class="circle">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                          <div class="form-check form-check-radio form-check-inline">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioFemale" value="optionInactive" data-compulsory="false" disabled>
+                              Female
+                              <span class="circle">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Age</span> 
+                        <input id="viewTutorAge"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
+    
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+              <div class="modal-footer">
+                <a type="button" class="btn btn-primary" href="#" id="btnViewTutorModalFullProfile" disabled>View Full Profile</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnViewTutorModalUpdate">Update</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main content -->
       <div class="content">
         <div class="container-fluid">
           <!-- your content here -->
 
-          <!-- Inner Navigation -->
-          <div class="row">
-            <div class="col-md-12">
-              <nav class="navbar navbar-expand-sm bg-primary ">
-                <div class="container">
-                  <!-- <a class="navbar-brand" href="#">Navbar</a>
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button> -->
-                  <div class="" id="navbarText">
-                    <ul class="navbar-nav mr-auto">
-                      <li class="nav-item ">
-                        <a class="nav-link" href="./update.html">Basic Details <span class="sr-only">(current)</span></a>
-                      </li>
-                      <li class="nav-item active">
-                        <a class="nav-link active" href="#">Description</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="./preferred-subject.html">Preferred Subject</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="./preferred-area.html">Preferred Area</a>
-                      </li>
-                    </ul>
-                    <!-- <span class="navbar-text">
-                      Navbar text with an inline element
-                    </span> -->
+          <!-- Main content -->
+          <div class="row  d-flex" id="desciption-row" >
+            <!-- button -->
+            <div class="p-2">
+              <!-- <a href="settings.html" class="btn btn-outline-primary btn-round" id="btnBack"><i class="fas fa-cog" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;"></i> Financial Settings</a> -->
+            </div>
+
+            <div class="ml-auto p-2">
+              <!-- <a href="./run-payroll.html" class="btn btn-primary btn-round" style="background-color: #2e74b6;">Run Payroll <i class="material-icons" style="color: white; margin-left: 0.5em; padding-bottom: 0.2em;">east</i></a> -->
+            </div>
+
+          </div>
+
+          <div class="container-fluid" >
+
+            <div class="row">
+              <div class="col-md-12">
+                
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="social">
+                          <h4 style="font-size: x-large;"><span> <button  id="btnStep1" class="btn btn-primary btn-just-icon btn-round" style="margin-right: 1rem;">
+                            <p>1</p>
+                            </button></span> 
+                            Select payroll period
+                          </h4>
+                          <!-- <h4 style="font-size: x-large;">Create single payslip</h4> -->
+
+                          <!-- <p>Create payslip for each teacher.</p> -->
+                        </div>
+
+
+                      </div>
+  
+                      <div class="col-md-4 align-self-center text-right">
+
+                        <input class="form-control" type="text" name="daterange" value="Select date range" />
+
+                        <!-- <div class="dropdown">
+                          <button class="btn btn-secondary btn-block dropdown-toggle text-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-bottom: medium solid #2e74b6;">
+                            Nov 2021
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item btn-block" href="#">Nov 2021</a>
+                            <a class="dropdown-item btn-block" href="#">Dec 2021</a>
+                          </div>
+                        </div> -->
+                      </div>
+                    </div>
                   </div>
+  
                 </div>
-              </nav>
+
+              </div>
+
             </div>
           </div>
 
-          <!-- Main content -->
-          <div class="row" id="desciption-row">
-
-            
-						<div class="col-lg-12 col-md-12 col-sm-12">
-
-              
-              <!-- Teaching Approach -->
-              <div class="card card-stats">
-								<div class="card-header card-header-success card-header-icon">
-									<div class="card-icon">
-										<i class="material-icons">menu_book</i>
-									</div>
-									<p class="card-category">Describe how you conduct your class, your teaching style, learning material used and how your student can improve by attending your class.</p>
-									<h3 class="card-title" id="main_subject_sentence">
-										Tutoring Approach
-									</h3>  
-								</div>
-								<div class="card-body" style="text-align: left;">
-                  <div class="form-group">
-                    <textarea class="form-control" id="tutoringApproach" rows="5" placeholder="Write something..." disabled></textarea>
-                  </div>
-								</div>
-
-								<div class="card-footer">
-									<div class="stats">
-										<!-- <p>Code: <span id="main_JobId"></span></p> -->
-									</div>
-								</div>
-							</div>
-
-                        
-              <!-- Teaching Experience -->
-							<div class="card card-stats">
-								<div class="card-header card-header-warning card-header-icon">
-									<div class="card-icon">
-										<i class="material-icons">emoji_events</i>
-									</div>
-									<p class="card-category">Share your achievements, past experiences and success stories.</p>
-									<h3 class="card-title" id="main_subject_sentence">
-										Teaching Experience
-									</h3>  
-								</div>
-								<div class="card-body" style="text-align: left;">
-                  <div class="form-group">
-                    <textarea class="form-control" id="tutoringExperience" rows="5" placeholder="Write something..." disabled></textarea>
-                  </div>
-				
-								</div>
-
-								<div class="card-footer">
-									<div class="stats">
-										<!-- <p>Code: <span id="main_JobId"></span></p> -->
-									</div>
-								</div>
-							</div>
-
-
-						</div>
-
- 
- 
-            <!-- Update button -->
-            <div class="col-lg-12 col-md-12 col-sm-12">
-              <a href="javascript:;" class="btn btn-lg btn-primary btn-round" id="btnUpdate"  style="background-color: grey; pointer-events: none;">Update Description</a>
-            </div>
-
-
-		      </div>
-      </div>
-
-      <footer class="footer">
-        <div class="container-fluid">
-          <nav class="float-left">
-          <ul>
-            <li>
-            <a href="https://golearn.com.my/join-us" target="_blank">
-              Visit GoLearn Tutor
-            </a>
-            </li>
-          </ul>
-          </nav>
-          <!-- <div class="copyright float-right">
-            &copy;
-            <script>
-              document.write(new Date().getFullYear())
-            </script> 
-            , made with <i class="material-icons">favorite</i> by <a href="#" >GoLearn Team</a>
-          </div> -->
-          <!-- your footer here -->
         </div>
-      </footer>
+
+        <footer class="footer">
+          <div class="container-fluid">
+            <nav class="float-left">
+            <ul>
+              <!-- <li>
+              <a href="https://golearn.com.my/join-us" target="_blank">
+                Visit GoLearn Tutor
+              </a>
+              </li> -->
+            </ul>
+            </nav>
+          </div>
+        </footer>
+      </div>
     </div>
-	  
-  </div>
- 
+
   <div class="fixed-plugin">
     <div class="dropdown show-dropdown">
       <a href="#" data-toggle="dropdown">
@@ -384,17 +434,16 @@
     </div>
   </div>
   
-
-  <script src="assets/js/core/jquery.min.js"></script>
-  <script src="assets/js/core/popper.min.js"></script>
-  <script src="assets/js/core/bootstrap-material-design.min.js"></script>
-  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!-- Plugin for the momentJs  -->
-  <script src="assets/js/plugins/moment.min.js"></script>
+  <script src="../assets/js/plugins/moment.min.js"></script>
   <!--  Plugin for Sweet Alert -->
-  <script src="assets/js/plugins/sweetalert2.js"></script>
+  <script src="../assets/js/plugins/sweetalert2.js"></script>
   <!-- Forms Validations Plugin -->
-  <script src="assets/js/plugins/jquery.validate.min.js"></script>
+  <script src="../assets/js/plugins/jquery.validate.min.js"></script>
   <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
   <!-- <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script> -->
   <!-- 	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
@@ -422,16 +471,21 @@
   <!-- Chartist JS -->
   <!-- <script src="assets/js/plugins/chartist.min.js"></script> -->
   <!--  Notifications Plugin    -->
-  <script src="assets/js/plugins/bootstrap-notify.js"></script>
+  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+  <script src="../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
   <!-- Common constants -->
-  <script src="../assets/js/common.js" type="text/javascript"></script>
+  <script src="../../assets/js/common.js" type="text/javascript"></script>
   <!-- Core Tutor Js -->
-  <script src="../assets/js/tutor-core.js" type="text/javascript"></script>
-  <script>
+  <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
+  <!-- Date range picker -->
+  <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script> -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+
+	<script>
     // Global Variables
     var tutorId;
     var current_name, current_email, current_phone, current_age, current_gender, current_imgUri, current_nric,
@@ -455,6 +509,8 @@
     var current_aweburl, current_aPremiumSubjectLimit, current_aPremiumConnectLimit, current_aTotalSubjectLimit, 
      current_aTotalConnectLimit, current_aPreferredSubjectLimit, current_aPreferredAreaLimit;
      
+    // Course-specific var
+    var allCourseSize;
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
@@ -462,7 +518,8 @@
     var tutorInfoObj = null;
     if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
       // Do nothing
-    }else{
+    }
+    else{
       // Set the nav user name
       tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
       document.getElementById("user").textContent = tutorInfoObj.name;
@@ -478,34 +535,7 @@
       currentTutoringExperience = tutorInfoObj.tutoringExperience;
       currentTutoringApproach = tutorInfoObj.tutoringApproach;
       currentQualification= tutorInfoObj.qualification;
-      current_mon_8am = tutorInfoObj.tMon8am;
-      current_mon_12pm= tutorInfoObj.tMon12pm; 
-      current_mon_3pm = tutorInfoObj.tMon3pm;  
-      current_mon_6pm = tutorInfoObj.tMon6pm;  
-      current_tue_8am = tutorInfoObj.tTue8am;  
-      current_tue_12pm= tutorInfoObj.tTue12pm;  
-      current_tue_3pm = tutorInfoObj.tTue3pm;  
-      current_tue_6pm = tutorInfoObj.tTue6pm;  
-      current_wed_8am = tutorInfoObj.tWed8am;  
-      current_wed_12pm= tutorInfoObj.tWed12pm;  
-      current_wed_3pm = tutorInfoObj.tWed3pm;  
-      current_wed_6pm = tutorInfoObj.tWed6pm;  
-      current_thu_8am = tutorInfoObj.tThu8am;  
-      current_thu_12pm= tutorInfoObj.tThu12pm;  
-      current_thu_3pm = tutorInfoObj.tThu3pm;  
-      current_thu_6pm = tutorInfoObj.tThu6pm;  
-      current_fri_8am = tutorInfoObj.tFri8am;  
-      current_fri_12pm= tutorInfoObj.tFri12pm;  
-      current_fri_3pm = tutorInfoObj.tFri3pm;  
-      current_fri_6pm = tutorInfoObj.tFri6pm; 
-      current_sat_8am = tutorInfoObj.tSat8am;  
-      current_sat_12pm= tutorInfoObj.tSat12pm;  
-      current_sat_3pm = tutorInfoObj.tSat3pm;  
-      current_sat_6pm = tutorInfoObj.tSat6pm;  
-      current_sun_8am = tutorInfoObj.tSun8am;  
-      current_sun_12pm= tutorInfoObj.tSun12pm;  
-      current_sun_3pm = tutorInfoObj.tSun3pm;  
-      current_sun_6pm = tutorInfoObj.tSun6pm;
+      
       current_aweburl = tutorInfoObj.aWebUrl
 
       // updatePageView(current_accountStatus);
@@ -515,25 +545,69 @@
       
 			if(!user){
         // Return to login if user does not exist.
-				window.location.href = "login.html"
+				window.location.href = "../login.html"
 			}else{
         // if the displayName is null, it means user register using Phone
         if (firebase.auth().currentUser.displayName == null ){
             tutorId = firebase.auth().currentUser.phoneNumber;
-        }else
-            tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+        }else{
+          tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+        }
+        loadUserInfo(tutorId)
+        loadAllTutorInfo()
+          
+        // test_loadLessonDateRange();
 
-        loadUserInfo(tutorId);
-        
 			}
 		});
+
+    function test_loadLessonDateRange(){
+      new Date();
+      let start = new Date('2021-11-04');
+      let end = new Date('2021-11-13');
+
+      // this.afs.collection('invoices', ref => ref
+      //   .where('dueDate', '>', start)
+      //   .where('dueDate', '<', end)
+      // );  
+
+      let docRef = db.collection("Class")
+          .doc("v1")
+          .collection("Lesson")
+          .where("classId", "==", 'huLBbCGbdRDJmRnxTJGl')
+          .where("status", "==", true)
+          .where("lesDate", ">", start)
+          .where("lesDate", "<", end)
+          // .orderBy('lesDate', 'desc')
+          // .startAfter(latestLessonDoc || today)
+          // .limit(10);
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+        console.log('Total Lessons Found: '+querySnapshot.docs.length);
+
+        querySnapshot.forEach((doc) => {
+          console.log(doc.data());
+          // latestLessonDoc = doc.data()[LESSON_DATE];
+          // console.log(latestLessonDoc);
+
+
+          
+        });
+
+
+ 
+      }).catch((error) => {
+          console.log("Error getting document:", error);
+      });
+    }
 
     // Tutor Specific
     function loadUserInfo(tutorId){
       // Tutor Id must be a phone with +60, no spacing or other chars
       var docRef = db.collection("Tutor").doc(tutorId);
       
-
       // docRef.get().then((doc) => {
       docRef.onSnapshot((doc) => {
 
@@ -687,58 +761,222 @@
           }else {
             let activationNavItem = document.querySelector('#activationNavItem');
             let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
+            console.log(activationNavItemIsExist)
             // Remove NavItem if exist
             if (activationNavItemIsExist){
               activationNavItem.parentNode.removeChild(activationNavItem);
             }else{
               // Do nothing
             }
-            // document.getElementById("btnActivateAccount").setAttribute("style", "visibility: hidden;" );
           }
-
-
-          //------ description.html specific Start -------------//
-
-          document.getElementById("tutoringApproach").value = doc.data().tutoringApproach;
-          document.getElementById("tutoringExperience").value = doc.data().tutoringExperience;
-          document.getElementById('tutoringApproach').removeAttribute('disabled');
-          document.getElementById('tutoringApproach').setAttribute('style','pointer-events: auto; ');
-          document.getElementById('tutoringExperience').removeAttribute('disabled');
-          document.getElementById('tutoringExperience').setAttribute('style','pointer-events: auto; ');
-          document.getElementById('btnUpdate').removeAttribute('disabled');
-          document.getElementById('btnUpdate').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
-          //------ description.html specific End -------------//
-
-
         } else {
-            
+           // Do nothing 
         }
       });
 
     };
+
+
+    // Tutor Specific
+    function loadAllTutorInfo(){
+      let docRef = db.collection("Class")
+          .doc("v1")
+          .collection("Tutor")
+          .where("adminId", "==", tutorId)
+          .where("statusAdmin", "==", true);
+      
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        // Session Storage data
+        let docsObj = [];
+
+        querySnapshot.forEach((doc) => {
+
+          docsObj.push(doc.data());
+          // courseId = doc.id;
+          console.log(doc.data())
+          // renderAllActiveTutor(doc);
+
+        });
+
+        // Store all docs data to sessionStorage
+        // sessionStorage.setItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY, JSON.stringify(docsObj));
+        // sessionStorage.setItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY, null);
+ 
+      });
+
+    };
+
+    function renderAllActiveTutor(doc){
+      // <div class="col-lg-2 col-md-3 col-6">
+      //   <div class="card-tutor text-center" >
+          // <div style="height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
+          //   <img id="tutorImgUrl" style="height: 100% ;width: 100%; object-fit: cover;" src="../../assets/img/sidebar-1.jpg"/>
+          // </div>
+      //     <div style="margin-top:1rem">
+      //       <h4 id="className">Alric Liew </h4>
+      //     </div>
+      //   </div>
+      // </div>
+
+      let img = document.createElement('img');
+      img.setAttribute('style', 'height: 100%; width: 100%; object-fit: cover;');
+      img.setAttribute('src', doc.data()[TUTOR_TUTOR_IMG_URL]);
+      let img_div = document.createElement('div');
+      img_div.setAttribute('style', 'height: 100px;width: 100px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;')
+      img_div.appendChild(img)
+
+      let name_h4 = document.createElement('h4');
+      name_h4.textContent = doc.data()[TUTOR_TUTOR_NAME];
+      let name_div = document.createElement('div');
+      name_div.setAttribute('style', 'margin-top:1rem;');
+      name_div.appendChild(name_h4);
+      
+      let tutor_div = document.createElement('div');
+      tutor_div.className = "card-tutor text-center";
+      tutor_div.appendChild(img_div);
+      tutor_div.appendChild(name_div);
+
+      let tutor_card_div = document.createElement('div');
+      tutor_card_div.className = 'col-lg-2 col-md-3 col-6';
+      tutor_card_div.setAttribute('onclick', 'viewTutorFunction(this)');
+      tutor_card_div.setAttribute('data-target', '#viewTutorModal');
+      tutor_card_div.setAttribute('data-toggle', 'modal');
+      tutor_card_div.setAttribute('data-id', doc.data()[TUTOR_ID]);
+      tutor_card_div.appendChild(tutor_div)
+        
+      const card_all_tutor = document.getElementById("card-all-tutor");
+      card_all_tutor.appendChild(tutor_card_div);
+    }
+
+	  function viewTutorFunction(elem){
+      // Get attribute and 
+      if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY)) == null ){
+        console.log("Error: Impossible to reach this state");
+        // Because this func only trigger when there's active class loaded
+        return;
+      }else{
+
+        let allClassList = null;
+
+        // Set the fields
+        allClassList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY));
+        allClassList.forEach((item) => {
+          if (item.id === elem.getAttribute('data-id')){
+            // Assign the data to viewTutorModal
+            document.getElementById("viewTutorName").value = item[TUTOR_TUTOR_NAME];
+            document.getElementById("viewTutorPhone").value = item[TUTOR_TUTOR_PHONE];
+            document.getElementById("viewTutorEmail").value = item[TUTOR_TUTOR_EMAIL];
+            document.getElementById("viewTutorGenderRadioMale").checked = item[TUTOR_TUTOR_GENDER] == 0 ? true: false;
+            document.getElementById("viewTutorGenderRadioFemale").checked = item[TUTOR_TUTOR_GENDER] == 1 ? true: false;
+            document.getElementById("viewTutorAge").value = item[TUTOR_TUTOR_AGE];
+            document.getElementById("viewTutorImgUrl").src = item[TUTOR_TUTOR_IMG_URL];
+            console.log(item[TUTOR_TUTOR_WEB_URL])
+            if (item[TUTOR_TUTOR_WEB_URL] == null || item[TUTOR_TUTOR_WEB_URL] == ''){
+              document.getElementById("btnViewTutorModalFullProfile").disabled = true;  
+              document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','#'); 
+              document.getElementById("btnViewTutorModalFullProfile").setAttribute('target',''); 
+            }
+            else{
+              document.getElementById("btnViewTutorModalFullProfile").disabled = false;      
+              document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','https://golearn.com.my/tutor/'+item[TUTOR_TUTOR_WEB_URL]); 
+              document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','_blank'); 
+            }
+
+            // sessionStorage.setItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY, JSON.stringify(item));
+            // sessionStorage.setItem(SESSION_STORAGE_CLASS_LOAD_KEY, true);
+          }
+          // window.location = './edit-class.html?id=';
+
+          // console.log(item);
+        });
+        
+      }
+		}
+
+    // Copy a text based on element ID
+    function copyText(targetElemId){
+      /* Get the text field */
+      let copyText = document.getElementById(targetElemId);
+      console.log(copyText)
+      console.log(copyText.select())
+      /* Select the text field */
+      copyText.focus();
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the text field */
+      navigator.clipboard.writeText(copyText.value);
+
+    }
 
     // Sign out
     function signOutFunction(){
       $('#signOutModal').modal('show');
       $("#signOutModal").appendTo("body");
     }
-
+  
   </script>
 
   <script>
-    $( document ).ready(function() {
+		$( document ).ready(function() {
+
+      // Class Announcement
+      // KEY, DATETIME, ID, JOB_STATUS and JOB_EXPLANATION var is global var used to simplify modal fire and hide.
+      var KEY = ""; // Extract info from data-* attributes
+      var DATETIME = ""; // Extract info from data-* attributes
+      var ID = ""; // Extract info from data-* attributes
+      var ANNOUNCEMENT = ""; // Extract info from data-* attributes
+
+      // Update Class Annoucement
+      $('#btnEditClassModalUpdate').on('click', function (e) {
+        var docData = {
+          [CLASS_ANNOUNCEMENT]: document.getElementById("modalClassAnnouncement").value,
+        }
+        // Set data
+        db.collection("Class")        
+          .doc("v1")
+          .collection("Class")
+          .doc(ID)
+          .set(docData, {merge: true})
+          .then(() => {
+            window.location = './class.html';
+          })
+          .catch((error) => {
+              console.error("Error writing document: ", error);
+          });;
+
+			  $('#editClassModal').modal('hide');
+		  });
+
+      $('#editClassModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button/Components that triggered the modal
+        ID = button.data('id') // Extract info from data-* attributes
+        ANNOUNCEMENT = button.data('announcement') // Extract info from data-* attributes
+        // Load Desription 
+        document.getElementById("modalClassAnnouncement").textContent = ANNOUNCEMENT;
+
+      });
       
-			// Sign-out
-			// $("#btn-logout").click(function(){
-      //   $('#signOutModal').modal('show');
-			// });
+      // Clear key and fields in modal when modal dismiss
+      $('#editClassModal').on('hide.bs.modal', function (event) {
+        ID = "";
+        ANNOUNCEMENT = "";
+        document.getElementById("modalClassAnnouncement").textContent = "";
+      });
+
+
       $('#btnSignOutModalUpdate').on('click', function (e) {
       
         firebase.auth().signOut().then(() => {
             // Sign-out successful.
           }).catch((error) => {
-            window.alert("Logging out failed");
+            // window.alert("Logging out failed");
             func.showNotification('top','center', 'danger', 'error_outline', "Logging out failed." );
+
           });
         // Do something
         $('#signOutModal').modal('hide');
@@ -750,78 +988,38 @@
       $('#btnSignOutModalClose2').on('click', function (e) {
         $('#signOutModal').modal('hide');
       });
-    
-      // Activate Account
-      $('#btnActivationModalUpdate').on('click', function (e) {
-        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-          window.location = "https://golearn.com.my/join-us/";
-        }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-          window.location = "https://golearn.com.my/contact-us/";
-        }else {
-          window.location = "https://golearn.com.my/pricing/";
-        }
-        // Do something
-        $('#activationModal').modal('hide');
-      });
 
-      $('#btnActivationModalClose1').on('click', function (e) {
-        $('#activationModal').modal('hide');
-      });
-      $('#btnActivationModalClose2').on('click', function (e) {
-        $('#activationModal').modal('hide');
-      });
-    
-      // Update Basic Details
-			$("#btnUpdate").click(function(){
-        $('#updateBasicDetailsModal').modal('show');
+			// Add New Course
+			$("#btnAddClass").click(function(){
+        window.location = "./add-class.html"
+
+        // if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
+        //   func.showNotification('top','center', 'danger', 'error_outline', "Activate your account to add new courses." );
+        // }else if  (allCourseSize >= current_aTotalSubjectLimit){
+        //   func.showNotification('top','center', 'danger', 'error_outline', "You have reach maximum ("+current_aTotalSubjectLimit+") subjects. Upgrade to Pro now!" );
+        // }else if (current_preferedAreaList == null || current_preferedAreaList.length == 0){
+        //   func.showNotification('top','center', 'danger', 'error_outline', "Please fill in Update Information > Preferred Area");
+        // }
+        // else{
+        //   window.location = "./add-class.html"
+        // }
 			});
-      $('#btnUpdateBasicDetailsModalUpdate').on('click', function (e) {
-
-        var docRef = db.collection("Tutor").doc(tutorId);
-
-        var docRefWithMerge = docRef.set({
-          // [CHECK_HOMETUTOR_KEY]: document.getElementById("mode").checked,
-          // [CHECK_PRIVATETUTOR_KEY]: document.getElementById("email").value,
-          // [CHECK_GROUPTUTOR_KEY]: document.getElementById("phone").value,
-          // [CHECK_ONLINETUTOR_KEY]: document.getElementById("address1").value,
-          // [ADMIN_WEB_URL_KEY]: current_aweburl,
-          // [CHECK_HOME_TUTOR_TO_STUDENT_KEY]: (document.getElementById("modeHomeTutorToStudent").checked)? true : false,
-          // [CHECK_HOME_STUDENT_TO_TUTOR_KEY]: (document.getElementById("modeHomeStudentToTutor").checked)? true : false,
-          // [CHECK_GROUP_KEY]: (document.getElementById("modeGroup").checked)? true : false,
-          // [CHECK_ONLINE_KEY]: (document.getElementById("modeOnline").checked)? true : false,
-          // [CHECK_ONLINE_GROUP_KEY]: (document.getElementById("modeOnlineGroup").checked)? true : false,
-
-          // [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY]: (document.getElementById("lanEng").checked)? true : false,
-          // [CHECK_TEACHING_LANGUAGE_BM_KEY]: (document.getElementById("lanBm").checked)? true : false,
-          // [CHECK_TEACHING_LANGUAGE_BC_KEY]: (document.getElementById("lanBc").checked)? true : false,
-          // [CHECK_TEACHING_LANGUAGE_BT_KEY]: (document.getElementById("lanBt").checked)? true : false,
-          // [CHECK_TEACHING_LANGUAGE_OTHER_KEY]: (document.getElementById("lanOther").checked)? true : false,
-          // [YEARS_EXPERIENCE_KEY]: document.getElementById("yearsExperience").value,
-          [TUTORING_EXPERIENCE_KEY]: document.getElementById("tutoringExperience").value,
-          [TUTORING_APPROACH_KEY]: document.getElementById("tutoringApproach").value,
-          // [QUALIFICATION_KEY]: document.getElementById("qualification").value,
-          // [PREFERED_SUBJECT_LIST_KEY]: null,
-          // [PREFERED_AREA_LIST_KEY]: null
-        }, { merge: true });
-
-
-        $('#updateBasicDetailsModal').modal('hide');
-        func.showNotification('top','center', 'success', 'check_circle', "Your description is updated.");
-
-      });
-
-      $('#btnUpdateBasicDetailsModalClose1').on('click', function (e) {
-        $('#updateBasicDetailsModal').modal('hide');
-      });
-      $('#btnUpdateBasicDetailsModalClose2').on('click', function (e) {
-        $('#updateBasicDetailsModal').modal('hide');
-      });
     
-    
-    });
+		});
 
   </script>
   
+  <script>
+    $(function() {
+      $('input[name="daterange"]').daterangepicker({
+        opens: 'left',
+        timePicker: true,
+      }, function(start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+      });
+    });
+    </script>
+
 </body>
 
 </html>

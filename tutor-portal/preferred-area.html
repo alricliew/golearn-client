@@ -2773,7 +2773,7 @@
 							</div>
               </div>
 						</div>
-		    </div>
+		      </div>
       </div>
 
       <footer class="footer">
@@ -3173,8 +3173,8 @@
             // If the preferedAreaList_temp is null in db, remake this var into a empty array
             preferedAreaList_temp = []
           // Area list is null. It must be a new account. Do nothing and enable all checker input.
-          }else{
-
+          }
+          else{
             // Pre-check all the Area in the list 
             preferedAreaList_temp.forEach(item => {
               let arr = [];
@@ -3183,7 +3183,6 @@
               console.log(getCityNameBasedOnCityIdAndStateId(arr[0], arr[1]));
               console.log(MYAllStateId[MYAllState.indexOf(arr[0])]);
               document.getElementById([getCityNameBasedOnCityIdAndStateId(MYAllStateId[MYAllState.indexOf(arr[0])], arr[1])]).checked = true;
-
             });
 
             // Check if the subject exceeded the limit
@@ -3193,7 +3192,6 @@
             }else{
               disableUncheckedInput(false);
             }
-
           }
 
           // Load success, Renabled the inputs

@@ -1,20 +1,41 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <title>GoLearn Tutor</title>
+  
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <!-- Meta tag start -->
+  <title>GoLearn School</title>
+  <meta name=description content="GoLearn School&trade; is Malaysia #1 teaching platform to run your tuition business and manage your lessons. Start now for Free!">
+  <meta property=og:title content=GoLearn>
+  <meta property=og:site_name content=GoLearn>
+  <meta property=og:type content=website>
+  <meta property=og:url content=https://app.golearn.com.my>
+  <meta property=og:image content=https://app.golearn.com.my/assets/aonelearn-og-img.png>
+  <meta property=og:description content="GoLearn School&trade; is Malaysia #1 teaching platform to run your tuition business and manage your lessons. Start now for Free!">
+  <link rel=apple-touch-icon sizes=180x180 href=https://app.golearn.com.my/icon-apple-touch-180x180.png>
+  <link rel=icon type=image/png sizes=32x32 href=https://app.golearn.com.my/icon-32x32.png>
+  <link rel=icon type=image/png sizes=16x16 href=https://app.golearn.com.my/icon-16x16.png>
+  <!-- <link rel=manifest href=https://aonelearn.my/site.webmanifest crossorigin=use-credentials> -->
+  <!-- <link rel=mask-icon href=https://aonelearn.my/safari-pinned-tab.svg color=#5bbad5> -->
+  <!-- <meta name=msapplication-TileColor content=#da532c> -->
+  <!-- <meta name=theme-color content=#ffffff> -->
+  <!-- <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no,maximum-scale=1,user-scalable=no"> -->
+  <!-- <meta name=facebook-domain-verification content=mn81pobsaj7e17e6fjbcufwu65set0>   -->
+  <!-- Meta tag End -->
+
   <!-- Fonts and icons -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <script src="https://kit.fontawesome.com/2bdd669e92.js" crossorigin="anonymous"></script>
   <!-- Material Kit CSS -->
-  <link href="assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-  <link href="assets/demo/demo.css" rel="stylesheet" />
+  <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <!-- Tutor specific css -->
   <link href="../assets/css/tutor.css" rel="stylesheet" />
+    <!-- Tutor Portal specific CSS -->
+  <link href="../assets/css/tutor-portal.css" rel="stylesheet" />
   <!-- Firebase Init -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
@@ -29,7 +50,7 @@
   <div class="wrapper ">
     
 
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/img/sidebar-3.jpg">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-3.jpg">
       <!--
       Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -37,7 +58,7 @@
   -->
       <div class="logo">
         <a href="./" class="simple-text logo-mini">
-			    <img src="source/logo.png" style="width: 216px; height: auto;" alt=""></img>
+			    <img src="../assets/img/logo.png" style="width: 216px; height: auto;" alt=""></img>
           
         </a>
         <a href="./" class="simple-text logo-normal">
@@ -46,27 +67,86 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
+          <li class="nav-item active">
             <a class="nav-link" href="./">
-              <i class="material-icons">home</i>
-              <p>Home</p>
+              <i class="far fa-chart-bar fa-fw nav-icon"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="report/">
+              <i class="far fa-lightbulb fa-fw nav-icon"></i>
+              <p>Insight</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Teaching</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="class/">
+              <i class="fas fa-chalkboard fa-fw nav-icon"></i>
+              <p>Classes</p>
             </a>
           </li>
 		  		<li class="nav-item">
-            <a class="nav-link" href="./job.html">
-              <i class="material-icons">work_outline</i>
+            <a class="nav-link" href="student/">
+              <i class="fas fa-user-graduate fa-fw nav-icon"></i>
+              <p>Students</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="teacher/">
+              <i class="fas fa-chalkboard-teacher fa-fw nav-icon"></i>
+              <p>Teachers</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Financial</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="invoice/">
+              <i class="fas fa-file-invoice-dollar fa-fw nav-icon"></i>
+              <p>Invoices</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="salary/">
+              <i class="fas fa-money-bill-wave fa-fw nav-icon"></i>
+              <p>Salaries</p>
+            </a>
+          </li>
+          <li class="nav-item" id="navPayroll" style="display: none;">
+            <a class="nav-link" href="payroll/">
+              <i class="fas fa-hand-holding-usd fa-fw nav-icon"></i>
+              <p>Payroll <span style="visibility: hidden;">PRO</span></p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="transaction/">
+              <i class="fas fa-exchange-alt fa-fw nav-icon"></i>
+              <p>Transactions</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <h4 class="nav-link" style="margin-left: 1rem;">Public</h4>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="course/">
+              <i class="fas fa-book-open fa-fw nav-icon"></i>
+              <p>My Public Courses 
+                <span style="background-color: #2e74b6;padding: 0.2em 0.5em 0.2em 0.5em;color: white;border-radius: 3px;font-size: x-small;">New</span>
+              </p>
+            </a>
+          </li>
+		  		<li class="nav-item">
+            <a class="nav-link" href="job.html">
+              <i class="fas fa-briefcase fa-fw nav-icon"></i>
               <p>Tuition Jobs</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./course.html">
-              <i class="material-icons">format_list_bulleted</i>
-              <p>My Courses</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./update.html">
-              <i class="material-icons">note_alt</i>
+            <a class="nav-link" href="settings/">
+              <i class="fas fa-user-cog fa-fw nav-icon"></i>
               <p>Update Information</p>
             </a>
           </li>
@@ -94,7 +174,7 @@
 
             <ul class="navbar-nav">
               <li class="nav-item" id="activationNavItem">
-                <a href="#" class="btn btn-danger btn-round" style="visibility: hidden;" id="btnActivateAccount" ></a>
+                <a href="#" class="btn btn-primary btn-round btn-sm" style="visibility: hidden;" id="btnActivateAccount"></a>
               </li>
               <li class="nav-item">
                 <a class="navbar-brand" href="javascript:;">
@@ -135,7 +215,7 @@
                   <a id="navPublicProfile" class="dropdown-item" href="#">My Public Profile</a>
 									<a class="display:block; dropdown-item" href="./about.html">About</a>
 									<div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="javascript:;" onclick="signOutFunction()" id="btn-logout">Log out</a>
+                  <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#signOutModal"  onclick="// signOutFunction()" id="btn-logout">Log out</a>
 									<div class="dropdown-divider"></div>
 									<a style="font-weight: 500 ;padding: 0.5em ;text-align: center; width: 200px; background-color: #428dd4 ;display: block; color: #fff;" href="https://golearn.com.my/pricing/" target="_blank" id="btnUpgradeToPro">Upgrade to Pro</a>
 
@@ -148,65 +228,62 @@
       <!-- End Navbar -->
 
       <!-- Modal Start -->
-      <!-- Time slot Modal -->
+
+      <!-- View Profile modal -->
       <div class="row">
-        <div class="modal fade" id="timeSlotModal" tabindex="-1" role="dialog" aria-labelledby="timeSlotModalLabel" aria-hidden="true">
+        <div class="modal fade" id="viewProfileModal" tabindex="-1" role="dialog" aria-labelledby="viewProfileModalLabel" aria-hidden="true">
           <div class="modal-dialog  modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="timeSlotModalLabel">New message</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="viewProfileModalLabel">My Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnViewProfileClose1">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
-                <!-- <label ></label> -->
-                <h5 >Availability</h5>
+              <div class="modal-body" id="viewProfileModalBody">
+                <div class="row">
+                  <div class="col-md-12" id="tutorNull">
 
-                <form>
-                  <div class="form-group">
-                    <div class="form-check form-check-radio form-check-inline">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio-open" value="option1" >
-                        Open
-                        <span class="circle">
-                          <span class="check"></span>
-                        </span>
-                      </label>
+                    <div class="card card-profile">
+                      <div class="card-avatar" style="height: 150px; width: 150px;">
+                        <a href="javascript:;">
+                          <img class="img" id="tutorImgUrl" style="height: 100%; width:100%; object-fit: cover; border-radius: 50%" src="../assets/img/empty-photo.png" />
+                        </a>
+                      </div>
+                      <div class="card-body">
+                        <h6 class="card-category text-gray" id="tutorGenderAgeYearsExperience">Male | 2 years old</h6>
+                        <h4 class="card-title" id="tutorName"  style="font-size: 1.5rem;">Boo Boo</h4>
+              
+                        <h5 class="card-category" style="font-size: 0.9rem; font-weight: 600; color: #474747;" >Education</h5>
+                        <p class="card-description" id="tutorEducation">
+                          University of Bear
+                        </p>
+                        <h5 class="card-category" style="font-size: 0.9rem; font-weight: 600; color: #474747;" >Tutoring Approach</h5>
+              
+                        <p class="card-description" id="tutorTutoringApproach"> 
+                          I am passionate about teaching and love little teddies.
+                        </p>
+      
+                        <h5 class="card-category" style="font-size: 0.9rem; font-weight: 600; color: #474747;" >Teaching Experience</h5>
+              
+                        <p class="card-description" id="tutorTutoringExperience">
+                          I have 9 months of teaching experience. Hire me starting from 2 cans of honey 🍯🍯.
+                        </p>
+      
+                        <a href="javascript:;" class="btn btn-primary btn-round" id="btnIWantThisTutor"  style="background-color: grey; pointer-events: none;">I want this tutor !</a>
+                      </div>
+                      <!-- <button>👆 This is what your profile looks like to parents.</button> -->
+      
                     </div>
-                    <div class="form-check form-check-radio form-check-inline">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio-busy" value="option2">
-                        Busy
-                        <span class="circle">
-                          <span class="check"></span>
-                        </span>
-                      </label>
-                    </div>
-        
-                    <div class="form-check form-check-radio form-check-inline">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio-closed" value="option3">
-                        Closed
-                        <span class="circle">
-                          <span class="check"></span>
-                        </span>
-                      </label>
-                    </div>
+      
                   </div>
-       
-                </form>
-
-                <h5 >Description</h5>
-                <div class="form-group">
-                  
-                  <!-- <label for="message-text" class="col-form-label">Message:</label> -->
-                  <textarea class="form-control" id="modalDescription" rows="4"></textarea>
                 </div>
+
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnTimeSlotModalUpdate">Update</button>
+                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnViewProfileModalUpdate"></button> -->
               </div>
             </div>
           </div>
@@ -245,7 +322,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="signOutLabel">Logging Out</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnSignOutModalClose1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -253,7 +330,7 @@
                 Are you sure you want to continue?
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSignOutModalClose2">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSignOutModalUpdate">Confirm</button>
               </div>
             </div>
@@ -270,97 +347,220 @@
           <!-- <button id="btnTest" class="btn btn-round btn-twitter"><i class="fa fa-twitter"></i> &middot; 45</button> -->
 
           <div class="row">
-            <!-- Dummy column -->
-            <div class="col-md-7">
+
+            <!-- Card -->
+            <div class="col-md-2 col-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-primary card-header-icon">
+                  <div class="card-icon">
+                    <i class="fas fa-user-graduate fa-fw"></i>
+                  </div>
+                  <p class="card-category"></p>
+                  <h3 class="card-title" id="main_subject_sentence">
+                    
+                  </h3>  
+                </div>
+                <div class="card-body" style="text-align: left;">
+                  <h4 class="card-title">
+                    Students
+                  </h4>  
+                  <h3 class="card-title" id="studentNum" style="font-weight: bold;">
+                    0
+                  </h3> 
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-md-2 col-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                    <i class="fas fa-chalkboard fa-fw"></i>
+                  </div>
+                  <p class="card-category"></p>
+                  <h3 class="card-title" id="main_subject_sentence">
+                  </h3>  
+                </div>
+                <div class="card-body" style="text-align: left;">
+                  <h4 class="card-title">
+                    Classes
+                  </h4>  
+                  <h3 class="card-title" id="classNum" style="font-weight: bold;">
+                    0
+                  </h3> 
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                  <div class="card-icon">
+                    <i class="fas fa-chalkboard-teacher fa-fw"></i>
+                  </div>
+                  <p class="card-category"></p>
+                  <h3 class="card-title" id="main_subject_sentence">
+                    
+                  </h3>  
+                </div>
+                <div class="card-body" style="text-align: left;">
+                  <h4 class="card-title">
+                    Teachers
+                  </h4>  
+                  <h3 class="card-title" id="tutorNum" style="font-weight: bold;">
+                    0
+                  </h3> 
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                    <i class="fas fa-user-cog fa-fw"></i>
+                  </div>
+                  <a href="javascript:;" data-toggle="modal" data-target="#viewProfileModal" class="btn btn-primary btn-round btn-sm">Preview</a>
+                  <p class="card-category"></p>
+                  <h3 class="card-title" id="main_subject_sentence">
+                  </h3>  
+                </div>
+                <div class="card-body" style="text-align: left;">
+                  <h4 class="card-title">
+                    Profile
+                  </h4>  
+                  <h3 class="card-title" style="font-weight: bold;">
+                    <span id="profilePercentageNum" >0%</span> 
+                    <span style="font-weight: 300; font-size: small;">Completed</span> 
+                    <span class="tooltiptext-trigger">? 
+                      <span class="tooltiptext-general" style="left: 15%; bottom: 50%; width: 200px">
+                        <h6>Profile</h6>
+                        <p style="font-weight: 300;"><span><i class="fas fa-minus-circle fa-fw" id="profilePic" style="color:red"></i></span> Upload a profile picture</p>
+                        <p style="font-weight: 300;"><span><i class="fas fa-minus-circle fa-fw" id="profileBasic" style="color:red"></i></span> Update basic details</p>
+                        <p style="font-weight: 300;"><span><i class="fas fa-minus-circle fa-fw" id="profileQualification" style="color:red"></i></span> Add qualification</p>
+                        <p style="font-weight: 300;"><span><i class="fas fa-minus-circle fa-fw" id="profileApproach" style="color:red"></i></span> Add teaching approach </p>
+                        <p style="font-weight: 300;"><span><i class="fas fa-minus-circle fa-fw" id="profileExp" style="color:red"></i></span> Add past experience</p>
+                        <p style="font-weight: 300;"><span><i class="fas fa-minus-circle fa-fw" id="profileSubject" style="color:red"></i></span> Preferred subjects</p>
+                        <p style="font-weight: 300;"><span><i class="fas fa-minus-circle fa-fw" id="profileArea" style="color:red"></i></span> Teaching places</p>
+                        <!-- <p style="font-weight: 300;"><span><i class="fas fa-minus-circle fa-fw" id="profilePublicCourse" style="color:red"></i></span> Add public courses</p> -->
+                      </span> 
+                    </span>
+                  </h3> 
+                </div>
+                <div class="card-footer">
+                  <!-- <div class="stats align-self-center" id="monthRevenueLastUpdate">
+                    <i class="material-icons">access_time</i> Update Now
+                  </div> -->
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Profile view -->
+            <div class="col-md-2 col-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                  <div class="card-icon">
+                    <i class="fas fa-eye fa-fw"></i>
+                  </div>
+                  <p class="card-category"></p>
+                  <h3 class="card-title" id="main_subject_sentence">
+                    
+                  </h3>  
+                </div>
+                <div class="card-body" style="text-align: left;">
+                  <h4 class="card-title">
+                    Profile Views
+                  </h4>  
+                  <h3 class="card-title" id="profileViewNum" style="font-weight: bold;">
+                    0
+                  </h3> 
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Public Courses -->
+            <div class="col-md-2 col-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-secondary card-header-icon">
+                  <div class="card-icon">
+                    <i class="fas fa-book-open fa-fw"></i>
+                  </div>
+                  <p class="card-category"></p>
+                  <h3 class="card-title" id="main_subject_sentence">
+                    
+                  </h3>  
+                </div>
+                <div class="card-body" style="text-align: left;">
+                  <h4 class="card-title">
+                    Public Courses
+                  </h4>  
+                  <h3 class="card-title" id="publicCourseNum" style="font-weight: bold;">
+                    0
+                  </h3> 
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Revenue column -->
+            <div class="col-md-6">
+              <div class="card card-chart">
+                <div class="card-header card-header-success">
+                  <!-- <div class="ct-chart" id="dailySalesChart"></div> -->
+                  <canvas id="monthlyRevenueChart" width="400" height="400"></canvas>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">Monthly Revenue</h4>
+                  <p class="card-category" id="monthRevenueText">
+                    <!-- <span class="text-success" id="monthRevenueText"><i class="fa fa-long-arrow-down"></i> 0% </span> increase in this month sales.</p> -->
+                </div>
+                <div class="card-footer">
+                  <div class="stats align-self-center" id="monthRevenueLastUpdate">
+                    <i class="material-icons">access_time</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-4">
               <div class="card">
                 <div class="card-header card-header-primary">
                 <h4 class="card-title">My Time Slot</h4>
                 <p class="card-category">Let your future clients know your availability.</p>
                 </div>
                 <div class="card-body">
-                  <!-- <div class="container"> -->
                     <div class="row">
-                      <!-- <div class="overflow-auto">...</div> -->
-                      <!-- col-sm-12 -->
-                      <div class="col-sm-12" id="time-slot-block"  style="padding: 0.1rem; margin: 0;">
-                        <div class="table-responsive" >
 
-             
-                          <table class="table table-borderless table-sm" id="time-slot-table" style="overflow-x: auto;">
-                            <thead>
-                              <tr class="time-slot-table-thead-tr">
-                                <!-- class="time-slot-table-thead-tr-th_null" -->
-                                <th scope="col" style="background: #d6d6d6;"></th> 
-                                <th scope="col" class="time-slot-table-thead-tr-th" >8am - 12pm</th>
-                                <th scope="col" class="time-slot-table-thead-tr-th_shaded">12pm - 3pm</th>
-                                <th scope="col" class="time-slot-table-thead-tr-th" >3pm - 6pm</th>
-                                <th scope="col" class="time-slot-table-thead-tr-th_shaded">6pm onward</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr class="time-slot-table-tbody-item-row">
-                                <th scope="row" class="time-slot-table-first-col">Mon</th>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9; " id="mon8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tMon8am"  data-datetime="Monday, 8am - 12pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="mon12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tMon12pm" data-datetime="Monday, 12pm - 3pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="mon3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tMon3pm" data-datetime="Monday, 3pm - 6pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="mon6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tMon6pm" data-datetime="Monday, 6pm onward">Closed</td>
-                              </tr>
-                              <tr class="time-slot-table-tbody-item-row">
-                                <th scope="row" class="time-slot-table-first-col-shaded">Tue</th>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="tue8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tTue8am" data-datetime="Tuesday, 8am - 12pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="tue12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tTue12pm" data-datetime="Tuesday, 12pm - 3pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="tue3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tTue3pm" data-datetime="Tuesday, 3pm - 6pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="tue6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tTue6pm" data-datetime="Tuesday, 6pm onward">Closed</td>
-                              </tr>
-                              <tr class="time-slot-table-tbody-item-row">
-                                <th scope="row" class="time-slot-table-first-col">Wed</th>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="wed8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tWed8am" data-datetime="Wednesday, 8am - 12pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="wed12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tWed12pm" data-datetime="Wednesday, 12pm - 3pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="wed3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tWed3pm" data-datetime="Wednesday, 3pm - 6pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="wed6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tWed6pm" data-datetime="Wednesday, 6pm onward">Closed</td>
-                              </tr>
-                              <tr class="time-slot-table-tbody-item-row">
-                                <th scope="row" class="time-slot-table-first-col-shaded">Thu</th>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="thu8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tThu8am" data-datetime="Thursday, 8am - 12pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="thu12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tThu12pm" data-datetime="Thursday, 12pm - 3pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="thu3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tThu3pm" data-datetime="Thursday, 3pm - 6pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="thu6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tThu6pm" data-datetime="Thursday, 6pm onward">Closed</td>
-                              </tr>
-                              <tr class="time-slot-table-tbody-item-row">
-                                <th scope="row" class="time-slot-table-first-col">Fri</th>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="fri8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tFri8am" data-datetime="Friday, 8am - 12pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="fri12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tFri12pm" data-datetime="Friday, 12pm - 3pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="fri3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tFri3pm" data-datetime="Friday, 3pm - 6pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="fri6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tFri6pm" data-datetime="Friday, 6pm onward">Closed</td>
-                              </tr>
-                              <tr class="time-slot-table-tbody-item-row">
-                                <th scope="row" class="time-slot-table-first-col-shaded">Sat</th>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="sat8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tSat8am" data-datetime="Saturday, 8am - 12pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="sat12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSat12pm" data-datetime="Saturday, 12pm - 3pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="sat3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSat3pm" data-datetime="Saturday, 3pm - 6pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #d6d6d6;" id="sat6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSat6pm" data-datetime="Saturday, 6pm onward">Closed</td>
-                              </tr>
-                              <tr class="time-slot-table-tbody-item-row">
-                                <th scope="row" class="time-slot-table-first-col">Sun</th>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="sun8am" data-toggle="modal" data-target="#timeSlotModal" data-key="tSun8am" data-datetime="Sunday, 8am - 12pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="sun12pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSun12pm" data-datetime="Sunday, 12pm - 3pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="sun3pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSun3pm" data-datetime="Sunday, 3pm - 6pm">Closed</td>
-                                <td class="time-slot-table-tbody-item" style="pointer-events: none; background-color: #e9e9e9;" id="sun6pm" data-toggle="modal" data-target="#timeSlotModal" data-key="tSun6pm" data-datetime="Sunday, 6pm onward">Closed</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
+                      <div class="col-sm-12">
+
                       </div>
                     </div>
-                  <!-- </div> -->
                 </div>
               </div>
-            </div>
-            <!-- Dummy column -->
-            <!-- <div class="col-md-1"></div> -->
+            </div> -->
  
-            <!-- Dummy profile -->
-            <div class="col-md-5" id="tutorNull">
+            <!-- Profile -->
+            <!-- <div class="col-md-4" id="tutorNull">
 
               <div class="card card-profile">
                 <div class="card-avatar" style="height: 150px; width: 150px;">
@@ -394,7 +594,7 @@
 
               </div>
 
-            </div>
+            </div> -->
 
           </div>
  
@@ -406,11 +606,11 @@
         <div class="container-fluid">
           <nav class="float-left">
           <ul>
-            <li>
+            <!-- <li>
             <a href="https://golearn.com.my/join-us" target="_blank">
               Visit GoLearn Tutor
             </a>
-            </li>
+            </li> -->
           </ul>
           </nav>
           <!-- <div class="copyright float-right">
@@ -424,866 +624,521 @@
         </div>
       </footer>
     </div>
-	  
   </div>
-  
-  <div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-      <a href="#" data-toggle="dropdown">
-				<i class="material-icons" style="font-size: 36px; padding: 0.2em; color: white;">apps</i>
-      </a>
-      <ul class="dropdown-menu">
-		    <br>
-        <li class="header-title">Get More Tuition Jobs?</li>
-        <li class="button-container">
-          <a href="https://golearn.com.my/job/" target="_blank" class="btn btn-primary btn-block">Apply Now</a>
-        </li>
-        
-        <li class="button-container">
-          <a href="https://golearn.com.my/" target="_blank" class="btn btn-default btn-block">
-            Visit our website
-          </a>
-        </li>
-       
-        <li class="header-title">Follow and Like Us!</li>
-        <li class="button-container text-center">
-			    <button id="facebook" class="btn btn-round btn-facebook" onclick="window.open('https://www.facebook.com/FindTutorInMalaysia/', '_blank');"><i class="fa fa-facebook-f"></i> &middot; facebook</button>
-          <button id="twitter"  class="btn btn-round btn-twitter" onclick="window.open('https://twitter.com/golearnmalaysia', '_blank');"><i class="fa fa-twitter"></i> &middot; twitter</button>
-          <button id="instagram"  class="btn btn-round btn-twitter" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); " onclick="window.open('https://www.instagram.com/golearn.education/', '_blank');"><i class="fa fa-instagram"></i> &middot; instagram</button>
-          <br>
-          <br>
-        </li>
-        <li class="header-title">Found a problem? </li>
-        <li class="button-container">
-          <a href="https://golearn.com.my/submit-anything-to-us/" target="_blank" class="btn btn-warning btn-block">
-            Let us know
-          </a>
-          <br>
-        </li>
-      </ul>
-    </div>
-  </div>
-  
-  <script src="assets/js/core/jquery.min.js"></script>
-  <script src="assets/js/core/popper.min.js"></script>
-  <script src="assets/js/core/bootstrap-material-design.min.js"></script>
-  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!-- Plugin for the momentJs  -->
-  <script src="assets/js/plugins/moment.min.js"></script>
+  <script src="../assets/js/plugins/moment.min.js"></script>
   <!--  Plugin for Sweet Alert -->
-  <script src="assets/js/plugins/sweetalert2.js"></script>
+  <script src="../assets/js/plugins/sweetalert2.js"></script>
   <!-- Forms Validations Plugin -->
-  <script src="assets/js/plugins/jquery.validate.min.js"></script>
-  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-  <!-- <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script> -->
-  <!-- 	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-  <!-- <script src="assets/js/plugins/bootstrap-selectpicker.js"></script> -->
-  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-  <!-- <script src="assets/js/plugins/bootstrap-datetimepicker.min.js"></script> -->
-  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
-  <!-- <script src="assets/js/plugins/jquery.dataTables.min.js"></script> -->
-  <!-- 	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-  <!-- <script src="assets/js/plugins/bootstrap-tagsinput.js"></script> -->
-  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-  <!-- <script src="assets/js/plugins/jasny-bootstrap.min.js"></script> -->
-  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-  <!-- <script src="assets/js/plugins/fullcalendar.min.js"></script> -->
-  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-  <!-- <script src="assets/js/plugins/jquery-jvectormap.js"></script> -->
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <!-- <script src="assets/js/plugins/nouislider.min.js"></script> -->
-  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> -->
-  <!-- Library for adding dinamically elements -->
-  <!-- <script src="assets/js/plugins/arrive.min.js"></script> -->
-  <!--  Google Maps Plugin    -->
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+  <script src="../assets/js/plugins/jquery.validate.min.js"></script>
   <!-- Chartist JS -->
   <!-- <script src="assets/js/plugins/chartist.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!--  Notifications Plugin    -->
-  <script src="assets/js/plugins/bootstrap-notify.js"></script>
+  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-  
+  <script src="../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>  
   <!-- Common constants -->
   <script src="../assets/js/common.js" type="text/javascript"></script>
-  <!-- Core Tutor Js -->
+  <script src="../assets/js/const.js" type="text/javascript"></script>
+  <!-- Global Var -->
+  <script src="../assets/js/globalvar.js" type="text/javascript"></script>
+  <!-- Tutor Core -->
   <script src="../assets/js/tutor-core.js" type="text/javascript"></script>
 
   <script>
-    // Global Variables
-    var tutorId;
-    var current_name, current_email, current_phone, current_age, current_gender, current_imgUri, current_nric,
-      current_address1, current_address2, current_addressPostCode, current_addressState,
-      current_rating, current_ratingTimes, current_ratingFinal, current_profileStatus,
-      current_token, current_agent, current_accountStatus;
-    var currentYearsExperience, currentTutoringExperience, currentTutoringApproach, currentQualification, 
-      current_preferedAreaList, current_preferedSubjectList;
-    // Depreciated
-    // var current_chk_homeTutor, current_chk_privateTutor, current_chk_groupTutor, current_chk_onlineTutor;
-    var isModeHomeStudentToTutor, isModeHomeTutorToStudent, isModeGroup, isModeOnline, isModeOnlineGroup;
-    var isLanEng, isLanBm, isLanBc, isLanBt, isLanOther;
-    var current_chk_homeStudentToTutor, current_chk_homeTutorToStudent, current_chk_group, current_chk_online, current_chk_onlineGroup;
-    var current_mon_8am, current_mon_12pm, current_mon_3pm, current_mon_6pm, 
-      current_tue_8am, current_tue_12pm, current_tue_3pm, current_tue_6pm, 
-      current_wed_8am, current_wed_12pm, current_wed_3pm, current_wed_6pm, 
-      current_thu_8am, current_thu_12pm, current_thu_3pm, current_thu_6pm, 
-      current_fri_8am, current_fri_12pm, current_fri_3pm, current_fri_6pm,
-      current_sat_8am, current_sat_12pm, current_sat_3pm, current_sat_6pm, 
-      current_sun_8am, current_sun_12pm, current_sun_3pm, current_sun_6pm;
-    var current_aweburl, current_aPremiumSubjectLimit, current_aPremiumConnectLimit, current_aTotalSubjectLimit, 
-     current_aTotalConnectLimit, current_aPreferredSubjectLimit, current_aPreferredAreaLimit;
+    // // Global Variables
+    // var tutorId;
+    // var current_name, current_email, current_phone, current_age, current_gender, current_imgUri, current_nric,
+    //   current_address1, current_address2, current_addressPostCode, current_addressState,
+    //   current_rating, current_ratingTimes, current_ratingFinal, current_profileStatus,
+    //   current_token, current_agent, current_accountStatus;
+    // var currentYearsExperience, currentTutoringExperience, currentTutoringApproach, currentQualification, 
+    //   current_preferedAreaList, current_preferedSubjectList;
+    // // Depreciated
+    // // var current_chk_homeTutor, current_chk_privateTutor, current_chk_groupTutor, current_chk_onlineTutor;
+    // var isModeHomeStudentToTutor, isModeHomeTutorToStudent, isModeGroup, isModeOnline, isModeOnlineGroup;
+    // var isLanEng, isLanBm, isLanBc, isLanBt, isLanOther;
+    // var current_chk_homeStudentToTutor, current_chk_homeTutorToStudent, current_chk_group, current_chk_online, current_chk_onlineGroup;
+    // var current_mon_8am, current_mon_12pm, current_mon_3pm, current_mon_6pm, 
+    //   current_tue_8am, current_tue_12pm, current_tue_3pm, current_tue_6pm, 
+    //   current_wed_8am, current_wed_12pm, current_wed_3pm, current_wed_6pm, 
+    //   current_thu_8am, current_thu_12pm, current_thu_3pm, current_thu_6pm, 
+    //   current_fri_8am, current_fri_12pm, current_fri_3pm, current_fri_6pm,
+    //   current_sat_8am, current_sat_12pm, current_sat_3pm, current_sat_6pm, 
+    //   current_sun_8am, current_sun_12pm, current_sun_3pm, current_sun_6pm;
+    // var current_aweburl, current_aPremiumSubjectLimit, current_aPremiumConnectLimit, current_aTotalSubjectLimit, 
+    //  current_aTotalConnectLimit, current_aPreferredSubjectLimit, current_aPreferredAreaLimit;
 
-		var db = firebase.firestore();
-		db.settings({ timestampsInSnapshots: true });
+		// var db = firebase.firestore();
+		// db.settings({ timestampsInSnapshots: true });
 
-    // Set the nav name and global var, if user already login and have session Storage 
-    var tutorInfoObj = null;
-    if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
-      // Do nothing
-    }else{
-      // Set the nav user name
-      tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
-      document.getElementById("user").textContent = tutorInfoObj.name;
 
-      current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
-      // current_email, 
-      // current_phone, 
-      current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
-      current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
-      current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
-      current_accountStatus = tutorInfoObj.accountStatus; // bool
-      currentYearsExperience = tutorInfoObj.yearsExperience; // number
-      currentTutoringExperience = tutorInfoObj.tutoringExperience;
-      currentTutoringApproach = tutorInfoObj.tutoringApproach;
-      currentQualification= tutorInfoObj.qualification;
-      current_mon_8am = tutorInfoObj.tMon8am;
-      current_mon_12pm= tutorInfoObj.tMon12pm; 
-      current_mon_3pm = tutorInfoObj.tMon3pm;  
-      current_mon_6pm = tutorInfoObj.tMon6pm;  
-      current_tue_8am = tutorInfoObj.tTue8am;  
-      current_tue_12pm= tutorInfoObj.tTue12pm;  
-      current_tue_3pm = tutorInfoObj.tTue3pm;  
-      current_tue_6pm = tutorInfoObj.tTue6pm;  
-      current_wed_8am = tutorInfoObj.tWed8am;  
-      current_wed_12pm= tutorInfoObj.tWed12pm;  
-      current_wed_3pm = tutorInfoObj.tWed3pm;  
-      current_wed_6pm = tutorInfoObj.tWed6pm;  
-      current_thu_8am = tutorInfoObj.tThu8am;  
-      current_thu_12pm= tutorInfoObj.tThu12pm;  
-      current_thu_3pm = tutorInfoObj.tThu3pm;  
-      current_thu_6pm = tutorInfoObj.tThu6pm;  
-      current_fri_8am = tutorInfoObj.tFri8am;  
-      current_fri_12pm= tutorInfoObj.tFri12pm;  
-      current_fri_3pm = tutorInfoObj.tFri3pm;  
-      current_fri_6pm = tutorInfoObj.tFri6pm; 
-      current_sat_8am = tutorInfoObj.tSat8am;  
-      current_sat_12pm= tutorInfoObj.tSat12pm;  
-      current_sat_3pm = tutorInfoObj.tSat3pm;  
-      current_sat_6pm = tutorInfoObj.tSat6pm;  
-      current_sun_8am = tutorInfoObj.tSun8am;  
-      current_sun_12pm= tutorInfoObj.tSun12pm;  
-      current_sun_3pm = tutorInfoObj.tSun3pm;  
-      current_sun_6pm = tutorInfoObj.tSun6pm;
-      current_aweburl = tutorInfoObj.aWebUrl
+    // // Set the nav name and global var, if user already login and have session Storage 
+    // var tutorInfoObj = null;
+    // console.log("tutorId during Init");
+    // console.log(tutorId);
+    
+    // function loadTutorInfoObj(){
+      
+    //   if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
+    //     // Do nothing
+    //     console.log("Null tutorInfoObj: Run_loadUserInfo ");
+    //     loadUserInfo(tutorId);
+        
+    //   }
+    //   else{
+    //     // Set the nav user name
+    //     tutorInfoObj = JSON.parse(sessionStorage.getItem(PROFILE_TUTOR_INFO));
+    //     document.getElementById("user").textContent = tutorInfoObj.name;
 
-      // updatePageView(current_accountStatus);
+    //     current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
+    //     current_email = (tutorInfoObj.email == null || tutorInfoObj.email == "")? "" : tutorInfoObj.email; 
+    //     current_phone = (tutorInfoObj.phone == null || tutorInfoObj.phone == "")? "New Tutor" : tutorInfoObj.phone; 
+    //     current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
+    //     current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
+    //     current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
+    //     current_accountStatus = tutorInfoObj.accountStatus; // bool
+    //     currentYearsExperience = tutorInfoObj.yearsExperience; // number
+    //     currentTutoringExperience = tutorInfoObj.tutoringExperience;
+    //     currentTutoringApproach = tutorInfoObj.tutoringApproach;
+    //     currentQualification = tutorInfoObj.qualification;
+    //     current_preferedAreaList = tutorInfoObj.preferedAreaList;
+    //     current_preferedSubjectList = tutorInfoObj.preferedSubjectList;
+    //     current_mon_8am = tutorInfoObj.tMon8am;
+    //     current_mon_12pm= tutorInfoObj.tMon12pm; 
+    //     current_mon_3pm = tutorInfoObj.tMon3pm;  
+    //     current_mon_6pm = tutorInfoObj.tMon6pm;  
+    //     current_tue_8am = tutorInfoObj.tTue8am;  
+    //     current_tue_12pm= tutorInfoObj.tTue12pm;  
+    //     current_tue_3pm = tutorInfoObj.tTue3pm;  
+    //     current_tue_6pm = tutorInfoObj.tTue6pm;  
+    //     current_wed_8am = tutorInfoObj.tWed8am;  
+    //     current_wed_12pm= tutorInfoObj.tWed12pm;  
+    //     current_wed_3pm = tutorInfoObj.tWed3pm;  
+    //     current_wed_6pm = tutorInfoObj.tWed6pm;  
+    //     current_thu_8am = tutorInfoObj.tThu8am;  
+    //     current_thu_12pm= tutorInfoObj.tThu12pm;  
+    //     current_thu_3pm = tutorInfoObj.tThu3pm;  
+    //     current_thu_6pm = tutorInfoObj.tThu6pm;  
+    //     current_fri_8am = tutorInfoObj.tFri8am;  
+    //     current_fri_12pm= tutorInfoObj.tFri12pm;  
+    //     current_fri_3pm = tutorInfoObj.tFri3pm;  
+    //     current_fri_6pm = tutorInfoObj.tFri6pm; 
+    //     current_sat_8am = tutorInfoObj.tSat8am;  
+    //     current_sat_12pm= tutorInfoObj.tSat12pm;  
+    //     current_sat_3pm = tutorInfoObj.tSat3pm;  
+    //     current_sat_6pm = tutorInfoObj.tSat6pm;  
+    //     current_sun_8am = tutorInfoObj.tSun8am;  
+    //     current_sun_12pm= tutorInfoObj.tSun12pm;  
+    //     current_sun_3pm = tutorInfoObj.tSun3pm;  
+    //     current_sun_6pm = tutorInfoObj.tSun6pm;
+    //     current_aweburl = tutorInfoObj.aWebUrl;
+    //     current_aPremiumSubjectLimit = tutorInfoObj.aPremiumSubjectLimit; 
+    //     current_aPremiumConnectLimit = tutorInfoObj.aPremiumConnectLimit; 
+    //     current_aTotalSubjectLimit = tutorInfoObj.aTotalSubjectLimit;
+    //     current_aTotalConnectLimit = tutorInfoObj.aTotalConnectLimit; 
+    //     current_aPreferredSubjectLimit = tutorInfoObj.aPreferredSubjectLimit;
+    //     current_aPreferredAreaLimit = tutorInfoObj.aPreferredAreaLimit;
+
+    //     loadPageInitFunc();
+
+    //     updateGeneralView();
+
+    //   }
+    // }
+
+
+		// firebase.auth().onAuthStateChanged(function(user){
+      
+		// 	if(!user){
+    //     // Return to login if user does not exist.
+		// 		window.location.href = "../"
+		// 	}else{
+    //     // if the displayName is null, it means user register using Phone
+    //     if (firebase.auth().currentUser.displayName == null ){
+    //         tutorId = firebase.auth().currentUser.phoneNumber;
+    //     }else
+    //         tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+
+
+    //     console.log("running loadTutorInfoObj")
+
+    //     loadTutorInfoObj();
+
+    //     // loadUserInfo(tutorId);
+
+    //     // loadGeneralNum();
+
+    //     // loadAllOrgRevenue();
+
+    //   }
+		// });
+
+    // // Tutor Specific
+    // function loadUserInfo(tutorId){
+    //   // Tutor Id must be a phone with +60, no spacing or other chars
+    //   var docRef = db.collection("Tutor").doc(tutorId);
+      
+    //   docRef.get().then((doc) => {
+    //   // docRef.onSnapshot((doc) => {
+    //     if (doc.exists) {
+    //       current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
+    //       current_email = (doc.data().email == null || doc.data().email == "")? "" : doc.data().email; 
+    //       current_phone = (doc.data().phone == null || doc.data().phone == "")? "New Tutor" : doc.data().phone; 
+    //       current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
+    //       current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
+    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
+    //       current_accountStatus = doc.data().accountStatus; 
+    //       currentYearsExperience = doc.data().yearsExperience; // number
+    //       currentTutoringExperience = doc.data().tutoringExperience;
+    //       currentTutoringApproach = doc.data().tutoringApproach;
+    //       currentQualification= doc.data().qualification;
+    //       current_preferedSubjectList = doc.data()[PREFERED_SUBJECT_LIST_KEY]; 
+    //       current_preferedAreaList = doc.data()[PREFERED_AREA_LIST_KEY]; 
+    //       current_mon_8am = doc.data().tMon8am;
+    //       current_mon_12pm= doc.data().tMon12pm; 
+    //       current_mon_3pm = doc.data().tMon3pm;  
+    //       current_mon_6pm = doc.data().tMon6pm;  
+    //       current_tue_8am = doc.data().tTue8am;  
+    //       current_tue_12pm= doc.data().tTue12pm;  
+    //       current_tue_3pm = doc.data().tTue3pm;  
+    //       current_tue_6pm = doc.data().tTue6pm;  
+    //       current_wed_8am = doc.data().tWed8am;  
+    //       current_wed_12pm= doc.data().tWed12pm;  
+    //       current_wed_3pm = doc.data().tWed3pm;  
+    //       current_wed_6pm = doc.data().tWed6pm;  
+    //       current_thu_8am = doc.data().tThu8am;  
+    //       current_thu_12pm= doc.data().tThu12pm;  
+    //       current_thu_3pm = doc.data().tThu3pm;  
+    //       current_thu_6pm = doc.data().tThu6pm;  
+    //       current_fri_8am = doc.data().tFri8am;  
+    //       current_fri_12pm= doc.data().tFri12pm;  
+    //       current_fri_3pm = doc.data().tFri3pm;  
+    //       current_fri_6pm = doc.data().tFri6pm; 
+    //       current_sat_8am = doc.data().tSat8am;  
+    //       current_sat_12pm= doc.data().tSat12pm;  
+    //       current_sat_3pm = doc.data().tSat3pm;  
+    //       current_sat_6pm = doc.data().tSat6pm;  
+    //       current_sun_8am = doc.data().tSun8am;  
+    //       current_sun_12pm= doc.data().tSun12pm;  
+    //       current_sun_3pm = doc.data().tSun3pm;  
+    //       current_sun_6pm = doc.data().tSun6pm; 
+    //       current_aPremiumSubjectLimit = tutorInfoObj.aPremiumSubjectLimit; 
+    //       current_aPremiumConnectLimit = tutorInfoObj.aPremiumConnectLimit; 
+    //       current_aTotalSubjectLimit = tutorInfoObj.aTotalSubjectLimit;
+    //       current_aTotalConnectLimit = tutorInfoObj.aTotalConnectLimit; 
+    //       current_aPreferredSubjectLimit = tutorInfoObj.aPreferredSubjectLimit;
+    //       current_aPreferredAreaLimit = tutorInfoObj.aPreferredAreaLimit;
+
+    //       // Store data to sessionStorage
+    //       var tutorDataObj = {
+    //         [NAME_KEY] : doc.data().name,
+    //         [EMAIL_KEY] : doc.data().email,
+    //         [PHONE_KEY] : doc.data().phone,
+    //         [AGE_KEY] : doc.data().age,
+    //         [GENDER_KEY] : doc.data().gender,
+    //         [ADDRESS_1_KEY] :doc.data().address1,
+    //         [ADDRESS_2_KEY] :doc.data().address2,
+    //         [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
+    //         [ADDRESS_STATE_KEY] :doc.data().addressState,
+    //         [IMAGE_KEY] : doc.data().imgUrl,
+    //         // [NRIC_KEY] : doc.data().name,
+    //         [RATING_KEY] : doc.data().rating,
+    //         [RATING_TIMES_KEY] : doc.data().ratingTimes,
+    //         [RATING_FINAL_KEY] : doc.data().ratingFinal,
+    //         [PROFILE_STATUS_KEY] : doc.data().profileStatus,
+    //         // [CHECK_HOMETUTOR_KEY] : doc.data().name,
+    //         // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
+    //         // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
+    //         // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
+    //         [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
+    //         [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
+    //         [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
+    //         [QUALIFICATION_KEY] : doc.data().qualification,
+    //         [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
+    //         [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
+    //         [AGENT_KEY] : doc.data().agent,
+    //         [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
+            
+    //         [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
+    //         [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
+    //         [CHECK_GROUP_KEY] : doc.data().modeGroup,
+    //         [CHECK_ONLINE_KEY] : doc.data().modeOnline,
+    //         [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
+    //         [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
+    //         [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
+    //         [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
+    //         [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
+    //         [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
+
+    //         [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
+    //         [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
+    //         [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
+    //         [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
+    //         [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
+    //         [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
+    //         [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
+    //         [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
+    //         [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
+    //         [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
+    //         [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
+    //         [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
+    //         [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
+    //         [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
+    //         [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
+    //         [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
+    //         [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
+    //         [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
+    //         [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
+    //         [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
+    //         [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
+    //         [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
+    //         [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
+    //         [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
+    //         [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
+    //         [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
+    //         [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
+    //         [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
+    //         // Create a placeholder for aWebUrl. This param can only initiated by admin
+    //         // manually through https://golearn.com.my/admin/admin-portal.html
+    //         [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
+    //         [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
+    //         [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
+    //         [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
+    //         [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
+    //         [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
+    //         [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
+    //       }
+
+    //       // Set tutorInfoObj as sessionStorage
+    //       sessionStorage.setItem(PROFILE_TUTOR_INFO, JSON.stringify(tutorDataObj));
+
+
+    //       loadPageInitFunc();
+
+    //       updateGeneralView();
+
+    //       // index.html specific
+
+    //       // updatePageView();
+
+    //     } 
+        
+    //     else {
+    //       window.location = "../"
+    //       // console.log("No tutor!");
+    //       // document.getElementById("tutorImgUrl").src = "../assets/img/hello.gif";
+    //       // document.getElementById("tutorName").textContent = "Boo Boo";
+    //       // document.getElementById("tutorTutoringApproach").textContent = "I am passionate about teaching and love little teddies.";
+    //       // document.getElementById("tutorTutoringExperience").textContent = " I have 9 months of teaching experience. Hire me starting from 2 cans of honey 🍯🍯.";
+    //       // document.getElementById("tutorEducation").textContent = "University of Bear";
+    //       // document.getElementById("tutorGenderAgeYearsExperience").textContent = "Male | 2 years old";
+    //     }
+    //   });
+
+
+    //   var docRefDate = db.collection("Tutor").doc(tutorId);
+
+    //   docRefDate.get().then((doc) => {
+    //       if (doc.exists) {
+    //           // console.log("Document data:", doc.data());
+    //         // Update last online 
+    //         let docRef = db.collection("Tutor").doc(tutorId);
+    //         let docRefWithMerge = docRef.set({
+    //           [SYSTEM_LAST_ONLINE_KEY] : firebase.firestore.Timestamp.fromDate(new Date())
+    //           }, { merge: true });
+              
+    //       } else {
+    //           // doc.data() will be undefined in this case
+    //           console.log("No such document!");
+    //       }
+    //   }).catch((error) => {
+    //       console.log("Error getting document:", error);
+    //   });
+
+    // }
+
+
+    // Check if user logged on
+    AuthCheck();
+
+    // Page Specific Initialization
+    function loadPageInitFunc(){
+      loadGeneralNum();
+      loadAllOrgRevenue();
     }
 
-		firebase.auth().onAuthStateChanged(function(user){
-      
-			if(!user){
-        // Return to login if user does not exist.
-				window.location.href = "login.html"
-			}else{
-        // if the displayName is null, it means user register using Phone
-        if (firebase.auth().currentUser.displayName == null ){
-            tutorId = firebase.auth().currentUser.phoneNumber;
-        }else
-            tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
+    // Load the student number
+    function loadGeneralNum(){
+      let docRef = db.collection("Report")
+          .doc("v1")
+          .collection("General")
+          .where(NUM_ADMIN_ID, "==", tutorId)
 
-        loadUserInfo(tutorId);
+      docRef
+      .get()
+      .then((querySnapshot) => {
 
-      }
-		});
+        if(querySnapshot.empty) {
 
-    // Tutor Specific
-    function loadUserInfo(tutorId){
-      // Tutor Id must be a phone with +60, no spacing or other chars
-      var docRef = db.collection("Tutor").doc(tutorId);
-      
+          console.log("Empty ");
+          clearDashboard();
+        } 
+        else {
+          console.log("Found ");
+          querySnapshot.forEach((doc) => {
 
-      // docRef.get().then((doc) => {
-      docRef.onSnapshot((doc) => {
+            console.log(doc.data());
 
-        if (doc.exists) {
-          // console.log("Document data:", doc.data());
-
-          current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
-          // current_email, 
-          // current_phone, 
-          current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
-          current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
-          current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
-          current_accountStatus = doc.data().accountStatus; 
-          currentYearsExperience = doc.data().yearsExperience; // number
-          currentTutoringExperience = doc.data().tutoringExperience;
-          currentTutoringApproach = doc.data().tutoringApproach;
-          currentQualification= doc.data().qualification;
-          current_mon_8am = doc.data().tMon8am;
-          current_mon_12pm= doc.data().tMon12pm; 
-          current_mon_3pm = doc.data().tMon3pm;  
-          current_mon_6pm = doc.data().tMon6pm;  
-          current_tue_8am = doc.data().tTue8am;  
-          current_tue_12pm= doc.data().tTue12pm;  
-          current_tue_3pm = doc.data().tTue3pm;  
-          current_tue_6pm = doc.data().tTue6pm;  
-          current_wed_8am = doc.data().tWed8am;  
-          current_wed_12pm= doc.data().tWed12pm;  
-          current_wed_3pm = doc.data().tWed3pm;  
-          current_wed_6pm = doc.data().tWed6pm;  
-          current_thu_8am = doc.data().tThu8am;  
-          current_thu_12pm= doc.data().tThu12pm;  
-          current_thu_3pm = doc.data().tThu3pm;  
-          current_thu_6pm = doc.data().tThu6pm;  
-          current_fri_8am = doc.data().tFri8am;  
-          current_fri_12pm= doc.data().tFri12pm;  
-          current_fri_3pm = doc.data().tFri3pm;  
-          current_fri_6pm = doc.data().tFri6pm; 
-          current_sat_8am = doc.data().tSat8am;  
-          current_sat_12pm= doc.data().tSat12pm;  
-          current_sat_3pm = doc.data().tSat3pm;  
-          current_sat_6pm = doc.data().tSat6pm;  
-          current_sun_8am = doc.data().tSun8am;  
-          current_sun_12pm= doc.data().tSun12pm;  
-          current_sun_3pm = doc.data().tSun3pm;  
-          current_sun_6pm = doc.data().tSun6pm; 
-
-          // Store data to sessionStorage
-          var tutorDataObj = {
-            [NAME_KEY] : doc.data().name,
-            [EMAIL_KEY] : doc.data().email,
-            [PHONE_KEY] : doc.data().phone,
-            [AGE_KEY] : doc.data().age,
-            [GENDER_KEY] : doc.data().gender,
-            [ADDRESS_1_KEY] :doc.data().address1,
-            [ADDRESS_2_KEY] :doc.data().address2,
-            [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
-            [ADDRESS_STATE_KEY] :doc.data().addressState,
-            [IMAGE_KEY] : doc.data().imgUrl,
-            // [NRIC_KEY] : doc.data().name,
-            [RATING_KEY] : doc.data().rating,
-            [RATING_TIMES_KEY] : doc.data().ratingTimes,
-            [RATING_FINAL_KEY] : doc.data().ratingFinal,
-            [PROFILE_STATUS_KEY] : doc.data().profileStatus,
-            // [CHECK_HOMETUTOR_KEY] : doc.data().name,
-            // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
-            // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
-            // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
-            [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
-            [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
-            [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
-            [QUALIFICATION_KEY] : doc.data().qualification,
-            [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
-            [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
-            [AGENT_KEY] : doc.data().agent,
-            [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
-            
-            [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
-            [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
-            [CHECK_GROUP_KEY] : doc.data().modeGroup,
-            [CHECK_ONLINE_KEY] : doc.data().modeOnline,
-            [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
-            [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
-            [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
-            [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
-            [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
-            [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
-
-            [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
-            [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
-            [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
-            [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
-            [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
-            [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
-            [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
-            [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
-            [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
-            [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
-            [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
-            [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
-            [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
-            [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
-            [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
-            [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
-            [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
-            [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
-            [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
-            [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
-            [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
-            [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
-            [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
-            [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
-            [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
-            [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
-            [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
-            [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
-            // Create a placeholder for aWebUrl. This param can only initiated by admin
-            // manually through https://golearn.com.my/admin/admin-portal.html
-            [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
-            [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
-            [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
-            [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
-            [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
-            [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
-            [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
-          }
-
-          // Set tutorInfoObj as sessionStorage
-          sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
-
-          // Set the nav user name and public profile link
-          document.getElementById("user").textContent = doc.data().name;
-
-          if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
-            document.getElementById("navPublicProfile").href = "#"  ;
-            document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
-          } else{
-            document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
-            document.getElementById("navPublicProfile").target = "_blank";
-          }
-          
-          if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-            document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
-            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
-            document.getElementById("btnActivateAccount").target = "_blank";
-          }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-            document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-            document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
-            document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
-            document.getElementById("btnActivateAccount").target = "_blank";
-          }else {
-            let activationNavItem = document.querySelector('#activationNavItem');
-			      // activationNavItem.parentNode.removeChild(activationNavItem);
-            let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
-            console.log(activationNavItemIsExist)
-            // Remove NavItem if exist
-            if (activationNavItemIsExist){
-              activationNavItem.parentNode.removeChild(activationNavItem);
-            }else{
-              // Do nothing
-            }
-          }
-          
-          // index.html specific
-
-          // Update fundamental fields
-          updatePageView(doc.data().accountStatus);
-
-          
-          // Init timetable
-          const mon8am = document.querySelector("#mon8am");
-          if (current_mon_8am == "open"){
-              // mon8am.style = "background-color: #93FAC2"
-              mon8am.setAttribute("style", "background-color: #93FAC2")
-              mon8am.textContent = "Open";
-          }else if(current_mon_8am == "closed"){
-            // mon8am.style = "background-color: #e9e9e9"
-              mon8am.setAttribute("style", "background-color: #e9e9e9")
-              mon8am.textContent = "Closed";
-          }else if(current_mon_8am == "busy"){
-            // mon8am.style = "background-color: #FF9C94"
-              mon8am.setAttribute("style", "background-color: #FF9C94")
-              mon8am.textContent = "Busy";
-          }else{
-            // mon8am.style = "background-color: #e9e9e9"
-              mon8am.setAttribute("style", "background-color: #e9e9e9")
-              mon8am.textContent = "Closed";
-          }
-
-          const mon12pm = document.querySelector("#mon12pm");
-          if (doc.data().tMon12pm == "open"){
-              mon12pm.setAttribute("style", "background-color: #93FAC2")
-              mon12pm.textContent = "Open";
-          }else if(doc.data().tMon12pm == "closed"){
-              mon12pm.setAttribute("style", "background-color: #e9e9e9")
-              mon12pm.textContent = "Closed";
-          }else if(doc.data().tMon12pm == "busy"){
-              mon12pm.setAttribute("style", "background-color: #FF9C94")
-              mon12pm.textContent = "Busy";
-          }else{
-              mon12pm.setAttribute("style", "background-color: #e9e9e9")
-              mon12pm.textContent = "Closed";
-          }
-
-          const mon3pm = document.querySelector("#mon3pm");
-          if (doc.data().tMon3pm == "open"){
-              mon3pm.setAttribute("style", "background-color: #93FAC2")
-              mon3pm.textContent = "Open";
-          }else if(doc.data().tMon3pm == "closed"){
-              mon3pm.setAttribute("style", "background-color: #e9e9e9")
-              mon3pm.textContent = "Closed";
-          }else if(doc.data().tMon3pm == "busy"){
-              mon3pm.setAttribute("style", "background-color: #FF9C94")
-              mon3pm.textContent = "Busy";
-          }else{
-              mon3pm.setAttribute("style", "background-color: #e9e9e9")
-              mon3pm.textContent = "Closed";
-          }
-
-          const mon6pm = document.querySelector("#mon6pm");
-          if (doc.data().tMon6pm == "open"){
-              mon6pm.setAttribute("style", "background-color: #93FAC2")
-              mon6pm.textContent = "Open";
-          }else if(doc.data().tMon6pm == "closed"){
-              mon6pm.setAttribute("style", "background-color: #e9e9e9")
-              mon6pm.textContent = "Closed";
-          }else if(doc.data().tMon6pm == "busy"){
-              mon6pm.setAttribute("style", "background-color: #FF9C94")
-              mon6pm.textContent = "Busy";
-          }else{
-              mon6pm.setAttribute("style", "background-color: #e9e9e9")
-              mon6pm.textContent = "Closed";
-          }
-
-          // Tuesday
-          const tue8am = document.querySelector("#tue8am");
-          if (doc.data().tTue8am == "open"){
-              tue8am.setAttribute("style", "background-color: #77e2a7")
-              tue8am.textContent = "Open";
-          }else if(doc.data().tTue8am == "closed"){
-              tue8am.setAttribute("style", "background-color: #d6d6d6")
-              tue8am.textContent = "Closed";
-          }else if(doc.data().tTue8am == "busy"){
-              tue8am.setAttribute("style", "background-color: #f5867e")
-              tue8am.textContent = "Busy";
-          }else{
-              tue8am.setAttribute("style", "background-color: #d6d6d6")
-              tue8am.textContent = "Closed";
-          }
-
-          const tue12pm = document.querySelector("#tue12pm");
-          if (doc.data().tTue12pm == "open"){
-              tue12pm.setAttribute("style", "background-color: #77e2a7")
-              tue12pm.textContent = "Open";
-          }else if(doc.data().tTue12pm == "closed"){
-              tue12pm.setAttribute("style", "background-color: #d6d6d6")
-              tue12pm.textContent = "Closed";
-          }else if(doc.data().tTue12pm == "busy"){
-              tue12pm.setAttribute("style", "background-color: #f5867e")
-              tue12pm.textContent = "Busy";
-          }else{
-              tue12pm.setAttribute("style", "background-color: #d6d6d6")
-              tue12pm.textContent = "Closed";
-          }
-
-          const tue3pm = document.querySelector("#tue3pm");
-          if (doc.data().tTue3pm == "open"){
-              tue3pm.setAttribute("style", "background-color: #77e2a7")
-              tue3pm.textContent = "Open";
-          }else if(doc.data().tTue3pm == "closed"){
-              tue3pm.setAttribute("style", "background-color: #d6d6d6")
-              tue3pm.textContent = "Closed";
-          }else if(doc.data().tTue3pm == "busy"){
-              tue3pm.setAttribute("style", "background-color: #f5867e")
-              tue3pm.textContent = "Busy";
-          }else{
-              tue3pm.setAttribute("style", "background-color: #d6d6d6")
-              tue3pm.textContent = "Closed";
-          }
-
-          const tue6pm = document.querySelector("#tue6pm");
-          if (doc.data().tTue6pm == "open"){
-              tue6pm.setAttribute("style", "background-color: #77e2a7")
-              tue6pm.textContent = "Open";
-          }else if(doc.data().tTue6pm == "closed"){
-              tue6pm.setAttribute("style", "background-color: #d6d6d6")
-              tue6pm.textContent = "Closed";
-          }else if(doc.data().tTue6pm == "busy"){
-              tue6pm.setAttribute("style", "background-color: #f5867e")
-              tue6pm.textContent = "Busy";
-          }else{
-              tue6pm.setAttribute("style", "background-color: #d6d6d6")
-              tue6pm.textContent = "Closed";
-          }
-
-          // Wednesday
-          const wed8am = document.querySelector("#wed8am");
-          if (doc.data().tWed8am == "open"){
-              wed8am.setAttribute("style", "background-color: #93FAC2")
-              wed8am.textContent = "Open";
-          }else if(doc.data().tWed8am == "closed"){
-              wed8am.setAttribute("style", "background-color: #e9e9e9")
-              wed8am.textContent = "Closed";
-          }else if(doc.data().tWed8am == "busy"){
-              wed8am.setAttribute("style", "background-color: #FF9C94")
-              wed8am.textContent = "Busy";
-          }else{
-              wed8am.setAttribute("style", "background-color: #e9e9e9")
-              wed8am.textContent = "Closed";
-          }
-
-          const wed12pm = document.querySelector("#wed12pm");
-          if (doc.data().tWed12pm == "open"){
-              wed12pm.setAttribute("style", "background-color: #93FAC2")
-              wed12pm.textContent = "Open";
-          }else if(doc.data().tWed12pm == "closed"){
-              wed12pm.setAttribute("style", "background-color: #e9e9e9")
-              wed12pm.textContent = "Closed";
-          }else if(doc.data().tWed12pm == "busy"){
-              wed12pm.setAttribute("style", "background-color: #FF9C94")
-              wed12pm.textContent = "Busy";
-          }else{
-              wed12pm.setAttribute("style", "background-color: #e9e9e9")
-              wed12pm.textContent = "Closed";
-          }
-
-          const wed3pm = document.querySelector("#wed3pm");
-          if (doc.data().tWed3pm == "open"){
-              wed3pm.setAttribute("style", "background-color: #93FAC2")
-              wed3pm.textContent = "Open";
-          }else if(doc.data().tWed3pm == "closed"){
-              wed3pm.setAttribute("style", "background-color: #e9e9e9")
-              wed3pm.textContent = "Closed";
-          }else if(doc.data().tWed3pm == "busy"){
-              wed3pm.style = "background-color: #FF9C94"
-              // wed3pm.setAttribute("style", "background-color: #FF9C94")
-              wed3pm.textContent = "Busy";
-          }else{
-              wed3pm.setAttribute("style", "background-color: #e9e9e9")
-              wed3pm.textContent = "Closed";
-          }
-
-          const wed6pm = document.querySelector("#wed6pm");
-          if (doc.data().tWed6pm == "open"){
-              wed6pm.setAttribute("style", "background-color: #93FAC2")
-              wed6pm.textContent = "Open";
-          }else if(doc.data().tWed6pm == "closed"){
-              wed6pm.setAttribute("style", "background-color: #e9e9e9")
-              wed6pm.textContent = "Closed";
-          }else if(doc.data().tWed6pm == "busy"){
-              wed6pm.setAttribute("style", "background-color: #FF9C94")
-              wed6pm.textContent = "Busy";
-          }else{
-              wed6pm.setAttribute("style", "background-color: #e9e9e9")
-              wed6pm.textContent = "Closed";
-          }
-
-          // Thursday
-          const thu8am = document.querySelector("#thu8am");
-          if (doc.data().tThu8am == "open"){
-              thu8am.setAttribute("style", "background-color: #77e2a7")
-              thu8am.textContent = "Open";
-          }else if(doc.data().tThu8am == "closed"){
-              thu8am.setAttribute("style", "background-color: #d6d6d6")
-              thu8am.textContent = "Closed";
-          }else if(doc.data().tThu8am == "busy"){
-              thu8am.setAttribute("style", "background-color: #f5867e")
-              thu8am.textContent = "Busy";
-          }else{
-              thu8am.setAttribute("style", "background-color: #d6d6d6")
-              thu8am.textContent = "Closed";
-          }
-
-          const thu12pm = document.querySelector("#thu12pm");
-          if (doc.data().tThu12pm == "open"){
-              thu12pm.setAttribute("style", "background-color: #77e2a7")
-              thu12pm.textContent = "Open";
-          }else if(doc.data().tThu12pm == "closed"){
-              thu12pm.setAttribute("style", "background-color: #d6d6d6")
-              thu12pm.textContent = "Closed";
-          }else if(doc.data().tThu12pm == "busy"){
-              thu12pm.setAttribute("style", "background-color: #f5867e")
-              thu12pm.textContent = "Busy";
-          }else{
-              thu12pm.setAttribute("style", "background-color: #d6d6d6")
-              thu12pm.textContent = "Closed";
-          }
-
-          const thu3pm = document.querySelector("#thu3pm");
-          if (doc.data().tThu3pm == "open"){
-              thu3pm.setAttribute("style", "background-color: #77e2a7")
-              thu3pm.textContent = "Open";
-          }else if(doc.data().tThu3pm == "closed"){
-              thu3pm.setAttribute("style", "background-color: #d6d6d6")
-              thu3pm.textContent = "Closed";
-          }else if(doc.data().tThu3pm == "busy"){
-              thu3pm.setAttribute("style", "background-color: #f5867e")
-              thu3pm.textContent = "Busy";
-          }else{
-              thu3pm.setAttribute("style", "background-color: #d6d6d6")
-              thu3pm.textContent = "Closed";
-          }
-
-          const thu6pm = document.querySelector("#thu6pm");
-          if (doc.data().tThu6pm == "open"){
-              thu6pm.setAttribute("style", "background-color: #77e2a7")
-              thu6pm.textContent = "Open";
-          }else if(doc.data().tThu6pm == "closed"){
-              thu6pm.setAttribute("style", "background-color: #d6d6d6")
-              thu6pm.textContent = "Closed";
-          }else if(doc.data().tThu6pm == "busy"){
-              thu6pm.setAttribute("style", "background-color: #f5867e")
-              thu6pm.textContent = "Busy";
-          }else{
-              thu6pm.setAttribute("style", "background-color: #d6d6d6")
-              thu6pm.textContent = "Closed";
-          }
-
-          // Friday
-          const fri8am = document.querySelector("#fri8am");
-          if (doc.data().tFri8am == "open"){
-              fri8am.setAttribute("style", "background-color: #93FAC2")
-              fri8am.textContent = "Open";
-          }else if(doc.data().tFri8am == "closed"){
-              fri8am.setAttribute("style", "background-color: #e9e9e9")
-              fri8am.textContent = "Closed";
-          }else if(doc.data().tFri8am == "busy"){
-              fri8am.setAttribute("style", "background-color: #FF9C94")
-              fri8am.textContent = "Busy";
-          }else{
-              fri8am.setAttribute("style", "background-color: #e9e9e9")
-              fri8am.textContent = "Closed";
-          }
-
-          const fri12pm = document.querySelector("#fri12pm");
-          if (doc.data().tFri12pm == "open"){
-              fri12pm.setAttribute("style", "background-color: #93FAC2")
-              fri12pm.textContent = "Open";
-          }else if(doc.data().tFri12pm == "closed"){
-              fri12pm.setAttribute("style", "background-color: #e9e9e9")
-              fri12pm.textContent = "Closed";
-          }else if(doc.data().tFri12pm == "busy"){
-              fri12pm.setAttribute("style", "background-color: #FF9C94")
-              fri12pm.textContent = "Busy";
-          }else{
-              fri12pm.setAttribute("style", "background-color: #e9e9e9")
-              fri12pm.textContent = "Closed";
-          }
-
-          const fri3pm = document.querySelector("#fri3pm");
-          if (doc.data().tFri3pm == "open"){
-              fri3pm.setAttribute("style", "background-color: #93FAC2")
-              fri3pm.textContent = "Open";
-          }else if(doc.data().tFri3pm == "closed"){
-              fri3pm.setAttribute("style", "background-color: #e9e9e9")
-              fri3pm.textContent = "Closed";
-          }else if(doc.data().tFri3pm == "busy"){
-              fri3pm.setAttribute("style", "background-color: #FF9C94")
-              fri3pm.textContent = "Busy";
-          }else{
-              fri3pm.setAttribute("style", "background-color: #e9e9e9")
-              fri3pm.textContent = "Closed";
-          }
-
-          const fri6pm = document.querySelector("#fri6pm");
-          if (doc.data().tFri6pm == "open"){
-              fri6pm.setAttribute("style", "background-color: #93FAC2")
-              fri6pm.textContent = "Open";
-          }else if(doc.data().tFri6pm == "closed"){
-              fri6pm.setAttribute("style", "background-color: #e9e9e9")
-              fri6pm.textContent = "Closed";
-          }else if(doc.data().tFri6pm == "busy"){
-              fri6pm.setAttribute("style", "background-color: #FF9C94")
-              fri6pm.textContent = "Busy";
-          }else{
-              fri6pm.setAttribute("style", "background-color: #e9e9e9")
-              fri6pm.textContent = "Closed";
-          }
-
-          // Saturday
-          const sat8am = document.querySelector("#sat8am");
-          if (doc.data().tSat8am == "open"){
-              sat8am.setAttribute("style", "background-color: #77e2a7")
-              sat8am.textContent = "Open";
-          }else if(doc.data().tSat8am == "closed"){
-              sat8am.setAttribute("style", "background-color: #d6d6d6")
-              sat8am.textContent = "Closed";
-          }else if(doc.data().tSat8am == "busy"){
-              sat8am.setAttribute("style", "background-color: #f5867e")
-              sat8am.textContent = "Busy";
-          }else{
-              sat8am.setAttribute("style", "background-color: #d6d6d6")
-              sat8am.textContent = "Closed";
-          }
-
-          const sat12pm = document.querySelector("#sat12pm");
-          if (doc.data().tSat12pm == "open"){
-              sat12pm.setAttribute("style", "background-color: #77e2a7")
-              sat12pm.textContent = "Open";
-          }else if(doc.data().tSat12pm == "closed"){
-              sat12pm.setAttribute("style", "background-color: #d6d6d6")
-              sat12pm.textContent = "Closed";
-          }else if(doc.data().tSat12pm == "busy"){
-              sat12pm.setAttribute("style", "background-color: #f5867e")
-              sat12pm.textContent = "Busy";
-          }else{
-              sat12pm.setAttribute("style", "background-color: #d6d6d6")
-              sat12pm.textContent = "Closed";
-          }
-
-          const sat3pm = document.querySelector("#sat3pm");
-          if (doc.data().tSat3pm == "open"){
-              sat3pm.setAttribute("style", "background-color: #77e2a7")
-              sat3pm.textContent = "Open";
-          }else if(doc.data().tSat3pm == "closed"){
-              sat3pm.setAttribute("style", "background-color: #d6d6d6")
-              sat3pm.textContent = "Closed";
-          }else if(doc.data().tSat3pm == "busy"){
-              sat3pm.setAttribute("style", "background-color: #f5867e")
-              sat3pm.textContent = "Busy";
-          }else{
-              sat3pm.setAttribute("style", "background-color: #d6d6d6")
-              sat3pm.textContent = "Closed";
-          }
-
-          const sat6pm = document.querySelector("#sat6pm");
-          if (doc.data().tSat6pm == "open"){
-              sat6pm.setAttribute("style", "background-color: #77e2a7")
-              sat6pm.textContent = "Open";
-          }else if(doc.data().tSat6pm == "closed"){
-              sat6pm.setAttribute("style", "background-color: #d6d6d6")
-              sat6pm.textContent = "Closed";
-          }else if(doc.data().tSat6pm == "busy"){
-              sat6pm.setAttribute("style", "background-color: #f5867e")
-              sat6pm.textContent = "Busy";
-          }else{
-              sat6pm.setAttribute("style", "background-color: #d6d6d6")
-              sat6pm.textContent = "Closed";
-          }
-
-          // Sunday
-          const sun8am = document.querySelector("#sun8am");
-          if (doc.data().tSun8am == "open"){
-              sun8am.setAttribute("style", "background-color: #93FAC2")
-              sun8am.textContent = "Open";
-          }else if(doc.data().tSun8am == "closed"){
-              sun8am.setAttribute("style", "background-color: #e9e9e9")
-              sun8am.textContent = "Closed";
-          }else if(doc.data().tSun8am == "busy"){
-              sun8am.setAttribute("style", "background-color: #FF9C94")
-              sun8am.textContent = "Busy";
-          }else{
-              sun8am.setAttribute("style", "background-color: #e9e9e9")
-              sun8am.textContent = "Closed";
-          }
-
-          const sun12pm = document.querySelector("#sun12pm");
-          if (doc.data().tSun12pm == "open"){
-              sun12pm.setAttribute("style", "background-color: #93FAC2")
-              sun12pm.textContent = "Open";
-          }else if(doc.data().tSun12pm == "closed"){
-              sun12pm.setAttribute("style", "background-color: #e9e9e9")
-              sun12pm.textContent = "Closed";
-          }else if(doc.data().tSun12pm == "busy"){
-              sun12pm.setAttribute("style", "background-color: #FF9C94")
-              sun12pm.textContent = "Busy";
-          }else{
-              sun12pm.setAttribute("style", "background-color: #e9e9e9")
-              sun12pm.textContent = "Closed";
-          }
-
-          const sun3pm = document.querySelector("#sun3pm");
-          if (doc.data().tSun3pm == "open"){
-              sun3pm.setAttribute("style", "background-color: #93FAC2")
-              sun3pm.textContent = "Open";
-          }else if(doc.data().tSun3pm == "closed"){
-              sun3pm.setAttribute("style", "background-color: #e9e9e9")
-              sun3pm.textContent = "Closed";
-          }else if(doc.data().tSun3pm == "busy"){
-              sun3pm.setAttribute("style", "background-color: #FF9C94")
-              sun3pm.textContent = "Busy";
-          }else{
-              sun3pm.setAttribute("style", "background-color: #e9e9e9")
-              sun3pm.textContent = "Closed";
-          }
-
-          const sun6pm = document.querySelector("#sun6pm");
-          if (doc.data().tSun6pm == "open"){
-              sun6pm.setAttribute("style", "background-color: #93FAC2")
-              sun6pm.textContent = "Open";
-          }else if(doc.data().tSun6pm == "closed"){
-              sun6pm.setAttribute("style", "background-color: #e9e9e9")
-              sun6pm.textContent = "Closed";
-          }else if(doc.data().tSun6pm == "busy"){
-              sun6pm.setAttribute("style", "background-color: #FF9C94")
-              sun6pm.textContent = "Busy";
-          }else{
-              sun6pm.setAttribute("style", "background-color: #e9e9e9")
-              sun6pm.textContent = "Closed";
-          }
-
-
-          // Re-Enable timeslot input
-          var input = document.getElementsByClassName("time-slot-table-tbody-item");
-          var inputList = Array.prototype.slice.call(input);
-          inputList.forEach(item => {
-            // console.log(item.id);
-            // item.removeAttribute('disabled');
-            item.style.cursor= "pointer";
+            updateDashboard(doc);
           });
 
-          // Enable the dummy profile
-          document.getElementById('btnIWantThisTutor').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
+        }
+
+      });
+
+      
+    }
+
+    // Update dashboard view
+    function updateDashboard(doc){
+      let type = doc.data()[NUM_TYPE];
+      let value = doc.data()[NUM_VALUE];
+
+      if (type === NUM_TYPE_STUDENT){
+        document.getElementById("studentNum").textContent = value;
+      }
+      else if (type === NUM_TYPE_TEACHER){
+        document.getElementById("classNum").textContent = value;
+      }
+      else if (type === NUM_TYPE_CLASS){
+        document.getElementById("tutorNum").textContent = value;
+      }
+      else if (type === NUM_TYPE_PUBLIC_COURSE){
+        document.getElementById("profileViewNum").textContent = value;
+      }
+      else if (type === NUM_TYPE_PROFILE_VIEW){
+        document.getElementById("publicCourseNum").textContent = value;
+      }
+      else{
+        // Do nothing
+      }
+      
+    }
+
+    // reset dashboard view
+    function clearDashboard(){
+       
+      document.getElementById("studentNum").textContent = 0;
+      document.getElementById("classNum").textContent = 0;
+      document.getElementById("tutorNum").textContent = 0;
+      document.getElementById("profileViewNum").textContent = 0;
+      document.getElementById("publicCourseNum").textContent = 0;
+
+    }
+
+
+    // Load all organization level revenue
+    function loadAllOrgRevenue(){
+      let fullYear = new Date().getFullYear();
+      let month = new Date().getMonth();
+      // console.log(month);
+
+      let docRef = db.collection("Report")
+          .doc("v1")
+          .collection("Revenue")
+          .where(REV_ADMIN_ID, "==", tutorId)
+          .where(REV_TYPE, "==", REV_TYPE_ORG)
+          .where(REV_MONTH, "==", fullYear+"99")
+          .where(REV_STATUS, "==", true)
+
+      docRef
+      .get()
+      .then((querySnapshot) => {
+
+        if(querySnapshot.empty) {
+
+          console.log("Empty ");
 
         } 
-        
         else {
+          querySnapshot.forEach((doc) => {
+            // console.log("Revenue Report found");
+            // console.log(doc.data());
 
-          // console.log("No tutor!");
-          document.getElementById("tutorImgUrl").src = "../assets/img/hello.gif";
-          document.getElementById("tutorName").textContent = "Boo Boo";
-          document.getElementById("tutorTutoringApproach").textContent = "I am passionate about teaching and love little teddies.";
-          document.getElementById("tutorTutoringExperience").textContent = " I have 9 months of teaching experience. Hire me starting from 2 cans of honey 🍯🍯.";
-          document.getElementById("tutorEducation").textContent = "University of Bear";
-          document.getElementById("tutorGenderAgeYearsExperience").textContent = "Male | 2 years old";
+            let monthRevenueList = doc.data()[REV_DOC_TOTAL_ARR];
+
+            // monthRevenueList.forEach((item) =>{
+              // addData(monthlyRevenueChart, '', item);
+            // });
+            addData(monthlyRevenueChart, '', monthRevenueList);
+
+            let thisMonthRevenue = 0;
+            let lastMonthRevenue = 0;
+            let revenueGrowth = 0;
+            // console.log('month: '+month);
+            // console.log(monthRevenueList[month])
+            // console.log(monthRevenueList[month-1])
+            if (month > 0 ){
+              thisMonthRevenue = monthRevenueList[month];
+              lastMonthRevenue = monthRevenueList[month - 1];
+              revenueGrowth = (thisMonthRevenue -  lastMonthRevenue) / lastMonthRevenue * 100;
+            }else{
+              revenueGrowth = 0;
+            }
+            // console.log(revenueGrowth);
+            
+            if (revenueGrowth>= 0){
+              document.getElementById('monthRevenueText').innerHTML = "<span class='text-success'><i class='fa fa-long-arrow-up'></i> "+parseFloat(revenueGrowth.toFixed(1))+"%  </span> increase in this month sales.";
+            }else if(revenueGrowth < 0) {
+              document.getElementById('monthRevenueText').innerHTML = "<span class='text-danger'><i class='fa fa-long-arrow-down'></i> "+parseFloat(revenueGrowth.toFixed(1))+"%  </span> decrease in this month sales.";
+            }else {
+              // revenueGrowth = nan or other unexpected value 
+              document.getElementById('monthRevenueText').innerHTML = "<span class='text-success'><i class='fa fa-long-arrow-up'></i> 0%  </span> increase in this month sales.";
+            }
+
+            document.getElementById('monthRevenueLastUpdate').innerHTML = "<i class='material-icons'>access_time</i> updated "+doc.data()[REV_DATE_EDIT].toDate().toLocaleDateString("en-GB");;
+
+          });
         }
-      });
-      // .catch((error) => {
-      //     console.log("Error getting document:", error);
-      //     document.getElementById("tutorImgUrl").src = "../assets/img/hello.gif";
-      //     document.getElementById("tutorName").textContent = "Boo Boo";
-      //     document.getElementById("tutorTutoringApproach").textContent = "I am passionate about teaching and love little teddies.";
-      //     document.getElementById("tutorTutoringExperience").textContent = " I have 9 months of teaching experience. Hire me starting from 2 cans of honey 🍯🍯.";
-      //     document.getElementById("tutorEducation").textContent = "University of Bear";
-      //     document.getElementById("tutorGenderAgeYearsExperience").textContent = "Male | 2 years old";
-      // });
 
-      
-      var docRefDate = db.collection("Tutor").doc(tutorId);
-
-      docRefDate.get().then((doc) => {
-          if (doc.exists) {
-              console.log("Document data:", doc.data());
-                    // Update last online 
-            let docRef = db.collection("Tutor").doc(tutorId);
-            let docRefWithMerge = docRef.set({
-              [SYSTEM_LAST_ONLINE_KEY] : firebase.firestore.Timestamp.fromDate(new Date())
-              }, { merge: true });
-              
-          } else {
-              // doc.data() will be undefined in this case
-              console.log("No such document!");
-          }
-      }).catch((error) => {
-          console.log("Error getting document:", error);
       });
 
+    }
 
-
-
-
+    // Push data to chart
+    function updateData(chart, label, data) {
       
+      chart.data.labels.push(label);
+      chart.data.datasets.forEach((dataset) => {
+        // console.log(dataset.data);
 
+        // console.log(data.datasets[0].data);
+        dataset.data.push(data);
+      });
+      chart.update();
+    }
 
-    };
+    function addData(chart, label, data) {
+      
+      chart.data.labels.push(label);
+      chart.data.datasets.forEach((dataset) => {
+        console.log(dataset.data);
+        // console.log(data.datasets[0].data);
+        dataset.data = data;
+      });
+      chart.update();
+    }
 
-    function updatePageView(accountStatus){
+  // Update Page Specific View
+    function updatePageView(){
       // Create Tutor Public profile
-
       if (current_name != "New Tutor"){
         let detail =""
         if (currentYearsExperience == 0 || currentYearsExperience == null)
@@ -1309,6 +1164,53 @@
         document.getElementById("tutorGenderAgeYearsExperience").textContent = "Male | 2 years old";
       }
       
+      // Enable the dummy profile
+      document.getElementById('btnIWantThisTutor').setAttribute('style','background-color: #2e74b6; pointer-events: auto; ');
+
+      // Update Dashboard > Profile
+      let checker = 0; // max = 7
+      if (current_imgUri != null && current_imgUri != ""){
+        document.getElementById("profilePic").style.color = "green";
+        document.getElementById("profilePic").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+      if (currentYearsExperience != null && currentYearsExperience != ""){
+        document.getElementById("profileBasic").style.color = "green";
+        document.getElementById("profileBasic").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+      if (currentQualification != null && currentQualification != ""){
+        document.getElementById("profileQualification").style.color = "green";
+        document.getElementById("profileQualification").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+      if (currentTutoringApproach != null && currentTutoringApproach != ""){
+        document.getElementById("profileApproach").style.color = "green";
+        document.getElementById("profileApproach").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+      if (currentTutoringExperience != null && currentTutoringExperience != ""){
+        document.getElementById("profileExp").style.color = "green";
+        document.getElementById("profileExp").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+      console.log()
+      if (current_preferedSubjectList != null && current_preferedSubjectList != "" && current_preferedSubjectList.length > 0){
+        document.getElementById("profileSubject").style.color = "green";
+        document.getElementById("profileSubject").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+      if (current_preferedAreaList != null && current_preferedAreaList != "" && current_preferedAreaList.length > 0){
+        document.getElementById("profileArea").style.color = "green";
+        document.getElementById("profileArea").className = "fas fa-check-circle fa-fw";
+        checker = checker + 1;
+      }
+
+      // Get the percentage of completion. 7 is just the number of criteria contested
+      let percentage = checker / 7 * 100;
+      document.getElementById("profilePercentageNum").textContent = percentage + "%";
+
+
     }
 
     // Sign out
@@ -1316,6 +1218,7 @@
       $('#signOutModal').modal('show');
       $("#signOutModal").appendTo("body");
     }
+
   </script>
 
   <script>
@@ -1327,223 +1230,7 @@
         [SYSTEM_LAST_ONLINE_KEY] : firebase.firestore.Timestamp.fromDate(new Date())
         }, { merge: true });
 
-      // Timeslot Table
-      // KEY and DATETIME var is global var used to simplify modal fire and hide.
-      var KEY = ""; // Extract info from data-* attributes
-      var DATETIME = ""; // Extract info from data-* attributes
-      $('#timeSlotModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        KEY = button.data('key') // Extract info from data-* attributes
-        DATETIME = button.data('datetime') // Extract info from data-* attributes
-
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text(DATETIME)
-        modal.find('.modal-body input').val(KEY);
-
-        if (KEY == TUTOR_TIME_SLOT_MON_8AM_KEY){
-          document.getElementById("radio-open").checked = (current_mon_8am == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_mon_8am == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_mon_8am == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_MON_12PM_KEY){
-          document.getElementById("radio-open").checked = (current_mon_12pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_mon_12pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_mon_12pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_MON_3PM_KEY){
-          document.getElementById("radio-open").checked = (current_mon_3pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_mon_3pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_mon_3pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_MON_6PM_KEY){
-          document.getElementById("radio-open").checked = (current_mon_6pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_mon_6pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_mon_6pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_TUE_8AM_KEY){
-          document.getElementById("radio-open").checked = (current_tue_8am == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_tue_8am == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_tue_8am == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_TUE_12PM_KEY){
-          document.getElementById("radio-open").checked = (current_tue_12pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_tue_12pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_tue_12pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_TUE_3PM_KEY){
-          document.getElementById("radio-open").checked = (current_tue_3pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_tue_3pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_tue_3pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_TUE_6PM_KEY){
-          document.getElementById("radio-open").checked = (current_tue_6pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_tue_6pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_tue_6pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_WED_8AM_KEY){
-          document.getElementById("radio-open").checked = (current_wed_8am == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_wed_8am == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_wed_8am == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_WED_12PM_KEY){
-          document.getElementById("radio-open").checked = (current_wed_12pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_wed_12pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_wed_12pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_WED_3PM_KEY){
-          document.getElementById("radio-open").checked = (current_wed_3pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_wed_3pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_wed_3pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_WED_6PM_KEY){
-          document.getElementById("radio-open").checked = (current_wed_6pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_wed_6pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_wed_6pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_THU_8AM_KEY){
-          document.getElementById("radio-open").checked = (current_thu_8am == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_thu_8am == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_thu_8am == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_THU_12PM_KEY){
-          document.getElementById("radio-open").checked = (current_thu_12pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_thu_12pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_thu_12pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_THU_3PM_KEY){
-          document.getElementById("radio-open").checked = (current_thu_3pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_thu_3pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_thu_3pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_THU_6PM_KEY){
-          document.getElementById("radio-open").checked = (current_thu_6pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_thu_6pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_thu_6pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_FRI_8AM_KEY){
-          document.getElementById("radio-open").checked = (current_fri_8am == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_fri_8am == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_fri_8am == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_FRI_12PM_KEY){
-          document.getElementById("radio-open").checked = (current_fri_12pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_fri_12pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_fri_12pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_FRI_3PM_KEY){
-          document.getElementById("radio-open").checked = (current_fri_3pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_fri_3pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_fri_3pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_FRI_6PM_KEY){
-          document.getElementById("radio-open").checked = (current_fri_6pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_fri_6pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_fri_6pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_SAT_8AM_KEY){
-          document.getElementById("radio-open").checked = (current_sat_8am == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_sat_8am == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_sat_8am == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_SAT_12PM_KEY){
-          document.getElementById("radio-open").checked = (current_sat_12pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_sat_12pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_sat_12pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_SAT_3PM_KEY){
-          document.getElementById("radio-open").checked = (current_sat_3pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_sat_3pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_sat_3pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_SAT_6PM_KEY){
-          document.getElementById("radio-open").checked = (current_sat_6pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_sat_6pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_sat_6pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_SUN_8AM_KEY){
-          document.getElementById("radio-open").checked = (current_sun_8am == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_sun_8am == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_sun_8am == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_SUN_12PM_KEY){
-          document.getElementById("radio-open").checked = (current_sun_12pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_sun_12pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_sun_12pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_SUN_3PM_KEY){
-          document.getElementById("radio-open").checked = (current_sun_3pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_sun_3pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_sun_3pm == "busy") ?  true : false;
-        }
-        if (KEY == TUTOR_TIME_SLOT_SUN_6PM_KEY){
-          document.getElementById("radio-open").checked = (current_sun_6pm == "open") ? true : false;
-          document.getElementById("radio-closed").checked = (current_sun_6pm == "closed") ?  true : false;
-          document.getElementById("radio-busy").checked = (current_sun_6pm == "busy") ?  true : false;
-        }
-      
-        // KEY is the docId of timeslot
-        var docRef = db.collection("Tutor").doc(tutorId).collection("TimeSlot").doc(KEY);
-        docRef.get().then((doc) => {
-          if (doc.exists) {
-              // console.log("Document data:", doc.data());
-              if (doc.data().timeSlotDescription == "")
-                document.getElementById("modalDescription").placeholder = "Enter description..";
-              else
-                document.getElementById("modalDescription").value = doc.data().timeSlotDescription;
-          } else {
-              // doc.data() will be undefined in this case
-              // console.log("No such document!");
-              document.getElementById("modalDescription").placeholder = "Enter description..";
-          }
-        }).catch((error) => {
-          console.log("Error getting document:", error);
-          document.getElementById("modalDescription").textContent = "Enter description..";
-        });
-
-      });
-      
-      // Update Time Slot
-      $('#btnTimeSlotModalUpdate').on('click', function (e) {
-        let timeSlotStatus = TUTOR_TIME_SLOT_CLOSE_KEY;
-        if (document.getElementById("radio-open").checked){
-          timeSlotStatus = TUTOR_TIME_SLOT_OPEN_KEY;
-        }else if (document.getElementById("radio-closed").checked){
-          timeSlotStatus = TUTOR_TIME_SLOT_CLOSE_KEY;
-        }else if (document.getElementById("radio-busy").checked){
-          timeSlotStatus = TUTOR_TIME_SLOT_BUSY_KEY;
-        }else{
-          timeSlotStatus = TUTOR_TIME_SLOT_CLOSE_KEY;
-        }
-        var KEY_TEMP = "aaa";
-        var mainTimeSlotRef = db.collection("Tutor").doc(tutorId);
-        var setMainTimeSlotWithMerge = mainTimeSlotRef.set({
-          [KEY]: timeSlotStatus,
-        }, { merge: true });
-
-        var singleTimeSlotDocRef = db.collection("Tutor").doc(tutorId).collection("TimeSlot").doc(KEY);
-        var setSingleTimeSlotWithMerge = singleTimeSlotDocRef.set({
-          [TIME_SLOT_DESCRIPTION_KEY]: document.getElementById("modalDescription").value,
-          [TIME_SLOT_STATUS_KEY]: timeSlotStatus,
-        }, { merge: true });
-
-			  $('#timeSlotModal').modal('hide');
-		  });
-
-
-      // Clear key and fields in modal when modal dismiss
-      $('#timeSlotModal').on('hide.bs.modal', function (event) {
-        KEY = ""; 
-        DATETIME = "";
-        // document.getElementById("modalDescription").textContent = "";
-        document.getElementById("modalDescription").value = "";
-        document.getElementById("radio-open").checked = false;
-        document.getElementById("radio-closed").checked = true;
-        document.getElementById("radio-busy").checked = false;
-        // console.log(KEY);
-      });
-
+     
       $('#btnIWantThisTutor').on('click', function (e) {
         $('#activationModal').modal('show');
         if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
@@ -1574,12 +1261,12 @@
         $('#activationModal').modal('hide');
       });
 
-      $('#btnActivationModalClose1').on('click', function (e) {
-        $('#activationModal').modal('hide');
-      });
-      $('#btnActivationModalClose2').on('click', function (e) {
-        $('#activationModal').modal('hide');
-      });
+      // $('#btnActivationModalClose1').on('click', function (e) {
+      //   $('#activationModal').modal('hide');
+      // });
+      // $('#btnActivationModalClose2').on('click', function (e) {
+      //   $('#activationModal').modal('hide');
+      // });
 
 			// Sign-out
 			// $("#btn-logout").click(function(){
@@ -1588,35 +1275,112 @@
       $('#btnSignOutModalUpdate').on('click', function (e) {
       
         firebase.auth().signOut().then(() => {
-            // Sign-out successful.
+          // Sign-out successful.
           }).catch((error) => {
             window.alert("Logging out failed");
             func.showNotification('top','center', 'danger', 'error_outline', "Logging out failed." );
           });
         // Do something
-        $('#signOutModal').modal('hide');
+        // $('#signOutModal').modal('hide');
       });
 
-      $('#btnSignOutModalClose1').on('click', function (e) {
-        $('#signOutModal').modal('hide');
-      });
-      $('#btnSignOutModalClose2').on('click', function (e) {
-        $('#signOutModal').modal('hide');
-      });
-
-
-      // $('#time-slot-table').DataTable({
-        // "scrollX": true
+      // $('#btnSignOutModalClose1').on('click', function (e) {
+      //   $('#signOutModal').modal('hide');
       // });
-
-      // $('#btnTest').on('click', function (e) {
-      //   console.log(JSON.parse(sessionStorage.getItem("tutorInfoObj")));
+      // $('#btnSignOutModalClose2').on('click', function (e) {
+      //   $('#signOutModal').modal('hide');
       // });
-      
 
     });
 
   </script>
+
+  <!-- Chart -->
+  <script>
+
+    // Monthly Revenue
+    const month = MyMonthAbr;
+    const labels = month;
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'Monthly Revenue',
+        // data: [65, 59, 80, 81, 56, 55, 40],
+        data: [],
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
+        borderWidth: 1,
+        
+      }]
+    };
+
+    const option = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        },
+        title: {
+          display: false,
+          text: 'Chart.js Bar Chart'
+        }
+      },
+      scales: {
+
+        x: {
+          ticks: {
+            color: ['rgba(255, 255, 255, 0.9)'],
+          },
+          grid:{
+            display: true,
+            color: function(context) {
+
+              if (context.tick == null ){
+                return 'transparent';
+              }else if (context.tick.value == 0) {
+                return 'rgba(255, 255, 255, 0.9)';
+              } else if (context.tick.value > 0) {
+                return 'transparent';
+              } 
+            }
+            
+          },
+          beginAtZero: true,
+        },
+        y: {
+          ticks: {
+            color: 'rgba(255, 255, 255, 0.9)',
+          },
+          grid:{
+            display: true,            
+            color: function(context) {
+
+              if (context.tick == null ){
+                return 'rgba(255, 255, 255, 0.3)';
+              }else if (context.tick.value == 0) {
+                return 'rgba(255, 255, 255, 1)';
+              } else if (context.tick.value > 0) {
+                return 'rgba(255, 255, 255, 0.3)';
+              } 
+            }
+          },
+          beginAtZero: true,
+        },
+      }
+    }
+
+    const config = {
+      type: 'bar',
+      data: data,
+      options: option,
+    };
+
+    const ctx = document.getElementById('monthlyRevenueChart').getContext('2d');
+    const monthlyRevenueChart = new Chart(ctx, config);
+
+
+  </script>
+ 
  
 </body>
 
