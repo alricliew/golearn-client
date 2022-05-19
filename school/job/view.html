@@ -71,16 +71,7 @@
       vertical-align: middle;
       font-weight: 500;
       color: #6d6d6d;
-      margin-bottom: 6px;
-    }
-    .card-course h3 {
-      font-weight: 300;
-      font-size: 20px;
-
-    }
-
-    .card-course h4 {
-      font-weight: 300;
+      margin-bottom: 12px;
     }
     .card-cambridge {
       background-image: url("../../assets/img/card-course-cambridge.png");
@@ -313,7 +304,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Tuition Jobs</a>
+            <a class="navbar-brand" href="javascript:;">Tuition Jobs <span><i class="material-icons" style="color: gray;">chevron_right</i></span> <span id="jobIdTop"></span></a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -411,24 +402,8 @@
                   </div>
                 </div>
 
-                <div class="row" style="margin-top: 1rem;">
-                  <div class="col-md-12">
-                    <p>Recommend to others? Share this job🔊</p>
-                    <div class="input-group">
-                      <span class="d-flex align-items-center input-group-addon" style="margin-right: 0.5em; cursor: pointer;" onclick="copyText('inJobLink')">
-                        <span class="material-icons">
-                          content_copy
-                        </span>
-                      </span>
-                      <textarea type="text" class="form-control" style="background-color: #f5f5f5;" id="inJobLink" row="auto" readonly></textarea>
-                    </div>
-
-                  </div>
-                </div>
-
               </div>
               <div class="modal-footer">
-
                 <button type="button" class="btn btn-primary" id="btnApplyModalConfirm" disabled>Apply</button>
               </div>
             </div>
@@ -488,78 +463,86 @@
           <!-- All Job Requests -->
 
           <div class="row">
-            <div class="col-md-12 text-right">
-              <a class="d-flex justify-content-end" href="https://golearn.com.my/job/" target="_blank" id="btnUpdate" style="margin-top: 1rem;" >View Older Jobs</a>
+            <div class="col-md-12">
+              <a href="./" class="btn btn-outline-primary btn-round"><i class="material-icons" style="color: #2e74b6; margin-right: 0.5em; padding-bottom: 0.2em;">west</i> Back</a>
             </div>
           </div>
 
           
-          <div class="row" id="card-all-job-requests">
-            <!-- <div class="col-md-3">
-              <div class="card-course card-kpm" data-toggle="modal" data-target="#applyModal" data-id="axoquhdoadozncuhoaijsidao">
-                <span class="request-label" style="color: #21896c; background: #c1e1d2;">New <i class="fas fa-circle"></i></span>
-                <h6 style="position: relative; margin: 0;"><span>PV01008</span> &middot; <span>12/05/2020</span></h6>
-                <h3 style="margin-top: 8px;">SPM Bahasa Malaysia, SPM Mathematics <span class="card-course-online-label">ONLINE</span> </h3>
-                <p style="font-size: 0.9rem; margin-bottom: 6px; font-style: italic;">Bandar Tun Razak, Kuala Lumpur</p>
-                <p class="card-course-item" >
-                  <i class="material-icons" style="color: #969696; margin-right: 8px; vertical-align: middle;" >paid</i> 
-                  <span style="vertical-align: middle;"> RM 20/hour</span>
-                </p>
-                <p class="card-course-item" >
-                  <i class="material-icons" style="color: #969696; margin-right: 8px; vertical-align: middle;" >schedule</i>
-                  <span style="vertical-align: middle;"> 2 hours / class</span> 
-                </p>
-                <p class="card-course-item" >
-                  <i class="material-icons" style="color: #969696; margin-right: 8px; vertical-align: middle;" >date_range</i>
-                  <span style="vertical-align: middle;"> 1 class / week</span>
-                </p>
-                <p class="card-course-item" >
-                  <i class="material-icons" style="color: #969696; margin-right: 8px; vertical-align: middle;" >description</i>
-                  <span style="vertical-align: middle;">Description</span> 
-                </p>
-                <p style="font-size: 0.9rem; ">Tutoring Type: Home Tuition, Parents want exam focused tuition with pearson text book</p>
-                <p style="color: #21896c; font-weight: bold; margin: 0;">Applied</p>
+          <div class="row" style="margin-top: 1rem">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <span id="inStatus" class="request-label" style="color: #21896c; background: #c1e1d2;"></span>
+                  <h3 id="inSubject" style="margin-top: 8px;"></h3>
+                  <h6 id="inDetail" style="position: relative; margin: 0; font-weight: 300;"></h6>
+                  
+
+                </div>
+                <div class="card-body">
+                  <p class="card-course-item" >
+                    <i class="material-icons" style="color: #969696; margin-right: 8px; vertical-align: middle;" >place</i> 
+                    <span style="vertical-align: middle;" id="inArea"></span>
+                  </p>
+                  <p class="card-course-item" >
+                    <i class="material-icons" style="color: #969696; margin-right: 8px; vertical-align: middle;" >paid</i> 
+                    <span style="vertical-align: middle;" id="inFee"></span>
+                  </p>
+                  <p class="card-course-item" >
+                    <i class="material-icons" style="color: #969696; margin-right: 8px; vertical-align: middle;" >schedule</i>
+                    <span style="vertical-align: middle;" id="inDuration"></span> 
+                  </p>
+                  <p class="card-course-item" >
+                    <i class="material-icons" style="color: #969696; margin-right: 8px; vertical-align: middle;" >date_range</i>
+                    <span style="vertical-align: middle;" id="inLessPerWeek"></span>
+                  </p>
+                  <p class="card-course-item" >
+                    <i class="material-icons" style="color: #969696; margin-right: 8px; vertical-align: middle;" >description</i>
+                    <span style="vertical-align: middle;">Description</span> 
+                  </p>
+                  <p id="inDesc" style="font-size: 0.9rem; "></p>
+
+                  <p class="card-course-item" >
+                    <i class="material-icons" style="color: #969696; margin-right: 8px; vertical-align: middle;" >link</i>
+                    <a id="inLink" href="" style="vertical-align: middle;"></a> 
+                  </p>
+
+                  <button type="button" class="btn btn-primary btn-round"  data-toggle="modal" data-target="#applyModal" id="btnApplyJob" disabled>Apply</button>
+
+                </div>
               </div>
-            </div> -->
-          
-          </div>
 
-          <!-- Load more -->
-          <div class="row">
-            <div class="col-md-12" style="margin-top: 1rem;">
-              <a href="javascript:;" class="btn btn-outline-primary btn-round" id="loadmore">Load More <i class="material-icons" style="color: #2e74b6; margin-left: 0.5em; padding-bottom: 0.2em;">expand_more</i></a>
             </div>
+        
           </div>
 
-		  	</div>
-      </div>
-
-      <footer class="footer">
-        <div class="container-fluid">
-          <nav class="float-left">
-          <ul>
-            <!-- <li>
-            <a href="https://golearn.com.my/join-us" target="_blank">
-              Visit GoLearn Tutor
-            </a>
-            </li> -->
-          </ul>
-          </nav>
-          <!-- <div class="copyright float-right">
-            &copy;
-            <script>
-              document.write(new Date().getFullYear())
-            </script> 
-            , made with <i class="material-icons">favorite</i> by <a href="#" >GoLearn Team</a>
-          </div> -->
-          <!-- your footer here -->
         </div>
-      </footer>
+      </div>
     </div>
-	  
+
+    <footer class="footer">
+      <div class="container-fluid">
+        <nav class="float-left">
+        <ul>
+          <!-- <li>
+          <a href="https://golearn.com.my/join-us" target="_blank">
+            Visit GoLearn Tutor
+          </a>
+          </li> -->
+        </ul>
+        </nav>
+        <!-- <div class="copyright float-right">
+          &copy;
+          <script>
+            document.write(new Date().getFullYear())
+          </script> 
+          , made with <i class="material-icons">favorite</i> by <a href="#" >GoLearn Team</a>
+        </div> -->
+        <!-- your footer here -->
+      </div>
+    </footer>
   </div>
-
-
+	
   <script src="../../assets/js/core/jquery.min.js"></script>
   <script src="../../assets/js/core/popper.min.js"></script>
   <script src="../../assets/js/core/bootstrap-material-design.min.js"></script>
@@ -588,6 +571,25 @@
     // Store last document - Used for Load More btn
     var latestDoc = null;
 
+    var url_string = window.location.href
+    var url = new URL(url_string);
+    var jobId = url.searchParams.get("id");
+    
+    var comPol = "";
+    var jobRefNo = "";
+    var fee = 0;
+    var feeType = FEES_TYPE_PER_HOUR_KEY;
+
+    var duration = 1;
+    var lessPerWeek = 1;
+
+    if (jobId != null && jobId != ''){
+      loadJob(jobId);
+    }
+    else {
+      // alert("Invalid job. Returning to job home page.")
+    }
+
     var docsObj = [];
     // Initialization
     AuthCheck();
@@ -595,7 +597,151 @@
     // Page Specific Initialization
     function loadPageInitFunc(){
 
-      updateInfoInAllActiveJob()
+      // updateInfoInAllActiveJob();
+
+    }
+
+    function loadJob(job_id) {
+      var docRef = db.collection("Jobs")
+        .doc("v1")
+        .collection("job")
+        .doc(job_id)
+
+      docRef.get().then((doc) => {
+
+        if (doc.exists) {
+          console.log(doc.data());
+
+          jobRefNo = doc.data()[JOB_REF_NO];
+          comPol = doc.data()[JOB_COMMISSION_POLICY];
+          jobFee = doc.data()[JOB_FEE];
+          jobFeeType = doc.data()[JOB_FEE_TYPE];
+          jobDuration = doc.data()[JOB_DURATION];
+          jobLessPerWeek = doc.data()[JOB_LESS_PER_WEEK];
+
+          renderJobView(doc);
+
+
+        }
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+
+    }
+
+    function renderJobView(doc){
+    
+      document.getElementById('jobIdTop').textContent = doc.data()[JOB_REF_NO];
+
+      // Status 
+      let status = document.getElementById('inStatus');
+      let closeList = [REQ_ADMIN_REQ_STATUS_JOB_NO_RESPONSE, REQ_ADMIN_REQ_STATUS_JOB_REJECT, REQ_ADMIN_REQ_STATUS_JOB_STOP_AFTER_TRIAL,  
+        REQ_ADMIN_REQ_STATUS_JOB_NO_TUTOR, REQ_ADMIN_REQ_STATUS_JOB_TIME, REQ_ADMIN_REQ_STATUS_SUCCESS]
+      if( doc.data()[JOB_JOB_STATUS] == REQ_ADMIN_REQ_STATUS_JOB_IN_PROGRESS ){
+        status.setAttribute('style', "color: #21896c; background: #c1e1d2;");
+        status.innerHTML = `New <i class="fas fa-circle"></i>`;
+      }
+      else if( doc.data()[JOB_JOB_STATUS] == REQ_ADMIN_REQ_STATUS_JOB_SENT){
+        status.setAttribute('style', "color: #ff5f00; background: #fed8c1;");
+        status.innerHTML = `Last Call <i class="fas fa-circle"></i>`;
+      }
+      else if( closeList.includes(doc.data()[JOB_JOB_STATUS])){
+        status.setAttribute('style', "color: red; background: #ffcccb;");
+        status.innerHTML = `Closed <i class="fas fa-circle"></i>`;
+      }
+      else {
+        status.setAttribute('style', "color: #21896c; background: #c1e1d2;");
+        status.innerHTML = `New <i class="fas fa-circle"></i>`;
+      }
+      
+      // Details
+      let inDetail =  document.getElementById('inDetail');
+      let detail_html = doc.data()[JOB_REF_NO] + '&middot;' + doc.data()[JOB_DATE_CREATE].toDate().toLocaleDateString("en-gb");
+      inDetail.innerHTML =  detail_html;
+
+      // Title
+      let inSubject = document.getElementById('inSubject');
+      let subject_html = "";
+      doc.data()[JOB_CAT_ARR].forEach((cat, index) => {
+        let category = Category[CategoryId.indexOf(cat)];
+        let subject = getSubjectBasedOnCategoryIdAndSubjectId(cat, doc.data()[JOB_SUB_ARR][index])
+        subject_html += category + '-' +subject;
+        
+        if (index < doc.data()[JOB_CAT_ARR].length - 1){
+          subject_html += ", ";
+        }
+      });
+      subject_html += (doc.data()[JOB_ONLINE]) ? `<span class="card-course-online-label">ONLINE</span>` : "";
+      inSubject.innerHTML =  subject_html;
+
+      // Area
+      let area = getCityNameBasedOnCityIdAndStateId2(doc.data()[JOB_STATE], doc.data()[JOB_AREA]);
+      area  = (area == null) ? "" : area;
+      let state = MYAllState[MYAllStateId.indexOf(doc.data()[JOB_STATE])];
+      state  = (state == null) ? "" : state;
+      console.log(area, state)
+      let inArea = document.getElementById('inArea');
+      inArea.textContent = (doc.data()[JOB_ONLINE]) ? "" :  area + ", " + state ;
+      
+      // fee
+      let blogsHtml_fee = '';
+      if (doc.data()[JOB_FEE_TYPE] == "Per Hour"){
+        blogsHtml_fee += "<span style='vertical-align: middle'> RM"+doc.data()[JOB_FEE]+" / hour</span>";
+      }else{
+        blogsHtml_fee += "<span style='vertical-align: middle'> RM"+ doc.data()[JOB_FEE] +" / month</span>";
+      }
+      let inFee = document.getElementById('inFee');
+      inFee.innerHTML = blogsHtml_fee;
+
+      // duration
+      let blogsHtml_duration = '';
+      if (parseFloat(doc.data()[JOB_DURATION]) > 1)
+        blogsHtml_duration += "<span style='vertical-align: middle'>"+doc.data()[JOB_DURATION]+" hours / week</span>";
+      else
+        blogsHtml_duration += "<span style='vertical-align: middle'>"+doc.data()[JOB_DURATION]+" hour / week</span>";
+      let inDuration =  document.getElementById('inDuration');
+      inDuration.innerHTML = blogsHtml_duration;
+
+      // Class / week
+      let blogsHtml_classPerWeek = '';
+      if (parseInt(doc.data()[JOB_LESS_PER_WEEK]) > 1)
+        blogsHtml_classPerWeek += "<span style='vertical-align: middle'>"+doc.data()[JOB_LESS_PER_WEEK]+" classes / week</span>";
+      else
+        blogsHtml_classPerWeek += "<span style='vertical-align: middle'>"+doc.data()[JOB_LESS_PER_WEEK]+" class / week</span>";
+      let inLessPerWeek = document.getElementById('inLessPerWeek');
+      inLessPerWeek.innerHTML = blogsHtml_classPerWeek;
+
+      // Description
+      let blogsHtml_description = '';
+      blogsHtml_description += "<span style='vertical-align: middle'>Description</span>";
+      let description_p = document.createElement('p');
+      description_p.className = "card-course-item";
+      description_p.innerHTML = blogsHtml_description;
+
+      let inDesc = document.getElementById('inDesc');
+      if (doc.data()[JOB_DETAIL] == null || doc.data()[JOB_DETAIL] == ""){
+        inDesc.textContent = "No description.";
+
+      }else{
+        inDesc.textContent = doc.data()[JOB_DETAIL];
+      }
+
+      // Link
+      let link = "https://app.golearn.com.my/school/job/view.html?id=" + doc.data()[JOB_ID];
+      let inLink = document.getElementById('inLink');
+      inLink.innerHTML = link;
+
+      // Aplication status 
+      if (doc.data()[JOB_APPLICANT_ID_ARR].includes(tutorId)){
+        document.getElementById('btnApplyJob').setAttribute('disabled', true);
+        document.getElementById('btnApplyJob').textContent = "Applied";
+
+      }else {
+        document.getElementById('btnApplyJob').removeAttribute('disabled');
+        document.getElementById('btnApplyJob').textContent = "Apply";      
+      }
+
     }
 
     function updateInfoInAllActiveJob(){
@@ -609,7 +755,7 @@
         .where(JOB_STATUS, "==" , true)
         .orderBy(JOB_DATE_CREATE, 'desc')
         .startAfter(latestDoc || today)
-        .limit(12);
+        .limit(20);
       
       colRef
       .get()
@@ -624,18 +770,18 @@
           renderAllActiveJobs(doc);
         });
 
-        // Update latest doc.
-        latestDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+        // // Update latest doc.
+        // latestDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
         
-        if (querySnapshot.empty){
-          loadmore.removeEventListener('click', handleClick );
-        }
+        // if (querySnapshot.empty){
+        //     loadmore.removeEventListener('click', handleClick );
+        // }
 
-        if (querySnapshot.docs.length < 12){
-          loadmore.style.visibility='hidden';
-        }else{
-          loadmore.style.visibility='visible';
-        }
+        // if (querySnapshot.docs.length < 20){
+        //     loadmore.style.visibility='hidden';
+        // }else{
+        //     loadmore.style.visibility='visible';
+        // }
       })
       .catch((error) => {
         console.log("Error getting documents: ", error);
@@ -643,16 +789,7 @@
       
     }
 
-    // Load More Button
-    const loadmore = document.querySelector('#loadmore');
-    loadmore.style.visibility='hidden';
-
-    const handleClick = () =>{
-        // alert('Load more');
-        updateInfoInAllActiveJob();
-    }
-
-    loadmore.addEventListener('click', handleClick );
+   
 
     function renderAllActiveJobs(doc){
       // <div class="col-md-3">
@@ -846,324 +983,104 @@
 
     }
 
-    function renderAllActiveJobs2(doc, courseId, renderNull){
-  
-      // Reference: https://codepen.io/Corsurath/pen/abbxNpj
-      // Code + Date
-      let blogsHtml_code = '';
-      blogsHtml_code += "<span style='margin-right: 0.3rem;'>"+doc.data().id.toUpperCase()+"</span> &middot; <span style='margin-left: 0.3rem;'>"+doc.data()[DATE_CREATED_KEY].toDate().toDateString().slice(-12)+"</span>";
-      
-      if (doc.data()[JOB_STATUS_KEY] == JOB_STATUS_OPEN_KEY)
-      blogsHtml_code += "<span class='card-course-status-label' style='background-color: green;''>OPEN</span>";
-      else if (doc.data()[JOB_STATUS_KEY] == JOB_STATUS_CLOSED_KEY || doc.data()[JOB_STATUS_KEY] == JOB_STATUS_SUCCESS_KEY)
-      blogsHtml_code += "<span class='card-course-status-label' style='background-color: red;''>CLOSED</span>";
-      else if (doc.data()[JOB_STATUS_KEY] == JOB_STATUS_FULL_KEY)
-      blogsHtml_code += "<span class='card-course-status-label' style='background-color: #ffd000;''>FULL</span>";
-      else
-      blogsHtml_code += "<span class='card-course-status-label' style='background-color: red;''>CLOSED</span>";
-
-      let code_h6 = document.createElement('h6');
-      code_h6.innerHTML = blogsHtml_code;
-
-      // Status
-      // let blogsHtml_status = '';
-      // if (doc.data()[JOB_STATUS_KEY] == JOB_STATUS_OPEN_KEY)
-      //   blogsHtml_status += "<span class='card-course-status-label' style='background-color: green;''>OPEN</span>";
-      // else if (doc.data()[JOB_STATUS_KEY] == JOB_STATUS_CLOSED_KEY || doc.data()[JOB_STATUS_KEY] == JOB_STATUS_SUCCESS_KEY)
-      //   blogsHtml_status += "<span class='card-course-status-label' style='background-color: red;''>CLOSED</span>";
-      // else if (doc.data()[JOB_STATUS_KEY] == JOB_STATUS_FULL_KEY)
-      //   blogsHtml_status += "<span class='card-course-status-label' style='background-color: #ffd000;''>FULL</span>";
-      // else
-      //   blogsHtml_status += "<span class='card-course-status-label' style='background-color: red;''>CLOSED</span>";
-      // let status_h6 = document.createElement('h6');
-      // status_h6.innerHTML = blogsHtml_status;
-
-      // subject
-      let blogsHtml_subject = '';
-      if (doc.data().online){
-        blogsHtml_subject += doc.data()[CATEGORY_KEY]+"  "+doc.data()[SUBJECT_KEY]+"<span class='card-course-online-label' style='font-size: 0.8rem;'>ONLINE</span>";
-      }else{
-        blogsHtml_subject += doc.data()[CATEGORY_KEY]+"  "+doc.data()[SUBJECT_KEY];
-      }
-      let subject_h3 = document.createElement('h3');
-      subject_h3.innerHTML = blogsHtml_subject;
-
-      // Area
-      let area_h5 = document.createElement('h5');
-      if (doc.data()[ONLINE_KEY]){
-        // Do nothing
-      }else{
-        area_h5.textContent = doc.data()[AREA_KEY] +", "+MYAllState[MYAllStateId.indexOf(doc.data()[STATE_ID_KEY])];
-      }
-      
-      // fee
-      let blogsHtml_fee = '';
-      if (doc.data().feeType == "Per Hour"){
-        blogsHtml_fee += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >paid</i> RM"+doc.data()[FEES_KEY]+" / hour";
-      }else{
-        blogsHtml_fee += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >paid</i> RM"+ doc.data()[FEES_KEY] +" / month";
-      }
-      let fee_p = document.createElement('p');
-      fee_p.className = "card-course-item";
-      fee_p.innerHTML = blogsHtml_fee;
-      let fee_a = document.createElement('a');
-      fee_a.className = "card-course-item-wrapper"
-      fee_a.appendChild(fee_p);
-
-      // duration
-      let blogsHtml_duration = '';
-      if (doc.data().duration > 1)
-        blogsHtml_duration += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >schedule</i>"+doc.data()[DURATION_KEY]+" hours / week";
-      else
-        blogsHtml_duration += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >schedule</i>"+doc.data()[DURATION_KEY]+" hour / week";
-      let duration_p = document.createElement('p');
-      duration_p.className = "card-course-item";
-      duration_p.innerHTML = blogsHtml_duration;
-      let duration_a = document.createElement('a');
-      duration_a.className = "card-course-item-wrapper"
-      duration_a.appendChild(duration_p);
-
-      // Class / week
-      let blogsHtml_classPerWeek = '';
-      if (doc.data().classPerWeek > 1)
-        blogsHtml_classPerWeek += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >date_range</i>"+doc.data()[CLASSPERWEEK_KEY]+" classes / week";
-      else
-        blogsHtml_classPerWeek += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >date_range</i>"+doc.data()[CLASSPERWEEK_KEY]+" class / week";
-
-      let classPerWeek_p = document.createElement('p');
-      classPerWeek_p.className = "card-course-item";
-      classPerWeek_p.innerHTML = blogsHtml_classPerWeek;
-      let classPerWeek_a = document.createElement('a');
-      classPerWeek_a.className = "card-course-item-wrapper"
-      classPerWeek_a.appendChild(classPerWeek_p);
-
-      // Description
-      let blogsHtml_description = '';
-      blogsHtml_description += "<i class='material-icons' style='color: #6d6d6d; margin-right: 8px;' >description</i> Description";
-      let description_p = document.createElement('p');
-      description_p.className = "card-course-item";
-      description_p.innerHTML = blogsHtml_description;
-      let description_a = document.createElement('a');
-      description_a.className = "card-course-item-wrapper"
-      description_a.appendChild(description_p);
-
-      let description_content_p = document.createElement('p');
-      if (doc.data()[JOB_DETAIL_KEY] == null || doc.data()[JOB_DETAIL_KEY] == ""){
-        description_content_p.textContent = "No description.";
-
-      }else{
-        description_content_p.textContent = doc.data()[JOB_DETAIL_KEY];
-      }
-
-      // Card top
-      let card_div = document.createElement('div');
-      if (doc.data()[CATEGORY_ID_KEY] == "recep" || doc.data()[CATEGORY_ID_KEY] == "camPri" ||
-      doc.data()[CATEGORY_ID_KEY] == "camLowerSec" || doc.data()[CATEGORY_ID_KEY] == "igcse" ||
-      doc.data()[CATEGORY_ID_KEY] == "alevel"){
-        card_div.className = "card-course card-cambridge";
-      }else if(doc.data()[CATEGORY_ID_KEY] == "ibEyp" || doc.data()[CATEGORY_ID_KEY] == "ibPyp" ||
-      doc.data()[CATEGORY_ID_KEY] == "ibMyp" || doc.data()[CATEGORY_ID_KEY] == "ibDiploma"){
-        card_div.className = "card-course card-ib";
-      }else if(doc.data()[CATEGORY_ID_KEY] == "kindergarten" || doc.data()[CATEGORY_ID_KEY] == "upsr" ||
-      doc.data()[CATEGORY_ID_KEY] == "pt3" || doc.data()[CATEGORY_ID_KEY] == "spm" || 
-      doc.data()[CATEGORY_ID_KEY] == "stpm"){
-        card_div.className = "card-course card-kpm";
-      }else if(doc.data()[CATEGORY_ID_KEY] == "uecJun" || doc.data()[CATEGORY_ID_KEY] == "uecSen"){
-        card_div.className = "card-course card-uec";
-      }else if(doc.data()[CATEGORY_ID_KEY] == "engExam" || doc.data()[CATEGORY_ID_KEY] == "adultLanguage"){
-        card_div.className = "card-course card-language-and-english-exam";
-      }else if(doc.data()[CATEGORY_ID_KEY] == "music"){
-        card_div.className = "card-course card-music";
-      }else if(doc.data()[CATEGORY_ID_KEY] == "computer"){
-        card_div.className = "card-course card-computer-programming";
-      }else{
-        card_div.className = "card-course card-language-and-english-exam";
-      }
-
-      card_div.setAttribute("data-category",doc.data()[CATEGORY_KEY]);
-      card_div.setAttribute("data-category-id",doc.data()[CATEGORY_ID_KEY]);
-      card_div.setAttribute("data-subject", doc.data()[SUBJECT_KEY]);
-      card_div.setAttribute("data-subject-id", doc.data()[SUBJECT_ID_KEY]);
-      card_div.setAttribute("data-online", doc.data()[ONLINE_KEY]);
-      card_div.setAttribute("data-course-id",courseId);
-      // card_div.setAttribute("onclick","editCourseFunction(this)");
-      card_div.appendChild(code_h6);
-      // card_div.appendChild(status_h6);
-      card_div.appendChild(subject_h3);
-      if (doc.data()[ONLINE_KEY]){
-        // Do nothing
-      }else{
-        // Append area
-        card_div.appendChild(area_h5);
-      }
-      card_div.appendChild(fee_a);
-      card_div.appendChild(duration_a);
-      card_div.appendChild(classPerWeek_a);
-      card_div.appendChild(description_a);
-      card_div.appendChild(description_content_p);
-
-
-      let card_top = document.createElement('div');
-      card_top.className = "col-md-4 col-lg-4";
-
-      // If the course size is less than 2, we need to render empty placeholder so bootstrap looks good.
-      if (renderNull){
-        // render nothing
-      }else{
-        card_top.appendChild(card_div);
-      }
-      const card_all_job_requests = document.getElementById("card-all-job-requests");
-      card_all_job_requests.appendChild(card_top);
-
-      }
-
-    // Copy a text based on element ID
-    function copyText(targetElemId){
-      /* Get the text field */
-      let copyText = document.getElementById(targetElemId);
-      // console.log(copyText)
-      // console.log(copyText.select())
-      /* Select the text field */
-      copyText.focus();
-      copyText.select();
-      copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-      /* Copy the text inside the text field */
-      navigator.clipboard.writeText(copyText.value);
-      func.showNotification('top','center', 'success', 'check_circle', "Link copied.");
-    }
-
   </script>
   <script>
 		$( document ).ready(function() {
 
       // Apply Modal
-      var APPLY_JOB_ID = "";
-      var APPLY_JOB_REF_NO = "";
       $('#applyModal').on('show.bs.modal', function (event) {
-        var target = $(event.relatedTarget) // Button/Components that triggered the modal
-        APPLY_JOB_ID = target.data('id') // Extract info from data-* attributes
-        console.log(APPLY_JOB_ID);
 
-        docsObj.forEach((doc) => {
+        document.getElementById("applyEnableText").textContent = jobRefNo;
 
-          if (doc.id == APPLY_JOB_ID){
+        var applyHtml = "";
+        var comType1Time = [COMMISSION_POLICY_50_KEY, COMMISSION_POLICY_40_KEY, COMMISSION_POLICY_30_KEY, COMMISSION_POLICY_20_KEY, COMMISSION_POLICY_10_KEY];
 
-            APPLY_JOB_REF_NO = doc[JOB_REF_NO];
-            console.log( APPLY_JOB_REF_NO);
-            
-            document.getElementById("applyEnableText").textContent = APPLY_JOB_REF_NO;
+        // With 1 time commission: 
+        if (comType1Time.includes(comPol)){
 
+          let fee = parseFloat(jobFee).toFixed(2);
+          let duration = parseFloat(jobDuration).toFixed(1);
+          let lessPerWeek = parseInt(jobLessPerWeek);
 
-            let comPol = doc[JOB_COMMISSION_POLICY];
-
-            var applyHtml = "";
-            var comType1Time = [COMMISSION_POLICY_50_KEY, COMMISSION_POLICY_40_KEY, COMMISSION_POLICY_30_KEY, COMMISSION_POLICY_20_KEY, COMMISSION_POLICY_10_KEY];
-
-            // With 1 time commission: 
-            if (comType1Time.includes(comPol)){
-              // <div class="col-md-12" id="comPolText">
-              //   <p>Here's how you will be paid when you get matched:</p>
-              //   <p>1. Parents will pay you the full amount with <strong style="color: #2e74b6 ;">RM 600 (RM50/hr x 1.5 hours/lesson x 2 classes/week x 4 weeks in a month)</strong> at the end of a month or in any form agreed by both of you.</p>
-              //   <p> 2. We will collect <strong style="color: #2e74b6 ;">50% of the first month's fee or RM 300</strong> as a deposit from you. Once you've done that, we will share the parent's contact for you to make the necessary arrangements to conduct the lesson.</p> 
-              //   <p>3. We <strong style="color: #2e74b6 ;">GUARANTEE a full refund</strong> of your deposit if your lesson is terminated within 2 weeks starting from the first class. Else, the deposit will turn to the commission.</p>
-              //   <p>Are you ready to go with this?👨🏻‍🏫</p>
-              // </div>
-
-              let fee = parseFloat(doc[JOB_FEE]).toFixed(2);
-              let duration = parseFloat(doc[JOB_DURATION]).toFixed(1);
-              let lessPerWeek = parseInt(doc[JOB_LESS_PER_WEEK]);
-
-              let feeHalfText = 0;
-              let feePerMonth = 0;
-              // Fee Complete text
-              let feeCompleteText = "";
-              if (doc[JOB_FEE_TYPE] === FEES_TYPE_PER_HOUR_KEY){
-                feePerMonth = fee * duration * lessPerWeek * 4;
-                feeCompleteText = "RM" + feePerMonth +  " (RM" + fee +"/hr x " + doc[JOB_DURATION] + " hour(s)/class x " + doc[JOB_LESS_PER_WEEK] + " class(es)/week x 4 weeks in a month)";
-              }
-              else {
-                feePerMonth = fee
-                feeCompleteText = "RM" + feePerMonth +  " per month";
-              }
-
-              // Commission Text 
-              let commissionText = "";
-              if (comPol === COMMISSION_POLICY_50_KEY){
-                commissionText = "50% of the first month's fee or RM" + (feePerMonth/2).toFixed(2);
-              }
-              else if (comPol === COMMISSION_POLICY_40_KEY){
-                commissionText = "40% of the first month's fee or RM" + (feePerMonth * 0.4).toFixed(2);
-              }
-              else if (comPol === COMMISSION_POLICY_30_KEY){
-                commissionText = "30% of the first month's fee or RM" + (feePerMonth * 0.3).toFixed(2);
-              }
-              else if (comPol === COMMISSION_POLICY_20_KEY){
-                commissionText = "20% of the first month's fee or RM" + (feePerMonth * 0.2).toFixed(2);
-              }
-              else if (comPol === COMMISSION_POLICY_10_KEY){
-                commissionText = "10% of the first month's fee or RM" + (feePerMonth * 0.1).toFixed(2);
-              }
-
-              applyHtml = 
-              `
-              <p>Here's how you will be paid when you get matched:</p>
-              <p>1. Parents will pay you the full amount with <strong style="color: #2e74b6 ;">`+feeCompleteText+`</strong> at the end of a month or in any form agreed by both of you.</p>
-              <p> 2. We will collect <strong style="color: #2e74b6 ;">`+commissionText+`</strong> as a deposit from you. Once you've done that, we will share the parent's contact for you to make the necessary arrangements to conduct the lesson.</p> 
-              <p>3. We <strong style="color: #2e74b6 ;">GUARANTEE a full refund</strong> of your deposit if your lesson is terminated within 2 weeks starting from the first class. Else, the deposit will turn to the commission.</p>
-              <p>Are you ready to go with this?👨🏻‍🏫</p>
-              `
-            }
-            // No commission
-            else if (comPol === COMMISSION_POLICY_NO_COMMISSION_KEY ){
-              applyHtml = 
-              `
-              <p>Are you ready to go with this?👨🏻‍🏫</p>
-              `
-            }
-            // Progressive Increment Plan
-            else if (comPol === COMMISSION_POLICY_PROGRESSIVE_INCREMENT_PLAN_KEY){
-              // <p>2. Once the class is confirmed, we'll create a Whatsapp/Messenger group for you and the parents to understand what the kid needs and make the necessary arrangements to conduct the lesson.</p>
-              // <p>3. GoLearn will send an invoice and collect the tuition fee from parents. You will be getting your pay based on the percentage of the monthly tuition fee. If the class starts in the middle of a month, it is calculated based on the start date of the first class.</p>
-
-              applyHtml = 
-              `
-              <p>For an online tuition job, this is how you will get paid when you get matched (after trial class if any):</p>
-              <p>1. <strong style="color: #2e74b6 ;">0% deposit</strong></p>
-              <p style="margin: 0;">2. Tuition fee that you will be receiving:</p>
-              <p style="margin: 0; font-size: 900; color: #2e74b6;">1st month - 74%</p>
-              <p style="margin: 0; font-size: 900; color: #2e74b6;">2nd month - 78%</p>
-              <p style="margin: 0; font-size: 900; color: #2e74b6;">3rd month - 82%</p>
-              <p style="margin: 0; font-size: 900; color: #2e74b6;">4th month - 84%</p>
-              <p style="margin: 0; font-size: 900; color: #2e74b6;">5th month and onward - 86%</p>
-              <p>Are you ready to go with this?👨🏻‍🏫</p>
-              `
-            }
-            else {
-              applyHtml = 
-              `
-              <p>Are you ready to go with this?👨🏻‍🏫</p>
-              `
-            }
-           
-            // <div class="col-md-12" id="comPolText">
-            document.getElementById("comPolText").innerHTML = applyHtml;
-
-
-            // View job Links
-            let link = "https://app.golearn.com.my/school/job/view.html?id=" + APPLY_JOB_ID;
-            document.getElementById("inJobLink").textContent = link;
+          let feeHalfText = 0;
+          let feePerMonth = 0;
+          // Fee Complete text
+          let feeCompleteText = "";
+          if (jobFeeType === FEES_TYPE_PER_HOUR_KEY){
+            feePerMonth = fee * duration * lessPerWeek * 4;
+            feeCompleteText = "RM" + feePerMonth +  " (RM" + fee +"/hr x " + duration + " hour(s)/class x " + lessPerWeek + " class(es)/week x 4 weeks in a month)";
+          }
+          else {
+            feePerMonth = fee
+            feeCompleteText = "RM" + feePerMonth +  " per month";
           }
 
-        })
+          // Commission Text 
+          let commissionText = "";
+          if (comPol === COMMISSION_POLICY_50_KEY){
+            commissionText = "50% of the first month's fee or RM" + (feePerMonth/2).toFixed(2);
+          }
+          else if (comPol === COMMISSION_POLICY_40_KEY){
+            commissionText = "40% of the first month's fee or RM" + (feePerMonth * 0.4).toFixed(2);
+          }
+          else if (comPol === COMMISSION_POLICY_30_KEY){
+            commissionText = "30% of the first month's fee or RM" + (feePerMonth * 0.3).toFixed(2);
+          }
+          else if (comPol === COMMISSION_POLICY_20_KEY){
+            commissionText = "20% of the first month's fee or RM" + (feePerMonth * 0.2).toFixed(2);
+          }
+          else if (comPol === COMMISSION_POLICY_10_KEY){
+            commissionText = "10% of the first month's fee or RM" + (feePerMonth * 0.1).toFixed(2);
+          }
+
+          applyHtml = 
+          `
+          <p>Here's how you will be paid when you get matched:</p>
+          <p>1. Parents will pay you the full amount with <strong style="color: #2e74b6 ;">`+feeCompleteText+`</strong> at the end of a month or in any form agreed by both of you.</p>
+          <p> 2. We will collect <strong style="color: #2e74b6 ;">`+commissionText+`</strong> as a deposit from you. Once you've done that, we will share the parent's contact for you to make the necessary arrangements to conduct the lesson.</p> 
+          <p>3. We <strong style="color: #2e74b6 ;">GUARANTEE a full refund</strong> of your deposit if your lesson is terminated within 2 weeks starting from the first class. Else, the deposit will turn to the commission.</p>
+          <p>Are you ready to go with this?👨🏻‍🏫</p>
+          `
+        }
+        // No commission
+        else if (comPol === COMMISSION_POLICY_NO_COMMISSION_KEY ){
+          applyHtml = 
+          `
+          <p>Are you ready to go with this?👨🏻‍🏫</p>
+          `
+        }
+        // Progressive Increment Plan
+        else if (comPol === COMMISSION_POLICY_PROGRESSIVE_INCREMENT_PLAN_KEY){
+          applyHtml = 
+          `
+          <p>For an online tuition job, this is how you will get paid when you get matched (after trial class if any):</p>
+          <p>1. <strong style="color: #2e74b6 ;">0% deposit</strong></p>
+          <p>2. Once the class is confirmed, we'll create a Whatsapp/Messenger group for you and the parents to understand what the kid needs and make the necessary arrangements to conduct the lesson.</p>
+          <p>3. GoLearn will send an invoice and collect the tuition fee from parents. You will be getting your pay based on the percentage of the monthly tuition fee. If the class starts in the middle of a month, it is calculated based on the start date of the first class.</p>
+          <p style="margin: 0;">4. Tuition fee that you will be receiving:</p>
+          <p style="margin: 0; font-size: 900; color: #2e74b6;">1st month - 74%</p>
+          <p style="margin: 0; font-size: 900; color: #2e74b6;">2nd month - 78%</p>
+          <p style="margin: 0; font-size: 900; color: #2e74b6;">3rd month - 82%</p>
+          <p style="margin: 0; font-size: 900; color: #2e74b6;">4th month - 84%</p>
+          <p style="margin: 0; font-size: 900; color: #2e74b6;">5th month and onward - 86%</p>
+          <p>Are you ready to go with this?👨🏻‍🏫</p>
+          `
+        }
+        else {
+          applyHtml = 
+          `
+          <p>Are you ready to go with this?👨🏻‍🏫</p>
+          `
+        }
+        
+        // <div class="col-md-12" id="comPolText">
+        document.getElementById("comPolText").innerHTML = applyHtml;
 
       });
 
       // Add new applicant hide 
       $('#applyModal').on('hidden.bs.modal', function (event) {
 
-        APPLY_JOB_ID = "";
-        APPLY_JOB_REF_NO = "";
 
         document.getElementById("comPolText").innerHTML = "";
         document.getElementById("applyEnableText").textContent = ""
@@ -1182,7 +1099,7 @@
         var docRef = db.collection("Jobs")
           .doc("v1")
           .collection("job")
-          .doc(APPLY_JOB_ID);
+          .doc(jobId);
 
         return db.runTransaction((transaction) => {
           return transaction.get(docRef).then((doc) => {
@@ -1215,9 +1132,11 @@
             console.log("Transaction successfully committed!");
 
             // Show applied text;
-            let eleList = document.querySelector("[data-id='"+APPLY_JOB_ID+"']").children
+            // let eleList = document.querySelector("[data-id='"+APPLY_JOB_ID+"']").children
             // console.log(eleList[eleList.length - 1])
-            eleList[eleList.length - 1].textContent = "Applied";
+            // eleList[eleList.length - 1].textContent = "Applied";
+            document.getElementById('btnApplyJob').setAttribute('disabled', true);
+            document.getElementById('btnApplyJob').textContent = "Applied";
 
             $('#applyModal').modal("hide");
             document.getElementById('btnApplyModalConfirm').textContent = "Apply";
@@ -1229,6 +1148,10 @@
         .catch((error) => {
             console.log("Transaction failed: ", error);
             $('#applyModal').modal("hide");
+
+            document.getElementById('btnApplyJob').removeAttribute('disabled');
+            document.getElementById('btnApplyJob').textContent = "Apply";
+
             document.getElementById('btnApplyModalConfirm').textContent = "Apply";
             document.getElementById('btnApplyModalConfirm').removeAttribute("disabled");
             func.showNotification('top','center', 'danger', 'error_outline', "Cannot apply this job now. Please try again!" );
@@ -1239,13 +1162,15 @@
 
       // Apply Modal Confirm Text
       $('#applyModalConfirmText').on('input', function(){
-        if (this.value === APPLY_JOB_REF_NO){
+        if (this.value === jobRefNo){
           $('#btnApplyModalConfirm').prop('disabled', false);
         }
         else{
           $('#btnApplyModalConfirm').prop('disabled', true);
         }
       });
+
+
 
 		});
 
