@@ -227,6 +227,10 @@
   </style>
   <!-- Lesson Content -->
   <style>
+    #main {
+      /* margin: 50px 0; */
+    }
+
     #main .lesson-content .card-section {
       margin-bottom: 0px;
       border: 0;
@@ -746,7 +750,7 @@
        
 
               <h2 id="courseName"></h2>
-              <p id="courseDesc" style="font-size: large;"></p>
+              <p id="courseDesc" style="font-size: large; margin-bottom: 0;"></p>
 
               <span id="teachingModeOnline" style="padding: 3px 5px; margin-bottom: 0; color: white; background-color: #2e74b6; border-radius: 5px; font-size: small; font-weight: 500; display: none;">Online
               </span>
@@ -2607,7 +2611,7 @@
       if (lanList != null && lanList.length > 0){
         lanList.forEach((lan) => {
           let lanSpan = document.createElement('span');
-          lanSpan.setAttribute('style', "padding: 3px 5px; margin-bottom: 0; color: white; background-color: #2e74b6; border-radius: 5px; font-size: small; font-weight: 500;");
+          lanSpan.setAttribute('style', "padding: 3px 5px; display: inline-block; margin-bottom: 0; margin-right: 3px; color: white; background-color: #2e74b6; border-radius: 5px; font-size: small; font-weight: 500;");
           if (lan === LAN_ENGLISH) lanSpan.textContent = 'English';
           else if(lan === LAN_BM) lanSpan.textContent = 'Malay';
           else if(lan === LAN_BC) lanSpan.textContent = 'Chinese';
