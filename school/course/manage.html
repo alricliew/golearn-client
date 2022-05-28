@@ -1498,7 +1498,7 @@
                             
                               <div class="form-check" style="margin-top: 1.0rem;">
                                 <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="" id="modeOnlineGroup">
+                                  <input class="form-check-input" type="checkbox" value="" id="modeOnlineGroup" >
                                   <span class="form-check-sign">
                                     <span class="check"></span>
                                   </span>
@@ -4286,7 +4286,80 @@
 
       batch.commit().then(() => {
         func.showNotification('top','center', 'success', 'check_circle', "Course successfully updated" );
+      })
+      // For normal update - After commited the changes, run ajax to regenerate the html with latest changes 
+      .then(() => {
+
+        if (!isPublish){
+          //TODO: Create a html in golearn.com.my/all-courses/<courseFinalUrl>.html using php
+          // https://golearn.com.my/all-courses/a-source/create-course.php?courseid=Yjs2d35YwYE2VHGxqd2c&tutorid=KzYwMTM4MjUyODE4&contentid=&v=20220420
+          
+          var courseTutorIdEncoded = encode64(tutorId);
+          var createCourseUrl = "https://golearn.com.my/all-courses/a-source/create-course.php?courseid=" + courseId + "&tutorid=" + courseTutorIdEncoded+ "&contentid=&v=" + "20220420";
+          console.log("Creating course")
+          console.log(createCourseUrl);
+
+          return Promise.resolve(
+            $.ajax({
+              type: "GET",
+              url: createCourseUrl,
+              data: $(this).serialize(),
+              success: function(response)
+              {
+                console.log(response)
+          
+              },
+              error: function(xhr, textStatus, error) {
+                  console.log(xhr.responseText);
+                  console.log(xhr.statusText);
+                  console.log(xhr);
+                  console.log(textStatus);
+                  console.log(error);
+                  func.showNotification('top','center', 'danger', 'error_outline', "Creating HTML failed. Contact technical person now!");
+
+              }
+
+            })
+          )
+        }
+        
+
+      })
+      // Update sitemap
+      .then(() => {
+        if (!isPublish){
+          console.log("Updating sitemap")
+          let path = 'all-courses/' + courseFinalUrl + ".html";
+          let sitemapParam = "https://golearn.com.my/update-sitemap.php?action="+"update"+"&path="+path+"&lastmod=&sitemap=" + "sitemap-all-courses.xml";
+
+          return Promise.resolve(
+            $.ajax({
+              type: "GET",
+              url: sitemapParam,
+              data: $(this).serialize(),
+              success: function(response)
+              {
+                console.log(response)
+              },
+              error: function(xhr, textStatus, error) {
+                  console.log(xhr.responseText);
+                  console.log(xhr.statusText);
+                  console.log(xhr);
+                  console.log(textStatus);
+                  console.log(error);
+                  func.showNotification('top','center', 'danger', 'error_outline', "Update sitemap failed. Contact technical person now!");
+              }
+            })
+          )
+
+        }
+  
+        
       }).then(() => {
+        func.showNotification('top','center', 'success', 'check_circle', "Course successfully published");
+        // console.log("Reach this stage");
+      })
+      .then(() => {
 
         if (isPublish){
           window.location.reload();
