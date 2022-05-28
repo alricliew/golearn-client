@@ -1997,6 +1997,7 @@
     var courseNameOri = "";
     var courseContentId = "";
     var courseClassId = "";
+    var courseFinalUrl = "";
     var courseCat = "";
     var courseSub = "";
     var courseStatus = "";
@@ -2042,6 +2043,8 @@
         querySnapshot.forEach((doc) => {
           // console.log(doc.data());
           courseContentId = doc.id;
+          courseFinalUrl = doc.data()[COURSE_URL];
+
           initCourseContent(doc);
 
         });
@@ -4284,9 +4287,10 @@
 
       }
 
-      batch.commit().then(() => {
-        func.showNotification('top','center', 'success', 'check_circle', "Course successfully updated" );
-      })
+      batch.commit()
+      // .then(() => {
+      //   func.showNotification('top','center', 'success', 'check_circle', "Course successfully updated" );
+      // })
       // For normal update - After commited the changes, run ajax to regenerate the html with latest changes 
       .then(() => {
 
@@ -4356,8 +4360,7 @@
   
         
       }).then(() => {
-        func.showNotification('top','center', 'success', 'check_circle', "Course successfully published");
-        // console.log("Reach this stage");
+        func.showNotification('top','center', 'success', 'check_circle', "Course successfully updated" );      
       })
       .then(() => {
 
