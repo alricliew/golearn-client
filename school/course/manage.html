@@ -2254,6 +2254,7 @@
 
           initCourse(snapshots[0]);
 
+          courseContentId = snapshots[0].data()[COURSE_CONTENT_ID];
           courseClassId = snapshots[0].data()[COURSE_CLASS_ID];
           courseCat = snapshots[0].data()[COURSE_CAT_ID];
           courseSub = snapshots[0].data()[COURSE_SUB_ID];
@@ -4356,9 +4357,6 @@
       }
 
       batch.commit()
-      // .then(() => {
-      //   func.showNotification('top','center', 'success', 'check_circle', "Course successfully updated" );
-      // })
       // For normal update - After commited the changes, run ajax to regenerate the html with latest changes 
       .then(() => {
 
@@ -4427,11 +4425,10 @@
         }
   
         
-      }).then(() => {
-        func.showNotification('top','center', 'success', 'check_circle', "Course successfully updated" );      
       })
+      // Reload page
       .then(() => {
-
+        func.showNotification('top','center', 'success', 'check_circle', "Course successfully updated" );
         if (isPublish){
           window.location.reload();
         }
