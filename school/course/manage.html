@@ -2327,10 +2327,6 @@
       .then(() =>{
         document.getElementById("loadingScreen").style.display = "none";
 
-        // Enable Page
-        document.getElementById("btnSave").removeAttribute("disabled");
-
-
       });
 
 
@@ -2417,6 +2413,8 @@
       if (doc.data()[COURSE_STATUS] == COURSE_STATUS_SUSPENDED){
         document.getElementById("btnSuspendedDiv").style.display = "";
       }else {
+        // Enable Page
+        document.getElementById("btnSave").removeAttribute("disabled");
         document.getElementById("btnSuspendedDiv").style.display = "none";
       }
 
