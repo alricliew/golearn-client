@@ -2012,13 +2012,11 @@
       // Get Default List of Tutor
       if (courseId != null && courseId != ''){
 
-        console.log(courseId);
+        // console.log(courseId);
 
         loadCourse(courseId);
         
         // loadCourseContent(courseId);
-
-
 
       }else {
         // window.location = "./";
@@ -2236,23 +2234,23 @@
       .collection("course")
       .doc(courseId);
 
-      var courseContentRef = db.collection("course")
-      .doc('v1')
-      .collection("content")
-      .where(COURSE_CONTENT_COURSE_ID, '==', courseId);
+      // var courseContentRef = db.collection("course")
+      // .doc('v1')
+      // .collection("content")
+      // .where(COURSE_CONTENT_COURSE_ID, '==', courseId);
 
-      
       const promiseArr = [];
-
       promiseArr.push(courseRef.get());
-      promiseArr.push(courseContentRef.get());
+      // promiseArr.push(courseContentRef.get());
 
       Promise.all(promiseArr)
       .then((snapshots) => {
 
+        var promiseAll = [];
+
         // Course Info
         if(snapshots[0].exists){
-          console.log(snapshots[0].data());
+          // console.log(snapshots[0].data());
 
           initCourse(snapshots[0]);
 
@@ -2261,71 +2259,143 @@
           courseSub = snapshots[0].data()[COURSE_SUB_ID];
           courseStatus = snapshots[0].data()[COURSE_STATUS];
 
-          console.log('courseStatus: ' + courseStatus)
+          // console.log('courseStatus: ' + courseStatus)
 
           if ( snapshots[0].data()[COURSE_STATUS_MESSAGE] != null && snapshots[0].data()[COURSE_STATUS_MESSAGE] != ""){
             func.showNotification('top','center', 'danger', 'error_outline', "Important: " +  snapshots[0].data()[COURSE_STATUS_MESSAGE]);
             
           }
+          
+          // // Course Content
+          // if (snapshots[1] != null && snapshots[1].size > 0){
+          //   // Course Content Info
+          //   snapshots[1].forEach((doc) => {
+          //     console.log(doc.data());
+          //     courseContentId = doc.id;
+          //     initCourseContent(doc);
+          //   })
+          // }
+          // else {
+          //   func.showNotification('top','center', 'warning', 'error_outline', 'This course has no content. Please create one!' );
+          // }
+          if (snapshots[0].data()[COURSE_CONTENT_ID] != null && snapshots[0].data()[COURSE_CONTENT_ID] !== ""){
+            let courseContentRef = db.collection("course")
+              .doc('v1')
+              .collection("content")
+              .doc(snapshots[0].data()[COURSE_CONTENT_ID]);
+
+            promiseAll.push(courseContentRef.get())
+          }
+          else {
+            promiseAll.push(null);
+          }
+
+          // Load Class Info
+          if (snapshots[0].data()[COURSE_CLASS_ID] == null || snapshots[0].data()[COURSE_CLASS_ID] == ""){
+            promiseAll.push(null)
+          }
+          else {
+            // loadLinkedClass(classId);
+            var classRef = db.collection("Class")
+            .doc('v1')
+            .collection("Class")
+            .doc(snapshots[0].data()[COURSE_CLASS_ID]);
+
+            promiseAll.push(classRef.get())
+            
+           
+          }
+
+          return Promise.all(promiseAll);
 
         } 
         else {
           console.log("No such course!");
+          func.showNotification('top','center', 'danger', 'error_outline', "No such course!");
+
+          return 2;
+
         }
 
-        // Course Content
-        if (snapshots[1] != null && snapshots[1].size > 0){
-          // Course Content Info
-          snapshots[1].forEach((doc) => {
-            // console.log(doc.data());
-            courseContentId = doc.id;
-            initCourseContent(doc);
-
-          })
-        }
-        else {
-          func.showNotification('top','center', 'warning', 'error_outline', 'This course has no content. Please create one!' );
-        }
-    
-        
-        // Load Class Info
-        if (snapshots[0].data()[COURSE_CLASS_ID] == null || snapshots[0].data()[COURSE_CLASS_ID] == ""){
-          return null;
-        }
-        else {
-          // loadLinkedClass(classId);
-          var classRef = db.collection("Class")
-          .doc('v1')
-          .collection("Class")
-          .doc(snapshots[0].data()[COURSE_CLASS_ID]);
-          return Promise.resolve(classRef.get())
-        }
 
       })
       // Get Class Info
       .then((snapshots) => {
 
 
-        if (snapshots == null) {
-         // Do nothing 
+        // if (snapshots == 1) {
+        //  // Do nothing 
+        //  document.getElementById("loadingScreen").style.display = "none";
+
+        // }
+        // // No such course
+        // else if (snapshots == 2) {
+        //  // Do nothing 
+        //  document.getElementById("loadingScreen").style.display = "";
+
+        // }
+        // else if (snapshots.exists){
+        //   document.getElementById("inClassName").textContent = snapshots.data()[CLASS_NAME];
+        //   document.getElementById("btnLinkClass").textContent = 'Unlink';
+        //   document.getElementById("btnLinkClass").setAttribute('data-target', '#unlinkModal');
+
+        //   document.getElementById("loadingScreen").style.display = "none";
+
+        // }
+        // else {
+        //   document.getElementById("btnLinkClass").textContent = 'Link';
+        //   document.getElementById("btnLinkClass").setAttribute('data-target', '#addClassModal');
+        //   console.log("No such document!");
+
+        //   document.getElementById("loadingScreen").style.display = "none";
+
+        // }
+
+        // document.getElementById("btnLinkClass").removeAttribute('disabled');
+
+
+        // Init Course Content
+        if (snapshots[0] != null  && snapshots[0].exists){
+          // console.log('Course Content');
+          // console.log(snapshots[0].data());
+          initCourseContent(snapshots[0]);
+          // snapshots[0].forEach((doc) => {
+          //   console.log(doc.data());
+          //   courseContentId = doc.id;
+          //   initCourseContent(doc);
+          // })
         }
-        else if (snapshots.exists){
-          document.getElementById("inClassName").textContent = snapshots.data()[CLASS_NAME];
+        else {
+          func.showNotification('top','center', 'warning', 'error_outline', 'This course has no content. Please create one!' );
+        }
+
+        // Init Class
+        if (snapshots[1] != null  && snapshots[1].exists){
+          document.getElementById("inClassName").textContent = snapshots[1].data()[CLASS_NAME];
           document.getElementById("btnLinkClass").textContent = 'Unlink';
           document.getElementById("btnLinkClass").setAttribute('data-target', '#unlinkModal');
-        }
+        }  
         else {
           document.getElementById("btnLinkClass").textContent = 'Link';
           document.getElementById("btnLinkClass").setAttribute('data-target', '#addClassModal');
-          console.log("No such document!");
         }
-
         document.getElementById("btnLinkClass").removeAttribute('disabled');
+
+        // Global init
+        if (snapshots == 2) {
+          // No such course
+          document.getElementById("loadingScreen").style.display = "";
+
+        }
+        else {
+          document.getElementById("loadingScreen").style.display = "none";
+
+        }
 
       })
       // Complete
       .then(() =>{
-        document.getElementById("loadingScreen").style.display = "none";
+        // document.getElementById("loadingScreen").style.display = "none";
 
       });
 
