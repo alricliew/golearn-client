@@ -1869,6 +1869,7 @@
 
         docRef.get().then((doc) => {
           if (doc.exists){
+            // console.log("Doc ID: " + doc.id)
             // console.log(doc.data());
 
             const promiseAll = [];
@@ -1923,7 +1924,7 @@
             // No content
             document.getElementById("noContent").style.display = "";
           }else {
-            // console.log(snapshot.data());
+            // console.log(snapshot[0].data());
 
             // Content specific
             if (snapshot[0] == null ){
@@ -1944,7 +1945,7 @@
             if (snapshot[1] == null ){
               // No Lesson Found
               document.getElementById("latestLessonBlock").style.display ="none";
-              console.log('No lesson found')
+              // console.log('No lesson found')
             }
             else {
               // console.log(snapshot[1])
@@ -1954,7 +1955,7 @@
 
                 var counter = 0;
                 snapshot[1].forEach((doc, index) => {
-                  console.log(doc.data());
+                  // console.log(doc.data());
                   // Render only latest 3 lessons
                   if (counter < 3){
                     renderLessonDoc(doc);
