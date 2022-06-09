@@ -5,6 +5,7 @@ function AuthCheck(){
   firebase.auth().onAuthStateChanged(function(user){
     if(!user){
       // Return to login if user does not exist.
+      // alert("!user");
       window.location.href = "https://golearn.com.my/admin/signin.html"
     }else{
       // // if the displayName is null, it means user register using Phone
@@ -23,7 +24,7 @@ function AuthCheck(){
       console.log(tutorId);
 
       // "admin@golearn.com.my"
-      if (tutorId == null || !EMPLOYEE_LIST.includes(tutorId)){
+      if (tutorId == null || tutorId == "" || !EMPLOYEE_LIST.includes(tutorId)){
         alert("Wrong Login Details");
         // TODO: Uncomment after complition
         // window.location.href = "https://golearn.com.my/admin/signin.html";
@@ -123,9 +124,19 @@ function loadTutorInfoObj(tutorId){
 
     // Check if user logged in with other number. If true, logout
     if (current_id != tutorId){
-      console.log("Stored TutorId in session storage is NOT equal to latest tutorId. ")
+      loadUserInfo(tutorId);
+
+      console.log("Stored TutorId in session storage "+current_id+" is NOT equal to latest tutorId " +tutorId )
       // window.location.href = "https://golearn.com.my/admin/signin.html";
     }
+    
+    // Check if user an employee 
+    if (!EMPLOYEE_LIST.includes(tutorId)){
+      // alert("!EMPLOYEE_LIST.includes(tutorId)");
+      console.log("!EMPLOYEE_LIST.includes(tutorId)");
+      window.location.href = "https://golearn.com.my/admin/signin.html";
+    }
+
     // console.log(current_uLastOnline)
     // let secondLastOnline = current_uLastOnline.seconds;
     // let secondCurrent = new Date().getTime() / 1000;
@@ -163,7 +174,6 @@ function loadTutorInfoObj(tutorId){
         //   [SYSTEM_LAST_ONLINE_KEY] : new Date() //firebase.firestore.Timestamp.fromDate(new Date())
         //   }
         // );
-
 
       }
 
