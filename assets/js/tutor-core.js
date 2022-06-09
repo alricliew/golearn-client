@@ -342,7 +342,7 @@ function loadUserInfo(tutorId){
 function updateGeneralView(){
   // Set the nav user name.
   document.getElementById("user").textContent = current_name;
-    
+  
   // Set the public profile link.
   // By default, general link were given.
   let url = encode64(tutorId);
@@ -357,6 +357,8 @@ function updateGeneralView(){
     document.getElementById("btnActivateAccount").target = "_blank";
     // Payroll
     document.getElementById("navPayroll").setAttribute("style", "display: none;");
+    if (checkIsPayrollPages()) window.location.href = "https://app.golearn.com.my/school/";
+    
   }
   else if (current_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY || current_accountStatus == PREMIUM_ACCOUNT_1_ACTIVE_STATUS_KEY){
     document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
@@ -365,6 +367,7 @@ function updateGeneralView(){
     document.getElementById("btnActivateAccount").target = "_blank";
     // Payroll
     document.getElementById("navPayroll").setAttribute("style", "display: none;");
+    if (checkIsPayrollPages()) window.location.href = "https://app.golearn.com.my/school/";
   }
   else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY || current_accountStatus == PREMIUM_ACCOUNT_2_ACTIVE_STATUS_KEY){
     document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white;" );
@@ -389,6 +392,8 @@ function updateGeneralView(){
     document.getElementById("btnActivateAccount").target = "_blank";
     // Payroll
     document.getElementById("navPayroll").setAttribute("style", "display: none;" );
+    if (checkIsPayrollPages()) window.location.href = "https://app.golearn.com.my/school/";
+    
   }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
     document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible; color: white; background: red" );
     document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
@@ -396,6 +401,8 @@ function updateGeneralView(){
     document.getElementById("btnActivateAccount").target = "_blank";
     // Payroll
     document.getElementById("navPayroll").setAttribute("style", "display: none;");
+    if (checkIsPayrollPages()) window.location.href = "https://app.golearn.com.my/school/";
+
     // Public profile link is disabled for suspended user
     document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
 
@@ -412,7 +419,13 @@ function updateGeneralView(){
     }
     // Payroll
     document.getElementById("navPayroll").setAttribute("style", "display: none;");
+    if (checkIsPayrollPages()) window.location.href = "https://app.golearn.com.my/school/";
 
+  }
+
+  function checkIsPayrollPages(){
+    const url = window.location.pathname;
+    return url == "/school/payroll/" || url =="/school/payroll/run-payroll.html" || url == "/school/payroll/history.html";
   }
 }
 
