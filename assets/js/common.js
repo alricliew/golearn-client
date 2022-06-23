@@ -753,6 +753,8 @@ const INV_CHECK_DATE_EDIT = "dateEdit";
 //  Review (Review > v1 > Review)
 const REVIEW_ID = "id";
 const REVIEW_RECEIVER_ID = "recId"; // PK
+const REVIEW_RECEIVER_NAME = "recName";
+const REVIEW_RECEIVER_IMG = "recImgUrl"
 const REVIEW_REVIEWER_ID = "revId";
 const REVIEW_REVIEWER_NAME = "revName";
 const REVIEW_REVIEWER_IMG = "revImgUrl"
