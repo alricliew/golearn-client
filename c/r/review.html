@@ -440,8 +440,7 @@
     var current_name, current_email, current_phone, current_imgUri, current_nric,
       current_address1, current_address2, current_addressPostCode, current_addressState, current_address;
      
-    var tutorName;
-    var tutorImgUri, tutorRating, tutorRatingTimes, tutorRatingFinal;
+    var tutorName, tutorImgUri, tutorRating, tutorRatingTimes, tutorRatingFinal;
 
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
@@ -669,6 +668,8 @@
         let docData = {
           [REVIEW_ID]: docRef.id,
           [REVIEW_RECEIVER_ID]: tutorId,
+          [REVIEW_RECEIVER_NAME]: tutorName,
+          [REVIEW_RECEIVER_IMG]: tutorImgUri,
           [REVIEW_REVIEWER_ID]: userId,
           [REVIEW_REVIEWER_NAME]: current_name,
           [REVIEW_REVIEWER_IMG]: current_imgUri,
@@ -700,7 +701,7 @@
         console.log("Tutor Rating Data Update");
         console.log(tutorDocData);
 
-        // !IMPORTANT, DO NOT UPDATE THE tutorDoc directly.
+        // !IMPORTANT, DO NOT UPDATE the tutorDoc directly.
         // batch.set(tutorDocRef, tutorDocData, { merge: true });
 
         // Commit the batch
