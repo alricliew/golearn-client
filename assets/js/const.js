@@ -829,13 +829,13 @@ const SubjectRestrictedIdIGCSE = ["igcseFirstEnglish", "igcseSecondEnglish", "ig
     "igcseEco", "igcseEngLit", "igcseGeo", "igcseHis", "igcseGloPer",
     "igcseICT"]; //19
 const SubjectALevel = ["Accounting", "Applied ICT", "Biology", "Business", "Chemistry",
-    "Computer Science", "Economics", "English Literature", "Further Mathematics", "Law",
+    "Computer Science", "Economics", "English Literature", "Further Mathematics", "History", "Law",
     "Mathematics", "Physics", "Psychology", "Sociology"];
 // const SubjectIdALevel = ["accountingAlevel", "appliedICT", "bioAlevel", "businessAlevel","cheAlevel",
 //         "cs", "ecoAlevel", "englishLiterature", "furmath", "law",
 //         "mathAlevel","phyAlevel", "psy", "socio"]; // 14
 const SubjectIdALevel = ["aLevelAccounting", "aLevelAppliedICT", "aLevelBio", "aLevelBusiness", "aLevelChe",
-    "aLevelCs", "aLevelEco", "aLevelEngLit", "aLevelFurmath", "aLevelLaw",
+    "aLevelCs", "aLevelEco", "aLevelEngLit", "aLevelFurmath", "aLevelHist", "aLevelLaw",
     "aLevelMath", "aLevelPhy", "aLevelPsy", "aLevelSocio"]; // 14
 const SubjectRestrictedIdALevel = ["aLevelBio", "aLevelChe", "aLevelMath", "aLevelPhy"]; //4
 
@@ -883,12 +883,12 @@ const SubjectUecSenior = ["Accounting", "Advanced Mathematics", "Advanced Mathem
     "Art", "Basic Circuit Theory", "Biology", "Book-keeping and Accounts",
     "Business Studies", "Chemistry", "Chinese Language", "Computing and Information Technology",
     "Digital Logic", "Economics", "English Language", "Fundamentals of Electrical Engineering",
-    "Geography", "History", "Malay Language (National)", "Physics", "Principle Electronic"];
+    "Geography", "History", "Malay Language (National)", "Mathematics", "Physics", "Principle Electronic"];
 const SubjectIdUecSenior = ["uecSenAcc", "uecSenAdvMath", "uecSenAdvMathI", "uecSenAdvMathII",
     "uecSenArt", "uecSenBasicCirTheo", "uecSenBio", "uecSenBookKeepAcc",
     "uecSenBusStu", "uecSenChe", "uecSenChiLan", "uecSenIct",
     "uecSenDigLogic", "uecSenEco", "uecSenEngLan", "uecSenFunEnE",
-    "uecSenGeo", "uecSenHist", "uecSenMalayLan", "uecSenPhy", "uecSenPrinE"]; //21
+    "uecSenGeo", "uecSenHist", "uecSenMalayLan", "uecSenMath", "uecSenPhy", "uecSenPrinE"]; //21
 const SubjectRestrictedIdUecSenior = ["uecSenAdvMath", "uecSenAdvMathI", "uecSenAdvMathII",
     "uecSenBio", "uecSenChe", "uecSenChiLan", "uecSenEngLan", "uecSenMalayLan", "uecSenPhy"]; // 9
 
