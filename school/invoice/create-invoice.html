@@ -1452,7 +1452,7 @@
 
       // Add a new item by default
       let uuid = create_UUID();
-      addItem("New Item", uuid, 1, 0,  'uncategorized', 'Uncategorized', []);
+      addItem("New Item", uuid, 1, 0, 'uncategorized', 'Uncategorized', []);
 
       // Enable Add Student Modal
       document.getElementById("invAllStudentLink").setAttribute('data-target', '#addStudentModal');
@@ -1465,12 +1465,9 @@
         // console.log('Null or empty cid ' )
       }
       else {
-
         try {
           let decodeId = decode64(clientId);
-          // console.log(decodeId);
           autoAssignClient(decodeId);
-
         }
         catch(err) {
           console.log('Error: ' + err)
@@ -1643,9 +1640,8 @@
             // Load Desription 
             document.getElementById("inClientId").setAttribute('value', ID);
             document.getElementById("inClientName").value = NAME;
-            document.getElementById("inClientContact").value = PHONE;
-            intlTelInput(document.getElementById("inClientContact"));
-            
+            // document.getElementById("inClientContact").value = PHONE;
+            itiPhone.setNumber(PHONE);
             document.getElementById("inClientEmail").value = EMAIL;
             document.getElementById("inClientAddr").value = ADDRESS;
 
@@ -1659,16 +1655,8 @@
         } else {
           console.log('Client Not Found')
         }
-    
       })
-      .then(() => {
-        
-      })
-      
-
-
     }
-
 
     //---------- Init All Admin's Student details ----------//
     // Lesson Load More Button - Init
@@ -4901,18 +4889,26 @@
       // Edit Client Modal on Load
       $('#editClientModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button/Components that triggered the modal
-        ID = button.data('gurid') // Extract info from data-* attributes
-        NAME = button.data('gurname') // Extract info from data-* attributes
-        PHONE = button.data('gurphone') // Extract info from data-* attributes
-        EMAIL = button.data('guremail') // Extract info from data-* attributes
-        ADDRESS = button.data('guraddr') // Extract info from data-* attributes
-        // Load Desription 
-        document.getElementById("inClientId").setAttribute('value', ID);
-        document.getElementById("inClientName").value = NAME;
-        document.getElementById("inClientContact").value = PHONE;
-        document.getElementById("inClientEmail").value = EMAIL;
-        document.getElementById("inClientAddr").value = ADDRESS;
-
+        if (button.length > 0){
+          // This happens when a client is choosen manually. Gurdian info exists.
+          ID = button.data('gurid') // Extract info from data-* attributes
+          NAME = button.data('gurname') // Extract info from data-* attributes
+          PHONE = button.data('gurphone') // Extract info from data-* attributes
+          EMAIL = button.data('guremail') // Extract info from data-* attributes
+          ADDRESS = button.data('guraddr') // Extract info from data-* attributes
+          // Load Desription 
+          document.getElementById("inClientId").setAttribute('value', ID);
+          document.getElementById("inClientName").value = NAME;
+          // document.getElementById("inClientContact").value = PHONE;
+          itiPhone.setNumber(PHONE);
+          document.getElementById("inClientEmail").value = EMAIL;
+          document.getElementById("inClientAddr").value = ADDRESS;
+        }
+        else {
+          // This happens when cid exists through redirection from summary.
+          console.log("Button doest not exists")
+        }
+        
         if (ID == null || ID == ''){
           document.getElementById("inClientName").removeAttribute('readonly');
           document.getElementById("inClientContact").removeAttribute('readonly'); 
