@@ -103,7 +103,7 @@ const citySelangor = [
     "Damansara", "Damansara Damai", "Damansara Jaya", "Damansara Perdana", "Dengkil", "Gombak", "Hulu Klang", "Hulu Langat", "Jenjarom", "Jeram",
     "Kajang", "Kajang Perdana", "Kajang Utama", "Kampung Tunku", "Kapar", "Kelana Jaya", "Kepong", "Kerling", "Klang", "Klang Jaya", "Klang Utama", 
     "KLIA", "Kota Damansara", "Kota Kemuning", "Kuala Kubu Baru", "Kuala Selangor", "Kuang", "Kundang", "Meru", "Mutiara Damansara",
-    "Pandan Indah", "Petalling Jaya", "Port Klang", "Puchong", "Pulau Carey", "Pulau Indah", "Pulau Ketam", "Puncak Alam", "Puncak Jalil", 
+    "Pandan Indah", "Petaling Jaya", "Port Klang", "Puchong", "Pulau Carey", "Pulau Indah", "Pulau Ketam", "Puncak Alam", "Puncak Jalil", 
     "Puncak Perdana", "Putra Heights", "Putrajaya", "Rasa", "Rawang", "Sabak Bernam", "Saujana Impian", "U16, Shah Alam", "Sekinchan", "Seksyen 17, Petaling Jaya", 
     "Seksyen 19, Shah Alam", "Seksyen 7, Shah Alam", "Seksyen 9, Shah Alam", "Selayang", "Semenyih", "Sepang", "Serdang", "Serendah", "Seri Kembangan", "Setia Alam", "Shah Alam", 
     "Sri Damansara", "SS 19", "SS 2", "Subang", "Subang Jaya", "Sungai Ayer Tawar", "Sungai Besar", "Sungai Buloh", "Sungai Chua", "Sungai Long", 
@@ -582,39 +582,6 @@ function getCityIdBasedOnCityNameAndStateName(stateName, cityName) {
 }
 
 
-
-// Education Level and subjects
-// const Category = ["UPSR (Awaiting New Curriculum)", "PT3", "SPM", "PreU", "IGCSE", "A Level"];
-// const CategoryId = ["upsr", "pt3", "spm", "preu", "igcse", "alevel"];
-
-// const SubjectUPSR = ["Bahasa Melayu", "Bahasa Inggeris", "Matematik", "Sains", "Bahasa Cina", "Bahasa Tamil"];
-// const SubjectIdUPSR = ["bm", "english", "math", "science", "bc", "bt"];
-// const SubjectPT3 = ["Bahasa Melayu", "Bahasa Inggeris", "Mathematics", "Science", "Bahasa Cina", "Bahasa Tamil",
-//         "Sejarah", "Geografi", "Asas Sains Komputer", "Reka Bentuk dan Teknologi"];
-// const SubjectIdPT3 = ["bm", "english", "math", "science", "bc", "bt", "sej", "geo", "ask", "rbk"];
-// const SubjectSPM = ["Bahasa Melayu", "Bahasa Inggeris", "Mathematics", "Additional Mathematics", "Sejarah",
-//         "Chemistry", "Biology", "Physics", "Ekonomi", "Reka Bentuk dan Teknologi","Perniagaan","Prinsip Perakaunan", "Bahasa Cina"];
-// const SubjectIdSPM = ["bm", "english", "math", "addmath", "sej",
-//         "che", "bio", "phy", "eko", "rbk","perniagaan","pp", "bc"];
-// const SubjectPreU = ["Pengajian Am", "Mathematics(M)", "Mathematics(T)", "Physics", "Chemistry", "Biology",
-//         "Pengajian Perniagaan", "Ekonomi", "Perakaunan", "Bahasa Melayu", "Sejarah","Geografi","Kesusasteraan Melayu",
-//         "Bahasa Cina", "Bahasa Tamil"];
-// const SubjectIdPreU = ["pa", "math(M)", "math(T)","phy", "che", "bio",
-//         "pp", "eko", "perakaunan", "bm", "sej","geo","kesusasteraanMelaye",
-//         "bc", "bt"];
-// const SubjectIGCSE = ["First Language English", "Second Language English", "Malay", "Mathematics","Additional Mathematics",
-//         "Chemistry", "Biology", "Physics", "Combined Science", "Accounting","Business Studies","Economics"];
-// const SubjectIdIGCSE = ["firstEnglish", "secondEnglish", "bm", "math","addmath",
-//         "che", "bio", "phy", "combinedScience", "accounting","business","eco"];
-
-// const SubjectALevel = ["Accounting", "Applied ICT", "Biology", "Business","Chemistry",
-//         "Computer Science", "Economics", "English Literature", "Further Mathematics", "Law",
-//         "Mathematics", "Physics","Psychology", "Sociology"];
-// const SubjectIdALevel = ["accountingAlevel", "appliedICT", "bioAlevel", "businessAlevel","cheAlevel",
-//         "cs", "ecoAlevel", "englishLiterature", "furmath", "law",
-//         "mathAlevel","phyAlevel", "psy", "socio"];
-
-
 const Category = ["Kindergarten", "Primary", "PT3", "SPM", "STPM", "Reception/Nursery", "Cambridge Primary",
     "Cambridge Lower Secondary", "IGCSE", "A Level",
     "IB Early Years", "IB Primary (PYP)", "IB Middle (MYP)", "IB Diploma", "UEC Junior",
@@ -638,28 +605,18 @@ const SubjectRestrictedIdKindergarten = ["kinBm", "kinEnglish", "kinMath", "kinS
 const SubjectUPSR = ["Bahasa Melayu", "Bahasa Inggeris", "Matematik", "Sains", "Bahasa Cina",
     "Bahasa Tamil", "Sejarah", "Reka Bentuk dan Teknologi", "Pendidikan Islam / Moral", "Bahasa Iban",
     "Bahasa Arab", "Bahasa Kadazandusun"];
-// const SubjectIdUPSR = ["bm", "english", "math", "science", "bc",
-//         "bt", "sej", "rbk", "pim", "priIban",
-//         "priArab", "priKadazandusun"]; // 12 
+
 const SubjectIdUPSR = ["priBm", "priEnglish", "priMath", "priScience", "priBc",
     "priBt", "priSej", "priRbk", "priPim", "priIban",
     "priArab", "priKadazandusun"];
 const SubjectRestrictedIdUPSR = ["priBm", "priEnglish", "priBc", "priMath", "priScience"]; // 5
-
-// IMPORTANT! The list below is created only for update information > preferred subject
-// const SubjectIdUPSRSpecial = ["pribm", "prienglish", "primath", "priscience", "pribc",
-//         "pribt", "prisej", "prirbk", "pripim", "priIban",
-//         "priArab", "priKadazandusun"]; // 12 
 
 // Source: https://www.moe.gov.my/images/KPM/UKK/2019/03_Mac/Brochure_PT3-UPDATED-19March1.jpg
 const SubjectPT3 = ["Bahasa Melayu", "Bahasa Inggeris", "Mathematics", "Science", "Bahasa Cina", "Bahasa Tamil",
     "Sejarah", "Geografi", "Asas Sains Komputer", "Reka Bentuk dan Teknologi",
     "Pendidikan Islam", "Bahasa Arab", "Bahasa Iban", "Bahasa Kadazandusun", "Bahasa Punjabi",
     "Maharat al-Quran (KBT)", "Usul al-Din (KBD)", "Al-Syariah (KBD)", "Al-Lughah Al-Arabiah Al-Muasirah (KBD)"];
-// const SubjectIdPT3 = ["bm", "english", "math", "science", "bc", "bt",
-//         "sej", "geo", "ask", "rbk",
-//         "pt3Pi", "pt3Arab", "pt3Iban", "pt3Kadazandusun", "pt3Punjabi",
-//         "pt3MaharatAlQuran", "pt3UsulAlDin", "pt3AlSyariah", "pt3AlLugAlArabAlMua"]; // 19 
+ 
 const SubjectIdPT3 = ["pt3Bm", "pt3English", "pt3Math", "pt3Science", "pt3Bc", "pt3Bt",
     "pt3Sej", "pt3Geo", "pt3Ask", "pt3Rbk",
     "pt3Pi", "pt3Arab", "pt3Iban", "pt3Kadazandusun", "pt3Punjabi",
@@ -667,12 +624,6 @@ const SubjectIdPT3 = ["pt3Bm", "pt3English", "pt3Math", "pt3Science", "pt3Bc", "
 
 const SubjectRestrictedIdPT3 = ["pt3Bm", "pt3English", "pt3Math", "pt3Science", "pt3Bc", "pt3Bt",
     "pt3Sej", "pt3Geo"]; // 8
-
-// IMPORTANT! The list below is created only for update information > preferred subject
-// const SubjectIdPT3Special = ["pt3bm", "pt3english", "pt3math", "pt3science", "pt3bc", "pt3bt",
-//         "pt3sej", "pt3geo", "pt3ask", "pt3rbk",
-//         "pt3Pi", "pt3Arab", "pt3Iban", "pt3Kadazandusun", "pt3Punjabi",
-//         "pt3MaharatAlQuran", "pt3UsulAlDin", "pt3AlSyariah", "pt3AlLugAlArabAlMua"]; // 19 
 
 // Source: https://www.moe.gov.my/pekeliling/3054-spi-bil-6-tahun-2019-pelaksanaan-kssm-menengah-atas-dan-pakej-mata-pelajaran-tahun-2020/file
 // Source2: https://www.moe.gov.my/muat-turun/laporan-dan-statistik/lp/3324-laporan-analisis-keputusan-spm-2019/file
@@ -693,17 +644,6 @@ const SubjectSPM = [
     "Pendidikan Syariah", "Pendidikan Al Quran dan Al Sunnah", "Tasawwur Islam", "Usul Al-Din", "Al-Syariah",
     "Al-Lughah Al-Arabiah Al-Muasirah", "Manahij Al-Ulum Al-Islamiah", "Al-Adab Wa Al-Balaghah"];
 
-// const SubjectIdSPM = [
-//         "bm", "english", "math", "spmSains", "sej", "spmPi","spmPm",
-//         "addmath", "che", "bio", "phy",
-//         "bc", "spmTamil", "spmIban",
-//         "eko", "perniagaan","pp", "spmGeo", "spmKesusasteraanMelayu", "spmKesusasteraanCina",
-//         "spmKesusasteraanTamil", "spmPsv",
-//         "spmGrafikKomTek", "spmPertanian", "spmSainsRumahTangga","spmRekaCipta", "spmSainsKomputer", "spmSainsSukan",
-//         "spmAsasKelestarian", "spmLukisanKejuruteraan", "spmSainsTambahan",
-//         "spmSyariah", "spmAlQuranAlSunnah", "spmTasawwurIslam", "spmUsulAlDin", "spmAlSyariah",
-//         "spmAlLugAlArabAlMua", "spmManahijAlUlumAlIslamiah", "spmAlAdabWaAlBalaghah",
-//         ]; // 38 
 const SubjectIdSPM = [
     "spmBm", "spmEnglish", "spmMath", "spmSains", "spmSej", "spmPi", "spmPm",
     "spmAddmath", "spmChe", "spmBio", "spmPhy",
@@ -716,22 +656,10 @@ const SubjectIdSPM = [
     "spmAlLugAlArabAlMua", "spmManahijAlUlumAlIslamiah", "spmAlAdabWaAlBalaghah",
 ]; // 38 
 const SubjectRestrictedIdSPM = [
-    "spmBm", "spmEnglish", "spmMath", "spmSains", "spmSej",
+    "spmBm", "spmEnglish", "spmMath", "spmSains", "spmSej", "spmPi",
     "spmAddmath", "spmChe", "spmBio", "spmPhy",
     "spmBc", "spmTamil",
     "spmEko", "spmPerniagaan", "spmPp", "spmGeo"]; // 15
-
-// const SubjectIdSPMSpecial = [
-//     "spmbm", "spmenglish", "spmmath", "spmSains", "spmsej", "spmPi","spmPm",
-//     "spmaddmath", "spmche", "spmbio", "spmphy",
-//     "spmbc", "spmTamil", "spmIban",
-//     "spmeko", "spmperniagaan", "spmpp", "spmGeo", "spmKesusasteraanMelayu", "spmKesusasteraanCina",
-//     "spmKesusasteraanTamil", "spmPsv",
-//     "spmGrafikKomTek", "spmPertanian", "spmSainsRumahTangga","spmRekaCipta", "spmSainsKomputer", "spmSainsSukan",
-//     "spmAsasKelestarian", "spmLukisanKejuruteraan", "spmSainsTambahan",
-//     "spmSyariah", "spmAlQuranAlSunnah", "spmTasawwurIslam", "spmUsulAlDin", "spmAlSyariah",
-//     "spmAlLugAlArabAlMua", "spmManahijAlUlumAlIslamiah", "spmAlAdabWaAlBalaghah",
-//     ]; // 38 
 
 // Source: https://www.moe.gov.my/pendidikan/lepas-menengah/tingkatan-6/kurikulum
 const SubjectPreU = ["Pengajian Am",
@@ -740,12 +668,7 @@ const SubjectPreU = ["Pengajian Am",
     "Sejarah", "Geografi", "Kesusasteraan Melayu",
     "Bahasa Melayu", "Bahasa Cina", "Bahasa Tamil",
     "Information and Communications Technology (ICT)", "Sains Sukan", "Seni Visual"];
-// const SubjectIdPreU = ["pa",
-//         "math(M)", "math(T)","phy", "che", "bio",
-//         "pp", "eko", "perakaunan",
-//         "sej", "geo","kesusasteraanMelayu",
-//         "bm", "bc", "bt",
-//         "stpmIct", "stpmSainsSukan", "stpmSeniVisual"]; //18
+
 const SubjectIdPreU = ["stpmPa",
     "stpmMathM", "stpmMathT", "stpmPhy", "stpmChe", "stpmBio",
     "stpmPp", "stpmEko", "stpmPerakaunan",
@@ -756,13 +679,6 @@ const SubjectIdPreU = ["stpmPa",
 const SubjectRestrictedIdPreU = ["stpmPa",
     "stpmMathM", "stpmMathT", "stpmPhy", "stpmChe", "stpmBio",
     "stpmPp", "stpmEko", "stpmPerakaunan"]; //9
-
-// const SubjectIdPreUSpecial = ["stpmpa",
-//         "stpmmath(M)", "stpmmath(T)","stpmphy", "stpmche", "stpmbio",
-//         "stpmpp", "stpmeko", "stpmperakaunan",
-//         "stpmsej", "stpmgeo","stpmkesusasteraanMelayu",
-//         "stpmbm", "stpmbc", "stpmbt",
-//         "stpmIct", "stpmSainsSukan", "stpmSeniVisual"]; //18
 
 const SubjectCambridgeNursery = ["Phonics", "Mandarin", "Malay", "Mathematics"];
 const SubjectIdCambridgeNursery = ["camNurPhonics", "camNurMan", "camNurBm", "camNurMath"]; // 4 
@@ -781,11 +697,7 @@ const SubjectIdCambridgeSecondary = ["camSecEng", "camSecMath", "camSecScience",
     "camSecMandarin", "camSecArt", "camSecIct", "camSecMusic", "camSecDrama"]; // 10
 const SubjectRestrictedIdCambridgeSecondary = ["camSecEng", "camSecMath", "camSecScience",
     "camSecMalay", "camSecMandarin"]; // 5
-// const SubjectIGCSE = ["First Language English", "Second Language English", "Mathematics",
-//         "Chemistry", "Biology", "Physics", "Combined Science", "Bahasa Melayu", "Additional Mathematics",
-//         "Accounting", "Art", "Business Studies", "Computer Science", "Design and Technology", "Drama",
-//         "Economics", "English literature", "Geography", "History", "Global Perspectives",
-//         "ICT", "Music" ];
+
 const SubjectIGCSE = ["Accounting", "Afrikaans - Second Language", "Agriculture", "Arabic - First Language",
     "Arabic - Foreign Language", "Art & Design", "Bahasa Indonesia", "Biology", "Business Studies", "Chemistry",
     "Chinese - First Language", "Chinese - Second Language", "Chinese (Mandarin) - Foreign Language",
@@ -802,11 +714,7 @@ const SubjectIGCSE = ["Accounting", "Afrikaans - Second Language", "Agriculture"
     "Spanish - Foreign Language", "Spanish - Literature", "Swahili", "Thai - First Language", "Travel & Tourism",
     "Turkish - First Language", "Urdu as a Second Language", "World Literature"
 ];
-// const SubjectIdIGCSE = ["igcseFirstEnglish", "igcseSecondEnglish", "igcseMath",
-//         "igcseChe", "igcseBio", "igcsePhy", "igcseCombinedScience","igcseBm", "igcseAddmath",
-//         "igcseAccounting","igcseArt" ,"igcseBusiness", "igcseCS","igcseDesignTech", "igcseDrama",
-//         "igcseEco", "igcseEngLit","igcseGeo","igcseHis","igcseGloPer",
-//         "igcseICT", "igcseMusic" ];
+
 const SubjectIdIGCSE = ["igcseAccounting", "igcseAfrikaansSecondLan", "igcseAgri",
     "igcseArabicForeignLan", "igcseArt", "igcseBIndon", "igcseBio", "igcseBusiness", "igcseChe",
     "igcseChineseFirstLan", "igcseChineseSecondLan", "igcseChineseForeignLan",
@@ -831,9 +739,7 @@ const SubjectRestrictedIdIGCSE = ["igcseFirstEnglish", "igcseSecondEnglish", "ig
 const SubjectALevel = ["Accounting", "Applied ICT", "Biology", "Business", "Chemistry",
     "Computer Science", "Economics", "English Literature", "Further Mathematics", "History", "Law",
     "Mathematics", "Physics", "Psychology", "Sociology"];
-// const SubjectIdALevel = ["accountingAlevel", "appliedICT", "bioAlevel", "businessAlevel","cheAlevel",
-//         "cs", "ecoAlevel", "englishLiterature", "furmath", "law",
-//         "mathAlevel","phyAlevel", "psy", "socio"]; // 14
+
 const SubjectIdALevel = ["aLevelAccounting", "aLevelAppliedICT", "aLevelBio", "aLevelBusiness", "aLevelChe",
     "aLevelCs", "aLevelEco", "aLevelEngLit", "aLevelFurmath", "aLevelHist", "aLevelLaw",
     "aLevelMath", "aLevelPhy", "aLevelPsy", "aLevelSocio"]; // 14
