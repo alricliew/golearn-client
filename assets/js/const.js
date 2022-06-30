@@ -9,7 +9,7 @@ const MYAllStateId = ["kl", "sg", "pn", "jh", "mk",
     "ns", "ph", "pk", "tr", "kt", "kd", "sb", "sw",
     "pl", "pj", "lb"];
 
-// Total place: 164
+// Total place: 631
 // const cityJohor = ["Gelang Patah","Kluang","Kota Tinggi","Kulai","Mersing",
 //     "Muar","Nusajaya","Pasir Gudang","Permas Jaya","Pontian","Segamat","Senai",
 //     "Skudai","Tampoi","Ulu Tiram"]; // 15
@@ -581,7 +581,6 @@ function getCityIdBasedOnCityNameAndStateName(stateName, cityName) {
     }
 }
 
-
 const Category = ["Kindergarten", "Primary", "PT3", "SPM", "STPM", "Reception/Nursery", "Cambridge Primary",
     "Cambridge Lower Secondary", "IGCSE", "A Level",
     "IB Early Years", "IB Primary (PYP)", "IB Middle (MYP)", "IB Diploma", "UEC Junior",
@@ -592,8 +591,9 @@ const CategoryId = ["kindergarten", "upsr", "pt3", "spm", "stpm", "recep", "camP
     "ibEyp", "ibPyp", "ibMyp", "ibDiploma", "uecJun", "uecSen", "ausmat", "sam",
     "engExam", "adultLanguage", "music", "computer"];
 
-// NOTE: TOTAL 260 Total subjects
+// NOTE: TOTAL 362 Total subjects
 // NOTE: TOTAL 111 Restricted subjects
+
 const SubjectKindergarten = ["Bahasa Melayu", "Bahasa Inggeris", "Bahasa Cina", "Bahasa Tamil", "Matematik", "Sains",
     "Phonics", "Suku Kata", "Pendidikan Islam", "Pendidikan Moral"];
 const SubjectIdKindergarten = ["kinBm", "kinEnglish", "kinBc", "kinBt", "kinMath", "kinSains",
@@ -715,7 +715,7 @@ const SubjectIGCSE = ["Accounting", "Afrikaans - Second Language", "Agriculture"
     "Turkish - First Language", "Urdu as a Second Language", "World Literature"
 ];
 
-const SubjectIdIGCSE = ["igcseAccounting", "igcseAfrikaansSecondLan", "igcseAgri",
+const SubjectIdIGCSE = ["igcseAccounting", "igcseAfrikaansSecondLan", "igcseAgri", "igcseArabicFirstLan",
     "igcseArabicForeignLan", "igcseArt", "igcseBIndon", "igcseBio", "igcseBusiness", "igcseChe",
     "igcseChineseFirstLan", "igcseChineseSecondLan", "igcseChineseForeignLan",
     "igcseCS", "igcseDesignTech", "igcseDevStu", "igcseDrama", "igcseEco",
