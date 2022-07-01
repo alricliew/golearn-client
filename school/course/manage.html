@@ -2041,7 +2041,7 @@
         querySnapshot.forEach((doc) => {
           // console.log(doc.data());
           courseContentId = doc.id;
-          courseFinalUrl = doc.data()[COURSE_URL];
+          // courseFinalUrl = doc.data()[COURSE_URL];
 
           initCourseContent(doc);
 
@@ -2219,7 +2219,7 @@
         });
 
       }else{
-        func.showNotification('top','center', 'warning', 'error_outline', 'This course has no content. Please create one!' );
+        // func.showNotification('top','center', 'warning', 'error_outline', 'This course has no content. Please create one!' );
       }
 
     }
@@ -2259,7 +2259,8 @@
           courseCat = snapshots[0].data()[COURSE_CAT_ID];
           courseSub = snapshots[0].data()[COURSE_SUB_ID];
           courseStatus = snapshots[0].data()[COURSE_STATUS];
-
+          courseFinalUrl = snapshots[0].data()[COURSE_URL];
+          
           // console.log('courseStatus: ' + courseStatus)
 
           if ( snapshots[0].data()[COURSE_STATUS_MESSAGE] != null && snapshots[0].data()[COURSE_STATUS_MESSAGE] != ""){
@@ -4400,7 +4401,7 @@
         if (!isPublish){
           console.log("Updating sitemap")
           let path = 'all-courses/' + courseFinalUrl + ".html";
-          let sitemapParam = "https://golearn.com.my/update-sitemap.php?action="+"update"+"&path="+path+"&lastmod=&sitemap=" + "sitemap-all-courses.xml";
+          let sitemapParam = "https://golearn.com.my/update-sitemap.php?action="+"update"+"&path="+path+"&lastmod=&sitemap=" + "sitemap-all-courses";
 
           return Promise.resolve(
             $.ajax({
