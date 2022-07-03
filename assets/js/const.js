@@ -663,7 +663,7 @@ const SubjectRestrictedIdSPM = [
 
 // Source: https://www.moe.gov.my/pendidikan/lepas-menengah/tingkatan-6/kurikulum
 const SubjectPreU = ["Pengajian Am",
-    "Mathematics(M)", "Mathematics(T)", "Physics", "Chemistry", "Biology",
+    "Mathematics (M)", "Mathematics (T)", "Physics", "Chemistry", "Biology",
     "Pengajian Perniagaan", "Ekonomi", "Perakaunan",
     "Sejarah", "Geografi", "Kesusasteraan Melayu",
     "Bahasa Melayu", "Bahasa Cina", "Bahasa Tamil",
@@ -764,7 +764,7 @@ const SubjectIBDiploma = ["Biology HL / SL", "Business and Management HL / SL", 
     "English B HL / SL", "English Language and Literature HL / SL", "English Literature and Performance SL",
     "English Literature HL / SL", "French Ab Initio SL", "French B HL / SL", "Geography HL / SL",
     "Global Politics HL / SL", "History HL / SL", "Malay Ab Initio SL", "Malay B SL",
-    "Malay Literature HL/SL", "Mathematics HL / SL", "Music HL / SL", "Physics HL / SL",
+    "Malay Literature HL / SL", "Mathematics HL / SL", "Music HL / SL", "Physics HL / SL",
     "Psychology HL / SL", "Spanish Ab Initio SL", "Spanish B HL / SL", "Sports Health and Exercise Science HL / SL",
     "Theatre Arts HL / SL", "Visual Arts HL / SL", "World Religions SL"];
 const SubjectIdIBDiploma = ["ibDipBio", "ibDipBusMan", "ibDipChe", "ibDipChiB",
