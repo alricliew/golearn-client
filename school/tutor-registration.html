@@ -593,10 +593,31 @@
     var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
+    // Phone
+    var inputPhone = document.querySelector("#phone");
+    var inputStudent = document.querySelector("#phoneTutor");
+  
+    var itiPhone = intlTelInput(inputPhone,{
+      autoHideDialCode: false,
+      nationalMode: false,
+      // onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
+      preferredCountries: ['MY', 'SG'],
+      separateDialCode: true,
+      utilsScript: "js/utils.js",
+    });
+
+    var itiStudent = intlTelInput(inputStudent,{
+      autoHideDialCode: false,
+      nationalMode: false,
+      // onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
+      // preferredCountries: ['MY', 'SG', 'ID'],
+      separateDialCode: true,
+      utilsScript: "js/utils.js",
+      });
+
     // Check URL
     var url_string = window.location.href;
     var url = new URL(url_string);
-
     var adminId = '';
     adminId = url.searchParams.get("aid");
 
@@ -689,7 +710,7 @@
 
         querySnapshot.forEach((doc) => {
           
-          console.log(doc.data())
+          // console.log(doc.data())
 
           adminTeacherNum = adminTeacherNum + 1;
 
@@ -698,8 +719,8 @@
       })
       .then(() => {
 
-        console.log(adminTeacherNum)
-        console.log(admin_accountStatus)
+        // console.log(adminTeacherNum)
+        // console.log(admin_accountStatus)
 
           // Check admin account status 
           if (admin_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || 
@@ -802,8 +823,7 @@
           document.getElementById("name").value = doc.data().name;
           document.getElementById("email").value = doc.data().email;
           // document.getElementById("phoneTutor").value = doc.data().phone;
-          itiStudent.setNumber(doc.data().phone);
-
+          itiStudent.setNumber(doc.id);
           // itiStudent.setNumber(doc.data().phone);
           document.getElementById("age").value = doc.data().age;
           document.getElementById("address1").value = doc.data().address1;
@@ -983,7 +1003,6 @@
       }
       // console.log("imgUrl: "+ imgUrl_temp);
 
-
       let docRef = db.collection("Tutor").doc(tutorId);
 
       let data = {
@@ -994,220 +1013,34 @@
         [ADDRESS_2_KEY]: document.getElementById("address2").value,
         [ADDRESS_POSTCODE_KEY]: document.getElementById("addressPostCode").value,
         [ADDRESS_STATE_KEY]: document.getElementById("addressState").value,
-        [IMAGE_KEY]: imgUrl_temp,
+        // [IMAGE_KEY]: imgUrl_temp,
         [AGE_KEY]: parseInt(document.getElementById("age").value, 10),
         [GENDER_KEY]: gender_temp
       }
       // console.log('Tutor Data');
       // console.log(data);
-      let docRefWithMerge = docRef.set( data, { merge: true });
+      let docRefWithMerge = docRef.update( data);
 
       // Update all active course
-      // let final_address = document.getElementById("address1").value + ", " +
-      //   document.getElementById("address2").value + ", " + 
-      //   document.getElementById("addressPostCode").value + ", " +
-      //   document.getElementById("addressState").value;
       let final_address1 = (document.getElementById("address1").value == null ||  document.getElementById("address1").value == "")? '' : document.getElementById("address1").value + ", ";
       let final_address2 = (document.getElementById("address1").value == null ||  document.getElementById("address1").value == "")? '' : document.getElementById("address2").value + ", ";
       let final_addressPostCode = (document.getElementById("address1").value == null ||  document.getElementById("address1").value == "")? '' : document.getElementById("addressPostCode").value + ", ";
       let final_addressState = (document.getElementById("address1").value == null ||  document.getElementById("address1").value == "")? '' : document.getElementById("addressState").value + ", ";
       final_address = final_address1 + final_address2 +final_addressPostCode + final_addressState
 
-      var allActiveCourseData = {
-        [NAME_KEY]: document.getElementById("name").value,
-        [EMAIL_KEY]: document.getElementById("email").value,
-        [PHONE_KEY]: itiStudent.getNumber(), //document.getElementById("phoneTutor").value,
-        [ADDRESS_KEY]: final_address,
-        [AGE_KEY]: parseInt(document.getElementById("age").value, 10),
-        [GENDER_KEY]: gender_temp,
-        [IMAGE_KEY]: imgUrl_temp,
-      }
-      // Update the profile pic, name, & etc of all the active courses..
-
-      updateInfoInAllActiveCourse(allActiveCourseData);
-
-
+      
       // If admin is filling the form themselves, skill action
       if (admin_weburl == current_aweburl && admin_weburl != "" && current_aweburl != ""){
         func.showNotification('top','center', 'warning', 'error_outline', "You are attempting to add yourself as tutor. Action restricted.");
         ValidateTutorInTutorDB();
-        
       }
       else{
         ValidateTutorInTutorDB();
-
-      }
-
-      // Update metadata and sitemaps
-      // Update meta data of user's public profile
-      if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || 
-        current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-        // Do nothing if the account is new, deactivated or suspended
-
-      }
-      else {
-
-
-        // Check if aWebUrl Exist or not. Update only if it exists.
-        if (current_aweburl == null || current_aweburl == ""  ){
-          // Do nothing
-        }
-        else{
-
-          let detail_temp =""
-          if (currentYearsExperience == 0 || currentYearsExperience == null)
-            detail_temp = gender_string_temp + " | " + document.getElementById("age").value;
-          else if (currentYearsExperience == 1)
-            detail_temp = gender_string_temp + " | " + document.getElementById("age").value + " |  1 year of experience";
-          else
-            detail_temp = gender_string_temp + " | " + document.getElementById("age").value + " | "+ currentYearsExperience + " years of experience";
-          
-          // console.log(current_aweburl);
-          // console.log(document.getElementById("name").value);
-          // console.log(detail_temp);
-          // console.log(imgUrl_temp);
-          updateMetaData(current_aweburl, document.getElementById("name").value, detail_temp, imgUrl_temp);
-          updateSitemap(current_aweburl);
-        }
-        
-      
       }
       
-      // func.showNotification('top','center', 'success', 'check_circle', "Your profile is updated.");
+      func.showNotification('top','center', 'success', 'check_circle', "Your profile is updated.");
 
     }
-
-    // Update profile pic, name, & etc of tutor for all active courses
-    function updateInfoInAllActiveCourse(allActiveCourseData) {
-
-      var allActiveCourseCol = db.collection("Tutor").doc(tutorId).collection("Courses")
-      .where("status", "==", true);
-
-      allActiveCourseCol
-      .get()
-      .then((querySnapshot) => {
-        let docId;
-        querySnapshot.forEach((doc) => {
-          docId = doc.id;
-          // Updating Offline class
-          if (doc.data().online){
-            // Online class
-            // console.log('Updating online class: '+doc.data().id);
-            var allSubjectColRef = 
-              db.collection("country")
-              .doc("malaysia")
-              .collection("state")
-              .doc("online")
-              .collection("category")
-              .doc(doc.data().categoryId)
-              .collection("subject")
-              .doc(doc.data().subjectId)
-              .collection("tutor")
-              .doc(tutorId);
-
-              // Update the course
-              allSubjectColRef.set(allActiveCourseData, { merge: true });
-
-              // Update the history as well
-              allSubjectColRef.collection("AllCourses").doc(docId)
-                .set(allActiveCourseData, { merge: true });
-
-          }
-          // Updating Offline class
-          else{
-            // Offline class
-            // console.log('Updating Offline class: '+doc.data().id);
-            for ( let i = 0; i <  doc.data().preferedAreaList.length; i++){
-              let State_Area = doc.data().preferedAreaList[i].split("-");
-
-              var allSubjectColRef = 
-                db.collection("country")
-                .doc("malaysia")
-                .collection("state")
-                .doc(State_Area[0].toLowerCase())
-                .collection("area")
-                .doc(State_Area[1])
-                .collection("category")
-                .doc(doc.data().categoryId)
-                .collection("subject")
-                .doc(doc.data().subjectId)
-                .collection("tutor")
-                .doc(tutorId);
-
-                // Update the course
-                allSubjectColRef.set(allActiveCourseData, { merge: true });
-
-                // Update the history as well
-                allSubjectColRef.collection("AllCourses").doc(docId)
-                  .set(allActiveCourseData, { merge: true });
-            }
-          }
-        });
-
-      }).catch((error) => {
-        console.log("Error getting documents: ", error);
-      });
-
-    }
-
-
-    function updateMetaData(aWebUrl, name, detail, imgUrl){
-        // This function create-tutor public profile based on aweburl param.
-      // All the data fields are required to contruct the static meta data of the profile							
-      var temp_name = encodeURIComponent(name);
-      var temp_detail = encodeURIComponent(detail);
-      var temp_imgUrl = encodeURIComponent(imgUrl);		
-
-      let param = "https://golearn.com.my/tutor/a-source/create-tutor.php?aweburl="+aWebUrl+"&name="+temp_name+"&detail="+temp_detail+"&imgUrl="+temp_imgUrl;				  
-      $.ajax({
-        type: "GET",
-        url: param,
-        data: $(this).serialize(),
-        success: function(response)
-        {
-          var jsonData = JSON.parse(response);
-
-          // user is logged in successfully in the back-end
-          // let's redirect
-          if (jsonData.success == "1")
-          {
-            alert('Tutor Created!');
-          }
-          else
-          {
-            alert('Invalid Credentials!');
-          }
-        }
-      });
-
-    }
-
-    function updateSitemap(aWebUrl){
-
-      // Add the url to sitemap
-      let sitemapParam = "https://golearn.com.my/update-sitemap.php?action=add&path=tutor/"+aWebUrl+"&lastmod=";
-      $.ajax({
-        type: "GET",
-        url: sitemapParam,
-        data: $(this).serialize(),
-        success: function(response)
-        {
-          var jsonData = JSON.parse(response);
-
-          // user is logged in successfully in the back-end
-          // let's redirect
-          if (jsonData.success == "1")
-          {
-            alert('Tutor Created!');
-          }
-          else
-          {
-            alert('Invalid Credentials!');
-          }
-        }
-      });
-    }
-
 
     // Report: Update Teacher Number
     function updateTeacherNum(value){
@@ -1575,129 +1408,6 @@
 
   </script>
 
-  <!-- Tel input script -->
-  <script>
-    // Phone
-    var inputPhone = document.querySelector("#phone");
-    var inputStudent = document.querySelector("#phoneTutor");
- 
-    var itiPhone = intlTelInput(inputPhone,{
-      autoHideDialCode: false,
-      nationalMode: false,
-      // onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
-      preferredCountries: ['MY', 'SG'],
-      separateDialCode: true,
-      utilsScript: "js/utils.js",
-    });
-
-    var itiStudent = intlTelInput(inputStudent,{
-      autoHideDialCode: false,
-      nationalMode: false,
-      // onlyCountries: ['MY', 'SG', 'TH', 'ID', 'VN', 'PH', 'BN', 'US', 'GB', 'SA'],
-      // preferredCountries: ['MY', 'SG', 'ID'],
-      separateDialCode: true,
-      utilsScript: "js/utils.js",
-      });
-   
-    
-   
-    var errorMsg = document.querySelector("#error-msg");
-    var validMsg = document.querySelector("#valid-msg");
-    var errorMsgStudent = document.querySelector("#error-msgTutor");
-    var validMsgStudent = document.querySelector("#valid-msgTutor");
-
-    // here, the index maps to the error code returned from getValidationError - see readme
-    var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
-    var reset = function() {
-      inputPhone.classList.remove("error");
-      errorMsg.innerHTML = "";
-      errorMsg.classList.add("hide");
-      validMsg.classList.add("hide");
-    };
-    var resetStudent = function() {
-      inputStudent.classList.remove("error");
-      errorMsgStudent.innerHTML = "";
-      errorMsgStudent.classList.add("hide");
-      validMsgStudent.classList.add("hide");
-    };
-  
-
-    // on blur: validate
-    
-    inputPhone.addEventListener('blur', function() {
-      reset();
-      if (inputPhone.value.trim()) {
-        if (itiPhone.isValidNumber()) {
-          validMsg.classList.remove("hide");
-        } else {
-          inputPhone.classList.add("error");
-          var errorCode = itiPhone.getValidationError();
-          errorMsg.innerHTML = errorMap[errorCode];
-          errorMsg.classList.remove("hide");
-        }
-      }
-    });
-    inputStudent.addEventListener('blur', function() {
-      resetStudent();
-      if (inputStudent.value.trim()) {
-        if (itiStudent.isValidNumber()) {
-          validMsgStudent.classList.remove("hide");
-        } else {
-          inputStudent.classList.add("error");
-          var errorCode = itiStudent.getValidationError();
-          errorMsgStudent.innerHTML = errorMap[errorCode];
-          errorMsgStudent.classList.remove("hide");
-        }
-      }
-    });
-    
-
-    // on keyup / change flag: reset
-    inputPhone.addEventListener('change', reset);
-    inputPhone.addEventListener('keyup', reset);
-    inputStudent.addEventListener('change', resetStudent);
-    inputStudent.addEventListener('keyup', resetStudent);
- 
-    // Validate fields in based on parents. 
-    function ValidateFields(parentId){
-      // This function deals with validation of the form fields with data-compulsory = 'true'
-      var x, y, i, valid = true;
-      x = document.getElementById(parentId);
-      
-      y =x.querySelectorAll('[data-compulsory="true"]');
-
-      // A loop that checks every input field in the current tab:
-      for (i = 0; i < y.length; i++) {
-        // console.log(y[i].value)
-        // If a field is empty...
-        if (y[i].value == "") {
-          // add an "invalid" class to the field:
-          y[i].className += " invalid";
-          // and set the current valid status to false:
-          valid = false;
-        }
-      }
-      return valid; // return the valid status
-    }
-
-    // Validate fields - Phone Input specific. 
-    function ValidatePhone(phoneId){
-      var valid = true;
-      let inPhone = document.querySelector("#"+phoneId);
-      // console.log(inPhone.value)
-      if (inPhone.value.trim()) {
-        if (itiGuardian.isValidNumber()) {
-          // Do nothing
-        } else {
-          inPhone.className += " invalid";
-          valid = false;
-        }
-      }
-      return valid; // return the valid status
-    }
-  </script>
-
   <!-- Upload Image -->
   <script>
 
@@ -1912,50 +1622,21 @@
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
               imgUrl_temp = downloadURL;
 
-
               // Once uploaded, update the new url
               var docRef = db.collection("Tutor").doc(tutorId);
-              var docRefWithMerge = docRef.set({
+              let data = {
                 [IMAGE_KEY]: imgUrl_temp
-              }, { merge: true });
-
-
-              var allActiveCourseData = {
-                [IMAGE_KEY]: imgUrl_temp,
               }
-              // Update the profile pic, name, & etc of all the active courses..
-              updateInfoInAllActiveCourse(allActiveCourseData);
-              // TODO: Use promise to Update all courses under tutor profile
-              // updateInfoInTutorCourse(allActiveCourseData);
 
-              // Update metadata and sitemaps
-              // Update meta data of user's public profile
-              if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || 
-                current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-                // Do nothing if the account is new, deactivated or suspended
-                func.showNotification('top','center', 'success', 'check_circle', "Your profile picture is updated. Please activate your account." );
+              docRef.update(data, { merge: true });
 
-              }else {
-                // Check if aWebUrl Exist or not. Update only if it exists.
-                if (current_aweburl == null || current_aweburl == ""  ){
-                  // Do nothing
-                }else{
-                  let detail_temp =""
-                  if (currentYearsExperience == 0 || currentYearsExperience == null)
-                    detail_temp = current_gender + " | " + current_age;
-                  else if (currentYearsExperience == 1)
-                    detail_temp = current_gender + " | " + current_age + " |  1 year of experience";
-                  else
-                    detail_temp = current_gender + " | " + current_age + " | "+ currentYearsExperience + " years of experience";
-                  
-                  console.log("detail: "+ detail_temp+ "   aweburl: "+current_aweburl);
-                  updateMetaData(current_aweburl, current_name, detail_temp, imgUrl_temp);
-                }
-                func.showNotification('top','center', 'success', 'check_circle', "Your profile picture is updated.");
-              }
+              return Promise.resolve(docRef);
+              
+            })
+            .then(() => {
+              func.showNotification('top','center', 'success', 'check_circle', "Your profile picture is updated.");
 
               $('#uploadModal').modal('hide');
-
             });
           }
         );
@@ -2188,6 +1869,107 @@
     }
 
   </script>
+
+  <!-- Tel input script -->
+  <script>
+
+    var errorMsg = document.querySelector("#error-msg");
+    var validMsg = document.querySelector("#valid-msg");
+    var errorMsgStudent = document.querySelector("#error-msgTutor");
+    var validMsgStudent = document.querySelector("#valid-msgTutor");
+
+    // here, the index maps to the error code returned from getValidationError - see readme
+    var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+    var reset = function() {
+      inputPhone.classList.remove("error");
+      errorMsg.innerHTML = "";
+      errorMsg.classList.add("hide");
+      validMsg.classList.add("hide");
+    };
+    var resetStudent = function() {
+      inputStudent.classList.remove("error");
+      errorMsgStudent.innerHTML = "";
+      errorMsgStudent.classList.add("hide");
+      validMsgStudent.classList.add("hide");
+    };
+  
+
+    // on blur: validate
+    
+    inputPhone.addEventListener('blur', function() {
+      reset();
+      if (inputPhone.value.trim()) {
+        if (itiPhone.isValidNumber()) {
+          validMsg.classList.remove("hide");
+        } else {
+          inputPhone.classList.add("error");
+          var errorCode = itiPhone.getValidationError();
+          errorMsg.innerHTML = errorMap[errorCode];
+          errorMsg.classList.remove("hide");
+        }
+      }
+    });
+    inputStudent.addEventListener('blur', function() {
+      resetStudent();
+      if (inputStudent.value.trim()) {
+        if (itiStudent.isValidNumber()) {
+          validMsgStudent.classList.remove("hide");
+        } else {
+          inputStudent.classList.add("error");
+          var errorCode = itiStudent.getValidationError();
+          errorMsgStudent.innerHTML = errorMap[errorCode];
+          errorMsgStudent.classList.remove("hide");
+        }
+      }
+    });
+    
+
+    // on keyup / change flag: reset
+    inputPhone.addEventListener('change', reset);
+    inputPhone.addEventListener('keyup', reset);
+    inputStudent.addEventListener('change', resetStudent);
+    inputStudent.addEventListener('keyup', resetStudent);
+  
+    // Validate fields in based on parents. 
+    function ValidateFields(parentId){
+      // This function deals with validation of the form fields with data-compulsory = 'true'
+      var x, y, i, valid = true;
+      x = document.getElementById(parentId);
+      
+      y =x.querySelectorAll('[data-compulsory="true"]');
+
+      // A loop that checks every input field in the current tab:
+      for (i = 0; i < y.length; i++) {
+        // console.log(y[i].value)
+        // If a field is empty...
+        if (y[i].value == "") {
+          // add an "invalid" class to the field:
+          y[i].className += " invalid";
+          // and set the current valid status to false:
+          valid = false;
+        }
+      }
+      return valid; // return the valid status
+    }
+
+    // Validate fields - Phone Input specific. 
+    function ValidatePhone(phoneId){
+      var valid = true;
+      let inPhone = document.querySelector("#"+phoneId);
+      // console.log(inPhone.value)
+      if (inPhone.value.trim()) {
+        if (itiGuardian.isValidNumber()) {
+          // Do nothing
+        } else {
+          inPhone.className += " invalid";
+          valid = false;
+        }
+      }
+      return valid; // return the valid status
+    }
+  </script>
+  
 
 </body>
 
