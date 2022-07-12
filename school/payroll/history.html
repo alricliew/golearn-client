@@ -573,9 +573,8 @@
         }
 
         querySnapshot.forEach((doc) => {
-          console.log(doc.data())
+          // console.log(doc.data())
           docsObj.push(doc.data());
-          // courseId = doc.id;
           renderAllActivePayroll(doc)
 
         });

@@ -2260,7 +2260,7 @@
           courseSub = snapshots[0].data()[COURSE_SUB_ID];
           courseStatus = snapshots[0].data()[COURSE_STATUS];
           courseFinalUrl = snapshots[0].data()[COURSE_URL];
-          
+
           // console.log('courseStatus: ' + courseStatus)
 
           if ( snapshots[0].data()[COURSE_STATUS_MESSAGE] != null && snapshots[0].data()[COURSE_STATUS_MESSAGE] != ""){
@@ -4378,7 +4378,6 @@
               success: function(response)
               {
                 console.log(response)
-          
               },
               error: function(xhr, textStatus, error) {
                   console.log(xhr.responseText);

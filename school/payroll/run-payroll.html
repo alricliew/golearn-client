@@ -1703,7 +1703,7 @@
 
 
 	<script>
-
+    
     //  Tutor Settings
     var bizName, bizPhone, bizEmail, bizAddr, bizImgUrl;
 
@@ -1851,8 +1851,8 @@
         } 
         else {
           querySnapshot.forEach((doc) => {
-            console.log("Payroll found");
-            console.log(doc.data());
+            // console.log("Payroll found");
+            // console.log(doc.data());
 
             renderRecentPayroll(doc);
             
@@ -1941,8 +1941,8 @@
         } 
         else {
           querySnapshot.forEach((doc) => {
-            console.log("Payroll found");
-            console.log(doc.data());
+            // console.log("Payroll found");
+            // console.log(doc.data());
 
             renderAllPayroll(doc);
             
@@ -6887,7 +6887,7 @@
             // push a new item and total into the arrays
             payrollDocIdArr.push(payDocId);
             payrollDocTotalArr.push(netPay);
-
+            
             // Change the amount at the index
             // payrollDocTotalArr[payslipDocIndex] = netPay;
 
