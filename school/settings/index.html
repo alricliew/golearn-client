@@ -3746,9 +3746,9 @@
           // // public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/[levelId]/subject/all/tutor/{docId}
           // 7. Search Level with State (Not important)
           // // public/v1/tutor/v1/state/[stateId]/area/all/level/[levelId]/subject/all/tutor/{docId}
-          // 8. Search State-Area Only (Not important)
+          // 8. Search State-Area Only
           // // public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/all/subject/all/tutor/{docId}
-          // 9. Search State Only (Not important)
+          // 9. Search State Only
           // // public/v1/tutor/v1/state/[stateId]/area/all/level/all/subject/all/tutor/{docId}
 
           var data = {
@@ -3817,13 +3817,133 @@
 
                 }
 
+                // 8. Search State-Area Only
+                // // public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/all/subject/all/p_tutor/{docId}
+                let docRef8 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                .collection('state').doc(infoState).collection('area').doc(infoArea)
+                .collection('level').doc('all').collection('subject').doc('all')
+                .collection('p_tutor').doc(tutorId);
+
+                data[PUBLIC_ID] = docRef8.id;
+
+                let docRef8Promise = docRef8.set(data, {merge: true});
+                promisesLayer3.push(docRef8Promise);
+                  
+
               });
+
             
+              var uniqStateArr = stateArry.reduce((a,b) => 
+                {
+                  if (a.indexOf(b) < 0 ) a.push(b);
+                  return a;
+                },[]);
+              let uniqLevelArr = levelArry.reduce((a,b) => 
+              {
+                if (a.indexOf(b) < 0 ) a.push(b);
+                return a;
+              },[]);
+
+              // --------- Update State Only (5)(7)(9)--------- //
+              uniqStateArr.forEach((state) => {
+                
+                // 9. Search State Only (Not important)
+                // // public/v1/tutor/v1/state/[stateId]/area/all/level/all/subject/all/p_tutor/{docId}
+                let docRef9 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                .collection('state').doc(state).collection('area').doc('all')
+                .collection('level').doc('all').collection('subject').doc('all')
+                .collection('p_tutor').doc(tutorId);
+
+                data[PUBLIC_ID] = docRef9.id;
+
+                let docRef9Promise = docRef9.set(data, {merge: true});
+
+                promisesLayer3.push(docRef9Promise);
+                
+                // TODO: DISABLED TO SAVE DOCUMENTS
+                // // Loop through all subject
+                // if (prefferedSubject.length != 0) {
+
+                //   prefferedSubject.forEach((subject) => {
+
+                //     let subjectInfo = subject.split('-');
+                //     let infoLevel = subjectInfo[0]
+                //     let infoSubject = subjectInfo[1]
+                //     // console.log(areaInfo, subjectInfo);
+
+                //     // 5. Search Level-subject with State (Not important)
+                //     // // public/v1/tutor/v1/state/[stateId]/area/all/level/[levelId]/subject/[subjectId]/p_tutor/{docId}
+                //     let docRef4 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                //     .collection('state').doc(state).collection('area').doc('all')
+                //     .collection('level').doc(infoLevel).collection('subject').doc(infoSubject)
+                //     .collection('p_tutor').doc(tutorId);
+
+                //     data[PUBLIC_ID] = docRef4.id;
+
+                //     let docRef4Promise = docRef4.set(data);
+
+                //     promisesLayer3.push(docRef4Promise);
+                    
+                //   });
+                // }
+                // // Subject is empty
+                // else {
+
+                // }
+
+                // uniqLevelArr.forEach((level) => {
+                //   // 7. Search Level with State (Not important)
+                //   // // public/v1/tutor/v1/state/[stateId]/area/all/level/[levelId]/subject/all/p_tutor/{docId}
+                //   let docRef7 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                //   .collection('state').doc(state).collection('area').doc('all')
+                //   .collection('level').doc(level).collection('subject').doc('all')
+                //   .collection('p_tutor').doc(tutorId);
+
+                //   data[PUBLIC_ID] = docRef7.id;
+
+                //   let docRef7Promise = docRef7.set(data);
+
+                //   promisesLayer3.push(docRef7Promise);
+
+                // });
+
+              })
+
+              // --------- Update Level Only (6)--------- //
+              // TODO: DISABLED TO SAVE DOCUMENTS
+              // uniqLevelArr.forEach((level) => {
+            
+              //   // 6. Search Level with State + Area (Not important)
+              //   // // public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/[levelId]/subject/all/p_tutor/{docId}
+              //   if (prefferedArea.length != 0) {
+  
+              //     prefferedArea.forEach((area) => {
+              //       let areaInfo = area.split('-');
+              //       let infoState = areaInfo[0]
+              //       let infoArea = areaInfo[1]
+
+              //       let docRef6 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+              //       .collection('state').doc(infoState).collection('area').doc(infoArea)
+              //       .collection('level').doc(level).collection('subject').doc('all')
+              //       .collection('p_tutor').doc(tutorId);
+
+              //       data[PUBLIC_ID] = docRef6.id;
+
+              //       let docRef6Promise = docRef6.set(data);
+
+              //       promisesLayer3.push(docRef6Promise);
+              //     });
+
+              //   }
+              //   else {
+
+              //   }
+
+              // });
             }
 
 
             // ------- Update Default (1) -------- //
-      
             // 1. Default: Start with Premium, then Relevance Score
             // // public/v1/tutor/v1/default/all/p_tutor/{docId}
             // Equivalent to 
@@ -3931,104 +4051,105 @@
 
                 }
 
-                // // 8. Search State-Area Only (Not important)
-                // // // public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/all/subject/all/tutor/{docId}
-                // let docRef8 = db.collection('public').doc('v1').collection('tutor').doc('v1')
-                // .collection('state').doc(infoState).collection('area').doc(infoArea)
-                // .collection('level').doc('all').collection('subject').doc('all')
-                // .collection('tutor').doc();
+                // 8. Search State-Area Only
+                // // public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/all/subject/all/p_tutor/{docId}
+                let docRef8 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                .collection('state').doc(infoState).collection('area').doc(infoArea)
+                .collection('level').doc('all').collection('subject').doc('all')
+                .collection('p_tutor').doc(tutorId);
 
-                // data[PUBLIC_ID] = docRef8.id;
+                data[PUBLIC_ID] = docRef8.id;
 
-                // let docRef8Promise = docRef8.set(data);
-                // promisesLayer3.push(docRef8Promise);
+                let docRef8Promise = docRef8.set(data, {merge: true});
+                promisesLayer3.push(docRef8Promise);
 
               });
 
-              // TODO: DISABLED TO SAVE DOCUMENTS
-              // var uniqStateArr = stateArry.reduce((a,b) => 
-              //   {
-              //     if (a.indexOf(b) < 0 ) a.push(b);
-              //     return a;
-              //   },[]);
-              // let uniqLevelArr = levelArry.reduce((a,b) => 
-              // {
-              //   if (a.indexOf(b) < 0 ) a.push(b);
-              //   return a;
-              // },[]);
+              var uniqStateArr = stateArry.reduce((a,b) => 
+                {
+                  if (a.indexOf(b) < 0 ) a.push(b);
+                  return a;
+                },[]);
+              let uniqLevelArr = levelArry.reduce((a,b) => 
+              {
+                if (a.indexOf(b) < 0 ) a.push(b);
+                return a;
+              },[]);
 
-              // // --------- Update State Only (5)(7)(9)--------- //
-              // uniqStateArr.forEach((state) => {
+              // --------- Update State Only (5)(7)(9)--------- //
+              uniqStateArr.forEach((state) => {
 
-              //   // Loop through all subject
-              //   if (prefferedSubject.length != 0) {
+                // 9. Search State Only (Not important)
+                // // public/v1/tutor/v1/state/[stateId]/area/all/level/all/subject/all/p_tutor/{docId}
+                let docRef9 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                .collection('state').doc(state).collection('area').doc('all')
+                .collection('level').doc('all').collection('subject').doc('all')
+                .collection('p_tutor').doc(tutorId);
 
-              //     prefferedSubject.forEach((subject) => {
+                data[PUBLIC_ID] = docRef9.id;
 
-              //       let subjectInfo = subject.split('-');
-              //       let infoLevel = subjectInfo[0]
-              //       let infoSubject = subjectInfo[1]
-              //       // console.log(areaInfo, subjectInfo);
+                let docRef9Promise = docRef9.set(data, {merge: true});
 
-              //       // 5. Search Level-subject with State (Not important)
-              //       // // public/v1/tutor/v1/state/[stateId]/area/all/level/[levelId]/subject/[subjectId] /tutor/{docId}
-              //       let docRef4 = db.collection('public').doc('v1').collection('tutor').doc('v1')
-              //       .collection('state').doc(state).collection('area').doc('all')
-              //       .collection('level').doc(infoLevel).collection('subject').doc(infoSubject)
-              //       .collection('tutor').doc();
+                promisesLayer3.push(docRef9Promise);
 
-              //       data[PUBLIC_ID] = docRef4.id;
+                // TODO: DISABLED TO SAVE DOCUMENTS
+                // // Loop through all subject
+                // if (prefferedSubject.length != 0) {
 
-              //       let docRef4Promise = docRef4.set(data);
+                //   prefferedSubject.forEach((subject) => {
 
-              //       promisesLayer3.push(docRef4Promise);
+                //     let subjectInfo = subject.split('-');
+                //     let infoLevel = subjectInfo[0]
+                //     let infoSubject = subjectInfo[1]
+                //     // console.log(areaInfo, subjectInfo);
+
+                //     // 5. Search Level-subject with State (Not important)
+                //     // // public/v1/tutor/v1/state/[stateId]/area/all/level/[levelId]/subject/[subjectId] /tutor/{docId}
+                //     let docRef4 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                //     .collection('state').doc(state).collection('area').doc('all')
+                //     .collection('level').doc(infoLevel).collection('subject').doc(infoSubject)
+                //     .collection('tutor').doc();
+
+                //     data[PUBLIC_ID] = docRef4.id;
+
+                //     let docRef4Promise = docRef4.set(data);
+
+                //     promisesLayer3.push(docRef4Promise);
                     
-              //     });
-              //   }
-              //   // Subject is empty
-              //   else {
+                //   });
+                // }
+                // // Subject is empty
+                // else {
 
-              //   }
+                // }
 
-              //   uniqLevelArr.forEach((level) => {
-              //     // 7. Search Level with State (Not important)
-              //     // // public/v1/tutor/v1/state/[stateId]/area/all/level/[levelId]/subject/all/tutor/{docId}
-              //     let docRef7 = db.collection('public').doc('v1').collection('tutor').doc('v1')
-              //     .collection('state').doc(state).collection('area').doc('all')
-              //     .collection('level').doc(level).collection('subject').doc('all')
-              //     .collection('tutor').doc();
+                // uniqLevelArr.forEach((level) => {
+                //   // 7. Search Level with State (Not important)
+                //   // // public/v1/tutor/v1/state/[stateId]/area/all/level/[levelId]/subject/all/tutor/{docId}
+                //   let docRef7 = db.collection('public').doc('v1').collection('tutor').doc('v1')
+                //   .collection('state').doc(state).collection('area').doc('all')
+                //   .collection('level').doc(level).collection('subject').doc('all')
+                //   .collection('tutor').doc();
 
-              //     data[PUBLIC_ID] = docRef7.id;
+                //   data[PUBLIC_ID] = docRef7.id;
 
-              //     let docRef7Promise = docRef7.set(data);
+                //   let docRef7Promise = docRef7.set(data);
 
-              //     promisesLayer3.push(docRef7Promise);
+                //   promisesLayer3.push(docRef7Promise);
 
-              //   });
+                // });
 
-              //   // 9. Search State Only (Not important)
-              //   // // public/v1/tutor/v1/state/[stateId]/area/all/level/all/subject/all/tutor/{docId}
-              //   let docRef9 = db.collection('public').doc('v1').collection('tutor').doc('v1')
-              //   .collection('state').doc(state).collection('area').doc('all')
-              //   .collection('level').doc('all').collection('subject').doc('all')
-              //   .collection('tutor').doc();
-
-              //   data[PUBLIC_ID] = docRef9.id;
-
-              //   let docRef9Promise = docRef9.set(data);
-
-              //   promisesLayer3.push(docRef9Promise);
-              // })
+              })
 
               // // --------- Update Level Only (3)(6)--------- //
 
               // uniqLevelArr.forEach((level) => {
               //   // 3. Search Level Only. ONLINE (Not important)
-              //   // // public/v1/tutor/v1/state/all/area/all/level/[levelId]/subject/all/tutor/{docId}
+              //   // // public/v1/tutor/v1/state/all/area/all/level/[levelId]/subject/all/p_tutor/{docId}
               //   let docRef3 = db.collection('public').doc('v1').collection('tutor').doc('v1')
               //   .collection('state').doc('all').collection('area').doc('all')
               //   .collection('level').doc(level).collection('subject').doc('all')
-              //   .collection('tutor').doc();
+              //   .collection('p_tutor').doc(tutorId);
 
               //   data[PUBLIC_ID] = docRef3.id;
 
@@ -4038,7 +4159,7 @@
 
 
               //   // 6. Search Level with State + Area (Not important)
-              //   // // public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/[levelId]/subject/all/tutor/{docId}
+              //   // // public/v1/tutor/v1/state/[stateId]/area/[areaId]/level/[levelId]/subject/all/p_tutor/{docId}
               //   if (prefferedArea.length != 0) {
   
               //     prefferedArea.forEach((area) => {
@@ -4049,7 +4170,7 @@
               //       let docRef6 = db.collection('public').doc('v1').collection('tutor').doc('v1')
               //       .collection('state').doc(infoState).collection('area').doc(infoArea)
               //       .collection('level').doc(level).collection('subject').doc('all')
-              //       .collection('tutor').doc();
+              //       .collection('p_tutor').doc(tutorId);
 
               //       data[PUBLIC_ID] = docRef6.id;
 
@@ -4057,14 +4178,9 @@
 
               //       promisesLayer3.push(docRef6Promise);
               //     });
-
               //   }
               //   else {
-
               //   }
-
-
-
               // });
 
   
@@ -4143,11 +4259,11 @@
 
               // uniqLevelArr.forEach((level) => {
               //   // 3. Search Level Only. ONLINE (Not important)
-              //   // // public/v1/tutor/v1/state/all/area/all/level/[levelId]/subject/all/tutor/{docId}
+              //   // // public/v1/tutor/v1/state/all/area/all/level/[levelId]/subject/all/p_tutor/{docId}
               //   let docRef10 = db.collection('public').doc('v1').collection('tutor').doc('v1')
               //   .collection('state').doc('all').collection('area').doc('all')
               //   .collection('level').doc(level).collection('subject').doc('all')
-              //   .collection('tutor').doc();
+              //   .collection('p_tutor').doc(tutorId);
 
               //   data[PUBLIC_ID] = docRef10.id;
 
@@ -4176,6 +4292,7 @@
 
           }
             
+
 
         }
 
