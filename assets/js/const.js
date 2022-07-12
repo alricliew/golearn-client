@@ -46,9 +46,9 @@ const cityJohorId = [
 //     "klWMju", "klTMlwti"]; //29
 
 const cityKL = [
-    "Alam Damai", "Ampang", "Bandar Sg Long", "Bandar Tun Razak", "Bangsar", "Bangsar South", "Brickfields", "Bukit Bintang", "Bukit Damansara", "Bukit Jalil", 
-    "Cheras", "Chow Kit", "City Center (KLCC)", "Desa Pandan", "Desa Park City", "Jalan Ipoh", "Kepong", "Kerinchi", "KL Town", "Kuchai Lama", "Lembah Keramat", 
-    "Lembah Pantai", "Menjalara", "Mont Kiara", "Oug", "Segambut", "Selayang", "Sentul", "Seputeh", "Setapak", "Setiawangsa", "Sri Hartamas", "Sri Permaisuri", 
+    "Alam Damai", "Ampang, KL", "Bandar Sg Long", "Bandar Tun Razak", "Bangsar", "Bangsar South", "Brickfields", "Bukit Bintang", "Bukit Damansara", "Bukit Jalil", 
+    "Cheras, KL", "Chow Kit", "City Center (KLCC)", "Desa Pandan", "Desa Park City", "Jalan Ipoh", "Kepong, KL", "Kerinchi", "KL Town", "Kuchai Lama", "Lembah Keramat", 
+    "Lembah Pantai", "Menjalara", "Mont Kiara", "Oug", "Segambut", "Selayang, KL", "Sentul", "Seputeh", "Setapak", "Setiawangsa", "Sri Hartamas", "Sri Permaisuri", 
     "Sri Petaling", "Sungai Besi", "Taman Bukit Segar", "Taman connaught ", "Taman Desa", "Taman Len Seng", "Taman Maluri", "Taman Melawati", "Taman Tun Dr Ismail (TDDI)", 
     "Wangsa Maju"] //43
 
@@ -104,7 +104,7 @@ const citySelangor = [
     "Kajang", "Kajang Perdana", "Kajang Utama", "Kampung Tunku", "Kapar", "Kelana Jaya", "Kepong", "Kerling", "Klang", "Klang Jaya", "Klang Utama", 
     "KLIA", "Kota Damansara", "Kota Kemuning", "Kuala Kubu Baru", "Kuala Selangor", "Kuang", "Kundang", "Meru", "Mutiara Damansara",
     "Pandan Indah", "Petaling Jaya", "Port Klang", "Puchong", "Pulau Carey", "Pulau Indah", "Pulau Ketam", "Puncak Alam", "Puncak Jalil", 
-    "Puncak Perdana", "Putra Heights", "Putrajaya", "Rasa", "Rawang", "Sabak Bernam", "Saujana Impian", "U16, Shah Alam", "Sekinchan", "Seksyen 17, Petaling Jaya", 
+    "Puncak Perdana", "Putra Heights", "Putrajaya, Selangor", "Rasa", "Rawang", "Sabak Bernam", "Saujana Impian", "U16, Shah Alam", "Sekinchan", "Seksyen 17, Petaling Jaya", 
     "Seksyen 19, Shah Alam", "Seksyen 7, Shah Alam", "Seksyen 9, Shah Alam", "Selayang", "Semenyih", "Sepang", "Serdang", "Serendah", "Seri Kembangan", "Setia Alam", "Shah Alam", 
     "Sri Damansara", "SS 19", "SS 2", "Subang", "Subang Jaya", "Sungai Ayer Tawar", "Sungai Besar", "Sungai Buloh", "Sungai Chua", "Sungai Long", 
     "Sungai Pelek", "Taman Alam Megah", "Taman Bukit Mewah", "Taman Gembira", "Taman Kinrara", "Taman Putra Perdana", "Taman Sentosa", "Taman Sri Andalas", 
@@ -130,10 +130,10 @@ const citySelangorId = [
 //     "Kubang Pasu", "Kulim", "Langkawi", "Padang Terap", "Pendang", "Pokok Sena",
 //     "Sik", "Yan"]; //12
 const cityKedah = ["Alor Setar","Ayer Hitam","Baling","Bandar Baharu", "Bandar Puteri Jaya, Sungai Petani", "Bedong", "Bukit Kayu Hitam",
-    "Changloon", "Gurun","Jeniang", "Jitra", "Karangan", "Kepala Batas" , "Kodiang" , "Kota Kuala Muda" , 
-    "Kota Sarang Semut" , "Kuala Kedah" , "Kuala Ketil" , "Kuala Nerang", "Kuala Pegang" , "Kulim" , 
+    "Changloon", "Gurun","Jeniang", "Jitra", "Karangan", "Kepala Batas, Kedah" , "Kodiang" , "Kota Kuala Muda" , 
+    "Kota Sarang Semut" , "Kuala Kedah" , "Kuala Ketil" , "Kuala Nerang", "Kuala Pegang" , "Kulim, Kedah" , 
     "Kupang" , "Langgar", "Langkawi" , "Lunas" , "Merbok" , "Padang Serai", "Pendang" , "Pokok Sena" , 
-    "Serdang" , "Sik" , "Simpang Empat" , "Sungai Petani" , "Taman Ria, Sungai Petani", "Taman Sejati Indah, Sungai Petani", "Universiti Utara Malaysia" , "Yan"]; // 37
+    "Serdang, Kedah" , "Sik" , "Simpang Empat" , "Sungai Petani" , "Taman Ria, Sungai Petani", "Taman Sejati Indah, Sungai Petani", "Universiti Utara Malaysia" , "Yan"]; // 37
 
 // const cityKedahId = ["kdBalg", "kdBBhr", "kdKStar", "kdKMda",
 //     "kdKPsu", "kdKlim", "kdLgkawi", "kdPTrap", "kdPndg", "kdPSna",
@@ -149,7 +149,7 @@ const cityKedahId = ["ktASetar","ktAHitam","kdBalg","kdBBhr", "kdBPtrJ", "ktBdg"
 const cityKelantan = ["Ayer Lanas", "Bachok", "Cherang Ruku", "Dabong",
     "Gua Musang", "Jeli", "Kem Desa Pahlawan", "Ketereh", "Kota Bharu", "Kuala Balah",
     "Kuala Krai", "Machang", "Melor", "Pasir Mas", "Pasir Puteh", "Pulai Chondong",
-    "Rantau Panjang", "Selising", "Tanah Merah", "Temangan", "Tumpat", "Wakaf Bharu"]; //22
+    "Rantau Panjang, Kelantan", "Selising", "Tanah Merah", "Temangan", "Tumpat", "Wakaf Bharu"]; //22
 
 // const cityKelantanId = ["ktBchok", "ktGMusg", "ktJli", "ktKBhru",
 //     "ktKKrai", "ktMachg", "ktPMas", "ktPPuteh", "ktTMrah", "ktTmpat"]; //10
@@ -163,7 +163,7 @@ const cityMelaka = ["Alai", "Alor Gajah","Asahan", "Ayer Keroh", "Ayer Molek",
     "Bachang", "Batu Berendam", "Bemban", "Bukit Baru", "Bukit Beruang", "Bukit Katil", "Bukit Rambai", "Cheng", 
     "Durian Tunggal", "Jasin","Kem Trendak", "Klebang", "Krubong",
     "Kuala Sungai Baru", "Lendu", "Lubok China", "Machap Baru", "Malim Jaya", "Masjid Tanah",
-    "Melaka Raya", "Merlimau", "Nyalas", "Selandar", "Serkam", "Simpang Ampat", 
+    "Melaka Raya", "Merlimau", "Nyalas", "Selandar", "Serkam", "Simpang Ampat, Melaka", 
     "Sungai Rambai", "Sungai Udang", "Tanjung Bidara", "Tanjong Kling", 
     "Telok Mas", "Ujong Pasir"]; //36
 // const cityMelakaId = ["mkAGjh", "mkKMlka", "mkJsn"]; //3
@@ -218,9 +218,9 @@ const cityPahangId = ["phBlok", "phBra", "phBIMahkota","phBPJgka", "phBTARazak",
 const cityPerak = ["Ayer Tawar","Bagan Datoh","Bagan Serai", "Bandar Seri Iskandar", "Batu Gajah", 
     "Batu Kurau", "Bercham", "Behrang Stesen", "Bidor", "Bota", "Bruas", "Buntong, Ipoh", "Changkat Jering", "Changkat Keruing", 
     "Chemor", "Chenderiang", "Chenderong Balai", "Chikus", "Enggor", "Gerik", "Gopeng", "Gunung Rapat", "Hutan Melintang", 
-    "Intan", "Ipoh", "Jelapang, Ipoh", "Jeram", "Kampar", "Kampung Gajah", "Kampung Kepayang", "Kamunting", "Klebang", "Kuala Kangsar", 
+    "Intan", "Ipoh", "Jelapang, Ipoh", "Jeram, Perak", "Kampar", "Kampung Gajah", "Kampung Kepayang", "Kamunting", "Klebang, Perak", "Kuala Kangsar", 
     "Kuala Kurau", "Kuala Sepetang", "Lahat", "Lambor Kanan", "Langkap", "Lenggong", "Lumut", "Malim Nawar", "Manong", 
-    "Matang", "Menglembu", "Meru", "Padang Rengas", "Pangkor", "Pantai Remis", "Parit", "Parit Buntar", "Pasir Putih, Ipoh", "Pengkalan, Lahat", "Pengkalan Hulu", "Pusing", 
+    "Matang", "Menglembu", "Meru, Perak", "Padang Rengas", "Pangkor", "Pantai Remis", "Parit", "Parit Buntar", "Pasir Putih, Ipoh", "Pengkalan, Lahat", "Pengkalan Hulu", "Pusing", 
     "Rantau Panjang", "Sauk", "Selama", "Selekoh", "Seri Manjong", "Silibin, Ipoh", "Simpang", "Simpang Ampat Semanggol",
     "Sitiawan", "Slim River", "Station 18, Ipoh", "Sungai Siput", "Sungai Sumun", "Sungkai", "Taiping", "Tambun", "Tanjong Malim", 
     "Tanjong Piandang", "Tanjong Rambutan", "Tanjong Tualang", "Tapah", "Tapah Road", "Tasek, Ipoh", "Teluk Intan", "Temoh", 
@@ -260,7 +260,7 @@ const cityLabuan = ["Labuan"]; //1
 const cityLabuanId = ["lb"]; //1
 
 // const cityPerlis = ["Perlis"];//1
-const cityPerlis = ["Arau", "Kaki Bukit", "Kangar", "Kuala Perlis", "Padang Besar", "Simpang Ampat"];//6
+const cityPerlis = ["Arau", "Kaki Bukit", "Kangar", "Kuala Perlis", "Padang Besar", "Simpang Ampat, Perlis"];//6
 // const cityPerlisId = ["pl"];//1
 const cityPerlisId = ["plArau", "plKBkt", "plKngr", "plKPrls", "plPdgBsr", "plSmpngAmpt"];
 
@@ -581,11 +581,18 @@ function getCityIdBasedOnCityNameAndStateName(stateName, cityName) {
     }
 }
 
-const Category = ["Kindergarten", "Primary", "PT3", "SPM", "STPM", "Reception/Nursery", "Cambridge Primary",
+const Category = ["Kindergarten", "Primary", "PBS (Previously PT3)", "SPM", "STPM", "Reception/Nursery", "Cambridge Primary",
     "Cambridge Lower Secondary", "IGCSE", "A Level",
     "IB Early Years", "IB Primary (PYP)", "IB Middle (MYP)", "IB Diploma", "UEC Junior",
     "UEC Senior", "AUSMAT", "South Australian Certificate of Education (SACE)", "English Exam",
     "Adult Language", "Music", "Computer Programming"];
+// NOTE. This CategorySEO is exact duplicate of Category above with minor changes, based on const.php
+// It was used for url generation.
+const CategorySEO = ["Kindergarten", "Primary", "PBS", "SPM", "STPM", "Reception", "Cambridge Primary",
+"Cambridge Lower Secondary", "IGCSE", "A Level",
+"IB Early Years", "IB Primary", "IB Middle", "IB Diploma", "UEC Junior",
+"UEC Senior", "AUSMAT", "SACE", "English Exam",
+"Adult Language", "Music", "Computer Programming"];
 
 const CategoryId = ["kindergarten", "upsr", "pt3", "spm", "stpm", "recep", "camPri", "camLowerSec", "igcse", "alevel",
     "ibEyp", "ibPyp", "ibMyp", "ibDiploma", "uecJun", "uecSen", "ausmat", "sam",
