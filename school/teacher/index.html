@@ -30,9 +30,11 @@
   <script src="../../assets/js/firebase.js"></script>
   <!-- Tutor Portal specific CSS -->
   <link href="../../assets/css/tutor-portal.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../assets/css/intlTelInput.css">
+
   <style>
     .br {
-      border-radius: 8px;  
+      border-radius: 8px;
     }
     .w30 {
       width: 30%;
@@ -167,7 +169,7 @@
           <li class="nav-item">
             <a class="nav-link" href="../course/">
               <i class="fas fa-book-open fa-fw nav-icon"></i>
-              <p>My Public Courses 
+              <p>My Public Courses
                 <span style="background-color: #2e74b6;padding: 0.2em 0.5em 0.2em 0.5em;color: white;border-radius: 3px;font-size: x-small;">New</span>
               </p>
             </a>
@@ -212,7 +214,7 @@
               <li class="nav-item">
                 <a class="navbar-brand" href="javascript:;">
                    Hi <span id="user"></span> !
-                </a> 
+                </a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link" href="javascript:;" id="navbarDropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -235,7 +237,7 @@
                 </div>
               </li>
               <!-- your navbar here -->
-			  
+
 			  			<li class="nav-item dropdown">
                 <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">person</i>
@@ -274,7 +276,7 @@
               </div>
               <div class="modal-body" >
                 <p>
-                  You have reached the maximum number of teacher available for your account. 
+                  You have reached the maximum number of teacher available for your account.
                 </p>
                 <p>
                   Upgrade to <strong style="color: #2e74b6;">unlock more slots</strong> and enjoy a tonne of <strong style="color: #2e74b6;">other benefits</strong>.
@@ -303,7 +305,7 @@
               <div class="modal-body" id="addTutorModalBody">
 
                 <div class="form-group" style="margin-top: 0rem;">
-                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">New Teacher Registration Link</span> 
+                  <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">New Teacher Registration Link</span>
                   <div class="input-group">
                     <span class="d-flex align-items-center input-group-addon" style="margin-right: 0.5em; cursor: pointer;" onclick="copyText('inAutoJoinLink')">
                       <span class="material-icons">
@@ -316,8 +318,200 @@
 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddTutorModalClose2">Ok</button>
-                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddTutorModalUpdate"></button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle='modal' data-target='#createTutorModal'>Add Manually</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Tutor modal -->
+      <div class="row">
+        <div class="modal fade" id="createTutorModal" tabindex="-1" role="dialog" aria-labelledby="createTutorModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="createTutorModalLabel">Create New Teacher</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btncreateTutorModalClose1">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="createTutorModalBody">
+                <!-- Info -->
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="row">
+                      <div class="col-md-12 text-center">
+                        <div style="height: 140px; width: 140px; display: inline-block; position: relative; overflow: hidden; border-radius: 50%;">
+                          <img id="viewTutorImgUrl" style="height: 100%;width: 100%; object-fit: cover;" src="../../assets/img/empty-photo.png"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 text-center">
+                        <a type="button" class="btn btn-primary" href="#" id="btnViewTutorModalFullProfile" target="_blank" style="display: none;">View Full Profile</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-8">
+
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Name*</span>
+                        <input id="viewTutorName"  type="text" value='' class="form-control" data-compulsory="true" oninput="this.className = 'form-control'">
+                      </div>
+                      <div class="col-md-6">
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Phone*</span>
+                        <div class="input-group">
+                          <input id="viewTutorPhone" type="text" value='' class="form-control" data-compulsory="true">
+                          <span id="valid-msg" class="hide" style="color: #42ba96;">✓ Valid</span>
+                          <span id="error-msg" class="hide" style="color: #F32013;"></span>
+                        </div>
+                        <div class="row" id="checkTeacher" >
+                          <div class="col-md-12">
+                            <button class="btn btn-primary btn-sm" type="button" id="btnCheckTeacher">Check Teacher</button>
+                            <span class="tooltiptext-trigger">?
+                              <span class="tooltiptext-general">
+                                <h6>Check Teacher</h6>
+                                <p>Run a check to find out the teacher's public profile registed using the phone number above.</p>
+                              </span>
+                            </span>
+                          </div>
+
+                        </div>
+
+                      </div>
+                      <div class="col-md-6">
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Email*</span>
+                        <input id="viewTutorEmail"  type="text" value='' class="form-control" data-compulsory="true" oninput="this.className = 'form-control'">
+
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Gender</span>
+                        <div class="form-group">
+                          <div class="form-check form-check-radio form-check-inline">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioMale" value="optionActive" data-compulsory="false" checked>
+                              Male
+                              <span class="circle">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                          <div class="form-check form-check-radio form-check-inline">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="radio" name="tutorGender" id="viewTutorGenderRadioFemale" value="optionInactive" data-compulsory="false">
+                              Female
+                              <span class="circle">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Age</span>
+                        <input id="viewTutorAge" type="number" value='24' class="form-control">
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <!-- Employement Details -->
+                <div class="row">
+                  <div class="col-md-12">
+                    <span>Employment Details</span>
+                    <span class="tooltiptext-trigger">?
+                      <span class="tooltiptext-general">
+                        <h6>Employment Details</h6>
+                        <p>Filling up employment details here will make running a payroll easier!</p>
+                      </span>
+                    </span>
+                  </div>
+                  <!-- Bank Name -->
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Name</span>
+                      <input type="text" class="form-control" id="inBankName" data-compulsory="false" oninput="this.className = 'form-control'" >
+                    </div>
+                  </div>
+
+                  <!-- Bank Account Number -->
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Bank Account No</span>
+                      <input type="text" class="form-control" id="inBankAcNo" data-compulsory="false" oninput="this.className = 'form-control'" >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                 <!-- EPF No -->
+                 <div class="col-md-4">
+                  <div class="form-group" >
+                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">EPF No</span>
+                    <input type="text" class="form-control" id="inEPFNo" data-compulsory="false" oninput="this.className = 'form-control'">
+                  </div>
+                </div>
+
+                <!-- Socso No -->
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; margin-bottom: 0;">Socso No</span>
+                    <input type="text" class="form-control" id="inSocsoNo" data-compulsory="false" oninput="this.className = 'form-control'">
+                  </div>
+                </div>
+                </div>
+
+                <!-- Status -->
+                <div class="row">
+                  <div class="col-sm-12 text-left">
+                    <span class="" style="font-size: smaller; font-weight: 300; color: gray;">Employment Status</span>
+                    <span class="tooltiptext-trigger">?
+                      <span class="tooltiptext-general">
+                        <h6>Employment Status</h6>
+                        <p>Set to <strong style="color: #2e74b6;">Inactive</strong> to keep the teacher profile, but disallowed from joining future classes and payrolls.</p>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="form-check form-check-radio form-check-inline">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="radio" name="employmentStatus" id="employmentStatusRadioActive" value="optionActive" data-compulsory="false" checked>
+                          Active
+                          <span class="circle">
+                            <span class="check"></span>
+                          </span>
+                        </label>
+                      </div>
+                      <div class="form-check form-check-radio form-check-inline">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="radio" name="employmentStatus" id="employmentStatusRadioInactive" value="optionInactive" data-compulsory="false">
+                          Inactive
+                          <span class="circle">
+                            <span class="check"></span>
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+                <button type="button" class="btn btn-primary" id="btnCreateTutorManuallyModalConfirm">Confirm</button>
+
               </div>
             </div>
           </div>
@@ -348,7 +542,7 @@
       </div>
 
       <!-- View Tutor Modal -->
-       <div class="row">
+       <!-- <div class="row">
         <div class="modal fade" id="viewTutorModal" tabindex="-1" role="dialog" aria-labelledby="viewTutorModalLabel" aria-hidden="true">
           <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -368,26 +562,26 @@
                   </div>
 
                   <div class="col-md-8">
-                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Name</span> 
+                    <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Name</span>
                     <input id="viewTutorName"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
 
                     <div class="row">
                       <div class="col-md-6">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Phone</span> 
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Phone</span>
                         <input id="viewTutorPhone"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-    
+
                       </div>
                       <div class="col-md-6">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Email</span> 
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Email</span>
                         <input id="viewTutorEmail"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-    
+
                       </div>
                     </div>
 
-   
+
                     <div class="row">
                       <div class="col-md-6">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Gender</span> 
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Gender</span>
                         <div class="form-group">
                           <div class="form-check form-check-radio form-check-inline">
                             <label class="form-check-label">
@@ -410,9 +604,9 @@
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Age</span> 
+                        <span class="" style="font-size: smaller; font-weight: 300; color: gray; padding-right: 2rem;">Age</span>
                         <input id="viewTutorAge"  type="text" value='' class="form-control" style="pointer-events: none;" readonly>
-    
+
                       </div>
                     </div>
 
@@ -423,12 +617,11 @@
               <div class="modal-footer">
                 <a type="button" class="btn btn-primary" href="#" id="btnViewTutorModalFullProfile" disabled>View Full Profile</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnViewTutorModalUpdate">Update</button> -->
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Main content -->
       <div class="content">
@@ -484,7 +677,7 @@
                 </div>
               <!-- </div> -->
             </div>
- 
+
 
           </div>
         </div>
@@ -507,7 +700,7 @@
 
   </div>
 
-  
+
   <script src="../../assets/js/core/jquery.min.js"></script>
   <script src="../../assets/js/core/popper.min.js"></script>
   <script src="../../assets/js/core/bootstrap-material-design.min.js"></script>
@@ -518,37 +711,11 @@
   <script src="../../assets/js/plugins/sweetalert2.js"></script>
   <!-- Forms Validations Plugin -->
   <script src="../../assets/js/plugins/jquery.validate.min.js"></script>
-  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-  <!-- <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script> -->
-  <!-- 	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-  <!-- <script src="assets/js/plugins/bootstrap-selectpicker.js"></script> -->
-  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-  <!-- <script src="assets/js/plugins/bootstrap-datetimepicker.min.js"></script> -->
-  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
-  <!-- <script src="assets/js/plugins/jquery.dataTables.min.js"></script> -->
-  <!-- 	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-  <!-- <script src="assets/js/plugins/bootstrap-tagsinput.js"></script> -->
-  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-  <!-- <script src="assets/js/plugins/jasny-bootstrap.min.js"></script> -->
-  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-  <!-- <script src="assets/js/plugins/fullcalendar.min.js"></script> -->
-  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-  <!-- <script src="assets/js/plugins/jquery-jvectormap.js"></script> -->
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <!-- <script src="assets/js/plugins/nouislider.min.js"></script> -->
-  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> -->
-  <!-- Library for adding dinamically elements -->
-  <!-- <script src="assets/js/plugins/arrive.min.js"></script> -->
-  <!--  Google Maps Plugin    -->
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
-  <!-- Chartist JS -->
-  <!-- <script src="assets/js/plugins/chartist.min.js"></script> -->
   <!--  Notifications Plugin    -->
   <script src="../../assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
-  
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
   <!-- Common constants -->
   <script src="../../assets/js/common.js" type="text/javascript"></script>
@@ -558,239 +725,15 @@
   <script src="../../assets/js/globalvar.js" type="text/javascript"></script>
   <!-- Core Tutor Js -->
   <script src="../../assets/js/tutor-core.js" type="text/javascript"></script>
-  
+  <!-- International Telephone Input -->
+  <script src="../../assets/js/plugins/intlTelInput/intlTelInput.min.js"  charset="utf-8"></script>
+
 	<script>
 
     // Course-specific var
     var allCourseSize;
 
     const btnAddTeacher = document.getElementById("btnAddTeacher");
-
-		// var db = firebase.firestore();
-		// db.settings({ timestampsInSnapshots: true });
-
-    // // Set the nav name and global var, if user already login and have session Storage 
-    // var tutorInfoObj = null;
-    // if (JSON.parse(sessionStorage.getItem("tutorInfoObj")) == null ){
-    //   // Do nothing
-    // }
-    // else{
-    //   // Set the nav user name
-    //   tutorInfoObj = JSON.parse(sessionStorage.getItem("tutorInfoObj"));
-    //   document.getElementById("user").textContent = tutorInfoObj.name;
-
-    //   current_name = (tutorInfoObj.name == null || tutorInfoObj.name == "")? "New Tutor" : tutorInfoObj.name;
-    //   // current_email, 
-    //   // current_phone, 
-    //   current_age = (tutorInfoObj.age == null || tutorInfoObj.age == "")? "18" : tutorInfoObj.age; 
-    //   current_gender= (tutorInfoObj.gender == 0)? "Male" : "Female"; 
-    //   current_imgUri = (tutorInfoObj.imgUrl == null || tutorInfoObj.imgUrl == "")? "../assets/img/hello.gif" : tutorInfoObj.imgUrl;
-    //   current_accountStatus = tutorInfoObj.accountStatus; // bool
-    //   currentYearsExperience = tutorInfoObj.yearsExperience; // number
-    //   currentTutoringExperience = tutorInfoObj.tutoringExperience;
-    //   currentTutoringApproach = tutorInfoObj.tutoringApproach;
-    //   currentQualification= tutorInfoObj.qualification;
-      
-    //   current_aweburl = tutorInfoObj.aWebUrl
-
-    //   // updatePageView(current_accountStatus);
-    // }
-
-		// firebase.auth().onAuthStateChanged(function(user){
-      
-		// 	if(!user){
-    //     // Return to login if user does not exist.
-		// 		window.location.href = "../login.html"
-		// 	}else{
-    //     // if the displayName is null, it means user register using Phone
-    //     if (firebase.auth().currentUser.displayName == null ){
-    //         tutorId = firebase.auth().currentUser.phoneNumber;
-    //     }else{
-    //       tutorId = firebase.auth().currentUser.email.replace("[^a-zA-Z0-9]", "_").toLowerCase();
-    //     }
-    //     loadUserInfo(tutorId)
-    //     loadAllTutorInfo()
-          
-    //     // Update Add Teacher Registration Link
-    //     let uriAdminId = encodeURIComponent(tutorId);
-    //     document.getElementById("inAutoJoinLink").value = 'https://app.golearn.com.my/tutor-portal/tutor-registration.html?aid='+uriAdminId;
-
-		// 	}
-		// });
-
-    // // Tutor Specific
-    // function loadUserInfo(tutorId){
-    //   // Tutor Id must be a phone with +60, no spacing or other chars
-    //   var docRef = db.collection("Tutor").doc(tutorId);
-      
-
-    //   // docRef.get().then((doc) => {
-    //   docRef.onSnapshot((doc) => {
-
-    //     if (doc.exists) {
-    //       // console.log("Document data:", doc.data());
-
-    //       current_name = (doc.data().name == null || doc.data().name == "")? "New Tutor" : doc.data().name;
-    //       // current_email, 
-    //       // current_phone, 
-    //       current_age = (doc.data().age == null || doc.data().age == "")? "18" : doc.data().age; 
-    //       current_gender= (doc.data().gender == 0)? "Male" : "Female"; 
-    //       current_imgUri = (doc.data().imgUrl == null || doc.data().imgUrl == "")? "../assets/img/hello.gif" : doc.data().imgUrl;
-    //       current_accountStatus = doc.data().accountStatus; 
-    //       currentYearsExperience = doc.data().yearsExperience; // number
-    //       currentTutoringExperience = doc.data().tutoringExperience;
-    //       currentTutoringApproach = doc.data().tutoringApproach;
-    //       currentQualification= doc.data().qualification;
-    //       current_mon_8am = doc.data().tMon8am;
-    //       current_mon_12pm= doc.data().tMon12pm; 
-    //       current_mon_3pm = doc.data().tMon3pm;  
-    //       current_mon_6pm = doc.data().tMon6pm;  
-    //       current_tue_8am = doc.data().tTue8am;  
-    //       current_tue_12pm= doc.data().tTue12pm;  
-    //       current_tue_3pm = doc.data().tTue3pm;  
-    //       current_tue_6pm = doc.data().tTue6pm;  
-    //       current_wed_8am = doc.data().tWed8am;  
-    //       current_wed_12pm= doc.data().tWed12pm;  
-    //       current_wed_3pm = doc.data().tWed3pm;  
-    //       current_wed_6pm = doc.data().tWed6pm;  
-    //       current_thu_8am = doc.data().tThu8am;  
-    //       current_thu_12pm= doc.data().tThu12pm;  
-    //       current_thu_3pm = doc.data().tThu3pm;  
-    //       current_thu_6pm = doc.data().tThu6pm;  
-    //       current_fri_8am = doc.data().tFri8am;  
-    //       current_fri_12pm= doc.data().tFri12pm;  
-    //       current_fri_3pm = doc.data().tFri3pm;  
-    //       current_fri_6pm = doc.data().tFri6pm; 
-    //       current_sat_8am = doc.data().tSat8am;  
-    //       current_sat_12pm= doc.data().tSat12pm;  
-    //       current_sat_3pm = doc.data().tSat3pm;  
-    //       current_sat_6pm = doc.data().tSat6pm;  
-    //       current_sun_8am = doc.data().tSun8am;  
-    //       current_sun_12pm= doc.data().tSun12pm;  
-    //       current_sun_3pm = doc.data().tSun3pm;  
-    //       current_sun_6pm = doc.data().tSun6pm; 
-
-    //       // Store data to sessionStorage
-    //       var tutorDataObj = {
-    //         [NAME_KEY] : doc.data().name,
-    //         [EMAIL_KEY] : doc.data().email,
-    //         [PHONE_KEY] : doc.data().phone,
-    //         [AGE_KEY] : doc.data().age,
-    //         [GENDER_KEY] : doc.data().gender,
-    //         [ADDRESS_1_KEY] :doc.data().address1,
-    //         [ADDRESS_2_KEY] :doc.data().address2,
-    //         [ADDRESS_POSTCODE_KEY] :doc.data().addressPostCode,
-    //         [ADDRESS_STATE_KEY] :doc.data().addressState,
-    //         [IMAGE_KEY] : doc.data().imgUrl,
-    //         // [NRIC_KEY] : doc.data().name,
-    //         [RATING_KEY] : doc.data().rating,
-    //         [RATING_TIMES_KEY] : doc.data().ratingTimes,
-    //         [RATING_FINAL_KEY] : doc.data().ratingFinal,
-    //         [PROFILE_STATUS_KEY] : doc.data().profileStatus,
-    //         // [CHECK_HOMETUTOR_KEY] : doc.data().name,
-    //         // [CHECK_PRIVATETUTOR_KEY] : doc.data().name,
-    //         // [CHECK_GROUPTUTOR_KEY] : doc.data().name,
-    //         // [CHECK_ONLINETUTOR_KEY] : doc.data().name,
-    //         [YEARS_EXPERIENCE_KEY] :doc.data().yearsExperience,
-    //         [TUTORING_EXPERIENCE_KEY] :doc.data().tutoringExperience,
-    //         [TUTORING_APPROACH_KEY] : doc.data().tutoringApproach,
-    //         [QUALIFICATION_KEY] : doc.data().qualification,
-    //         [PREFERED_AREA_LIST_KEY] : doc.data().preferedAreaList,
-    //         [PREFERED_SUBJECT_LIST_KEY] : doc.data().preferedSubjectList,
-    //         [AGENT_KEY] : doc.data().agent,
-    //         [ACCOUNT_STATUS_KEY] : doc.data().accountStatus,
-            
-    //         [CHECK_HOME_TUTOR_TO_STUDENT_KEY] : doc.data().modeHomeTutorToStudent,
-    //         [CHECK_HOME_STUDENT_TO_TUTOR_KEY] : doc.data().modeHomeStudentToTutor,
-    //         [CHECK_GROUP_KEY] : doc.data().modeGroup,
-    //         [CHECK_ONLINE_KEY] : doc.data().modeOnline,
-    //         [CHECK_ONLINE_GROUP_KEY] : doc.data().modeOnlineGroup,
-    //         [CHECK_TEACHING_LANGUAGE_ENGLISH_KEY] : doc.data().lanEng,
-    //         [CHECK_TEACHING_LANGUAGE_BM_KEY] : doc.data().lanBm,
-    //         [CHECK_TEACHING_LANGUAGE_BC_KEY] : doc.data().lanBc,
-    //         [CHECK_TEACHING_LANGUAGE_BT_KEY] : doc.data().lanBt,
-    //         [CHECK_TEACHING_LANGUAGE_OTHER_KEY] : doc.data().lanOther,
-
-    //         [TUTOR_TIME_SLOT_MON_8AM_KEY] : doc.data().tMon8am,
-    //         [TUTOR_TIME_SLOT_MON_12PM_KEY] : doc.data().tMon12pm,
-    //         [TUTOR_TIME_SLOT_MON_3PM_KEY] : doc.data().tMon3pm,
-    //         [TUTOR_TIME_SLOT_MON_6PM_KEY] : doc.data().tMon6pm,
-    //         [TUTOR_TIME_SLOT_TUE_8AM_KEY] : doc.data().tTue8am,
-    //         [TUTOR_TIME_SLOT_TUE_12PM_KEY] : doc.data().tTue12pm,
-    //         [TUTOR_TIME_SLOT_TUE_3PM_KEY] : doc.data().tTue3pm,
-    //         [TUTOR_TIME_SLOT_TUE_6PM_KEY] : doc.data().tTue6pm,
-    //         [TUTOR_TIME_SLOT_WED_8AM_KEY] : doc.data().tWed8am,
-    //         [TUTOR_TIME_SLOT_WED_12PM_KEY] : doc.data().tWed12pm,
-    //         [TUTOR_TIME_SLOT_WED_3PM_KEY] : doc.data().tWed3pm,
-    //         [TUTOR_TIME_SLOT_WED_6PM_KEY] : doc.data().tWed6pm,
-    //         [TUTOR_TIME_SLOT_THU_8AM_KEY] : doc.data().tThu8am,
-    //         [TUTOR_TIME_SLOT_THU_12PM_KEY] : doc.data().tThu12pm,
-    //         [TUTOR_TIME_SLOT_THU_3PM_KEY] : doc.data().tThu3pm,
-    //         [TUTOR_TIME_SLOT_THU_6PM_KEY] : doc.data().tThu6pm,
-    //         [TUTOR_TIME_SLOT_FRI_8AM_KEY] : doc.data().tFri8am,
-    //         [TUTOR_TIME_SLOT_FRI_12PM_KEY] : doc.data().tFri12pm,
-    //         [TUTOR_TIME_SLOT_FRI_3PM_KEY] : doc.data().tFri3pm,
-    //         [TUTOR_TIME_SLOT_FRI_6PM_KEY] : doc.data().tFri6pm,
-    //         [TUTOR_TIME_SLOT_SAT_8AM_KEY] : doc.data().tSat8am,
-    //         [TUTOR_TIME_SLOT_SAT_12PM_KEY] : doc.data().tSat12pm,
-    //         [TUTOR_TIME_SLOT_SAT_3PM_KEY] : doc.data().tSat3pm,
-    //         [TUTOR_TIME_SLOT_SAT_6PM_KEY] : doc.data().tSat6pm,
-    //         [TUTOR_TIME_SLOT_SUN_8AM_KEY] : doc.data().tSun8am,
-    //         [TUTOR_TIME_SLOT_SUN_12PM_KEY] : doc.data().tSun12pm,
-    //         [TUTOR_TIME_SLOT_SUN_3PM_KEY] : doc.data().tSun3pm,
-    //         [TUTOR_TIME_SLOT_SUN_6PM_KEY] : doc.data().tSun6pm,
-    //         // Create a placeholder for aWebUrl. This param can only initiated by admin
-    //         // manually through https://golearn.com.my/admin/admin-portal.html
-    //         [ADMIN_WEB_URL_KEY] : doc.data().aWebUrl,
-    //         [ADMIN_PREMIUM_SUBJECT_LIMIT_KEY] : doc.data().aPremiumSubjectLimit,
-    //         [ADMIN_PREMIUM_CONNECT_LIMIT_KEY] : doc.data().aPremiumConnectLimit,
-    //         [ADMIN_TOTAL_SUBJECT_LIMIT_KEY] : doc.data().aTotalSubjectLimit,
-    //         [ADMIN_TOTAL_CONNECT_LIMIT_KEY] : doc.data().aTotalConnectLimit,
-    //         [ADMIN_PREFFERED_AREA_LIMIT_KEY] : doc.data().aPreferredAreaLimit,
-    //         [ADMIN_PREFERRED_SUBJECT_LIMIT_KEY] : doc.data().aPreferredSubjectLimit
-    //       }
-
-    //       // Set tutorInfoObj as sessionStorage
-    //       sessionStorage.setItem("tutorInfoObj", JSON.stringify(tutorDataObj));
-
-    //       // Set the nav user name and public profile link
-    //       document.getElementById("user").textContent = doc.data().name;
-
-    //       if (doc.data().aWebUrl == null || doc.data().aWebUrl == ""){
-    //         document.getElementById("navPublicProfile").href = "#"  ;
-    //         document.getElementById("navPublicProfile").setAttribute("style", "background: #d6d6d6; pointer-events: none; cursor: default;")  
-    //       } else{
-    //         document.getElementById("navPublicProfile").href = "https://golearn.com.my/tutor/"+doc.data().aWebUrl;
-    //         document.getElementById("navPublicProfile").target = "_blank";
-    //       }
-          
-    //       if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY){
-    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-    //         document.getElementById("btnActivateAccount").textContent = "Activate My Account Now";
-    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/join-us/";
-    //         document.getElementById("btnActivateAccount").target = "_blank";
-    //       }else if (current_accountStatus == SUSPENDED_ACCOUNT_STATUS_KEY){
-    //         document.getElementById("btnActivateAccount").setAttribute("style", "visibility: visible;" );
-    //         document.getElementById("btnActivateAccount").textContent = "Account Suspended. Fix Now";
-    //         document.getElementById("btnActivateAccount").href = "https://golearn.com.my/contact-us/";
-    //         document.getElementById("btnActivateAccount").target = "_blank";
-    //       }else {
-    //         let activationNavItem = document.querySelector('#activationNavItem');
-    //         let activationNavItemIsExist = document.querySelector('#activationNavItem') !== null;
-    //         console.log(activationNavItemIsExist)
-    //         // Remove NavItem if exist
-    //         if (activationNavItemIsExist){
-    //           activationNavItem.parentNode.removeChild(activationNavItem);
-    //         }else{
-    //           // Do nothing
-    //         }
-    //       }
-    //     } else {
-    //        // Do nothing 
-    //     }
-    //   });
-
-    // };
 
     // Initialization
     AuthCheck();
@@ -800,7 +743,7 @@
 
       // Load all tutor indo
       loadAllTutorInfo()
-        
+
       // Update Add Teacher Registration Link
       let uriAdminId = encodeURIComponent(tutorId);
       document.getElementById("inAutoJoinLink").value = 'https://app.golearn.com.my/school/tutor-registration.html?aid='+uriAdminId;
@@ -814,7 +757,7 @@
           .where(TUTOR_ADMIN_ID, "==", tutorId)
           .where(TUTOR_STATUS_ADMIN, "in", [TUTOR_STATUS_TYPE_ACTIVE, TUTOR_STATUS_TYPE_PASSIVE])
           .orderBy(TUTOR_TUTOR_NAME, 'asc')
-          
+
       let adminTeacherNum = 0;
 
       docRef
@@ -829,7 +772,7 @@
         }else{
           document.getElementById("noDataPlaceholder").style.display = 'none';
         }
-        
+
         // Session Storage data
         let docsObj = [];
 
@@ -845,26 +788,26 @@
         // Store all docs data to sessionStorage
         sessionStorage.setItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY, JSON.stringify(docsObj));
         sessionStorage.setItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY, null);
- 
+
       })
       .then(() => {
 
         // console.log(adminTeacherNum)
         // console.log(current_accountStatus)
 
-        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY || 
-          current_accountStatus == ACTIVE_ACCOUNT_STATUS_KEY|| 
+        if (current_accountStatus == DEACTIVATED_ACCOUNT_STATUS_KEY ||
+          current_accountStatus == ACTIVE_ACCOUNT_STATUS_KEY||
           current_accountStatus == PREMIUM_ACCOUNT_1_STATUS_KEY){
           if (adminTeacherNum >= TeacherNum_Active){
             btnAddTeacher.className = "btn btn-default btn-round";
             btnAddTeacher.style.pointerEvents = "auto";
             btnAddTeacher.setAttribute("data-toggle", "modal");
-            btnAddTeacher.setAttribute("data-target", "#limitReachModal");     
+            btnAddTeacher.setAttribute("data-target", "#limitReachModal");
           }else {
             btnAddTeacher.className = "btn btn-primary btn-round";
             btnAddTeacher.style.pointerEvents = "auto";
             btnAddTeacher.setAttribute("data-toggle", "modal");
-            btnAddTeacher.setAttribute("data-target", "#addTutorModal");       
+            btnAddTeacher.setAttribute("data-target", "#addTutorModal");
           }
         }
         else if (current_accountStatus == PREMIUM_ACCOUNT_2_STATUS_KEY  || current_accountStatus == PREMIUM_ACCOUNT_2_ACTIVE_STATUS_KEY){
@@ -872,12 +815,12 @@
             btnAddTeacher.className = "btn btn-default btn-round";
             btnAddTeacher.style.pointerEvents = "auto";
             btnAddTeacher.setAttribute("data-toggle", "modal");
-            btnAddTeacher.setAttribute("data-target", "#limitReachModal");     
+            btnAddTeacher.setAttribute("data-target", "#limitReachModal");
           }else {
             btnAddTeacher.className = "btn btn-primary btn-round";
             btnAddTeacher.style.pointerEvents = "auto";
             btnAddTeacher.setAttribute("data-toggle", "modal");
-            btnAddTeacher.setAttribute("data-target", "#addTutorModal");       
+            btnAddTeacher.setAttribute("data-target", "#addTutorModal");
           }
         }
         else if (current_accountStatus == PREMIUM_ACCOUNT_3_STATUS_KEY || current_accountStatus == PREMIUM_ACCOUNT_3_ACTIVE_STATUS_KEY){
@@ -885,12 +828,12 @@
             btnAddTeacher.className = "btn btn-default btn-round";
             btnAddTeacher.style.pointerEvents = "auto";
             btnAddTeacher.setAttribute("data-toggle", "modal");
-            btnAddTeacher.setAttribute("data-target", "#limitReachModal");     
+            btnAddTeacher.setAttribute("data-target", "#limitReachModal");
           }else {
             btnAddTeacher.className = "btn btn-primary btn-round";
             btnAddTeacher.style.pointerEvents = "auto";
             btnAddTeacher.setAttribute("data-toggle", "modal");
-            btnAddTeacher.setAttribute("data-target", "#addTutorModal");       
+            btnAddTeacher.setAttribute("data-target", "#addTutorModal");
           }
         }
         else {
@@ -898,7 +841,7 @@
           btnAddTeacher.className = "btn btn-default btn-round";
           btnAddTeacher.style.pointerEvents = "auto";
           btnAddTeacher.setAttribute("data-toggle", "modal");
-          btnAddTeacher.setAttribute("data-target", "#limitReachModal");     
+          btnAddTeacher.setAttribute("data-target", "#limitReachModal");
         }
 
 
@@ -924,7 +867,7 @@
       // img.setAttribute('src', doc.data()[TUTOR_TUTOR_IMG_URL]);
 
       // Check if img is valid. If no, create a 2 chars avatar
-      if (doc.data()[TUTOR_TUTOR_IMG_URL] == null || doc.data()[TUTOR_TUTOR_IMG_URL] == "" 
+      if (doc.data()[TUTOR_TUTOR_IMG_URL] == null || doc.data()[TUTOR_TUTOR_IMG_URL] == ""
       || doc.data()[TUTOR_TUTOR_IMG_URL] == "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"
       || tutorImgUrlChecker(doc.data()[TUTOR_TUTOR_IMG_URL])){
         let AvatarText = doc.data()[TUTOR_TUTOR_NAME][0] + doc.data()[TUTOR_TUTOR_NAME][1];
@@ -943,7 +886,7 @@
       let name_div = document.createElement('div');
       name_div.setAttribute('style', 'margin-top:1rem;');
       name_div.appendChild(name_h4);
-      
+
       let tutor_div = document.createElement('div');
       tutor_div.className = "card-tutor text-center";
       tutor_div.appendChild(img_div);
@@ -956,7 +899,7 @@
       tutor_card_div.setAttribute('data-toggle', 'modal');
       tutor_card_div.setAttribute('data-id', doc.data()[TUTOR_ID]);
       tutor_card_div.appendChild(tutor_div)
-        
+
       const card_all_tutor = document.getElementById("card-all-tutor");
       card_all_tutor.appendChild(tutor_card_div);
     }
@@ -978,7 +921,7 @@
           isEmptyPhotoPngExist = true;
         }
       }
-      let isGeneratedAvatar = false; 
+      let isGeneratedAvatar = false;
       let generatedAvatarArr = imgUrl.match(/data:image\/png;base64,/gi)
       if ( generatedAvatarArr != null) {
         if (generatedAvatarArr.length > 0){
@@ -993,7 +936,7 @@
     }
 
 	  function viewTutorFunction(elem){
-      // Get attribute and 
+      // Get attribute and
       if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY)) == null ){
         console.log("Error: Impossible to reach this state");
         // Because this func only trigger when there's active class loaded
@@ -1016,14 +959,14 @@
             // document.getElementById("viewTutorImgUrl").src = item[TUTOR_TUTOR_IMG_URL];
             // console.log(item[TUTOR_TUTOR_WEB_URL])
             // if (item[TUTOR_TUTOR_WEB_URL] == null || item[TUTOR_TUTOR_WEB_URL] == ''){
-            //   document.getElementById("btnViewTutorModalFullProfile").disabled = true;  
-            //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','#'); 
-            //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('target',''); 
+            //   document.getElementById("btnViewTutorModalFullProfile").disabled = true;
+            //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','#');
+            //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','');
             // }
             // else{
-            //   document.getElementById("btnViewTutorModalFullProfile").disabled = false;      
-            //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','https://golearn.com.my/tutor/'+item[TUTOR_TUTOR_WEB_URL]); 
-            //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','_blank'); 
+            //   document.getElementById("btnViewTutorModalFullProfile").disabled = false;
+            //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('href','https://golearn.com.my/tutor/'+item[TUTOR_TUTOR_WEB_URL]);
+            //   document.getElementById("btnViewTutorModalFullProfile").setAttribute('target','_blank');
             // }
 
             sessionStorage.setItem(SESSION_STORAGE_TUTOR_CURRENT_DOC_KEY, JSON.stringify(item));
@@ -1031,7 +974,7 @@
           }
 
         });
-        
+
       }
 		}
     // Copy a text based on element ID
@@ -1050,6 +993,88 @@
       func.showNotification('top','center', 'success', 'check_circle', "Link copied.");
     }
 
+    // Update Student Info
+    function AddTeacherToDB(docId){
+      let docRef = db.collection("Class")
+        .doc('v1')
+        .collection('Tutor')
+        .doc();
+        // console.log("Img Src valid? ", isValidImgSrc(document.getElementById("viewTutorImgUrl").src))
+
+      let data = {
+        [TUTOR_ID]: docRef.id,
+        [TUTOR_ADMIN_ID]: tutorId,
+        [TUTOR_TUTOR_ID]: itiTutor.getNumber(),
+        [TUTOR_DATE_ADD]: new Date(),
+        [TUTOR_DATE_EDIT]: new Date(),
+        [TUTOR_DATE_DEL]: '',
+        [TUTOR_STATUS_ADMIN]: document.getElementById("employmentStatusRadioActive").checked? TUTOR_STATUS_TYPE_ACTIVE : TUTOR_STATUS_TYPE_PASSIVE,
+        [TUTOR_STATUS_TUTOR]: TUTOR_STATUS_TYPE_ACTIVE,
+        // Admin specific
+        [TUTOR_ADMIN_NAME]: current_name,
+        [TUTOR_ADMIN_PHONE]: tutorId,
+        [TUTOR_ADMIN_EMAIL]: current_email,
+        [TUTOR_ADMIN_ADDR]: "",
+        [TUTOR_ADMIN_IMG_URL]: current_imgUri,
+        [TUTOR_ADMIN_WEB_URL]: "",
+        // Tutor specific
+        [TUTOR_TUTOR_NAME]: document.getElementById("viewTutorName").value,
+        [TUTOR_TUTOR_PHONE]: itiTutor.getNumber(),
+        [TUTOR_TUTOR_EMAIL]: document.getElementById("viewTutorEmail").value,
+        [TUTOR_TUTOR_GENDER]: document.getElementById("viewTutorGenderRadioMale").checked ? 0 : 1,
+        [TUTOR_TUTOR_AGE]: parseInt(document.getElementById("viewTutorAge").value),
+        [TUTOR_TUTOR_ADDR]: "",
+        [TUTOR_TUTOR_IMG_URL]: isValidImgSrc(document.getElementById("viewTutorImgUrl").src) ? document.getElementById("viewTutorImgUrl").src : "",
+        [TUTOR_TUTOR_WEB_URL]: "",
+
+        [TUTOR_BANK_NAME]: document.getElementById("inBankName").value,
+        [TUTOR_AC_NO]: document.getElementById("inBankAcNo").value,
+        [TUTOR_EPF]: document.getElementById("inEPFNo").value,
+        [TUTOR_SOCSO]: document.getElementById("inSocsoNo").value,
+      }
+
+      console.log("Create Data: ")
+      console.log(data)
+      docRef
+      .set(data)
+      .then(()=> {
+        $('#createTutorModal').modal('hide');
+        window.location.reload();
+      });
+    }
+
+    function isValidImgSrc(src){
+      let isHelloGifExist = false ;
+      let helloGifArr =  src.match(/hello.gif/gi)
+      if ( helloGifArr != null) {
+        if (helloGifArr.length > 0){
+          isHelloGifExist = true;
+        }
+      }
+
+      let isEmptyPhotoPngExist = false;
+      let emptyPhotoPngArr = src.match(/empty-photo.png/gi)
+      if ( emptyPhotoPngArr != null) {
+        if (emptyPhotoPngArr.length > 0){
+          isEmptyPhotoPngExist = true;
+        }
+      }
+
+      let isBase64ImgExist = false;
+      let base64ImgArr = src.match(/data:image\/png/gi)
+      if ( base64ImgArr != null) {
+        if (base64ImgArr.length > 0){
+          isBase64ImgExist = true;
+        }
+      }
+
+      if(isHelloGifExist || isEmptyPhotoPngExist || isBase64ImgExist){
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
   </script>
 
   <script>
@@ -1068,7 +1093,7 @@
           [CLASS_ANNOUNCEMENT]: document.getElementById("modalClassAnnouncement").value,
         }
         // Set data
-        db.collection("Class")        
+        db.collection("Class")
           .doc("v1")
           .collection("Class")
           .doc(ID)
@@ -1087,11 +1112,11 @@
         var button = $(event.relatedTarget) // Button/Components that triggered the modal
         ID = button.data('id') // Extract info from data-* attributes
         ANNOUNCEMENT = button.data('announcement') // Extract info from data-* attributes
-        // Load Desription 
+        // Load Desription
         document.getElementById("modalClassAnnouncement").textContent = ANNOUNCEMENT;
 
       });
-      
+
       // Clear key and fields in modal when modal dismiss
       $('#editClassModal').on('hide.bs.modal', function (event) {
         ID = "";
@@ -1099,14 +1124,227 @@
         document.getElementById("modalClassAnnouncement").textContent = "";
       });
 
+
+      // Create Teacher Profile Manually
+      $('#btnCreateTutorManuallyModalConfirm').on('click', function (e) {
+
+        if (validateForm("createTutorModal") && itiTutor.getNumber() != "" && itiTutor.isValidNumber()) {
+
+
+          if(itiTutor.getNumber() == tutorId){
+            alert("INFO: You cannot add yourself as teacher!")
+          }
+          else {
+
+            var validPhone =true;
+            // Get attribute and
+            if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY)) == null ){
+              console.log("Error: Impossible to reach this state")
+            }
+            else{
+
+              let allClassList = null;
+
+              // Set the fields
+              allClassList = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_TUTOR_ALL_DOCS_KEY));
+
+              for (var index = 0; index < allClassList.length; index++) {
+              // allClassList.forEach((item) => {
+                if (allClassList[index][TUTOR_TUTOR_ID] === itiTutor.getNumber()){
+                  validPhone = false;
+                  break;
+                }
+
+              };
+
+            }
+
+            if (validPhone){
+              document.getElementById("btnCreateTutorManuallyModalConfirm").setAttribute('disabled', true);
+              document.getElementById("btnCreateTutorManuallyModalConfirm").textContent = 'Creating... Please wait.';
+              AddTeacherToDB();
+            }
+            else {
+              alert("INFO: Teacher ("+ itiTutor.getNumber() +  ") already existed.");
+            }
+
+          }
+
+        }
+		  });
+
+      // Clear key and fields in modal when modal dismiss
+      $('#createTutorModal').on('hide.bs.modal', function (event) {
+
+        document.getElementById("btnViewTutorModalFullProfile").style.display = "none";
+        document.getElementById("btnViewTutorModalFullProfile").href = "#";
+        document.getElementById("viewTutorImgUrl").src = "https://golearn.com.my/assets/img/empty-photo.png";
+        document.getElementById("viewTutorName").value = "";
+        itiTutor.setNumber("");
+        // document.getElementById("viewTutorPhone").setNumber("");
+
+        // document.getElementById("checkTeacher").style.display = "none";
+        document.getElementById("viewTutorEmail").value = "";
+        document.getElementById("viewTutorAge").value = 24;
+        document.getElementById("viewTutorGenderRadioMale").checked = true;
+        document.getElementById("inBankName").value = "";
+        document.getElementById("inBankAcNo").value = "";
+        document.getElementById("inEPFNo").value = "";
+        document.getElementById("inSocsoNo").value = "";
+        document.getElementById("employmentStatusRadioActive").checked = true;
+
+        document.getElementById("btnCreateTutorManuallyModalConfirm").removeAttribute('disabled');
+        document.getElementById("btnCreateTutorManuallyModalConfirm").textContent = 'Confirm';
+      });
+
+      $("#viewTutorName").blur(function(){
+        updateImg();
+
+      });
+
+      // Create Teacher Profile Manually
+      $('#btnCheckTeacher').on('click', function (e) {
+
+        // console.log(itiTutor.getNumber())
+        document.getElementById("btnCheckTeacher").setAttribute('disabled', true);
+        document.getElementById("btnCheckTeacher").textContent = 'Checking...';
+
+        if(itiTutor.getNumber() == tutorId){
+          alert("INFO: You cannot add yourself as teacher!")
+          document.getElementById("btnCheckTeacher").removeAttribute('disabled');
+          document.getElementById("btnCheckTeacher").textContent = 'Check Teacher';
+
+        }
+        else if (itiTutor.getNumber() != "" && itiTutor.isValidNumber()) {
+
+
+          let docRef = db.collection("Tutor").doc(itiTutor.getNumber());
+          let tutorDocRef = db.collection("Class")
+          .doc('v1')
+          .collection('Tutor')
+          .where(TUTOR_ADMIN_ID, "==", tutorId)
+          .where(TUTOR_TUTOR_ID, "==", itiTutor.getNumber())
+
+          var promiseAll = [];
+          promiseAll.push(docRef.get());
+          promiseAll.push(tutorDocRef.get());
+
+
+          Promise.all(promiseAll)
+          .then((querySnapshots) => {
+
+            if (querySnapshots[1] != null && querySnapshots[1].docs.length > 0){
+              // console.log("querySnapshots[1] data: ")
+              // console.log(querySnapshots[1])
+
+              updateImg();
+
+              document.getElementById("btnViewTutorModalFullProfile").style.display = "none";
+              document.getElementById("btnViewTutorModalFullProfile").href = "#";
+
+              alert("INFO: Teacher ("+ itiTutor.getNumber() +  ") already existed.");
+            }
+            else {
+              console.log("querySnapshots[1] is empty")
+
+              // Check if Phone number is valid
+              if (querySnapshots[0].exists) {
+                // console.log("querySnapshots[0] data: ")
+                // console.log(querySnapshots[0].data())
+
+                document.getElementById("viewTutorImgUrl").src = (querySnapshots[0].data().imgUrl == null || querySnapshots[0].data().imgUrl == "")? "https://golearn.com.my/assets/img/empty-photo.png" : querySnapshots[0].data().imgUrl;
+
+                document.getElementById("btnViewTutorModalFullProfile").style.display = "";
+                let url = "https://golearn.com.my/tutor/?tid=" + encode64(itiTutor.getNumber());
+                document.getElementById("btnViewTutorModalFullProfile").href = url;
+
+                document.getElementById("viewTutorName").value = (querySnapshots[0].data().name == null || querySnapshots[0].data().name == "")? "" : querySnapshots[0].data().name;
+                document.getElementById("viewTutorEmail").value = (querySnapshots[0].data().email == null || querySnapshots[0].data().email == "")? "" : querySnapshots[0].data().email;
+                document.getElementById("viewTutorAge").value = (querySnapshots[0].data().age == null || querySnapshots[0].data().age == "")? "0" : querySnapshots[0].data().age;
+                document.getElementById("viewTutorGenderRadioMale").checked =  (querySnapshots[0].data().gender == 0) ? true : false;
+                document.getElementById("viewTutorGenderRadioFemale").checked =  (querySnapshots[0].data().gender == 1) ? true : false;
+              }
+              else {
+                updateImg();
+
+                document.getElementById("btnViewTutorModalFullProfile").style.display = "none";
+                document.getElementById("btnViewTutorModalFullProfile").href = "#";
+
+                alert("INFO: Teacher not found.")
+              }
+
+            }
+          })
+          .then(() => {
+            document.getElementById("btnCheckTeacher").removeAttribute('disabled');
+            document.getElementById("btnCheckTeacher").textContent = 'Check Teacher';
+          });
+        }
+        else {
+
+          updateImg();
+          document.getElementById("btnViewTutorModalFullProfile").style.display = "none";
+          document.getElementById("btnViewTutorModalFullProfile").href = "#";
+          document.getElementById("btnCheckTeacher").removeAttribute('disabled');
+          document.getElementById("btnCheckTeacher").textContent = 'Check Teacher';
+
+          validateForm("createTutorModal");
+
+          alert("Warning: Please enter a valid phone number.")
+
+          document.getElementById("btnCheckTeacher").removeAttribute('disabled');
+          document.getElementById("btnCheckTeacher").textContent = 'Check Teacher';
+
+        }
+
+      });
+
+
 		});
 
   </script>
-  
+
   <!-- More functions -->
   <script>
+
+    function updateImg() {
+      if (document.getElementById("viewTutorName").value.length >= 2){
+        let AvatarText = document.getElementById("viewTutorName").value[0] + document.getElementById("viewTutorName").value[1];
+        document.getElementById("viewTutorImgUrl").src = generateAvatar(AvatarText, "#eaeaea", "#f6f6f6", "100px");
+      }
+      else {
+        document.getElementById("viewTutorImgUrl").src = "https://golearn.com.my/assets/img/empty-photo.png";
+      }
+    }
+
+
+    function validateForm(id) {
+      // This function deals with validation of the form fields with data-compulsory = 'true'
+      var x, y, i, valid = true;
+      // y = x[activePanelNum].getElementsByTagName("input") && x[activePanelNum].querySelectorAll('[type="text"]');
+      y = document.getElementById(id).querySelectorAll('[data-compulsory="true"]');
+
+      // A loop that checks every input field in the current tab:
+      for (i = 0; i < y.length; i++) {
+        // console.log(y[i].value)
+        // If a field is empty...
+        if (y[i].value == "") {
+          // add an "invalid" class to the field:
+          y[i].className += " invalid";
+          // and set the current valid status to false:
+          valid = false;
+        }
+      }
+      // If the valid status is true, mark the step as finished and valid:
+      if (valid) {
+        // document.getElementsByClassName("step")[activePanelNum].className += " finish";
+      }
+      return valid; // return the valid status
+    }
+
+
 	  function editTeacherFunction(elem){
-      // Get attribute and 
+      // Get attribute and
       if (JSON.parse(sessionStorage.getItem(SESSION_STORAGE_CLASS_ALL_DOCS_KEY)) == null ){
         console.log("Error: Impossible to reach this state");
         // Because this func only trigger when there's active class loaded
@@ -1129,12 +1367,115 @@
 
           // console.log(item);
         });
-        
+
       }
 		}
 
   </script>
- 
+
+  <!-- Teacher's Phone related -->
+  <script>
+
+
+    // Init Tutor Phone
+    var inputTutor = document.querySelector("#viewTutorPhone");
+    var itiTutor = intlTelInput(inputTutor,{
+      autoHideDialCode: false,
+      preferredCountries: ['my', 'sg'],
+      separateDialCode: true,
+      utilsScript: "https://golearn.com.my/assets/js/plugins/intlTelInput/utils.js",
+      });
+
+    var errorMsg = document.querySelector("#error-msg");
+    var validMsg = document.querySelector("#valid-msg");
+
+    // here, the index maps to the error code returned from getValidationError - see readme
+    var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+    var reset = function() {
+      inputTutor.classList.remove("error");
+      errorMsg.innerHTML = "";
+      errorMsg.classList.add("hide");
+      validMsg.classList.add("hide");
+    };
+
+    // on blur: validate
+    inputTutor.addEventListener('blur', function() {
+      reset();
+      if (itiTutor.getNumber() != "") {
+        if (itiTutor.isValidNumber()) {
+          validMsg.classList.remove("hide");
+
+          // Remove the invalid tag on the phone input
+          document.getElementById("viewTutorPhone").className = "form-control"
+
+          document.getElementById("checkTeacher").setAttribute('style', "");
+        } else {
+          inputTutor.classList.add("error");
+          var errorCode = itiTutor.getValidationError();
+          errorMsg.innerHTML = errorMap[errorCode];
+          errorMsg.classList.remove("hide");
+
+          document.getElementById("checkTeacher").setAttribute('style', "display: none;");
+
+        }
+      }
+      else {
+          inputTutor.classList.add("error");
+          var errorCode = itiTutor.getValidationError();
+          errorMsg.innerHTML = errorMap[4];
+          errorMsg.classList.remove("hide");
+
+          document.getElementById("checkTeacher").setAttribute('style', "display: none;");
+
+      }
+
+    });
+
+    // on keyup / change flag: reset
+    inputTutor.addEventListener('change', reset);
+    inputTutor.addEventListener('keyup', reset);
+    // Validate fields in based on parents.
+    function ValidateFields(parentId){
+      // This function deals with validation of the form fields with data-compulsory = 'true'
+      var x, y, i, valid = true;
+      x = document.getElementById(parentId);
+      y =x.querySelectorAll('[data-compulsory="true"]');
+
+      // A loop that checks every input field in the current tab:
+      for (i = 0; i < y.length; i++) {
+        // console.log(y[i].value)
+        // If a field is empty...
+        if (y[i].value == "") {
+          // add an "invalid" class to the field:
+          y[i].className += " invalid";
+          // and set the current valid status to false:
+          valid = false;
+        }
+      }
+      return valid; // return the valid status
+    }
+
+    // Validate fields - Phone Input specific.
+    function ValidatePhone(phoneId){
+      var valid = true;
+      let inPhone = document.querySelector("#"+phoneId);
+      // console.log(inPhone.value)
+      if (itiTutor.getNumber() != "") {
+        if (itiTutor.isValidNumber()) {
+          // Do nothing
+        } else {
+          inPhone.className += " invalid";
+          valid = false;
+        }
+      }else {
+        valid = false;
+      }
+      return valid; // return the valid status
+    }
+
+  </script>
+
 </body>
 
 </html>
